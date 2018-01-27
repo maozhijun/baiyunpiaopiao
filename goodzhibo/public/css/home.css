@@ -1,0 +1,266 @@
+﻿
+div.tv p.more{
+	height: 28px;
+    background: #737373;
+    font-size: 14px; line-height: 28px; text-align: center; color: #dadada;
+    cursor: pointer;
+}
+div.tv p.more span{
+	margin-left: 10px;
+	position: absolute;
+}
+div.tv a{
+	background: #30333c;
+	font-size: 16px; line-height: 40px; text-align: center; font-weight: bold;
+	float: left;
+	display: inline-block;
+	position: relative;
+}
+div.tv a.big{
+	width: 25%; height: 120px;
+}
+div.tv a.small{
+	width: 16.66%; height: 40px;
+	font-size: 14px; line-height: 40px; font-weight: normal;
+	overflow: hidden;
+}
+div.tv a:hover{
+	color: #de1a25; text-decoration: underline;
+}
+div.tv a:before{
+	width: 1px;
+	background: #1e2228;
+	position: absolute; top: 30px; left: 0; bottom: 30px;
+	content: '';
+}
+div.tv a.small:before{
+	top: 10px; bottom: 10px;
+}
+div.tv a.big:nth-child(4n-2):before,
+div.tv a.small:nth-child(6n+1):before{
+	display: none;
+}
+div.tv a:after{
+	height: 1px;
+	background: #1e2228;
+	position: absolute; top: 0; left: 30px; right: 30px;
+	display: none;
+	content: '';
+}
+div.tv a.small:nth-child(n+7):after{
+	left: 16px; right: 16px;
+	display: block;
+}
+div.tv a.big:nth-child(n+6):after{
+	display: block;
+}
+div.tv a.big img{
+	height: 50px; max-width: 90%;
+	margin: 20px auto 0;
+	display: block;
+}
+
+
+table.list{
+	width: 100%;
+	table-layout: fixed;
+}
+table.list thead th{
+	height: 36px;
+	background: #737373;
+	font-size: 16px; line-height: 36px; text-align: center; color: #dadada;
+}
+table.list thead th:nth-child(1){
+	min-width: 42px;
+}
+table.list thead th:nth-child(2){
+	width: 118px;
+}
+table.list thead th:nth-child(3){
+	width: 80px;
+}
+table.list thead th:nth-child(4){
+	width: 64px;
+}
+table.list thead th:nth-child(5){
+	width: 478px;
+}
+table.list thead th:nth-child(6){
+	width: 214px;
+}
+table.list tbody th{
+	height: 28px;
+	background: #d3e1ed;
+	font-size: 14px; line-height: 28px; text-align: center; color: #002778;
+}
+
+table.list tbody td{
+	height: 50px;
+	background: #30333c;
+	font-size: 16px; line-height: 28px; text-align: center; color: #fff;
+}
+table.list tbody tr + tr td{
+	border-top: 1px solid #1e2228;
+}
+table.list tbody tr.adbanner + tr td,
+table.list tbody tr.date + tr td{
+	border-top: none;
+}
+table.list tbody td:nth-child(1){
+
+}
+table.list tbody td:nth-child(2){
+
+}
+table.list tbody td:nth-child(3){
+	line-height: 16px;
+}
+table#Show_2 tbody td:nth-child(3){
+	font-size: 12px; line-height: 16px;
+}
+table.list tbody td:nth-child(4){
+	padding-right: 10px;
+	text-align: right;
+}
+table.list tbody td:nth-child(5){
+	
+}
+table.list tbody td:nth-child(6){
+	padding-right: 10px;
+	text-align: right;	
+}
+table.list tbody td:nth-child(7){
+	
+}
+table.list tbody td:nth-child(8){
+	padding-left: 10px;
+	text-align: left;
+}
+table.list tbody td:nth-child(9){
+	
+}
+table.list tbody td:nth-child(10){
+	padding-left: 12px;
+	text-align: left;
+}
+table.list tbody td:nth-child(11){
+	text-align: left;
+}
+table.list tbody td:nth-child(11) a{
+	padding: 0 10px;
+	color: #fff; text-decoration: underline;
+	display: inline-block;
+}
+table.list tbody td:nth-child(11) a:hover{
+	color: #de1a25;
+}
+
+table.list tbody td:nth-child(1) p{
+	height: 24px; width: 50px;
+	border-radius: 0 12px 12px 0;
+	background: #d6d6d6;
+	box-shadow: 1px 3px 3px 0px rgba(0, 0, 0, 0.35);
+	font-size: 14px; line-height: 24px; text-align: center;
+}
+table.list tbody td:nth-child(1) p.football{
+	color: #880008;
+}
+table.list tbody td:nth-child(1) p.basketball{
+	color: #1e3c89;
+}
+table.list tbody td img.icon{
+	width: 20px; height: 20px;
+}
+
+/*浮动*/
+#TableHead{
+	margin-top: 0;
+    position: fixed; top: 60px; left: 14%; right: 14%; z-index: 3;
+    display: none;
+}
+
+
+/*广告*/
+table.list tbody tr.adbanner a,
+table.list tbody tr.adbanner img{
+	width: 100%; height: auto;
+	display: block;
+}
+table.list tbody tr.adbanner td{
+	height: auto;
+	padding: 0;
+}
+
+
+
+.moreVideo{
+	
+}
+.moreVideo div.labelbox{
+	height: 42px;
+	margin-top: 10px;
+	border-bottom: 1px solid #1e2228;
+	background: #737373;
+}
+.moreVideo .labelbox button{
+	height: 42px;
+	margin-left: 4%;
+	border-radius: 0;
+	background: #737373;
+	font-size: 16px; text-align: center; line-height: 42px; color: #dadada;
+	float: left;
+}
+.moreVideo .labelbox button:first-child{
+	margin-left: 20px;
+}
+.moreVideo .labelbox button:hover,.moreVideo .labelbox button.on{
+	border-bottom: 3px solid #dadada;
+}
+.moreVideo .list{
+	padding: 0 10px 10px;
+	background: #30333c;
+}
+.moreVideo .list a{
+	font-size: 14px; line-height: 20px; text-align: center;
+	float: left;
+	display: inline-block;
+}
+.moreVideo .list a:hover{
+	color: #de1a25;
+}
+.moreVideo .list a p{
+	padding: 0 10px; margin-bottom: 10px;
+}
+.moreVideo .list a.big{
+	width: 20%;
+}
+.moreVideo .list a.big img{
+	width: 94%;
+	margin: 20px 3% 10px;
+	display: block;
+}
+.moreVideo .list a.small{
+	width: 25%; height: 20px;
+	margin: 5px 0;
+	text-align: left;
+	overflow: hidden;
+}
+.moreVideo .list a.small p{
+	padding-left: 20px;
+	position: relative;
+}
+.moreVideo .list a.small p:before{
+	width: 4px; height: 4px;
+	background: #dadada;
+	position: absolute; top: 8px; left: 8px;
+	content: '';
+}
+
+
+
+
+
+
+
+
+
