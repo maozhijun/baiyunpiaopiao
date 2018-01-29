@@ -115,7 +115,6 @@ class LiveController extends Controller
             } else{
                 Storage::disk("public")->put("/static/json/lives.json", $server_output);
             }
-
         } catch (\Exception $exception) {
             Log::error($exception);
         }
@@ -629,9 +628,9 @@ class LiveController extends Controller
      */
     public function getLivesCache($bet = '') {
         if ($bet == self::BET_MATCH) {
-            $cache = Storage::get('/public/static/json/lives.json');
-        } else {
             $cache = Storage::get('/public/static/json/bet-lives.json');
+        } else {
+            $cache = Storage::get('/public/static/json/lives.json');
         }
         if (empty($cache)) {
             return ['matches'=>[]];
@@ -680,11 +679,14 @@ class LiveController extends Controller
         $matches = $json['matches'];
         foreach ($matches as $match_array) {
             foreach ($match_array as $match) {
-                if (isset($match) && isset($match['channels']) && isset($match['isMatching']) && $match['isMatching']) {
-                    $channels = $match['channels'];
-                    foreach ($channels as $channel) {
-                        $ch_id = $channel['id'];
-                        $this->staticLiveUrl($request, $ch_id);
+                if (isset($match) && isset($match['channels']) && isset($match['time'])) {
+                    $m_time = strtotime($match['time']);
+                    if ($m_time - time() < (60 * 60) ) {//1小时内的比赛静态化接口
+                        $channels = $match['channels'];
+                        foreach ($channels as $channel) {
+                            $ch_id = $channel['id'];
+                            $this->staticLiveUrl($request, $ch_id);
+                        }
                     }
                 }
             }
