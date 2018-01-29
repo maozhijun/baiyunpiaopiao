@@ -20,10 +20,12 @@
                 }
             }
             if (url.length == 4){
-                str = str.substr(0,str.length - 2);
-            }
-            else{
                 str = str.substr(0,str.length - 1);
+            } else{
+                str = str.substr(0,str.length - 1);
+            }
+            if (str.indexOf('.html') != -1 && str.lastIndexOf('/') == str.length - 1) {
+                str = str.substr(0, str.length - 1);
             }
             window.location = str;
         }

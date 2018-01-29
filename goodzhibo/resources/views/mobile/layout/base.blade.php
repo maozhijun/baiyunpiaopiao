@@ -12,7 +12,9 @@
     <link rel="Shortcut Icon" data-ng-href="{{env('CDN_URL')}}/img/ico.ico" href="{{env('CDN_URL')}}/img/ico.ico">
     <link href="/img/pc/icon_face.png" sizes="100x100" rel="apple-touch-icon-precomposed">
     <script type="text/javascript">
-        if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+
+        } else {
             var url = window.location.href;
             url = url.split('/');
             var str = '';

@@ -101,7 +101,11 @@ class LiveController extends Controller
     protected function liveJson($bet = '') {
         try {
             $ch = curl_init();
-            $url = env('LIAOGOU_URL')."/livesJson?bet=" . $bet;
+            if ($bet == self::BET_MATCH) {
+                $url = env('AIKQ_URL')."/json/bet-lives.json";
+            } else {
+                $url = env('AIKQ_URL')."/json/lives.json";
+            }
             curl_setopt($ch, CURLOPT_URL,$url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $server_output = curl_exec ($ch);
@@ -123,7 +127,7 @@ class LiveController extends Controller
     protected function basketballLiveJson() {
         try {
             $ch = curl_init();
-            $url = env('LIAOGOU_URL')."/basketballLivesJson";
+            $url = env('AIKQ_URL')."/json/basketball-lives.json";
             curl_setopt($ch, CURLOPT_URL,$url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $server_output = curl_exec ($ch);
@@ -140,7 +144,7 @@ class LiveController extends Controller
     protected function footballLiveJson() {
         try {
             $ch = curl_init();
-            $url = env('LIAOGOU_URL')."/footballLivesJson";
+            $url = env('AIKQ_URL')."/json/football-lives.json";
             curl_setopt($ch, CURLOPT_URL,$url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $server_output = curl_exec ($ch);
@@ -423,10 +427,11 @@ class LiveController extends Controller
      * @param $mid
      * @return mixed
      */
-    public function getLiveUrl(Request $request,$mid){
+    public function getLiveUrl(Request $request, $mid){
         $ch = curl_init();
-        $isMobile = \App\Http\Controllers\Controller::isMobile($request)?1:0;
+        $isMobile = \App\Http\Controllers\Controller::isMobile($request) ? 1 : 0;
         $url = env('LIAOGOU_URL')."/match/live/url/channel/$mid".'?breakTTZB=break&isMobile='.$isMobile.'&sport='.$request->input('sport',1);
+        //$url = env('LIAOGOU_URL') . "/match/live/url/channel/". $mid . '.json';
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $server_output = curl_exec ($ch);
@@ -572,6 +577,8 @@ class LiveController extends Controller
         return view('pc.live.detail_recommend', $json);
     }
 
+
+    //===========================================================================================================================//
     /**
      * 清除底部推荐缓存
      * @param Request $request
@@ -616,17 +623,35 @@ class LiveController extends Controller
     }
 
     /**
+     * 获取直播的缓存
+     * @param string $bet
+     * @return array|mixed
+     */
+    public function getLivesCache($bet = '') {
+        if ($bet == self::BET_MATCH) {
+            $cache = Storage::get('/public/static/json/lives.json');
+        } else {
+            $cache = Storage::get('/public/static/json/bet-lives.json');
+        }
+        if (empty($cache)) {
+            return ['matches'=>[]];
+        }
+        return json_decode($cache, true);
+    }
+
+    /**
      * 静态化直播终端页
      * @param Request $request
      */
     public function staticLiveDetail(Request $request) {
-        $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/livesJson?bet=" . 0;
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $server_output = curl_exec ($ch);
-        curl_close ($ch);
-        $json = json_decode($server_output,true);
+//        $ch = curl_init();
+//        $url = env('LIAOGOU_URL')."/livesJson?bet=" . 0;
+//        curl_setopt($ch, CURLOPT_URL,$url);
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//        $server_output = curl_exec ($ch);
+//        curl_close ($ch);
+//        $json = json_decode($server_output,true);
+        $json = $this->getLivesCache();
         $json = $json['matches'];
         foreach ($json as $index=>$datas){
             foreach ($datas as $match){
@@ -651,20 +676,21 @@ class LiveController extends Controller
      * @param Request $request
      */
     public function staticPlayerJson(Request $request) {
-        $json = $this->getLives();
-        if (!isset($json) || !isset($json['play_matches'])) {
-            return;
-        }
-        $play_matches = $json['play_matches'];
-        foreach ($play_matches as $match) {
-            if (!isset($match)) {
-                return;
-            }
-            if (isset($match['channels'])) {
-                $channels = $match['channels'];
-                foreach ($channels as $channel) {
-                    $ch_id = $channel['id'];
-                    $this->staticLiveUrl($request, $ch_id);
+//        $json = $this->getLives();
+//        if (!isset($json) || !isset($json['play_matches'])) {
+//            return;
+//        }
+//        $play_matches = $json['play_matches'];
+        $json = $this->getLivesCache();
+        $matches = $json['matches'];
+        foreach ($matches as $match_array) {
+            foreach ($match_array as $match) {
+                if (isset($match) && isset($match['channels']) && isset($match['isMatching']) && $match['isMatching']) {
+                    $channels = $match['channels'];
+                    foreach ($channels as $channel) {
+                        $ch_id = $channel['id'];
+                        $this->staticLiveUrl($request, $ch_id);
+                    }
                 }
             }
         }
