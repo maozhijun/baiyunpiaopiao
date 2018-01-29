@@ -50,9 +50,9 @@
     </div>
 </div>
 @yield('content')
-<?php $links = \App\Http\Controllers\PC\Live\LiveController::links(); ?>
+<?php //$links = \App\Http\Controllers\PC\Live\LiveController::links(); ?>
 <div id="Bottom">
-    <p>友情链接：@foreach($links as $link)<a target="_blank" href="{{$link['url']}}">{{$link['name']}}</a>@endforeach </p>
+    {{--<p>友情链接：@foreach($links as $link)<a target="_blank" href="{{$link['url']}}">{{$link['name']}}</a>@endforeach </p>--}}
     <p>Copyright 2014-2015 ©goodzhibo.com, All rights reserved.</p>
     <p>免责声明：本站所有直播和视频链接均由网友提供，如有侵权问题，请及时联系，我们将尽快处理。</p>
 </div>
