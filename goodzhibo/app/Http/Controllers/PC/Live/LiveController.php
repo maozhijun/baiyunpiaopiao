@@ -684,8 +684,10 @@ class LiveController extends Controller
                     if ($m_time - time() < (60 * 60) ) {//1小时内的比赛静态化接口
                         $channels = $match['channels'];
                         foreach ($channels as $channel) {
-                            $ch_id = $channel['id'];
-                            $this->staticLiveUrl($request, $ch_id);
+                            if ($channel['type'] != MatchLiveChannel::kTypeTTZB) {//天天不做静态化。
+                                $ch_id = $channel['id'];
+                                $this->staticLiveUrl($request, $ch_id);
+                            }
                         }
                     }
                 }
