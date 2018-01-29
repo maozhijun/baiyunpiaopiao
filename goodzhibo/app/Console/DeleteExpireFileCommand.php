@@ -45,7 +45,7 @@ class DeleteExpireFileCommand extends Command
      */
     public function handle()
     {
-        $del_time = strtotime('-1 days');//24小时前的文件删除
+        $del_time = strtotime('-3 days');//3天前的文件删除
 
         $this->delStorageFiles('/public/live/basketball', $del_time);
         $this->delStorageFiles('/public/live/football', $del_time);

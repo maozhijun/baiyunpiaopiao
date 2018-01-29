@@ -13,9 +13,7 @@
     <link rel="Shortcut Icon" data-ng-href="{{env('CDN_URL')}}/img/ico.ico" href="{{env('CDN_URL')}}/img/ico.ico">
 </head>
 <body scroll="no">
-<div class="player_content" id="MyFrame">
-    {{--<p class="loading"><img src="https://img.liaogou168.com/kqm/file/img/loading.gif">加载中</p>--}}
-</div>
+<div class="player_content" id="MyFrame"></div>
 </body>
 <script type="text/javascript" src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript" src="//imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.0.js"></script>
@@ -29,8 +27,9 @@
         document.body.appendChild(P)
     }
     window.host = '{{$_SERVER['HTTP_HOST']}}';
+    window.isMobile = '{{\App\Http\Controllers\Controller::isMobileUAgent($_SERVER['HTTP_USER_AGENT'])}}';
 </script>
-<script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/player.js"></script>
+<script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/player.js?t=0180129"></script>
 <script>
     var _hmt = _hmt || [];
     (function() {
