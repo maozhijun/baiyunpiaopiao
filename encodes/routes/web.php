@@ -11,14 +11,16 @@
 |
 */
 
-Route::match(["get", "post"], "/login", 'AuthController@login');//登录
+Route::match(["get", "post"], "/login", 'AuthController@index');//登录
 
 /**
  * Vip工具
  */
 Route::group(["middleware" => "auth"], function () {
-    Route::get("/encodes/qq/", "QQEncodesController@index");
-    Route::post("/encodes/qq/created/", "QQEncodesController@created");
-    Route::get("/encodes/qq/stop/{id}", "QQEncodesController@stop");
-    Route::get("/encodes/", "EncodesController@index");
+    Route::get("/manager/qq/", "QQEncodesController@index");
+    Route::post("/manager/qq/created/", "QQEncodesController@created");
+    Route::get("/manager/qq/stop/{id}", "QQEncodesController@stop");
+    Route::get("/manager/", "QQEncodesController@index");
+
+    Route::get("/manager/list/", "EncodesController@index");
 });

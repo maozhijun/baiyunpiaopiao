@@ -13,7 +13,7 @@
 <body>
 <div class="container">
     <div class="row">
-        <h1 class="page-header">信号列表</h1>
+        <h1 class="page-header">转码(卫星信号，腾讯体育)</h1>
         <div class="row placeholders"></div>
         <div class="row">
             <div class="col-lg-12">
@@ -73,7 +73,7 @@
                         <td width="15%">{{ $et->name }}</td>
                         <td>{{ $et->channel }}</td>
                         <td width="50%">
-                            <textarea style="width:100%;">{{ $et->out }}</textarea>
+                            <textarea style="width:100%;" readonly>{{ $et->out }}</textarea>
                         </td>
                         <td>
                             {{ substr($et->created_at,5,11) }}
