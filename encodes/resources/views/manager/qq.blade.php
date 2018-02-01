@@ -17,7 +17,7 @@
         <div class="row placeholders"></div>
         <div class="row">
             <div class="col-lg-12">
-                <form action="/encodes/qq/created/" method="post">
+                <form action="/manager/qq/created/" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="label-title">名称</label>
@@ -83,7 +83,7 @@
                         </td>
                         <td>
                             @if($et->status==1)
-                                <a class="btn btn-xs btn-danger" href="/encodes/qq/stop/{{ $et->id }}">停止</a>
+                                <a class="btn btn-xs btn-danger" href="/manager/qq/stop/{{ $et->id }}">停止</a>
                             @endif
                         </td>
                     </tr>
