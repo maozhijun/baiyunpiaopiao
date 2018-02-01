@@ -12,7 +12,28 @@
 */
 
 Route::group(["namespace" => 'Live'], function () {
-    Route::get('/',"LiveController@lives");
+    Route::get('/',"HomeController@immediate");
+    Route::get('/football/immediate.html',"HomeController@immediate");
+    Route::get('/football/result.html',"HomeController@result");
+    Route::get('/football/schedule.html',"HomeController@schedule");
+    Route::get('/football/lives.html',"HomeController@lives");
+    Route::get('/football/match_detail/{date}/{id}.html',"HomeController@footballDetail");
+
+    Route::get('/football/match_detail/odd/{id}', 'HomeController@footballOdd');
+    Route::get('/football/match_detail/corner/{id}', 'HomeController@footballDetailCorner');
+    Route::get('/football/match_detail/style/{id}', 'HomeController@footballDetailStyle');
+    Route::get('/football/match_detail/odd_index/{id}', 'HomeController@footballOddIndex');
+    Route::get('/football/match_detail/same_odd/{id}', 'HomeController@footballSameOdd');
+
+
+    /////////////////======================================================================/////////////////
+    Route::get('/basketball/immediate.html', 'BasketBallController@immediate');//篮球即时页面列表
+    Route::get('/basketball/result.html', 'BasketBallController@result');//篮球赛果页面列表
+    Route::get('/basketball/schedule.html', 'BasketBallController@schedule');//篮球赛程页面列表
+    Route::get('/basketball/lives.html', 'BasketBallController@lives');//篮球直播页面列表
+
+    /////////////////======================================================================/////////////////
+    //Route::get('/', 'Live\LiveController@lives');
     Route::get('/index.html', 'LiveController@lives');
 });
 
@@ -20,9 +41,9 @@ Route::group(["namespace" => 'Live'], function () {
  * 直播入口
  */
 Route::group(["namespace" => 'Live'], function () {
-    Route::any("/", function (){
-        return redirect('/m/lives.html');
-    });
+    //Route::any("/", function (){
+        //return redirect('/m/lives.html');
+    //});
     Route::get("/lives.html", "LiveController@lives");//直播列表
     Route::get("/football.html", "LiveController@footballLives");//直播列表
     Route::get("/basketball.html", "LiveController@basketballLives");//直播列表

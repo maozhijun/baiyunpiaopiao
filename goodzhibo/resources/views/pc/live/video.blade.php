@@ -46,12 +46,12 @@
         {{--<div class="adbanner inner"><a href="http://91889188.87.cn" target="_blank"><img src="/img/ad_1.jpg"><button class="close"></button></a></div>--}}
         <div class="clear"></div>
     </div>
-    {{--<div class="adflag left">--}}
-        {{--<a href="http://91889188.87.cn" target="_blank"><img src="/img/ad.jpg"><button class="close"></button></a>--}}
-    {{--</div>--}}
-    {{--<div class="adflag right">--}}
-        {{--<a href="http://91889188.87.cn" target="_blank"><img src="/img/ad.jpg"><button class="close"></button></a>--}}
-    {{--</div>--}}
+    <div class="adflag left">
+        <img src="/img/pc/qrcode_for_gh.jpg"><p>微信扫码看比赛</p>
+    </div>
+    <div class="adflag right">
+        <img src="/img/pc/qrcode_for_gh.jpg"><p>微信扫码看比赛</p>
+    </div>
 @endsection
 @section('js')
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/video.js"></script>
@@ -63,5 +63,5 @@
     </script>
 @endsection
 @section('css')
-    <link rel="stylesheet" type="text/css" href="{{env('CDN_URL')}}/css/video.css">
+    <link rel="stylesheet" type="text/css" href="{{env('CDN_URL')}}/css/video.css?rd=20180131">
 @endsection

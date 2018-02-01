@@ -213,6 +213,9 @@ body{
 	max-width: 208px; width: 11%;
 	position: fixed; top: 80px;
 }
+.adflag p{
+	font-size: 12px; line-height: 24px; text-align: center; color: #fff;
+}
 .adflag a, .adbanner a{
 	display: block;
 	position: relative;
