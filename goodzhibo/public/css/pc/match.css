@@ -1,0 +1,2131 @@
+#Content{
+	min-height: 700px;
+}
+#Content .default{
+	background: url(../img/bg_pattern.png) no-repeat right top #fff;
+}
+#Content .default .title{
+	padding: 20px 0 20px 20px;
+	border-bottom: none;
+	background: none;
+}
+#Content .default .title p{
+	background: none;
+	font-size: 18px;
+}
+#Content .default .title p:before{
+	width: 4px; height: 26px;
+	margin-top: -13px;
+	background: #000;
+	position: absolute; top: 50%; left: 0px;
+	content: '';
+}
+#Content .default .title p:after{
+	display: none;
+}
+
+.red{
+	color: #bc1c25 !important;
+}
+.green{
+	color: #1CC075 !important;
+}
+.blue{
+	color: #999;
+}
+
+
+/*信息*/
+#Info{
+	min-height: 260px;
+	padding: 0 24%;
+	background: url(../img/image_bg_n.jpg) no-repeat center top #fff; background-size: auto 260px;
+	position: relative;
+	overflow: hidden;
+}
+
+#Info div.score{
+	width: 24%; height: 50px;
+	font-size: 24px; line-height: 40px; text-align: center; color: #fff;
+	position: relative; z-index: 2;
+	float: left;
+}
+#Info div.team{
+	width: 38%; height: 40px;
+	font-size: 28px; line-height: 40px; color: #fff;
+	position: relative; z-index: 2;
+	display: inline-block;
+}
+#Info div.host{
+	text-align: left;
+	float: left;
+}
+#Info div.away{
+	text-align: right;
+	float: right;
+}
+#Info div.team p{
+	display: inline-block;
+}
+#Info div.team span.team{
+	height: 40px;
+	letter-spacing: 2px;
+	overflow: hidden;
+	display: inline-block;
+}
+#Info div.team span.league{
+	font-size: 14px; line-height: 28px; text-align: center; color: rgba(255,255,255,0.7); letter-spacing: 1px;
+	display: block;
+}
+#Info div.icon{
+	width: 92px; height: 92px;
+	padding: 19px; margin-top: -65px;
+    border-radius: 50%;
+    background: #fff;
+    position: absolute; top: 50%; z-index: 2;
+    overflow: hidden;
+    behavior: url(PIE.htc);
+}
+#Info .host div.icon{
+	left: -150px;
+}
+#Info .away div.icon{
+	right: -150px;
+}
+#Info div.icon img{
+	width: 92px; height: 92px;
+}
+
+#Info div.mes{
+	padding: 24px 0 40px;
+	font-size: 14px; line-height: 18px; text-align: center; color: #808488; letter-spacing: 1px;
+}
+#Info div.mes p{
+	padding-top: 16px;
+}
+#Info div.odd{
+	height: 44px; width: 546px;
+	margin-left: -273px;
+	background: rgba(242,242,242,0.2);
+	position: absolute; top: 216px; left: 50%;
+}
+#Info div.odd p{
+	width: 32.3%; height: 44px;
+	font-size: 12px; line-height: 44px; text-align: center; color: #fff;
+	position: relative;
+	display: inline-block;
+}
+#Info div.odd p + p:before{
+	width: 1px; 
+	background: #fff;
+	position: absolute; top: 10px; bottom: 10px; left: 0;
+	content: '';
+}
+#Info div.mes span,
+#Info div.odd span{
+	padding: 0 10px;
+}
+
+#Info div.analysis{
+	height: 160px;
+	padding: 0 180px 20px; margin: 100px -34% 0;
+	position: relative; z-index: 2;
+}
+#Info div.analysis canvas{
+	width: 130px; height: 130px;
+	border-radius: 50%; -moz-border-radius: 50%; -webkit-border-radius: 50%;
+	background: #f7f7f7;
+	position: absolute; top: 20px;
+	behavior: url(PIE.htc);
+}
+#Info div.analysis canvas.host{
+	left: 0;
+}
+#Info div.analysis canvas.away{
+	right: 0;
+}
+#Info div.analysis div.cover{
+	width: 110px; height: 64px;
+	padding: 23px 0;
+	border-radius: 50%;
+	background: #fff;
+	font-size: 20px; line-height: 32px; text-align: center;
+	position: absolute; top: 30px;
+	behavior: url(PIE.htc);
+}
+#Info div.analysis div.cover b{
+	font-size: 22px;
+}
+#Info div.analysis div.cover[class*=host]{
+	left: 10px;
+}
+#Info div.analysis div.cover[class*=away]{
+	right: 10px;
+}
+#Info div.analysis p.title{
+	font-size: 21px; line-height: 32px; text-align: center; font-weight: bold; letter-spacing: 1px;
+}
+#Info div.analysis dl{
+	padding: 16px 60px 0;
+}
+#Info div.analysis dl dt{
+	padding: 0 8px;
+	font-size: 15px; line-height: 24px; text-align: center; color: #999;
+}
+#Info div.analysis dl dt p.host{
+	color: #333;
+	float: left;
+}
+#Info div.analysis dl dt p.away{
+	text-align: right; color: #333;
+	float: right;
+}
+#Info div.analysis dl dt p.host b{
+	color: #bc1c25;
+}
+#Info div.analysis dl dt p.away b{
+	color: #58A1F6;
+}
+#Info div.analysis dl dd{
+	height: 8px;
+	margin: 8px 0 14px;
+	border-radius: 4px;
+	background: #f7f7f7;
+	position: relative;
+}
+#Info div.analysis dl dd:before{
+	height: 8px;
+	margin: -4px -4px 0 -4px;
+	border: 4px solid #fff; border-radius: 8px;
+	position: absolute; top: 0; left: 0; right: 0; z-index: 2;
+	content: '';
+}
+#Info div.analysis dl dd p{
+	position: absolute; top: 0; bottom: 0;
+}
+#Info div.analysis dl dd p.host{
+	border-radius: 4px 0 0 4px;
+	background: #bc1c25;
+	left: 0;
+}
+#Info div.analysis dl dd p.away{
+	border-radius: 0 4px 4px 0;
+	background: #58A1F6;
+	right: 0;
+}
+#Info div.analysis dl dd span{
+	width: 100px;
+	font-size: 14px; line-height: 16px;
+	position: absolute; top: -4px; bottom: 0;
+}
+#Info div.analysis dl dd span.host{
+	text-align: right; color: #bc1c25;
+	left: -110px;
+}
+#Info div.analysis dl dd span.away{
+	color: #58A1F6;
+	right: -110px;
+}
+#Info div.video{
+	height: 50px;
+	padding: 25px 0; margin: 78px -306px 0;
+	background: #fff;
+	line-height: 50px; text-align: center; vertical-align: middle;
+	position: relative; z-index: 1;
+}
+#Info div.video:before{
+	width: 50%;
+	background: url(../img/image_left_live.png) no-repeat left center; background-size: auto 100px;
+	position: absolute; top: 0; bottom: 0; left: 0;
+	content: '';
+}
+#Info div.video:after{
+	width: 50%;
+	background: url(../img/iamge_right_live.png) no-repeat right center; background-size: auto 100px;
+	position: absolute; top: 0; bottom: 0; right: 0;
+	content: '';
+}
+#Info div.video a.goVideo{
+	width: 100px; height: 44px;
+	border-radius: 4px;
+	background: #bc1c25;
+	font-size: 18px; line-height: 44px; text-align: center; color: #fff;
+	position: relative; z-index: 1;
+	display: inline-block;
+}
+#Info div.video a:hover{
+	color: #fff !important;
+}
+#Info div.video img{
+	margin-left: 15px;
+}
+
+#Info div.sameOdd{
+	height: 45px;
+	padding-bottom: 20px; margin: 10px -34%;
+	position: relative; z-index: 2;
+}
+#Info div.sameOdd p{
+	height: 43px;
+	border: 1px solid #e6e6e6; border-right: none;
+	font-size: 15px; line-height: 42px; text-align: center;
+	float: left;
+}
+#Info div.sameOdd p.name{
+	min-width: 200px; width: 30%;
+}
+#Info div.sameOdd p.name b{
+	padding: 0 4px;
+	color: #bc1c25;
+}
+#Info div.sameOdd p.win,
+#Info div.sameOdd p.draw,
+#Info div.sameOdd p.lose{
+	min-width: 100px; width: 15%;
+}
+#Info div.sameOdd p.win b,
+#Info div.sameOdd p.draw b,
+#Info div.sameOdd p.lose b{
+	padding-left: 8px;
+	font-size: 24px;
+}
+#Info div.sameOdd p.win b{
+	color: #bc1c25;
+}
+#Info div.sameOdd p.draw b{
+	color: #999;
+}
+#Info div.sameOdd p.lose b{
+	color: #58A1F6;
+}
+#Info div.sameOdd a{
+	height: 43px; min-width: 100px; width: 24%;
+	border: 1px solid #e6e6e6;
+	background: #f7f7f7;
+	font-size: 15px; line-height: 42px; color: #666; text-align: center;
+	float: left;
+}
+#Info div.sameOdd a:hover{
+	border-color: #2f333c;
+	background: #2f333c;
+	color: #fff !important;
+}
+
+
+#MatchList{
+	margin: 20px 0;
+}
+#MatchList .title{
+	height: 38px;
+	border-bottom: 4px solid #bc1c25;
+}
+#MatchList .title p{
+	width: 120px; height: 38px;
+	background: #bc1c25;
+	font-size: 18px; line-height: 38px; color: #fff;	
+	display: inline-block;
+	float: initial;
+}
+#MatchList .title p:before{
+	display: none;
+}
+#MatchList .title a{
+	width: 120px; height: 33px;
+	margin: 0;
+	border-top: 1px solid #e6e6e6; border-left: 1px solid #e6e6e6;
+	background: #fff;
+	font-size: 16px; line-height: 33px; text-align: center; color: #333; vertical-align: bottom;
+	display: inline-block;
+	float: initial;
+}
+#MatchList .title p + a{
+	border-left-color: #fff;
+}
+#MatchList .title a:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+#MatchList .title a:hover{
+	border-color: #bc1c25;
+	background: #bc1c25;
+	color: #fff !important;
+}
+/*内容区域*/
+#Tabbar{
+	height: 38px;
+	margin-top: 30px;
+	border-bottom: 4px solid #292b2e;
+}
+#Tabbar button{
+	width: 120px; height: 33px;
+	border-top: 1px solid #292b2e; border-left: 1px solid #292b2e; border-radius: 0;
+	background: #c5c5c5;
+	font-size: 16px; line-height: 33px; text-align: center; color: #292b2e; vertical-align: bottom;
+	display: inline-block;
+}
+#Tabbar button:hover{
+	border-color: #292b2e;
+	background: #fff;
+	color: #292b2e;
+}
+#Tabbar button.on{
+	width: 120px; height: 38px;
+	border-color: #292b2e;
+	background: #fff;
+	font-size: 18px; line-height: 38px; color: #292b2e;
+}
+#Tabbar button:last-child{
+	border-right: 1px solid #292b2e;
+}
+
+/*内容公用*/
+.default{
+	border-top: 4px solid #292b2e;
+}
+.default:first-child{
+	border-top: none;
+}
+.default .title .selectParent{
+	width: 88px; height: 32px;
+	margin: 0 16px 0 10px; padding-left: 10px; padding-right: 16px; 
+    border-radius: 2px; border: 1px solid #e6e6e6;
+	background: url(../img/icon_select_arrow.png) no-repeat scroll right center transparent;
+    font-size: 14px; line-height: 24px; text-align: center; color: #333;
+    display: inline-block;
+    overflow: hidden;
+	float: right;
+}
+.default .title select{
+	width: 128px; height: 32px;
+	background: transparent;
+    border:none;
+}
+.default .title .control{
+	height: 32px; width: 500px;
+	margin-left: -250px;
+	font-size: 14px; line-height: 32px;
+	text-align: center; vertical-align: middle;
+	position: absolute; left: 50%;
+}
+.default .title .control .selectParent{
+	position: relative; top: 12px;
+	float: none;
+}
+.default label{
+	height: 24px;
+	margin: 12px 16px 0 0; padding-left: 22px;
+	font-size: 14px; line-height: 24px;
+	display: inline-block;
+	position: relative;
+	float: right;
+}
+.default label input{
+	width: 0; height: 0;
+	opacity: 0; filter:Alpha(opacity=0);
+	position: absolute; left: 0; right: 0;
+}
+.default .title button{
+	width: 16px; height: 16px;
+	margin: 0 6px;
+	border: 1px solid #e6e6e6;
+	position: relative; top: 2px;
+}
+.default label span{
+	width: 14px; height: 14px;
+	margin-top: -8px;
+	border: 1px solid #e6e6e6;
+	position: absolute; top: 50%; left: 0;
+	display: inline-block;
+}
+.default label input[type=checkbox] + span,
+.default .title button.checkbox{
+	border-radius: 2px;
+}
+.default label input[type=radio] + span,
+.default .title button.radio{
+	border-radius: 50%;
+}
+.default label input[type=checkbox]:checked + span,
+.default .title button.checkbox.on{
+	background: url(../img/icon_search_seleted.png) no-repeat center; background-size: 10px;
+}
+.default label input[type=radio]:checked + span:before,
+.default .title button.radio.on:before{
+	width: 8px; height: 8px;
+	border-radius: 50%;
+	background: #bc1c25;
+	position: absolute; top: 3px; left: 3px;
+	content: '';
+}
+.default table{
+	width: 100%;
+	table-layout: auto;
+}
+.default table th{
+	height: 34px;
+	border-top: 1px solid #e6e6e6; border-left: 1px solid #e6e6e6;
+	font-size: 14px; line-height: 34px; text-align: center; color: #999;
+}
+.default table td{
+	height: 34px;
+	border-top: 1px solid #e6e6e6; border-left: 1px solid #e6e6e6;
+	font-size: 14px; line-height: 20px; text-align: center;
+	position: relative;
+}
+
+/*左侧快捷栏*/
+#LeftBar{
+	width: 80px;
+	position: fixed; right: 3%; bottom: 152px;
+}
+#LeftBar a{
+	background: rgba(0,0,0,0.45);
+	font-size: 14px; line-height: 40px; text-align: center; color: #fff;
+	display: block;
+}
+#LeftBar a + a{
+	margin-top: 4px;
+}
+#LeftBar a:hover{
+	background: #bc1c25;
+	color: #fff !important;
+}
+@media screen and (max-width: 1160px) {
+	#LeftBar{
+		display: none;
+	}
+}
+
+
+/*比赛赛况*/
+#Match{
+	margin-bottom: 20px;
+}
+#Match .first{
+	margin-bottom: 20px;
+	text-align: center;
+}
+#Match .first .host{
+	width: 45%;
+	padding: 0 10px 16px 0;
+	display: inline-block;
+}
+#Match .first .away{
+	width: 45%;
+	padding: 0 0 16px 10px;
+	display: inline-block;
+}
+#Match .first div.name{
+	padding: 10px 0;
+	font-size: 18px; line-height: 40px; text-align: center;
+	position: relative;
+}
+#Match .first div.name span{
+	padding: 0 10px;
+	font-size: 13px; color: #999;
+}
+#Match .first div.name .number{
+	margin-top: -4px; padding-bottom: 30px;
+	font-size: 14px; line-height: 24px; color: #666;
+	position: relative;
+}
+#Match .first .host div.name .number{
+	padding-right: 330px;
+	text-align: right;
+}
+#Match .first .away div.name .number{
+	padding-left: 330px;
+	text-align: left;
+}
+#Match .first div.name .number b{
+	padding: 0 4px;
+	color: #bc1c25;
+}
+#Match .first div.name dl{
+	height: 8px; width: 210px;
+	border-radius: 4px;
+	background: #eee;
+	position: absolute; top: 50%; 
+}
+#Match .first .host div.name dl{
+	right: 100px;
+}
+#Match .first .away div.name dl{
+	left: 100px;
+}
+#Match .first div.name dl dt{
+	margin-top: -12px;
+	font-size: 14px; line-height: 24px; color: #666; font-weight: bold;
+	position: absolute; top: 50%;
+}
+#Match .first .host div.name dl dt{
+	right: -90px;
+}
+#Match .first .away div.name dl dt{
+	left: -90px;
+}
+#Match .first .host div.name dl dt{
+	color: #bc1c25;
+}
+#Match .first .away div.name dl dt{
+	color: #58A1F6;
+}
+#Match .first div.name dl dd{
+	height: 8px;
+	border-radius: 4px;
+}
+#Match .first .host div.name dl dd{
+	float: right;
+}
+#Match .first .away div.name dl dd{
+	float: left;
+}
+#Match .first .host div.name dl dd{
+	background: #bc1c25;
+}
+#Match .first .away div.name dl dd{
+	background: #58A1F6;
+}
+#Match .first table{
+	width: 100%;
+	margin: 0 auto;
+	border-bottom: 1px solid #e6e6e6;
+}
+#Match .first table th{
+	width: 50%;
+	padding-left: 54px;
+	border: none;
+	font-size: 12px;
+}
+#Match .first table td{
+	height: 40px;
+	padding-left: 54px;
+}
+#Match .first table td:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+#Match .first table td:nth-child(even){
+	color: #808488;
+}
+#Match .first table tr:nth-child(even) td{
+	background: #f1f8fd;
+}
+#Match .first table td p{
+	width: 18px; height: 18px;
+	background: #bc1c25;
+	font-size: 12px; line-height: 18px; color: #fff;
+	position: absolute; top: 11px; left: 26px;
+}
+#Match .first .away table td p{
+	background: #58A1F6;
+}
+#Match .first table td:nth-child(even) p{
+	opacity: 0.5; filter:Alpha(opacity=50);
+}
+#Match .first table .number{
+	width: 16%;
+}
+
+#Match .technology{
+	margin-bottom: 20px;
+	padding: 0 12%;
+}
+#Match .technology .title{
+	margin: 0 -15.5%; padding-bottom: 40px;
+}
+#Match .technology .tecBox{
+	width: 50%; height: 70px;
+	position: relative;
+	float: left;
+}
+#Match .technology .tecBox dl{
+	height: 40px; width: 300px;
+	margin: -4px 0 0 -150px;
+	position: absolute; left: 50%; top: 0;
+}
+#Match .technology .tecBox dl dt{
+	font-size: 14px; line-height: 40px; text-align: center;
+}
+#Match .technology .tecBox dl dt.host{
+	font-size: 14px; text-align: right; font-weight: bold;
+	position: absolute; top: 0; right: 310px;
+}
+#Match .technology .tecBox dl dt.away{
+	font-size: 14px; text-align: left; font-weight: bold;
+	position: absolute; top: 0; left: 310px;
+}
+#Match .technology .tecBox dl dd{
+	height: 8px;
+	margin-top: -4px;
+	border-radius: 4px;
+	background: #eee;
+	position: absolute; top: 50%;
+}
+#Match .technology .tecBox dl dd.host{
+	right: 195px; left: 0;
+}
+#Match .technology .tecBox dl dd.away{
+	left: 195px; right: 0;
+}
+#Match .technology .tecBox dl dd p{
+	height: 8px;
+	border-radius: 4px;
+	position: absolute; top: 0;
+}
+#Match .technology .tecBox dl dd.host p{
+	background: #bc1c25;
+	right: 0;
+}
+#Match .technology .tecBox dl dd.away p{
+	background: #58A1F6;
+	left: 0;
+}
+#Match .technology .clear{
+	padding-top: 20px;
+}
+
+#Match .event{
+	margin: 20px 0;
+}
+#Match .event .inner{
+	height: 286px;
+	position: relative;
+}
+#Match .event .inner .timeline{
+	height: 46px; width: 780px;
+	margin: -23px 0 0 -390px;
+	border-radius: 22px;
+	background: #dadada;
+	position: absolute; top: 50%; left: 50%;
+}
+#Match .event .inner .timeline:before{
+	height: 46px;
+	font-size: 12px; line-height: 46px; color: #bababa;
+	position: absolute; left: -28px; top: 0;
+	content: '始';
+}
+#Match .event .event .inner .timeline:after{
+	height: 46px;
+	font-size: 12px; line-height: 46px; color: #bababa;
+	position: absolute; right: -28px; top: 0;
+	content: '终';
+}
+#Match .event .inner .timeline .fill{
+	height: 46px;
+	border-radius: 22px;
+	background: #77b52e;
+	display: inline-block;
+	position: relative;
+}
+#Match .event .inner .timeline .fill p{
+	width: 20px; height: 20px;
+	margin-top: -10px;
+	border-radius: 50%;
+	background: rgba(188,28,37,0.2);
+	position: absolute; top: 50%; right: -10px; z-index: 3;
+	-moz-animation: minute 0.7s cubic-bezier(0.25,0.1,0.25,1) infinite; -webkit-animation: minute 0.7s cubic-bezier(0.25,0.1,0.25,1) infinite; -o-animation: minute 0.7s cubic-bezier(0.25,0.1,0.25,1) infinite; animation: minute 0.7s cubic-bezier(0.25,0.1,0.25,1) infinite;
+}
+#Match .event .inner .timeline .fill p:after{
+	width: 10px; height: 10px;
+	margin: 5px;
+	border-radius: 50%;
+	background: #fff;
+	display: block;
+	content: '';
+}
+@keyframes minute{
+	from {opacity: 100;}
+	to {opacity: 0;}
+}
+#Match .event .inner .timeline .line{
+	height: 1px;
+	border-top: 1px solid #fff;
+	opacity: 0.4; filter:Alpha(opacity=40);
+	position: absolute; top: 50%; left: 0; right: 0;
+}
+#Match .event .inner .timeline .minute{
+	width: 5px; height: 5px;
+	margin: -2px 0 0 -2px;
+	border-radius: 50%;
+	background: #fff;
+	position: absolute; top: 50%;
+}
+#Match .event .inner .timeline .minute p{
+	width: 50px;
+	margin-left: -25px; 
+	font-size: 12px; line-height: 24px; text-align: center; color: #f4f4f4;
+	position: absolute; bottom: 4px; left: 50%;
+}
+#Match .event .inner .timeline .minute:nth-child(even) p{
+	bottom: auto; top: 4px;
+}
+#Match .event .inner .timeline .minute[class*=future]{
+	background: #bababa;
+}
+#Match .event .inner .timeline .future p{
+	color: #bababa;
+}
+#Match .event .inner .eventList{
+	width: 780px; height: 14px;
+	margin-left: -390px;
+	position: absolute; left: 50%;
+}
+#Match .event .inner .host_event{
+	top: 97px;
+}
+#Match .event .inner .away_event{
+	bottom: 97px;
+}
+#Match .event .inner .eventList:before{
+	height: 14px;
+	margin-top: -7px;
+	font-size: 14px; line-height: 14px;
+	position: absolute; top: 50%; left: -42px;
+}
+#Match .event .inner .host_event:before{
+	content: '主';
+}
+#Match .event .inner .away_event:before{
+	content: '客';
+}
+#Match .event .inner .eventList .item{
+	width: 40px;
+	margin-left: -20px;
+	font-size: 12px; line-height: 20px; text-align: center; color: #050505;
+	position: absolute;
+}
+#Match .event .inner .host_event .item{
+	/*padding-bottom: 20px;*/
+	bottom: 0;
+}
+#Match .event .inner .away_event .item{
+	/*padding-top: 20px;*/
+	top: 0;
+}
+#Match .event .inner .host_event .item[type=goal]{
+	background: url(../img/image_goal.png) no-repeat center bottom 2px; background-size: 16px;
+}
+#Match .event .inner .away_event .item[type=goal]{
+	background: url(../img/image_goal.png) no-repeat center 2px; background-size: 16px;
+}
+#Match .event .inner .host_event .item[type=corner]{
+	background: url(../img/image_corner.png) no-repeat center bottom 2px; background-size: 16px;
+}
+#Match .event .inner .away_event .item[type=corner]{
+	background: url(../img/image_corner.png) no-repeat center 2px; background-size: 16px;
+}
+#Match .event .inner .host_event .item[type=exchange]{
+	background: url(../img/image_exchange.png) no-repeat center bottom 2px; background-size: 16px;
+}
+#Match .event .inner .away_event .item[type=exchange]{
+	background: url(../img/image_exchange.png) no-repeat center 2px; background-size: 16px;
+}
+#Match .event .inner .host_event .item[type=yellow]{
+	background: url(../img/image_yellow.png) no-repeat center bottom 2px; background-size: 16px;
+}
+#Match .event .inner .away_event .item[type=yellow]{
+	background: url(../img/image_yellow.png) no-repeat center 2px; background-size: 16px;
+}
+#Match .event .inner .host_event .item[type=red]{
+	background: url(../img/image_red.png) no-repeat center bottom 2px; background-size: 16px;
+}
+#Match .event .inner .away_event .item[type=red]{
+	background: url(../img/image_red.png) no-repeat center 2px; background-size: 16px;
+}
+
+#Match .event .inner .eventList .item div{
+	height: 16px;
+	position: relative;
+}
+#Match .event .inner .host_event .item div{
+	margin-top: 4px;
+}
+#Match .event .inner .away_event .item div{
+	margin-bottom: 4px;
+}
+#Match .event .inner .eventList .item div > img{
+	width: 16px; height: 16px;
+}
+#Match .event .inner .eventList .item div p{
+	width: 200px;
+	font-size: 12px; line-height: 26px; text-align: left;
+	position: absolute; top: -5px; bottom: -5px; left: 40px; z-index: 2;
+	display: none;
+}
+#Match .event .inner .eventList .item div:hover p{
+	display: block;
+}
+#Match .event .inner .eventList .item div p span{
+	padding: 0 10px;
+	border-radius: 2px;
+	background: #e5e5e5;
+	font-size: 12px; line-height: 26px; text-align: left;
+	display: inline-block;
+}
+#Match .event .inner .eventList .item p span:before{
+	width: 6px; height: 6px;
+	margin-top: -3px;
+	background: #e5e5e5;
+	transform: rotate(45deg); -ms-transform: rotate(45deg); -webkit-transform: rotate(45deg); -o-transform: rotate(45deg); -moz-transform: rotate(45deg);
+	position: absolute; left: -3px; top: 50%;
+	content: '';
+}
+
+/*特色数据*/
+#Characteristic{
+	margin-bottom: 20px;
+}
+
+#Characteristic .strength{
+	margin-bottom: 20px; padding: 0 16px;
+	text-align: center;
+}
+#Characteristic .strength .title{
+	margin: 0 -16px;
+}
+#Characteristic .strength .host{
+	width: 45%;
+	padding: 0 10px 16px 0;
+	display: inline-block;
+}
+#Characteristic .strength .away{
+	width: 45%;
+	padding: 0 0 16px 10px;
+	display: inline-block;
+}
+#Characteristic .strength .name{
+	padding: 10px 0;
+	font-size: 18px; line-height: 40px; text-align: center;
+}
+#Characteristic .strength div.name span{
+	padding: 0 10px;
+	font-size: 13px; color: #999;
+}
+#Characteristic .strength table{
+	width: 100%;
+	margin: 0 auto;
+	border-bottom: 1px solid #e6e6e6;
+}
+#Characteristic .strength table th{
+	border: none;
+	font-size: 12px;
+}
+#Characteristic .strength table td{
+	height: 40px;
+}
+#Characteristic .strength table td:last-child{
+	border-right: 1px solid #e6e6e6; border-left: none;
+}
+#Characteristic .strength table .item{
+	width: 60%;
+	padding: 0 16px;
+	text-align: left;
+}
+#Characteristic .strength table .item img{
+	width: 20px; height: 20px;
+	padding-right: 6px;
+	vertical-align: middle;
+}
+#Characteristic .strength table span{
+	height: 20px;
+    padding: 0 10px; margin-left: 10px;
+    border-radius: 10px;
+    font-size: 12px; line-height: 20px; text-align: center; color: #fff;
+    position: absolute; right: 16px; top: 10px;
+}
+#Characteristic .strength table span.mostStrong {
+    background: #73DA0F;
+}
+#Characteristic .strength table span.moreStrong {
+    background: #21D392;
+}
+#Characteristic .strength table span.strong {
+    background: #00DFE1;
+}
+#Characteristic .strength table span.moreWeak {
+    background: #AF2F3E;
+}
+#Characteristic .strength table span.weak {
+    background: #F3A423;
+}
+
+#Characteristic .prediction{
+	margin-bottom: 20px; padding-bottom: 20px;
+}
+#Characteristic .prediction table{
+	width: 85%;
+	margin: 0 auto;
+	border-bottom: 1px solid #e6e6e6;
+}
+#Characteristic .prediction table th{
+	border: none;
+	font-size: 12px;
+}
+#Characteristic .prediction table td{
+	height: 40px;
+	border-left: none;
+}
+#Characteristic .prediction table td:first-child{
+	border-left: 1px solid #e6e6e6;
+}
+#Characteristic .prediction table td:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+#Characteristic .prediction table .all{
+	width: 60%;
+	padding: 0 16px;
+}
+#Characteristic .prediction table span{
+	height: 20px;
+    padding: 0 10px;
+    border-radius: 10px;
+    font-size: 12px; line-height: 20px; text-align: center; color: #fff;
+    display: inline-block;
+}
+#Characteristic .prediction table span.mostStrong {
+    background: #73DA0F;
+}
+#Characteristic .prediction table span.moreStrong {
+    background: #21D392;
+}
+#Characteristic .prediction table span.strong {
+    background: #00DFE1;
+}
+#Characteristic .prediction table span.moreWeak {
+    background: #AF2F3E;
+}
+#Characteristic .prediction table span.weak {
+    background: #F3A423;
+}
+
+#Characteristic .referee{
+	margin-bottom: 20px; padding-bottom: 20px;
+}
+#Characteristic .referee table{
+	width: 90%;
+	margin: 0 auto;
+	border-bottom: 1px solid #e6e6e6;
+}
+#Characteristic .referee table th{
+	width: 20%;
+	border: none;
+	font-size: 12px;
+}
+#Characteristic .referee table td{
+	height: 40px;
+	border-left: none;
+}
+#Characteristic .referee table td:first-child{
+	border-left: 1px solid #e6e6e6;
+}
+#Characteristic .referee table td:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+#Characteristic .referee table td:nth-child(odd){
+	background: #f1f8fd;
+}
+
+#Characteristic .sameOdd{
+	margin-bottom: 20px;
+}
+#Characteristic .sameOdd .title{
+	padding-bottom: 80px;
+}
+#Characteristic .sameOdd .title .control{
+	top: 65px;
+}
+#Characteristic .sameOdd button.radio{
+	height: 34px; width: 60px;
+	margin: 0; 
+	border: 1px solid #e6e6e6; border-radius: 0;
+	top: 0;
+}
+#Characteristic .sameOdd button.radio + button.radio{
+	border-left: none;
+}
+#Characteristic .sameOdd button.radio:before{
+	display: none;
+}
+#Characteristic .sameOdd button.radio.on{
+	background: #292b2e;
+	color: #fff;
+}
+#Characteristic .sameOdd .result{
+	padding: 0 30% 40px;
+}
+#Characteristic .sameOdd .result p{
+	width: 33.3%;
+	font-size: 16px; line-height: 24px; text-align: center;
+	display: inline-block;
+}
+#Characteristic .sameOdd .result p.win{
+	color: #bc1c25;
+}
+#Characteristic .sameOdd .result p.draw{
+	color: #1CC075;
+}
+#Characteristic .sameOdd .result p.lose{
+	color: #58A1F6;
+}
+#Characteristic .sameOdd .result p span{
+	font-size: 30px; line-height: 42px; font-weight: bold;
+}
+#Characteristic .sameOdd table th{
+	border: none;
+	font-size: 12px;
+}
+#Characteristic .sameOdd table td{
+	height: 60px;
+	border-left: none;
+}
+#Characteristic .sameOdd table td:first-child{
+	border-left: none;
+}
+#Characteristic .sameOdd table .league{
+	width: 100px;
+	border-left: none;
+}
+#Characteristic .sameOdd table p{
+	width: 86px; height: 34px;
+    margin: 0 auto;
+    border-radius: 4px;
+    line-height: 34px; color: #fff;
+}
+#Characteristic .sameOdd table .team{
+	width: 140px;
+}
+#Characteristic .sameOdd table .date{
+	width: 80px;
+}
+#Characteristic .sameOdd table .score{
+	width: 110px;
+}
+#Characteristic .sameOdd table .odd{
+	width: 60px;
+}
+#Characteristic .sameOdd table .comity{
+	width: 110px;
+}
+#Characteristic .sameOdd table .end{
+	width: 60px;
+}
+
+/*数据分析*/
+#Data{
+	margin-bottom: 20px;
+}
+
+#Data .strength{
+	margin-bottom: 20px; padding-bottom: 20px;
+}
+#Data .strength .title{
+	padding-bottom: 40px;
+}
+#Data .strength .title .selectParent{
+	margin: 12px 0 0 -58px;
+	position: absolute; top: 46px; left: 50%;
+}
+#Data .strength table{
+	border-bottom: 1px solid #e6e6e6;
+}
+#Data .strength table .team{
+	min-width: 100px;
+	border-left: none;
+}
+#Data .strength table th.goal,
+#Data .strength table th.miss,
+#Data .strength table th.match{
+	width: 70px;
+}
+#Data .strength table th.win,
+#Data .strength table th.draw,
+#Data .strength table th.lose{
+	width: 46px;
+}
+
+#Data > .odd{
+	margin-bottom: 20px; padding: 0 44px 20px;
+}
+#Data .odd .title{
+	margin: 0 -44px; padding-bottom: 70px;
+}
+#Data .odd .title .abox{
+	width: 180px; height: 40px;
+	padding: 0 12px;
+	border-radius: 10px;
+	background: #f2f2f2;
+	position: absolute; top: 50px; right: 10px;
+}
+#Data .odd .title a{
+	width: 33.3%;
+	margin: 0;
+	line-height: 40px; text-align: center; color: #333;
+	display: inline-block;
+}
+#Data .odd table{
+	border: 1px solid #e6e6e6; border-top: none;
+}
+#Data .odd table .company{
+	min-width: 60px;
+	border-left: none;
+}
+#Data .odd table .status{
+	width: 60px;
+}
+#Data .odd table .europe{
+	width: 80px;
+}
+#Data .odd table .team{
+	width: 80px;
+}
+#Data .odd table .comity{
+	width: 140px;
+}
+#Data .odd table .control{
+	width: 40px;
+}
+#Data .odd table .control button{
+	width: 20px; height: 20px;
+	border: none;
+	background: none;
+	color: inherit;
+}
+
+#Data .league{
+	margin-bottom: 20px;
+	text-align: center;
+}
+#Data .league .host{
+	width: 45%;
+	padding: 0 10px 16px 0;
+	display: inline-block;
+}
+#Data .league .away{
+	width: 45%;
+	padding: 0 0 16px 10px;
+	display: inline-block;
+}
+#Data .league p.name{
+	padding-bottom: 20px;
+	font-size: 18px; line-height: 40px; text-align: center;
+}
+#Data .league p.name span{
+	padding: 0 10px;
+	font-size: 13px; color: #999;
+}
+#Data .league table{
+	border-bottom: 1px solid #e6e6e6;
+}
+#Data .league table th{
+	border: none;
+	font-size: 12px;
+}
+#Data .league table td{
+	border-left: none; border-right: none;
+}
+#Data .league tr td:first-child{
+	min-width: 40px;
+	border-left: 1px solid #e6e6e6;
+}
+#Data .league tr td:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+#Data .league table .normal{
+	width: 46px;
+}
+#Data .league table .more{
+	width: 64px;
+}
+#Data .league table .most{
+	width: 70px;
+}
+
+#Data .battle{
+	margin-bottom: 20px;
+}
+#Data .battle .title{
+	padding-bottom: 80px;
+}
+#Data .battle .title .control{
+	top: 65px;
+}
+#Data .battle .canvasBox{
+	height: 235px;
+	position: relative;
+}
+#Data .battle canvas{
+	width: 140px; height: 140px;
+	border-radius: 50%; -moz-border-radius: 50%; -webkit-border-radius: 50%;
+	background: #f7f7f7;
+	position: absolute; top: 25px;
+	behavior: url(PIE.htc);
+}
+#Data .battle canvas.europe{
+	left: 14%;
+}
+#Data .battle canvas.asia{
+	left: 50%; margin-left: -70px;
+}
+#Data .battle canvas.goal{
+	right: 14%;
+}
+#Data .battle .cover{
+	width: 100px; height: 100px;
+	border-radius: 50%;
+	background: #fff;
+	position: absolute; top: 45px;
+	behavior: url(PIE.htc);
+}
+#Data .battle .cover[class*=europe]{
+	margin-left: 20px;
+	left: 14%;
+}
+#Data .battle .cover[class*=asia]{
+	margin-left: -50px;
+	left: 50%;
+}
+#Data .battle .cover[class*=goal]{
+	margin-right: 20px;
+	right: 14%;
+}
+#Data .battle .canvasBox p{
+	width: 300px;
+	font-size: 14px; line-height: 24px; text-align: center;
+	position: absolute; top: 185px;
+}
+#Data .battle .canvasBox p.europe{
+	margin-left: -75px;
+	left: 14%;
+}
+#Data .battle .canvasBox p.asia{
+	left: 50%; margin-left: -150px;
+}
+#Data .battle .canvasBox p.goal{
+	margin-right: -75px;
+	right: 14%;
+}
+#Data .battle .canvasBox p span{
+	padding-left: 26px;
+	position: relative;
+}
+#Data .battle .canvasBox p span:before{
+	width: 14px; height: 14px;
+	margin-top: -7px;
+	border-radius: 2px;
+	position: absolute; top: 50%; left: 8px;
+	content: '';
+}
+#Data .battle .canvasBox p span.win:before{
+	background: #f1333e;
+}
+#Data .battle .canvasBox p span.draw:before{
+	background: #1CC075;
+}
+#Data .battle .canvasBox p span.lose:before{
+	background: #999;
+}
+#Data .battle table td{
+	height: 60px;
+}
+#Data .battle table td,
+#Data .battle table th{
+	border-left: none; border-right: none;
+}
+#Data .battle table .league{
+	width: 106px;
+}
+#Data .battle table .team{
+	width: 120px;
+}
+#Data .battle table .date{
+	width: 80px;
+}
+#Data .battle table .score{
+	width: 110px;
+}
+#Data .battle table .odd{
+	width: 56px; height: 24px;
+	border-top: none;
+	font-size: 12px;
+}
+#Data .battle table .comity{
+	width: 80px; height: 24px;
+	border-top: none;
+	font-size: 12px;
+}
+#Data .battle table .result{
+	width: 54px;
+}
+#Data .battle table td:nth-child(1){
+	border-left: none;
+}
+#Data .battle table td:first-child p{
+	width: 80%; height: 34px;
+	margin: 0 auto;
+	border-radius: 4px;
+	line-height: 34px; color: #fff;
+}
+#Data .battle table .selectParent{
+	height: 24px; width: 45px;
+	padding-left: 8px; padding-right: 16px;
+    border: none;
+    background: url(../img/icon_select_arrow.png) no-repeat scroll right center transparent;
+    font-size: 14px; line-height: 24px; text-align: center; color: #333;
+    display: inline-block;
+	overflow: hidden;
+}
+#Data .battle table .selectParent + .selectParent{
+	margin-left: 10px;
+}
+#Data .battle table .selectParent select{
+	height: 24px; width: 80px;
+	margin-right: -16px;
+	background: transparent;
+    border:none;
+}
+
+#Data .history{
+	margin-bottom: 20px;
+}
+#Data .history .name{
+	padding: 10px 0 70px;
+	font-size: 18px; line-height: 40px; text-align: center;
+}
+#Data .history table + .name{
+	padding-top: 44px;
+	border-top: 1px solid #e6e6e6;
+}
+#Data .history .name span.league{
+	padding: 0 10px;
+    font-size: 13px; color: #999;
+}
+#Data .history .name .control{
+	height: 32px; width: 500px;
+	margin-left: -250px;
+	font-size: 14px; line-height: 32px;
+	text-align: center; vertical-align: middle;
+	position: absolute; left: 50%;
+}
+#Data .history .name .selectParent{
+	width: 90px; height: 24px;
+	margin: 6px 16px 0 0; padding-left: 10px; padding-right: 16px; 
+    border-radius: 2px; border: 1px solid #e6e6e6;
+	background: url(../img/icon_select_arrow.png) no-repeat scroll right center transparent;
+    font-size: 14px; line-height: 24px; text-align: center; color: #333;
+    display: inline-block;
+    overflow: hidden;
+	float: right;
+}
+#Data .history .name .selectParent{
+	margin-left: 10px;
+	position: relative; top: 8px;
+	float: none;
+}
+#Data .history .name select{
+	width: 130px; height: 24px;
+	background: transparent;
+    border: none;
+}
+#Data .history .name .control button{
+	width: 16px; height: 16px;
+	margin: 0 6px;
+	border: 1px solid #e6e6e6;
+	position: relative; top: 2px;
+}
+#Data .history .name .control button.checkbox{
+	border-radius: 2px;
+}
+#Data .history .name .control button.radio{
+	border-radius: 50%;
+}
+#Data .history .name .control button.checkbox.on{
+	background: url(../img/icon_search_seleted.png) no-repeat center; background-size: 10px;
+}
+#Data .history .name .control button.radio.on:before{
+	width: 8px; height: 8px;
+	border-radius: 50%;
+	background: #bc1c25;
+	position: absolute; top: 3px; left: 3px;
+	content: '';
+}
+#Data .history .name label{
+	margin-top: 6px;
+}
+#Data .history .svgbox{
+	height: 180px;
+	/*border-top: 1px solid #e6e6e6;*/
+	position: relative;
+}
+#Data .history .svgbox dl{
+	height: 120px; width: 320px;
+	margin-left: 40px;
+	border-top: 1px dashed #e6e6e6; border-bottom: 1px dashed #e6e6e6;
+	position: absolute; top: 25px;
+}
+#Data .history .svgbox dl.europe{
+	left: 30px;
+}
+#Data .history .svgbox dl.asia{
+	margin-left: -140px;
+	left: 50%;
+}
+#Data .history .svgbox dl.goal{
+	right: 30px;
+}
+#Data .history .svgbox dl:before{
+	border-bottom: 1px dashed #E6E6E6;
+    position: absolute; top: 50%; left: 0; right: 0;
+    content: '';
+}
+#Data .history .svgbox dl dt{
+	font-size: 13px; line-height: 24px; color: #999;
+	position: absolute; left: -40px;
+}
+#Data .history .svgbox dl dt.win{
+	top: -12px;
+}
+#Data .history .svgbox dl dt.draw{
+	margin-top: -12px;
+	top: 50%;
+}
+#Data .history .svgbox dl dt.lose{
+	bottom: -12px;
+}
+#Data .history .svgbox dl dd{
+	height: 100%;
+    position: relative;
+	float: left;
+}
+#Data .history .svgbox dl dd:after{
+    border-radius: 50%;
+    position: absolute; left: 50%; z-index: 2;
+    content: '';
+}
+#Data .history .svgbox dl dd[style*="10%"]:after{
+	width: 16px; height: 16px;
+	margin-left: -8px;
+}
+#Data .history .svgbox dl dd[style*="5%"]:after{
+	width: 10px; height: 10px;
+	margin-left: -5px;
+}
+#Data .history .svgbox dl dd.win:after{
+    background: #f1333e;
+}
+#Data .history .svgbox dl dd.win[style*="10%"]:after{
+    top: -8px;
+}
+#Data .history .svgbox dl dd.win[style*="5%"]:after{
+    top: -5px;
+}
+#Data .history .svgbox dl dd.draw:after{
+    background: #1CC075;
+    top: 50%;
+}
+#Data .history .svgbox dl dd.draw[style*="10%"]:after{
+    margin-top: -8px;
+}
+#Data .history .svgbox dl dd.draw[style*="5%"]:after{
+    margin-top: -5px;
+}
+#Data .history .svgbox dl dd.lose:after{
+    background: #999;
+}
+#Data .history .svgbox dl dd.lose[style*="10%"]:after{
+    bottom: -8px;
+}
+#Data .history .svgbox dl dd.lose[style*="5%"]:after{
+    bottom: -5px;
+}
+#Data .history .svgbox dl svg{
+	height: 120px;
+    position: absolute; top: 0;
+}
+#Data .history .svgbox dl svg.ten{
+	width: 288px;
+	left: 15px;
+}
+#Data .history .svgbox dl svg.twenty{
+	width: 304px;
+	left: 8px;
+}
+#Data .history table td{
+	height: 60px;
+}
+#Data .history table td,
+#Data .history table th{
+	border-left: none; border-right: none;
+}
+#Data .history table .league{
+	width: 80px;
+	border-left: none;
+}
+#Data .history table .team{
+	width: 120px;
+}
+#Data .history table .date{
+	width: 80px;
+}
+#Data .history table .score{
+	width: 110px;
+}
+#Data .history table .odd{
+	width: 56px;
+	border-top: none;
+	font-size: 12px;
+}
+#Data .history table .comity{
+	width: 80px; height: 24px;
+	border-top: none;
+	font-size: 12px;
+}
+#Data .history table .result{
+	width: 54px;
+}
+#Data .history table td:first-child{
+	width: 120px;
+	border-left: none;
+}
+#Data .history table td:first-child p{
+	width: 86px; height: 34px;
+	margin: 0 auto;
+	border-radius: 4px;
+	line-height: 34px; color: #fff;
+}
+#Data .history table .selectParent{
+	height: 24px; width: 45px;
+	padding-left: 8px; padding-right: 16px; margin-top: 5px;
+    border: none;
+    background: url(../img/icon_select_arrow.png) no-repeat scroll right center transparent;
+    font-size: 14px; line-height: 24px; text-align: center; color: #333;
+    display: inline-block;
+    overflow: hidden;
+}
+#Data .history table .selectParent + .selectParent{
+	margin-left: 10px;
+}
+#Data .history table .selectParent select{
+	height: 24px; width: 80px;
+	margin-right: -16px;
+	background: transparent;
+    border:none;
+}
+
+#Data .track{
+	margin-bottom: 20px;
+	text-align: center;
+}
+#Data .track .host{
+	width: 45%;
+	padding: 0 10px 16px 0;
+	display: inline-block;
+}
+#Data .track .away{
+	width: 45%;
+	padding: 0 0 16px 10px;
+	display: inline-block;
+}
+#Data .track p.name{
+	padding: 10px 0 24px;
+	font-size: 18px; line-height: 22px; text-align: center;
+}
+#Data .track p.name span{
+	padding: 0 10px;
+	font-size: 13px; color: #999;
+}
+#Data .track table{
+	border-bottom: 1px solid #e6e6e6;
+}
+#Data .track table th{
+	border: none;
+	font-size: 12px;
+}
+#Data .track table th:nth-child(1){
+	min-width: 30px;
+}
+#Data .track tr td{
+	border-left: none; border-right: none;
+}
+#Data .track tr td:first-child{
+	border-left: 1px solid #e6e6e6;
+}
+#Data .track tr td:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+#Data .track table .normal{
+	width: 48px;
+}
+#Data .track table .more{
+	width: 58px;
+}
+#Data .track table .most{
+	width: 74px;
+}
+
+#Data .future{
+	margin-bottom: 20px;
+	text-align: center;
+}
+#Data .future .host{
+	width: 45%;
+	padding: 0 10px 16px 0;
+	display: inline-block;
+}
+#Data .future .away{
+	width: 45%;
+	padding: 0 0 16px 10px;
+	display: inline-block;
+}
+#Data .future p.name{
+	padding: 10px 0 24px;
+	font-size: 18px; line-height: 22px; text-align: center;
+}
+#Data .future p.name span{
+	padding: 0 10px;
+	font-size: 13px; color: #999;
+}
+#Data .future table{
+	border-bottom: 1px solid #e6e6e6;
+}
+#Data .future table th{
+	border: none;
+	font-size: 12px;
+}
+#Data .future table th:nth-child(1){
+	min-width: 70px; width: 20%;
+}
+#Data .future table th:nth-child(2){
+	min-width: 60px; width: 16%;
+}
+#Data .future tr td{
+	height: 60px;
+	border-left: none; border-right: none;
+}
+#Data .future tr td:first-child{
+	border-left: 1px solid #e6e6e6;
+}
+#Data .future tr td:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+#Data .future tr td:nth-child(3), #Data .future tr td:nth-child(5){
+	padding: 0 5px;
+}
+#Data .future tr td:nth-child(4){
+	width: 20px;
+}
+#Data .future table .separated{
+	width: 50px;
+}
+#Data .future table p{
+    width: 80%; height: 34px;
+    margin: 0 auto;
+    border-radius: 4px;
+    line-height: 34px; color: #fff;
+}
+
+/*角球数据*/
+#Corner{
+
+}
+
+#Corner .odd{
+	margin-bottom: 20px; padding-bottom: 20px;
+}
+#Corner .odd table{
+	width: 90%;
+	margin: 0 auto;
+	border-bottom: 1px solid #e6e6e6;
+}
+#Corner .odd table th{
+	border: none;
+	font-size: 12px;
+}
+#Corner .odd table td{
+	height: 40px;
+	border-left: none;
+}
+#Corner .odd table td:first-child{
+	border-left: 1px solid #e6e6e6;
+}
+#Corner .odd table td:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+#Corner .odd table .status{
+	width: 200px;
+	border-left: none;
+}
+
+#Corner .data{
+	margin-bottom: 20px; padding-bottom: 20px;
+}
+#Corner .data .title{
+	padding-bottom: 70px;
+}
+#Corner .data .title .control{
+	top: 65px;
+}
+#Corner .data table{
+	width: 90%;
+	margin: 0 auto;
+	border-bottom: 1px solid #e6e6e6;
+}
+#Corner .data table th{
+	border: none;
+	font-size: 12px;
+}
+#Corner .data table td{
+	height: 40px;
+	border-left: none;
+}
+#Corner .data table td:first-child{
+	border-left: 1px solid #e6e6e6;
+}
+#Corner .data table td:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+#Corner .data table .team{
+	width: 350px;
+	border-left: none;
+}
+
+#Corner .battle{
+	margin-bottom: 20px; padding-bottom: 20px;
+}
+#Corner .battle .title{
+	padding-bottom: 70px;
+}
+#Corner .battle .title .control{
+	top: 65px;
+}
+#Corner .battle table{
+	width: 100%;
+	margin: 0 auto;
+	border-bottom: 1px solid #e6e6e6;
+}
+#Corner .battle table th{
+	border: none;
+	font-size: 12px;
+}
+#Corner .battle .progressBox{
+	height: 12px; width: 500px;
+	margin: 50px auto 50px;
+	border-radius: 6px;
+	background: #f7f7f7;
+	position: relative;
+}
+#Corner .battle .progressBox:before{
+	height: 12px;
+	border: 8px solid #fff; border-radius: 14px;
+	position: absolute; top: -8px; left: -2px; right: -2px; z-index: 2;
+	content: '';
+}
+#Corner .battle dl.progressBox dd{
+	height: 12px;
+	box-sizing: border-box;
+	display: inline-block;
+	position: relative;
+	float: left;
+}
+#Corner .battle dl.progressBox dd.win{
+	border-right: 4px solid #fff;
+	background: #bc1c25;
+}
+#Corner .battle dl.progressBox dd.draw{
+	border-right: 4px solid #fff;
+	background: #1CC075;
+}
+#Corner .battle dl.progressBox dd.lose{
+	background: #58A1F6;
+}
+#Corner .battle dl.progressBox dd p{
+	width: 100px;
+	margin-left: -50px;
+	font-size: 13px; line-height: 32px; text-align: center;
+	position: absolute; top: -32px; left: 50%; z-index: 3;
+}
+#Corner .battle dl.progressBox dd.draw p{
+	top: auto; bottom: -32px;
+}
+#Corner .battle table td{
+	border-left: none;
+}
+#Corner .battle table td:first-child{
+	border-left: 1px solid #e6e6e6;
+}
+#Corner .battle table td:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+#Corner .battle table td:first-child p{
+	width: 86px; height: 34px;
+	margin: 0 auto;
+	border-radius: 4px;
+	line-height: 34px; color: #fff;
+}
+#Corner .battle table .league{
+	width: 80px;
+	border-left: none;
+}
+#Corner .battle table .team{
+	width: 140px;
+}
+#Corner .battle table .date{
+	width: 80px;
+}
+#Corner .battle table .score{
+	width: 110px;
+}
+#Corner .battle table .odd{
+	width: 70px;
+}
+#Corner .battle table .comity{
+	width: 70px;
+}
+#Corner .battle table .result{
+	width: 55px;
+}
+
+#Corner .history{
+	margin-bottom: 20px; padding-bottom: 20px;
+}
+#Corner .history .name{
+	padding: 10px 0 70px;
+	font-size: 18px; line-height: 40px; text-align: center;
+}
+#Corner .history table + .name{
+	padding-top: 44px;
+}
+#Corner .history .name span.league{
+	padding: 0 10px;
+    font-size: 13px; color: #999;
+}
+#Corner .history .name .control{
+	height: 32px; width: 500px;
+	margin-left: -250px;
+	font-size: 14px; line-height: 32px;
+	text-align: center; vertical-align: middle;
+	position: absolute; left: 50%;
+}
+#Corner .history .name .selectParent{
+	width: 90px; height: 24px;
+	margin: 6px 16px 0 0; padding-left: 10px; padding-right: 16px; 
+    border-radius: 2px; border: 1px solid #e6e6e6;
+	background: url(../img/icon_select_arrow.png) no-repeat scroll right center transparent;
+    font-size: 14px; line-height: 24px; text-align: center; color: #333;
+    display: inline-block;
+    overflow: hidden;
+	float: right;
+}
+#Corner .history .name .selectParent{
+	margin-left: 10px;
+	position: relative; top: 8px;
+	float: none;
+}
+#Corner .history .name select{
+	width: 130px; height: 24px;
+	background: transparent;
+    border: none;
+}
+#Corner .history .name .control button{
+	width: 16px; height: 16px;
+	margin: 0 6px;
+	border: 1px solid #e6e6e6;
+	position: relative; top: 2px;
+}
+#Corner .history .name .control button.checkbox{
+	border-radius: 2px;
+}
+#Corner .history .name .control button.radio{
+	border-radius: 50%;
+}
+#Corner .history .name .control button.checkbox.on{
+	background: url(../img/icon_search_seleted.png) no-repeat center; background-size: 10px;
+}
+#Corner .history .name .control button.radio.on:before{
+	width: 8px; height: 8px;
+	border-radius: 50%;
+	background: #bc1c25;
+	position: absolute; top: 3px; left: 3px;
+	content: '';
+}
+#Corner .history .name label{
+	margin-top: 6px;
+}
+#Corner .history .progressBox{
+	height: 12px; width: 500px;
+	margin: 40px auto 50px;
+	border-radius: 6px;
+	background: #f7f7f7;
+	position: relative;
+}
+#Corner .history .progressBox:before{
+	height: 12px;
+	border: 8px solid #fff; border-radius: 14px;
+	position: absolute; top: -8px; left: -2px; right: -2px; z-index: 2;
+	content: '';
+}
+#Corner .history dl.progressBox dd{
+	height: 12px;
+	box-sizing: border-box;
+	display: inline-block;
+	position: relative;
+	float: left;
+}
+#Corner .history dl.progressBox dd.win{
+	border-right: 4px solid #fff;
+	background: #bc1c25;
+}
+#Corner .history dl.progressBox dd.draw{
+	border-right: 4px solid #fff;
+	background: #1CC075;
+}
+#Corner .history dl.progressBox dd.lose{
+	background: #58A1F6;
+}
+#Corner .history dl.progressBox dd p{
+	width: 100px;
+	margin-left: -50px;
+	font-size: 13px; line-height: 32px; text-align: center;
+	position: absolute; top: -32px; left: 50%; z-index: 3;
+}
+#Corner .history dl.progressBox dd.draw p{
+	top: auto; bottom: -32px;
+}
+#Corner .history table{
+	width: 100%;
+	margin: 0 auto;
+	border-bottom: 1px solid #e6e6e6;
+}
+#Corner .history table th{
+	border: none;
+	font-size: 12px;
+}
+#Corner .history table td{
+	border-left: none;
+}
+#Corner .history table td:first-child{
+	border-left: 1px solid #e6e6e6;
+}
+#Corner .history table td:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+#Corner .history table td:first-child p{
+	width: 86px; height: 34px;
+	margin: 0 auto;
+	border-radius: 4px;
+	line-height: 34px; color: #fff;
+}
+#Corner .history table .league{
+	width: 80px;
+	border-left: none;
+}
+#Corner .history table .team{
+	width: 140px;
+}
+#Corner .history table .date{
+	width: 80px;
+}
+#Corner .history table .score{
+	width: 110px;
+}
+#Corner .history table .odd{
+	width: 70px;
+}
+#Corner .history table .comity{
+	width: 70px;
+}
+#Corner .history table .result{
+	width: 55px;
+}
+
+
+@media screen and (max-width: 1400px){
+	#Content td, #Content th, #Data .battle .canvasBox p span{
+		font-size: 12px !important;
+	}
+	#Info div.mes p{
+		padding-top: 10px;
+	}
+	#Info div.team span.team{
+		font-size: 20px; line-height: 32px;
+	}
+	#Info div.team span.league{
+		font-size: 14px; line-height: 20px;
+	}
+	#Info div.icon{
+		width: 80px; height: 80px;
+		padding: 12px; margin-top: -52px;
+	}
+	#Info div.icon img{
+		width: 80px; height: 80px;
+	}
+	#Info .host div.icon{
+		left: -80%;
+	}
+	#Info .away div.icon{
+		right: -80%;	
+	}
+}
+
+
+/*广告*/
+.bannerAD.default{
+	margin-bottom: 20px;
+	border-top: none;
+}
+
+
+
+
+/*底色效果*/
+#Data_League table tbody tr:hover,
+#Data_League table.bg_2 td:nth-child(2),#Data_League table.bg_3 td:nth-child(3),#Data_League table.bg_4 td:nth-child(4),#Data_League table.bg_5 td:nth-child(5),
+#Data_League table.bg_6 td:nth-child(6),#Data_League table.bg_7 td:nth-child(7),#Data_League table.bg_8 td:nth-child(8),#Data_League table.bg_9 td:nth-child(9),
+#Data_League table.bg_10 td:nth-child(10),#Data_League table.bg_11 td:nth-child(11),
+#Data_League table.bg_2 th:nth-child(2),#Data_League table.bg_3 th:nth-child(3),#Data_League table.bg_4 th:nth-child(4),#Data_League table.bg_5 th:nth-child(5),
+#Data_League table.bg_6 th:nth-child(6),#Data_League table.bg_7 th:nth-child(7),#Data_League table.bg_8 th:nth-child(8),#Data_League table.bg_9 th:nth-child(9),
+#Data_League table.bg_10 th:nth-child(10),#Data_League table.bg_11 th:nth-child(11){
+	background: #cbd1d6;
+}
+#Data_League table td:hover{
+	background: #838587 !important;
+}
+#Data_League table td:first-child:hover{
+	background: #cbd1d6 !important;
+}
+
+
+#Data_Battle table tbody tr:hover,
+#Data_Battle table.bg_1 td:nth-child(1),#Data_Battle table.bg_2 td:nth-child(2),#Data_Battle table.bg_3 td:nth-child(3),#Data_Battle table.bg_4 td:nth-child(4),
+#Data_Battle table.bg_5 td:nth-child(5),#Data_Battle table.bg_6 td:nth-child(6),#Data_Battle table.bg_7 td:nth-child(7),#Data_Battle table.bg_8 td:nth-child(8),
+#Data_Battle table.bg_9 td:nth-child(9),#Data_Battle table.bg_10 td:nth-child(10),#Data_Battle table.bg_11 td:nth-child(11),#Data_Battle table.bg_12 td:nth-child(12),
+#Data_Battle table.bg_13 td:nth-child(13),#Data_Battle table.bg_14 td:nth-child(14),#Data_Battle table.bg_15 td:nth-child(15),#Data_Battle table.bg_16 td:nth-child(16),
+#Data_Battle table.bg_17 td:nth-child(17){
+	background: #cbd1d6;
+}
+#Data_Battle table td:hover{
+	background: #838587 !important;
+}
+
+#Data_History table tbody tr:hover,
+#Data_History table.bg_1 td:nth-child(1),#Data_History table.bg_2 td:nth-child(2),#Data_History table.bg_3 td:nth-child(3),#Data_History table.bg_4 td:nth-child(4),
+#Data_History table.bg_5 td:nth-child(5),#Data_History table.bg_6 td:nth-child(6),#Data_History table.bg_7 td:nth-child(7),#Data_History table.bg_8 td:nth-child(8),
+#Data_History table.bg_9 td:nth-child(9),#Data_History table.bg_10 td:nth-child(10),#Data_History table.bg_11 td:nth-child(11),#Data_History table.bg_12 td:nth-child(12),
+#Data_History table.bg_13 td:nth-child(13),#Data_History table.bg_14 td:nth-child(14),#Data_History table.bg_15 td:nth-child(15),#Data_History table.bg_16 td:nth-child(16),
+#Data_History table.bg_17 td:nth-child(17){
+	background: #cbd1d6;
+}
+#Data_History table td:hover{
+	background: #838587 !important;
+}
+
+#Characteristic_SameOdd table tbody tr:hover,
+#Characteristic_SameOdd table.bg_1 td:nth-child(1),#Characteristic_SameOdd table.bg_2 td:nth-child(2),#Characteristic_SameOdd table.bg_3 td:nth-child(3),#Characteristic_SameOdd table.bg_4 td:nth-child(4),
+#Characteristic_SameOdd table.bg_5 td:nth-child(5),#Characteristic_SameOdd table.bg_6 td:nth-child(6),#Characteristic_SameOdd table.bg_7 td:nth-child(7),#Characteristic_SameOdd table.bg_8 td:nth-child(8),
+#Characteristic_SameOdd table.bg_9 td:nth-child(9),#Characteristic_SameOdd table.bg_10 td:nth-child(10),#Characteristic_SameOdd table.bg_11 td:nth-child(11),#Characteristic_SameOdd table.bg_12 td:nth-child(12){
+	background: #cbd1d6;
+}
+#Characteristic_SameOdd table td:hover{
+	background: #838587 !important;
+}
+
+
+

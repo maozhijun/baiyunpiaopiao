@@ -52,7 +52,7 @@ class Handler extends ExceptionHandler
         }
 
         if ($exception instanceof NotFoundHttpException) {
-            return redirect('/');
+            //return redirect('/');
         }
         return parent::render($request, $exception);
     }

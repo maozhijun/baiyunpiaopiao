@@ -28,18 +28,18 @@ foreach($data as $match){
 ?>
 <div class="canvasBox" ha="{{$ha}}" le="{{$league}}">
     <div class="canvasArea">
-        <div class="circle"><canvas width="140px" height="140px" value="{{round($ouWin/$count, 1)}}" color="#F9423D"></canvas></div>
+        <div class="circle"><canvas width="140px" height="140px" value="{{$count == 0 ? 0 : round($ouWin/$count, 1)}}" color="#F9423D"></canvas></div>
         <p>主胜<b class="red">{{$ouWin}}</b></p>
     </div>
     <div class="canvasArea">
-        <div class="circle"><canvas width="140px" height="140px" value="{{round($ouDraw/$count, 1)}}" color="#32C47C"></canvas></div>
+        <div class="circle"><canvas width="140px" height="140px" value="{{$count == 0 ? 0 : round($ouDraw/$count, 1)}}" color="#32C47C"></canvas></div>
         <p>平局<b class="green">{{$ouDraw}}</b></p>
     </div>
     <div class="canvasArea">
-        <div class="circle"><canvas width="140px" height="140px" value="{{round($ouLose/$count, 1)}}" color="#6E6E6E"></canvas></div>
+        <div class="circle"><canvas width="140px" height="140px" value="{{$count == 0 ? 0 : round($ouLose/$count, 1)}}" color="#6E6E6E"></canvas></div>
         <p>主负<b class="gray">{{$ouLose}}</b></p>
     </div>
-    <p class="summary">共{{$count}}场，胜率：<b>{{round($ouWin/$count, 3) * 100}}%</b>，赢盘率：<b>{{round($asia_win_count / $count, 4) * 100}}%</b></p>
+    <p class="summary">共{{$count}}场，胜率：<b>{{$count == 0 ? 0 : round($ouWin/$count, 3) * 100}}%</b>，赢盘率：<b>{{$count == 0 ? 0 : round($asia_win_count / $count, 4) * 100}}%</b></p>
 </div>
 <table ha="{{$ha}}" le="{{$league}}">
     <thead>

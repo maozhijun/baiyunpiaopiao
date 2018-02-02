@@ -1,0 +1,547 @@
+
+
+td.red{
+	color: #bc1c25;
+}
+
+#Content{
+	min-height: 700px;
+}
+
+#MatchList{
+	margin: 20px 0;
+}
+#MatchList .title{
+	height: 34px;
+	border-bottom: 4px solid #fff;
+	background: none;
+}
+#MatchList .title p{
+	width: 120px; height: 34px;
+	background: #fff;
+	font-size: 18px; line-height: 38px; color: #2f333c;	
+	display: inline-block;
+	float: none;
+}
+#MatchList .title p:before, #MatchList .title p:after{
+	display: none;
+}
+#MatchList .title a{
+	width: 120px; height: 33px;
+	margin: 0;
+	border-top: 1px solid #2f333c; border-right: 1px solid #2f333c;
+	background: #c5c5c5;
+	font-size: 16px; line-height: 33px; text-align: center; color: #2f333c; vertical-align: bottom;
+	display: inline-block;
+	position: relative; top: 4px;
+	float: none;
+}
+#MatchList .title p + a,#MatchList .title .date + a{
+	border-left: 1px solid #2f333c;
+}
+#MatchList .title a:hover{
+	background: #fff;
+}
+
+#MatchList div.date{
+	height: 38px;
+	position: relative; top: -2px;
+	float: right;
+}
+#MatchList div.date label{
+	height: 24px;
+	margin-top: 10px; padding: 0 16px;
+	border-radius: 2px;
+	font-size: 14px; line-height: 24px; text-align: center; color: #333;
+	display: inline-block;
+}
+#MatchList div.date label:hover{
+	color: #bc1c25;
+}
+#MatchList div.date input[type=radio]{
+	width: 0; height: 0;
+	opacity: 0; filter:Alpha(opacity=0);
+	position: absolute; top: 0; left: 0;
+}
+#MatchList div.date input[type=radio]:checked + label{
+	background: #fdeaec;
+	color: #bc1c25;
+}
+#MatchList div.date input[type=date]{
+	height: 30px; width: 186px;
+	margin-top: 2px; padding-left: 10px;
+	border: none; border-radius: 4px 0 0 4px;
+	line-height: 30px;
+}
+#MatchList div.date button.sreach{
+	width: 70px; height: 30px;
+	margin-top: 2px;
+	border-radius: 0 4px 4px 0;
+	background: #2f333c;
+	font-size: 14px; color: #fff; line-height: 30px;
+	float: right;
+	position: relative; z-index: 2;
+}
+
+#MatchList .control{
+	height: 32px;
+	padding: 23px 10px 15px 10px;
+	border-top: 1px solid #e6e6e6;
+	background: #fff;
+	font-size: 12px; line-height: 32px;
+	position: relative;
+}
+#MatchList .control > button{
+	height: 32px;
+	padding: 0 16px;
+	border: 1px solid #e6e6e6; border-radius: 0;
+	background: #fff;
+	font-size: 12px; text-align: center; color: #808488;
+	float: left;
+}
+#MatchList .control button.save,
+#MatchList .control button.league{
+	margin-right: 10px;
+}
+#MatchList .control button.del,
+#MatchList .control button.pleague{
+	margin-right: 30px;
+}
+#MatchList .control button.video{
+	border-left: none;
+}
+#MatchList .control button.all{
+	margin-right: 20px;
+	border-left: none;
+}
+#MatchList .control button.show{
+	float: right;
+}
+#MatchList .control div.multiScreen{
+	width: 100px; height: 26px;
+	margin-right: 10px; padding: 3px 4px;
+	border-radius: 16px;
+	background: #e5e5e5;
+	cursor: pointer;
+	float: right;
+}
+#MatchList .control div.multiScreen p{
+	height: 26px;
+	padding: 0 8px 0 36px;
+	border-radius: 13px;
+	background: #fff;
+	box-shadow: 0px 0px 2px 0px rgba(88, 0, 0, 0.36);
+	font-size: 12px; line-height: 26px; text-align: center;
+	position: relative;
+}
+#MatchList .control div.multiScreen p img{
+	width: 20px; height: 20px;
+	margin-top: -10px;
+	position: absolute; top: 50%; left: 8px;
+}
+#MatchList .control button.on{
+	border-color: #2f333c;
+	background: #2f333c;
+	color: #fff;
+}
+#MatchList .control button:hover{
+	border-color: #2f333c;
+	background: #2f333c !important;
+	color: #fff;
+}
+#MatchList .control b{
+	padding: 0 5px;
+	color: #2f333c;
+}
+#MatchList .control p{
+	color: #808488;
+}
+#MatchList .control p span{
+	cursor: pointer;
+}
+#MatchList .control p span:hover{
+	color: #2f333c;
+}
+
+#MatchList table{
+	width: 100%;
+	background: #fff;
+	table-layout: auto;
+}
+#MatchList .control + table{
+	margin-top: 5px;
+}
+#MatchList table + table{
+	margin-top: 18px;
+}
+#MatchList table button{
+	width: 16px; height: 16px;
+	border-radius: 2px; border: 1px solid #e6e6e6;
+	background: #fff;
+	position: absolute; top: 7px; left: 12px;
+}
+#MatchList table button.on{
+	background: url(../img/icon_search_seleted.png) no-repeat center #fff; background-size: 12px;
+}
+
+#MatchList table th{
+	height: 30px;
+	background: #2f333c;
+	font-size: 14px; line-height: 30px; text-align: center; color: #b0b0b0;
+	position: relative;
+}
+#MatchList table th:nth-child(1){
+	min-width: 110px;
+	padding-left: 140px;
+	border-left: 2px solid #bc1c25;
+	text-align: left;
+	position: relative;
+}
+#MatchList table th.period{
+	width: 60px;
+}
+#MatchList table th.full,
+#MatchList table th.europe{
+	min-width: 40px; width: 60px;
+}
+#MatchList table th.period_half{
+	width: 120px;
+}
+#MatchList table th.half{
+	min-width: 60px; width: 80px;
+}
+#MatchList table th.period,
+#MatchList table th.period_half,
+#MatchList table th.half,
+#MatchList table th.full{
+	color: #dadada;
+}
+#MatchList table th.difference{
+	min-width: 40px; width: 60px;
+}
+#MatchList table th.add{
+	min-width: 60px; width: 80px;
+}
+#MatchList table th.asia{
+	width: 95px;
+}
+#MatchList table th.goal{
+	width: 120px;
+}
+#MatchList table th.data{
+	max-width: 150px; width: 120px;
+}
+#MatchList table th span.league{
+	width: 72px; height: 20px;
+	font-size: 14px; line-height: 20px; text-align: center; color: #fff;
+	position: absolute; top: 5px; left: 42px;
+}
+#MatchList table th p{
+	color: #de1a25;
+}
+#MatchList table tr{
+	background: #737373;
+}
+#MatchList table td{
+	height: 36px;
+	border-right: 1px solid #1e2228;
+	font-size: 14px; line-height: 24px; text-align: center;
+	position: relative;
+}
+#MatchList table tr + tr td{
+	border-top: 1px solid #1e2228;
+}
+#MatchList table td[rowspan]:last-child{
+	border-right: none !important;
+}
+#MatchList table td[rowspan="2"]:first-child{
+	min-width: 40px; width: 5%;
+	line-height: 20px; color: #fff;
+}
+#MatchList table td[rowspan="2"]:first-child img{
+	height: 16px;
+}
+#MatchList table td.team{
+	width: 10%;
+	padding-left: 50px;
+	border-right: 0px;
+	text-align: left; color: #fff;
+	position: relative;
+}
+#MatchList table td.team ~ td{
+	border-right: 0px;
+	background: #909090;
+}
+#MatchList table td.full{
+	color: #fff;
+}
+#MatchList table td.full ~ td{
+	border-right: 1px solid #1e2228;
+	background: none;
+}
+#MatchList table tr:first-child td.full ~ td{
+	border-top: none;
+}
+#MatchList table td.asia{
+	padding-left: 4%;
+	text-align: left;
+	position: relative;
+}
+#MatchList table td.asia span{
+	width: 50%; height: 24px;
+	text-align: center; color: #fc9609;
+	position: absolute; top: 6px; left: 0;
+}
+#MatchList table td.goal{
+	padding-left: 7%;
+	text-align: left;
+	position: relative;
+}
+#MatchList table td.goal span{
+	width: 65%; height: 24px;
+	text-align: center; color: #fc9609;
+	position: absolute; top: 6px; left: 0;
+}
+#MatchList table td.link a{
+	color: #000; text-decoration: underline;
+}
+#MatchList table td.link a:hover{
+	color: #fff;
+}
+#MatchList table td.rem{
+	border-top: none;
+}
+#MatchList table td.rem a{
+	color: #bc1c25;
+}
+#MatchList table td.team img{
+	width: 24px; height: 24px;
+	position: absolute; top: 6px; left: 12px;
+}
+#MatchList table td p{
+	margin: 0 6px;
+	border-radius: 4px;
+}
+#MatchList table td p.red{
+	background: #bc1c25;
+	color: #fff;
+}
+
+/*通栏广告*/
+tr.bannerAD{
+
+}
+tr.bannerAD td{
+	height: auto !important; min-height: 32px;
+	padding: 0;
+}
+tr.bannerAD img{
+	width: 100%;
+	display: block;
+}
+
+/*弹框样式*/
+.pop div.filter{
+	width: 766px;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0px 0px 29px 0px rgba(1, 0, 62, 0.58);
+	position: absolute; top: 50%; left: 50%;
+	overflow: hidden;
+}
+.pop div.filter .title{
+	height: 32px;
+	padding: 20px 70px 20px 35px;
+	background: #fff;
+	font-size: 22px; line-height: 32px;
+	position: absolute; top: 0; left: 0; right: 0; z-index: 1;
+}
+.pop div.filter .title button.tab{
+	width: 88px; height: 32px;
+	border: 1px solid #bc1c25; border-radius: 0;
+	font-size: 16px; color: #2f333c;
+	float: right;
+}
+.pop div.filter .title button.tab + button.tab{
+	margin-right: 30px;
+}
+.pop div.filter .title button.tab.on,
+.pop div.filter .title button.tab:hover{
+	background: #2f333c;
+	color: #fff;
+}
+.pop div.filter .bottom{
+	height: 30px;
+	padding: 20px 62px 20px 35px;
+	background: #fff;
+	position: absolute; bottom: 0; left: 0; right: 0; z-index: 1;
+}
+.pop div.filter .bottom button{
+	height: 30px;
+	padding: 0 15px;
+	border-radius: 4px;
+	font-size: 14px;
+}
+.pop div.filter .bottom button.all{
+	background: #fff;
+	border: 1px solid #e6e6e6;
+	color: #868686;
+}
+.pop div.filter .bottom button.opposite{
+	margin-left: 10px;
+	background: #2f333c;
+	color: #fff;
+}
+.pop div.filter .bottom button.confirm{
+	width: 98px;
+	background: #2f333c;
+	color: #fff;
+	float: right;
+}
+
+#LeagueFilter div.filter{
+	height: 612px;
+	margin: -306px 0 0 -383px;
+}
+#LeagueFilter div.filter ul{
+	position: absolute; top: 72px; bottom: 70px; left: 0; right: 0;
+	overflow-x: hidden; overflow-y: auto;
+}
+#LeagueFilter div.filter li{
+	padding: 20px 0 8px 70px;
+	background: #eee;
+	position: relative;
+}
+#LeagueFilter div.filter li + li:before{
+	height: 1px;
+	background: #c5d0d8;
+	position: absolute; top: 0; left: 90px; right: 0;
+	content: '';
+}
+#LeagueFilter div.filter li b{
+	width: 40px; height: 40px;
+	margin-top: -20px;
+	border-radius: 4px;
+	background: #d2d2d2;
+	font-size: 34px; line-height: 40px; text-align: center; color: #fff; font-weight: normal;
+	position: absolute; top: 50%; left: 25px;
+}
+#LeagueFilter div.filter li button{
+	width: 136px; height: 30px;
+	margin-bottom: 12px; margin-left: 20px; padding-left: 30px;
+	font-size: 14px; text-align: left; color: #868686;
+	position: relative;
+}
+#LeagueFilter div.filter li button.on,
+#LeagueFilter div.filter li button:hover{
+	background: #2f333c;
+	color: #fff;
+}
+#LeagueFilter div.filter li button span{
+	width: 12px; height: 12px;
+	margin-top: -7px;
+	border: 1px solid #e6e6e6; border-radius: 4px;
+	position: absolute; top: 50%; left: 8px;
+	display: block;
+}
+#LeagueFilter div.filter li button:hover span{
+	border-color: #2f333c;
+	background: #fff;
+}
+#LeagueFilter div.filter li button.on span{
+	border-color: #2f333c;
+	background: url(../img/icon_match_popUp_icon_hook_n.png) no-repeat center #fff; background-size: 14px;
+}
+
+#OddFilter div.filter{
+	height: 500px;
+	margin: -250px 0 0 -383px;
+}
+#OddFilter .oddlist{
+	border: 1px solid #e6e6e6; border-top: 2px solid #bc1c25;
+	position: absolute; top: 126px; bottom: 70px; left: 20px; right: 20px;
+}
+#OddFilter .oddlist button.asia,
+#OddFilter .oddlist button.goal{
+	height: 52px;
+	border-radius: 6px 6px 0 0;
+	background: #eee;
+	font-size: 18px; color: #868686;
+	position: absolute; top: -54px;
+}
+#OddFilter .oddlist button.asia{
+	width: 70px;
+	left: 0;
+}
+#OddFilter .oddlist button.goal{
+	width: 100px;
+	left: 70px;
+}
+#OddFilter .oddlist button.asia.on,
+#OddFilter .oddlist button.goal.on{
+	background: #bc1c25;
+	color: #fff;
+}
+#OddFilter .oddlist div.itembox{
+	padding: 20px 0;
+	position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+	overflow-y: auto;
+}
+#OddFilter .oddlist div.itembox p + p{
+	padding-top: 10px;
+}
+#OddFilter .oddlist button.item{
+	min-width: 134px; height: 30px;
+	padding-right: 10px; 
+	margin-bottom: 12px; margin-left: 20px; padding-left: 30px;
+	border: 1px solid #e6e6e6;
+	font-size: 14px; text-align: left; color: #868686;
+	position: relative;
+}
+#OddFilter .oddlist button.item.on,
+#OddFilter .oddlist button.item:hover{
+	border-color: #bc1c25;
+	background: #bc1c25;
+	color: #fff;
+}
+#OddFilter .oddlist button.item span{
+	width: 12px; height: 12px;
+	margin-top: -7px;
+	border: 1px solid #e6e6e6; border-radius: 4px;
+	position: absolute; top: 50%; left: 8px;
+	display: block;
+}
+
+#OddFilter .oddlist button.item:hover span{
+	border-color: #bc1c25;
+	background: #fff;
+}
+#OddFilter .oddlist button.item.on span{
+	border-color: #bc1c25;
+	background: url(/img/pc/icon_search_seleted.png) no-repeat center #fff; background-size: 10px;
+}
+
+#BackTop{
+	width: 48px; height: 48px;
+	background: url(/img/pc/icon_top.png) no-repeat center #2f333c; background-size: 48px;
+	position: fixed; right: 6%; bottom: 155px;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 1400px){
+	#MatchList table td, #MatchList table th, #MatchList table th span.league{
+		font-size: 12px;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+

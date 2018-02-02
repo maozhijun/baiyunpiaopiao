@@ -15,7 +15,8 @@ function GetQueryString(str,href) {
 }
 
 function LoadVideo () {
-	var MatchID = location.href.split('/')[location.href.split('/').length -1].split('.html')[0];
+	// var MatchID = location.href.split('/')[location.href.split('/').length -1].split('.html')[0];
+	var MatchID = 123;
 	var NowBtn = GetQueryString('btn');
 
 	if (NowBtn && NowBtn != '' && $('#Info .line button:eq(' + parseInt(NowBtn) + ')')){
@@ -35,8 +36,11 @@ function ChangeChannel (Link,obj) {
 	if (obj.className.indexOf('on') != -1) {
         return;
     }
-	var MatchID = location.href.split('/')[location.href.split('/').length -1].split('.html')[0];
+
+	// var MatchID = location.href.split('/')[location.href.split('/').length -1].split('.html')[0];
+	var MatchID = 123;
 	var BtnNum = 0;
+
 	var Btn = $('#Info .line button');
 	for (var i = 0; i < Btn.length; i++) {
 		if (obj == Btn[i]) {
@@ -53,6 +57,7 @@ function ChangeChannel (Link,obj) {
 	}
 
 	localStorage.setItem('Video_' + MatchID,JSON.stringify(Target));
+
 	if (!document.getElementById('Frame')) {
 		var Iframe = document.createElement('iframe');
 		Iframe.id = 'Frame';
@@ -66,6 +71,7 @@ function ChangeChannel (Link,obj) {
 	}else{
 		document.getElementById('Frame').src = Link;
 	}
+
 	document.getElementById('Share').getElementsByTagName('input')[0].value = Link;
 
 }
@@ -99,4 +105,5 @@ function setADClose () {
 			$(this).parents('a').remove();
 		}
     })
+	
 }

@@ -25,7 +25,7 @@ label{cursor: pointer;}
 html{height: 100%;}
 body{
 	min-height: 100%;
-	padding: 60px 14% 134px;
+	padding: 60px 11% 134px;
 	background: url(/img/pc/bg_big.jpg) repeat center top; background-size: 100% auto; background-attachment: fixed; color: #000; font-weight: normal; font: 12px/20px 'PingFang','PingFangSC-Regular','苹方',Tahoma, Helvetica, Arial,'微软雅黑',sans-serif;
 	box-sizing: border-box;
 	-webkit-text-size-adjust: none;
@@ -109,7 +109,7 @@ body{
 /*无内容*/
 .noList{
 	padding: 160px 0 40px;
-	background: url(/img/bg_nolist.png) no-repeat center 40px #fff !important; background-size: 120px !important;
+	background: url(/img/pc/bg_nolist.png) no-repeat center 40px #fff !important; background-size: 120px !important;
 	font-size: 16px; line-height: 24px; text-align: center; color: #999;
 	display: none;
 }
@@ -134,8 +134,8 @@ body{
 	position: absolute; left: 0; top: 8px;
 }
 #Navigation a.column{
-	height: 60px; width: 12%; min-width: 50px; max-width: 120px;
-	margin-left: 2%;
+	height: 60px; min-width: 50px; max-width: 120px;
+	padding: 0 30px; margin-left: 2%;
 	font-size: 22px; line-height: 60px; text-align: center; color: #000;
 	position: relative;
 	display: inline-block;
@@ -195,8 +195,14 @@ body{
 
 /*弹框*/
 .pop{
-	background: rgba(40,0,0,0.5);
+	background: rgba(0,0,0,0.8);
 	position: fixed; top: 0; bottom: 0; left: 0; right: 0; z-index: 300;
+}
+.pop button.close{
+	width: 24px; height: 24px;
+	border-radius: 50%;
+	background: url(/img/pc/icon_close_btn.png) no-repeat center #d8d8d8; background-size: 12px;
+	position: absolute; top: 20px; right: 20px;
 }
 
 /*广告*/
@@ -207,10 +213,11 @@ body{
 	margin-top: 10px;
 }
 .default.adbanner{
-	margin-bottom: 30px; margin-top: 0;
+	margin-bottom: 20px; margin-top: 0;
+	display: block;
 }
 .adflag{
-	max-width: 208px; width: 11%;
+	max-width: 208px; width: 9%;
 	position: fixed; top: 80px;
 }
 .adflag p{
@@ -226,11 +233,11 @@ body{
 	position: absolute; right: 4px; top: 6px;
 }
 .adflag.left{
-	margin-left: -50%; padding-left: 2%;
+	margin-left: -50%; padding-left: 1.5%;
 	left: 50%;
 }
 .adflag.right{
-	margin-right: -50%; padding-right: 2%;
+	margin-right: -50%; padding-right: 1.5%;
 	right: 50%;
 }
 .adbanner a, .adbanner img,
@@ -260,6 +267,11 @@ body{
 
 
 
+@media screen and (max-width: 1400px) {
+	#Navigation a.column{
+		font-size: 18px;
+	}
+}
 
 
 

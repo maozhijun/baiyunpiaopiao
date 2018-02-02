@@ -10,6 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(["namespace" => 'Index'], function () {
+    Route::any("/immediate.html", 'FootballController@immediate');
+    /**Route::any("/", function (){
+        return redirect('/index.html');
+    });**/
+});
+
 
 //直播相关
 Route::group(["namespace" => 'Live'], function () {
