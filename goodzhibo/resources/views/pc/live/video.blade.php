@@ -47,10 +47,10 @@
         <div class="clear"></div>
     </div>
     <div class="adflag left">
-        <img src="/img/pc/qrcode_for_gh.jpg"><p>微信扫码看比赛</p>
+        <img src="/img/pc/qrcode_for_ht_n.jpg"><p>扫码关注，每日抽千元大奖</p>
     </div>
     <div class="adflag right">
-        <img src="/img/pc/qrcode_for_gh.jpg"><p>微信扫码看比赛</p>
+        <img src="/img/pc/qrcode_for_ht_n.jpg"><p>扫码关注，每日抽千元大奖</p>
     </div>
 @endsection
 @section('js')
