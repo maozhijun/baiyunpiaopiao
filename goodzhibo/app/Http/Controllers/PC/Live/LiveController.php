@@ -102,14 +102,18 @@ class LiveController extends Controller
         try {
             $ch = curl_init();
             if ($bet == self::BET_MATCH) {
-                $url = env('AIKQ_URL')."/json/bet-lives.json";
+                $url = env('LIAOGOU_URL')."/heitu/livesJson";
             } else {
-                $url = env('AIKQ_URL')."/json/lives.json";
+                $url = env('LIAOGOU_URL')."/heitu/livesJson?bet=1";
             }
             curl_setopt($ch, CURLOPT_URL,$url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $server_output = curl_exec ($ch);
             curl_close ($ch);
+            $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            if ($code >= 400 || empty($server_output)) {
+                return;
+            }
             if ($bet == self::BET_MATCH) {
                 Storage::disk("public")->put("/static/json/bet-lives.json", $server_output);
             } else{
@@ -126,11 +130,15 @@ class LiveController extends Controller
     protected function basketballLiveJson() {
         try {
             $ch = curl_init();
-            $url = env('AIKQ_URL')."/json/basketball-lives.json";
+            $url = env('LIAOGOU_URL')."/heitu/basketballLivesJson";
             curl_setopt($ch, CURLOPT_URL,$url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $server_output = curl_exec ($ch);
             curl_close ($ch);
+            $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            if ($code >= 400 || empty($server_output)) {
+                return;
+            }
             Storage::disk("public")->put("/static/json/basketball-lives.json", $server_output);
         } catch (\Exception $exception) {
             Log::error($exception);
@@ -143,11 +151,15 @@ class LiveController extends Controller
     protected function footballLiveJson() {
         try {
             $ch = curl_init();
-            $url = env('AIKQ_URL')."/json/football-lives.json";
+            $url = env('LIAOGOU_URL')."/heitu/footballLivesJson";
             curl_setopt($ch, CURLOPT_URL,$url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $server_output = curl_exec ($ch);
             curl_close ($ch);
+            $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            if ($code >= 400 || empty($server_output)) {
+                return;
+            }
             Storage::disk("public")->put("/static/json/football-lives.json", $server_output);
         } catch (\Exception $exception) {
             Log::error($exception);
@@ -218,7 +230,7 @@ class LiveController extends Controller
      */
     protected function getLives($bet = '') {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/livesJson?bet=" . $bet;
+        $url = env('LIAOGOU_URL')."/heitu/livesJson?bet=" . $bet;
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         //$code = curl_getinfo($ch, CURLE_RECV_ERROR);
@@ -313,7 +325,7 @@ class LiveController extends Controller
      */
     public function detail(Request $request, $id) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/lives/detailJson/$id";
+        $url = env('LIAOGOU_URL')."/heitu/lives/detailJson/$id";
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $server_output = curl_exec ($ch);
@@ -330,7 +342,7 @@ class LiveController extends Controller
      */
     public function basketDetail(Request $request, $id) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/lives/basketDetailJson/$id";
+        $url = env('LIAOGOU_URL')."/heitu/lives/basketDetailJson/$id";
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $server_output = curl_exec ($ch);
@@ -430,7 +442,6 @@ class LiveController extends Controller
         $ch = curl_init();
         $isMobile = \App\Http\Controllers\Controller::isMobile($request) ? 1 : 0;
         $url = env('LIAOGOU_URL')."/match/live/url/channel/$mid".'?breakTTZB=break&isMobile='.$isMobile.'&sport='.$request->input('sport',1);
-        //$url = env('AIKQ_URL') . "/match/live/url/channel/". $mid . '.json';
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $server_output = curl_exec ($ch);
@@ -447,7 +458,7 @@ class LiveController extends Controller
         $mid = $request->input('mid');//当前页面直播中的id 格式应该是 id1-id2...-idn
         $ch = curl_init();
         $sport = $request->input('sport',0);
-        $url = env('LIAOGOU_URL')."/lives/liveMatchesJson?sport=".$sport."&mid=".$mid;
+        $url = env('LIAOGOU_URL')."/heitu/lives/liveMatchesJson?sport=".$sport."&mid=".$mid;
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $server_output = curl_exec ($ch);
@@ -597,7 +608,7 @@ class LiveController extends Controller
      */
     public function staticHtml(Request $request){
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/livesJson?bet=" . 0;
+        $url = env('LIAOGOU_URL')."/heitu/livesJson?bet=" . 0;
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $server_output = curl_exec ($ch);
