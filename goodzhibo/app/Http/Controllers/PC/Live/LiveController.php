@@ -102,15 +102,15 @@ class LiveController extends Controller
         try {
             $ch = curl_init();
             if ($bet == self::BET_MATCH) {
-                $url = env('LIAOGOU_URL')."/heitu/livesJson";
-            } else {
                 $url = env('LIAOGOU_URL')."/heitu/livesJson?bet=1";
+            } else {
+                $url = env('LIAOGOU_URL')."/heitu/livesJson";
             }
             curl_setopt($ch, CURLOPT_URL,$url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $server_output = curl_exec ($ch);
-            curl_close ($ch);
+            $server_output = curl_exec($ch);
             $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close ($ch);
             if ($code >= 400 || empty($server_output)) {
                 return;
             }
@@ -134,8 +134,8 @@ class LiveController extends Controller
             curl_setopt($ch, CURLOPT_URL,$url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $server_output = curl_exec ($ch);
-            curl_close ($ch);
             $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close ($ch);
             if ($code >= 400 || empty($server_output)) {
                 return;
             }
@@ -155,8 +155,8 @@ class LiveController extends Controller
             curl_setopt($ch, CURLOPT_URL,$url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $server_output = curl_exec ($ch);
-            curl_close ($ch);
             $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close ($ch);
             if ($code >= 400 || empty($server_output)) {
                 return;
             }
@@ -184,7 +184,6 @@ class LiveController extends Controller
         $server_output = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($server_output,true);
-        dump($url);
         return $json;
     }
 
