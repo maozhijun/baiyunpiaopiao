@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                     <label for="label-watermark">水印内容</label>
-                    <input name="watermark" type="text" value="免费看球网址：www.goodzhibo.com，加微信【fs188fs】进群聊球抢红包赢iPhone X"
+                    <input name="watermark" type="text" value="看球网址：goodzhibo.com，微信搜索公众号【goodzhibo01】领取千元现金"
                            class="form-control" id="label-watermark">
                 </div>
                 <div class="form-group">

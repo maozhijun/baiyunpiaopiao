@@ -13,9 +13,6 @@
 
 Route::match(["get", "post"], "/login", 'AuthController@index');//登录
 
-/**
- * Vip工具
- */
 Route::group(["middleware" => "auth"], function () {
     Route::get("/manager/qq/", "QQEncodesController@index");
     Route::post("/manager/qq/created/", "QQEncodesController@created");
@@ -30,3 +27,6 @@ Route::group(["middleware" => "auth"], function () {
 
     Route::get("/manager/list/", "EncodesController@index");
 });
+
+//定时任务
+Route::get("/manager/check-ffmpeg", 'CrontabController@checkFFMPEG');
