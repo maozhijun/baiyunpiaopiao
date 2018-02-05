@@ -20,15 +20,15 @@ class QQEncodesController extends BaseController
         '10004' => '/lives/10004',
     ];
     private $ggcdns = [
-        'kanqiuma' => '139524?pwd=f27e5c8111feefc9',
-        'lg310' => '139523?pwd=6bdd6e706bceafa7',
-        'footballlive' => '139525?pwd=9fc7768b9ac7358b',
-        'lgzhibo' => '139526?pwd=1b83cab1d5881746'
+        'aikanqiu188' => '141370?pwd=fe2cb6c6f525f295',
+        'aikanqiu888' => '141371?pwd=e424794ba6687601',
+        'aikanqiu168' => '141373?pwd=b876ef2042dd7474',
+        'sportslive001' => '140136?pwd=941cdfeddec09d20',
     ];
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('status', 1)->get();
+        $ets = EncodeTask::query()->where('from','QQ')->where('to','AIKQ')->where('status', 1)->get();
 
         return view('manager.qq', ['ets' => $ets, 'alicdns' => $this->alicdns, 'ggcdns' => $this->ggcdns]);
     }
@@ -80,6 +80,8 @@ class QQEncodesController extends BaseController
                 $et->input = $input;
                 $et->rtmp = $rtmp;
                 $et->out = $output;
+                $et->from = 'QQ';
+                $et->to = 'AIKQ';
                 $et->status = 1;
                 $et->save();
             }

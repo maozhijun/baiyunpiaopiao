@@ -21,7 +21,7 @@ class HeiEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('status', 1)->get();
+        $ets = EncodeTask::query()->where('from','QQ')->where('to','HEITU')->where('status', 1)->get();
 
         return view('manager.hei', ['ets' => $ets, 'alicdns' => $this->alicdns]);
     }
@@ -53,6 +53,7 @@ class HeiEncodesController extends BaseController
                 $rtmp = $this->ali_rtmp . $this->alicdns[$value] . '?vhost=' . $this->ali_host . '&auth_key=' . $auth_key;
                 $sstring = $this->alicdns[$value] . ".m3u8-$timestamp-0-0-" . $this->ali_key;
                 $auth_key = "$timestamp-0-0-" . md5($sstring);
+//                $output = "http://" . $this->ali_host . $this->alicdns[$value] . ".m3u8?auth_key=" . $auth_key;
                 $output = "http://" . $this->ali_host . $this->alicdns[$value] . ".m3u8?auth_key=" . $auth_key;
             } elseif ($type == 'GG') {
 //                $rtmp = $this->gg_rtmp . $this->ggcdns[$value];
@@ -73,6 +74,8 @@ class HeiEncodesController extends BaseController
                 $et->input = $input;
                 $et->rtmp = $rtmp;
                 $et->out = $output;
+                $et->from = 'QQ';
+                $et->to = 'HEITU';
                 $et->status = 1;
                 $et->save();
             }
