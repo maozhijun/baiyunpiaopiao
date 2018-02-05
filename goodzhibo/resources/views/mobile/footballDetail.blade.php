@@ -325,7 +325,7 @@
             @endcomponent
         @endif
         @if(isset($base['schedule']['away']))
-            @component("mobile.cell.football_detail_schedule",['tname'=>$match['hname'], 'data'=>$base['schedule']['away'], 'tid'=>$match['aid']])
+            @component("mobile.cell.football_detail_schedule",['tname'=>$match['aname'], 'data'=>$base['schedule']['away'], 'tid'=>$match['aid']])
             @endcomponent
         @endif
     </div>

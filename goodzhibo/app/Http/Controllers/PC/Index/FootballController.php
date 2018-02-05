@@ -25,9 +25,10 @@ class FootballController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function immediate(Request $request) {
+        //$cks = $request->cookies;
         $homeController = new HomeController();
         $data = $homeController->footballData();
-        dump($data);
+        $data['nav'] = 'football';
         return view('pc.index.immediate', $data);
     }
 
@@ -40,6 +41,8 @@ class FootballController extends Controller
         $date = $request->input('date', date('Y-m-d', strtotime('-1 days')));
         $homeController = new HomeController();
         $data = $homeController->footballData($date);
+        $data['type'] = 'result';
+        $data['nav'] = 'football';
         return view('pc.index.result', $data);
     }
 
@@ -52,6 +55,7 @@ class FootballController extends Controller
         $date = $request->input('date', date('Y-m-d', strtotime('+1 days')));
         $homeController = new HomeController();
         $data = $homeController->footballData($date);
+        $data['nav'] = 'football';
         return view('pc.index.schedule', $data);
     }
 
@@ -107,4 +111,68 @@ class FootballController extends Controller
         $matchOdds['typeValue'] = $typeValue;
         return $matchOdds;
     }
+
+
+//=================================================================================================================================//
+//接口
+    public function liveJson(Request $request) {
+        $ch = curl_init();
+        $url = env('LIAOGOU_URL')."change/live.json?date=" . time();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 3);
+        $json = curl_exec ($ch);
+        curl_close ($ch);
+        $json = json_decode($json, true);
+        return $json;
+        //$arr = ['1059237'=>['time'=>'20<span>\'</span>', 'score'=>'1-0', 'ch_score'=>'2-1', 'half_score'=>'0-0']];
+        //return $arr;
+    }
+
+
+    public function oddRollJson(Request $request) {
+        $ch = curl_init();
+        $url = env('LIAOGOU_URL')."api/odd/roll?date=" . time();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 3);
+        $json = curl_exec ($ch);
+        curl_close ($ch);
+        $json = json_decode($json, true);
+        return $json;
+        //return ['1056085'=>['all'=>['1'=>['up'=>'1.2', 'middle'=>'1.25', 'down'=>'0.9'], '2'=>['up'=>'1.9', 'middle'=>'3.5', 'down'=>'0.8']  ]]];
+    }
+
+    /**
+     * 比赛事件
+     * @param Request $request
+     * @param $id
+     * @param $date
+     * @return mixed
+     */
+    public function eventJson(Request $request, $date, $id) {
+        $ch = curl_init();
+        //$url = "http://match.liaogou168.com/live-event/" . $date . "/" . $id . ".json";
+        $url = 'http://user.liaogou168.com:8089/intf/foot/events/' . $id;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 3);
+        $json = curl_exec ($ch);
+        curl_close ($ch);
+        $json = json_decode($json, true);
+        return $json;
+    }
+
+    /**
+     * 获取事件的html
+     * @param Request $request
+     * @param $date
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function eventHtml(Request $request, $date, $id) {
+        $data = $this->eventJson($request, $date, $id);
+        return view('pc.index.match_event_list', ['events'=>$data]);
+    }
+
 }

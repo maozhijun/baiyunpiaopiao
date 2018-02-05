@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//====================================足球====================================//
 Route::group(["namespace" => 'Index'], function () {
     Route::any("/football/immediate.html", 'FootballController@immediate');
     Route::any("/football/result.html", 'FootballController@result');
@@ -17,8 +18,31 @@ Route::group(["namespace" => 'Index'], function () {
     /**Route::any("/", function (){
         return redirect('/index.html');
     });**/
+
+    //////////////////===============================//////////////////
+    /// 异步请求接口
+    Route::any('/football/change/live.json', 'FootballController@liveJson');
+    Route::any('/football/odd/roll.json', 'FootballController@oddRollJson');
+    Route::any('/football/event/{date}/{id}.json', 'FootballController@eventHtml');
+
 });
 
+//====================================篮球====================================//
+Route::group(["namespace" => 'Index'], function () {
+    Route::any("/basketball/immediate.html", 'BasketballController@immediate');
+    Route::any("/basketball/result.html", 'BasketballController@result');
+    Route::any("/basketball/schedule.html", 'BasketballController@schedule');
+
+    //////////////////===============================//////////////////
+    /// 异步请求接口
+    Route::any('/basketball/change/live.json', 'BasketballController@liveJson');
+    //Route::any('/football/odd/roll.json', 'FootballController@oddRollJson');
+});
+
+Route::group(["namespace" => 'Live'], function () {
+    Route::get('/download.html',"LiveController@download");//下载页面
+    Route::get('/lives.html',"LiveController@lives");//直播页面
+});
 
 //直播相关
 Route::group(["namespace" => 'Live'], function () {

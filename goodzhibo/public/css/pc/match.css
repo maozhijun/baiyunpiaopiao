@@ -2,7 +2,7 @@
 	min-height: 700px;
 }
 #Content .default{
-	background: url(../img/bg_pattern.png) no-repeat right top #fff;
+	background: url(/img/pc/bg_pattern.png) no-repeat right top #fff;
 }
 #Content .default .title{
 	padding: 20px 0 20px 20px;
@@ -39,7 +39,7 @@
 #Info{
 	min-height: 260px;
 	padding: 0 24%;
-	background: url(../img/image_bg_n.jpg) no-repeat center top #fff; background-size: auto 260px;
+	background: url(/img/pc/image_bg_n.jpg) no-repeat center top #fff; background-size: auto 260px;
 	position: relative;
 	overflow: hidden;
 }
@@ -235,13 +235,13 @@
 }
 #Info div.video:before{
 	width: 50%;
-	background: url(../img/image_left_live.png) no-repeat left center; background-size: auto 100px;
+	background: url(/img/pc/image_left_live.png) no-repeat left center; background-size: auto 100px;
 	position: absolute; top: 0; bottom: 0; left: 0;
 	content: '';
 }
 #Info div.video:after{
 	width: 50%;
-	background: url(../img/iamge_right_live.png) no-repeat right center; background-size: auto 100px;
+	background: url(/img/pc/iamge_right_live.png) no-repeat right center; background-size: auto 100px;
 	position: absolute; top: 0; bottom: 0; right: 0;
 	content: '';
 }
@@ -388,7 +388,7 @@
 	width: 88px; height: 32px;
 	margin: 0 16px 0 10px; padding-left: 10px; padding-right: 16px; 
     border-radius: 2px; border: 1px solid #e6e6e6;
-	background: url(../img/icon_select_arrow.png) no-repeat scroll right center transparent;
+	background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
     font-size: 14px; line-height: 24px; text-align: center; color: #333;
     display: inline-block;
     overflow: hidden;
@@ -446,7 +446,7 @@
 }
 .default label input[type=checkbox]:checked + span,
 .default .title button.checkbox.on{
-	background: url(../img/icon_search_seleted.png) no-repeat center; background-size: 10px;
+	background: url(/img/pc/icon_search_seleted.png) no-repeat center; background-size: 10px;
 }
 .default label input[type=radio]:checked + span:before,
 .default .title button.radio.on:before{
@@ -802,34 +802,34 @@
 	top: 0;
 }
 #Match .event .inner .host_event .item[type=goal]{
-	background: url(../img/image_goal.png) no-repeat center bottom 2px; background-size: 16px;
+	background: url(/img/pc/image_goal.png) no-repeat center bottom 2px; background-size: 16px;
 }
 #Match .event .inner .away_event .item[type=goal]{
-	background: url(../img/image_goal.png) no-repeat center 2px; background-size: 16px;
+	background: url(/img/pc/image_goal.png) no-repeat center 2px; background-size: 16px;
 }
 #Match .event .inner .host_event .item[type=corner]{
-	background: url(../img/image_corner.png) no-repeat center bottom 2px; background-size: 16px;
+	background: url(/img/pc/image_corner.png) no-repeat center bottom 2px; background-size: 16px;
 }
 #Match .event .inner .away_event .item[type=corner]{
-	background: url(../img/image_corner.png) no-repeat center 2px; background-size: 16px;
+	background: url(/img/pc/image_corner.png) no-repeat center 2px; background-size: 16px;
 }
 #Match .event .inner .host_event .item[type=exchange]{
-	background: url(../img/image_exchange.png) no-repeat center bottom 2px; background-size: 16px;
+	background: url(/img/pc/image_exchange.png) no-repeat center bottom 2px; background-size: 16px;
 }
 #Match .event .inner .away_event .item[type=exchange]{
-	background: url(../img/image_exchange.png) no-repeat center 2px; background-size: 16px;
+	background: url(/img/pc/image_exchange.png) no-repeat center 2px; background-size: 16px;
 }
 #Match .event .inner .host_event .item[type=yellow]{
-	background: url(../img/image_yellow.png) no-repeat center bottom 2px; background-size: 16px;
+	background: url(/img/pc/image_yellow.png) no-repeat center bottom 2px; background-size: 16px;
 }
 #Match .event .inner .away_event .item[type=yellow]{
-	background: url(../img/image_yellow.png) no-repeat center 2px; background-size: 16px;
+	background: url(/img/pc/image_yellow.png) no-repeat center 2px; background-size: 16px;
 }
 #Match .event .inner .host_event .item[type=red]{
-	background: url(../img/image_red.png) no-repeat center bottom 2px; background-size: 16px;
+	background: url(/img/pc/image_red.png) no-repeat center bottom 2px; background-size: 16px;
 }
 #Match .event .inner .away_event .item[type=red]{
-	background: url(../img/image_red.png) no-repeat center 2px; background-size: 16px;
+	background: url(/img/pc/image_red.png) no-repeat center 2px; background-size: 16px;
 }
 
 #Match .event .inner .eventList .item div{
@@ -1368,7 +1368,7 @@
 	height: 24px; width: 45px;
 	padding-left: 8px; padding-right: 16px;
     border: none;
-    background: url(../img/icon_select_arrow.png) no-repeat scroll right center transparent;
+    background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
     font-size: 14px; line-height: 24px; text-align: center; color: #333;
     display: inline-block;
 	overflow: hidden;
@@ -1409,7 +1409,7 @@
 	width: 90px; height: 24px;
 	margin: 6px 16px 0 0; padding-left: 10px; padding-right: 16px; 
     border-radius: 2px; border: 1px solid #e6e6e6;
-	background: url(../img/icon_select_arrow.png) no-repeat scroll right center transparent;
+	background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
     font-size: 14px; line-height: 24px; text-align: center; color: #333;
     display: inline-block;
     overflow: hidden;
@@ -1438,7 +1438,7 @@
 	border-radius: 50%;
 }
 #Data .history .name .control button.checkbox.on{
-	background: url(../img/icon_search_seleted.png) no-repeat center; background-size: 10px;
+	background: url(/img/pc/icon_search_seleted.png) no-repeat center; background-size: 10px;
 }
 #Data .history .name .control button.radio.on:before{
 	width: 8px; height: 8px;
@@ -1595,7 +1595,7 @@
 	height: 24px; width: 45px;
 	padding-left: 8px; padding-right: 16px; margin-top: 5px;
     border: none;
-    background: url(../img/icon_select_arrow.png) no-repeat scroll right center transparent;
+    background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
     font-size: 14px; line-height: 24px; text-align: center; color: #333;
     display: inline-block;
     overflow: hidden;
@@ -1908,7 +1908,7 @@
 	width: 90px; height: 24px;
 	margin: 6px 16px 0 0; padding-left: 10px; padding-right: 16px; 
     border-radius: 2px; border: 1px solid #e6e6e6;
-	background: url(../img/icon_select_arrow.png) no-repeat scroll right center transparent;
+	background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
     font-size: 14px; line-height: 24px; text-align: center; color: #333;
     display: inline-block;
     overflow: hidden;
@@ -1937,7 +1937,7 @@
 	border-radius: 50%;
 }
 #Corner .history .name .control button.checkbox.on{
-	background: url(../img/icon_search_seleted.png) no-repeat center; background-size: 10px;
+	background: url(/img/pc/icon_search_seleted.png) no-repeat center; background-size: 10px;
 }
 #Corner .history .name .control button.radio.on:before{
 	width: 8px; height: 8px;

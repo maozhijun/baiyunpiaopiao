@@ -1,22 +1,30 @@
 @extends('pc.layout.base_new')
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{env('CDN_URL')}}/css/pc/immediate.css">
+    <style>
+        .show {
+
+        }
+        .hide {
+            display: none;
+        }
+    </style>
 @endsection
 @section('content')
     <div id="Content" class="inner">
         <div id="MatchList" class="default">
             <div class="title">@yield('match_title')</div>
             <div class="control">
-                <button class="save">保留</button>
-                <button class="del">删除</button>
-                <button class="good on">精简</button>
-                <button class="lottery">竞彩</button>
-                <button class="all">完整</button>
+                <button name="filter" class="save" onclick="confirmFilter('match', false)">保留</button>
+                <button name="filter" class="del" onclick="confirmFilter('match', true)">删除</button>
+                <button name="filter" class="good on" id="first" onclick="matchFilter('first')">精简</button>
+                <button name="filter" class="lottery" id="lottery" onclick="matchFilter('lottery')">竞彩</button>
+                <button name="filter" class="all" id="all" onclick="matchFilter('all')">完整</button>
                 <button class="show odd">选择盘路</button>
                 <button class="show league">选择赛事</button>
                 <p>
-                    共有<b>{{count($matches)}}</b>场&nbsp;&nbsp;隐藏<b>212</b>场&nbsp;&nbsp;<span>[ 显示 ]</span>
-                    <button id="Sound" onclick="SoundControl()">进球声</button>
+                    共有<b id="totalMatchCount">0</b>场&nbsp;&nbsp;隐藏<b id="hideMatchCount">0</b>场&nbsp;&nbsp;<span>[ 显示 ]</span>
+                    <button class="on" id="Sound" onclick="SoundControl()">进球声</button>
                     <audio id="GoalAudio">
                         <source src="{{env('CDN_URL')}}/song/song.wav" type="audio/wav">
                         <source src="{{env('CDN_URL')}}/song/song.mp3" type="audio/mpeg">
@@ -66,7 +74,7 @@
                 <tbody>
                 @if(isset($matches))
                     @foreach($matches as $match)
-                        @component("pc.index.cell.match_list_cell", ['match'=>$match,'articlesCount'=>$articlesCount])
+                        @component("pc.index.cell.match_list_cell", ['match'=>$match])
                         @endcomponent
                     @endforeach
                 @endif
@@ -113,157 +121,69 @@
         <div class="filter">
             <div class="title">
                 选择赛事
-                <button class="tab">一级联赛</button><button class="tab">五大联赛</button><button class="tab on">全部联赛</button>
+                <button class="tab" onclick="leagueFilter('first')">一级联赛</button>
+                <button class="tab" onclick="leagueFilter('five')">五大联赛</button>
+                <button class="tab on" onclick="leagueFilter('all')">全部联赛</button>
                 <button class="close"></button>
             </div>
             <div class="bottom">
-                <button class="all">全部</button><button class="opposite">反选</button><button class="confirm">确认</button>
+                <button class="all">全部</button><button class="opposite">反选</button><button onclick="confirmFilter('league', false);" class="confirm">确认</button>
             </div>
+            @if(isset($matches) && count($matches) > 0 && count($league_array) > 0)
             <ul>
+                @foreach($league_array as $key=>$leagues)
                 <li>
-                    <b>A</b>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
+                    <b>{{$key}}</b>
+                    @foreach($leagues as $league)
+                        <?php $leagueClass = ($league["isFive"] ? "five " : "").($league["isFirst"] ? "first" : "") ?>
+                        <button value="{{$league['id']}}" league="{{$leagueClass}}" class="item"><span></span>{{$league["name"]}}({{$league["count"]}})</button>
+                    @endforeach
                 </li>
-                <li>
-                    <b>B</b>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                </li>
-                <li>
-                    <b>C</b>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                </li>
-                <li>
-                    <b>D</b>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                </li>
-                <li>
-                    <b>E</b>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                </li>
-                <li>
-                    <b>F</b>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                    <button class="item"><span></span>奥乙(4)</button>
-                    <button class="item on"><span></span>奥乙(4)</button>
-                </li>
+                @endforeach
             </ul>
+            @endif
         </div>
     </div>
     <div class="pop" id="OddFilter" style="display: none;">
         <div class="filter">
-            <div class="title">
-                选择盘路
-                <button class="close"></button>
-            </div>
+            <div class="title">选择盘路<button class="close"></button></div>
             <div class="bottom">
-                <button class="all">全部</button><button class="opposite">反选</button><button class="confirm">确认</button>
+                <button class="all">全部</button><button class="opposite">反选</button><button class="confirm" onclick="confirmFilter('odd', false);">确认</button>
             </div>
             <div class="oddlist">
                 <button class="asia on">让球</button>
                 <button class="goal"><span></span>大小球</button>
-                <div class="itembox asia" style="display: block;">
-                    <p>
-                        <button class="item"><span></span>未开盘 (127)</button>
-                        <button class="item"><span></span>平手 (15)</button>
-                    </p>
-                    <p>
-                        <button class="item"><span></span>让平手/半球 (25)</button>
-                        <button class="item"><span></span>让半球 (21)</button>
-                        <button class="item"><span></span>让半/一 (10)</button>
-                        <button class="item"><span></span>让一球 (12)</button>
-                        <button class="item"><span></span>让一球/球半 (2)</button>
-                        <button class="item"><span></span>让一球半 (17)</button>
-                        <button class="item"><span></span>让球半/两 (17)</button>
-                        <button class="item"><span></span>让两球 (17)</button>
-                        <button class="item"><span></span>让两球/半 (17)</button>
-                        <button class="item"><span></span>让两球半 (17)</button>
-                        <button class="item"><span></span>让球半/三 (17)</button>
-                        <button class="item"><span></span>让三球 (17)</button>
-                        <button class="item"><span></span>让三球以上 (17)</button>
-                    </p>
-                    <p>
-                        <button class="item"><span></span>受让平手/半球 (25)</button>
-                        <button class="item"><span></span>受让半球 (21)</button>
-                        <button class="item"><span></span>受让半/一 (10)</button>
-                        <button class="item"><span></span>受让一球 (12)</button>
-                        <button class="item"><span></span>受让一球/球半 (2)</button>
-                        <button class="item"><span></span>受让一球半 (17)</button>
-                        <button class="item"><span></span>受让球半/两 (17)</button>
-                        <button class="item"><span></span>受让两球 (17)</button>
-                        <button class="item"><span></span>受让两球/半 (17)</button>
-                        <button class="item"><span></span>受让两球半 (17)</button>
-                        <button class="item"><span></span>受让球半/三 (17)</button>
-                        <button class="item"><span></span>受让三球 (17)</button>
-                        <button class="item"><span></span>受让三球以上 (17)</button>
-                    </p>
+                <div class="itembox asia show">
+                    @if(isset($asiaOdds) && isset($asiaOdds["middle"]))
+                        <p>
+                            @foreach($asiaOdds["middle"] as $tempArray)
+                                <button value="asiaMiddle_{{$tempArray['sort']}}" class="item"><span></span>{{$tempArray['typeCn']}} ({{$tempArray['count']}})</button>
+                            @endforeach
+                        </p>
+                    @endif
+                    @if(isset($asiaOdds) && isset($asiaOdds["up"]))
+                        <p>
+                            @foreach($asiaOdds["up"] as $tempArray)
+                                <button value="asiaUp_{{$tempArray['sort']}}" class="item"><span></span>{{$tempArray['typeCn']}} ({{$tempArray['count']}})</button>
+                            @endforeach
+                        </p>
+                    @endif
+                    @if(isset($asiaOdds) && isset($asiaOdds["down"]))
+                        <p>
+                            @foreach($asiaOdds["down"] as $tempArray)
+                                <button value="asiaDown_{{$tempArray['sort']}}" class="item"><span></span>{{$tempArray['typeCn']}} ({{$tempArray['count']}})</button>
+                            @endforeach
+                        </p>
+                    @endif
                 </div>
-                <div class="itembox goal" style="display: none;">
-                    <p>
-                        <button class="item"><span></span>未开盘 (127)</button>
-                        <button class="item"><span></span>2球以下 (25)</button>
-                        <button class="item"><span></span>2球 (21)</button>
-                        <button class="item"><span></span>2/2.5球 (10)</button>
-                        <button class="item"><span></span>2.5球 (12)</button>
-                        <button class="item"><span></span>2.5/3球 (2)</button>
-                        <button class="item"><span></span>3球 (17)</button>
-                        <button class="item"><span></span>3/3.5球 (17)</button>
-                        <button class="item"><span></span>3.5球 (17)</button>
-                        <button class="item"><span></span>3.5/4球 (17)</button>
-                        <button class="item"><span></span>4球 (17)</button>
-                        <button class="item"><span></span>4球以上 (17)</button>
-                    </p>
+                <div class="itembox goal hide">
+                    @if(isset($ouOdds))
+                        <p>
+                            @foreach($ouOdds as $tempArray)
+                                <button value="ou_{{$tempArray['sort']}}" class="item"><span></span>{{$tempArray['typeCn']}} ({{$tempArray['count']}})</button>
+                            @endforeach
+                        </p>
+                    @endif
                 </div>
             </div>
         </div>
@@ -273,11 +193,18 @@
     {{--<script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/jquery.js"></script>--}}
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/public.js"></script>
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/immediate.js"></script>
+    <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/self/util.js"></script>
+    <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/self/football-list.js"></script>
     <script type="text/javascript">
         window.onload = function () {
             setTableCheck ();
             setFilter ();
             setBG();
+            setMatchCount();
+            @if (!isset($type) || $type != 'result')
+            window.setInterval('refresh()',5000);
+            window.setInterval('refreshRoll()',5000);
+            @endif
             // $('#TableHead').width($('#Show').width());
         }
     </script>

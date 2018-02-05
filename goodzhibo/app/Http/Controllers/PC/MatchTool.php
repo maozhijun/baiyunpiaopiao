@@ -9,6 +9,8 @@
 namespace App\Http\Controllers\PC;
 
 
+use App\Models\Match\BasketMatch;
+
 trait MatchTool
 {
     //php获取中文字符拼音首字母
@@ -48,4 +50,85 @@ trait MatchTool
         if ($asc >= -11055 && $asc <= -10247) return 'Z';
         return null;
     }
+
+    //获取篮球比赛的即时时间
+    public static function getBasketCurrentTime($status, $liveStr, $isHalfFormat = false) {
+        switch ($status) {
+            case -1:
+                $timeStr = '已结束';
+                break;
+            case 0:
+                $timeStr = '';
+                break;
+            case 1:
+                $timeStr = ($isHalfFormat ? '上半场 ' : '第一节 ').$liveStr;
+                break;
+            case 2:
+                $timeStr = '第二节 '.$liveStr;
+                break;
+            case 3:
+                $timeStr = ($isHalfFormat ? '下半场 ' : '第三节 ').$liveStr;
+                break;
+            case 4:
+                $timeStr = '第四节 '.$liveStr;
+                break;
+            case 5:
+                $timeStr = '加时1 '.$liveStr;
+                break;
+            case 6:
+                $timeStr = '加时2 '.$liveStr;
+                break;
+            case 7:
+                $timeStr = '加时3 '.$liveStr;
+                break;
+            case 8:
+                $timeStr = '加时4 '.$liveStr;
+                break;
+            case 50:
+            default:
+                $timeStr = BasketMatch::getStatusTextCn($status);
+                break;
+        }
+        return $timeStr;
+    }
+
+    //获取篮球比赛 单个球队的半场分数
+    public static function getBasketHalfScoreTxt($match, $isHome = true) {
+        $status = $match['status'];
+        if ($isHome) {
+            $halfScore = $status == -1 ? ($match['hscore_1st'] + $match['hscore_2nd']) . " / " . ($match['hscore_3rd'] + $match['hscore_4th']) : ($status > 2 ? ($match['hscore_1st'] + $match['hscore_2nd']) . " / -" : ($status > 0 ? '-' : ''));
+        } else {
+            $halfScore = $status == -1 ? ($match['ascore_1st'] + $match['ascore_2nd']) . " / " . ($match['ascore_3rd'] + $match['ascore_4th']) : ($status > 2 ? ($match['ascore_1st'] + $match['ascore_2nd']) . " / -" : ($status > 0 ? '-' : ''));
+        }
+        return $halfScore;
+    }
+
+    public static function getBasketScoreTxt($match, $isHalf = false, $isDiff = true) {
+        $status = $match['status'];
+        if ($isHalf) {
+            if ($isDiff) {
+                $txt = ($status == -1 || $status > 2) ? '半：' . ($match['hscore_1st'] + $match['hscore_2nd'] - $match['ascore_1st'] - $match['ascore_2nd']) : '';
+            } else {
+                $txt = ($status == -1 || $status > 2) ? '半：'.($match['hscore_1st'] + $match['hscore_2nd'] + $match['ascore_1st'] + $match['ascore_2nd']) : '';
+            }
+        } else {
+            if ($isDiff) {
+                $txt = $status == -1 ? '全：' . ($match['hscore'] - $match['ascore']) : '';
+            } else {
+                $txt = $status == -1 ? '全：'.($match['hscore'] + $match['ascore']) : '';
+            }
+        }
+        return $txt;
+    }
+
+    //获取篮球比赛的加时
+    public static function getBasketOtScore($ots) {
+        return (isset($ots) && strlen($ots) > 0) ? explode(',', $ots) : [];
+    }
+
+    public static function getBasketScore($score) {
+        if (isset($score)) return $score;
+        return '';
+    }
+
 }

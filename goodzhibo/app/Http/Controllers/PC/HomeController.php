@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
    public function index(Request $request){
-       return view('pc.home_old');
+       return view('pc.home');
    }
 
     /**

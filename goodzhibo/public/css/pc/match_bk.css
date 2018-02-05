@@ -2,7 +2,7 @@
 	min-height: 700px;
 }
 #Content .default{
-	background: url(../img/bg_pattern.png) no-repeat right top #fff;
+	background: url(/img/pc/bg_pattern.png) no-repeat right top #fff;
 }
 #Content .default .title{
 	padding: 20px 0 20px 32px;
@@ -33,7 +33,7 @@
 #Info{
 	min-height: 260px;
 	padding: 0 306px;
-	background: url(../img/bg_match_bk.jpg) no-repeat center top #fff; background-size: auto 260px;
+	background: url(/img/pc/bg_match_bk.jpg) no-repeat center top #fff; background-size: auto 260px;
 	position: relative;
 	overflow: hidden;
 }
@@ -128,13 +128,13 @@
 }
 #Info div.video:before{
 	width: 50%;
-	background: url(../img/image_left_live.png) no-repeat left center; background-size: auto 100px;
+	background: url(/img/pc/image_left_live.png) no-repeat left center; background-size: auto 100px;
 	position: absolute; top: 0; bottom: 0; left: 0;
 	content: '';
 }
 #Info div.video:after{
 	width: 50%;
-	background: url(../img/iamge_right_live.png) no-repeat right center; background-size: auto 100px;
+	background: url(/img/pc/iamge_right_live.png) no-repeat right center; background-size: auto 100px;
 	position: absolute; top: 0; bottom: 0; right: 0;
 	content: '';
 }
@@ -229,7 +229,7 @@
 	width: 88px; height: 32px;
 	margin: 0 16px 0 10px; padding-left: 10px; padding-right: 16px; 
     border-radius: 2px; border: 1px solid #e6e6e6;
-	background: url(../img/icon_select_arrow.png) no-repeat scroll right center transparent;
+	background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
     font-size: 14px; line-height: 24px; text-align: center; color: #333;
     display: inline-block;
     overflow: hidden;
@@ -287,7 +287,7 @@
 }
 .default label input[type=checkbox]:checked + span,
 .default .title button.checkbox.on{
-	background: url(../img/icon_search_seleted.png) no-repeat center; background-size: 10px;
+	background: url(/img/pc/icon_search_seleted.png) no-repeat center; background-size: 10px;
 }
 .default label input[type=radio]:checked + span:before,
 .default .title button.radio.on:before{
@@ -829,7 +829,7 @@
 	height: 24px; width: 45px;
 	padding-left: 8px; padding-right: 16px;
     border: none;
-    background: url(../img/icon_select_arrow.png) no-repeat scroll right center transparent;
+    background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
     font-size: 14px; line-height: 24px; text-align: center; color: #333;
     display: inline-block;
 	overflow: hidden;
@@ -870,7 +870,7 @@
 	width: 90px; height: 24px;
 	margin: 6px 16px 0 0; padding-left: 10px; padding-right: 16px; 
     border-radius: 2px; border: 1px solid #e6e6e6;
-	background: url(../img/icon_select_arrow.png) no-repeat scroll right center transparent;
+	background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
     font-size: 14px; line-height: 24px; text-align: center; color: #333;
     display: inline-block;
     overflow: hidden;
@@ -899,7 +899,7 @@
 	border-radius: 50%;
 }
 #Data .history .name .control button.checkbox.on{
-	background: url(../img/icon_search_seleted.png) no-repeat center; background-size: 10px;
+	background: url(/img/pc/icon_search_seleted.png) no-repeat center; background-size: 10px;
 }
 #Data .history .name .control button.radio.on:before{
 	width: 8px; height: 8px;
@@ -1029,7 +1029,7 @@
 	height: 24px; width: 45px;
 	padding-left: 8px; padding-right: 16px; margin-top: 5px;
     border: none;
-    background: url(../img/icon_select_arrow.png) no-repeat scroll right center transparent;
+    background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
     font-size: 14px; line-height: 24px; text-align: center; color: #333;
     display: inline-block;
     overflow: hidden;
@@ -1159,7 +1159,7 @@
 	width: 90px; height: 24px;
 	margin: 6px 16px 0 0; padding-left: 10px; padding-right: 16px; 
     border-radius: 2px; border: 1px solid #e6e6e6;
-	background: url(../img/icon_select_arrow.png) no-repeat scroll right center transparent;
+	background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
     font-size: 14px; line-height: 24px; text-align: center; color: #333;
     display: inline-block;
     overflow: hidden;
@@ -1261,7 +1261,7 @@
 	width: 90px; height: 24px;
 	margin: 6px 16px 0 0; padding-left: 10px; padding-right: 16px; 
     border-radius: 2px; border: 1px solid #e6e6e6;
-	background: url(../img/icon_select_arrow.png) no-repeat scroll right center transparent;
+	background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
     font-size: 14px; line-height: 24px; text-align: center; color: #333;
     display: inline-block;
     overflow: hidden;
@@ -1326,7 +1326,7 @@
 	width: 90px; height: 24px;
 	margin: 6px 16px 0 0; padding-left: 10px; padding-right: 16px; 
     border-radius: 2px; border: 1px solid #e6e6e6;
-	background: url(../img/icon_select_arrow.png) no-repeat scroll right center transparent;
+	background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
     font-size: 14px; line-height: 24px; text-align: center; color: #333;
     display: inline-block;
     overflow: hidden;
@@ -1390,7 +1390,7 @@
 	width: 90px; height: 24px;
 	margin: 6px 16px 0 0; padding-left: 10px; padding-right: 16px; 
     border-radius: 2px; border: 1px solid #e6e6e6;
-	background: url(../img/icon_select_arrow.png) no-repeat scroll right center transparent;
+	background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
     font-size: 14px; line-height: 24px; text-align: center; color: #333;
     display: inline-block;
     overflow: hidden;

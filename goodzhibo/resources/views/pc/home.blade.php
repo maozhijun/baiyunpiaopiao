@@ -1,4 +1,4 @@
-@extends('pc.layout.base')
+@extends('pc.layout.base_new')
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{env('CDN_URL')}}/css/home.css">
 @endsection

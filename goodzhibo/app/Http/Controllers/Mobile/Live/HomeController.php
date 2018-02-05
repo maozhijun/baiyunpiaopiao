@@ -197,9 +197,10 @@ class HomeController extends Controller
 
     /**
      * @param string $date
+     * @param $cookie
      * @return mixed
      */
-    public function footballData($date = '') {
+    public function footballData($date = '', $cookie = '') {
         $ch = curl_init();
         $url = env('LIAOGOU_URL')."/intf/foot/data?date=" . $date;
         curl_setopt($ch, CURLOPT_URL, $url);

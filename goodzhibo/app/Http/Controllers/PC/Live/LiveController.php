@@ -93,6 +93,17 @@ class LiveController extends Controller
         $this->basketballLiveJson();//首页篮球赛事缓存
     }
 
+//==================================================================================================//
+
+    /**
+     * 下载页面
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function download(Request $request) {
+        return view('pc.index.download', ['nav'=>'download']);
+    }
+
     /**
      * 首页、竞彩赛事
      * @param $bet
@@ -165,6 +176,7 @@ class LiveController extends Controller
             Log::error($exception);
         }
     }
+
     //===============================================================================//
 
     /**
@@ -202,6 +214,7 @@ class LiveController extends Controller
         $json = $this->toNewMatchArray($json);
         $json['week_array'] = array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');
         $json['check'] = 'all';
+        $json['nav'] = 'lives';
         return view('pc.home', $json);
     }
 

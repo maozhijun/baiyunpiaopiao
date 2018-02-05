@@ -117,10 +117,10 @@ function setFilter () {
 }
 
 function CloseFilter () {
-    $('.filter')[0].style.display = 'none';
-    $('.filter')[1].style.display = 'none';
-    $('.control .odd')[0].className = 'show odd';
-    $('.control .league')[0].className = 'show league';
+    // $('.filter')[0].style.display = 'none';
+    // $('.filter')[1].style.display = 'none';
+    // $('.control .odd')[0].className = 'show odd';
+    // $('.control .league')[0].className = 'show league';
 }
 
 function AllFilter (type) {

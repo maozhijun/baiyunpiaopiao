@@ -92,15 +92,19 @@ function setFilter () {
         if (type == 'asia') {
             $('#OddFilter button.asia')[0].className = 'asia on';
             $('#OddFilter div.asia')[0].style.display = 'block';
+            $('#OddFilter div.asia').removeClass('hide').addClass('show');
 
             $('#OddFilter button.goal')[0].className = 'goal';
             $('#OddFilter div.goal')[0].style.display = 'none';
+            $('#OddFilter div.goal').removeClass('show').addClass('hide');
         }else{
             $('#OddFilter button.asia')[0].className = 'asia';
             $('#OddFilter div.asia')[0].style.display = 'none';
+            $('#OddFilter div.asia').removeClass('show').addClass('hide');
 
             $('#OddFilter button.goal')[0].className = 'goal on';
             $('#OddFilter div.goal')[0].style.display = 'block';
+            $('#OddFilter div.goal').removeClass('hide').addClass('show');
         }
     }
 
