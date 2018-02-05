@@ -36,7 +36,7 @@ Route::group(["namespace" => 'Index'], function () {
     //////////////////===============================//////////////////
     /// 异步请求接口
     Route::any('/basketball/change/live.json', 'BasketballController@liveJson');
-    //Route::any('/football/odd/roll.json', 'FootballController@oddRollJson');
+    Route::any('/basketball/odd/roll.json', 'BasketballController@oddRollJson');
 });
 
 Route::group(["namespace" => 'Live'], function () {

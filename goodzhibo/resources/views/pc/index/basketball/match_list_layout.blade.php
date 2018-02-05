@@ -73,6 +73,8 @@
             setFilter ();
             //setBackTop();
             window.setInterval('refresh()',5000);
+            window.setInterval('refreshRoll()',5000);
+            refreshRoll();
             @if (!isset($type) || $type != 'result')
             //window.setInterval('refreshRoll()',5000);
             @endif
