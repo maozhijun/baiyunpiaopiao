@@ -15,7 +15,7 @@
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
     </button>
     <div class="navbar-header">
-        <a class="navbar-brand" href="/manager/">料狗转码(卫星信号，腾讯体育)</a>
+        <a class="navbar-brand" href="/manager/">黑土转码(卫星信号，腾讯体育)</a>
     </div>
 </nav>
 
@@ -23,13 +23,13 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12">
             <ul class="nav nav-tabs">
-                <li role="presentation"><a href="/manager/hei/">黑土转码</a></li>
-                <li role="presentation" class="active"><a href="/manager/qq/">料狗转码</a></li>
+                <li role="presentation" class="active"><a href="/manager/hei/">黑土转码</a></li>
+                <li role="presentation"><a href="/manager/qq/">料狗转码</a></li>
             </ul>
             <br>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-12">
-            <form action="/manager/qq/created/" method="post">
+            <form action="/manager/hei/created/" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="label-title">名称</label>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                     <label for="label-watermark">水印内容</label>
-                    <input name="watermark" type="text" value="免费看球网址：www.lg310.com，加微信【fs188fs】进群聊球抢红包赢iPhone X"
+                    <input name="watermark" type="text" value="免费看球网址：www.goodzhibo.com，加微信【fs188fs】进群聊球抢红包赢iPhone X"
                            class="form-control" id="label-watermark">
                 </div>
                 <div class="form-group">
@@ -54,13 +54,13 @@
                                 @endif
                             @endforeach
                         </optgroup>
-                        <optgroup label="GG平台">
-                            @foreach($ggcdns as $key=>$value)
-                                @if(!$ets->contains('channel','GG##'.$key))
-                                    <option value="GG##{{ $key }}">GG##{{ $key }}</option>
-                                @endif
-                            @endforeach
-                        </optgroup>
+                        {{--<optgroup label="GG平台">--}}
+                        {{--@foreach($ggcdns as $key=>$value)--}}
+                        {{--@if(!$ets->contains('channel','GG##'.$key))--}}
+                        {{--<option value="GG##{{ $key }}">GG##{{ $key }}</option>--}}
+                        {{--@endif--}}
+                        {{--@endforeach--}}
+                        {{--</optgroup>--}}
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">新建转码</button>
@@ -93,7 +93,7 @@
                             </td>
                             <td>
                                 @if($et->status==1)
-                                    <a class="btn btn-xs btn-danger" href="/manager/qq/stop/{{ $et->id }}">停止</a>
+                                    <a class="btn btn-xs btn-danger" href="/manager/hei/stop/{{ $et->id }}">停止</a>
                                 @endif
                             </td>
                         </tr>
@@ -103,7 +103,6 @@
             </div>
         </div>
     </div>
-
 </div>
 </body>
 <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>

@@ -21,6 +21,12 @@ Route::group(["middleware" => "auth"], function () {
     Route::post("/manager/qq/created/", "QQEncodesController@created");
     Route::get("/manager/qq/stop/{id}", "QQEncodesController@stop");
     Route::get("/manager/", "QQEncodesController@index");
+    Route::get("/manager/ali-live-room", "QQEncodesController@createdAliRoom");
+
+    Route::get("/manager/hei/", "HeiEncodesController@index");
+    Route::post("/manager/hei/created/", "HeiEncodesController@created");
+    Route::get("/manager/hei/stop/{id}", "HeiEncodesController@stop");
+    Route::get("/manager/hei/ali-live-room", "HeiEncodesController@createdAliRoom");
 
     Route::get("/manager/list/", "EncodesController@index");
 });

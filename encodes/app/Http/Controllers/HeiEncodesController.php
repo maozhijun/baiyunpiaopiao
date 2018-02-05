@@ -6,31 +6,24 @@ use App\Http\Controllers\Controller as BaseController;
 use App\Models\EncodeTask;
 use Illuminate\Http\Request;
 
-class QQEncodesController extends BaseController
+class HeiEncodesController extends BaseController
 {
-    private $ali_host = "hls.cdn.vcgood.net";
-    private $ali_key = "6dUCKVycRs";
+    private $ali_host = "live.cdn.vcgood.net";
+    private $ali_key = "t7Trm3V0Sg";
     private $ali_rtmp = "rtmp://video-center.alivecdn.com";
-    private $gg_rtmp = "rtmp://msk.goodgame.ru:1940/live/";
     private $alicdns = [
-        '10000' => '/lives/10000',
-        '10001' => '/lives/10001',
-        '10002' => '/lives/10002',
-        '10003' => '/lives/10003',
-        '10004' => '/lives/10004',
-    ];
-    private $ggcdns = [
-        'kanqiuma' => '139524?pwd=f27e5c8111feefc9',
-        'lg310' => '139523?pwd=6bdd6e706bceafa7',
-        'footballlive' => '139525?pwd=9fc7768b9ac7358b',
-        'lgzhibo' => '139526?pwd=1b83cab1d5881746'
+        'hei-1' => '/lives/hei-1',
+        'hei-2' => '/lives/hei-2',
+        'hei-3' => '/lives/hei-3',
+        'hei-4' => '/lives/hei-4',
+        'hei-5' => '/lives/hei-5',
     ];
 
     public function index(Request $request)
     {
         $ets = EncodeTask::query()->where('status', 1)->get();
 
-        return view('manager.qq', ['ets' => $ets, 'alicdns' => $this->alicdns, 'ggcdns' => $this->ggcdns]);
+        return view('manager.hei', ['ets' => $ets, 'alicdns' => $this->alicdns]);
     }
 
     public function created(Request $request)
@@ -62,8 +55,8 @@ class QQEncodesController extends BaseController
                 $auth_key = "$timestamp-0-0-" . md5($sstring);
                 $output = "http://" . $this->ali_host . $this->alicdns[$value] . ".m3u8?auth_key=" . $auth_key;
             } elseif ($type == 'GG') {
-                $rtmp = $this->gg_rtmp . $this->ggcdns[$value];
-                $output = "https://goodgame.ru/player?" . explode('?', $this->ggcdns[$value])[0];
+//                $rtmp = $this->gg_rtmp . $this->ggcdns[$value];
+//                $output = "https://goodgame.ru/player?" . explode('?', $this->ggcdns[$value])[0];
             }
             $date = date('Y-m-d');
             exec("mkdir -p /tmp/ffmpeg/$date/");
@@ -111,12 +104,12 @@ class QQEncodesController extends BaseController
     public function createdAliRoom(Request $request)
     {
         $timestamp = time() + 10800;
-        $sstring = $this->alicdns['10000'] . "-$timestamp-0-0-" . $this->ali_key;
+        $sstring = $this->alicdns['hei-3'] . "-$timestamp-0-0-" . $this->ali_key;
         $auth_key = "$timestamp-0-0-" . md5($sstring);
-        $rtmp = $this->ali_rtmp . $this->alicdns['10000'] . '?vhost=' . $this->ali_host . '&auth_key=' . $auth_key;
-        $sstring = $this->alicdns['10000'] . ".m3u8-$timestamp-0-0-" . $this->ali_key;
+        $rtmp = $this->ali_rtmp . $this->alicdns['hei-3'] . '?vhost=' . $this->ali_host . '&auth_key=' . $auth_key;
+        $sstring = $this->alicdns['hei-3'] . ".m3u8-$timestamp-0-0-" . $this->ali_key;
         $auth_key = "$timestamp-0-0-" . md5($sstring);
-        $output = "http://" . $this->ali_host . $this->alicdns['10000'] . ".m3u8?auth_key=" . $auth_key;
+        $output = "http://" . $this->ali_host . $this->alicdns['hei-3'] . ".m3u8?auth_key=" . $auth_key;
         echo $rtmp . '<br>' . $output;
     }
 }
