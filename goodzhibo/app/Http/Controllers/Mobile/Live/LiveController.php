@@ -52,7 +52,7 @@ class LiveController extends Controller
 
     public function lives(Request $request) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/footballLivesJson?isMobile=1";
+        $url = env('LIAOGOU_URL')."/heitu/footballLivesJson?isMobile=1";
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $server_output = curl_exec ($ch);
@@ -64,7 +64,7 @@ class LiveController extends Controller
 
     public function footballLives(Request $request) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/footballLivesJson?isMobile=1";
+        $url = env('LIAOGOU_URL')."/heitu/footballLivesJson?isMobile=1";
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $server_output = curl_exec ($ch);
@@ -76,7 +76,7 @@ class LiveController extends Controller
 
     public function basketballLives(Request $request) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/basketballLivesJson?isMobile=1";
+        $url = env('LIAOGOU_URL')."/heitu/basketballLivesJson?isMobile=1";
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $server_output = curl_exec ($ch);
@@ -94,7 +94,7 @@ class LiveController extends Controller
      */
     public function footballdetail(Request $request, $id) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/lives/detailJson/$id?isMobile=1";
+        $url = env('LIAOGOU_URL')."/heitu/lives/detailJson/$id?isMobile=1";
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $server_output = curl_exec ($ch);
@@ -111,7 +111,7 @@ class LiveController extends Controller
      */
     public function basketballDetail(Request $request, $id) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/lives/basketDetailJson/$id?isMobile=1";
+        $url = env('LIAOGOU_URL')."/heitu/lives/basketDetailJson/$id?isMobile=1";
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $server_output = curl_exec ($ch);
@@ -426,7 +426,7 @@ class LiveController extends Controller
      */
     protected function getFootballMatches() {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/footballLivesJson?isMobile=1";
+        $url = env('LIAOGOU_URL')."/heitu/footballLivesJson?isMobile=1";
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $server_output = curl_exec ($ch);
@@ -445,7 +445,7 @@ class LiveController extends Controller
      */
     protected function getBasketballMatches() {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/basketballLivesJson?isMobile=1";
+        $url = env('LIAOGOU_URL')."/heitu/basketballLivesJson?isMobile=1";
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $server_output = curl_exec ($ch);

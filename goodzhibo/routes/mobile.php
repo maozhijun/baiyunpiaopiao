@@ -31,6 +31,7 @@ Route::group(["namespace" => 'Live'], function () {
     Route::get('/basketball/result.html', 'BasketBallController@result');//篮球赛果页面列表
     Route::get('/basketball/schedule.html', 'BasketBallController@schedule');//篮球赛程页面列表
     Route::get('/basketball/lives.html', 'BasketBallController@lives');//篮球直播页面列表
+    Route::get('/lives/cache/details', 'LiveController@liveDetailsStatic');//篮球直播页面列表
 
     /////////////////======================================================================/////////////////
     //Route::get('/', 'Live\LiveController@lives');

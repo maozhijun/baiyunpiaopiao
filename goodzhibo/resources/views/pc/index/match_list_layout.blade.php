@@ -5,9 +5,7 @@
 @section('content')
     <div id="Content" class="inner">
         <div id="MatchList" class="default">
-            <div class="title">
-                <p>即时比分</p><a href="schedule.html">下日赛程</a><a href="result.html">完场比分</a>
-            </div>
+            <div class="title">@yield('match_title')</div>
             <div class="control">
                 <button class="save">保留</button>
                 <button class="del">删除</button>
@@ -17,7 +15,7 @@
                 <button class="show odd">选择盘路</button>
                 <button class="show league">选择赛事</button>
                 <p>
-                    共有<b>212</b>场&nbsp;&nbsp;隐藏<b>212</b>场&nbsp;&nbsp;<span>[ 显示 ]</span>
+                    共有<b>{{count($matches)}}</b>场&nbsp;&nbsp;隐藏<b>212</b>场&nbsp;&nbsp;<span>[ 显示 ]</span>
                     <button id="Sound" onclick="SoundControl()">进球声</button>
                     <audio id="GoalAudio">
                         <source src="{{env('CDN_URL')}}/song/song.wav" type="audio/wav">

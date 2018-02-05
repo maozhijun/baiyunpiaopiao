@@ -31,7 +31,32 @@ class FootballController extends Controller
         return view('pc.index.immediate', $data);
     }
 
+    /**
+     * 结果
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function result(Request $request) {
+        $date = $request->input('date', date('Y-m-d', strtotime('-1 days')));
+        $homeController = new HomeController();
+        $data = $homeController->footballData($date);
+        return view('pc.index.result', $data);
+    }
 
+    /**
+     * 结果
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function schedule(Request $request) {
+        $date = $request->input('date', date('Y-m-d', strtotime('+1 days')));
+        $homeController = new HomeController();
+        $data = $homeController->footballData($date);
+        return view('pc.index.schedule', $data);
+    }
+
+//=================================================================================================================================//
+//常用方法
     public static function getMatchOdds($handicap, $type, $sport = GoodsArticles::kSportFootball)
     {
         $typeCn = "";

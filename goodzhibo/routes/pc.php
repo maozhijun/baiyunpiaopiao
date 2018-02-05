@@ -11,7 +11,9 @@
 |
 */
 Route::group(["namespace" => 'Index'], function () {
-    Route::any("/immediate.html", 'FootballController@immediate');
+    Route::any("/football/immediate.html", 'FootballController@immediate');
+    Route::any("/football/result.html", 'FootballController@result');
+    Route::any("/football/schedule.html", 'FootballController@schedule');
     /**Route::any("/", function (){
         return redirect('/index.html');
     });**/
