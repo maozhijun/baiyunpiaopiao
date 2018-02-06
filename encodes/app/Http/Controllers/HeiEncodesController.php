@@ -21,9 +21,13 @@ class HeiEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from','QQ')->where('to','HEITU')->where('status', 1)->get();
-
-        return view('manager.hei', ['ets' => $ets, 'alicdns' => $this->alicdns]);
+        $ets = EncodeTask::query()->where('from', 'QQ')->where('to', 'HEITU')->where('status', 1)->get();
+        $user = session(AuthController::K_LOGIN_SESSION_KEY);
+        if ($user['role'] == 'admin') {
+            return view('manager.hei', ['ets' => $ets, 'alicdns' => $this->alicdns]);
+        } else {
+            return view('manager.hei', ['ets' => $ets, 'alicdns' => []]);
+        }
     }
 
     public function created(Request $request)
