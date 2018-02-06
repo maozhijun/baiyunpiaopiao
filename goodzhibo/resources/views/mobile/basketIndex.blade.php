@@ -65,9 +65,9 @@
                         @if($match['status'] == -1)
                         <em>已结束</em>
                         @elseif ($match['status'] == 0 && $match['wap_live'])
-                        <p class="live"><img src="img/icon_video_live.png"></p>
+                        <p class="live"><img src="{{env('CDN_URL')}}/img/pc/icon_video_live.png"></p>
                         @elseif ($match['status'] > 0 && $match['wap_live'])
-                        <p class="live"><img src="img/icon_video_live.png">直播中</p>
+                        <p class="live"><img src="{{env('CDN_URL')}}/img/pc/icon_video_live.png">直播中</p>
                         @elseif (!$match['wap_live'])
                         <em>暂无直播</em>
                         @endif

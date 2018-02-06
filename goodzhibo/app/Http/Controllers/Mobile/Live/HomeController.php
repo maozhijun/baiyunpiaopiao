@@ -202,7 +202,7 @@ class HomeController extends Controller
      */
     public function footballData($date = '', $cookie = '') {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/intf/foot/data?date=" . $date;
+        $url = env('LIAOGOU_URL')."intf/foot/data?date=" . $date;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec ($ch);
@@ -218,7 +218,7 @@ class HomeController extends Controller
      */
     public function footballDetailData($id) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/intf/foot/detail/" . $id;
+        $url = env('LIAOGOU_URL')."intf/foot/detail/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec ($ch);
@@ -234,7 +234,7 @@ class HomeController extends Controller
      */
     public function footballOddData($id) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/intf/foot/odd/" . $id;
+        $url = env('LIAOGOU_URL')."intf/foot/odd/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec ($ch);
@@ -250,7 +250,7 @@ class HomeController extends Controller
      */
     public function footballBaseData($id) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/intf/foot/base/" . $id;
+        $url = env('LIAOGOU_URL')."intf/foot/base/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec ($ch);
@@ -261,7 +261,7 @@ class HomeController extends Controller
 
     public function footballCornerData($id) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/intf/foot/corner/" . $id;
+        $url = env('LIAOGOU_URL')."intf/foot/corner/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec ($ch);
@@ -277,7 +277,7 @@ class HomeController extends Controller
      */
     public function footballStyleData($id) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/intf/foot/team_style/" . $id;
+        $url = env('LIAOGOU_URL')."intf/foot/team_style/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec ($ch);
@@ -293,7 +293,7 @@ class HomeController extends Controller
      */
     public function footballOddIndexData($id) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/intf/foot/odd_index/" . $id;
+        $url = env('LIAOGOU_URL')."intf/foot/odd_index/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec ($ch);
@@ -309,7 +309,58 @@ class HomeController extends Controller
      */
     public function footballSameOddData($id) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/intf/foot/same_odd/" . $id;
+        $url = env('LIAOGOU_URL')."intf/foot/same_odd/" . $id;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $json = curl_exec ($ch);
+        curl_close ($ch);
+        $json = json_decode($json, true);
+        return $json;
+    }
+
+    /**
+     * PC比赛终端 特殊数据
+     * @param $id
+     * @return mixed
+     */
+    public function footballCharacteristicData($id) {
+        $ch = curl_init();
+        $prifex = 'http://user.liaogou168.com:8089/';//env('LIAOGOU_URL')
+        $url = $prifex . "intf/foot/characteristic/" . $id;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $json = curl_exec ($ch);
+        curl_close ($ch);
+        $json = json_decode($json, true);
+        return $json;
+    }
+
+    /**
+     * 获取PC足球比赛终端页的 基本状况数据。
+     * @param $id
+     * @return mixed
+     */
+    public function footballBaseData4PC($id) {
+        $ch = curl_init();
+        $prifex = 'http://user.liaogou168.com:8089/';//env('LIAOGOU_URL')
+        $url = $prifex . "intf/foot/base_pc/" . $id;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $json = curl_exec ($ch);
+        curl_close ($ch);
+        $json = json_decode($json, true);
+        return $json;
+    }
+
+    /**
+     * 足球比赛是否又直播。
+     * @param $id
+     * @return mixed
+     */
+    public function footballMatchIsLive($id) {
+        $ch = curl_init();
+        $prifex = 'http://user.liaogou168.com:8089/';//env('LIAOGOU_URL')
+        $url = $prifex . "api/match/live/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec ($ch);

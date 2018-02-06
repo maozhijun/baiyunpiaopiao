@@ -15,6 +15,16 @@ Route::group(["namespace" => 'Index'], function () {
     Route::any("/football/immediate.html", 'FootballController@immediate');
     Route::any("/football/result.html", 'FootballController@result');
     Route::any("/football/schedule.html", 'FootballController@schedule');
+
+    //足球终端相关 开始
+    Route::get("/football/detail/{date}/{id}.html", "FootballController@detail");
+    Route::get("/football/detail_cell/odd/{id}.html", "FootballController@footballOddCell");//数据分析 赔率指数
+    Route::get("/football/detail_cell/corner/{id}.html", "FootballController@footballCornerCell");//角球数据
+    Route::get("/football/detail_cell/chara/{id}.html", "FootballController@footballCharacteristicCell");//特色数据
+    Route::get("/football/detail_cell/base/{id}.html", "FootballController@footballBaseCell");//比赛状况
+
+
+    //足球终端相关 结束
     /**Route::any("/", function (){
         return redirect('/index.html');
     });**/
@@ -23,8 +33,10 @@ Route::group(["namespace" => 'Index'], function () {
     /// 异步请求接口
     Route::any('/football/change/live.json', 'FootballController@liveJson');
     Route::any('/football/odd/roll.json', 'FootballController@oddRollJson');
-    Route::any('/football/event/{date}/{id}.json', 'FootballController@eventHtml');
+    Route::any('/football/event/{date}/{id}.json', 'FootballController@eventHtml');//异步获取事件HTML
 
+    Route::get('/football/has_live/{id}.json', 'FootballController@footballHasLive');//足球终端，请求判断该比赛是否有足球比赛。
+    Route::get('/football/events/{id}.json', 'FootballController@footballEvents');//足球事件接口。
 });
 
 //====================================篮球====================================//
@@ -107,6 +119,8 @@ Route::group(["namespace" => 'Live'], function () {
     Route::get('/live/cache/player/json', 'LiveController@staticPlayerJson');//静态化所有当前正在比赛的线路
     Route::get('/live/cache/flush', 'LiveController@flushVideoCache');//刷新缓存文件
 
+    //------------------------------------------------------------------------------------------------------//
+    Route::get('/live/flush_cache/detail', 'LiveController@flushDetailAndJsonCache');//动态刷新终端页、接口文件。
 });
 
 //邀请注册

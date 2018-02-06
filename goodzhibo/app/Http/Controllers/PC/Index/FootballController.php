@@ -59,6 +59,96 @@ class FootballController extends Controller
         return view('pc.index.schedule', $data);
     }
 
+    //***********************************************************************************************************//
+    //足球终端接口 开始
+    /**
+     * 足球比赛终端
+     * @param Request $request
+     * @param $date
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function detail(Request $request, $date, $id) {
+        $interface = new HomeController();
+        $data = $interface->footballDetailData($id);
+        //dump($data);
+        $data['id'] = $id;
+        return view('pc.detail.football_detail', $data);
+    }
+
+    /**
+     * 足球比赛终端 数据分析 赔率指数的 html
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function footballOddCell(Request $request, $id) {
+        $interface = new HomeController();
+        $data = $interface->footballOddData($id);
+        return view('pc.detail.football_cell.odd', $data);
+    }
+
+    /**
+     * 足球比赛终端 角球数据 html
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function footballCornerCell(Request $request, $id) {
+        $interface = new HomeController();
+        $data = $interface->footballCornerData($id);
+        return view('pc.detail.football_cell.corner', $data);
+    }
+
+    /**
+     * 比赛终端 特色数据 html （球队风格、裁判数据、历史同赔）
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function footballCharacteristicCell(Request $request, $id) {
+        $interface = new HomeController();
+        $data = $interface->footballCharacteristicData($id);
+        return view('pc.detail.football_cell.characteristic', $data);
+    }
+
+    /**
+     * 比赛终端 比赛状况 html 首发、技术统计、比赛事件
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function footballBaseCell(Request $request, $id) {
+        $interface = new HomeController();
+        $data = $interface->footballBaseData4PC($id);
+        return view('pc.detail.football_cell.base', $data);
+    }
+
+    /**
+     * 该足球比赛是否有直播
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function footballHasLive(Request $request, $id) {
+        $interface = new HomeController();
+        $data = $interface->footballMatchIsLive($id);
+        return response()->json($data);
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function footballEvents(Request $request, $id) {
+        $date = $request->input('date', date('Ymd'));
+        $data = $this->eventJson($request, $date, $id);
+        return response()->json($data);
+    }
+    //足球终端接口 结束
+    //***********************************************************************************************************//
+
 //=================================================================================================================================//
 //常用方法
     public static function getMatchOdds($handicap, $type, $sport = GoodsArticles::kSportFootball)
@@ -153,7 +243,8 @@ class FootballController extends Controller
     public function eventJson(Request $request, $date, $id) {
         $ch = curl_init();
         //$url = "http://match.liaogou168.com/live-event/" . $date . "/" . $id . ".json";
-        $url = 'http://user.liaogou168.com:8089/intf/foot/events/' . $id;
+        $prefix = 'http://user.liaogou168.com:8089/';//env('LIAOGOU_URL')
+        $url = $prefix . 'intf/foot/events/' . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 3);
