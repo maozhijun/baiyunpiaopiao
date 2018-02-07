@@ -289,11 +289,14 @@ class HomeController extends Controller
     /**
      * 比赛赔率指数
      * @param $id
+     * @param $platform
      * @return mixed
      */
-    public function footballOddIndexData($id) {
+    public function footballOddIndexData($id, $platform = '') {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."intf/foot/odd_index/" . $id;
+        $param = $platform == 'pc' ? '?platform=pc' : '';
+        $prefix = 'http://user.liaogou168.com:8089/';//env('LIAOGOU_URL');
+        $url = $prefix . "intf/foot/odd_index/" . $id . $param;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec ($ch);

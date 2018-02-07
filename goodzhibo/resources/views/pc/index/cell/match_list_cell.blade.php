@@ -144,9 +144,9 @@ $hasLive = $match['live'];
         <p class="goal"><span value="{{$ouUp}}">{{$ouUp}}</span><span value="{{$match['ouMiddle']}}">{{$ouMiddle}}</span><span value="{{$ouDown}}">{{$ouDown}}</span></p>
     </td>
     <td>
-        <a href="match.html" target="_blank">析</a>&nbsp;
-        <a href="oddAsia.html" target="_blank">亚</a>&nbsp;
-        <a href="oddGoal.html" target="_blank">大</a>&nbsp;
-        <a href="oddEurope.html" target="_blank">欧</a>
+        <a href="{{$matchUlr}}" target="_blank">析</a>&nbsp;
+        <a href="/football/detail_odd/{{$mid}}.html#asia" target="_blank">亚</a>&nbsp;
+        <a href="/football/detail_odd/{{$mid}}.html#goal" target="_blank">大</a>&nbsp;
+        <a href="/football/detail_odd/{{$mid}}.html#ou" target="_blank">欧</a>
     </td>
 </tr>

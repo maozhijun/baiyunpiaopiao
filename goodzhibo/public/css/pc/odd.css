@@ -7,7 +7,7 @@
 #Info{
 	min-height: 260px;
 	padding: 0 24%;
-	background: url(../img/image_bg_n.jpg) no-repeat center top #fff; background-size: auto 260px;
+	background: url(/img/pc/image_bg_n.jpg) no-repeat center top #fff; background-size: auto 260px;
 	position: relative;
 	overflow: hidden;
 }
@@ -203,13 +203,13 @@
 }
 #Info div.video:before{
 	width: 50%;
-	background: url(../img/image_left_live.png) no-repeat left center; background-size: auto 100px;
+	background: url(/img/pc/image_left_live.png) no-repeat left center; background-size: auto 100px;
 	position: absolute; top: 0; bottom: 0; left: 0;
 	content: '';
 }
 #Info div.video:after{
 	width: 50%;
-	background: url(../img/iamge_right_live.png) no-repeat right center; background-size: auto 100px;
+	background: url(/img/pc/iamge_right_live.png) no-repeat right center; background-size: auto 100px;
 	position: absolute; top: 0; bottom: 0; right: 0;
 	content: '';
 }
@@ -317,7 +317,7 @@
 
 #Odd{
 	margin-bottom: 20px; padding-top: 70px;
-	background: url(../img/bg_pattern.png) no-repeat right top #fff;
+	background: no-repeat right top #fff;
 }
 #Odd table{
 	width: 100%;
