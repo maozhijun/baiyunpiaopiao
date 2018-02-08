@@ -68,3 +68,12 @@ Route::group(["namespace" => 'Live'], function () {
 //    //channel通用
 //    Route::get("/match/live/url/channel/{id}.json", 'LiveController@getLiveUrl');
 });
+
+//app相关
+Route::group(["namespace" => 'Match'], function () {
+    Route::get("/app/matches/{sport}/{type}", "MatchesController@index");
+    Route::get("/app/match/{sport}/detail", "MatchDetailController@index");
+
+    //足球比赛详情
+    Route::get("/app/football/tab/{tab}/{id}", "MatchDetailController@footballDetailTab");
+});
