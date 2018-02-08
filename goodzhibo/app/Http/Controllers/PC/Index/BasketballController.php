@@ -30,11 +30,14 @@ class BasketballController extends Controller
     /**
      * 赛果
      * @param Request $request
+     * @param $date
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function result(Request $request) {
+    public function result(Request $request, $date ='') {
         $default_date = date('Y-m-d', strtotime('-1 days'));
-        $date = $request->input('date', $default_date);
+        if (empty($date)) {
+            $date = $request->input('date', $default_date);
+        }
         $bCon = new \App\Http\Controllers\Mobile\Live\BasketBallController();
         $data = $bCon->basketballData($date);
         $data['date'] = $date == $default_date ? '' : $date;
@@ -45,11 +48,14 @@ class BasketballController extends Controller
     /**
      * 赛程
      * @param Request $request
+     * @param $date
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function schedule(Request $request) {
+    public function schedule(Request $request, $date = '') {
         $default_date = date('Y-m-d', strtotime('+1 days'));
-        $date = $request->input('date', $default_date);
+        if (empty($date)) {
+            $date = $request->input('date', $default_date);
+        }
         $bCon = new \App\Http\Controllers\Mobile\Live\BasketBallController();
         $data = $bCon->basketballData($date);
         $data['date'] = $date == $default_date ? '' : $date;

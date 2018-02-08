@@ -13,6 +13,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Mobile\Live\BasketBallController;
 use App\Http\Controllers\Mobile\Live\HomeController;
 use App\Http\Controllers\PC\Index\FootballController;
+use App\Models\Match\Match;
+use App\Models\Match\MatchLive;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -35,7 +37,7 @@ class JsonController extends Controller
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 3);
-        $json = curl_exec ($ch);
+        $json = curl_exec($ch);
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close ($ch);
         if ($code >= 400 || empty($json)) return;
@@ -90,13 +92,31 @@ class JsonController extends Controller
             echo 'http_code：' . $code . ', 或者返回html为空';
             return;
         }
+        $patch = self::getMatchListStoragePatch($date, MatchLive::kSportFootball);
+        Storage::disk("public")->put($patch, $json);
+    }
 
-        if (!empty($date)) {
-            $date = date('Ymd', strtotime($date));
-            Storage::disk("public")->put("/static/json/football/list/" . $date . "/data.json", $json);
+    //--------------------------------//
+
+    /**
+     * 获取缓存路径
+     * @param $date = ''   时间格式：2018-01-01
+     * @param $sport = 1   竞技类型 1.足球，2.篮球
+     * @return string 返回缓存的路径
+     */
+    public static function getMatchListStoragePatch($date = '', $sport = 1) {
+        if (empty($date)) {
+            $date = date('Ymd');
         } else {
-            Storage::disk("public")->put("/static/json/football/list/data.json", $json);
+            $date = date('Ymd', strtotime($date));
         }
+        if ($sport == MatchLive::kSportBasketball) {
+            $sport = 'basketball';
+        } else {
+            $sport = 'football';
+        }
+        $patch = '/static/json/' . $sport . '/list/' . $date . '/data.json';
+        return $patch;
     }
 
     //=================================================================================================================================//
@@ -120,12 +140,8 @@ class JsonController extends Controller
             echo 'http_code：' . $code . ', 或者返回html为空';
             return;
         }
-        if (!empty($date)) {
-            $date = date('Ymd', strtotime($date));
-            Storage::disk("public")->put("/static/json/basketball/list/" . $date . "/data.json", $json);
-        } else {
-            Storage::disk("public")->put("/static/json/basketball/list/data.json", $json);
-        }
+        $patch = self::getMatchListStoragePatch($date, MatchLive::kSportBasketball);
+        Storage::disk("public")->put($patch, $json);
     }
 
     /**
@@ -157,9 +173,8 @@ class JsonController extends Controller
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 3);
-        $json = curl_exec ($ch);
-        curl_close ($ch);
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $json = curl_exec ($ch);
         curl_close ($ch);
         if ($code >= 400 || empty($json)) return;
         Storage::disk("public")->put("/static/json/basketball/odd/roll.json", $json);

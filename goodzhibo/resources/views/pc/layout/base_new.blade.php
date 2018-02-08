@@ -42,7 +42,7 @@
         <a class="column {{$nav == 'football' ? 'on' : ''}}" @if($nav != 'football') href="/football/immediate.html" @endif ><span>足球</span></a>
         <a class="column {{$nav == 'basketball' ? 'on' : ''}}" @if($nav != 'basketball') href="/basketball/immediate.html" @endif ><span>篮球</span></a>
         <a class="column {{$nav == 'lives' ? 'on' : ''}}" @if($nav != 'lives') href="/lives.html" @endif ><span>直播</span></a>
-        <a class="column {{$nav == 'download' ? 'on' : ''}}" @if($nav != 'download') href="/download.html" @endif ><span>手机直播</span></a>
+        {{--<a class="column {{$nav == 'download' ? 'on' : ''}}" @if($nav != 'download') href="/download.html" @endif ><span>手机直播</span></a>--}}
     </div>
 </div>
 @yield('content')

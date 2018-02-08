@@ -206,6 +206,14 @@
             @endif
             // $('#TableHead').width($('#Show').width());
         }
+        var divDate = $('#MatchList div.title div.date');
+
+        if (divDate.length == 1) {
+            divDate.find('button').click(function () {
+                var d = divDate.find('input').val();
+                location.href = '{{$_SERVER['PHP_SELF']}}?date=' + d;
+            });
+        }
     </script>
 @endsection
 <!--[if lte IE 8]>

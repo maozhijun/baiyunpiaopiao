@@ -6,6 +6,7 @@
     $hLeagueRank = $match['hLeagueRank'];
     $aLeagueRank = $match['aLeagueRank'];
     $isLive = false;//\App\Models\Match\MatchLive::isLive($match->id);
+    $startTime = date('Ymd', strtotime($match['time']));
     ?>
     <div id="Content" class="inner">
         <div class="leftBar" id="LeftBar">
@@ -749,7 +750,7 @@
             onChangeTab('Corner');
             if (0 == $('#Corner div').length){
                 $.ajax({
-                    url:'/football/detail_cell/corner/{{$id}}.html',
+                    url:'/football/detail_cell/corner/{{$startTime}}/{{$id}}.html',
                     success:function (html) {
                         $('#Corner').html(html);
                         if(hLeagueRank > 0) {
@@ -791,7 +792,7 @@
             onChangeTab('Match');
             if (0 == $('#Match div').length){
                 $.ajax({
-                    url:'/football/detail_cell/base/{{$id}}.html',
+                    url:'/football/detail_cell/base/{{$startTime}}/{{$id}}.html',
                     success:function (html) {
                         $('#Match').html(html);
                         if(hLeagueRank > 0) {
@@ -830,7 +831,7 @@
             onChangeTab('Characteristic');
             if (0 == $('#Characteristic div').length){
                 $.ajax({
-                    url:'/football/detail_cell/chara/{{$id}}.html',
+                    url:'/football/detail_cell/chara/{{$startTime}}/{{$id}}.html',
                     success:function (html) {
                         $('#Characteristic').html(html);
                         setBG();

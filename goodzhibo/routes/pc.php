@@ -16,12 +16,15 @@ Route::group(["namespace" => 'Index'], function () {
     Route::any("/football/result.html", 'FootballController@result');
     Route::any("/football/schedule.html", 'FootballController@schedule');
 
+    Route::any("/football/{date}/result.html", 'FootballController@result');
+    Route::any("/football/{date}/schedule.html", 'FootballController@schedule');
+
     //足球终端相关 开始
     Route::get("/football/detail/{date}/{id}.html", "FootballController@detail");
     Route::get("/football/detail_cell/odd/{id}.html", "FootballController@footballOddCell");//数据分析 赔率指数
-    Route::get("/football/detail_cell/corner/{id}.html", "FootballController@footballCornerCell");//角球数据
-    Route::get("/football/detail_cell/chara/{id}.html", "FootballController@footballCharacteristicCell");//特色数据
-    Route::get("/football/detail_cell/base/{id}.html", "FootballController@footballBaseCell");//比赛状况
+    Route::get("/football/detail_cell/corner/{date}/{id}.html", "FootballController@footballCornerCell");//角球数据
+    Route::get("/football/detail_cell/chara/{date}/{id}.html", "FootballController@footballCharacteristicCell");//特色数据
+    Route::get("/football/detail_cell/base/{date}/{id}.html", "FootballController@footballBaseCell");//比赛状况
     //足球终端相关 结束
 
     Route::get('/football/detail_odd/{id}.html', 'FootballController@footballOddIndex');//赔率列表
@@ -42,8 +45,12 @@ Route::group(["namespace" => 'Index'], function () {
 //====================================篮球====================================//
 Route::group(["namespace" => 'Index'], function () {
     Route::any("/basketball/immediate.html", 'BasketballController@immediate');
+
     Route::any("/basketball/result.html", 'BasketballController@result');
     Route::any("/basketball/schedule.html", 'BasketballController@schedule');
+
+    Route::any("/basketball/{date}/result.html", 'BasketballController@result');
+    Route::any("/basketball/{date}/schedule.html", 'BasketballController@schedule');
 
     //////////////////===============================//////////////////
     /// 异步请求接口

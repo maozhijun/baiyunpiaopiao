@@ -35,10 +35,13 @@ class FootballController extends Controller
     /**
      * 结果
      * @param Request $request
+     * @param $date
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function result(Request $request) {
-        $date = $request->input('date', date('Y-m-d', strtotime('-1 days')));
+    public function result(Request $request, $date = '') {
+        if (empty($date)) {
+            $date = $request->input('date', date('Y-m-d', strtotime('-1 days')));
+        }
         $homeController = new HomeController();
         $data = $homeController->footballData($date);
         $data['type'] = 'result';
@@ -49,10 +52,13 @@ class FootballController extends Controller
     /**
      * 结果
      * @param Request $request
+     * @param $date
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function schedule(Request $request) {
-        $date = $request->input('date', date('Y-m-d', strtotime('+1 days')));
+    public function schedule(Request $request, $date = '') {
+        if (empty($date)) {
+            $date = $request->input('date', date('Y-m-d', strtotime('+1 days')));
+        }
         $homeController = new HomeController();
         $data = $homeController->footballData($date);
         $data['nav'] = 'football';
@@ -71,7 +77,6 @@ class FootballController extends Controller
     public function detail(Request $request, $date, $id) {
         $interface = new HomeController();
         $data = $interface->footballDetailData($id);
-        //dump($data);
         $data['id'] = $id;
         return view('pc.detail.football_detail', $data);
     }
@@ -91,10 +96,11 @@ class FootballController extends Controller
     /**
      * 足球比赛终端 角球数据 html
      * @param Request $request
+     * @param $date
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function footballCornerCell(Request $request, $id) {
+    public function footballCornerCell(Request $request, $date, $id) {
         $interface = new HomeController();
         $data = $interface->footballCornerData($id);
         return view('pc.detail.football_cell.corner', $data);
@@ -103,10 +109,11 @@ class FootballController extends Controller
     /**
      * 比赛终端 特色数据 html （球队风格、裁判数据、历史同赔）
      * @param Request $request
+     * @param $date
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function footballCharacteristicCell(Request $request, $id) {
+    public function footballCharacteristicCell(Request $request, $date, $id) {
         $interface = new HomeController();
         $data = $interface->footballCharacteristicData($id);
         return view('pc.detail.football_cell.characteristic', $data);
@@ -115,10 +122,11 @@ class FootballController extends Controller
     /**
      * 比赛终端 比赛状况 html 首发、技术统计、比赛事件
      * @param Request $request
+     * @param $date
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function footballBaseCell(Request $request, $id) {
+    public function footballBaseCell(Request $request, $date, $id) {
         $interface = new HomeController();
         $data = $interface->footballBaseData4PC($id);
         return view('pc.detail.football_cell.base', $data);

@@ -2,7 +2,16 @@
 
 namespace App\Console;
 
+use App\Console\CacheCommands\BasketballListCommands;
+use App\Console\CacheCommands\BasketballLiveJsonCommands;
+use App\Console\CacheCommands\FootballDetailCommands;
+use App\Console\CacheCommands\FootballListCommands;
+use App\Console\CacheCommands\FootballLiveJsonCommands;
+use App\Console\CacheCommands\FootballWapDetailCommands;
+use App\Console\CacheCommands\ImmediateHtmlCommands;
+use App\Console\CacheCommands\ResultHtmlCommands;
 use App\Http\Controllers\Mobile\Live\LiveController;
+use App\Http\Controllers\StaticHtml\ResultHtmlController;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Http\Request;
@@ -21,6 +30,14 @@ class Kernel extends ConsoleKernel
         DeleteExpireFileCommand::class,
         MobileDetailCommand::class,
         LivesJsonCommand::class,
+        FootballListCommands::class,
+        BasketballListCommands::class,
+        ImmediateHtmlCommands::class,
+        ResultHtmlCommands::class,
+        FootballLiveJsonCommands::class,
+        BasketballLiveJsonCommands::class,
+        FootballDetailCommands::class,
+        FootballWapDetailCommands::class,
     ];
 
     /**
@@ -43,6 +60,20 @@ class Kernel extends ConsoleKernel
         $schedule->call(function() use($mController){
             $mController->matchLiveStatic(new Request());//每分钟刷新比赛状态数据
         })->everyMinute();
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $schedule->command('fb_list_json_cache:run')->everyMinute();//每分钟执行一次 足球当天列表的定时任务
+        $schedule->command('bb_list_json_cache:run')->everyMinute();//每分钟执行一次 篮球当天列表的定时任务
+
+        $schedule->command('imm_html_cache:run')->everyMinute();//即时列表html静态化。
+        $schedule->command('result_html_cache:run')->everyFiveMinutes();//当天的结果列表html静态化。
+
+        $schedule->command('fb_detail_cache:run')->everyFiveMinutes();//正在比赛的足球赛事终端每分五种静态化一次。
+        $schedule->command('fb_wap_detail_cache:run')->everyFiveMinutes();//正在比赛的足球赛事终端每分五种静态化一次。
+
+        $schedule->command('fb_detail_cache:run')->everyMinute();//足球即时比赛数据、赔率数据
+        $schedule->command('bb_live_json_cache:run')->everyMinute();//篮球即时比赛数据、赔率数据
     }
 
     /**

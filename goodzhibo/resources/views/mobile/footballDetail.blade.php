@@ -22,7 +22,7 @@
 </div>
 <div id="Info">
     <div class="team">
-        <p class="img"><img src="{{$match['hteam']['icon']}}"></p>
+        <p class="img"><img src="{{$match['hteam']['icon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'"></p>
         <p class="name">{{$match['hname']}}</p>
         <p class="rank">排名：{{$match['hLeagueRank']}}</p>
     </div>
@@ -35,7 +35,7 @@
         @if($match['status'] > 0 && isset($match['wap_live']) && $match['wap_live']))<a href="videoPhone.html" class="live">正在直播</a>@endif
     </div>
     <div class="team">
-        <p class="img"><img src="{{$match['ateam']['icon']}}"></p>
+        <p class="img"><img src="{{$match['ateam']['icon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'"></p>
         <p class="name">{{$match['aname']}}</p>
         <p class="rank">排名：{{$match['aLeagueRank']}}</p>
     </div>
@@ -498,8 +498,9 @@
         setHead();
     }
     window.mid = '{{$id}}';
+    window.startTime = '{{date('Ymd', strtotime($match['time']))}}';
     $.ajax({
-        url:'/m/football/match_detail/odd/{{$id}}',
+        url:'/m/football/detail/odd/' + window.startTime + '/{{$id}}.html',
         success:function (html) {
             if (html == "") {
                 $('#Data div.odd').hide();
