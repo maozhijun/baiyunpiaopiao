@@ -45,14 +45,14 @@ class MatchDetailController
                 if (isset($event)) {
                     $data = array_merge($data, $event);
                 }
-                $views = 'app.match.football.match_detail_base';
+                $views = 'app.football.match_detail_base';
                 break;
             case "analyse":
                 $oddData = $this->footballOddData($id, $date);
                 if (isset($oddData)) {
                     $data = array_merge($data, $oddData);
                 }
-                $views = 'app.match.football.match_detail_analyse';
+                $views = 'app.football.match_detail_analyse';
                 break;
             case "team":
                 $cornerData = $this->footballCornerData($id, $date);
@@ -63,18 +63,18 @@ class MatchDetailController
                 if (isset($styleData)) {
                     $data = array_merge($data, $styleData);
                 }
-                $views = 'app.match.football.match_detail_team';
+                $views = 'app.football.match_detail_team';
                 break;
             case "odd":
                 $oddIndex = $this->footballOddIndexData($id, $date);
                 if (isset($oddIndex)) {
                     $data = array_merge($data, $oddIndex);
                 }
-                $views = 'app.match.football.match_detail_odd';
+                $views = 'app.football.match_detail_odd';
                 break;
             case "sameOdd":
                 $data = array_merge($data, $this->footballSameOddData($id, $date));
-                $views = 'app.match.football.match_detail_same_odd';
+                $views = 'app.football.match_detail_same_odd';
                 break;
         }
         return view($views, $data);

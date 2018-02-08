@@ -16,19 +16,19 @@
     @if(isset($home))
     <tr>
         <td>{{$hname}}</td>
-        <td>{{$home[$key]['avgGoal']}}球</td>
-        <td>{{$home[$key]['avgMiss']}}球</td>
-        <td>{{$home[$key]['avgGoalMatch']}}场</td>
-        <td>{{$home[$key]['avgMissMatch']}}场</td>
+        <td @if($away && $home[$key]['avgGoal'] > $away[$key]['avgGoal']) class="red" @endif>{{$home[$key]['avgGoal']}}球</td>
+        <td @if($away && $home[$key]['avgMiss'] > $away[$key]['avgMiss']) class="red" @endif>{{$home[$key]['avgMiss']}}球</td>
+        <td @if($away && $home[$key]['avgGoalMatch'] > $away[$key]['avgGoalMatch']) class="red" @endif>{{$home[$key]['avgGoalMatch']}}场</td>
+        <td @if($away && $home[$key]['avgMissMatch'] > $away[$key]['avgMissMatch']) class="red" @endif>{{$home[$key]['avgMissMatch']}}场</td>
     </tr>
     @endif
     @if(isset($away))
     <tr>
         <td>{{$aname}}</td>
-        <td>{{$away[$key]['avgGoal']}}球</td>
-        <td>{{$away[$key]['avgMiss']}}球</td>
-        <td>{{$away[$key]['avgGoalMatch']}}场</td>
-        <td>{{$away[$key]['avgMissMatch']}}场</td>
+        <td @if($home && $home[$key]['avgGoal'] < $away[$key]['avgGoal']) class="red" @endif>{{$away[$key]['avgGoal']}}球</td>
+        <td @if($home && $home[$key]['avgMiss'] < $away[$key]['avgMiss']) class="red" @endif>{{$away[$key]['avgMiss']}}球</td>
+        <td @if($home && $home[$key]['avgGoalMatch'] < $away[$key]['avgGoalMatch']) class="red" @endif>{{$away[$key]['avgGoalMatch']}}场</td>
+        <td @if($home && $home[$key]['avgMissMatch'] < $away[$key]['avgMissMatch']) class="red" @endif>{{$away[$key]['avgMissMatch']}}场</td>
     </tr>
     @endif
     <tr>
