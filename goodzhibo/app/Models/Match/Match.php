@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Match extends Model
 {
-    //public $connection = "match";
+    public $connection = "match";
 
     const k_genre_all = 1;//全部
     const k_genre_yiji = 2;//一级
