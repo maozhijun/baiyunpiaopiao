@@ -23,7 +23,6 @@ class BasketBallController extends Controller
         $json = $this->basketballData();
         $json['type'] = 'immediate';
         $json['date'] = empty($date) ? date('Y-m-d') : $date;
-        dump($json['league_array']);
         return view('mobile.basketIndex', $json);
     }
 

@@ -93,7 +93,7 @@ $hasLive = $match['live'];
         </a>
     </td>
     <td>
-        <a href="{{$matchUlr}}" target="_blank" onmouseover="getMousePos(this); ct=window.setInterval('loadEvent(\'{{$mid}}\', \'{{$time_format}}\')',200)" onmouseout="window.clearInterval(ct)" >
+        <a href="{{$matchUlr}}" target="_blank" @if($status == -1 || $status > 0)  onmouseover="getMousePos(this); ct=window.setInterval('loadEvent(\'{{$mid}}\', \'{{$time_format}}\')',200)" onmouseout="window.clearInterval(ct)" @else onmouseover="getMousePos(this);" @endif >
             <p id="score_{{$mid}}" @if($hasLineup) style="font-size: 13px;" @endif >
                 @if($hasLineup)[首发]@else{{\App\Models\Match\Match::getScoreText($status, $match['hscore'], $match['ascore'], true)}}@endif
             </p>

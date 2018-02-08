@@ -217,7 +217,7 @@ class FootballController extends Controller
 
 
 //=================================================================================================================================//
-//接口
+    //接口
     public function liveJson(Request $request) {
         $ch = curl_init();
         $url = env('LIAOGOU_URL')."change/live.json?date=" . time();
