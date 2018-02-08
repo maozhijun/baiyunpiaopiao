@@ -93,7 +93,7 @@ $hasLive = $match['live'];
         </a>
     </td>
     <td>
-        <a href="{{$matchUlr}}" target="_blank" onmouseover="getMousePos(this); ct=window.setInterval('loadEvent(\'{{$mid}}\', \'{{$time_format}}\')',200)" onmouseout="window.clearInterval(ct)" >
+        <a href="{{$matchUlr}}" target="_blank" @if($status == -1 || $status > 0)  onmouseover="getMousePos(this); ct=window.setInterval('loadEvent(\'{{$mid}}\', \'{{$time_format}}\')',200)" onmouseout="window.clearInterval(ct)" @else onmouseover="getMousePos(this);" @endif >
             <p id="score_{{$mid}}" @if($hasLineup) style="font-size: 13px;" @endif >
                 @if($hasLineup)[首发]@else{{\App\Models\Match\Match::getScoreText($status, $match['hscore'], $match['ascore'], true)}}@endif
             </p>
@@ -144,9 +144,9 @@ $hasLive = $match['live'];
         <p class="goal"><span value="{{$ouUp}}">{{$ouUp}}</span><span value="{{$match['ouMiddle']}}">{{$ouMiddle}}</span><span value="{{$ouDown}}">{{$ouDown}}</span></p>
     </td>
     <td>
-        <a href="match.html" target="_blank">析</a>&nbsp;
-        <a href="oddAsia.html" target="_blank">亚</a>&nbsp;
-        <a href="oddGoal.html" target="_blank">大</a>&nbsp;
-        <a href="oddEurope.html" target="_blank">欧</a>
+        <a href="{{$matchUlr}}" target="_blank">析</a>&nbsp;
+        <a href="/football/detail_odd/{{$mid}}.html#asia" target="_blank">亚</a>&nbsp;
+        <a href="/football/detail_odd/{{$mid}}.html#goal" target="_blank">大</a>&nbsp;
+        <a href="/football/detail_odd/{{$mid}}.html#ou" target="_blank">欧</a>
     </td>
 </tr>

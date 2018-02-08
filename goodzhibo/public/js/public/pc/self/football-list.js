@@ -253,11 +253,11 @@ function refresh() {
                     halfScoreItem.html(dataItem.half_score);
                 }
                 if (liveItem && liveItem.length > 0){
-                    if(liveItem[0].src == "/img/icon_home_live.png") {
-                        liveItem[0].src = "/img/icon_home_video_live.gif";
+                    if(liveItem[0].src == "/img/pc/icon_home_live.png") {
+                        liveItem[0].src = "/img/pc/icon_home_video_live.gif";
                     }
                     if (timeItem == '已结束'){
-                        liveItem[0].src = "/img/icon_home_live.png";
+                        liveItem[0].src = "/img/pc/icon_home_live.png";
                     }
                 }
             }

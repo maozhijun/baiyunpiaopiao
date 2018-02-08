@@ -22,9 +22,9 @@ Route::group(["namespace" => 'Index'], function () {
     Route::get("/football/detail_cell/corner/{id}.html", "FootballController@footballCornerCell");//角球数据
     Route::get("/football/detail_cell/chara/{id}.html", "FootballController@footballCharacteristicCell");//特色数据
     Route::get("/football/detail_cell/base/{id}.html", "FootballController@footballBaseCell");//比赛状况
-
-
     //足球终端相关 结束
+
+    Route::get('/football/detail_odd/{id}.html', 'FootballController@footballOddIndex');//赔率列表
     /**Route::any("/", function (){
         return redirect('/index.html');
     });**/

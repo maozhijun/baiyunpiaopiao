@@ -149,6 +149,19 @@ class FootballController extends Controller
     //足球终端接口 结束
     //***********************************************************************************************************//
 
+    /**
+     * 足球赔率
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    function footballOddIndex(Request $request, $id) {
+        $interface = new HomeController();
+        $data = $interface->footballOddIndexData($id, 'pc');
+        $data['type'] = 'asia';
+        return view('pc.detail.football_odd', $data);
+    }
+
 //=================================================================================================================================//
 //常用方法
     public static function getMatchOdds($handicap, $type, $sport = GoodsArticles::kSportFootball)
@@ -204,7 +217,7 @@ class FootballController extends Controller
 
 
 //=================================================================================================================================//
-//接口
+    //接口
     public function liveJson(Request $request) {
         $ch = curl_init();
         $url = env('LIAOGOU_URL')."change/live.json?date=" . time();

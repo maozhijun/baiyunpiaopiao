@@ -101,18 +101,18 @@
         <table>
             <tbody>
             <tr>
-                <td>亚青U19</td>
-                <td>42'</td>
-                <td class="goal">马尔代夫U19（中）</td>
-                <td><b class="goal">1</b> - <b>1</b></td>
-                <td>斯里兰卡U19</td>
+                <td>-</td>
+                <td>-</td>
+                <td class="goal">-</td>
+                <td><b class="goal">0</b> - <b>0</b></td>
+                <td>-</td>
             </tr>
             <tr>
-                <td>亚青U19</td>
-                <td>42'</td>
-                <td>马尔代夫U19（中）</td>
-                <td><b>1</b> - <b class="goal">1</b></td>
-                <td class="goal">斯里兰卡U19</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td><b>0</b> - <b class="goal">0</b></td>
+                <td class="goal">-</td>
             </tr>
             </tbody>
         </table>
@@ -190,7 +190,6 @@
     </div>
 @endsection
 @section('js')
-    {{--<script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/jquery.js"></script>--}}
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/public.js"></script>
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/immediate.js"></script>
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/self/util.js"></script>
@@ -210,5 +209,5 @@
     </script>
 @endsection
 <!--[if lte IE 8]>
-<script type="text/javascript" src="{{env('CDN_URL')}}/js/publics/pc/jquery_191.js"></script>
+<script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/jquery_191.js"></script>
 <![endif]-->
