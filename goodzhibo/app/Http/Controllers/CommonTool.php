@@ -87,7 +87,7 @@ class CommonTool
         if ($mid > 0) {
             if (MatchLive::kSportBasketball == $sport) {
                 $path = '/live/basketball/' . $mid . '.html';
-            } else if (MatchLive::kSportBasketball == $sport) {
+            } else if (MatchLive::kSportFootball == $sport) {
                 $path = '/live/football/' . $mid . '.html';
             }
         }
