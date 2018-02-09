@@ -45,6 +45,8 @@ class MatchDetailController
                 if (isset($event)) {
                     $data = array_merge($data, $event);
                 }
+                $data['match']['hicon'] = $match['hicon'];
+                $data['match']['aicon'] = $match['aicon'];
                 $views = 'app.football.match_detail_base';
                 break;
             case "analyse":
