@@ -23,14 +23,14 @@ class QQEncodesController extends BaseController
         '10006' => '/lives/10006',
     ];
     private $ggcdns = [
-        'aikanqiu188' => '141370?pwd=fe2cb6c6f525f295',
+//        'aikanqiu188' => '141370?pwd=fe2cb6c6f525f295',
         'aikanqiu888' => '141371?pwd=e424794ba6687601',
         'aikanqiu168' => '141373?pwd=b876ef2042dd7474',
         'sportslive001' => '140136?pwd=941cdfeddec09d20',
-        'aizhibo188' => '141427?pwd=ab870a742642f687',
+//        'aizhibo188' => '141427?pwd=ab870a742642f687',
         'aizhibo168' => '141428?pwd=72f23b1b5788d9d3',
         'sportslive168' => '141443?pwd=4725d0025dd63ddb',
-        'sportslive188' => '141444?pwd=fb038eb31899d412',
+//        'sportslive188' => '141444?pwd=fb038eb31899d412',
         'aikanqiu001' => '141445?pwd=bcee1f58bbd860ba',
     ];
 

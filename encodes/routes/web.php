@@ -25,6 +25,10 @@ Route::group(["middleware" => "auth"], function () {
     Route::get("/manager/hei/stop/{id}", "HeiEncodesController@stop");
     Route::get("/manager/hei/ali-live-room", "HeiEncodesController@createdAliRoom");
 
+    Route::get("/manager/other/", "OtherEncodesController@index");
+    Route::post("/manager/other/created/", "OtherEncodesController@created");
+    Route::get("/manager/other/stop/{id}", "OtherEncodesController@stop");
+
     Route::get("/manager/list/", "EncodesController@index");
 });
 

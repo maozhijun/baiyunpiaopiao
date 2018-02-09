@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class HeiEncodesController extends BaseController
 {
-    private $ali_host = "live.cdn.vcgood.net";
-    private $ali_key = "t7Trm3V0Sg";
+    private $ali_host = "hls.cdn.vcgood.net";
+    private $ali_key = "At7Trm3V0SgZ";
     private $ali_rtmp = "rtmp://video-center.alivecdn.com";
     private $alicdns = [
         'hei-1' => '/lives/hei-1',
