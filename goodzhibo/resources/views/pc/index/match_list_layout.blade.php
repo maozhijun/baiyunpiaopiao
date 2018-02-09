@@ -209,13 +209,19 @@
             // $('#TableHead').width($('#Show').width());
         }
         var divDate = $('#MatchList div.title div.date');
-
         if (divDate.length == 1) {
             divDate.find('button').click(function () {
                 var d = divDate.find('input').val();
-                location.href = '{{$_SERVER['PHP_SELF']}}?date=' + d;
+                var url = location.href;
+                var type = url.match(/\/(\w+)\.html/)[1];
+                d = d.replace(/[-|/]/g, '');
+                location.href = '/football/' + d + '/' + type + '.html';
             });
         }
+        $("#BackTop").click(function () {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        });
     </script>
 @endsection
 <!--[if lte IE 8]>
