@@ -601,6 +601,37 @@ class LiveController extends Controller
 
 
     //===========================================================================================================================//
+
+
+    public function flushDetailAndJsonCache(Request $request) {
+        $id = $request->input('id');
+        $ch_id = $request->input('ch_id');
+        $sport = $request->input('sport');
+
+        if (!is_numeric($id) || !in_array($sport, [1, 2])) {
+            return '参数错误';
+        }
+
+        //刷新终端页面
+        if ($sport == 1) {
+            $html = $this->detail($request, $id);
+            Storage::disk("public")->put("/live/football/". $id. ".html", $html);
+        } else {
+            $html = $this->basketDetail($request, $id);
+            Storage::disk("public")->put("/live/basketball/". $id. ".html", $html);
+        }
+
+        $mCon = new \App\Http\Controllers\Mobile\Live\LiveController();
+        $mCon->liveDetailStatic($request, $id, $sport);//刷新 WAP 终端页面
+
+
+        if (is_numeric($ch_id)) {
+            $this->staticLiveUrl($request, $ch_id);//刷新接口
+        }
+    }
+
+
+    //==========================================================================================================================//
     /**
      * 清除底部推荐缓存
      * @param Request $request

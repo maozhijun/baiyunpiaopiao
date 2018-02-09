@@ -2,7 +2,7 @@
 	min-height: 700px;
 }
 #Content .default{
-	background: url(/img/pc/bg_pattern.png) no-repeat right top #fff;
+	background: no-repeat right top #fff;
 }
 #Content .default .title{
 	padding: 20px 0 20px 20px;
@@ -2127,5 +2127,12 @@
 	background: #838587 !important;
 }
 
-
-
+.nolist{
+	width: 100%;
+	padding: 200px 0 20px;
+	background: url(img/bg_vip_nolist.png) no-repeat center top; background-size: 200px;
+	font-size: 24px; line-height: 42px; text-align: center; color: #a7a1a1;
+}
+.title + .nolist{
+	display: block;
+}

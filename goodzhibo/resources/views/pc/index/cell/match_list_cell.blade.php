@@ -86,14 +86,14 @@ $hasLive = $match['live'];
     <td>{{date('H:i', strtotime($time))}} @if(isset($match['betting_num'])) <p>{{$match['betting_num']}}</p> @endif </td>
     <td id="time_{{$mid}}" @if(isset($matchTime) && '已结束' != $matchTime) class="red" @endif>{!! $matchTime !!}</td>
     <td id="h_team_{{$mid}}">
-        <a href="match.html" target="_blank">
+        <a href="{{$matchUlr}}" target="_blank">
             <img class="icon" src="{{$match['home_icon']}}">
             @if($match['h_red'] > 0)<span class="redCard">{{$match['h_red']}}</span>@endif
             @if($match['h_yellow'] > 0)<span class="yellowCard">{{$match['h_yellow']}}</span>@endif{{$match['hname']}}
         </a>
     </td>
     <td>
-        <a href="match.html" target="_blank" onmouseover="getMousePos(this); ct=window.setInterval('loadEvent(\'{{$mid}}\', \'{{$time_format}}\')',200)" onmouseout="window.clearInterval(ct)" >
+        <a href="{{$matchUlr}}" target="_blank" @if($status == -1 || $status > 0)  onmouseover="getMousePos(this); ct=window.setInterval('loadEvent(\'{{$mid}}\', \'{{$time_format}}\')',200)" onmouseout="window.clearInterval(ct)" @else onmouseover="getMousePos(this);" @endif >
             <p id="score_{{$mid}}" @if($hasLineup) style="font-size: 13px;" @endif >
                 @if($hasLineup)[首发]@else{{\App\Models\Match\Match::getScoreText($status, $match['hscore'], $match['ascore'], true)}}@endif
             </p>
@@ -116,8 +116,8 @@ $hasLive = $match['live'];
             @endif
         </a>
     </td>
-    <td>
-        <a href="match.html" target="_blank">
+    <td id="a_team_{{$mid}}">
+        <a href="{{$matchUlr}}" target="_blank">
             <img class="icon" src="{{$match['away_icon']}}">{{$match['aname']}}
             @if($match['a_yellow'] > 0)<span class="yellowCard">{{$match['a_yellow']}}</span>@endif
             @if($match['a_red'] > 0)<span class="redCard">{{$match['a_red']}}</span>@endif
@@ -144,9 +144,9 @@ $hasLive = $match['live'];
         <p class="goal"><span value="{{$ouUp}}">{{$ouUp}}</span><span value="{{$match['ouMiddle']}}">{{$ouMiddle}}</span><span value="{{$ouDown}}">{{$ouDown}}</span></p>
     </td>
     <td>
-        <a href="match.html" target="_blank">析</a>&nbsp;
-        <a href="oddAsia.html" target="_blank">亚</a>&nbsp;
-        <a href="oddGoal.html" target="_blank">大</a>&nbsp;
-        <a href="oddEurope.html" target="_blank">欧</a>
+        <a href="{{$matchUlr}}" target="_blank">析</a>&nbsp;
+        <a href="/football/detail_odd/{{$mid}}.html#asia" target="_blank">亚</a>&nbsp;
+        <a href="/football/detail_odd/{{$mid}}.html#goal" target="_blank">大</a>&nbsp;
+        <a href="/football/detail_odd/{{$mid}}.html#ou" target="_blank">欧</a>
     </td>
 </tr>

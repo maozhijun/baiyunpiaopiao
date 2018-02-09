@@ -82,10 +82,12 @@
                 {{--<tr class="bannerAD"><td colspan="11"><a href="http://91889188.87.cn" target="_blank"><img src="{{env('CDN_URL')}}/img/pc/ad_1.jpg"></td></a></tr>--}}
                 </tbody>
                 <tfoot>
+                @if(isset($exceptionMatches))
                 @foreach($exceptionMatches as $match)
                     @component("pc.index.cell.match_list_cell", ['match'=>$match])
                     @endcomponent
                 @endforeach
+                @endif
                 </tfoot>
             </table>
         </div>
@@ -101,18 +103,18 @@
         <table>
             <tbody>
             <tr>
-                <td>亚青U19</td>
-                <td>42'</td>
-                <td class="goal">马尔代夫U19（中）</td>
-                <td><b class="goal">1</b> - <b>1</b></td>
-                <td>斯里兰卡U19</td>
+                <td>-</td>
+                <td>-</td>
+                <td class="goal">-</td>
+                <td><b class="goal">0</b> - <b>0</b></td>
+                <td>-</td>
             </tr>
             <tr>
-                <td>亚青U19</td>
-                <td>42'</td>
-                <td>马尔代夫U19（中）</td>
-                <td><b>1</b> - <b class="goal">1</b></td>
-                <td class="goal">斯里兰卡U19</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td><b>0</b> - <b class="goal">0</b></td>
+                <td class="goal">-</td>
             </tr>
             </tbody>
         </table>
@@ -190,7 +192,6 @@
     </div>
 @endsection
 @section('js')
-    {{--<script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/jquery.js"></script>--}}
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/public.js"></script>
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/immediate.js"></script>
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/self/util.js"></script>
@@ -207,8 +208,22 @@
             @endif
             // $('#TableHead').width($('#Show').width());
         }
+        var divDate = $('#MatchList div.title div.date');
+        if (divDate.length == 1) {
+            divDate.find('button').click(function () {
+                var d = divDate.find('input').val();
+                var url = location.href;
+                var type = url.match(/\/(\w+)\.html/)[1];
+                d = d.replace(/[-|/]/g, '');
+                location.href = '/football/' + d + '/' + type + '.html';
+            });
+        }
+        $("#BackTop").click(function () {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        });
     </script>
 @endsection
 <!--[if lte IE 8]>
-<script type="text/javascript" src="{{env('CDN_URL')}}/js/publics/pc/jquery_191.js"></script>
+<script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/jquery_191.js"></script>
 <![endif]-->

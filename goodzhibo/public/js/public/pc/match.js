@@ -191,6 +191,60 @@ function myBrowser(){
     }; //判断是否IE浏览器
 }
 
+function ResetView () {
+    function CheckView () {
+        if (document.body.offsetWidth <= 1400) {
+            var Child = document.body.childNodes;
+            var Leng = 0;
+            var Content = 0;
+            for (var i = 0; i < Child.length; i++) {
+                if (Child[i].offsetHeight && Child[i].id != 'Goal' && Child[i].id.indexOf('AD') == -1) {
+                    // alert(Child[i].offsetHeight * 0.2 + ',' + Child[i].id)
+                    if (Child[i].id != 'Bottom') {
+                        Leng += Child[i].offsetHeight * 0.2;
+                    }
+                    Content += Child[i].offsetHeight * 0.8;
+
+                }
+            }
+
+            if (document.getElementById('Focus')) {
+                Content += document.getElementById('Focus').offsetHeight * 0.2;
+                Leng -= document.getElementById('Focus').offsetHeight * 0.2;
+            }
+
+            // var SetHeight = document.body.offsetHeight;
+            document.body.style.height = (Content + 20) + 'px';
+            document.getElementById('Bottom').style.top = '-' + (Leng - 20) + 'px';
+        }else{
+            document.body.style.marginBottom = '0px';
+        }
+    }
+
+    function SetPop () {
+        var BodyH = document.body.offsetHeight;
+        var ScH = window.screen.availHeight;
+        var Pop = $('.pop');
+        var ScrollT = document.documentElement.scrollTop || document.body.scrollTop;
+        if (document.body.offsetWidth <= 1400) {
+            for (var i = 0; i < Pop.children().length; i++) {
+                Pop.children()[i].style.marginTop = (ScH/2 + ScrollT*1.25 - 280 - BodyH/2) + 'px';
+            }
+        }else{
+            Pop.children().removeAttr("style");
+        }
+    }
+
+    if (IECheck() >= 9) {
+        CheckView ()
+    }else if (navigator.userAgent.indexOf('WebKit') != -1 || navigator.userAgent.indexOf("Firefox") != -1) {
+        SetPop ()
+        $(document).on("scroll",function(){
+            SetPop ()
+        });
+    }
+}
+
 
 
 

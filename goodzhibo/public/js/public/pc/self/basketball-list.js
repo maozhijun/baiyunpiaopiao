@@ -333,3 +333,195 @@ function GoalTR (obj) { //进球效果，哪队进球对应TD触发此事件
             obj.className = '';
         },5000);
 }
+
+function refreshRoll() {
+    $.ajax({
+        "url": "/basketball/odd/roll.json",
+        "dataType": "json",
+        "success": function (json) {
+            for (var ID in json) {
+                var dataItem = json[ID];
+                var asia = dataItem['all']['1'];
+                var goal = dataItem['all']['2'];
+                var asiaP = $('#m_table_' + ID + ' td.asia')[0];
+                var goalP = $('#m_table_' + ID + ' td.goal')[0];
+                var timeItem = $('#time_' + ID)[0];
+                if (timeItem && (timeItem.innerHTML == '' || timeItem.innerHTML == '已结束' || timeItem.innerHTML == '推迟')){
+
+                }
+                else {
+                    if (asia) {
+                        changeSpanOddNew(ID, asia, true);
+
+                        // var value = asia['up'];
+                        // var span = $(asiaP).find('span')[0];
+                        // changeSpanOdd(span, value,true,false);
+                        // var value = asia['middle'];
+                        // var span = $(asiaP).find('span')[1];
+                        // changeSpanOdd(span, value,true,true);
+                        // var value = asia['down'];
+                        // var span = $(asiaP).find('span')[2];
+                        // changeSpanOdd(span, value,true,false);
+                    }
+                    if (goal) {
+                        changeSpanOddNew(ID, goal, false);
+                        // var value = goal['up'];
+                        // var span = $(goalP).find('span')[0];
+                        // changeSpanOdd(span, value,false,false);
+                        // var value = goal['middle'];
+                        // var span = $(goalP).find('span')[1];
+                        // changeSpanOdd(span, value,false,true);
+                        // var value = goal['down'];
+                        // var span = $(goalP).find('span')[2];
+                        // changeSpanOdd(span, value,false,false);
+                    }
+                }
+            }
+        },
+        "error": function () {
+
+        }
+    });
+}
+
+function changeSpanOddNew(id, odd, isAsia) {
+    var up = odd['up'];
+    var middle = odd['middle'];
+    var down = odd['down'];
+
+    var cName = isAsia ? 'asia' : 'goal';
+    var ht = $('#m_table_' + id + ' tr:eq(1) td.' + cName);
+    var at = $('#m_table_' + id + ' tr:eq(2) td.' + cName);
+    if (ht.length > 0) {
+        var hostHtml = '', tmpMiddle, tmpUp;
+        if (ht.find('span').length > 0) {
+            tmpMiddle = parseFloat(ht.find('span').attr('data'));
+        }
+        if (ht.find('p').length > 0) {
+            tmpUp = parseFloat(ht.find('p').attr('data'));
+        }
+
+        if (isAsia) {
+            if (middle && middle >= 0) {
+                if (/\d+(.\d+)?/.test(tmpMiddle)) {
+                    if (middle > tmpMiddle) {
+                        hostHtml += '<span data="' + middle + '">' + middle + '↑</span>';
+                    } else if (middle == tmpMiddle) {
+                        hostHtml += '<span data="' + middle + '">' + middle + '</span>';
+                    } else {
+                        hostHtml += '<span data="' + middle + '">' + middle + '↓</span>';
+                    }
+                } else {
+                    hostHtml += '<span data="' + middle + '">' + middle + '</span>';
+                }
+            }
+            if (up) {
+                if (/\d+(.\d+)?/.test(tmpUp)) {
+                    if (up > tmpUp) {
+                        hostHtml += '<p style="margin: 0;" data="' + up + '">' + up + '↑</p>';
+                    } else if (up == tmpUp) {
+                        hostHtml += '<p style="margin: 0;" data="' + up + '">' + up + '</p>';
+                    } else {
+                        hostHtml += '<p style="margin: 0;" data="' + up + '">' + up + '↓</p>';
+                    }
+                } else {
+                    hostHtml += '<p style="margin: 0;" data="' + up + '">' + up + '</p>';
+                }
+            }
+        } else {
+            if (middle && middle >= 0) {
+                if (/\d+(.\d+)?/.test(tmpMiddle)) {
+                    if (middle > tmpMiddle) {
+                        hostHtml += '<span data="' + middle + '">大 ' + middle + '↑</span>';
+                    } else if (middle == tmpMiddle) {
+                        hostHtml += '<span data="' + middle + '">大 ' + middle + '</span>';
+                    } else {
+                        hostHtml += '<span data="' + middle + '">大 ' + middle + '↓</span>';
+                    }
+                } else {
+                    hostHtml += '<span data="' + middle + '">大 ' + middle + '</span>';
+                }
+            }
+            if (up) {
+                if (/\d+(.\d+)?/.test(tmpUp)) {
+                    if (up > tmpUp) {
+                        hostHtml += '<p style="margin: 0;" data="' + up + '">' + up + '↑</p>';
+                    } else if (up == tmpUp) {
+                        hostHtml += '<p style="margin: 0;" data="' + up + '">' + up + '</p>';
+                    } else {
+                        hostHtml += '<p style="margin: 0;" data="' + up + '">' + up + '↓</p>';
+                    }
+                } else {
+                    hostHtml += '<p style="margin: 0;" data="' + up + '">' + up + '</p>';
+                }
+            }
+        }
+        ht.html(hostHtml);
+    }
+
+    if (at.length > 0) {
+        var awayHtml = '', tmpMiddle, tmpDown;
+        if (at.find('span').length > 0) {
+            tmpMiddle = parseFloat(at.find('span').attr('data'));
+        }
+        if (at.find('p').length > 0) {
+            tmpDown = parseFloat(at.find('p').attr('data'));
+        }
+        if (isAsia) {
+            if (middle && middle < 0) {
+                if (/\d+(.\d+)?/.test(tmpMiddle)) {
+                    if (middle > tmpMiddle) {
+                        awayHtml += '<span data="' + middle + '">' + (-1 * middle) + '↓</span>';
+                    } else if (middle == tmpMiddle) {
+                        awayHtml += '<span data="' + middle + '">' + (-1 * middle) + '</span>';
+                    } else {
+                        awayHtml += '<span data="' + middle + '">' + (-1 * middle) + '↑</span>';
+                    }
+                } else {
+                    awayHtml += '<span data="' + middle + '">' + (-1 * middle) + '</span>';
+                }
+            }
+            if (down) {
+                if (/\d+(.\d+)?/.test(tmpDown)) {
+                    if (down > tmpDown) {
+                        awayHtml += '<p style="margin: 0;" data="' + down + '">' + down + '↑</p>';
+                    } else if (up == tmpUp) {
+                        awayHtml += '<p style="margin: 0;" data="' + down + '">' + down + '</p>';
+                    } else {
+                        awayHtml += '<p style="margin: 0;" data="' + down + '">' + down + '↓</p>';
+                    }
+                } else {
+                    awayHtml += '<p data="' + down + '">' + down + '</p>';
+                }
+            }
+        } else {
+            if (middle && middle >= 0) {
+                if (/\d+(.\d+)?/.test(tmpMiddle)) {
+                    if (middle > tmpMiddle) {
+                        awayHtml += '<span data="' + middle + '">小 ' + middle + '↑</span>';
+                    } else if (middle == tmpMiddle) {
+                        awayHtml += '<span data="' + middle + '">小 ' + middle + '</span>';
+                    } else {
+                        awayHtml += '<span data="' + middle + '">小 ' + middle + '↓</span>';
+                    }
+                } else {
+                    awayHtml += '<span data="' + middle + '">小 ' + middle + '</span>';
+                }
+            }
+            if (down) {
+                if (/\d+(.\d+)?/.test(tmpDown)) {
+                    if (down > tmpDown) {
+                        awayHtml += '<p style="margin: 0;" data="' + down + '">' + down + '↑</p>';
+                    } else if (down == tmpDown) {
+                        awayHtml += '<p style="margin: 0;" data="' + down + '">' + down + '</p>';
+                    } else {
+                        awayHtml += '<p style="margin: 0;" data="' + down + '">' + down + '↓</p>';
+                    }
+                } else {
+                    awayHtml += '<p style="margin: 0;" data="' + down + '">' + down + '</p>';
+                }
+            }
+        }
+        at.html(awayHtml);
+    }
+}

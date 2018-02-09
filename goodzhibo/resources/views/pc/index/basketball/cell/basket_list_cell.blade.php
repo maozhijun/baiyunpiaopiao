@@ -162,12 +162,13 @@ $away_icon = !empty($match['away_icon']) ? ($icon_pre . $match['away_icon']) : (
         <td id="half_total_{{$mid}}">{{$half_total}}</td>
         <td>{{$europeUp}}</td>
         <td class="asia">
-            @if($asiaMiddle >= 0)
-                <span>{{$asiaMiddle}}</span>
-            @endif
-            {{$asiaUp}}
+            @if($asiaMiddle >= 0)<span data="{{$asiaMiddle}}">{{$asiaMiddle}}</span>@endif
+            <p style="margin: 0;" data="{{$asiaUp}}">{{$asiaUp}}</p>
         </td>
-        <td class="goal"><span>{{$ouMiddle>0?'大 '.$ouMiddle:''}}</span>{{$ouUp}}</td>
+        <td class="goal">
+            <span data="{{$ouMiddle}}">{{$ouMiddle>0?'大 '.$ouMiddle:''}}</span>
+            <p style="margin: 0;" data="{{$ouUp}}">{{$ouUp}}</p>
+        </td>
         <td rowspan="2" class="link">
             {{--<a href="match_bk.html">析</a>&nbsp;<a href="oddAsia_bk.html">亚</a>&nbsp;<a href="oddGoal_bk.html">大</a>&nbsp;<a href="oddEurope_bk.html">欧</a>--}}
         </td>
@@ -201,12 +202,13 @@ $away_icon = !empty($match['away_icon']) ? ($icon_pre . $match['away_icon']) : (
         <td id="full_total_{{$mid}}">{{$whole_total}}</td>
         <td>{{$europeDown}}</td>
         <td class="asia">
-            @if($asiaMiddle < 0)
-                <span>{{abs($asiaMiddle)}}</span>
-            @endif
-            {{$asiaDown}}
+            @if($asiaMiddle < 0)<span data="{{$asiaMiddle}}">{{abs($asiaMiddle)}}</span>@endif
+            <p style="margin: 0;" data="{{$asiaDown}}">{{$asiaDown}}</p>
         </td>
-        <td class="goal"><span>{{$ouMiddle>0?'小 '.$ouMiddle:''}}</span>{{$ouDown}}</td>
+        <td class="goal">
+            <span data="{{$ouMiddle}}">{{$ouMiddle>0?'小 '.$ouMiddle:''}}</span>
+            <p style="margin: 0;" data="{{$ouDown}}">{{$ouDown}}</p>
+        </td>
     </tr>
     </tbody>
 </table>

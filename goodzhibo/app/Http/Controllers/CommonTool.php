@@ -58,9 +58,9 @@ class CommonTool
         if ($mid > 1000) {
             $first = date_format(date_create($dateString), 'Ymd');
             if ($sport == 2) {
-                $path = '/basket_detail/' . $first . '/' . $mid . '.html';
+                $path = '/basketball/detail/' . $first . '/' . $mid . '.html';
             } else {
-                $path = '/match_detail/' . $first . '/' . $mid . '.html';
+                $path = '/football/detail/' . $first . '/' . $mid . '.html';
             }
         }
         return $path;
@@ -82,10 +82,14 @@ class CommonTool
         return $path;
     }
 
-    public static function matchLiveFullPathWithId($mid,$sport=MatchLive::kSportFootball){
+    public static function matchLiveFullPathWithId($mid, $sport = MatchLive::kSportFootball){
         $path = '';
         if ($mid > 0) {
-            $path = '/match/live/' . $sport . '/'  . $mid . '.html';
+            if (MatchLive::kSportBasketball == $sport) {
+                $path = '/live/basketball/' . $mid . '.html';
+            } else if (MatchLive::kSportFootball == $sport) {
+                $path = '/live/football/' . $mid . '.html';
+            }
         }
         return $path;
     }

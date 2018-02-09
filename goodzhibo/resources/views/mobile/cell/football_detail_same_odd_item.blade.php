@@ -51,9 +51,18 @@
                     <span>{{$match['down1']}}</span>
                 </p>
                 <p>
-                    <span>{{$match['up2']}}</span>
-                    <span>{{$type == 2 ? $match['middle2'] :\App\Models\Match\Odd::getOddMiddleString($match['middle2'])}}</span>
-                    <span>{{$match['down2']}}</span>
+                    <span
+                            @if($match['up2'] > $match['up1']) class="red" @endif
+                            @if($match['up2'] < $match['up1']) class="green" @endif
+                    >{{$match['up2']}}</span>
+                    <span
+                            @if($match['middle2'] > $match['middle1']) class="red" @endif
+                            @if($match['middle2'] < $match['middle1']) class="green" @endif
+                    >{{$type == 2 ? $match['middle2'] :\App\Models\Match\Odd::getOddMiddleString($match['middle2'])}}</span>
+                    <span
+                            @if($match['down2'] > $match['down1']) class="red" @endif
+                            @if($match['down2'] < $match['down1']) class="green" @endif
+                    >{{$match['down2']}}</span>
                 </p>
             </td>
             <td>

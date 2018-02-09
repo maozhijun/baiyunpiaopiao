@@ -13,18 +13,18 @@
 
 Route::group(["namespace" => 'Live'], function () {
     Route::get('/',"HomeController@immediate");
+    Route::get('/index.html',"HomeController@immediate");
     Route::get('/football/immediate.html',"HomeController@immediate");
     Route::get('/football/result.html',"HomeController@result");
     Route::get('/football/schedule.html',"HomeController@schedule");
     Route::get('/football/lives.html',"HomeController@lives");
-    Route::get('/football/match_detail/{date}/{id}.html',"HomeController@footballDetail");
+    Route::get('/football/detail/{date}/{id}.html',"HomeController@footballDetail");
 
-    Route::get('/football/match_detail/odd/{id}', 'HomeController@footballOdd');
-    Route::get('/football/match_detail/corner/{id}', 'HomeController@footballDetailCorner');
-    Route::get('/football/match_detail/style/{id}', 'HomeController@footballDetailStyle');
-    Route::get('/football/match_detail/odd_index/{id}', 'HomeController@footballOddIndex');
-    Route::get('/football/match_detail/same_odd/{id}', 'HomeController@footballSameOdd');
-
+    Route::get('/football/detail/odd/{date}/{id}.html', 'HomeController@footballOdd');
+    Route::get('/football/detail/corner/{date}/{id}.html', 'HomeController@footballDetailCorner');
+    Route::get('/football/detail/style/{date}/{id}.html', 'HomeController@footballDetailStyle');
+    Route::get('/football/detail/odd_index/{date}/{id}.html', 'HomeController@footballOddIndex');
+    Route::get('/football/detail/same_odd/{date}/{id}.html', 'HomeController@footballSameOdd');
 
     /////////////////======================================================================/////////////////
     Route::get('/basketball/immediate.html', 'BasketBallController@immediate');//篮球即时页面列表
@@ -35,7 +35,7 @@ Route::group(["namespace" => 'Live'], function () {
 
     /////////////////======================================================================/////////////////
     //Route::get('/', 'Live\LiveController@lives');
-    Route::get('/index.html', 'LiveController@lives');
+    //Route::get('/index.html', 'LiveController@lives');
 });
 
 /**
@@ -67,4 +67,13 @@ Route::group(["namespace" => 'Live'], function () {
 //    Route::get("/match/live/url/wcj/{id}", 'LiveController@getWCJLiveUrl');
 //    //channel通用
 //    Route::get("/match/live/url/channel/{id}.json", 'LiveController@getLiveUrl');
+});
+
+//app相关
+Route::group(["namespace" => 'Match'], function () {
+    Route::get("/app/matches/{sport}/{type}", "MatchesController@index");
+    Route::get("/app/match/{sport}/detail", "MatchDetailController@index");
+
+    //足球比赛详情
+    Route::get("/app/football/tab/{tab}/{id}", "MatchDetailController@footballDetailTab");
 });

@@ -9,31 +9,36 @@
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="baidu-site-verification" content="nEdUlBWvbw">
     <script type="text/javascript">
-        // if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-        //     var url = window.location.href;
-        //     url = url.split('/');
-        //     var str = '';
-        //     for (var i = 0 ; i < url.length ; i++){
-        //         str = str + url[i] + '/';
-        //         if (i == 2){
-        //             str += 'm/';
-        //         }
-        //     }
-        //     if (url.length == 4){
-        //         str = str.substr(0,str.length - 1);
-        //     } else{
-        //         str = str.substr(0,str.length - 1);
-        //     }
-        //     if (str.indexOf('.html') != -1 && str.lastIndexOf('/') == str.length - 1) {
-        //         str = str.substr(0, str.length - 1);
-        //     }
-        //     window.location = str;
-        // }
+        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            var url = window.location.href;
+            if (url.indexOf('lives.html') != -1) {
+                window.location = '/m/football/lives.html';
+            } else {
+                url = url.split('/');
+                var str = '';
+                for (var i = 0 ; i < url.length ; i++){
+                    str = str + url[i] + '/';
+                    if (i == 2){
+                        str += 'm/';
+                    }
+                }
+                if (url.length == 4){
+                    str = str.substr(0,str.length - 1);
+                } else{
+                    str = str.substr(0,str.length - 1);
+                }
+                if (str.indexOf('.html') != -1 && str.lastIndexOf('/') == str.length - 1) {
+                    str = str.substr(0, str.length - 1);
+                }
+                window.location = str;
+            }
+        }
     </script>
     <link rel="stylesheet" type="text/css" href="{{env('CDN_URL')}}/css/pc/style.css">
     @yield('css')
     <link rel="Shortcut Icon" data-ng-href="{{env('CDN_URL')}}/img/pc/ico.ico" href="{{env('CDN_URL')}}/img/pc/ico.ico">
 </head>
+<?php $nav = isset($nav) ? $nav : ''; ?>
 <body>
 <div id="Navigation">
     <div class="inner">
@@ -41,7 +46,7 @@
         <a class="column {{$nav == 'football' ? 'on' : ''}}" @if($nav != 'football') href="/football/immediate.html" @endif ><span>足球</span></a>
         <a class="column {{$nav == 'basketball' ? 'on' : ''}}" @if($nav != 'basketball') href="/basketball/immediate.html" @endif ><span>篮球</span></a>
         <a class="column {{$nav == 'lives' ? 'on' : ''}}" @if($nav != 'lives') href="/lives.html" @endif ><span>直播</span></a>
-        <a class="column {{$nav == 'download' ? 'on' : ''}}" @if($nav != 'download') href="/download.html" @endif ><span>手机直播</span></a>
+        {{--<a class="column {{$nav == 'download' ? 'on' : ''}}" @if($nav != 'download') href="/download.html" @endif ><span>手机直播</span></a>--}}
     </div>
 </div>
 @yield('content')

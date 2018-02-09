@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Mobile\Live;
 
 
+use App\Http\Controllers\CacheInterface\FootballInterface;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -137,10 +138,11 @@ class HomeController extends Controller
     /**
      * 足球终端也赔率数据html
      * @param Request $request
+     * @param $date
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function footballOdd(Request $request, $id) {
+    public function footballOdd(Request $request, $date, $id) {
         $data = $this->footballOddData($id);
         //dump($data);
         if (!isset($data['bankers']) || count($data['bankers']) == 0) {
@@ -152,10 +154,11 @@ class HomeController extends Controller
     /**
      * 足球比赛终端，球队角球数据。
      * @param Request $request
+     * @param $date
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function footballDetailCorner(Request $request, $id) {
+    public function footballDetailCorner(Request $request, $date, $id) {
         $data = $this->footballCornerData($id);
         //dump($data);
         return view('mobile.cell.football_detail_corner', $data);
@@ -164,10 +167,11 @@ class HomeController extends Controller
     /**
      * 球队终端球队风格数据
      * @param Request $request
+     * @param $date
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function footballDetailStyle(Request $request, $id) {
+    public function footballDetailStyle(Request $request, $date, $id) {
         $data = $this->footballStyleData($id);
         return view('mobile.cell.football_detail_style', $data);
     }
@@ -175,10 +179,11 @@ class HomeController extends Controller
     /**
      *
      * @param Request $request
+     * @param $date
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function footballOddIndex(Request $request, $id) {
+    public function footballOddIndex(Request $request, $date, $id) {
         $json = $this->footballOddIndexData($id);
         return view('mobile.cell.football_detail_odd_index', $json);
     }
@@ -186,10 +191,11 @@ class HomeController extends Controller
     /**
      * 赛事得历史同赔
      * @param Request $request
+     * @param $date
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function footballSameOdd(Request $request, $id) {
+    public function footballSameOdd(Request $request, $date, $id) {
         $json = $this->footballSameOddData($id);
         return view('mobile.cell.football_detail_same_odd', $json);
     }
@@ -201,8 +207,15 @@ class HomeController extends Controller
      * @return mixed
      */
     public function footballData($date = '', $cookie = '') {
+        $cache = new FootballInterface();
+        $json = $cache->matchListDataJson($date);
+        if (!empty($json)) {
+            $json = json_decode($json, true);
+            return $json;
+        }
+
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/intf/foot/data?date=" . $date;
+        $url = env('LIAOGOU_URL')."intf/foot/data?date=" . $date;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec ($ch);
@@ -218,7 +231,7 @@ class HomeController extends Controller
      */
     public function footballDetailData($id) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/intf/foot/detail/" . $id;
+        $url = env('LIAOGOU_URL')."intf/foot/detail/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec ($ch);
@@ -234,7 +247,7 @@ class HomeController extends Controller
      */
     public function footballOddData($id) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/intf/foot/odd/" . $id;
+        $url = env('LIAOGOU_URL')."intf/foot/odd/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec ($ch);
@@ -250,7 +263,7 @@ class HomeController extends Controller
      */
     public function footballBaseData($id) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/intf/foot/base/" . $id;
+        $url = env('LIAOGOU_URL')."intf/foot/base/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec ($ch);
@@ -261,7 +274,7 @@ class HomeController extends Controller
 
     public function footballCornerData($id) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/intf/foot/corner/" . $id;
+        $url = env('LIAOGOU_URL')."intf/foot/corner/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec ($ch);
@@ -277,7 +290,7 @@ class HomeController extends Controller
      */
     public function footballStyleData($id) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/intf/foot/team_style/" . $id;
+        $url = env('LIAOGOU_URL')."intf/foot/team_style/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec ($ch);
@@ -289,11 +302,14 @@ class HomeController extends Controller
     /**
      * 比赛赔率指数
      * @param $id
+     * @param $platform
      * @return mixed
      */
-    public function footballOddIndexData($id) {
+    public function footballOddIndexData($id, $platform = '') {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/intf/foot/odd_index/" . $id;
+        $param = $platform == 'pc' ? '?platform=pc' : '';
+        $prefix = env('LIAOGOU_URL');
+        $url = $prefix . "intf/foot/odd_index/" . $id . $param;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec ($ch);
@@ -309,7 +325,58 @@ class HomeController extends Controller
      */
     public function footballSameOddData($id) {
         $ch = curl_init();
-        $url = env('LIAOGOU_URL')."/intf/foot/same_odd/" . $id;
+        $url = env('LIAOGOU_URL')."intf/foot/same_odd/" . $id;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $json = curl_exec ($ch);
+        curl_close ($ch);
+        $json = json_decode($json, true);
+        return $json;
+    }
+
+    /**
+     * PC比赛终端 特殊数据
+     * @param $id
+     * @return mixed
+     */
+    public function footballCharacteristicData($id) {
+        $ch = curl_init();
+        $prifex = env('LIAOGOU_URL');
+        $url = $prifex . "intf/foot/characteristic/" . $id;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $json = curl_exec ($ch);
+        curl_close ($ch);
+        $json = json_decode($json, true);
+        return $json;
+    }
+
+    /**
+     * 获取PC足球比赛终端页的 基本状况数据。
+     * @param $id
+     * @return mixed
+     */
+    public function footballBaseData4PC($id) {
+        $ch = curl_init();
+        $prifex = env('LIAOGOU_URL');//'http://user.liaogou168.com:8089/';//
+        $url = $prifex . "intf/foot/base_pc/" . $id;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $json = curl_exec ($ch);
+        curl_close ($ch);
+        $json = json_decode($json, true);
+        return $json;
+    }
+
+    /**
+     * 足球比赛是否又直播。
+     * @param $id
+     * @return mixed
+     */
+    public function footballMatchIsLive($id) {
+        $ch = curl_init();
+        $prifex = env('LIAOGOU_URL');'http://user.liaogou168.com:8089/';//
+        $url = $prifex . "api/match/live/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $json = curl_exec ($ch);

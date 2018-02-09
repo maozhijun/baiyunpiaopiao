@@ -35,7 +35,7 @@
     <ul id="List" class="basketball" style="display: block;">
         @foreach($matches as $match)
             <?php $live_str = \App\Models\Match\BasketMatch::getBasketCurrentTime($match['status'], $match['live_time_str'], $match['system'] == 1) ?>
-            <a class="li">
+            <a class="li" lid="{{$match['lid']}}">
                 <div class="part">
                     <p class="team"><img src="http://nba.win007.com{{$match['home_icon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'">{{$match['hname']}}</p>
                     <p class="team"><img src="http://nba.win007.com{{$match['away_icon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'">{{$match['aname']}}</p>
@@ -65,9 +65,9 @@
                         @if($match['status'] == -1)
                         <em>已结束</em>
                         @elseif ($match['status'] == 0 && $match['wap_live'])
-                        <p class="live"><img src="img/icon_video_live.png"></p>
+                        <p class="live"><img src="{{env('CDN_URL')}}/img/pc/icon_video_live.png"></p>
                         @elseif ($match['status'] > 0 && $match['wap_live'])
-                        <p class="live"><img src="img/icon_video_live.png">直播中</p>
+                        <p class="live"><img src="{{env('CDN_URL')}}/img/pc/icon_video_live.png">直播中</p>
                         @elseif (!$match['wap_live'])
                         <em>暂无直播</em>
                         @endif

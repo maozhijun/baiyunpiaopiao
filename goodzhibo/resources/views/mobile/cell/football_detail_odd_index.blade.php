@@ -19,18 +19,33 @@
                 <p class="gray">初</p>
                 <p class="gray">即</p>
             </td>
+            @if(isset($odd['asia']))
             <td>
                 <p>{{$odd['asia']['up1']}}</p>
-                <p class="green">{{$odd['asia']['up2']}}</p>
+                <p
+                        @if($odd['asia']['up2'] > $odd['asia']['up1']) class="red" @endif
+                @if($odd['asia']['up2'] < $odd['asia']['up1']) class="green" @endif
+                >{{$odd['asia']['up2']}}</p>
             </td>
             <td>
                 <p>{{$odd['asia']['middle1']}}</p>
-                <p class="green">{{$odd['asia']['middle2']}}</p>
+                <p
+                        @if($odd['asia']['middle2'] > $odd['asia']['middle1']) class="red" @endif
+                @if($odd['asia']['middle2'] < $odd['asia']['middle1']) class="green" @endif
+                >{{$odd['asia']['middle2']}}</p>
             </td>
             <td>
                 <p>{{$odd['asia']['down1']}}</p>
-                <p class="red">{{$odd['asia']['down2']}}</p>
+                <p
+                        @if($odd['asia']['down2'] > $odd['asia']['down1']) class="red" @endif
+                @if($odd['asia']['down2'] < $odd['asia']['down1']) class="green" @endif
+                >{{$odd['asia']['down2']}}</p>
             </td>
+            @else
+            <td><p>-</p><p class="green">-</p></td>
+            <td><p>-</p><p class="green">-</p></td>
+            <td><p>-</p><p class="green">-</p></td>
+            @endif
         </tr>
         @endforeach
         </tbody>
@@ -55,18 +70,33 @@
                         <p class="gray">初</p>
                         <p class="gray">即</p>
                     </td>
+                    @if(isset($odd['ou']))
                     <td>
                         <p>{{$odd['ou']['up1']}}</p>
-                        <p class="green">{{$odd['ou']['up2']}}</p>
+                        <p
+                                @if($odd['ou']['up2'] > $odd['ou']['up1']) class="red" @endif
+                        @if($odd['ou']['up2'] < $odd['ou']['up1']) class="green" @endif
+                        >{{$odd['ou']['up2']}}</p>
                     </td>
                     <td>
                         <p>{{$odd['ou']['middle1']}}</p>
-                        <p class="green">{{$odd['ou']['middle2']}}</p>
+                        <p
+                                @if($odd['ou']['middle2'] > $odd['ou']['middle1']) class="red" @endif
+                        @if($odd['ou']['middle2'] < $odd['ou']['middle1']) class="green" @endif
+                        >{{$odd['ou']['middle2']}}</p>
                     </td>
                     <td>
                         <p>{{$odd['ou']['down1']}}</p>
-                        <p class="red">{{$odd['ou']['down2']}}</p>
+                        <p
+                                @if($odd['ou']['down2'] > $odd['ou']['down1']) class="red" @endif
+                        @if($odd['ou']['down2'] < $odd['ou']['down1']) class="green" @endif
+                        >{{$odd['ou']['down2']}}</p>
                     </td>
+                    @else
+                    <td><p>-</p><p class="green">-</p></td>
+                    <td><p>-</p><p class="green">-</p></td>
+                    <td><p>-</p><p class="green">-</p></td>
+                    @endif
                 </tr>
             @endforeach
             </tbody>
@@ -91,18 +121,24 @@
                         <p class="gray">初</p>
                         <p class="gray">即</p>
                     </td>
-                    <td>
-                        <p>{{$odd['goal']['up1']}}</p>
-                        <p class="green">{{$odd['goal']['up2']}}</p>
-                    </td>
-                    <td>
-                        <p>{{$odd['goal']['middle1']}}</p>
-                        <p class="green">{{$odd['goal']['middle2']}}</p>
-                    </td>
-                    <td>
-                        <p>{{$odd['goal']['down1']}}</p>
-                        <p class="red">{{$odd['goal']['down2']}}</p>
-                    </td>
+                    @if(isset($odd['goal']))
+                        <td>
+                            <p>{{$odd['goal']['up1']}}</p>
+                            <p class="green">{{$odd['goal']['up2']}}</p>
+                        </td>
+                        <td>
+                            <p>{{$odd['goal']['middle1']}}</p>
+                            <p class="green">{{$odd['goal']['middle2']}}</p>
+                        </td>
+                        <td>
+                            <p>{{$odd['goal']['down1']}}</p>
+                            <p class="red">{{$odd['goal']['down2']}}</p>
+                        </td>
+                    @else
+                        <td><p>-</p><p class="green">-</p></td>
+                        <td><p>-</p><p class="green">-</p></td>
+                        <td><p>-</p><p class="green">-</p></td>
+                    @endif
                 </tr>
             @endforeach
             </tbody>

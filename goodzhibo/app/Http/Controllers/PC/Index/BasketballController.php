@@ -30,11 +30,14 @@ class BasketballController extends Controller
     /**
      * 赛果
      * @param Request $request
+     * @param $date
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function result(Request $request) {
+    public function result(Request $request, $date ='') {
         $default_date = date('Y-m-d', strtotime('-1 days'));
-        $date = $request->input('date', $default_date);
+        if (empty($date)) {
+            $date = $request->input('date', $default_date);
+        }
         $bCon = new \App\Http\Controllers\Mobile\Live\BasketBallController();
         $data = $bCon->basketballData($date);
         $data['date'] = $date == $default_date ? '' : $date;
@@ -45,11 +48,14 @@ class BasketballController extends Controller
     /**
      * 赛程
      * @param Request $request
+     * @param $date
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function schedule(Request $request) {
+    public function schedule(Request $request, $date = '') {
         $default_date = date('Y-m-d', strtotime('+1 days'));
-        $date = $request->input('date', $default_date);
+        if (empty($date)) {
+            $date = $request->input('date', $default_date);
+        }
         $bCon = new \App\Http\Controllers\Mobile\Live\BasketBallController();
         $data = $bCon->basketballData($date);
         $data['date'] = $date == $default_date ? '' : $date;
@@ -70,5 +76,22 @@ class BasketballController extends Controller
         curl_close ($ch);
         $json = json_decode($json, true);
         return $json;
+    }
+
+    /**
+     * 赔率变化
+     * @return mixed
+     */
+    public function oddRollJson() {
+        $ch = curl_init();
+        $url = env('LIAOGOU_URL')."api/odd/roll_b?date=" . time();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 3);
+        $json = curl_exec ($ch);
+        curl_close ($ch);
+        $json = json_decode($json, true);
+        return $json;
+        //return ['79011'=>['all'=>['1'=>['up'=>'1.2', 'middle'=>'6', 'down'=>'1.0'], '2'=>['up'=>'0.9', 'middle'=>'190', 'down'=>'0.9']  ]]];
     }
 }

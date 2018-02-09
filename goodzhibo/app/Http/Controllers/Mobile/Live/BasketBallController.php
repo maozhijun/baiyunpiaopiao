@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Mobile\Live;
 
 
+use App\Http\Controllers\CacheInterface\BasketballInterface;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,6 @@ class BasketBallController extends Controller
         $json = $this->basketballData();
         $json['type'] = 'immediate';
         $json['date'] = empty($date) ? date('Y-m-d') : $date;
-        dump($json['league_array']);
         return view('mobile.basketIndex', $json);
     }
 
@@ -78,6 +78,13 @@ class BasketBallController extends Controller
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public function basketballData($date = '') {
+        $cacheInterface = new BasketballInterface();
+        $cacheJson = $cacheInterface->matchListDataJson($date);
+        if (!empty($cacheJson)) {
+            $json = json_decode($cacheJson, true);
+            return $json;
+        }
+
         $ch = curl_init();
         $url = env('LIAOGOU_URL')."/intf/basket/data?date=" . $date;
         curl_setopt($ch, CURLOPT_URL, $url);
