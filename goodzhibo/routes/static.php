@@ -13,4 +13,6 @@ Route::group([],function (){
     Route::get('/result/to_html',"ResultHtmlController@staticHtml");
     Route::get('/schedule/to_html',"ScheduleHtmlController@staticHtml");
     Route::get('/football/detail/to_html',"FootballDetailController@staticHtml");
+
+    Route::get('/result/test',"ResultHtmlController@test");
 });
