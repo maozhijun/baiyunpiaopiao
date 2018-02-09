@@ -10,12 +10,14 @@
                     @component("mobile.cell.football_detail_style",['ws'=>$ws, 'match'=>$match])
                     @endcomponent
                 @endif
+                <div class="nolist">暂无数据</div>
             </div>
             <div id="Corner" class="childNode" style="display: none;">
                 @component("mobile.cell.football_detail_corner",['base'=>$base, 'odd'=>$odd,
                 'hname'=>$hname, 'aname'=>$aname, 'hid'=>$hid, 'aid'=>$aid,
                 'anaylse'=>$anaylse, 'historyBattle'=>$historyBattle, 'historyBattleResult'=>$historyBattleResult, 'recentBattle'=>$recentBattle])
                 @endcomponent
+                <div class="nolist">暂无数据</div>
             </div>
             <div class="bottom">
                 <div class="btn">
@@ -27,5 +29,4 @@
             </div>
         </div>
     @endif
-    <div class="nolist">暂无数据</div>
 @endsection
