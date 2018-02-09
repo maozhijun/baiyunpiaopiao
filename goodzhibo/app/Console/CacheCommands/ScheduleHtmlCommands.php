@@ -58,15 +58,15 @@ class ScheduleHtmlCommands extends Command
         Storage::disk("public")->put('/static/football/schedule.html', $pcFootballHtml);
 
         $wapFootball = new HomeController();
-        $wapFootballHtml = $wapFootball->result($request);
+        $wapFootballHtml = $wapFootball->schedule($request);
         Storage::disk("public")->put('/static/m/football/schedule.html', $wapFootballHtml);
 //----------------------------------------------------------------------------------------------------------//
         $pcBasketball = new BasketballController();
-        $pcBasketballHtml = $pcBasketball->result($request);
+        $pcBasketballHtml = $pcBasketball->schedule($request);
         Storage::disk("public")->put('/static/basketball/schedule.html', $pcBasketballHtml);
 
         $wapBasketball = new \App\Http\Controllers\Mobile\Live\BasketBallController();
-        $wapBasketballHtml = $wapBasketball->result($request);
+        $wapBasketballHtml = $wapBasketball->schedule($request);
         Storage::disk("public")->put('/static/m/basketball/schedule.html', $wapBasketballHtml);
     }
 

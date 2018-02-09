@@ -26,7 +26,7 @@ class LiveController extends Controller
         $html = $this->lives(new Request());
         try {
             Storage::disk("public")->put("/static/m/lives.html",$html);
-            Storage::disk("public")->put("/static/m/index.html",$html);
+            //Storage::disk("public")->put("/static/m/index.html",$html);
         } catch (\Exception $exception) {
             echo $exception->getMessage();
         }

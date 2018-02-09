@@ -308,7 +308,7 @@ class HomeController extends Controller
     public function footballOddIndexData($id, $platform = '') {
         $ch = curl_init();
         $param = $platform == 'pc' ? '?platform=pc' : '';
-        $prefix = 'http://user.liaogou168.com:8089/';//env('LIAOGOU_URL');
+        $prefix = env('LIAOGOU_URL');
         $url = $prefix . "intf/foot/odd_index/" . $id . $param;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -341,7 +341,7 @@ class HomeController extends Controller
      */
     public function footballCharacteristicData($id) {
         $ch = curl_init();
-        $prifex = 'http://user.liaogou168.com:8089/';//env('LIAOGOU_URL')
+        $prifex = env('LIAOGOU_URL');
         $url = $prifex . "intf/foot/characteristic/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -358,7 +358,7 @@ class HomeController extends Controller
      */
     public function footballBaseData4PC($id) {
         $ch = curl_init();
-        $prifex = 'http://user.liaogou168.com:8089/';//env('LIAOGOU_URL')
+        $prifex = env('LIAOGOU_URL');//'http://user.liaogou168.com:8089/';//
         $url = $prifex . "intf/foot/base_pc/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -375,7 +375,7 @@ class HomeController extends Controller
      */
     public function footballMatchIsLive($id) {
         $ch = curl_init();
-        $prifex = 'http://user.liaogou168.com:8089/';//env('LIAOGOU_URL')
+        $prifex = env('LIAOGOU_URL');'http://user.liaogou168.com:8089/';//
         $url = $prifex . "api/match/live/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

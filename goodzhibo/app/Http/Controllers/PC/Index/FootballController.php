@@ -264,7 +264,7 @@ class FootballController extends Controller
     public function eventJson(Request $request, $date, $id) {
         $ch = curl_init();
         //$url = "http://match.liaogou168.com/live-event/" . $date . "/" . $id . ".json";
-        $prefix = 'http://user.liaogou168.com:8089/';//env('LIAOGOU_URL')
+        $prefix = env('LIAOGOU_URL');'http://user.liaogou168.com:8089/';
         $url = $prefix . 'intf/foot/events/' . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

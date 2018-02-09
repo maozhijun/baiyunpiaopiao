@@ -62,6 +62,7 @@ class ImmediateHtmlCommands extends Command
         $wapFootball = new HomeController();
         $wapFootballHtml = $wapFootball->immediate($request);
         Storage::disk("public")->put('/static/m/football/immediate.html', $wapFootballHtml);
+        Storage::disk("public")->put("/static/m/index.html", $wapFootballHtml);
 //----------------------------------------------------------------------------------------------------------//
         $pcBasketball = new BasketballController();
         $pcBasketballHtml = $pcBasketball->immediate($request);

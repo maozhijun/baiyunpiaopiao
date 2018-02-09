@@ -41,7 +41,7 @@ class JsonController extends Controller
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close ($ch);
         if ($code >= 400 || empty($json)) return;
-        Storage::disk("public")->put("/static/json/football/change/live.json", $json);
+        Storage::disk("public")->put("/static/football/change/live.json", $json);
     }
 
     /**
@@ -59,7 +59,7 @@ class JsonController extends Controller
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close ($ch);
         if ($code >= 400 || empty($json)) return;
-        Storage::disk("public")->put("/static/json/football/odd/roll.json", $json);
+        Storage::disk("public")->put("/static/football/odd/roll.json", $json);
     }
 
     /**
@@ -159,7 +159,7 @@ class JsonController extends Controller
         $json = curl_exec ($ch);
         curl_close ($ch);
         if ($code >= 400 || empty($json)) return;
-        Storage::disk("public")->put("/static/json/basketball/change/live.json", $json);
+        Storage::disk("public")->put("/static/basketball/change/live.json", $json);
     }
 
     /**
@@ -177,7 +177,7 @@ class JsonController extends Controller
         $json = curl_exec ($ch);
         curl_close ($ch);
         if ($code >= 400 || empty($json)) return;
-        Storage::disk("public")->put("/static/json/basketball/odd/roll.json", $json);
+        Storage::disk("public")->put("/static/basketball/odd/roll.json", $json);
     }
 
     //=================================================================================================================================//
