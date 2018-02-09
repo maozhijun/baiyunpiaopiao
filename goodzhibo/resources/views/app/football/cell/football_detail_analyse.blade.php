@@ -126,4 +126,3 @@
         @endif
     </div>
 @endif
-<div class="nolist">暂无数据</div>
