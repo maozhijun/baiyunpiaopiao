@@ -108,32 +108,32 @@
                         <p class="minute">{{$event['happen_time']}}<span>'</span></p>
                         @if($event['kind'] == 11)
                             <ul>
-                                <li><img src="{{asset('img/customer3/icon_video_up.png')}}">{{$event['player_name_j']}}</li>
-                                <li><img src="{{asset('img/customer3/icon_video_down.png')}}">{{$event['player_name_j2']}}</li>
+                                <li><img src="{{asset('img/icon_video_up.png')}}">{{$event['player_name_j']}}</li>
+                                <li><img src="{{asset('img/icon_video_down.png')}}">{{$event['player_name_j2']}}</li>
                             </ul>
                         @elseif ($event['kind'] == 2)
                             <ul>
-                                <li><img src="{{asset('img/customer3/icon_video_red.png')}}">{{$event['player_name_j']}}</li>
+                                <li><img src="{{asset('img/icon_video_red.png')}}">{{$event['player_name_j']}}</li>
                             </ul>
                         @elseif ($event['kind'] == 3)
                             <ul>
-                                <li><img src="{{asset('img/customer3/icon_video_yellow.png')}}">{{$event['player_name_j']}}</li>
+                                <li><img src="{{asset('img/icon_video_yellow.png')}}">{{$event['player_name_j']}}</li>
                             </ul>
                         @elseif ($event['kind'] == 9)
                             <ul>
-                                <li><img src="{{asset('img/customer3/icon_video_red.png')}}">{{$event['player_name_j']}}（两黄一红）</li>
+                                <li><img src="{{asset('img/icon_video_red.png')}}">{{$event['player_name_j']}}（两黄一红）</li>
                             </ul>
                         @elseif ($event['kind'] == 1)
                             <ul>
-                                <li><img src="{{asset('img/customer3/icon_video_goal.png')}}">{{$event['player_name_j']}}</li>
+                                <li><img src="{{asset('img/icon_video_goal.png')}}">{{$event['player_name_j']}}</li>
                             </ul>
                         @elseif ($event['kind'] == 7)
                             <ul>
-                                <li><img src="{{asset('img/customer3/icon_video_goal.png')}}">{{$event['player_name_j']}}（点球）</li>
+                                <li><img src="{{asset('img/icon_video_goal.png')}}">{{$event['player_name_j']}}（点球）</li>
                             </ul>
                         @elseif ($event['kind'] == 8)
                             <ul>
-                                <li><img src="{{asset('img/customer3/icon_video_own.png')}}">{{$event['player_name_j']}}（乌龙）</li>
+                                <li><img src="{{asset('img/icon_video_own.png')}}">{{$event['player_name_j']}}（乌龙）</li>
                             </ul>
                         @endif
                     </dd>
