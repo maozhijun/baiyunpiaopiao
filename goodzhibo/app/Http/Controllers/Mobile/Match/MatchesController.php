@@ -51,17 +51,18 @@ class MatchesController
 
         $tempMatches = $result['matches'];
 
-        $allMatches = array();
         $matches = array();
         foreach ($tempMatches as $match) {
             $lid = $match['lid'];
-            $allMatches[] = $match;
 
             if (is_null($lids) || count($lids) <= 0 || in_array($lid, $lids)) {
                 $matches[] = $match;
             }
         }
-        $result['matches'] = $matches;
-        return Response::json(AppCommonResponse::createAppCommonResponse(0, '', $result, false));
+        if (is_null($lids) || count($lids) <= 0) {
+            $data['filter'] = $result['filter'];
+        }
+        $data['matches'] = $matches;
+        return Response::json(AppCommonResponse::createAppCommonResponse(0, '', $data, false));
     }
 }

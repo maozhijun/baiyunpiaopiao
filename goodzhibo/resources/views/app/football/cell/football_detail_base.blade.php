@@ -56,9 +56,9 @@
         <ul>
             <li>
                 <dl class="team">
-                    <dd class="host"><p class="img"><img src="{{(isset($match['hteam']['icon']) && strlen($match['hteam']['icon']) > 0) ? $match['hteam']['icon'] : asset('img/customer3/icon_team_default.png')}}"></p></dd>
+                    <dd class="host"><p class="img"><img src="{{(isset($match['hicon']) && strlen($match['hicon']) > 0) ? $match['hicon'] : asset('img/icon_teamDefault.png')}}"></p></dd>
                     <dt>VS</dt>
-                    <dd class="away"><p class="img"><img src="{{(isset($match['ateam']['icon']) && strlen($match['ateam']['icon']) > 0) ? $match['ateam']['icon'] : asset('img/customer3/icon_team_default.png')}}"></p></dd>
+                    <dd class="away"><p class="img"><img src="{{(isset($match['aicon']) && strlen($match['aicon']) > 0) ? $match['aicon'] : asset('img/icon_teamDefault.png')}}"></p></dd>
                 </dl>
                 <dl>
                     <dd class="host"><p>{{empty($match['h_yellow']) ? 0 : $match['h_yellow']}}</p><span style="width: {{108 * $match['h_y_p']}}px;"></span></dd><!--span的值为108*百分比-->

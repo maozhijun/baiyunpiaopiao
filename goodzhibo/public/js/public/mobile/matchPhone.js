@@ -89,7 +89,7 @@ function setCanvas () {
 
 function getSameOdd(so_id) {
     $.ajax({
-        'url': '/m/football/match_detail/same_odd/' + window.mid,
+        'url': '/m/football/detail/same_odd/' + window.startTime + '/' + window.mid + '.html',
         'type': 'get',
         'dataType': 'html',
         'success': function (html) {
@@ -106,7 +106,7 @@ function getSameOdd(so_id) {
 
 function getOddIndex(id) {
     $.ajax({
-        'url': '/m/football/match_detail/odd_index/' + window.mid,
+        'url': '/m/football/detail/odd_index/' + window.startTime + '/' + window.mid + '.html',
         'type': 'get',
         'dataType': 'html',
         'success': function (html) {
@@ -123,7 +123,7 @@ function getOddIndex(id) {
 
 function getTeamStyle(id) {
     $.ajax({
-        'url': '/m/football/match_detail/style/' + window.mid,
+        'url': '/m/football/detail/style/' + window.startTime + '/' + window.mid + '.html',
         'type': 'get',
         'dataType': 'html',
         'success': function (html) {
@@ -144,7 +144,7 @@ function getTeamStyle(id) {
 
 function getCorner(id) {
     $.ajax({
-        'url': '/m/football/match_detail/corner/' + window.mid,
+        'url': '/m/football/detail/corner/' + window.startTime + '/' + window.mid + '.html',
         'type': 'get',
         'dataType': 'html',
         'success': function (html) {

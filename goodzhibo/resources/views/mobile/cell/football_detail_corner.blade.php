@@ -60,7 +60,7 @@
         </tr>
         </thead>
         <tbody>
-        @if(isset($anaylse['home']['10']))
+        @if(isset($anaylse['home']) && isset($anaylse['home']['10']))
             <tr>
                 <td>{{$hname}}</td>
                 <td>{{round($anaylse['home']['10']['get'],0)}}</td>
@@ -70,7 +70,7 @@
                 <td>{{round($anaylse['home']['10']['big'],0)}}%</td>
             </tr>
         @endif
-        @if(isset($anaylse['home']['10']))
+        @if(isset($anaylse['away']) && isset($anaylse['away']['10']))
             <tr>
                 <td>{{$aname}}</td>
                 <td>{{round($anaylse['away']['10']['get'],0)}}</td>
@@ -110,7 +110,7 @@
     @endcomponent
 </div>
 @endif
-@if(isset($recentBattle))
+@if(isset($recentBattle) && isset($recentBattle['home']) && isset($recentBattle['away']))
 <div class="history matchTable default" ha="0" le="0">
     <?php
         $home = $recentBattle['home'];

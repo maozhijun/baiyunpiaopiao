@@ -6,7 +6,7 @@
 @endsection
 @section('banner')
     <div id="Navigation">
-        <div class="banner"><a class="home" @if($match['sport'] == 1) href="/m/football/immediate.html" @else href="/m/basketball.html" @endif ></a>比赛直播</div>
+        <div class="banner"><a class="home" @if($match['sport'] == 1) href="/m/football/lives.html" @else href="/m/basketball/lives.html" @endif ></a>比赛直播</div>
     </div>
 @endsection
 @section('content')

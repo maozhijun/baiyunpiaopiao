@@ -82,10 +82,12 @@
                 {{--<tr class="bannerAD"><td colspan="11"><a href="http://91889188.87.cn" target="_blank"><img src="{{env('CDN_URL')}}/img/pc/ad_1.jpg"></td></a></tr>--}}
                 </tbody>
                 <tfoot>
+                @if(isset($exceptionMatches))
                 @foreach($exceptionMatches as $match)
                     @component("pc.index.cell.match_list_cell", ['match'=>$match])
                     @endcomponent
                 @endforeach
+                @endif
                 </tfoot>
             </table>
         </div>
@@ -205,6 +207,14 @@
             window.setInterval('refreshRoll()',5000);
             @endif
             // $('#TableHead').width($('#Show').width());
+        }
+        var divDate = $('#MatchList div.title div.date');
+
+        if (divDate.length == 1) {
+            divDate.find('button').click(function () {
+                var d = divDate.find('input').val();
+                location.href = '{{$_SERVER['PHP_SELF']}}?date=' + d;
+            });
         }
     </script>
 @endsection
