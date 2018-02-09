@@ -112,7 +112,7 @@ class MatchDetailController
         if (is_null($match)) {
             return Response::json(AppCommonResponse::createAppCommonResponse(500, '参数错误'));
         }
-        $match['liveUrl'] = 'http://www.goodzhibo.com/m/live/football/'.$mid.'.html';
+        $match['liveUrl'] = 'http://www.goodzhibo.com/m/live/basketball/'.$mid.'.html';
         $reset = $match;
         //终端底部tab
         $reset['tabs'] = [
