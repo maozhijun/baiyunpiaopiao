@@ -31,8 +31,8 @@ class MatchDetailController
     }
 
     public function footballDetailTab(Request $request, $tab, $id) {
-        $match = Match::query()->find($id);
-        $date = date('Ymd', strtotime($match->time));
+        $match = $this->footballDetailMatchData($id);
+        $date = date('Ymd', $match['time']);
 
         $views = "";
         $data = $this->footballDetailBaseData($id, $date);
@@ -87,7 +87,7 @@ class MatchDetailController
         if (is_null($match)) {
             return Response::json(AppCommonResponse::createAppCommonResponse(500, '参数错误'));
         }
-
+        $match['liveUrl'] = 'http://www.goodzhibo.com/m/live/football/'.$mid.'.html';
         $reset = $match;
 
         //终端底部tab
@@ -110,7 +110,7 @@ class MatchDetailController
         if (is_null($match)) {
             return Response::json(AppCommonResponse::createAppCommonResponse(500, '参数错误'));
         }
-
+        $match['liveUrl'] = 'http://www.goodzhibo.com/m/live/football/'.$mid.'.html';
         $reset = $match;
         //终端底部tab
         $reset['tabs'] = [
