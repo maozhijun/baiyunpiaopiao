@@ -24,19 +24,19 @@ class DetailController extends Controller
         $date = date('Ymd', $match['time']);
         switch ($type) {
             case 'team' :
-                return $this->teamCell($request, $date, $id);
+                return $this->teamCell($request, $date, $id);//base
                 break;
             case 'analyse':
-                return $this->analyseCell($request, $date, $id);
+                return $this->analyseCell($request, $date, $id);//base
                 break;
             case 'base':
-                return$this->baseCell($request, $date, $id, $match);
+                return$this->baseCell($request, $date, $id, $match);//base
                 break;
-            case 'odd':
+            case 'odd'://暂时用home的接口。 后面需要需求为同一套
                 $con = new HomeController();
                 return $con->footballOddIndex($request, $date, $id);
                 break;
-            case 'same_odd':
+            case 'same_odd'://暂时用home的接口。 后面需要需求为同一套
                 $con = new HomeController();
                 return $con->footballSameOdd($request, $date, $id);
                 break;
@@ -55,8 +55,12 @@ class DetailController extends Controller
     public function teamCell(Request $request, $date, $id) {
         $corner = $this->teamCornerData($date, $id);
         $style = $this->teamStyleData($date, $id);
+        $base = $this->baseData($date, $id);
+
+        $base = isset($base) ? $base : [];
         $result['corner'] = $corner;
-        $result['style'] = isset($style);
+        $result['style'] = isset($style) ? isset($style) :[];
+        $result = array_merge($base, $result);
         if (count($result) == 0) {
             return "";
         }
@@ -91,8 +95,9 @@ class DetailController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function baseCell(Request $request, $date, $id, $match = []) {
-        $event = $this->baseData($date, $id);
-        $result = array_merge($event, $match);
+        $base = $this->baseData($date, $id);
+        $event = $this->eventData($date, $id);
+        $result = array_merge($base, $match, $event);
         if (count($result) == 0) {
             return "";
         }
@@ -173,7 +178,24 @@ class DetailController extends Controller
         if (isset($json)) {//如果有文件内容则返回文件的内容。
             return json_decode($json, true);
         }
-        $json = $this->footballDetailBaseData($mid, $date);
+        $json = $this->footballStyleData($mid, $date);
+        return $json;
+    }
+
+
+    /**
+     * 比赛终端 概况数据
+     * @param $date
+     * @param $mid
+     * @return bool|mixed|null|string
+     */
+    public function baseData($date, $mid) {
+        $cacheInterface = new FootballDetailInterface();
+        $json = $cacheInterface->getBaseDataFromCache($date, $mid);
+        if (isset($json)) {//如果有文件内容则返回文件的内容。
+            return json_decode($json, true);
+        }
+        $json = $this->footballEventData($mid, $date);
         return $json;
     }
 
@@ -183,7 +205,7 @@ class DetailController extends Controller
      * @param $mid
      * @return bool|mixed|null|string
      */
-    public function baseData($date, $mid) {
+    public function eventData($date, $mid) {
         $cacheInterface = new FootballDetailInterface();
         $json = $cacheInterface->getEventFromCache($date, $mid);
         if (isset($json)) {//如果有文件内容则返回文件的内容。
