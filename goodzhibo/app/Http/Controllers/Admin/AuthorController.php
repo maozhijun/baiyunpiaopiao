@@ -29,7 +29,7 @@ class AuthorController extends Controller
         $nickname = $request->input('nickname');
         $password = $request->input('password');
         $remember = $request->input("remember", 0);
-        $target = $request->input("target", '/admin');
+        $target = $request->input("target", '/admin/links/list');
 
         if ($isPost) {
             if (!isset(self::ACCOUNT_ARRAY[$nickname])) {

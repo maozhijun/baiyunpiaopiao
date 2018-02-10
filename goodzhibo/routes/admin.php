@@ -10,6 +10,7 @@
 |
 */
 Route::group([], function (){
+    Route::get('/', 'AuthorController@sign');
     Route::get('/login.html', 'AuthorController@sign');
     Route::post('/login.html', 'AuthorController@sign');
 });

@@ -1,4 +1,4 @@
-@extends('admin.layout.layout')
+@extends('admin.layout.base')
 @section('css')
     <style>
         body {
@@ -52,7 +52,7 @@
 @endsection
 @section('content')
     <div class="container">
-        <form class="form-signin" method="post" onsubmit="return formSubmit(this);">
+        <form class="form-signin" action="/admin/login.html" method="post" onsubmit="return formSubmit(this);">
             {{ csrf_field() }}
             <h2 class="form-signin-heading">Please sign in</h2>
             <label for="inputEmail" class="sr-only">nickname</label>
