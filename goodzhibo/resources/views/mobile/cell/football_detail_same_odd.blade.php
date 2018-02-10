@@ -10,15 +10,21 @@
         $thc = 'checked';
     }
 ?>
-@component("mobile.cell.football_detail_same_odd_item",
-    ['id'=>'SameOdd_Asia', 'class'=>'sameOddAsia', 'sameOdd'=>$sameOdd, 'type'=>1, 'ch'=>$oc])
-@endcomponent
-@component("mobile.cell.football_detail_same_odd_item",
-    ['id'=>'SameOdd_Europe', 'class'=>'sameOddEurope', 'sameOdd'=>$sameOdd2, 'type'=>2, 'ch'=>$twc])
-@endcomponent
-@component("mobile.cell.football_detail_same_odd_item",
-    ['id'=>'SameOdd_Goal', 'class'=>'sameOddGoal', 'sameOdd'=>$sameOdd3, 'type'=>3, 'ch'=>$thc])
-@endcomponent
+@if(isset($sameOdd))
+    @component("mobile.cell.football_detail_same_odd_item",
+        ['id'=>'SameOdd_Asia', 'class'=>'sameOddAsia', 'sameOdd'=>$sameOdd, 'type'=>1, 'ch'=>$oc])
+    @endcomponent
+@endif
+@if(isset($sameOdd2))
+    @component("mobile.cell.football_detail_same_odd_item",
+        ['id'=>'SameOdd_Europe', 'class'=>'sameOddEurope', 'sameOdd'=>$sameOdd2, 'type'=>2, 'ch'=>$twc])
+    @endcomponent
+@endif
+@if(isset($sameOdd2))
+    @component("mobile.cell.football_detail_same_odd_item",
+        ['id'=>'SameOdd_Goal', 'class'=>'sameOddGoal', 'sameOdd'=>$sameOdd3, 'type'=>3, 'ch'=>$thc])
+    @endcomponent
+@endif
 <div class="bottom">
     <div class="btn">
         @if(isset($sameOdd))

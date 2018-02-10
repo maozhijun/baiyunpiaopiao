@@ -83,5 +83,5 @@ Route::group(["namespace" => 'Match'], function () {
     Route::get("/app/match/{sport}/detail", "MatchDetailController@index");
 
     //足球比赛详情
-    Route::get("/app/football/tab/{tab}/{id}", "MatchDetailController@footballDetailTab");
+    Route::get("/app/football/detail/tab/{tab}/{index}/{id}.html", "MatchDetailController@footballDetailTab");
 });

@@ -221,7 +221,7 @@ class HomeController extends Controller
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
-        return $json;
+        return $this->convertEmptyJson($json);
     }
 
     /**
@@ -237,7 +237,7 @@ class HomeController extends Controller
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
-        return $json;
+        return $this->convertEmptyJson($json);
     }
 
     /**
@@ -253,7 +253,7 @@ class HomeController extends Controller
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
-        return $json;
+        return $this->convertEmptyJson($json);
     }
 
     /**
@@ -269,7 +269,7 @@ class HomeController extends Controller
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
-        return $json;
+        return $this->convertEmptyJson($json);
     }
 
     public function footballCornerData($id) {
@@ -280,7 +280,7 @@ class HomeController extends Controller
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
-        return $json;
+        return $this->convertEmptyJson($json);
     }
 
     /**
@@ -296,7 +296,7 @@ class HomeController extends Controller
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
-        return $json;
+        return $this->convertEmptyJson($json);
     }
 
     /**
@@ -315,7 +315,7 @@ class HomeController extends Controller
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
-        return $json;
+        return $this->convertEmptyJson($json);
     }
 
     /**
@@ -331,7 +331,7 @@ class HomeController extends Controller
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
-        return $json;
+        return $this->convertEmptyJson($json);
     }
 
     /**
@@ -348,7 +348,7 @@ class HomeController extends Controller
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
-        return $json;
+        return $this->convertEmptyJson($json);
     }
 
     /**
@@ -365,7 +365,7 @@ class HomeController extends Controller
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
-        return $json;
+        return $this->convertEmptyJson($json);
     }
 
     /**
@@ -382,7 +382,13 @@ class HomeController extends Controller
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
-        return $json;
+        return $this->convertEmptyJson($json);
     }
 
+    private function convertEmptyJson($json) {
+        if (is_null($json)) {
+            return [];
+        }
+        return $json;
+    }
 }
