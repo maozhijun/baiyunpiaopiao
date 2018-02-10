@@ -58,15 +58,21 @@ class DetailController extends Controller
      */
     public function baseCell(Request $request, $date, $id) {
         $event = $this->baseData($date, $id);
-        $this->footballDetailMatchData($id);
-        return view('mobile.football_detail_cell.base', $event);
+        $match = $this->footballDetailMatchData($id);
+        $result = array_merge($event, $match);
+        dump($result);
+        return view('mobile.football_detail_cell.base_cell', $result);
     }
     //====================================================================================//
 
     public function getFootballMatchData($id) {
-        //public/json/match/detail/0/1/1020908/match.json
-        $data = $this->footballDetailMatchData($id);
-        return $data;
+        $cacheInterface = new FootballDetailInterface();
+        $json = $cacheInterface->getMatchDataFromCache($id);
+        if (isset($json)) {
+            return json_decode($json, true);
+        }
+        $json = $this->footballDetailMatchData($id);
+        return $json;
     }
 
     /**
