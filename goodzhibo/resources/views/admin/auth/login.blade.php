@@ -56,7 +56,7 @@
             {{ csrf_field() }}
             <h2 class="form-signin-heading">Please sign in</h2>
             <label for="inputEmail" class="sr-only">nickname</label>
-            <input id="inputEmail" name="email" value="{{ request('nickname','') }}" class="form-control"
+            <input id="inputEmail" name="nickname" value="{{ request('nickname','') }}" class="form-control"
                    placeholder="nickname" required autofocus>
             <label for="inputPassword" class="sr-only">Password</label>
             <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password"

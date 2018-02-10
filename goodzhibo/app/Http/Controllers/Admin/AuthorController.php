@@ -17,7 +17,7 @@ class AuthorController extends Controller
 {
     const HEI_TU_AUTH_SESSION = "HEI_TU_AUTH_SESSION";
     const HEI_TU_AUTH_TOKEN = "HEI_TU_AUTH_TOKEN";
-    const ACCOUNT_ARRAY = ['admin'=>'333333'];
+    const ACCOUNT_ARRAY = ['admin'=>'f9f3b93aa04585220b1292c97abbbee68e5c0347'];//原始密码333333
     const SALT = "HEITU_MIMA_JIAMI";
     public function __construct()
     {
@@ -32,11 +32,11 @@ class AuthorController extends Controller
         $target = $request->input("target", '/admin');
 
         if ($isPost) {
-            if (!in_array($nickname, self::ACCOUNT_ARRAY)) {
+            if (!isset(self::ACCOUNT_ARRAY[$nickname])) {
                 return back()->withInput([])->with(["error" => "账户或密码错误"]);
             }
             $pwd = self::ACCOUNT_ARRAY[$nickname];
-            if ($password != self::shaPassword(self::SALT, $pwd)) {
+            if ($pwd != self::shaPassword(self::SALT, $password)) {
                 return back()->withInput([])->with(["error" => "账户或密码错误"]);
             }
             session([self::HEI_TU_AUTH_SESSION => $nickname]);//登录信息保存在session

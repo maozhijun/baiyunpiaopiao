@@ -4,10 +4,6 @@ window.teamStyleGet = false;
 window.cornerGet = false;
 function setPage(){
     var Tab = $('#Tab input');
-    alert(window.sameOddGet);
-    Tab.click(function () {
-        alert(this.value);
-    });
     Tab.change(function(){
         if (this.value == 'SameOdd' && !window.sameOddGet) {
             getSameOdd('SameOdd');//获取历史同赔
@@ -92,8 +88,9 @@ function setCanvas () {
 }
 
 function getSameOdd(so_id) {
+    var sameOddUrl = getCdnUrl('/m/football/detail/same_odd/' + window.startTime + '/' + window.mid + '.html');
     $.ajax({
-        'url': '/m/football/detail/same_odd/' + window.startTime + '/' + window.mid + '.html',
+        'url': sameOddUrl,
         'type': 'get',
         'dataType': 'html',
         'success': function (html) {
@@ -109,8 +106,9 @@ function getSameOdd(so_id) {
 }
 
 function getOddIndex(id) {
+    var oddIndexUrl = getCdnUrl('/m/football/detail/odd_index/' + window.startTime + '/' + window.mid + '.html');
     $.ajax({
-        'url': '/m/football/detail/odd_index/' + window.startTime + '/' + window.mid + '.html',
+        'url': oddIndexUrl,
         'type': 'get',
         'dataType': 'html',
         'success': function (html) {
@@ -126,8 +124,9 @@ function getOddIndex(id) {
 }
 
 function getTeamStyle(id) {
+    var teamStyle = getCdnUrl('/m/football/detail/style/' + window.startTime + '/' + window.mid + '.html');
     $.ajax({
-        'url': '/m/football/detail/style/' + window.startTime + '/' + window.mid + '.html',
+        'url': teamStyle,
         'type': 'get',
         'dataType': 'html',
         'success': function (html) {
@@ -147,8 +146,9 @@ function getTeamStyle(id) {
 }
 
 function getCorner(id) {
+    var cornerUrl = getCdnUrl('/m/football/detail/corner/' + window.startTime + '/' + window.mid + '.html');
     $.ajax({
-        'url': '/m/football/detail/corner/' + window.startTime + '/' + window.mid + '.html',
+        'url': cornerUrl,
         'type': 'get',
         'dataType': 'html',
         'success': function (html) {

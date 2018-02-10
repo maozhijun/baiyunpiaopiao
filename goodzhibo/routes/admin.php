@@ -10,5 +10,8 @@
 |
 */
 Route::group([], function (){
-    Route::any('/login.html', 'AuthorController@sign');
+    Route::get('/login.html', 'AuthorController@sign');
+    Route::post('/login.html', 'AuthorController@sign');
+
+    Route::get('/links/list', 'LinkController@index');
 });
