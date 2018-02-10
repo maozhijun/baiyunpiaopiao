@@ -490,6 +490,11 @@
 <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/mobile/publicPhone.js"></script>
 <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/mobile/matchPhone.js"></script>
 <script type="text/javascript">
+    function getCdnUrl(url) {
+        var http = location.href.indexOf('https://') != -1 ? 'https:' : 'http:';
+        var url = http + '{{env('CDN_URL')}}' + url;
+        return url;
+    }
     window.onload = function () {
         setPage();
         setCanvas();
@@ -499,8 +504,9 @@
     }
     window.mid = '{{$id}}';
     window.startTime = '{{date('Ymd', strtotime($match['time']))}}';
+    var indexOddUrl = getCdnUrl('/m/football/detail/odd/' + window.startTime + '/{{$id}}.html');
     $.ajax({
-        url:'/m/football/detail/odd/' + window.startTime + '/{{$id}}.html',
+        url: indexOddUrl,
         success:function (html) {
             if (html == "") {
                 $('#Data div.odd').hide();

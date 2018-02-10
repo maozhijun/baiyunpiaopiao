@@ -627,6 +627,11 @@
         }
     </script>
     <script type="text/javascript">
+        function getCdnUrl(url) {
+            var http = location.href.indexOf('https://') != -1 ? 'https:' : 'http:';
+            var url = http + '{{env('CDN_URL')}}' + url;
+            return url;
+        }
         var clickSameOdd = false;
         function SameOdd () {
             clickSameOdd = true;
@@ -749,8 +754,7 @@
         function clickCorner() {
             onChangeTab('Corner');
             if (0 == $('#Corner div').length){
-                var http = location.href.indexOf('https://') != -1 ? 'https:' : 'http:';
-                var url = http + '{{env('CDN_URL')}}/football/detail_cell/corner/{{$startTime}}/{{$id}}.html'
+                var url = getCdnUrl('/football/detail_cell/corner/{{$startTime}}/{{$id}}.html');
                 $.ajax({
                     url: url,
                     success:function (html) {
@@ -793,9 +797,10 @@
         function clickMatchBase() {
             onChangeTab('Match');
             if (0 == $('#Match div').length){
+                var url = getCdnUrl('/football/detail_cell/base/{{$startTime}}/{{$id}}.html');
                 $.ajax({
-                    url:'/football/detail_cell/base/{{$startTime}}/{{$id}}.html',
-                    success:function (html) {
+                    "url": url,
+                    "success":function (html) {
                         $('#Match').html(html);
                         if(hLeagueRank > 0) {
                             $('span.leagueRankH').html('[' + hLeagueName + hLeagueRank + ']');
@@ -832,11 +837,10 @@
         function clickCharacteristic(type) {
             onChangeTab('Characteristic');
             if (0 == $('#Characteristic div').length){
-                var http = location.href.indexOf('https://') != -1 ? 'https:' : 'http:';
-                var url = http + "{{env('CDN_URL')}}/football/detail_cell/chara/{{$startTime}}/{{$id}}.html";
+                var url = getCdnUrl("/football/detail_cell/chara/{{$startTime}}/{{$id}}.html");
                 $.ajax({
-                    url:'/football/detail_cell/chara/{{$startTime}}/{{$id}}.html',
-                    success:function (html) {
+                    "url": url,
+                    "success": function (html) {
                         $('#Characteristic').html(html);
                         setBG();
                         if(hLeagueRank > 0) {
@@ -1152,8 +1156,9 @@
         @endif
         function refreshMatch() {
             //刷新比赛信息
+            var url = getCdnUrl("/football/change/live.json");
             $.ajax({
-                "url": "/football/change/live.json?rd=" + (new Date()).getTime(),
+                "url": url + "?rd=" + (new Date()).getTime(),
                 "dataType": "json",
                 "success": function (json) {
                     var dataItem = json["{{$id}}"];
@@ -1185,8 +1190,9 @@
         }
         function hasLive() {
             //直播刷新
+            var url = getCdnUrl('/football/has_live/{{$id}}.json');
             $.ajax({
-                "url": "/football/has_live/{{$id}}.json",
+                "url": url,
                 "dataType": "json",
                 "success": function (json) {
                     if ($('div.video').length > 0) {
@@ -1195,8 +1201,12 @@
                     if ($('div.analysis').length > 0) {
                         $('div.analysis')[0].style.display = json['live'] == 0 ? '' : 'none';
                     }
-                    if ($('div.sameOdd').length > 0) {
-                        //$('div.sameOdd')[0].style.display = json['live'] == 0 ? '' : 'none';
+                    if ($('#Info div.sameOdd').length > 0) {
+                        if (json['live'] == 0) {
+                            $('#Info div.sameOdd').show();
+                        } else {
+                            $('#Info div.sameOdd').hide();
+                        }
                     }
                 },
                 "error": function () {
@@ -1214,8 +1224,9 @@
         @if(isset($id))
         function getMatchData() {
             if (0 == $('#Match div').length) return;
+            var url = getCdnUrl("/football/events/{{$id}}.json");
             $.ajax({
-                "url": "/football/events/{{$id}}.json?date=" + {{date('Ymd', strtotime($match['time']))}} + "&time=" + (new Date().getTime()),
+                "url": url + "?date=" + {{date('Ymd', strtotime($match['time']))}} + "&time=" + (new Date().getTime()),
                 "dataType": "json",
                 "success": function (json) {
                     if (json && json.code) {

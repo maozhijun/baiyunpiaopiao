@@ -154,9 +154,9 @@ function refresh() {
             }
         }
     }
-
+    var reUrl = getCdnUrl("/basketball/change/live.json");
     $.ajax({
-        "url": "/basketball/change/live.json?time=" + (new Date().getTime()),
+        "url": reUrl + "?time=" + (new Date().getTime()),
         "dataType": "json",
         "success": function (json) {
             var ups = $('span.up');
@@ -335,8 +335,9 @@ function GoalTR (obj) { //进球效果，哪队进球对应TD触发此事件
 }
 
 function refreshRoll() {
+    var rollUrl = getCdnUrl("/basketball/odd/roll.json");
     $.ajax({
-        "url": "/basketball/odd/roll.json",
+        "url": rollUrl,
         "dataType": "json",
         "success": function (json) {
             for (var ID in json) {
@@ -352,28 +353,9 @@ function refreshRoll() {
                 else {
                     if (asia) {
                         changeSpanOddNew(ID, asia, true);
-
-                        // var value = asia['up'];
-                        // var span = $(asiaP).find('span')[0];
-                        // changeSpanOdd(span, value,true,false);
-                        // var value = asia['middle'];
-                        // var span = $(asiaP).find('span')[1];
-                        // changeSpanOdd(span, value,true,true);
-                        // var value = asia['down'];
-                        // var span = $(asiaP).find('span')[2];
-                        // changeSpanOdd(span, value,true,false);
                     }
                     if (goal) {
                         changeSpanOddNew(ID, goal, false);
-                        // var value = goal['up'];
-                        // var span = $(goalP).find('span')[0];
-                        // changeSpanOdd(span, value,false,false);
-                        // var value = goal['middle'];
-                        // var span = $(goalP).find('span')[1];
-                        // changeSpanOdd(span, value,false,true);
-                        // var value = goal['down'];
-                        // var span = $(goalP).find('span')[2];
-                        // changeSpanOdd(span, value,false,false);
                     }
                 }
             }
