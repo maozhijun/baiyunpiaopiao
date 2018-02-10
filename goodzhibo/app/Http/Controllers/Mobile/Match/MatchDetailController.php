@@ -31,6 +31,35 @@ class MatchDetailController
     }
 
     public function footballDetailTab(Request $request, $tab, $id) {
+        if ($tab == "sameOdd") {
+            $tabHtml = $this->footballTabInnerHtml($id, "same_odd");
+        } else {
+            $tabHtml = $this->footballTabInnerHtml($id, $tab);
+        }
+        $data['html'] = $tabHtml;
+        $views = "";
+        switch ($tab) {
+            case "base":
+                $views = 'app.football.match_detail_base';
+                break;
+            case "analyse":
+                $views = 'app.football.match_detail_analyse';
+                break;
+            case "team":
+                $views = 'app.football.match_detail_team';
+                break;
+            case "odd":
+                $views = 'app.football.match_detail_odd';
+                break;
+            case "sameOdd":
+                $views = 'app.football.match_detail_same_odd';
+                break;
+        }
+        return view($views, $data);
+    }
+
+    //原有的逻辑，暂时保留
+    public function footballDetailTab2(Request $request, $tab, $id) {
         $match = $this->footballDetailMatchData($id);
         $date = date('Ymd', $match['time']);
 

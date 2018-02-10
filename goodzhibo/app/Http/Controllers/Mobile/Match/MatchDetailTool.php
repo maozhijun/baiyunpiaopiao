@@ -205,4 +205,21 @@ trait MatchDetailTool
         $json = json_decode($json, true);
         return $json;
     }
+
+
+    /**
+     * 比赛赔率指数
+     * @param $id
+     * @return mixed
+     */
+    public function footballTabInnerHtml($id, $tab) {
+        $ch = curl_init();
+//        $url = env('APP_URL')."/m/football/detail/tab/$tab/$id.html";
+        $url = "http://www.goodzhibo.com/m/football/detail/tab/$tab/$id.html";
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $json = curl_exec ($ch);
+        curl_close ($ch);
+        return $json;
+    }
 }
