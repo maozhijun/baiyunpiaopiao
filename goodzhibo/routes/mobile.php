@@ -38,6 +38,12 @@ Route::group(["namespace" => 'Live'], function () {
     //Route::get('/index.html', 'LiveController@lives');
 });
 
+Route::group(["namespace" => 'Detail'], function () {
+    Route::get('/football/detail/team_cell/{date}/{id}.html', 'DetailController@teamCell');
+    Route::get('/football/detail/analyse_cell/{date}/{id}.html', 'DetailController@analyseCell');
+    Route::get('/football/detail/base_cell/{date}/{id}.html', 'DetailController@baseCell');
+});
+
 /**
  * 直播入口
  */
