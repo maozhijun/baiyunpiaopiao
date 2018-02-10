@@ -38,12 +38,12 @@ class MatchesController
         }
 
         //先从本地获取文件
-        $result = json_decode(FileTool::getMatchesData($sport, $type, $date));
-
+        $formatDate = date('Ymd', strtotime($date));
+        $result = json_decode(FileTool::getMatchesData($sport, $type, $formatDate), true);
         //如果获取不到，则从match项目请求数据
-        if (is_null($result)) {
+        if (!isset($result)) {
             $ch = curl_init();
-            $url = env('MATCH_URL') . "/app/matches/" . date('Ymd', strtotime($date)) . "/" . $sport . "/" . $type . ".json";
+            $url = env('MATCH_URL') . "/app/matches/" . $formatDate . "/" . $sport . "/" . $type . ".json";
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $json = curl_exec($ch);
@@ -51,7 +51,6 @@ class MatchesController
 
             $result = json_decode($json, true);
         }
-
         if (is_null($result)) {
             return Response::json(AppCommonResponse::createAppCommonResponse(500, '参数错误'));
         }
