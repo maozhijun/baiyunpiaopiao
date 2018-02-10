@@ -52,19 +52,19 @@
         <ul>
             <li>
                 <dl class="team">
-                    <dd class="host"><p class="img"><img src="{{$match['hteam']['icon']}}"></p></dd>
+                    <dd class="host"><p class="img"><img src="{{$hicon or ''}}"></p></dd>
                     <dt>VS</dt>
-                    <dd class="away"><p class="img"><img src="{{$match['ateam']['icon']}}"></p></dd>
+                    <dd class="away"><p class="img"><img src="{{$aicon or ''}}"></p></dd>
                 </dl>
                 <dl>
-                    <dd class="host"><p>{{$match['h_yellow']}}</p><span style="width: {{108 * $match['h_y_p']}}px;"></span></dd><!--span的值为108*百分比-->
+                    <dd class="host"><p>{{isset($match['h_yellow']) ? $match['h_yellow'] : 0}}</p><span style="width: {{108 * $match['h_y_p']}}px;"></span></dd><!--span的值为108*百分比-->
                     <dt>黄牌</dt>
-                    <dd class="away"><p>{{$match['a_yellow']}}</p><span style="width: {{108 * $match['a_y_p']}}px;"></span></dd>
+                    <dd class="away"><p>{{isset($match['a_yellow']) ? $match['a_yellow'] : 0}}</p><span style="width: {{108 * $match['a_y_p']}}px;"></span></dd>
                 </dl>
                 <dl>
-                    <dd class="host"><p>{{$match['h_red']}}</p><span style="width: {{108 * $match['h_r_p']}}px;"></span></dd>
+                    <dd class="host"><p>{{isset($match['h_red']) ? $match['h_red'] : 0}}</p><span style="width: {{108 * $match['h_r_p']}}px;"></span></dd>
                     <dt>红牌</dt>
-                    <dd class="away"><p>{{$match['a_red']}}</p><span style="width: {{108 * $match['a_r_p']}}px;"></span></dd>
+                    <dd class="away"><p>{{isset($match['a_red']) ? $match['a_red'] : 0}}</p><span style="width: {{108 * $match['a_r_p']}}px;"></span></dd>
                 </dl>
                 <dl>
                     <dd class="host"><p>{{empty($match['h_corner']) ? 0 : $match['h_corner']}}</p><span style="width: {{108 * $match['h_cor_p']}}px;"></span></dd>
