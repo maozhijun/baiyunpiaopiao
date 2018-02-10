@@ -18,6 +18,25 @@ use Illuminate\Http\Request;
 class DetailController extends Controller
 {
     use MatchDetailTool;
+
+    public function detailCell(Request $request, $type, $id) {
+        $match = $this->footballDetailMatchData($id);
+        $date = date('Ymd', $match['time']);
+        switch ($type) {
+            case 'team' :
+                return $this->teamCell($request, $date, $id);
+                break;
+            case 'analyse':
+                return $this->analyseCell($request, $date, $id);
+                break;
+            case 'base':
+                return$this->baseCell($request, $date, $id, $match);
+                break;
+            default:
+                return "";
+        }
+    }
+
     /**
      * 球队终端 球队 单元的html 内容
      * @param Request $request
@@ -54,17 +73,21 @@ class DetailController extends Controller
      * @param Request $request
      * @param $date
      * @param $id
+     * @param $match
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function baseCell(Request $request, $date, $id) {
+    public function baseCell(Request $request, $date, $id, $match = []) {
         $event = $this->baseData($date, $id);
-        $match = $this->footballDetailMatchData($id);
         $result = array_merge($event, $match);
-        dump($result);
         return view('mobile.football_detail_cell.base_cell', $result);
     }
     //====================================================================================//
 
+    /**
+     *  获取比赛信息。
+     * @param $id
+     * @return array|bool|mixed|null|string
+     */
     public function getFootballMatchData($id) {
         $cacheInterface = new FootballDetailInterface();
         $json = $cacheInterface->getMatchDataFromCache($id);
