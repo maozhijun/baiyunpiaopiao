@@ -195,7 +195,7 @@ class DetailController extends Controller
         if (isset($json)) {//如果有文件内容则返回文件的内容。
             return json_decode($json, true);
         }
-        $json = $this->footballEventData($mid, $date);
+        $json = $this->footballDetailBaseData($mid, $date);
         return $json;
     }
 

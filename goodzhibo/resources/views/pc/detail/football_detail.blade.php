@@ -749,8 +749,10 @@
         function clickCorner() {
             onChangeTab('Corner');
             if (0 == $('#Corner div').length){
+                var http = location.href.indexOf('https://') != -1 ? 'https:' : 'http:';
+                var url = http + '{{env('CDN_URL')}}/football/detail_cell/corner/{{$startTime}}/{{$id}}.html'
                 $.ajax({
-                    url:'/football/detail_cell/corner/{{$startTime}}/{{$id}}.html',
+                    url: url,
                     success:function (html) {
                         $('#Corner').html(html);
                         if(hLeagueRank > 0) {
@@ -830,6 +832,8 @@
         function clickCharacteristic(type) {
             onChangeTab('Characteristic');
             if (0 == $('#Characteristic div').length){
+                var http = location.href.indexOf('https://') != -1 ? 'https:' : 'http:';
+                var url = http + "{{env('CDN_URL')}}/football/detail_cell/chara/{{$startTime}}/{{$id}}.html";
                 $.ajax({
                     url:'/football/detail_cell/chara/{{$startTime}}/{{$id}}.html',
                     success:function (html) {
