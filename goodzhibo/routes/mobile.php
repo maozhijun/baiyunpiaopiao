@@ -13,6 +13,7 @@
 
 Route::group(["namespace" => 'Live'], function () {
     Route::get('/',"HomeController@immediate");
+    Route::get('/index.html',"HomeController@immediate");
     Route::get('/football/immediate.html',"HomeController@immediate");
     Route::get('/football/result.html',"HomeController@result");
     Route::get('/football/schedule.html',"HomeController@schedule");
@@ -24,7 +25,6 @@ Route::group(["namespace" => 'Live'], function () {
     Route::get('/football/detail/style/{date}/{id}.html', 'HomeController@footballDetailStyle');
     Route::get('/football/detail/odd_index/{date}/{id}.html', 'HomeController@footballOddIndex');
     Route::get('/football/detail/same_odd/{date}/{id}.html', 'HomeController@footballSameOdd');
-//match_detail
 
     /////////////////======================================================================/////////////////
     Route::get('/basketball/immediate.html', 'BasketBallController@immediate');//篮球即时页面列表

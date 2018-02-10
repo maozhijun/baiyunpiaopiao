@@ -1201,6 +1201,10 @@
             });
         }
         hasLive();//执行一次.
+        $("a[href=#Navigation]").click(function () {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        });
     </script>
     <script type="text/javascript">
         @if(isset($id))
