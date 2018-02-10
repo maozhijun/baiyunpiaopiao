@@ -44,6 +44,6 @@ class FootResultHtmlCommands extends Command
      */
     public function handle()
     {
-        $this->onTabHtmlStatic(['base', 'odd', 'same_odd'], date('Ymd'));
+        $this->onTabHtmlStatic(['base', 'odd', 'same_odd'], date('Ymd', strtotime('-1 day')));
     }
 }

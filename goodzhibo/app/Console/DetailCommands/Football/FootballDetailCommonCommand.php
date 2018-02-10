@@ -16,7 +16,6 @@ use App\Models\Match\MatchLive;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
-use League\Flysystem\Exception;
 
 trait FootballDetailCommonCommand
 {
@@ -29,7 +28,7 @@ trait FootballDetailCommonCommand
         $json = json_decode(FileTool::getMatchesData(MatchLive::kSportFootball, 'first', $date), true);
         $matches = isset($json['matches']) ? $json['matches'] : [];
         if (count($matches) <= 0) return;
-        
+
         $curDate = date('Ymd');
         if (strtotime($date) == strtotime($curDate)) {
             $status = 1;
@@ -45,13 +44,13 @@ trait FootballDetailCommonCommand
         }
         //上次总共保存的比赛数量
         $lastSaveCount = count($savedMids);
-        dump($savedMids);
 
         $appDetailController = new MatchDetailController();
         $matchDetailController = new DetailController();
         $request = new Request();
 
         $count = 0;
+        $livingCount = 0;
         foreach ($matches as $match) {
             if ($count >= $saveCount) break;
 
@@ -61,30 +60,31 @@ trait FootballDetailCommonCommand
                     $tabHtml = $matchDetailController->detailCell($request, $tab, $mid);
                     $appTabHtml = $appDetailController->footballDetailTabDetail($tab, $tabHtml);
 
-                    $index = substr($mid, 0, 3);
+                    $index = FileTool::getMidIndex($mid);
                     $patch = "/static/m/football/detail/tab/$tab/$index/$mid.html";
-                    $appPatch = "/static/m/app/football/detail/tab/$tab/$index/$mid.html";
-                    try {
-                        Storage::disk("public")->put($patch, $tabHtml);
-                        Storage::disk("public")->put($appPatch, $appTabHtml);
-                    } catch (\Exception $e) {
-                        dump($e->getMessage());
-                    }
+                    $appPatch = "/static/m/football/detail/tab/$tab/$index/$mid"."a.html";
+
+                    Storage::disk("public")->put($patch, $tabHtml);
+                    Storage::disk("public")->put($appPatch, $appTabHtml);
+                }
+                if ($match['status'] <= 0) {
+                    $savedMids[] = $mid;
+                } else {
+                    $livingCount++;
                 }
                 $count++;
-                $savedMids[] = $mid;
             }
         }
-        $curSaveCount = count($savedMids);
-        if ($curSaveCount - $lastSaveCount < $saveCount) {
-            $length = $curSaveCount - $saveCount;
+        $totalSaveCount = count($savedMids);
+        $curSaveCount = $totalSaveCount - $lastSaveCount - $livingCount;
+        if ($curSaveCount < $saveCount) {
+            $length = $totalSaveCount - $saveCount;
             if ($length > 0) {
                 $savedMids = array_slice($savedMids, $saveCount, $length);
             } else {
                 $savedMids = [];
             }
         }
-        dump($savedMids);
         Redis::set($key,json_encode($savedMids));
         //设置过期时间 24小时
         Redis::expire($key, 24*60*60);

@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Mobile\Match;
 
 
 use App\Console\DetailCommands\Football\FootballDetailCommonCommand;
+use App\Http\Controllers\FileTool;
 use App\Http\Controllers\Mobile\AppCommonResponse;
 use App\Http\Controllers\Mobile\Detail\DetailController;
 use App\Models\Match\MatchLive;
@@ -32,13 +33,11 @@ class MatchDetailController
     }
 
     public function footballDetailTab(Request $request,$tab,$index,$id) {
+        if ($index != FileTool::getMidIndex($id)) return "";
 
-        $this->onTabHtmlStatic(['base', 'odd', 'same_odd'], date('Ymd'));
-
-
-//        $detailController = new DetailController();
-//        $tabHtml = $detailController->detailCell($request, $tab, $id);
-//        return $this->footballDetailTabDetail($tab, $tabHtml);
+        $detailController = new DetailController();
+        $tabHtml = $detailController->detailCell($request, $tab, $id);
+        return $this->footballDetailTabDetail($tab, $tabHtml);
     }
 
     public function footballDetailTabDetail($tab, $tabHtml) {
@@ -127,14 +126,14 @@ class MatchDetailController
         $match['liveUrl'] = 'http://www.goodzhibo.com/m/live/football/'.$mid.'.html';
         $reset = $match;
 
-        $index = substr($mid, 0, 3);
+        $index = FileTool::getMidIndex($mid);
         //终端底部tab
         $reset['tabs'] = [
-            ["name"=>"分析", "url"=>env('APP_URL')."/m/app/football/detail/tab/analyse/$index/$mid.html"],
-            ["name"=>"赛况", "url"=>env('APP_URL')."/m/app/football/detail/tab/base/$index/$mid.html"],
-            ["name"=>"球队", "url"=>env('APP_URL')."/m/app/football/detail/tab/team/$index/$mid.html"],
-            ["name"=>"指数", "url"=>env('APP_URL')."/m/app/football/detail/tab/odd/$index/$mid.html"],
-            ["name"=>"同赔", "url"=>env('APP_URL')."/m/app/football/detail/tab/same_odd/$index/$mid.html"],
+            ["name"=>"分析", "url"=>env('APP_URL')."/m/football/detail/tab/analyse/$index/$mid"."a.html"],
+            ["name"=>"赛况", "url"=>env('APP_URL')."/m/football/detail/tab/base/$index/$mid."."a.html"],
+            ["name"=>"球队", "url"=>env('APP_URL')."/m/football/detail/tab/team/$index/$mid"."a.html"],
+            ["name"=>"指数", "url"=>env('APP_URL')."/m/football/detail/tab/odd/$index/$mid."."a.html"],
+            ["name"=>"同赔", "url"=>env('APP_URL')."/m/football/detail/tab/same_odd/$index/$mid."."a.html"],
         ];
         return Response::json(AppCommonResponse::createAppCommonResponse(0, '', $reset, false));
     }

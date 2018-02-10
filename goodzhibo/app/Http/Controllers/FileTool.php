@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Storage;
 
 class FileTool extends Controller
 {
+    /**
+     * 根据比赛id截取前面的部分
+     */
+    public static function getMidIndex($mid) {
+        return substr($mid, 0, 2);
+    }
+
     private static function putFile($disk, $filePatch, $data) {
         try {
             Storage::disk($disk)->put($filePatch, $data);

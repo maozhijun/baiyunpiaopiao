@@ -97,6 +97,10 @@ class DetailController extends Controller
     public function baseCell(Request $request, $date, $id, $match = []) {
         $base = $this->baseData($date, $id);
         $event = $this->eventData($date, $id);
+
+        $base = isset($base) ? $base : [];
+        $event = isset($event) ? $event : [];
+
         $result = array_merge($base, $match, $event);
         if (count($result) == 0) {
             return "";
