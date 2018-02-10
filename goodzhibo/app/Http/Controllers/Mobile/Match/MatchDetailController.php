@@ -9,7 +9,6 @@
 namespace App\Http\Controllers\Mobile\Match;
 
 
-use App\Console\DetailCommands\Football\FootballDetailCommonCommand;
 use App\Http\Controllers\FileTool;
 use App\Http\Controllers\Mobile\AppCommonResponse;
 use App\Http\Controllers\Mobile\Detail\DetailController;
@@ -19,7 +18,7 @@ use Illuminate\Support\Facades\Response;
 
 class MatchDetailController
 {
-    use MatchTool, MatchDetailTool, FootballDetailCommonCommand;
+    use MatchTool, MatchDetailTool;
 
     public function index(Request $request, $sport) {
         if (!$this->isSport($sport)) {

@@ -39,7 +39,7 @@ Route::group(["namespace" => 'Live'], function () {
 });
 
 Route::group(["namespace" => 'Detail'], function () {
-    Route::get('/football/detail/tab/{type}/{index}/{id}.html', 'DetailController@detailCell');
+    Route::get('/football/detail/tab/{type}/{index}/wap{id}.html', 'DetailController@detailCell');
 
     Route::get('/football/detail/team_cell/{date}/{id}.html', 'DetailController@teamCell');
     Route::get('/football/detail/analyse_cell/{date}/{id}.html', 'DetailController@analyseCell');
@@ -83,5 +83,5 @@ Route::group(["namespace" => 'Match'], function () {
     Route::get("/app/match/{sport}/detail", "MatchDetailController@index");
 
     //足球比赛详情
-    Route::get("/football/detail/tab/{tab}/{index}/{id}a.html", "MatchDetailController@footballDetailTab");
+    Route::get("/football/detail/tab/{tab}/{index}/app{id}.html", "MatchDetailController@footballDetailTab");
 });

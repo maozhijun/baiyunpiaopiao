@@ -61,8 +61,8 @@ trait FootballDetailCommonCommand
                     $tabHtml = $matchDetailController->detailCell($request, $tab, $index, $mid);
                     $appTabHtml = $appDetailController->footballDetailTabDetail($tab, $tabHtml);
 
-                    $patch = "/static/m/football/detail/tab/$tab/$index/$mid.html";
-                    $appPatch = "/static/m/football/detail/tab/$tab/$index/$mid"."a.html";
+                    $patch = "/static/m/football/detail/tab/$tab/$index/"."wap"."$mid.html";
+                    $appPatch = "/static/m/football/detail/tab/$tab/$index/"."app"."$mid".".html";
 
                     Storage::disk("public")->put($patch, $tabHtml);
                     Storage::disk("public")->put($appPatch, $appTabHtml);
