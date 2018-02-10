@@ -1,7 +1,7 @@
 @extends('app.layout.match_base')
 
 @section('content')
-    <!--
+    {{--
     @if(isset($base))
         <div id="Team" class="content">
             <div id="Trait" class="childNode" style="display: ;">
@@ -28,7 +28,7 @@
             </div>
         </div>
     @endif
-    -->
+    --}}
     @if(isset($html))
         <div id="Team" class="content">{!! $html !!}</div>
     @endif
