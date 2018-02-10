@@ -64,6 +64,11 @@ class RouteServiceProvider extends ServiceProvider
             ->prefix('static')
             ->namespace($this->namespace . '\StaticHtml')
             ->group(base_path('routes/static.php'));
+
+        Route::middleware('web')
+            ->prefix('admin')
+            ->namespace($this->namespace . '\Admin')
+            ->group(base_path('routes/admin.php'));
     }
 
     /**

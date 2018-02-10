@@ -11,8 +11,8 @@ namespace App\Http\Controllers\Mobile\Detail;
 
 use App\Http\Controllers\CacheInterface\FootballDetailInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Mobile\Live\HomeController;
 use App\Http\Controllers\Mobile\Match\MatchDetailTool;
-use App\Models\Match\MatchLive;
 use Illuminate\Http\Request;
 
 class DetailController extends Controller
@@ -32,6 +32,14 @@ class DetailController extends Controller
             case 'base':
                 return$this->baseCell($request, $date, $id, $match);
                 break;
+            case 'odd':
+                $con = new HomeController();
+                return $con->footballOddIndex($request, $date, $id);
+                break;
+            case 'same_odd':
+                $con = new HomeController();
+                return $con->footballSameOdd($request, $date, $id);
+                break;
             default:
                 return "";
         }
@@ -48,7 +56,10 @@ class DetailController extends Controller
         $corner = $this->teamCornerData($date, $id);
         $style = $this->teamStyleData($date, $id);
         $result['corner'] = $corner;
-        $result['style'] = $style;
+        $result['style'] = isset($style);
+        if (count($result) == 0) {
+            return "";
+        }
         return view('mobile.football_detail_cell.team_cell', $result);
     }
 
@@ -65,6 +76,9 @@ class DetailController extends Controller
 
         $result['odd'] = $odd;
         $result['base'] = $base;
+        if (count($result) == 0) {
+            return "";
+        }
         return view('mobile.football_detail_cell.analyse_cell', $result);
     }
 
@@ -79,6 +93,9 @@ class DetailController extends Controller
     public function baseCell(Request $request, $date, $id, $match = []) {
         $event = $this->baseData($date, $id);
         $result = array_merge($event, $match);
+        if (count($result) == 0) {
+            return "";
+        }
         return view('mobile.football_detail_cell.base_cell', $result);
     }
     //====================================================================================//
