@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Mobile\Match;
 
 
 use App\Http\Controllers\Mobile\AppCommonResponse;
-use App\Models\Match\Match;
+use App\Http\Controllers\Mobile\Detail\DetailController;
 use App\Models\Match\MatchLive;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -31,10 +31,11 @@ class MatchDetailController
     }
 
     public function footballDetailTab(Request $request, $tab, $id) {
+        $detailController = new DetailController();
         if ($tab == "sameOdd") {
-            $tabHtml = $this->footballTabInnerHtml($id, "same_odd");
+            $tabHtml = $detailController->detailCell($request, 'same_odd', $id);
         } else {
-            $tabHtml = $this->footballTabInnerHtml($id, $tab);
+            $tabHtml = $detailController->detailCell($request, 'same_odd', $id);
         }
         $data['html'] = $tabHtml;
         $views = "";
