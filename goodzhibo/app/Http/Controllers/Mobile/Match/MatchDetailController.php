@@ -128,11 +128,11 @@ class MatchDetailController
         $index = FileTool::getMidIndex($mid);
         //终端底部tab
         $reset['tabs'] = [
-            ["name"=>"分析", "url"=>env('APP_URL')."/m/football/detail/tab/analyse/$index/$mid"."a.html"],
-            ["name"=>"赛况", "url"=>env('APP_URL')."/m/football/detail/tab/base/$index/$mid."."a.html"],
-            ["name"=>"球队", "url"=>env('APP_URL')."/m/football/detail/tab/team/$index/$mid"."a.html"],
-            ["name"=>"指数", "url"=>env('APP_URL')."/m/football/detail/tab/odd/$index/$mid."."a.html"],
-            ["name"=>"同赔", "url"=>env('APP_URL')."/m/football/detail/tab/same_odd/$index/$mid."."a.html"],
+            ["name"=>"分析", "url"=>env('APP_URL')."/m/football/detail/tab/analyse/$index/"."app"."$mid".".html"],
+            ["name"=>"赛况", "url"=>env('APP_URL')."/m/football/detail/tab/base/$index/"."app"."$mid".".html"],
+            ["name"=>"球队", "url"=>env('APP_URL')."/m/football/detail/tab/team/$index/"."app"."$mid".".html"],
+            ["name"=>"指数", "url"=>env('APP_URL')."/m/football/detail/tab/odd/$index/"."app"."$mid".".html"],
+            ["name"=>"同赔", "url"=>env('APP_URL')."/m/football/detail/tab/same_odd/$index/"."app"."$mid".".html"],
         ];
         return Response::json(AppCommonResponse::createAppCommonResponse(0, '', $reset, false));
     }
