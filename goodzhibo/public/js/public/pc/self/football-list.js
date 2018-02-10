@@ -215,8 +215,9 @@ function leagueFilter(leagueClass) {
 }
 
 function refresh() {
+    var url = getCdnUrl("/football/change/live.json");
     $.ajax({
-        "url": "/football/change/live.json?time=" + (new Date().getTime()),
+        "url": url + "?time=" + (new Date().getTime()),
         "dataType": "json",
         "success": function (json) {
             var ups = $('span.up');
@@ -323,6 +324,7 @@ function convertGoal(ID, dataItem, lastScore, currentScore) {
 
 function refreshMatchEvent(ID, date) {
     var url = "/football/event/" + date + "/" + ID + ".json";
+    url = getCdnUrl(url);
     $.ajax({
         "url": url,
         "data": "",
@@ -340,6 +342,7 @@ function refreshMatchEvent(ID, date) {
 var ct;
 function loadEvent(mid, date) {
     var url = "/football/event/" + date + "/" + mid + ".json";
+    url = getCdnUrl(url);
     $.ajax({
         "url": url,
         "data": {},
@@ -355,8 +358,9 @@ function loadEvent(mid, date) {
 }
 
 function refreshRoll() {
+    var url = getCdnUrl("/football/odd/roll.json");
     $.ajax({
-        "url": "/football/odd/roll.json",
+        "url": url,
         "dataType": "json",
         "success": function (json) {
             for (var ID in json) {

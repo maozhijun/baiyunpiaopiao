@@ -68,6 +68,11 @@
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/self/util.js"></script>
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/self/basketball-list.js"></script>
     <script type="text/javascript">
+        function getCdnUrl(url) {
+            var http = location.href.indexOf('https://') != -1 ? 'https:' : 'http:';
+            var url = http + '{{env('CDN_URL')}}' + url;
+            return url;
+        }
         window.onload = function () {
             setTableCheck ();
             setFilter ();

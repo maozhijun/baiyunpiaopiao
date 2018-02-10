@@ -4,6 +4,10 @@ window.teamStyleGet = false;
 window.cornerGet = false;
 function setPage(){
     var Tab = $('#Tab input');
+    alert(window.sameOddGet);
+    Tab.click(function () {
+        alert(this.value);
+    });
     Tab.change(function(){
         if (this.value == 'SameOdd' && !window.sameOddGet) {
             getSameOdd('SameOdd');//获取历史同赔
