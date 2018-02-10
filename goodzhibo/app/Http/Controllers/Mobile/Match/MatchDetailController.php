@@ -36,7 +36,7 @@ class MatchDetailController
         if ($index != FileTool::getMidIndex($id)) return "";
 
         $detailController = new DetailController();
-        $tabHtml = $detailController->detailCell($request, $tab, $id);
+        $tabHtml = $detailController->detailCell($request, $tab, $index, $id);
         return $this->footballDetailTabDetail($tab, $tabHtml);
     }
 

@@ -57,10 +57,10 @@ trait FootballDetailCommonCommand
             $mid = $match['mid'];
             if (!in_array($mid, $savedMids)) {
                 foreach ($tabs as $tab) {
-                    $tabHtml = $matchDetailController->detailCell($request, $tab, $mid);
+                    $index = FileTool::getMidIndex($mid);
+                    $tabHtml = $matchDetailController->detailCell($request, $tab, $index, $mid);
                     $appTabHtml = $appDetailController->footballDetailTabDetail($tab, $tabHtml);
 
-                    $index = FileTool::getMidIndex($mid);
                     $patch = "/static/m/football/detail/tab/$tab/$index/$mid.html";
                     $appPatch = "/static/m/football/detail/tab/$tab/$index/$mid"."a.html";
 

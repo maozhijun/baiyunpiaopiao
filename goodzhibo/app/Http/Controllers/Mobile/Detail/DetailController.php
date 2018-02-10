@@ -19,7 +19,7 @@ class DetailController extends Controller
 {
     use MatchDetailTool;
 
-    public function detailCell(Request $request, $type, $id) {
+    public function detailCell(Request $request, $type, $index, $id) {
         $match = $this->footballDetailMatchData($id);
         $date = date('Ymd', $match['time']);
         switch ($type) {

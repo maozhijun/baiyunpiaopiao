@@ -39,7 +39,7 @@ Route::group(["namespace" => 'Live'], function () {
 });
 
 Route::group(["namespace" => 'Detail'], function () {
-    Route::get('/football/detail/tab/{type}/{id}.html', 'DetailController@detailCell');
+    Route::get('/football/detail/tab/{type}/{index}/{id}.html', 'DetailController@detailCell');
 
     Route::get('/football/detail/team_cell/{date}/{id}.html', 'DetailController@teamCell');
     Route::get('/football/detail/analyse_cell/{date}/{id}.html', 'DetailController@analyseCell');
