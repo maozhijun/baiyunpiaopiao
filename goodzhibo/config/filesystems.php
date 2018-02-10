@@ -56,13 +56,13 @@ return [
         ],
         'matches' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/static/json/matches'),
+            'root' => base_path('public/static/json/matches'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
         'detail' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/static/json/detail'),
+            'root' => base_path('public/static/json/detail'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
