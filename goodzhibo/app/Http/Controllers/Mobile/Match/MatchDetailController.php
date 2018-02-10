@@ -35,7 +35,7 @@ class MatchDetailController
         if ($tab == "sameOdd") {
             $tabHtml = $detailController->detailCell($request, 'same_odd', $id);
         } else {
-            $tabHtml = $detailController->detailCell($request, 'same_odd', $id);
+            $tabHtml = $detailController->detailCell($request, $tab, $id);
         }
         $data['html'] = $tabHtml;
         $views = "";
