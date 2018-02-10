@@ -1,6 +1,7 @@
 <div id="Trait" class="childNode" style="">
     @if(isset($style))
-    @component('mobile.cell.football_detail_style', ['ws'=>$style['ws'], 'match'=>$style['match']])
+    <?php $ws = isset($style['ws']) ? $style['ws'] : []; ?>
+    @component('mobile.cell.football_detail_style', ['ws'=>$ws, 'match'=>$style['match']])
     @endcomponent
     @endif
 </div>
