@@ -10,5 +10,5 @@
 |
 */
 Route::group([], function (){
-
+    Route::get('/login.html', 'AuthorController@sign');
 });

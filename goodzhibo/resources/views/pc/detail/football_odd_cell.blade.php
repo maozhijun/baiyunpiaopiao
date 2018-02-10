@@ -36,6 +36,7 @@
         </thead>
         <tbody>
         @foreach($odds as $odd)
+            @continue(!isset($odd[$type]))
             <tr>
                 <td>{{$odd['name']}}</td>
                 <td>{{$odd[$type]['up1']}}</td>

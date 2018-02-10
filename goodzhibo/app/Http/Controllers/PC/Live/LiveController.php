@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\PC\Live;
 
+use App\Models\Match\MatchLiveChannel;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;

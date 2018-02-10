@@ -1,6 +1,6 @@
 @extends('mobile.layout.base')
 @section('title')
-    <title>黑土直播</title>
+    <title>黑土体育</title>
 @endsection
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{env('CDN_URL')}}/css/mobile/matchPhone.css">
@@ -107,9 +107,9 @@
             <ul>
                 <li>
                     <dl class="team">
-                        <dd class="host"><p class="img"><img src="{{$match['hteam']['icon']}}"></p></dd>
+                        <dd class="host"><p class="img"><img src="{{$match['hteam']['icon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'"></p></dd>
                         <dt>VS</dt>
-                        <dd class="away"><p class="img"><img src="{{$match['ateam']['icon']}}"></p></dd>
+                        <dd class="away"><p class="img"><img src="{{$match['ateam']['icon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'"></p></dd>
                     </dl>
                     <dl>
                         <dd class="host"><p>{{$match['h_yellow']}}</p><span style="width: {{108 * $match['h_y_p']}}px;"></span></dd><!--span的值为108*百分比-->
