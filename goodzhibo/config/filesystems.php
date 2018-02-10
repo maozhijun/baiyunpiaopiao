@@ -54,7 +54,18 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
-
+        'matches' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/static/json/matches'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+        'detail' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/static/json/detail'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_KEY'),
