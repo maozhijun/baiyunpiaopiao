@@ -26,7 +26,7 @@ class FileTool extends Controller
         try {
             $data = Storage::disk($disk)->get($filePath);
         } catch (\Exception $exception) {
-
+            dump($exception->getMessage());
         }
         return $data;
     }
