@@ -73,7 +73,6 @@ class Kernel extends ConsoleKernel
             $mController->matchLiveStatic(new Request());//每分钟刷新比赛状态数据
         })->everyMinute();
 
-
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $schedule->command('fb_list_json_cache:run')->everyMinute();//每分钟执行一次 足球当天列表的定时任务
         $schedule->command('bb_list_json_cache:run')->everyMinute();//每分钟执行一次 篮球当天列表的定时任务

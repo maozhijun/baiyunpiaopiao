@@ -12,6 +12,10 @@
 Route::group([], function (){
     Route::get('/login.html', 'AuthorController@sign');
     Route::post('/login.html', 'AuthorController@sign');
+});
 
+Route::group(['middleware' => 'admin_auth'], function () {
     Route::get('/links/list', 'LinkController@index');
+    Route::post('/links/save', 'LinkController@saveLink');
+    Route::get('/links/del', 'LinkController@delLink');
 });

@@ -32,7 +32,7 @@
             <span class="host">{{$match['hscore']}}</span>
             <span class="away">{{$match['ascore']}}</span>
         </p>
-        @if($match['status'] > 0 && isset($match['wap_live']) && $match['wap_live']))<a href="videoPhone.html" class="live">正在直播</a>@endif
+        @if($match['status'] > 0 && isset($match['wap_live']) && $match['wap_live']))<a href="/live/football/{{$match['mid']}}.html" class="live">正在直播</a>@endif
     </div>
     <div class="team">
         <p class="img"><img src="{{$match['ateam']['icon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'"></p>
@@ -490,11 +490,12 @@
 <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/mobile/publicPhone.js"></script>
 <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/mobile/matchPhone.js"></script>
 <script type="text/javascript">
-    function getCdnUrl(url) {
-        var http = location.href.indexOf('https://') != -1 ? 'https:' : 'http:';
-        var url = http + '{{env('CDN_URL')}}' + url;
-        return url;
-    }
+    {{--function getCdnUrl(url) {--}}
+        {{--var http = location.href.indexOf('https://') != -1 ? 'https:' : 'http:';--}}
+        {{--var url = http + '{{env('CDN_URL')}}' + url;--}}
+        {{--return url;--}}
+    {{--}--}}
+    window.cdn_url = '{{env('CDN_URL')}}';
     window.onload = function () {
         setPage();
         setCanvas();

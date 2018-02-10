@@ -171,5 +171,13 @@ function getCorner(id) {
             });
         }
     });
+}
 
+function getCdnUrl(url) {
+    if (!window.cdn_url) {
+        window.cdn_url = "//static.cdn.vcgood.net";
+    }
+    var http = location.href.indexOf('https://') != -1 ? 'https:' : 'http:';
+    var url = http + window.cdn_url + url;
+    return url;
 }
