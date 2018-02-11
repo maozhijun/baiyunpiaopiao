@@ -28,7 +28,6 @@ class FootballDetailController extends Controller
         }
         $matches = isset($json['matches']) ? $json['matches'] : [];
         $pc = new FootballController();
-        ///football/detail/20180208/1060215.html
         foreach ($matches as $match) {
             $status = $match['status'];
             $start_time = $match['time'];
@@ -66,12 +65,12 @@ class FootballDetailController extends Controller
                 $date = date('Ymd', strtotime($start_time));
                 $id = $match['mid'];
                 try {
-                    $this->detailHtml($request, $date, $id, $wap);
-                    $this->oddHtml($request, $date, $id, $wap);
-                    $this->cornerHtml($request, $date, $id, $wap);
-                    $this->styleHtml($request, $date, $id, $wap);
-                    $this->oddIndexHtml($request, $date, $id, $wap);
-                    $this->sameOddHtml($request, $date, $id, $wap);
+                    $this->wapDetailHtml($request, $date, $id, $wap);
+                    $this->wapOddHtml($request, $date, $id, $wap);
+                    $this->wapCornerHtml($request, $date, $id, $wap);
+                    $this->wapStyleHtml($request, $date, $id, $wap);
+                    $this->wapOddIndexHtml($request, $date, $id, $wap);
+                    $this->wapSameOddHtml($request, $date, $id, $wap);
                 } catch (\Exception $exception) {
                     echo 'exception : FootballWapDetailCommands ' . $id . '   ....';
                 }
@@ -81,13 +80,26 @@ class FootballDetailController extends Controller
     }
 
     /**
+     * 刷新单个PC 足球终端 缓存。
+     * @param Request $request
+     * @param $date
+     * @param $id
+     */
+    public function flushPcDetailCache(Request $request, $date, $id) {
+        $pc = new FootballController();
+        $this->pcBaseHtml($request, $date, $id, $pc);
+    }
+
+    //-------------------------------------------------------------------------------------//
+
+    /**
      * 终端页HTML
      * @param $request
      * @param $date
      * @param $id
      * @param $wap
      */
-    protected function detailHtml($request, $date, $id, $wap) {
+    protected function wapDetailHtml($request, $date, $id, $wap) {
         $detailHtml = $wap->footballDetail($request, $date, $id);
         $patch = '/static/m/football/detail/' . $date . '/' . $id . '.html';
         Storage::disk('public')->put($patch, $detailHtml);
@@ -100,7 +112,7 @@ class FootballDetailController extends Controller
      * @param $id
      * @param $wap
      */
-    protected function oddHtml($request, $date, $id, $wap) {
+    protected function wapOddHtml($request, $date, $id, $wap) {
         $oddHtml = $wap->footballOdd($request, $date, $id);
         $patch = '/static/m/football/detail/odd/' . $date . '/' . $id . '.html';
         Storage::disk('public')->put($patch, $oddHtml);
@@ -113,7 +125,7 @@ class FootballDetailController extends Controller
      * @param $id
      * @param $wap
      */
-    protected function cornerHtml($request, $date, $id, $wap) {
+    protected function wapCornerHtml($request, $date, $id, $wap) {
         $cornerHtml = $wap->footballDetailCorner($request, $date, $id);
         $patch = '/static/m/football/corner/odd/' . $date . '/' . $id . '.html';
         Storage::disk('public')->put($patch, $cornerHtml);
@@ -126,7 +138,7 @@ class FootballDetailController extends Controller
      * @param $id
      * @param $wap
      */
-    protected function styleHtml($request, $date, $id, $wap) {
+    protected function wapStyleHtml($request, $date, $id, $wap) {
         $styleHtml = $wap->footballDetailCorner($request, $date, $id);
         $patch = '/static/m/football/corner/style/' . $date . '/' . $id . '.html';
         Storage::disk('public')->put($patch, $styleHtml);
@@ -139,7 +151,7 @@ class FootballDetailController extends Controller
      * @param $id
      * @param $wap
      */
-    protected function oddIndexHtml($request, $date, $id, $wap) {
+    protected function wapOddIndexHtml($request, $date, $id, $wap) {
         $oddIndexHtml = $wap->footballDetailCorner($request, $date, $id);
         $patch = '/static/m/football/corner/odd_index/' . $date . '/' . $id . '.html';
         Storage::disk('public')->put($patch, $oddIndexHtml);
@@ -152,11 +164,78 @@ class FootballDetailController extends Controller
      * @param $id
      * @param $wap
      */
-    protected function sameOddHtml($request, $date, $id, $wap) {
+    protected function wapSameOddHtml($request, $date, $id, $wap) {
         $sameOddHtml = $wap->footballDetailCorner($request, $date, $id);
         $patch = '/static/m/football/corner/same_odd/' . $date . '/' . $id . '.html';
         Storage::disk('public')->put($patch, $sameOddHtml);
     }
 
+    //--------------------------------------------------------------------------------------------------------------------------//
+
+
+    /**
+     * 开始的终端数据
+     * @param $id
+     * @param $request
+     * @param $controller
+     * @param $date
+     */
+    public function pcDetailHtml($id, $request, $controller, $date) {
+        $detail_html = $controller->detail($request, $date, $id);
+        $patch = '/static/football/detail/' . $date . '/' . $id . '.html';
+        Storage::disk('public')->put($patch, $detail_html);
+    }
+
+    /**
+     * 终端角球数据
+     * @param $request
+     * @param $date
+     * @param $id
+     * @param $controller
+     */
+    public function pcCornerHtml($request, $date, $id, $controller) {
+        try {
+            $cornerHtml = $controller->footballCornerCell($request, $date, $id);
+            $patch = '/static/football/detail_cell/corner/' . $date . '/' . $id . '.html';
+            Storage::disk('public')->put($patch, $cornerHtml);
+        } catch (\Exception $exception) {
+            echo ' exception cornerHtml : ' . $id . ' ,,';
+        }
+    }
+
+    /**
+     * 终端特色数据
+     * @param $request
+     * @param $date
+     * @param $id
+     * @param $controller
+     */
+    public function pcCharaHtml($request, $date, $id, $controller) {
+        try {
+            $charaHtml = $controller->footballCharacteristicCell($request, $date, $id);
+            $patch = '/static/football/detail_cell/chara/' . $date . '/' . $id . '.html';
+            Storage::disk('public')->put($patch, $charaHtml);
+        } catch (\Exception $exception) {
+            echo ' exception charaHtml : ' . $id . ' ,,';
+        }
+    }
+
+    /**
+     * 终端比赛概括
+     * @param $request
+     * @param $date
+     * @param $id
+     * @param $controller
+     */
+    public function pcBaseHtml($request, $date, $id, $controller) {
+        try {
+            $baseHtml = $controller->footballBaseCell($request, $date, $id);
+            $patch = '/static/football/detail_cell/base/' . $date . '/' . $id . '.html';
+            ///football/detail_cell/base/{date}/{id}.html
+            Storage::disk('public')->put($patch, $baseHtml);
+        } catch (\Exception $exception) {
+            echo ' exception baseHtml : ' . $id . ' ,,';
+        }
+    }
 
 }

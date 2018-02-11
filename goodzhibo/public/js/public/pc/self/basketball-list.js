@@ -335,7 +335,7 @@ function GoalTR (obj) { //进球效果，哪队进球对应TD触发此事件
 }
 
 function refreshRoll() {
-    var rollUrl = getCdnUrl("/basketball/odd/roll.json");
+    var rollUrl = getCdnUrl("/basketball/odd/roll.json") + "?rd=" + (new Date()).getTime();
     $.ajax({
         "url": rollUrl,
         "dataType": "json",

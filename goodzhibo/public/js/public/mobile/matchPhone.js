@@ -88,6 +88,7 @@ function setCanvas () {
 }
 
 function getSameOdd(so_id) {
+    Alert('loading', '加载中');
     var sameOddUrl = getCdnUrl('/m/football/detail/same_odd/' + window.startTime + '/' + window.mid + '.html');
     $.ajax({
         'url': sameOddUrl,
@@ -101,11 +102,16 @@ function getSameOdd(so_id) {
                 $(this).parents('.content').children('.childNode').css('display','none');
                 $('#' + this.value).css('display','');
             });
+            closeLoading();
+        },
+        "error": function () {
+            closeLoading();
         }
     });
 }
 
 function getOddIndex(id) {
+    Alert('loading', '加载中');
     var oddIndexUrl = getCdnUrl('/m/football/detail/odd_index/' + window.startTime + '/' + window.mid + '.html');
     $.ajax({
         'url': oddIndexUrl,
@@ -119,11 +125,16 @@ function getOddIndex(id) {
                 $(this).parents('.content').children('.childNode').css('display','none');
                 $('#' + this.value).css('display','');
             });
+            closeLoading();
+        },
+        "error": function () {
+            closeLoading();
         }
     });
 }
 
 function getTeamStyle(id) {
+    Alert('loading', '加载中');
     var teamStyle = getCdnUrl('/m/football/detail/style/' + window.startTime + '/' + window.mid + '.html');
     $.ajax({
         'url': teamStyle,
@@ -141,11 +152,16 @@ function getTeamStyle(id) {
                     $(this).parents('.default').attr('close','close');
                 }
             });
+            closeLoading();
+        },
+        "error": function () {
+            closeLoading();
         }
     });
 }
 
 function getCorner(id) {
+    Alert('loading', '加载中');
     var cornerUrl = getCdnUrl('/m/football/detail/corner/' + window.startTime + '/' + window.mid + '.html');
     $.ajax({
         'url': cornerUrl,
@@ -169,6 +185,10 @@ function getCorner(id) {
                     $(this).parents('.default').attr('close','close');
                 }
             });
+            closeLoading();
+        },
+        "error": function () {
+            closeLoading();
         }
     });
 }

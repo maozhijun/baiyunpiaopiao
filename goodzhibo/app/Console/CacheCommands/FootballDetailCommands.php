@@ -77,7 +77,7 @@ class FootballDetailCommands extends Command
      * @param $controller
      * @param $date
      */
-    protected function detailHtml($id, $request, $controller, $date) {
+    public function detailHtml($id, $request, $controller, $date) {
         $detail_html = $controller->detail($request, $date, $id);
         $patch = '/static/football/detail/' . $date . '/' . $id . '.html';
         Storage::disk('public')->put($patch, $detail_html);
@@ -90,7 +90,7 @@ class FootballDetailCommands extends Command
      * @param $id
      * @param $controller
      */
-    protected function cornerHtml($request, $date, $id, $controller) {
+    public function cornerHtml($request, $date, $id, $controller) {
         try {
             $cornerHtml = $controller->footballCornerCell($request, $date, $id);
             $patch = '/static/football/detail_cell/corner/' . $date . '/' . $id . '.html';
@@ -107,7 +107,7 @@ class FootballDetailCommands extends Command
      * @param $id
      * @param $controller
      */
-    protected function charaHtml($request, $date, $id, $controller) {
+    public function charaHtml($request, $date, $id, $controller) {
         try {
             $charaHtml = $controller->footballCharacteristicCell($request, $date, $id);
             $patch = '/static/football/detail_cell/chara/' . $date . '/' . $id . '.html';
@@ -124,7 +124,7 @@ class FootballDetailCommands extends Command
      * @param $id
      * @param $controller
      */
-    protected function baseHtml($request, $date, $id, $controller) {
+    public function baseHtml($request, $date, $id, $controller) {
         try {
             $baseHtml = $controller->footballBaseCell($request, $date, $id);
             $patch = '/static/football/detail_cell/base/' . $date . '/' . $id . '.html';
@@ -134,6 +134,5 @@ class FootballDetailCommands extends Command
             echo ' exception baseHtml : ' . $id . ' ,,';
             dump($exception);
         }
-
     }
 }

@@ -602,11 +602,11 @@ div#Alert[status=loading] > div.loading, div#Alert[status=success] > div.success
 	-ms-transform: scale(1); -webkit-transform: scale(1); -o-transform: scale(1); -moz-transform: scale(1); transform: scale(1);
 }
 div#Alert > div.loading:before{
-	background: url(../../img/customer2/icon_loading_ring.png) no-repeat center; background-size: 64px;
+	background: url(/img/icon_loading_ring.png) no-repeat center; background-size: 64px;
 	-moz-animation: loading 0.5s linear infinite; -webkit-animation: loading 0.5s linear infinite; -o-animation: loading 0.5s linear infinite; animation: loading 0.5s linear infinite;
 }
 div#Alert > div.success:before{
-	background: url(../../img/customer2/icon_loading_draw.png) no-repeat center; background-size: 64px;
+	background: url(/img/icon_loading_draw.png) no-repeat center; background-size: 64px;
 	-ms-transform: rotate(-45deg); -webkit-transform: rotate(-45deg); -o-transform: rotate(-45deg); -moz-transform: rotate(-45deg); transform: rotate(-45deg);
 	-moz-transition: all 0.3s; -webkit-transition: all 0.3s; -o-transition: all 0.3s; transition: all 0.3s;
 }
