@@ -11,6 +11,8 @@ use App\Console\CacheCommands\FootballDetailScheduleCommands;
 use App\Console\CacheCommands\FootballListCommands;
 use App\Console\CacheCommands\FootballLiveJsonCommands;
 use App\Console\CacheCommands\FootballWapDetailCommands;
+use App\Console\CacheCommands\FootballWapDetailResultCommands;
+use App\Console\CacheCommands\FootballWapDetailScheduleCommands;
 use App\Console\CacheCommands\ImmediateHtmlCommands;
 use App\Console\CacheCommands\MatchesDataCommands;
 use App\Console\CacheCommands\ResultHtmlCommands;
@@ -54,6 +56,8 @@ class Kernel extends ConsoleKernel
         FootResultHtmlCommands::class,
         FootballDetailScheduleCommands::class,//赛程终端静态化
         FootballDetailResultCommands::class,//赛果终端静态化
+        FootballWapDetailResultCommands::class,//wap赛果终端静态化
+        FootballWapDetailScheduleCommands::class,//wap赛程终端静态化
     ];
 
     /**
@@ -91,8 +95,11 @@ class Kernel extends ConsoleKernel
         $schedule->command('fb_wap_detail_cache:run')->everyFiveMinutes();//正在比赛的足球赛事终端每分五种静态化一次。
 
         ////////
-        $schedule->command('schedule_detail_cache:run')->everyTenMinutes();//每天执行2次赛程的
-        $schedule->command('result_detail_cache:run')->everyTenMinutes();//每天执行2次赛程的
+        $schedule->command('schedule_detail_cache:run')->everyTenMinutes();//每10分钟执行一次 每次缓存5个页面
+        $schedule->command('result_detail_cache:run')->everyTenMinutes();//每10分钟执行一次 每次缓存5个页面
+
+        $schedule->command('wap_schedule_detail_cache:run')->everyTenMinutes();//每10分钟执行一次 每次缓存5个页面
+        $schedule->command('wap_result_detail_cache:run')->everyTenMinutes();//每10分钟执行一次 每次缓存5个页面
         ///////
 
         //$schedule->command('fb_detail_cache:run')->everyMinute();//足球即时比赛数据、赔率数据

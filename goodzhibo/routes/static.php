@@ -13,5 +13,7 @@ Route::group([],function (){
     Route::get('/result/to_html',"ResultHtmlController@staticHtml");//结果列表静态化html
     Route::get('/schedule/to_html',"ScheduleHtmlController@staticHtml");//赛程列表静态化html
 
-    Route::get('/football/detail/{date}/{id}',"FootballDetailController@flushPcDetailAllCache");//静态化足球终端
+    Route::get('/football/detail/{date}/{id}',"FootballDetailController@flushPcDetailAllCache");//静态化PC足球终端
+    Route::get('/football/detail/wap/{date}/{id}',"FootballDetailController@flushWapDetailAllCache");//静态化WAP足球终端
+
 });

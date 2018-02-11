@@ -11,6 +11,7 @@ namespace App\Console\CacheCommands;
 
 use App\Http\Controllers\CacheInterface\FootballInterface;
 use App\Http\Controllers\Mobile\Live\HomeController;
+use App\Http\Controllers\StaticHtml\FootballDetailController;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -55,7 +56,6 @@ class FootballWapDetailCommands extends Command
             return "暂无比赛";
         }
         $matches = isset($json['matches']) ? $json['matches'] : [];
-        $wap = new HomeController();
         foreach ($matches as $match) {
             $status = $match['status'];
             if ($status > 0) {
@@ -63,12 +63,7 @@ class FootballWapDetailCommands extends Command
                 $date = date('Ymd', strtotime($start_time));
                 $id = $match['mid'];
                 try {
-                    $this->detailHtml($request, $date, $id, $wap);
-                    $this->oddHtml($request, $date, $id, $wap);
-                    $this->cornerHtml($request, $date, $id, $wap);
-                    $this->styleHtml($request, $date, $id, $wap);
-                    $this->oddIndexHtml($request, $date, $id, $wap);
-                    $this->sameOddHtml($request, $date, $id, $wap);
+                    FootballDetailController::curlToWapHtml($date, $id);
                 } catch (\Exception $exception) {
                     echo 'exception : FootballWapDetailCommands ' . $id . '   ....';
                 }

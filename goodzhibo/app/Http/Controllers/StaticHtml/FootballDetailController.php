@@ -80,6 +80,22 @@ class FootballDetailController extends Controller
     }
 
     /**
+     * 刷新单个WAP 足球终端 缓存。
+     * @param Request $request
+     * @param $date
+     * @param $id
+     */
+    public function flushWapDetailAllCache(Request $request, $date, $id) {
+        $wap = new HomeController();
+        $this->wapDetailHtml($request, $date, $id, $wap);
+        $this->wapOddHtml($request, $date, $id, $wap);
+        $this->wapCornerHtml($request, $date, $id, $wap);
+        $this->wapStyleHtml($request, $date, $id, $wap);
+        $this->wapOddIndexHtml($request, $date, $id, $wap);
+        $this->wapSameOddHtml($request, $date, $id, $wap);
+    }
+
+    /**
      * 刷新单个PC 足球终端 缓存。
      * @param Request $request
      * @param $date
@@ -101,6 +117,21 @@ class FootballDetailController extends Controller
     public static function curlToHtml($date, $mid) {
         $ch = curl_init();
         $url = asset('/static/football/detail/' . $date . '/' . $mid);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_exec ($ch);
+        curl_close ($ch);
+    }
+
+    /**
+     * wap 静态化足球终端文件
+     * @param $date
+     * @param $mid
+     */
+    public static function curlToWapHtml($date, $mid) {
+        $ch = curl_init();
+        $url = asset('/static/football/detail/wap/' . $date . '/' . $mid);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
@@ -145,7 +176,7 @@ class FootballDetailController extends Controller
      */
     protected function wapCornerHtml($request, $date, $id, $wap) {
         $cornerHtml = $wap->footballDetailCorner($request, $date, $id);
-        $patch = '/static/m/football/corner/odd/' . $date . '/' . $id . '.html';
+        $patch = '/static/m/football/detail/corner/' . $date . '/' . $id . '.html';
         Storage::disk('public')->put($patch, $cornerHtml);
     }
 
@@ -158,7 +189,7 @@ class FootballDetailController extends Controller
      */
     protected function wapStyleHtml($request, $date, $id, $wap) {
         $styleHtml = $wap->footballDetailCorner($request, $date, $id);
-        $patch = '/static/m/football/corner/style/' . $date . '/' . $id . '.html';
+        $patch = '/static/m/football/detail/style/' . $date . '/' . $id . '.html';
         Storage::disk('public')->put($patch, $styleHtml);
     }
 
@@ -171,7 +202,7 @@ class FootballDetailController extends Controller
      */
     protected function wapOddIndexHtml($request, $date, $id, $wap) {
         $oddIndexHtml = $wap->footballDetailCorner($request, $date, $id);
-        $patch = '/static/m/football/corner/odd_index/' . $date . '/' . $id . '.html';
+        $patch = '/static/m/football/detail/odd_index/' . $date . '/' . $id . '.html';
         Storage::disk('public')->put($patch, $oddIndexHtml);
     }
 
@@ -184,7 +215,7 @@ class FootballDetailController extends Controller
      */
     protected function wapSameOddHtml($request, $date, $id, $wap) {
         $sameOddHtml = $wap->footballDetailCorner($request, $date, $id);
-        $patch = '/static/m/football/corner/same_odd/' . $date . '/' . $id . '.html';
+        $patch = '/static/m/football/detail/same_odd/' . $date . '/' . $id . '.html';
         Storage::disk('public')->put($patch, $sameOddHtml);
     }
 
