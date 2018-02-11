@@ -48,7 +48,7 @@ class LinkController extends Controller
             //判断是否有该链接。
             $links = json_decode($linksStr, true);
         }
-        if (!empty($id) && isset($links[$id])) {
+        if (($id == 0 || !empty($id)) && isset($links[$id])) {
             $links[$id] = ['name'=>$name, 'link'=>$url];
         } else {
             $links[] = ['name'=>$name, 'link'=>$url];
@@ -64,7 +64,7 @@ class LinkController extends Controller
      */
     public function delLink(Request $request) {
         $id = $request->input('id');
-        if (empty($id)) {
+        if ($id != 0 && empty($id)) {
             return back()->with('error', '参数错误');
         }
         $linksStr = Redis::get(self::LINKS_KEY);

@@ -60,7 +60,7 @@
                     <p class="total">{{$match['h_ot'] or '-'}}</p>
                     <p class="total">{{$match['a_ot'] or '-'}}</p>
                 </div>
-                <div class="part" onclick="event.preventDefault();location.href='/live/basketball/{{$match['id']}}.html'"><!--直播中的比赛，直接进入直播界面-->
+                <div class="part" onclick="event.preventDefault();location.href='/m/live/basketball/{{$match['id']}}.html'"><!--直播中的比赛，直接进入直播界面-->
                     <p class="live">
                         @if($match['status'] == -1)
                         <em>已结束</em>
