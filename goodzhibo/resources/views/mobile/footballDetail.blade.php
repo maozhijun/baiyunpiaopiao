@@ -32,7 +32,7 @@
             <span class="host">{{$match['hscore']}}</span>
             <span class="away">{{$match['ascore']}}</span>
         </p>
-        @if($match['status'] > 0 && isset($match['wap_live']) && $match['wap_live']))<a href="/live/football/{{$match['mid']}}.html" class="live">正在直播</a>@endif
+        @if($match['status'] > 0 && isset($match['wap_live']) && $match['wap_live']))<a href="/m/live/football/{{$match['mid']}}.html" class="live">正在直播</a>@endif
     </div>
     <div class="team">
         <p class="img"><img src="{{$match['ateam']['icon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'"></p>
