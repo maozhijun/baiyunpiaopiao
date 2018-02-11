@@ -188,7 +188,7 @@ class FootballDetailController extends Controller
      * @param $wap
      */
     protected function wapStyleHtml($request, $date, $id, $wap) {
-        $styleHtml = $wap->footballDetailCorner($request, $date, $id);
+        $styleHtml = $wap->footballDetailStyle($request, $date, $id);
         $patch = '/static/m/football/detail/style/' . $date . '/' . $id . '.html';
         Storage::disk('public')->put($patch, $styleHtml);
     }
@@ -201,7 +201,7 @@ class FootballDetailController extends Controller
      * @param $wap
      */
     protected function wapOddIndexHtml($request, $date, $id, $wap) {
-        $oddIndexHtml = $wap->footballDetailCorner($request, $date, $id);
+        $oddIndexHtml = $wap->footballOddIndex($request, $date, $id);
         $patch = '/static/m/football/detail/odd_index/' . $date . '/' . $id . '.html';
         Storage::disk('public')->put($patch, $oddIndexHtml);
     }
@@ -214,7 +214,7 @@ class FootballDetailController extends Controller
      * @param $wap
      */
     protected function wapSameOddHtml($request, $date, $id, $wap) {
-        $sameOddHtml = $wap->footballDetailCorner($request, $date, $id);
+        $sameOddHtml = $wap->footballSameOdd($request, $date, $id);
         $patch = '/static/m/football/detail/same_odd/' . $date . '/' . $id . '.html';
         Storage::disk('public')->put($patch, $sameOddHtml);
     }
