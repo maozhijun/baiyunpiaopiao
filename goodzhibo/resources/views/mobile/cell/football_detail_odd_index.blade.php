@@ -50,6 +50,7 @@
         @endforeach
         </tbody>
     </table>
+    <div class="nolist">暂无数据</div>
 </div>
 <div id="Europe" class="asia default childNode" style="display: none;">
         <table>
@@ -101,6 +102,7 @@
             @endforeach
             </tbody>
         </table>
+    <div class="nolist">暂无数据</div>
     </div>
 <div id="Goal" class="asia default childNode" style="display: none;">
         <table>
@@ -143,6 +145,7 @@
             @endforeach
             </tbody>
         </table>
+    <div class="nolist">暂无数据</div>
     </div>
 <div class="bottom">
     <div class="btn">

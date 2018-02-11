@@ -59,7 +59,7 @@ class DetailController extends Controller
 
         $base = isset($base) ? $base : [];
         $result['corner'] = $corner;
-        $result['style'] = isset($style) ? isset($style) :[];
+        $result['style'] = isset($style) ? $style :[];
         $result = array_merge($base, $result);
         if (count($result) == 0) {
             return "";
