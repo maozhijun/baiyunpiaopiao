@@ -68,6 +68,11 @@
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/self/util.js"></script>
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/self/basketball-list.js"></script>
     <script type="text/javascript">
+        function getCdnUrl(url) {
+            var http = location.href.indexOf('https://') != -1 ? 'https:' : 'http:';
+            var url = http + '{{env('CDN_URL')}}' + url;
+            return url;
+        }
         window.onload = function () {
             setTableCheck ();
             setFilter ();
@@ -85,9 +90,17 @@
         if (divDate.length == 1) {
             divDate.find('button').click(function () {
                 var d = divDate.find('input').val();
-                location.href = '{{$_SERVER['PHP_SELF']}}?date=' + d;
+                var url = location.href;
+                var type = url.match(/\/(\w+)\.html/)[1];
+                d = d.replace(/[-|/]/g, '');
+                location.href = '/basketball/' + d + '/' + type + '.html';
             });
         }
+
+        $("#BackTop").click(function () {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        });
     </script>
 @endsection
 <!--[if lte IE 8]>

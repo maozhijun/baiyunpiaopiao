@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Mobile\Match;
 
+use App\Http\Controllers\FileTool;
 use App\Http\Controllers\Mobile\AppCommonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -36,15 +37,20 @@ class MatchesController
             $lids = explode(',', $request->input('id'));
         }
 
-        $ch = curl_init();
-        $url = env('MATCH_URL') . "/app/matches/" . date('Ymd', strtotime($date)) . "/" . $sport . "/" . $type . ".json";
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $json = curl_exec($ch);
-        curl_close($ch);
+        //先从本地获取文件
+        $formatDate = date('Ymd', strtotime($date));
+        $result = json_decode(FileTool::getMatchesData($sport, $type, $formatDate), true);
+        //如果获取不到，则从match项目请求数据
+        if (!isset($result)) {
+            $ch = curl_init();
+            $url = env('MATCH_URL') . "/app/matches/" . $formatDate . "/" . $sport . "/" . $type . ".json";
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $json = curl_exec($ch);
+            curl_close($ch);
 
-        $result = json_decode($json, true);
-
+            $result = json_decode($json, true);
+        }
         if (is_null($result)) {
             return Response::json(AppCommonResponse::createAppCommonResponse(500, '参数错误'));
         }

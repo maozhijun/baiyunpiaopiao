@@ -9,11 +9,13 @@
 namespace App\Http\Controllers\StaticHtml;
 
 
+use App\Http\Controllers\CacheInterface\CacheTool;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Mobile\Live\HomeController;
 use App\Http\Controllers\PC\Index\BasketballController;
 use App\Http\Controllers\PC\Index\FootballController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class ResultHtmlController extends Controller
@@ -51,6 +53,26 @@ class ResultHtmlController extends Controller
         $wapBasketball = new \App\Http\Controllers\Mobile\Live\BasketBallController();
         $wapBasketballHtml = $wapBasketball->result($request, $date);
         Storage::disk("public")->put('/static/m/basketball/' . $date_patch . 'result.html', $wapBasketballHtml);
+    }
+
+
+    public function test(Request $request) {
+        $date = '20180207';
+        $sport = 1;
+        $mid = '1061376';
+        $patch = 'public/json/detail/' . $date . '/' . $sport . '/' . $mid .'/odd.json';
+        $detail_patch = CacheTool::getCacheJsonPatch($patch);
+        try {
+            $json = file_get_contents($detail_patch);
+            return $json;
+        } catch (\Exception $exception) {
+            $msg = $exception->getMessage();
+            if (preg_match('/No such file or directory/', $msg)) {
+                echo '该文件不存在';
+                return null;
+            }
+        }
+        return [];
     }
 
 }

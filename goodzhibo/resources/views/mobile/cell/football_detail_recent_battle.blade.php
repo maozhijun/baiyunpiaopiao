@@ -28,11 +28,11 @@ foreach($data as $match){
 ?>
 <div class="proportionBox" ha="{{$ha}}" le="{{$le}}">
     <div class="proportion">
-        <p class="win" style="width: {{round($ouWin/$count, 3) * 100}}%;"><b>{{$ouWin}}</b></p>
-        <p class="draw" style="width: {{round($ouDraw/$count, 3) * 100}}%;"><b>{{$ouDraw}}</b></p>
-        <p class="lose" style="width: {{round($ouLose/$count, 3) * 100}}%;"><b>{{$ouLose}}</b></p>
+        <p class="win" style="width: {{$count > 0 ? round($ouWin/$count, 3) * 100 : 0}}%;"><b>{{$ouWin}}</b></p>
+        <p class="draw" style="width: {{$count > 0 ? round($ouDraw/$count, 3) * 100 : 0}}%;"><b>{{$ouDraw}}</b></p>
+        <p class="lose" style="width: {{$count > 0 ? round($ouLose/$count, 3) * 100 : 0}}%;"><b>{{$ouLose}}</b></p>
     </div>
-    <p class="summary">共{{$count}}场，胜率：<b>{{round($ouWin/$count, 4) * 100}}%</b>，赢盘率：<b>{{round($asia_win_count/$count, 4) * 100}}%</b></p>
+    <p class="summary">共{{$count}}场，胜率：<b>{{$count > 0 ? round($ouWin/$count, 4) * 100 : 0}}%</b>，赢盘率：<b>{{$count > 0 ? round($asia_win_count/$count, 4) * 100 : 0}}%</b></p>
 </div>
 <table ha="{{$ha}}" le="{{$le}}">
     <thead>

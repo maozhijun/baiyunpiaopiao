@@ -11,19 +11,39 @@ class AuthController extends BaseController
     const K_LOGIN_SESSION_KEY = '__auth__';
     const K_LOGIN_COOKIE_KEY = '__auth__';
 
-    private $user = ['account' => '牛逼编码系统', 'password' => '9e8fa2d95c15baeca38d8d6c2ccae959ac078e61', 'salt' => '6dUrCKcxVycRs'];
+    private $users = [
+        [
+            'account' => '牛逼编码系统',
+            'password' => '9e8fa2d95c15baeca38d8d6c2ccae959ac078e61',
+            'salt' => '6dUrCKcxVycRs',
+            'role' => 'admin'
+        ],
+        [
+            'account' => 'gg-user',
+            'password' => '73b7873465e24754faeb01a5158b0ea97db49b72',
+            'salt' => '6dalIdJiO2Vt',
+            'role' => 'gg'
+        ],
+    ];
 
     public function index(Request $request)
     {
         if ($request->isMethod('post')) {
-            if (!$request->has('account') || $request->account != $this->user['account']) {
-                View::share('err_msg', '用户名错误');
-            } elseif (!$request->has('password') || sha1($request->password . $this->user['salt']) != $this->user['password']) {
-                View::share('err_msg', '密码错误');
+            if (!$request->has('account')) {
+                View::share('err_msg', '用户名不能为空');
+            } elseif (!$request->has('password')) {
+                View::share('err_msg', '密码不能为空');
             } else {
-                session([self::K_LOGIN_SESSION_KEY => $this->user]);
-                return redirect($request->input('target', '/manager/'));
+                foreach ($this->users as $user) {
+                    if ($request->account == $user['account'] &&
+                        sha1($request->password . $user['salt']) == $user['password']
+                    ) {
+                        session([self::K_LOGIN_SESSION_KEY => $user]);
+                        return redirect($request->input('target', '/manager/'));
+                    }
+                }
             }
+            View::share('err_msg', '用户名或密码错误');
         }
         return view('manager.auth');
     }

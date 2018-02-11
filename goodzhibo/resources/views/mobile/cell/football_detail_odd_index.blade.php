@@ -123,7 +123,6 @@
                         <p class="gray">初</p>
                         <p class="gray">即</p>
                     </td>
-<<<<<<< HEAD
                     @if(isset($odd['goal']))
                         <td>
                             <p>{{$odd['goal']['up1']}}</p>
@@ -142,29 +141,6 @@
                         <td><p>-</p><p class="green">-</p></td>
                         <td><p>-</p><p class="green">-</p></td>
                     @endif
-=======
-                    <td>
-                        <p>{{$odd['goal']['up1']}}</p>
-                        <p
-                                @if($odd['goal']['up2'] > $odd['goal']['up1']) class="red" @endif
-                        @if($odd['goal']['up2'] < $odd['goal']['up1']) class="green" @endif
-                        >{{$odd['goal']['up2']}}</p>
-                    </td>
-                    <td>
-                        <p>{{$odd['goal']['middle1']}}</p>
-                        <p
-                                @if($odd['goal']['middle2'] > $odd['goal']['middle1']) class="red" @endif
-                        @if($odd['goal']['middle2'] < $odd['goal']['middle1']) class="green" @endif
-                        >{{$odd['goal']['middle2']}}</p>
-                    </td>
-                    <td>
-                        <p>{{$odd['goal']['down1']}}</p>
-                        <p
-                                @if($odd['goal']['down2'] > $odd['goal']['down1']) class="red" @endif
-                        @if($odd['goal']['down2'] < $odd['goal']['down1']) class="green" @endif
-                        >{{$odd['goal']['down2']}}</p>
-                    </td>
->>>>>>> 263cefc1a3ff5bb408dc4fd94269a3fd149200a1
                 </tr>
             @endforeach
             </tbody>

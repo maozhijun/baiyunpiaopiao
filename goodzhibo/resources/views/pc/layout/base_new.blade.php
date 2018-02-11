@@ -51,7 +51,9 @@
 </div>
 @yield('content')
 <div id="Bottom">
-    <p>Copyright 2014-2015 ©www.goodzhibo.com, All rights reserved.</p>
+    <?php $links = \App\Http\Controllers\Admin\LinkController::getLinks(); ?>
+    @if(isset($links) && count($links) > 0)<p>友情链接：@foreach($links as $link)<a target="_blank" href="{{$link['link']}}">{{$link['name']}}</a>@endforeach</p>@endif
+    <p>Copyright 2014-2015 ©www.goodzhibo.com, All rights reserved.商户合作QQ：<a style="margin-left: 0;" href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2801866107" target="_blank">2801866107</a></p>
     <p>免责声明：本站所有直播和视频链接均由网友提供，如有侵权问题，请及时联系，我们将尽快处理。</p>
 </div>
 @yield('bottom')

@@ -13,6 +13,9 @@ use App\Console\CacheCommands\ImmediateHtmlCommands;
 use App\Console\CacheCommands\MatchesDataCommands;
 use App\Console\CacheCommands\ResultHtmlCommands;
 use App\Console\CacheCommands\ScheduleHtmlCommands;
+use App\Console\DetailCommands\Football\FootImmediateHtmlCommands;
+use App\Console\DetailCommands\Football\FootResultHtmlCommands;
+use App\Console\DetailCommands\Football\FootScheduleHtmlCommands;
 use App\Http\Controllers\Mobile\Live\LiveController;
 use App\Http\Controllers\StaticHtml\ResultHtmlController;
 use Illuminate\Console\Scheduling\Schedule;
@@ -44,6 +47,9 @@ class Kernel extends ConsoleKernel
         EventsHtmlCommands::class,
         FootballWapDetailCommands::class,
         MatchesDataCommands::class,
+        FootImmediateHtmlCommands::class,
+        FootScheduleHtmlCommands::class,
+        FootResultHtmlCommands::class,
     ];
 
     /**
@@ -67,7 +73,6 @@ class Kernel extends ConsoleKernel
             $mController->matchLiveStatic(new Request());//每分钟刷新比赛状态数据
         })->everyMinute();
 
-
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $schedule->command('fb_list_json_cache:run')->everyMinute();//每分钟执行一次 足球当天列表的定时任务
         $schedule->command('bb_list_json_cache:run')->everyMinute();//每分钟执行一次 篮球当天列表的定时任务
@@ -85,6 +90,11 @@ class Kernel extends ConsoleKernel
         $schedule->command('bb_live_json_cache:run')->everyMinute();//篮球即时比赛数据、赔率数据
 
         $schedule->command('matches_data_cache:run')->hourly();//足球列表、篮球列表数据（3天前 - 3天后）缓存
+
+        //足球终端页面缓存
+        $schedule->command('foot_detail_immediate_html:run')->everyMinute();
+        $schedule->command('foot_detail_result_html:run')->everyTenMinutes();
+        $schedule->command('foot_detail_schedule_html:run')->everyTenMinutes();
     }
 
     /**

@@ -1,9 +1,9 @@
 <div class="title">
     <p>赔率指数</p>
     <div class="abox">
-        <a href="/match/odd/ou/{{$mid}}">[欧]</a>
-        <a href="/match/odd/goal/{{$mid}}">[大]</a>
-        <a href="/match/odd/asia/{{$mid}}">[亚]</a>
+        <a href="/football/detail_odd/{{$mid}}.html#ou">[欧]</a>
+        <a href="/football/detail_odd/{{$mid}}.html#goal">[大]</a>
+        <a href="/football/detail_odd/{{$mid}}.html#asia">[亚]</a>
     </div>
 </div>
 <table>
@@ -68,27 +68,32 @@
         </tr>
         <tr>
             <td>终盘</td>
-            <td
-            @if($banker['ou']['up2'] > $banker['ou']['up1'])
-                class="red"
-            @elseif($banker['ou']['up2'] < $banker['ou']['up1'])
-                class="green"
+            @if(isset($banker['ou']) && isset($banker['ou']['middle1']))
+                <td
+                @if($banker['ou']['up2'] > $banker['ou']['up1'])
+                    class="red"
+                @elseif($banker['ou']['up2'] < $banker['ou']['up1'])
+                    class="green"
+                @endif
+                >{{$banker['ou']['up2']}}</td>
+                <td
+                        @if($banker['ou']['middle2'] > $banker['ou']['middle1'])
+                        class="red"
+                        @elseif($banker['ou']['middle2'] < $banker['ou']['middle1'])
+                        class="green"
+                        @endif
+                >{{$banker['ou']['middle2']}}</td>
+                <td
+                        @if($banker['ou']['down2'] > $banker['ou']['down1'])
+                        class="red"
+                        @elseif($banker['ou']['down2'] < $banker['ou']['down1'])
+                        class="green"
+                        @endif
+                >{{$banker['ou']['down2']}}</td>
+            @else
+                <td>-</td><td>-</td><td>-</td>
             @endif
-            >{{$banker['ou']['up2']}}</td>
-            <td
-                    @if($banker['ou']['middle2'] > $banker['ou']['middle1'])
-                    class="red"
-                    @elseif($banker['ou']['middle2'] < $banker['ou']['middle1'])
-                    class="green"
-                    @endif
-            >{{$banker['ou']['middle2']}}</td>
-            <td
-                    @if($banker['ou']['down2'] > $banker['ou']['down1'])
-                    class="red"
-                    @elseif($banker['ou']['down2'] < $banker['ou']['down1'])
-                    class="green"
-                    @endif
-            >{{$banker['ou']['down2']}}</td>
+            @if(isset($banker['asia']['middle1']))
             <td
                     @if($banker['asia']['up2'] > $banker['asia']['up1'])
                     class="red"
@@ -111,6 +116,10 @@
                     @endif
             >{{$banker['asia']['down2']}}</td>
             <td>{{$banker['asia']['up2'] + $banker['asia']['down2']}}</td>
+            @else
+                <td>-</td><td>-</td><td>-</td>
+            @endif
+            @if($banker['goal']['middle1'])
             <td
                     @if($banker['goal']['up2'] > $banker['goal']['up1'])
                     class="red"
@@ -133,6 +142,9 @@
                     @endif
             >{{$banker['goal']['down2']}}</td>
             <td>{{$banker['goal']['up2'] + $banker['goal']['down2']}}</td>
+            @else
+                <td>-</td><td>-</td><td>-</td><td>-</td>
+            @endif
         </tr>
         </tbody>
     @endforeach

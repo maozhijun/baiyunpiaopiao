@@ -28,47 +28,47 @@
                 <tr>
                     <td>1</td>
                     <td>Bein Sports HD</td>
-                    <td><a href='/v1.html'>播放</a></td>
+                    <td><a href='/ch/v1.html'>播放</a></td>
                 </tr>
                 <tr>
                     <td>2</td>
                     <td>Super Sports 1 HD</td>
-                    <td><a href='/v2.html'>播放</a></td>
+                    <td><a href='/ch/v2.html'>播放</a></td>
                 </tr>
                 <tr>
                     <td>3</td>
                     <td>Super Sports 2 HD</td>
-                    <td><a href='/v3.html'>播放</a></td>
+                    <td><a href='/ch/v3.html'>播放</a></td>
                 </tr>
                 <tr>
                     <td>4</td>
                     <td>Super Sports 3 HD</td>
-                    <td><a href='/v4.html'>播放</a></td>
+                    <td><a href='/ch/v4.html'>播放</a></td>
                 </tr>
                 <tr>
                     <td>5</td>
                     <td>Super Sports 4 HD</td>
-                    <td><a href='/v5.html'>播放</a></td>
+                    <td><a href='/ch/v5.html'>播放</a></td>
                 </tr>
                 <tr>
                     <td>6</td>
                     <td>Astro Super Sports 1 HD</td>
-                    <td><a href='/v6.html'>播放</a></td>
+                    <td><a href='/ch/v6.html'>播放</a></td>
                 </tr>
                 <tr>
                     <td>7</td>
                     <td>Astro Super Sports 2 HD</td>
-                    <td><a href='/v7.html'>播放</a></td>
+                    <td><a href='/ch/v7.html'>播放</a></td>
                 </tr>
                 <tr>
                     <td>8</td>
                     <td>Astro Super Sports 3 HD</td>
-                    <td><a href='/v8.html'>播放</a></td>
+                    <td><a href='/ch/v8.html'>播放</a></td>
                 </tr>
                 <tr>
                     <td>9</td>
                     <td>Astro Super Sports 4 HD</td>
-                    <td><a href='/v9.html'>播放</a></td>
+                    <td><a href='/ch/v9.html'>播放</a></td>
                 </tr>
                 </tbody>
             </table>

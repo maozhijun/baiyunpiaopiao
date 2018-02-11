@@ -9,8 +9,9 @@
 namespace App\Http\Controllers\Mobile\Match;
 
 
+use App\Http\Controllers\FileTool;
 use App\Http\Controllers\Mobile\AppCommonResponse;
-use App\Models\Match\Match;
+use App\Http\Controllers\Mobile\Detail\DetailController;
 use App\Models\Match\MatchLive;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -30,57 +31,89 @@ class MatchDetailController
         }
     }
 
-    public function footballDetailTab(Request $request, $tab, $id) {
-        $match = $this->footballDetailMatchData($id);
-        $date = date('Ymd', $match['time']);
+    public function footballDetailTab(Request $request,$tab,$index,$id) {
+        if ($index != FileTool::getMidIndex($id)) return "";
 
+        $detailController = new DetailController();
+        $tabHtml = $detailController->detailCell($request, $tab, $index, $id);
+        return $this->footballDetailTabDetail($tab, $tabHtml);
+    }
+
+    public function footballDetailTabDetail($tab, $tabHtml) {
+        $data['html'] = $tabHtml;
         $views = "";
-        $data = $this->footballDetailBaseData($id, $date);
-        if (is_null($data)) {
-            $data = [];
-        }
         switch ($tab) {
             case "base":
-                $event = $this->footballEventData($id, $date);
-                if (isset($event)) {
-                    $data = array_merge($data, $event);
-                }
-                $data['match']['hicon'] = $match['hicon'];
-                $data['match']['aicon'] = $match['aicon'];
                 $views = 'app.football.match_detail_base';
                 break;
             case "analyse":
-                $oddData = $this->footballOddData($id, $date);
-                if (isset($oddData)) {
-                    $data = array_merge($data, $oddData);
-                }
                 $views = 'app.football.match_detail_analyse';
                 break;
             case "team":
-                $cornerData = $this->footballCornerData($id, $date);
-                if (isset($cornerData)) {
-                    $data = array_merge($data, $cornerData);
-                }
-                $styleData = $this->footballStyleData($id, $date);
-                if (isset($styleData)) {
-                    $data = array_merge($data, $styleData);
-                }
                 $views = 'app.football.match_detail_team';
                 break;
             case "odd":
-                $oddIndex = $this->footballOddIndexData($id, $date);
-                if (isset($oddIndex)) {
-                    $data = array_merge($data, $oddIndex);
-                }
                 $views = 'app.football.match_detail_odd';
                 break;
-            case "sameOdd":
-                $data = array_merge($data, $this->footballSameOddData($id, $date));
+            case "same_odd":
                 $views = 'app.football.match_detail_same_odd';
                 break;
         }
         return view($views, $data);
     }
+
+    //原有的逻辑，暂时保留
+//    public function footballDetailTab2(Request $request, $tab, $id) {
+//        $match = $this->footballDetailMatchData($id);
+//        $date = date('Ymd', $match['time']);
+//
+//        $views = "";
+//        $data = $this->footballDetailBaseData($id, $date);
+//        if (is_null($data)) {
+//            $data = [];
+//        }
+//        switch ($tab) {
+//            case "base":
+//                $event = $this->footballEventData($id, $date);
+//                if (isset($event)) {
+//                    $data = array_merge($data, $event);
+//                }
+//                $data['match']['hicon'] = $match['hicon'];
+//                $data['match']['aicon'] = $match['aicon'];
+//                $views = 'app.football.match_detail_base';
+//                break;
+//            case "analyse":
+//                $oddData = $this->footballOddData($id, $date);
+//                if (isset($oddData)) {
+//                    $data = array_merge($data, $oddData);
+//                }
+//                $views = 'app.football.match_detail_analyse';
+//                break;
+//            case "team":
+//                $cornerData = $this->footballCornerData($id, $date);
+//                if (isset($cornerData)) {
+//                    $data = array_merge($data, $cornerData);
+//                }
+//                $styleData = $this->footballStyleData($id, $date);
+//                if (isset($styleData)) {
+//                    $data = array_merge($data, $styleData);
+//                }
+//                $views = 'app.football.match_detail_team';
+//                break;
+//            case "odd":
+//                $oddIndex = $this->footballOddIndexData($id, $date);
+//                if (isset($oddIndex)) {
+//                    $data = array_merge($data, $oddIndex);
+//                }
+//                $views = 'app.football.match_detail_odd';
+//                break;
+//            case "sameOdd":
+//                $data = array_merge($data, $this->footballSameOddData($id, $date));
+//                $views = 'app.football.match_detail_same_odd';
+//                break;
+//        }
+//        return view($views, $data);
+//    }
 
         //足球比赛终端
     private function footballDetail(Request $request) {
@@ -92,13 +125,14 @@ class MatchDetailController
         $match['liveUrl'] = 'http://www.goodzhibo.com/m/live/football/'.$mid.'.html';
         $reset = $match;
 
+        $index = FileTool::getMidIndex($mid);
         //终端底部tab
         $reset['tabs'] = [
-            ["name"=>"分析", "url"=>env('APP_URL')."/m/app/football/tab/analyse/$mid"],
-            ["name"=>"赛况", "url"=>env('APP_URL')."/m/app/football/tab/base/$mid"],
-            ["name"=>"球队", "url"=>env('APP_URL')."/m/app/football/tab/team/$mid"],
-            ["name"=>"指数", "url"=>env('APP_URL')."/m/app/football/tab/odd/$mid"],
-            ["name"=>"同赔", "url"=>env('APP_URL')."/m/app/football/tab/sameOdd/$mid"],
+            ["name"=>"分析", "url"=>env('APP_URL')."/m/football/detail/tab/analyse/$index/"."app"."$mid".".html"],
+            ["name"=>"赛况", "url"=>env('APP_URL')."/m/football/detail/tab/base/$index/"."app"."$mid".".html"],
+            ["name"=>"球队", "url"=>env('APP_URL')."/m/football/detail/tab/team/$index/"."app"."$mid".".html"],
+            ["name"=>"指数", "url"=>env('APP_URL')."/m/football/detail/tab/odd/$index/"."app"."$mid".".html"],
+            ["name"=>"同赔", "url"=>env('APP_URL')."/m/football/detail/tab/same_odd/$index/"."app"."$mid".".html"],
         ];
         return Response::json(AppCommonResponse::createAppCommonResponse(0, '', $reset, false));
     }

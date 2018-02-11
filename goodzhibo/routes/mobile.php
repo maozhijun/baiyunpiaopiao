@@ -13,6 +13,7 @@
 
 Route::group(["namespace" => 'Live'], function () {
     Route::get('/',"HomeController@immediate");
+    Route::get('/index.html',"HomeController@immediate");
     Route::get('/football/immediate.html',"HomeController@immediate");
     Route::get('/football/result.html',"HomeController@result");
     Route::get('/football/schedule.html',"HomeController@schedule");
@@ -24,7 +25,6 @@ Route::group(["namespace" => 'Live'], function () {
     Route::get('/football/detail/style/{date}/{id}.html', 'HomeController@footballDetailStyle');
     Route::get('/football/detail/odd_index/{date}/{id}.html', 'HomeController@footballOddIndex');
     Route::get('/football/detail/same_odd/{date}/{id}.html', 'HomeController@footballSameOdd');
-//match_detail
 
     /////////////////======================================================================/////////////////
     Route::get('/basketball/immediate.html', 'BasketBallController@immediate');//篮球即时页面列表
@@ -36,6 +36,14 @@ Route::group(["namespace" => 'Live'], function () {
     /////////////////======================================================================/////////////////
     //Route::get('/', 'Live\LiveController@lives');
     //Route::get('/index.html', 'LiveController@lives');
+});
+
+Route::group(["namespace" => 'Detail'], function () {
+    Route::get('/football/detail/tab/{type}/{index}/wap{id}.html', 'DetailController@detailCell');
+
+    Route::get('/football/detail/team_cell/{date}/{id}.html', 'DetailController@teamCell');
+    Route::get('/football/detail/analyse_cell/{date}/{id}.html', 'DetailController@analyseCell');
+    Route::get('/football/detail/base_cell/{date}/{id}.html', 'DetailController@baseCell');
 });
 
 /**
@@ -75,5 +83,5 @@ Route::group(["namespace" => 'Match'], function () {
     Route::get("/app/match/{sport}/detail", "MatchDetailController@index");
 
     //足球比赛详情
-    Route::get("/app/football/tab/{tab}/{id}", "MatchDetailController@footballDetailTab");
+    Route::get("/football/detail/tab/{tab}/{index}/app{id}.html", "MatchDetailController@footballDetailTab");
 });

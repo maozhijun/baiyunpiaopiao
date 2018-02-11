@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class HeiEncodesController extends BaseController
 {
-    private $ali_host = "live.cdn.vcgood.net";
-    private $ali_key = "t7Trm3V0Sg";
+    private $ali_host = "hls.cdn.vcgood.net";
+    private $ali_key = "At7Trm3V0SgZ";
     private $ali_rtmp = "rtmp://video-center.alivecdn.com";
     private $alicdns = [
         'hei-1' => '/lives/hei-1',
@@ -21,9 +21,13 @@ class HeiEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from','QQ')->where('to','HEITU')->where('status', 1)->get();
-
-        return view('manager.hei', ['ets' => $ets, 'alicdns' => $this->alicdns]);
+        $ets = EncodeTask::query()->where('from', 'QQ')->where('to', 'HEITU')->where('status', 1)->get();
+        $user = session(AuthController::K_LOGIN_SESSION_KEY);
+        if ($user['role'] == 'admin') {
+            return view('manager.hei', ['ets' => $ets, 'alicdns' => $this->alicdns]);
+        } else {
+            return view('manager.hei', ['ets' => $ets, 'alicdns' => []]);
+        }
     }
 
     public function created(Request $request)

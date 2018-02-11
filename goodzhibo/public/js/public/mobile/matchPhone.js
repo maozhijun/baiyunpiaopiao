@@ -88,8 +88,9 @@ function setCanvas () {
 }
 
 function getSameOdd(so_id) {
+    var sameOddUrl = getCdnUrl('/m/football/detail/same_odd/' + window.startTime + '/' + window.mid + '.html');
     $.ajax({
-        'url': '/m/football/detail/same_odd/' + window.startTime + '/' + window.mid + '.html',
+        'url': sameOddUrl,
         'type': 'get',
         'dataType': 'html',
         'success': function (html) {
@@ -105,8 +106,9 @@ function getSameOdd(so_id) {
 }
 
 function getOddIndex(id) {
+    var oddIndexUrl = getCdnUrl('/m/football/detail/odd_index/' + window.startTime + '/' + window.mid + '.html');
     $.ajax({
-        'url': '/m/football/detail/odd_index/' + window.startTime + '/' + window.mid + '.html',
+        'url': oddIndexUrl,
         'type': 'get',
         'dataType': 'html',
         'success': function (html) {
@@ -122,8 +124,9 @@ function getOddIndex(id) {
 }
 
 function getTeamStyle(id) {
+    var teamStyle = getCdnUrl('/m/football/detail/style/' + window.startTime + '/' + window.mid + '.html');
     $.ajax({
-        'url': '/m/football/detail/style/' + window.startTime + '/' + window.mid + '.html',
+        'url': teamStyle,
         'type': 'get',
         'dataType': 'html',
         'success': function (html) {
@@ -143,8 +146,9 @@ function getTeamStyle(id) {
 }
 
 function getCorner(id) {
+    var cornerUrl = getCdnUrl('/m/football/detail/corner/' + window.startTime + '/' + window.mid + '.html');
     $.ajax({
-        'url': '/m/football/detail/corner/' + window.startTime + '/' + window.mid + '.html',
+        'url': cornerUrl,
         'type': 'get',
         'dataType': 'html',
         'success': function (html) {
@@ -167,5 +171,13 @@ function getCorner(id) {
             });
         }
     });
+}
 
+function getCdnUrl(url) {
+    if (!window.cdn_url) {
+        window.cdn_url = "//static.cdn.vcgood.net";
+    }
+    var http = location.href.indexOf('https://') != -1 ? 'https:' : 'http:';
+    var url = http + window.cdn_url + url;
+    return url;
 }

@@ -1,6 +1,7 @@
 @extends('app.layout.match_base')
 
 @section('content')
+    {{--
     @if(isset($base))
         <div id="Team" class="content">
             <div id="Trait" class="childNode" style="display: ;">
@@ -10,14 +11,12 @@
                     @component("mobile.cell.football_detail_style",['ws'=>$ws, 'match'=>$match])
                     @endcomponent
                 @endif
-                <div class="nolist">暂无数据</div>
             </div>
             <div id="Corner" class="childNode" style="display: none;">
                 @component("mobile.cell.football_detail_corner",['base'=>$base, 'odd'=>$odd,
                 'hname'=>$hname, 'aname'=>$aname, 'hid'=>$hid, 'aid'=>$aid,
                 'anaylse'=>$anaylse, 'historyBattle'=>$historyBattle, 'historyBattleResult'=>$historyBattleResult, 'recentBattle'=>$recentBattle])
                 @endcomponent
-                <div class="nolist">暂无数据</div>
             </div>
             <div class="bottom">
                 <div class="btn">
@@ -29,4 +28,9 @@
             </div>
         </div>
     @endif
+    --}}
+    @if(isset($html))
+        <div id="Team" class="content">{!! $html !!}</div>
+    @endif
+    <div class="nolist">暂无数据</div>
 @endsection
