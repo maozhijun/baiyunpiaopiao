@@ -123,4 +123,56 @@ class MatchDetailController
         ];
         return Response::json(AppCommonResponse::createAppCommonResponse(0, '', $reset, false));
     }
+
+    public function basketballDetailTab(Request $request, $tab, $id) {
+        $match = $this->basketballDetailMatchData($id);
+        $date = date('Ymd', $match['time']);
+
+        $views = "";
+        $data = $this->footballDetailBaseData($id, $date);
+        if (is_null($data)) {
+            $data = [];
+        }
+        switch ($tab) {
+            case "base":
+                $event = $this->footballEventData($id, $date);
+                if (isset($event)) {
+                    $data = array_merge($data, $event);
+                }
+                $data['match']['hicon'] = $match['hicon'];
+                $data['match']['aicon'] = $match['aicon'];
+                $views = 'app.football.match_detail_base';
+                break;
+            case "analyse":
+                $oddData = $this->footballOddData($id, $date);
+                if (isset($oddData)) {
+                    $data = array_merge($data, $oddData);
+                }
+                $views = 'app.football.match_detail_analyse';
+                break;
+            case "team":
+                $cornerData = $this->footballCornerData($id, $date);
+                if (isset($cornerData)) {
+                    $data = array_merge($data, $cornerData);
+                }
+                $styleData = $this->footballStyleData($id, $date);
+                if (isset($styleData)) {
+                    $data = array_merge($data, $styleData);
+                }
+                $views = 'app.football.match_detail_team';
+                break;
+            case "odd":
+                $oddIndex = $this->basketballOddIndexData($id, $date);
+                if (isset($oddIndex)) {
+                    $data = array_merge($data, $oddIndex);
+                }
+                $views = 'app.football.match_detail_odd';
+                break;
+            case "sameOdd":
+                $data = array_merge($data, $this->footballSameOddData($id, $date));
+                $views = 'app.football.match_detail_same_odd';
+                break;
+        }
+        return view($views, $data);
+    }
 }
