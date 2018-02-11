@@ -797,7 +797,6 @@
         function clickMatchBase() {
             onChangeTab('Match');
             if (0 == $('#Match div').length){
-                Alert('loading');
                 var url = getCdnUrl('/football/detail_cell/base/{{$startTime}}/{{$id}}.html');
                 $.ajax({
                     "url": url,
@@ -830,10 +829,8 @@
                         else{
                             $('div.leftBar p.Match a[name=event]')[0].className = 'hide';
                         }
-                        closeLoading();
                     },
                     "error": function () {
-                        closeLoading();
                     }
                 })
             }
@@ -842,7 +839,6 @@
         function clickCharacteristic(type) {
             onChangeTab('Characteristic');
             if (0 == $('#Characteristic div').length){
-                Alert('loading');
                 var url = getCdnUrl("/football/detail_cell/chara/{{$startTime}}/{{$id}}.html");
                 $.ajax({
                     "url": url,
@@ -886,10 +882,8 @@
                         else{
                             $('div.leftBar p.Characteristic a[name=sameOdd]')[0].className = 'hide';
                         }
-                        closeLoading();
                     },
                     "error": function () {
-                        closeLoading();
                     }
                 })
             }

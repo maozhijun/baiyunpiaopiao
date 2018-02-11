@@ -10,6 +10,7 @@ namespace App\Console\CacheCommands;
 
 use App\Http\Controllers\CacheInterface\FootballInterface;
 use App\Http\Controllers\PC\Index\FootballController;
+use App\Http\Controllers\StaticHtml\FootballDetailController;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -54,17 +55,14 @@ class FootballDetailCommands extends Command
             return "暂无比赛";
         }
         $matches = isset($json['matches']) ? $json['matches'] : [];
-        $pc = new FootballController();
+//        $pc = new FootballController();
         foreach ($matches as $match) {
             $status = $match['status'];
             if ($status > 0) {
                 $start_time = $match['time'];
                 $date = date('Ymd', strtotime($start_time));
                 $id = $match['mid'];
-                $this->detailHtml($id, $request, $pc, $date);
-                $this->cornerHtml($request, $date, $id, $pc);
-                $this->charaHtml($request, $date, $id, $pc);
-                $this->baseHtml($request, $date, $id, $pc);
+                FootballDetailController::curlToHtml($date, $id);
             }
         }
         //首先加载pc终端

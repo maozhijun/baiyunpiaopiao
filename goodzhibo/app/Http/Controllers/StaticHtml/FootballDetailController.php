@@ -85,9 +85,27 @@ class FootballDetailController extends Controller
      * @param $date
      * @param $id
      */
-    public function flushPcDetailCache(Request $request, $date, $id) {
+    public function flushPcDetailAllCache(Request $request, $date, $id) {
         $pc = new FootballController();
-        $this->pcBaseHtml($request, $date, $id, $pc);
+        $this->pcDetailHtml($request, $date, $id, $pc);//分析数据
+        $this->pcBaseHtml($request, $date, $id, $pc);//基本赛况
+        $this->pcCornerHtml($request, $date, $id, $pc);//角球数据
+        $this->pcCharaHtml($request, $date, $id, $pc);//特色数据
+    }
+
+    /**
+     * 通过请求自己的链接静态化pc终端，主要是解决 文件权限问题。
+     * @param $date
+     * @param $mid
+     */
+    public static function curlToHtml($date, $mid) {
+        $ch = curl_init();
+        $url = asset('/static/football/detail/' . $date . '/' . $mid);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_exec ($ch);
+        curl_close ($ch);
     }
 
     //-------------------------------------------------------------------------------------//
@@ -175,15 +193,19 @@ class FootballDetailController extends Controller
 
     /**
      * 开始的终端数据
-     * @param $id
      * @param $request
-     * @param $controller
      * @param $date
+     * @param $id
+     * @param $controller
      */
-    public function pcDetailHtml($id, $request, $controller, $date) {
-        $detail_html = $controller->detail($request, $date, $id);
-        $patch = '/static/football/detail/' . $date . '/' . $id . '.html';
-        Storage::disk('public')->put($patch, $detail_html);
+    public function pcDetailHtml($request , $date, $id, $controller) {
+        try {
+            $detail_html = $controller->detail($request, $date, $id);
+            $patch = '/static/football/detail/' . $date . '/' . $id . '.html';
+            Storage::disk('public')->put($patch, $detail_html);
+        } catch (Exception $e) {
+            echo 'pcDetailHtml error' . $e->getMessage();
+        }
     }
 
     /**
@@ -199,7 +221,7 @@ class FootballDetailController extends Controller
             $patch = '/static/football/detail_cell/corner/' . $date . '/' . $id . '.html';
             Storage::disk('public')->put($patch, $cornerHtml);
         } catch (\Exception $exception) {
-            echo ' exception cornerHtml : ' . $id . ' ,,';
+            echo ' exception pcCornerHtml : ' . $id . $exception->getMessage() . ' ,,';
         }
     }
 
@@ -231,7 +253,6 @@ class FootballDetailController extends Controller
         try {
             $baseHtml = $controller->footballBaseCell($request, $date, $id);
             $patch = '/static/football/detail_cell/base/' . $date . '/' . $id . '.html';
-            ///football/detail_cell/base/{date}/{id}.html
             Storage::disk('public')->put($patch, $baseHtml);
         } catch (\Exception $exception) {
             echo ' exception baseHtml : ' . $id . ' ,,';
