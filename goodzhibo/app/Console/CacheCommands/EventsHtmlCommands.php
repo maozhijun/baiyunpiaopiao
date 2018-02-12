@@ -64,6 +64,7 @@ class EventsHtmlCommands extends Command
                 $id = $match['mid'];
                 //echo $start_time . ',' . $id . '。';
                 FootballEventsController::curlEventsToHtml($date, $id);
+                usleep(500);
             }
         }
     }

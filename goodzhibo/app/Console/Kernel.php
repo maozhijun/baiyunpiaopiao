@@ -22,7 +22,6 @@ use App\Console\DetailCommands\Football\FootImmediateHtmlCommands;
 use App\Console\DetailCommands\Football\FootResultHtmlCommands;
 use App\Console\DetailCommands\Football\FootScheduleHtmlCommands;
 use App\Http\Controllers\Mobile\Live\LiveController;
-use App\Http\Controllers\StaticHtml\ResultHtmlController;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Http\Request;

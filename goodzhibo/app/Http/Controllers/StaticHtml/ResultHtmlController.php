@@ -70,7 +70,11 @@ class ResultHtmlController extends Controller
         $key = self::Redis_key_pre . 'WAP_' . $paramDate;
         $exc_array = json_decode(Redis::get($key));
         if (is_null($exc_array)) $exc_array = [];
+        $index = 0;
         foreach ($matches as $match) {
+            if ($index > 4) {
+                break;
+            }
             $start_time = $match['time'];
             $id = $match['mid'];
             if (in_array($id, $exc_array)) {
@@ -83,6 +87,7 @@ class ResultHtmlController extends Controller
             echo '请求时间：' . (time() - $start) . '</br>';
             $exc_array[] = $id;
             Redis::set($key, json_encode($exc_array));
+            $index++;
         }
         echo '<br/>完成!!!!!';
     }
@@ -99,7 +104,11 @@ class ResultHtmlController extends Controller
         $key = self::Redis_key_pre . 'PC_' . $paramDate;
         $exc_array = json_decode(Redis::get($key));
         if (is_null($exc_array)) $exc_array = [];
+        $index = 0;
         foreach ($matches as $match) {
+            if ($index > 4) {
+                break;
+            }
             $start_time = $match['time'];
             $id = $match['mid'];
             if (in_array($id, $exc_array)) {
@@ -113,6 +122,7 @@ class ResultHtmlController extends Controller
             echo '请求时间：' . (time() - $start) . '</br>';
             $exc_array[] = $id;
             Redis::set($key, json_encode($exc_array));
+            $index++;
         }
         echo '<br/>完成!!!!!';
     }

@@ -50,8 +50,11 @@ class FootballEventsController extends Controller
         $key = self::Redis_prefix_Key . $date;
         $exc_array = json_decode(Redis::get($key));
         if (is_null($exc_array)) $exc_array = [];
-
+        $index = 0;
         foreach ($matches as $match) {
+            if ($index > 10) {
+                break;
+            }
             $id = $match['mid'];
             if (in_array($id, $exc_array)) {
                 continue;
@@ -62,8 +65,9 @@ class FootballEventsController extends Controller
             FootballEventsController::curlEventsToHtml($date, $id);
             $exc_array[] = $id;
             Redis::set($key, json_encode($exc_array));
+            $index++;
         }
-        echo '<br/>完成!!!!!';
+        echo '共静态化' . $index . '个比赛事件<br/>完成!!!!!';
     }
 
 }
