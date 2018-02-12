@@ -52,7 +52,7 @@ class FootballEventsController extends Controller
         if (is_null($exc_array)) $exc_array = [];
         $index = 0;
         foreach ($matches as $match) {
-            if ($index > 10) {
+            if ($index > 4) {
                 break;
             }
             $id = $match['mid'];

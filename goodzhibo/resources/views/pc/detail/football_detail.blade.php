@@ -263,11 +263,8 @@
             @endif
             @if(isset($base['matches']))
                 <div class="video"
-                     @if($base['matches'] && $base['matches']['status'] > 0 && $isLive)
-                     style="display: block"
-                     @else
-                     style="display: none"
-                        @endif
+                     @if($base['matches'] && $base['matches']['status'] > 0 && $isLive) style="display: block"
+                     @else style="display: none" @endif
                 >
                     <a target="_blank" href="{{\App\Http\Controllers\CommonTool::matchLiveFullPathWithId($id)}}" class="goVideo">正在直播</a>
                     <a target="_blank" href="{{\App\Http\Controllers\CommonTool::matchLiveFullPathWithId($id)}}"><img src="{{env('CDN_URL')}}/img/pc/icon_home_video_live.gif"></a>
@@ -334,7 +331,7 @@
             //setOnChangeTab();
             setDataCanvas();
             setBG();
-
+            hasLiveNew('{{$id}}');//执行一次.
             if(location.href.indexOf('#Characteristic')!=-1) {
                 var Oddtype = GetQueryString('type',location.href);
                 if (Oddtype > 0) {
@@ -352,7 +349,8 @@
             $('#Info .sameOdd a').click(function(){
                 $('#Tab_Characteristic').trigger('click');
                 location.href = '#Characteristic_SameOdd';
-            })
+            });
+
         }
     </script>
     <script type="text/javascript">
@@ -1154,7 +1152,7 @@
         @if(isset($id) && $base['matches']['status'] > 0 && $base['matches']['status'] < 4)
         function refresh() {
             refreshMatch();
-            hasLive();
+            hasLiveNew('{{$id}}');
         }
         setInterval(refresh, 5000);
         @endif
@@ -1221,7 +1219,6 @@
                 }
             });
         }
-        hasLive();//执行一次.
         $("a[href=#Navigation]").click(function () {
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;

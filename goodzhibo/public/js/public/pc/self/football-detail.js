@@ -115,3 +115,30 @@ function eventConvert(json) {
         }
     });
 }
+
+function hasLiveNew(id) {
+    //直播刷新
+    var url = getCdnUrl('/football/has_live/' + id + '.json');
+    $.ajax({
+        "url": url,
+        "dataType": "json",
+        "success": function (json) {
+            if ($('div.video').length > 0) {
+                $('div.video')[0].style.display = json['live'] == 0 ? 'none' : '';
+            }
+            if ($('div.analysis').length > 0) {
+                $('div.analysis')[0].style.display = json['live'] == 0 ? '' : 'none';
+            }
+            if ($('#Info div.sameOdd').length > 0) {
+                if (json['live'] == 0) {
+                    $('#Info div.sameOdd').show();
+                } else {
+                    $('#Info div.sameOdd').hide();
+                }
+            }
+        },
+        "error": function () {
+
+        }
+    });
+}
