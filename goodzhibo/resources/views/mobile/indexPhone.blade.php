@@ -34,7 +34,8 @@
     @if(isset($matches) && count($matches) > 0)
     <ul id="List" class="football" style="display: block;">
         @foreach($matches as $match)
-            <a class="li" href="/m/football/detail/{{date('Ymd', strtotime($match['time']))}}/{{$match['mid']}}.html" lid="{{$match['lid']}}">
+            <?php $isFirst = $type == 'lives' || (($match['genre'] >> 1 & 1) == 1); ?>
+            <a @if(!$isFirst) style="display: none;" @endif class="li" href="/m/football/detail/{{date('Ymd', strtotime($match['time']))}}/{{$match['mid']}}.html" lid="{{$match['lid']}}">
                 <div class="part">
                     <p class="time">{{date('H:i', strtotime($match['time']))}}</p>
                     <p class="league">{{$match['league_name']}}</p>
@@ -84,7 +85,7 @@
                     @foreach($league_array as $letter=>$leagues)
                         @foreach($leagues as $lid=>$league)
                             <li>
-                                <input type="checkbox" name="league" id="League_ALL_{{$lid}}" value="{{$lid}}">
+                                <input checked type="checkbox" name="league" id="League_ALL_{{$lid}}" value="{{$lid}}">
                                 <label for="League_ALL_{{$lid}}">{{$league['name']}}</label>
                             </li>
                         @endforeach
@@ -95,7 +96,7 @@
                         @foreach($leagues as $lid=>$league)
                             @if($league['isFive'])
                             <li>
-                                <input type="checkbox" name="league" id="League_Lottery_{{$lid}}" value="{{$lid}}">
+                                <input checked type="checkbox" name="league" id="League_Lottery_{{$lid}}" value="{{$lid}}">
                                 <label for="League_Lottery_{{$lid}}">{{$league['name']}}</label>
                             </li>
                             @endif
@@ -107,7 +108,7 @@
                         @foreach($leagues as $lid=>$league)
                             @if($league['isFirst'])
                                 <li>
-                                    <input type="checkbox" name="league" id="League_One_{{$lid}}" value="{{$lid}}">
+                                    <input checked type="checkbox" name="league" id="League_One_{{$lid}}" value="{{$lid}}">
                                     <label for="League_One_{{$lid}}">{{$league['name']}}</label>
                                 </li>
                             @endif

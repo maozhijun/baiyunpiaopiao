@@ -128,12 +128,17 @@ class QQEncodesController extends BaseController
     public function createdAliRoom(Request $request)
     {
         $timestamp = time() + 10800;
-        $sstring = $this->alicdns['10000'] . "-$timestamp-0-0-" . $this->ali_key;
+        $sstring = $this->alicdns['10002'] . "-$timestamp-0-0-" . $this->ali_key;
         $auth_key = "$timestamp-0-0-" . md5($sstring);
-        $rtmp = $this->ali_rtmp . $this->alicdns['10000'] . '?vhost=' . $this->ali_host . '&auth_key=' . $auth_key;
-        $sstring = $this->alicdns['10000'] . ".m3u8-$timestamp-0-0-" . $this->ali_key;
+        $rtmp = $this->ali_rtmp . $this->alicdns['10002'] . '?vhost=' . $this->ali_host . '&auth_key=' . $auth_key;
+
+        $sstring = $this->alicdns['10002'] . ".m3u8-$timestamp-0-0-" . $this->ali_key;
         $auth_key = "$timestamp-0-0-" . md5($sstring);
-        $output = "http://" . $this->ali_host . $this->alicdns['10000'] . ".m3u8?auth_key=" . $auth_key;
-        echo $rtmp . '<br>' . $output;
+        $output_m3u8 = "http://" . $this->ali_host . $this->alicdns['10002'] . ".m3u8?auth_key=" . $auth_key;
+
+        $sstring = $this->alicdns['10002'] . ".flv-$timestamp-0-0-" . $this->ali_key;
+        $auth_key = "$timestamp-0-0-" . md5($sstring);
+        $output_flv = "http://" . $this->ali_host . $this->alicdns['10002'] . ".flv?auth_key=" . $auth_key;
+        echo $rtmp . '<br>' . $output_m3u8 . '<br>' . $output_flv;
     }
 }

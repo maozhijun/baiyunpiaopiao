@@ -5,8 +5,7 @@
     </div>
     <div class="host">
         <div class="name">
-            <p>{{$hname}}<span class="leagueRankH"></span></p>
-            @if(array_key_exists('h_lineup_per',$lineup))
+            @if(array_key_exists('h_lineup_per',$lineup) && is_numeric($lineup['h_lineup_per']))
                 <p class="number">本场比赛有<b>{{number_format($lineup['h_lineup_per']*0.01*11,0)}}</b>名主力首发</p>
                 <dl>
                     <dt>（{{round($lineup['h_lineup_per'],2)}}%）</dt>

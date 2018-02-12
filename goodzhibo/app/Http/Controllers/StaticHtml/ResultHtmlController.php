@@ -16,11 +16,13 @@ use App\Http\Controllers\PC\Index\BasketballController;
 use App\Http\Controllers\PC\Index\FootballController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 
 class ResultHtmlController extends Controller
 {
     const KEY = "BYPP";
+    const Redis_key_pre = "Redis_key_pre_";
     public function staticHtml(Request $request) {
         $key = $request->input('key');//验证密钥
         if ($key != self::KEY) {
@@ -56,23 +58,83 @@ class ResultHtmlController extends Controller
     }
 
 
-    public function test(Request $request) {
-        $date = '20180207';
-        $sport = 1;
-        $mid = '1061376';
-        $patch = 'public/json/detail/' . $date . '/' . $sport . '/' . $mid .'/odd.json';
-        $detail_patch = CacheTool::getCacheJsonPatch($patch);
-        try {
-            $json = file_get_contents($detail_patch);
-            return $json;
-        } catch (\Exception $exception) {
-            $msg = $exception->getMessage();
-            if (preg_match('/No such file or directory/', $msg)) {
-                echo '该文件不存在';
-                return null;
-            }
+    public function wapDetailToHtml(Request $request) {
+        $paramDate = $request->input('date');
+        if (empty($paramDate)) {
+            return "参数错误";
         }
-        return [];
+
+        $home = new HomeController();
+        $json = $home->footballData($paramDate);
+        $matches = isset($json['matches']) ? $json['matches'] : [];
+        $key = self::Redis_key_pre . 'WAP_' . $paramDate;
+        $exc_array = json_decode(Redis::get($key));
+        if (is_null($exc_array)) $exc_array = [];
+        $index = 0;
+        foreach ($matches as $match) {
+            if ($index > 4) {
+                break;
+            }
+            $start_time = $match['time'];
+            $id = $match['mid'];
+            if (in_array($id, $exc_array)) {
+                continue;
+            }
+            $date = date('Ymd', strtotime($start_time));
+            echo $match['hname'] . ' VS ' . $match['aname'] . ' time : ' . $match['time'];
+            $start = time();
+            $this->toHtml($date, $id);
+            echo '请求时间：' . (time() - $start) . '</br>';
+            $exc_array[] = $id;
+            Redis::set($key, json_encode($exc_array));
+            $index++;
+        }
+        echo '<br/>完成!!!!!';
+    }
+
+    public function pcDetailToHtml(Request $request) {
+        $paramDate = $request->input('date');
+        if (empty($paramDate)) {
+            return "参数错误";
+        }
+
+        $home = new HomeController();
+        $json = $home->footballData($paramDate);
+        $matches = isset($json['matches']) ? $json['matches'] : [];
+        $key = self::Redis_key_pre . 'PC_' . $paramDate;
+        $exc_array = json_decode(Redis::get($key));
+        if (is_null($exc_array)) $exc_array = [];
+        $index = 0;
+        foreach ($matches as $match) {
+            if ($index > 4) {
+                break;
+            }
+            $start_time = $match['time'];
+            $id = $match['mid'];
+            if (in_array($id, $exc_array)) {
+                continue;
+            }
+            $date = date('Ymd', strtotime($start_time));
+            echo $match['hname'] . ' VS ' . $match['aname'] . ' time : ' . $match['time'];
+            $start = time();
+            //$this->toHtml($date, $id);
+            FootballDetailController::curlToHtml($date, $id);
+            echo '请求时间：' . (time() - $start) . '</br>';
+            $exc_array[] = $id;
+            Redis::set($key, json_encode($exc_array));
+            $index++;
+        }
+        echo '<br/>完成!!!!!';
+    }
+
+    protected function toHtml($date, $mid) {
+        $ch = curl_init();
+        $url = 'http://goodzhibo.com/static/football/detail/wap/' . $date . '/' . $mid;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_exec ($ch);
+        curl_close ($ch);
     }
 
 }

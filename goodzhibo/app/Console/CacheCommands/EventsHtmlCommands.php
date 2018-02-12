@@ -11,6 +11,7 @@ namespace App\Console\CacheCommands;
 
 use App\Http\Controllers\CacheInterface\FootballInterface;
 use App\Http\Controllers\PC\Index\FootballController;
+use App\Http\Controllers\StaticHtml\FootballEventsController;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -48,7 +49,6 @@ class EventsHtmlCommands extends Command
      */
     public function handle()
     {
-        $request = new Request();
         $fbIntf = new FootballInterface();
         $jsonStr = $fbIntf->matchListDataJson();//获取即时的比赛信息。
         $json = json_decode($jsonStr, true);
@@ -56,17 +56,15 @@ class EventsHtmlCommands extends Command
             return "暂无比赛";
         }
         $matches = isset($json['matches']) ? $json['matches'] : [];
-        $pc = new FootballController();
         foreach ($matches as $match) {
             $status = $match['status'];
             if ($status > 0) {
                 $start_time = $match['time'];
                 $date = date('Ymd', strtotime($start_time));
                 $id = $match['mid'];
-                $eventHtml = $pc->eventHtml($request, $date, $id);
-                //http://www.goodzhibo.com/football/event/20180208/1060220.json
-                $patch = '/static/football/event/' . $date . '/' . $id . '.json';
-                Storage::disk("public")->put($patch, $eventHtml);
+                //echo $start_time . ',' . $id . '。';
+                FootballEventsController::curlEventsToHtml($date, $id);
+                usleep(500);
             }
         }
     }

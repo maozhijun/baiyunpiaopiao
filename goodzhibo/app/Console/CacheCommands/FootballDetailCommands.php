@@ -10,6 +10,7 @@ namespace App\Console\CacheCommands;
 
 use App\Http\Controllers\CacheInterface\FootballInterface;
 use App\Http\Controllers\PC\Index\FootballController;
+use App\Http\Controllers\StaticHtml\FootballDetailController;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -54,17 +55,14 @@ class FootballDetailCommands extends Command
             return "暂无比赛";
         }
         $matches = isset($json['matches']) ? $json['matches'] : [];
-        $pc = new FootballController();
+//        $pc = new FootballController();
         foreach ($matches as $match) {
             $status = $match['status'];
             if ($status > 0) {
                 $start_time = $match['time'];
                 $date = date('Ymd', strtotime($start_time));
                 $id = $match['mid'];
-                $this->detailHtml($id, $request, $pc, $date);
-                $this->cornerHtml($request, $date, $id, $pc);
-                $this->charaHtml($request, $date, $id, $pc);
-                $this->baseHtml($request, $date, $id, $pc);
+                FootballDetailController::curlToHtml($date, $id);
             }
         }
         //首先加载pc终端
@@ -77,7 +75,7 @@ class FootballDetailCommands extends Command
      * @param $controller
      * @param $date
      */
-    protected function detailHtml($id, $request, $controller, $date) {
+    public function detailHtml($id, $request, $controller, $date) {
         $detail_html = $controller->detail($request, $date, $id);
         $patch = '/static/football/detail/' . $date . '/' . $id . '.html';
         Storage::disk('public')->put($patch, $detail_html);
@@ -90,7 +88,7 @@ class FootballDetailCommands extends Command
      * @param $id
      * @param $controller
      */
-    protected function cornerHtml($request, $date, $id, $controller) {
+    public function cornerHtml($request, $date, $id, $controller) {
         try {
             $cornerHtml = $controller->footballCornerCell($request, $date, $id);
             $patch = '/static/football/detail_cell/corner/' . $date . '/' . $id . '.html';
@@ -107,7 +105,7 @@ class FootballDetailCommands extends Command
      * @param $id
      * @param $controller
      */
-    protected function charaHtml($request, $date, $id, $controller) {
+    public function charaHtml($request, $date, $id, $controller) {
         try {
             $charaHtml = $controller->footballCharacteristicCell($request, $date, $id);
             $patch = '/static/football/detail_cell/chara/' . $date . '/' . $id . '.html';
@@ -124,7 +122,7 @@ class FootballDetailCommands extends Command
      * @param $id
      * @param $controller
      */
-    protected function baseHtml($request, $date, $id, $controller) {
+    public function baseHtml($request, $date, $id, $controller) {
         try {
             $baseHtml = $controller->footballBaseCell($request, $date, $id);
             $patch = '/static/football/detail_cell/base/' . $date . '/' . $id . '.html';
@@ -134,6 +132,5 @@ class FootballDetailCommands extends Command
             echo ' exception baseHtml : ' . $id . ' ,,';
             dump($exception);
         }
-
     }
 }

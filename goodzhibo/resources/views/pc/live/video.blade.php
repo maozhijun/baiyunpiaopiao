@@ -6,7 +6,7 @@
             <div id="Info">
                 <p class="name">{{$match['lname']}}直播：{{$match['hname']}}&nbsp;&nbsp;VS&nbsp;&nbsp;{{$match['aname']}}</p>
                 <p class="line">
-                <?php $channels = $live['channels']; ?>
+                <?php $channels = $live['channels']; $channels = is_array($channels) ? $channels : []; ?>
                     @foreach($channels as $index=>$channel)
                         <?php
                         if ($channel['type'] == 3 || $channel['type'] == 1 || $channel['type'] == 2 || $channel['type'] == 7)

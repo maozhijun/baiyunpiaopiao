@@ -88,6 +88,7 @@ function setCanvas () {
 }
 
 function getSameOdd(so_id) {
+    Alert('loading', '加载中');
     var sameOddUrl = getCdnUrl('/m/football/detail/same_odd/' + window.startTime + '/' + window.mid + '.html');
     $.ajax({
         'url': sameOddUrl,
@@ -101,11 +102,16 @@ function getSameOdd(so_id) {
                 $(this).parents('.content').children('.childNode').css('display','none');
                 $('#' + this.value).css('display','');
             });
+            closeLoading();
+        },
+        "error": function () {
+            closeLoading();
         }
     });
 }
 
 function getOddIndex(id) {
+    Alert('loading', '加载中');
     var oddIndexUrl = getCdnUrl('/m/football/detail/odd_index/' + window.startTime + '/' + window.mid + '.html');
     $.ajax({
         'url': oddIndexUrl,
@@ -119,11 +125,16 @@ function getOddIndex(id) {
                 $(this).parents('.content').children('.childNode').css('display','none');
                 $('#' + this.value).css('display','');
             });
+            closeLoading();
+        },
+        "error": function () {
+            closeLoading();
         }
     });
 }
 
 function getTeamStyle(id) {
+    Alert('loading', '加载中');
     var teamStyle = getCdnUrl('/m/football/detail/style/' + window.startTime + '/' + window.mid + '.html');
     $.ajax({
         'url': teamStyle,
@@ -141,11 +152,16 @@ function getTeamStyle(id) {
                     $(this).parents('.default').attr('close','close');
                 }
             });
+            closeLoading();
+        },
+        "error": function () {
+            closeLoading();
         }
     });
 }
 
 function getCorner(id) {
+    Alert('loading', '加载中');
     var cornerUrl = getCdnUrl('/m/football/detail/corner/' + window.startTime + '/' + window.mid + '.html');
     $.ajax({
         'url': cornerUrl,
@@ -169,6 +185,56 @@ function getCorner(id) {
                     $(this).parents('.default').attr('close','close');
                 }
             });
+            closeLoading();
+        },
+        "error": function () {
+            closeLoading();
+        }
+    });
+}
+function refreshMatch(mid) {
+    //刷新比赛信息
+    var url = getCdnUrl("/football/change/live.json");
+    $.ajax({
+        "url": url + "?rd=" + (new Date()).getTime(),
+        "dataType": "json",
+        "success": function (json) {
+            var dataItem = json[mid];
+            if (!dataItem) {
+                return;
+            }
+            var scoreItem = $("#Info p.score");
+            if (scoreItem) {
+                var currentScore = dataItem.score;
+                if (currentScore.indexOf('-')) {
+                    var scores = currentScore.split('-');
+                    if (scores.length == 2) {
+                        var hScore = scores[0];
+                        var aScore = scores[1];
+                        scoreItem.find('span.host').html($.trim(hScore));
+                        scoreItem.find('span.away').html($.trim(aScore));
+                    }
+                }
+            }
+        },
+        "error": function () {
+
+        }
+    });
+}
+function hasLive(mid) {
+    //直播刷新
+    var url = getCdnUrl('/football/has_live/' + mid + '.json');
+    $.ajax({
+        "url": url,
+        "dataType": "json",
+        "success": function (json) {
+            if ($('#Info a.live').length > 0) {
+                $('#Info a.live')[0].style.display = json['live'] == 0 ? 'none' : '';
+            }
+        },
+        "error": function () {
+
         }
     });
 }

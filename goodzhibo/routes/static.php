@@ -10,9 +10,15 @@
 |
 */
 Route::group([],function (){
-    Route::get('/result/to_html',"ResultHtmlController@staticHtml");
-    Route::get('/schedule/to_html',"ScheduleHtmlController@staticHtml");
-    Route::get('/football/detail/to_html',"FootballDetailController@staticHtml");
+    Route::get('/result/to_html',"ResultHtmlController@staticHtml");//结果列表静态化html
+    Route::get('/schedule/to_html',"ScheduleHtmlController@staticHtml");//赛程列表静态化html
 
-    Route::get('/result/test',"ResultHtmlController@test");
+    Route::get('/football/detail/{date}/{id}',"FootballDetailController@flushPcDetailAllCache");//静态化PC足球终端
+    Route::get('/football/detail/wap/{date}/{id}',"FootballDetailController@flushWapDetailAllCache");//静态化WAP足球终端
+
+    Route::get('/football/events/by_date', 'FootballEventsController@eventToHtmlByDate');//足球事件静态化
+    Route::get('/football/events/{date}/{id}', 'FootballEventsController@eventToHtml');//足球事件静态化
+
+    Route::get('/football/detail/wap_html', 'ResultHtmlController@wapDetailToHtml');//手机足球终端页面静态化
+    Route::get('/football/detail/pc_html', 'ResultHtmlController@pcDetailToHtml');//电脑足球终端页面静态化
 });

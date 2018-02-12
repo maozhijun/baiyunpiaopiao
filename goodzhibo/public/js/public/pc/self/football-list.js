@@ -358,7 +358,7 @@ function loadEvent(mid, date) {
 }
 
 function refreshRoll() {
-    var url = getCdnUrl("/football/odd/roll.json");
+    var url = getCdnUrl("/football/odd/roll.json") + "?rd=" + (new Date()).getTime();
     $.ajax({
         "url": url,
         "dataType": "json",

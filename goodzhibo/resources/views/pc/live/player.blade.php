@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="referrer" content="no-referre">
     <title>黑土体育-体育数据|足球比分|篮球网球比分直播|竞猜足球|世界杯|五大联赛|NBA|CBA|高清直播</title>
     <link rel="stylesheet" type="text/css" href="{{env('CDN_URL')}}/css/style.css">
     <link rel="stylesheet" type="text/css" href="{{env('CDN_URL')}}/css/player.css">

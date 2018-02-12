@@ -32,7 +32,11 @@
             <span class="host">{{$match['hscore']}}</span>
             <span class="away">{{$match['ascore']}}</span>
         </p>
-        @if($match['status'] > 0 && isset($match['wap_live']) && $match['wap_live']))<a href="/m/live/football/{{$match['mid']}}.html" class="live">正在直播</a>@endif
+        @if($match['status'] > 0 && isset($match['wap_live']) && $match['wap_live']))
+            <a href="/m/live/football/{{$id}}.html" class="live">正在直播</a>
+        @else
+            <a href="/m/live/football/{{$id}}.html" class="live" style="display: none">正在直播</a>
+        @endif
     </div>
     <div class="team">
         <p class="img"><img src="{{$match['ateam']['icon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'"></p>
@@ -521,5 +525,9 @@
             //$('#Data_Odd')[0].style.display = 'none';
         }
     });
+    @if($match['status'] > 0)
+    setInterval("refreshMatch('{{$id}}')", 5000);
+    setInterval("hasLive('{{$id}}')", 5000);
+    @endif
 </script>
 @endsection

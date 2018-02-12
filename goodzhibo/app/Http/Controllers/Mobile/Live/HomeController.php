@@ -91,15 +91,15 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function footballDetail(Request $request, $date, $id){
-        $key = 'footballDetail_' . $id;
-        $cache = Redis::get($key);
+//        $key = 'footballDetail_' . $id;
+        //$cache = Redis::get($key);
         //$cache = '';
-        if (!empty($cache) && $cache != '[]') {
-            $data = json_decode($cache, true);
-        } else {
+//        if (!empty($cache)) {
+//            $data = json_decode($cache, true);
+//        } else {
             $data = $this->footballDetailData($id);
-            Redis::setex($key, 60 * 60, json_encode($data));
-        }
+            //Redis::setex($key, 60 * 60, json_encode($data));
+//        }
         if (!isset($data['match'])) {
            // abort(404);
         }
