@@ -10,28 +10,66 @@
                     <th>2nd</th>
                     <th>3rd</th>
                     <th>4th</th>
-                    <th>OT1</th>
+                    @if((array_key_exists('h_ot',$match) && strlen($match['h_ot']) > 0)||(array_key_exists('a_ot',$match) && strlen($match['a_ot']) > 0))
+                        <th>OT</th>
+                    @endif
                     <th>总分</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td><img src="http://nba.win007.com/files/team/20120112162143.jpg"></td>
-                    <td>23</td>
-                    <td>30</td>
-                    <td class="now">31</td>
-                    <td>/</td>
-                    <td>/</td>
-                    <td>84</td>
+                    <td><img src="{{strlen($match['hicon']) > 0 ? $match['hicon'] : '/img/icon_teamDefault.png'}}"></td>
+                    <td
+                            @if($match['status'] == 1)
+                            class="now"
+                            @endif
+                    >{{$match['hscore_1st'] or '/'}}</td>
+                    <td
+                            @if($match['status'] == 2)
+                            class="now"
+                            @endif
+                    >{{$match['hscore_2nd'] or '/'}}</td>
+                    <td
+                            @if($match['status'] == 3)
+                            class="now"
+                            @endif
+                    >{{$match['hscore_3rd'] or '/'}}</td>
+                    <td
+                            @if($match['status'] == 4)
+                            class="now"
+                            @endif
+                    >{{$match['hscore_4th'] or '/'}}</td>
+                    @if((array_key_exists('h_ot',$match) && strlen($match['h_ot']) > 0)||(array_key_exists('a_ot',$match) && strlen($match['a_ot']) > 0))
+                        <td>{{$match['h_ot'] or '/'}}</td>
+                    @endif
+                    <td>{{$match['hscore'] or '/'}}</td>
                 </tr>
                 <tr>
-                    <td><img src="http://nba.win007.com/files/team/20120112162143.jpg"></td>
-                    <td>23</td>
-                    <td>30</td>
-                    <td class="now">31</td>
-                    <td>/</td>
-                    <td>/</td>
-                    <td>84</td>
+                    <td><img src="{{strlen($match['aicon']) > 0 ? $match['aicon'] : '/img/icon_teamDefault.png'}}"></td>
+                    <td
+                            @if($match['status'] == 1)
+                            class="now"
+                            @endif
+                    >{{$match['ascore_1st'] or '/'}}</td>
+                    <td
+                            @if($match['status'] == 2)
+                            class="now"
+                            @endif
+                    >{{$match['ascore_2nd'] or '/'}}</td>
+                    <td
+                            @if($match['status'] == 3)
+                            class="now"
+                            @endif
+                    >{{$match['ascore_3rd'] or '/'}}</td>
+                    <td
+                            @if($match['status'] == 4)
+                            class="now"
+                            @endif
+                    >{{$match['ascore_4th'] or '/'}}</td>
+                    @if((array_key_exists('h_ot',$match) && strlen($match['h_ot']) > 0)||(array_key_exists('a_ot',$match) && strlen($match['a_ot']) > 0))
+                        <td>{{$match['a_ot'] or '/'}}</td>
+                    @endif
+                    <td>{{$match['ascore'] or '/'}}</td>
                 </tr>
                 </tbody>
             </table>
