@@ -58,7 +58,7 @@ class ResultHtmlController extends Controller
     }
 
 
-    public function test(Request $request) {
+    public function wapDetailToHtml(Request $request) {
         $paramDate = $request->input('date');
         if (empty($paramDate)) {
             return "参数错误";
@@ -67,7 +67,7 @@ class ResultHtmlController extends Controller
         $home = new HomeController();
         $json = $home->footballData($paramDate);
         $matches = isset($json['matches']) ? $json['matches'] : [];
-        $key = self::Redis_key_pre . $paramDate;
+        $key = self::Redis_key_pre . 'WAP_' . $paramDate;
         $exc_array = json_decode(Redis::get($key));
         if (is_null($exc_array)) $exc_array = [];
         foreach ($matches as $match) {
@@ -80,6 +80,36 @@ class ResultHtmlController extends Controller
             echo $match['hname'] . ' VS ' . $match['aname'] . ' time : ' . $match['time'];
             $start = time();
             $this->toHtml($date, $id);
+            echo '请求时间：' . (time() - $start) . '</br>';
+            $exc_array[] = $id;
+            Redis::set($key, json_encode($exc_array));
+        }
+        echo '<br/>完成!!!!!';
+    }
+
+    public function pcDetailToHtml(Request $request) {
+        $paramDate = $request->input('date');
+        if (empty($paramDate)) {
+            return "参数错误";
+        }
+
+        $home = new HomeController();
+        $json = $home->footballData($paramDate);
+        $matches = isset($json['matches']) ? $json['matches'] : [];
+        $key = self::Redis_key_pre . 'PC_' . $paramDate;
+        $exc_array = json_decode(Redis::get($key));
+        if (is_null($exc_array)) $exc_array = [];
+        foreach ($matches as $match) {
+            $start_time = $match['time'];
+            $id = $match['mid'];
+            if (in_array($id, $exc_array)) {
+                continue;
+            }
+            $date = date('Ymd', strtotime($start_time));
+            echo $match['hname'] . ' VS ' . $match['aname'] . ' time : ' . $match['time'];
+            $start = time();
+            //$this->toHtml($date, $id);
+            FootballDetailController::curlToHtml($date, $id);
             echo '请求时间：' . (time() - $start) . '</br>';
             $exc_array[] = $id;
             Redis::set($key, json_encode($exc_array));

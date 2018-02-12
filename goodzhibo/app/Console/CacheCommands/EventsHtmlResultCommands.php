@@ -9,14 +9,14 @@
 namespace App\Console\CacheCommands;
 
 
-use App\Http\Controllers\CacheInterface\FootballInterface;
-use App\Http\Controllers\PC\Index\FootballController;
+use App\Http\Controllers\Mobile\Live\HomeController;
+use App\Http\Controllers\StaticHtml\FootballEventsController;
 use Illuminate\Console\Command;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Redis;
 
 class EventsHtmlResultCommands extends Command
 {
+    const Redis_Key_Prefix = "EventsHtmlResultCommands_";
 
     /**
      * The name and signature of the console command.
@@ -48,25 +48,36 @@ class EventsHtmlResultCommands extends Command
      */
     public function handle()
     {
-        $request = new Request();
-        $fbIntf = new FootballInterface();
-        $jsonStr = $fbIntf->matchListDataJson();//获取即时的比赛信息。
-        $json = json_decode($jsonStr, true);
-        if (!isset($json)) {
-            return "暂无比赛";
-        }
+        $home = new HomeController();
+        $match_date = date('Y-m-d', strtotime('-1 days'));
+        $json = $home->footballData($match_date);
         $matches = isset($json['matches']) ? $json['matches'] : [];
-        $pc = new FootballController();
-        foreach ($matches as $match) {
-            $status = $match['status'];
-            if ($status > 0) {
-                $start_time = $match['time'];
-                $date = date('Ymd', strtotime($start_time));
-                $id = $match['mid'];
-                $eventHtml = $pc->eventHtml($request, $date, $id);
-                $patch = '/static/football/event/' . $date . '/' . $id . '.json';
-                Storage::disk("public")->put($patch, $eventHtml);
-            }
+
+        $key = self::Redis_Key_Prefix . $match_date;
+        $excMidStr = Redis::get($key);
+        $excArray = json_decode($excMidStr, true);;
+        if (is_null($excArray)) {
+            $excArray = [];
         }
+        $excIndex = 0;
+
+        foreach ($matches as $match) {
+            if ($excIndex >= 20) {
+                break;
+            }
+            $id = $match['mid'];
+            if (in_array($id, $excArray)) {
+                continue;
+            }
+            $excArray[] = $id;
+
+            $start_time = $match['time'];
+            $date = date('Ymd', strtotime($start_time));
+            FootballEventsController::curlEventsToHtml($date, $id);
+            $excIndex++;
+            usleep(300);
+        }
+        Redis::setEx($key, 24 * 60 * 60, json_encode($excArray));
+        //echo $excIndex . ',' . json_encode($excArray);
     }
 }

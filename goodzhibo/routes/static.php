@@ -19,6 +19,6 @@ Route::group([],function (){
     Route::get('/football/events/by_date', 'FootballEventsController@eventToHtmlByDate');//足球事件静态化
     Route::get('/football/events/{date}/{id}', 'FootballEventsController@eventToHtml');//足球事件静态化
 
-    Route::get('/test', 'ResultHtmlController@test');
-
+    Route::get('/football/detail/wap_html', 'ResultHtmlController@wapDetailToHtml');//手机足球终端页面静态化
+    Route::get('/football/detail/pc_html', 'ResultHtmlController@pcDetailToHtml');//电脑足球终端页面静态化
 });

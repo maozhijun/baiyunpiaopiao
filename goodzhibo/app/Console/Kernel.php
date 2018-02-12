@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Console\CacheCommands\BasketballListCommands;
 use App\Console\CacheCommands\BasketballLiveJsonCommands;
 use App\Console\CacheCommands\EventsHtmlCommands;
+use App\Console\CacheCommands\EventsHtmlResultCommands;
 use App\Console\CacheCommands\FootballDetailCommands;
 use App\Console\CacheCommands\FootballDetailResultCommands;
 use App\Console\CacheCommands\FootballDetailScheduleCommands;
@@ -47,7 +48,10 @@ class Kernel extends ConsoleKernel
         ScheduleHtmlCommands::class,
         FootballLiveJsonCommands::class,
         BasketballLiveJsonCommands::class,
-        EventsHtmlCommands::class,
+
+        EventsHtmlCommands::class,//即时事件缓存
+        EventsHtmlResultCommands::class,//赛果（昨天的事件缓存）
+
         MatchesDataCommands::class,
 
         FootImmediateHtmlCommands::class,
@@ -95,6 +99,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('schedule_html_cache:run')->everyThirtyMinutes();//赛程列表html静态化。
 
         $schedule->command('events_cache:run')->everyFiveMinutes();//每五分钟刷新一次正在比赛的足球赛事事件。
+        $schedule->command('events_result_cache:run')->everyTenMinutes();//每10分钟刷新一次昨天已结束的足球赛事事件。
 
         $schedule->command('fb_detail_cache:run')->everyFiveMinutes();//正在比赛的足球赛事终端每分五种静态化一次。
         $schedule->command('fb_wap_detail_cache:run')->everyFiveMinutes();//正在比赛的足球赛事终端每分五种静态化一次。
