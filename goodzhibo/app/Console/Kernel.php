@@ -47,15 +47,17 @@ class Kernel extends ConsoleKernel
         ScheduleHtmlCommands::class,
         FootballLiveJsonCommands::class,
         BasketballLiveJsonCommands::class,
-        FootballDetailCommands::class,
         EventsHtmlCommands::class,
-        FootballWapDetailCommands::class,
         MatchesDataCommands::class,
+
         FootImmediateHtmlCommands::class,
         FootScheduleHtmlCommands::class,
         FootResultHtmlCommands::class,
+
+        FootballDetailCommands::class,//即时赛事静态化
         FootballDetailScheduleCommands::class,//赛程终端静态化
         FootballDetailResultCommands::class,//赛果终端静态化
+        FootballWapDetailCommands::class,//即时赛事静态化
         FootballWapDetailResultCommands::class,//wap赛果终端静态化
         FootballWapDetailScheduleCommands::class,//wap赛程终端静态化
     ];
@@ -82,6 +84,9 @@ class Kernel extends ConsoleKernel
         })->everyMinute();
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        $schedule->command('fb_live_json_cache:run')->everyMinute();//每分钟执行一次 足球当天列表的定时任务
+        $schedule->command('bb_live_json_cache:run')->everyMinute();//篮球即时比赛数据、赔率数据
+
         $schedule->command('fb_list_json_cache:run')->everyMinute();//每分钟执行一次 足球当天列表的定时任务
         $schedule->command('bb_list_json_cache:run')->everyMinute();//每分钟执行一次 篮球当天列表的定时任务
 
@@ -103,7 +108,6 @@ class Kernel extends ConsoleKernel
         ///////
 
         //$schedule->command('fb_detail_cache:run')->everyMinute();//足球即时比赛数据、赔率数据
-        $schedule->command('bb_live_json_cache:run')->everyMinute();//篮球即时比赛数据、赔率数据
 
         $schedule->command('matches_data_cache:run')->hourly();//足球列表、篮球列表数据（3天前 - 3天后）缓存
 

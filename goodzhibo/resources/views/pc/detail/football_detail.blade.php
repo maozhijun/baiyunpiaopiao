@@ -1166,6 +1166,9 @@
                 "dataType": "json",
                 "success": function (json) {
                     var dataItem = json["{{$id}}"];
+                    if (!dataItem) {
+                        return;
+                    }
                     var scoreItem = $($('div#Info div.score')[0]);
                     if (scoreItem && dataItem) {
                         var currentScore = dataItem.score;

@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Redis;
 class FootballWapDetailScheduleCommands extends Command
 {
 
-    const PC_REDIS_KEY = 'FootballWapDetailScheduleCommands';
+    const PC_REDIS_KEY = 'FootballWapDetailScheduleCommandsKey';
 
     /**
      * The name and signature of the console command.
@@ -75,7 +75,7 @@ class FootballWapDetailScheduleCommands extends Command
             $excArray[] = $id;
             $start_time = $match['time'];
             $date = date('Ymd', strtotime($start_time));
-            FootballDetailController::curlToHtml($date, $id);
+            FootballDetailController::curlToWapHtml($date, $id);
             $excIndex++;
             sleep(1);
         }

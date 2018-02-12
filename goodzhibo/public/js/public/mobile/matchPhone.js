@@ -192,6 +192,52 @@ function getCorner(id) {
         }
     });
 }
+function refreshMatch(mid) {
+    //刷新比赛信息
+    var url = getCdnUrl("/football/change/live.json");
+    $.ajax({
+        "url": url + "?rd=" + (new Date()).getTime(),
+        "dataType": "json",
+        "success": function (json) {
+            var dataItem = json[mid];
+            if (!dataItem) {
+                return;
+            }
+            var scoreItem = $("#Info p.score");
+            if (scoreItem) {
+                var currentScore = dataItem.score;
+                if (currentScore.indexOf('-')) {
+                    var scores = currentScore.split('-');
+                    if (scores.length == 2) {
+                        var hScore = scores[0];
+                        var aScore = scores[1];
+                        scoreItem.find('span.host').html($.trim(hScore));
+                        scoreItem.find('span.away').html($.trim(aScore));
+                    }
+                }
+            }
+        },
+        "error": function () {
+
+        }
+    });
+}
+function hasLive(mid) {
+    //直播刷新
+    var url = getCdnUrl('/football/has_live/' + mid + '.json');
+    $.ajax({
+        "url": url,
+        "dataType": "json",
+        "success": function (json) {
+            if ($('#Info a.live').length > 0) {
+                $('#Info a.live')[0].style.display = json['live'] == 0 ? 'none' : '';
+            }
+        },
+        "error": function () {
+
+        }
+    });
+}
 
 function getCdnUrl(url) {
     if (!window.cdn_url) {
