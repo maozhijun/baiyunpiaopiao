@@ -148,9 +148,10 @@ class MatchDetailController
         }
         $match['liveUrl'] = 'http://www.goodzhibo.com/m/live/basketball/'.$mid.'.html';
         $reset = $match;
+        $index = FileTool::getMidIndex($mid);
         //终端底部tab
         $reset['tabs'] = [
-//            ["name"=>"赛况", "url"=>"https://www.liaogou168.com/basket_detail/$tempStr.html#Match_Event"],
+            ["name"=>"赛况", "url"=>env('APP_URL')."/m/basketball/detail/tab/base/$index/"."app"."$mid".".html"],
 //            ["name"=>"分析", "url"=>"https://www.liaogou168.com/basket_detail/$tempStr.html#Data_Strength"],
 //            ["name"=>"指数", "url"=>"https://www.liaogou168.com/basket_detail/$tempStr.html#Data_Odd"],
 //            ["name"=>"推荐", "url"=>"https://www.liaogou168.com/basket_detail/$tempStr.html#Corner_Data"]
@@ -158,53 +159,16 @@ class MatchDetailController
         return Response::json(AppCommonResponse::createAppCommonResponse(0, '', $reset, false));
     }
 
-    public function basketballDetailTab(Request $request, $tab, $id) {
-        $match = $this->basketballDetailMatchData($id);
-        $date = date('Ymd', $match['time']);
+    public function basketballDetailTab(Request $request, $tab,$index, $id) {
+        if ($index != FileTool::getMidIndex($id)) return "";
 
+        $match = $this->basketballDetailMatchData($id);
+        $data = array();
         $views = "";
-        $data = $this->footballDetailBaseData($id, $date);
-        if (is_null($data)) {
-            $data = [];
-        }
         switch ($tab) {
             case "base":
-                $event = $this->footballEventData($id, $date);
-                if (isset($event)) {
-                    $data = array_merge($data, $event);
-                }
-                $data['match']['hicon'] = $match['hicon'];
-                $data['match']['aicon'] = $match['aicon'];
-                $views = 'app.football.match_detail_base';
-                break;
-            case "analyse":
-                $oddData = $this->footballOddData($id, $date);
-                if (isset($oddData)) {
-                    $data = array_merge($data, $oddData);
-                }
-                $views = 'app.football.match_detail_analyse';
-                break;
-            case "team":
-                $cornerData = $this->footballCornerData($id, $date);
-                if (isset($cornerData)) {
-                    $data = array_merge($data, $cornerData);
-                }
-                $styleData = $this->footballStyleData($id, $date);
-                if (isset($styleData)) {
-                    $data = array_merge($data, $styleData);
-                }
-                $views = 'app.football.match_detail_team';
-                break;
-            case "odd":
-                $oddIndex = $this->basketballOddIndexData($id, $date);
-                if (isset($oddIndex)) {
-                    $data = array_merge($data, $oddIndex);
-                }
-                $views = 'app.football.match_detail_odd';
-                break;
-            case "sameOdd":
-                $data = array_merge($data, $this->footballSameOddData($id, $date));
-                $views = 'app.football.match_detail_same_odd';
+                $data['match'] = $match;
+                $views = 'app.basketball.match_detail_base';
                 break;
         }
         return view($views, $data);

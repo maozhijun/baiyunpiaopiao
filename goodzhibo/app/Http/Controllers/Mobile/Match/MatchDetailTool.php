@@ -13,7 +13,7 @@ trait MatchDetailTool
 {
     //====================篮球比赛部分=========================================
     /**
-     * 足球终端页
+     * 篮球终端页
      * @param $id
      * @return array
      */
@@ -25,7 +25,6 @@ trait MatchDetailTool
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
-
         return $json;
     }
 

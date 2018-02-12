@@ -33,6 +33,8 @@ Route::group(["namespace" => 'Live'], function () {
     Route::get('/basketball/lives.html', 'BasketBallController@lives');//篮球直播页面列表
     Route::get('/lives/cache/details', 'LiveController@liveDetailsStatic');//篮球直播页面列表
 
+    Route::get('/basketball/detail/{date}/{id}.html',"BasketBallController@basketballDetail");
+
     /////////////////======================================================================/////////////////
     //Route::get('/', 'Live\LiveController@lives');
     //Route::get('/index.html', 'LiveController@lives');
@@ -84,4 +86,7 @@ Route::group(["namespace" => 'Match'], function () {
 
     //足球比赛详情
     Route::get("/football/detail/tab/{tab}/{index}/app{id}.html", "MatchDetailController@footballDetailTab");
+
+    //篮球比赛详情
+    Route::get("/basketball/detail/tab/{tab}/{index}/app{id}.html", "MatchDetailController@basketballDetailTab");
 });

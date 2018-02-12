@@ -94,7 +94,7 @@ class HomeController extends Controller
         $key = 'footballDetail_' . $id;
         $cache = Redis::get($key);
         //$cache = '';
-        if (!empty($cache)) {
+        if (!empty($cache) && $cache != '[]') {
             $data = json_decode($cache, true);
         } else {
             $data = $this->footballDetailData($id);

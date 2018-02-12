@@ -27,4 +27,15 @@ class BasketballInterface
         }
     }
 
+    /**
+     * 获取比赛数据
+     * @param $id
+     * @return bool|null|string
+     */
+    public function getMatchDataFromCache($id) {
+        $patch = 'public/json/match/detail/0/2/' . $id . '/match.json';
+        $jsonPatch = CacheTool::getCacheJsonPatch($patch);
+        $json = CacheTool::getFileContent($jsonPatch);
+        return $json;
+    }
 }
