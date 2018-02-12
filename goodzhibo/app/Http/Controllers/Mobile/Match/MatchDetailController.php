@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Mobile\Match;
 
 use App\Http\Controllers\FileTool;
 use App\Http\Controllers\Mobile\AppCommonResponse;
+use App\Http\Controllers\Mobile\Detail\BasketballDetailController;
 use App\Http\Controllers\Mobile\Detail\DetailController;
 use App\Models\Match\MatchLive;
 use Illuminate\Http\Request;
@@ -162,12 +163,16 @@ class MatchDetailController
     public function basketballDetailTab(Request $request, $tab,$index, $id) {
         if ($index != FileTool::getMidIndex($id)) return "";
 
-        $match = $this->basketballDetailMatchData($id);
-        $data = array();
+        $detailController = new BasketballDetailController();
+        $tabHtml = $detailController->detailCell($request, $tab, $index, $id);
+        return $this->basketballDetailTabDetail($tab, $tabHtml);
+    }
+
+    public function basketballDetailTabDetail($tab, $tabHtml) {
+        $data['html'] = $tabHtml;
         $views = "";
         switch ($tab) {
             case "base":
-                $data['match'] = $match;
                 $views = 'app.basketball.match_detail_base';
                 break;
         }

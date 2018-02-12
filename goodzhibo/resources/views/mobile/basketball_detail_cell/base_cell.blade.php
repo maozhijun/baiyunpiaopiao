@@ -1,5 +1,4 @@
-<div id="Match" class="content" style="display: ;">
-    <div id="Event" class="childNode" style="display: ;">
+ <div id="Event" class="childNode" style="display: ;">
         <div class="score default">
             <div class="title">比分统计<button class="close"></button></div>
             <table>
@@ -75,4 +74,3 @@
             </table>
         </div>
     </div>
-</div>

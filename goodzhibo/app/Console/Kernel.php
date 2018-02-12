@@ -18,6 +18,8 @@ use App\Console\CacheCommands\ImmediateHtmlCommands;
 use App\Console\CacheCommands\MatchesDataCommands;
 use App\Console\CacheCommands\ResultHtmlCommands;
 use App\Console\CacheCommands\ScheduleHtmlCommands;
+use App\Console\DetailCommands\Basketball\BasketImmediateHtmlCommands;
+use App\Console\DetailCommands\Basketball\BasketResultHtmlCommands;
 use App\Console\DetailCommands\Football\FootImmediateHtmlCommands;
 use App\Console\DetailCommands\Football\FootResultHtmlCommands;
 use App\Console\DetailCommands\Football\FootScheduleHtmlCommands;
@@ -63,6 +65,9 @@ class Kernel extends ConsoleKernel
         FootballWapDetailCommands::class,//即时赛事静态化
         FootballWapDetailResultCommands::class,//wap赛果终端静态化
         FootballWapDetailScheduleCommands::class,//wap赛程终端静态化
+
+        BasketImmediateHtmlCommands::class,
+        BasketResultHtmlCommands::class,
     ];
 
     /**
@@ -119,6 +124,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('foot_detail_immediate_html:run')->everyMinute();
         $schedule->command('foot_detail_result_html:run')->everyTenMinutes();
         $schedule->command('foot_detail_schedule_html:run')->everyTenMinutes();
+
+        //篮球终端页面缓存
+        $schedule->command('basket_detail_immediate_html:run')->everyMinute();
+        $schedule->command('basket_detail_result_html:run')->everyTenMinutes();
     }
 
     /**

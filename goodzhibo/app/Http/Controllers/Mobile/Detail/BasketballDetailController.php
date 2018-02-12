@@ -41,7 +41,7 @@ class BasketballDetailController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function baseCell(Request $request, $date, $id, $match = []) {
-        $result = array_merge([], $match);
+        $result = array('match'=>$match);
         if (count($result) == 0) {
             return "";
         }
