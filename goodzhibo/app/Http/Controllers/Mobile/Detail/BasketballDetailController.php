@@ -32,6 +32,9 @@ class BasketballDetailController extends Controller
                 $con = new BasketballController();
                 return $con->basketballOddIndex($request, $date, $id);
                 break;
+            case 'analyse':
+                return $this->analyseCell($request, $date, $id);//base
+                break;
             default:
                 return "";
         }
@@ -52,7 +55,56 @@ class BasketballDetailController extends Controller
         }
         return view('mobile.basketball_detail_cell.base_cell', $result);
     }
+
+    /**
+     * 终端分析页面
+     * @param Request $request
+     * @param $date
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function analyseCell(Request $request, $date, $id) {
+        $base = $this->analyseBaseData($date, $id);
+        $odd = $this->analyseOddData($date, $id);
+
+        $result['odd'] = $odd;
+        $result['base'] = $base;
+        if (count($result) == 0) {
+            return "";
+        }
+        return view('mobile.basketball_detail_cell.analyse_cell', $result);
+    }
+
     //====================================================================================//
 
 
+    /**
+     * 分析页面 赔率数据
+     * @param $date
+     * @param $id
+     * @return mixed
+     */
+    public function analyseOddData($date, $id) {
+        $cacheInterface = new BasketballDetailInterface();
+        $json = $cacheInterface->getOddDataFromCache($date, $id);
+        if (isset($json)) {
+            return json_decode($json, true);
+        }
+        return $this->basketballOddData($id, $date);
+    }
+
+    /**
+     * 分析页面基础数据
+     * @param $date
+     * @param $id
+     * @return array|mixed
+     */
+    public function analyseBaseData($date, $id) {
+        $cacheInterface = new BasketballDetailInterface();
+        $json = $cacheInterface->getBaseDataFromCache($date, $id);
+        if (isset($json)) {
+            return json_decode($json, true);
+        }
+        return $this->basketballDetailBaseData($id, $date);
+    }
 }

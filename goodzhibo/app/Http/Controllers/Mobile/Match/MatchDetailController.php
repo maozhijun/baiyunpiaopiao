@@ -153,8 +153,8 @@ class MatchDetailController
         //终端底部tab
         $reset['tabs'] = [
             ["name"=>"赛况", "url"=>env('APP_URL')."/m/basketball/detail/tab/base/$index/"."app"."$mid".".html"],
-//            ["name"=>"分析", "url"=>"https://www.liaogou168.com/basket_detail/$tempStr.html#Data_Strength"],
-//            ["name"=>"指数", "url"=>"https://www.liaogou168.com/basket_detail/$tempStr.html#Data_Odd"],
+            ["name"=>"分析", "url"=>env('APP_URL')."/m/basketball/detail/tab/analyse/$index/"."app"."$mid".".html"],
+            ["name"=>"指数", "url"=>env('APP_URL')."/m/basketball/detail/tab/odd/$index/"."app"."$mid".".html"],
 //            ["name"=>"推荐", "url"=>"https://www.liaogou168.com/basket_detail/$tempStr.html#Corner_Data"]
         ];
         return Response::json(AppCommonResponse::createAppCommonResponse(0, '', $reset, false));
@@ -177,6 +177,9 @@ class MatchDetailController
                 break;
             case "odd":
                 $views = 'app.football.match_detail_odd';
+                break;
+            case "analyse":
+                $views = 'app.basketball.match_detail_analyse';
                 break;
         }
         return view($views, $data);

@@ -41,4 +41,7 @@ class BasketballDetailInterface
         return $json;
     }
 
+    public function getOddDataFromCache($date, $mid) {
+        return $this->getDataFromCache($date, $mid, 'odd');
+    }
 }

@@ -28,6 +28,38 @@ trait MatchDetailTool
         return $json;
     }
 
+    /**
+     * 篮球终端页
+     * @param $id
+     * @return array
+     */
+    public function basketballDetailBaseData($id, $date){
+        $ch = curl_init();
+        $url = env('MATCH_URL')."/app/match/detail/$date/2/$id/base.json";
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $json = curl_exec ($ch);
+        curl_close ($ch);
+        $json = json_decode($json, true);
+
+        return $json;
+    }
+
+    /**
+     * 篮球比赛赔率
+     * @param $id
+     * @return mixed
+     */
+    public function basketballOddData($id, $date) {
+        $ch = curl_init();
+        $url = env('MATCH_URL')."/app/match/detail/$date/2/$id/odd.json";
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $json = curl_exec ($ch);
+        curl_close ($ch);
+        $json = json_decode($json, true);
+        return $json;
+    }
 
     //====================足球比赛部分=========================================
 
