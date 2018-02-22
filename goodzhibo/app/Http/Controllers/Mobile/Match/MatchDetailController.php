@@ -175,6 +175,9 @@ class MatchDetailController
             case "base":
                 $views = 'app.basketball.match_detail_base';
                 break;
+            case "odd":
+                $views = 'app.basketball.match_detail_odd';
+                break;
         }
         return view($views, $data);
     }

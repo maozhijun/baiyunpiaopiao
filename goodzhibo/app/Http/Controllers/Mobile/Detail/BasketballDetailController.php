@@ -14,6 +14,7 @@ use App\Http\Controllers\CacheInterface\BasketballInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Mobile\Live\HomeController;
 use App\Http\Controllers\Mobile\Match\MatchDetailTool;
+use App\Http\Controllers\PC\Index\BasketballController;
 use Illuminate\Http\Request;
 
 class BasketballDetailController extends Controller
@@ -26,6 +27,10 @@ class BasketballDetailController extends Controller
         switch ($type) {
             case 'base' :
                 return $this->baseCell($request, $date, $id,$match);//base
+                break;
+            case 'odd'://暂时用home的接口。 后面需要需求为同一套
+                $con = new BasketballController();
+                return $con->basketballOddIndex($request, $date, $id);
                 break;
             default:
                 return "";

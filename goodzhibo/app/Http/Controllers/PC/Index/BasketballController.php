@@ -94,4 +94,42 @@ class BasketballController extends Controller
         return $json;
         //return ['79011'=>['all'=>['1'=>['up'=>'1.2', 'middle'=>'6', 'down'=>'1.0'], '2'=>['up'=>'0.9', 'middle'=>'190', 'down'=>'0.9']  ]]];
     }
+
+    /**
+     *
+     * @param Request $request
+     * @param $date
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function basketballOddIndex(Request $request, $date, $id) {
+        $json = $this->basketballOddIndexData($id);
+        return view('mobile.basketball_detail_cell.cell.basketball_detail_odd_index', $json);
+    }
+
+    /**
+     * 比赛赔率指数
+     * @param $id
+     * @param $platform
+     * @return mixed
+     */
+    public function basketballOddIndexData($id, $platform = '') {
+        $ch = curl_init();
+        $param = $platform == 'pc' ? '?platform=pc' : '';
+        $prefix = env('LIAOGOU_URL');
+        $url = $prefix . "intf/basket/odd_index/" . $id . $param;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $json = curl_exec ($ch);
+        curl_close ($ch);
+        $json = json_decode($json, true);
+        return $this->convertEmptyJson($json);
+    }
+
+    private function convertEmptyJson($json) {
+        if (is_null($json)) {
+            return [];
+        }
+        return $json;
+    }
 }
