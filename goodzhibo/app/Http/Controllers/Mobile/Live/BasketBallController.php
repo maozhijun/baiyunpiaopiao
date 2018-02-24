@@ -9,13 +9,16 @@
 namespace App\Http\Controllers\Mobile\Live;
 
 
+use App\Console\DetailCommands\Football\FootballDetailCommonCommand;
 use App\Http\Controllers\CacheInterface\BasketballInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Mobile\Detail\BasketballDetailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
 class BasketBallController extends Controller
 {
+    use FootballDetailCommonCommand;
     /**
      * 即时篮球赛事列表
      * @param Request $request
@@ -104,18 +107,14 @@ class BasketBallController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function basketballDetail(Request $request, $date, $id){
-        $key = 'basketballDetail_' . $id;
-        $cache = Redis::get($key);
-        //$cache = '';
-        if (!empty($cache) && $cache != '[]') {
-            $data = json_decode($cache, true);
-        } else {
-            $data = $this->basketballDetailData($id);
-            Redis::setex($key, 60 * 60, json_encode($data));
-        }
+        $data = $this->basketballDetailData($id);
         if (!isset($data['match'])) {
             // abort(404);
         }
+
+        $controller = new BasketballDetailController();
+        $base = $controller->analyseBaseData($date, $id);
+        $data = $base;
         $data['id'] = $id;
         return view('mobile.basketballDetail', $data);
     }
@@ -133,7 +132,7 @@ class BasketBallController extends Controller
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
-        dump($url);
+//        dump($url);
         return $this->convertEmptyJson($json);
     }
 
@@ -166,5 +165,45 @@ class BasketBallController extends Controller
     public function basketballOddIndex(Request $request, $date, $id) {
         $json = $this->basketballOddIndexData($id);
         return view('mobile.cell.football_detail_odd_index', $json);
+    }
+
+    private function convertEmptyJson($json) {
+        if (is_null($json)) {
+            return [];
+        }
+        return $json;
+    }
+
+    /**
+     * 足球终端也赔率数据html
+     * @param Request $request
+     * @param $date
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function basketballOdd(Request $request, $date, $id) {
+        $data = $this->basketballOddData($id);
+        //dump($data);
+        if (!isset($data['bankers']) || count($data['bankers']) == 0) {
+            return "";
+        }
+//        dump($data);
+        return view('mobile.cell.football_detail_odd', $data);
+    }
+
+    /**
+     * 足球比赛赔率
+     * @param $id
+     * @return mixed
+     */
+    public function basketballOddData($id) {
+        $ch = curl_init();
+        $url = env('LIAOGOU_URL')."intf/basket/odd/" . $id;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $json = curl_exec ($ch);
+        curl_close ($ch);
+        $json = json_decode($json, true);
+        return $this->convertEmptyJson($json);
     }
 }

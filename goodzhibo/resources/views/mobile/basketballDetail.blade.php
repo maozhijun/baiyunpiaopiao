@@ -24,7 +24,6 @@
     <div class="team">
         <p class="img"><img src="{{$match['hteam']['icon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'"></p>
         <p class="name">{{$match['hname']}}</p>
-        <p class="rank">排名：{{$match['hLeagueRank']}}</p>
     </div>
     <div class="info">
         <p class="minute">{{$match['current_time']}}</p>
@@ -32,12 +31,11 @@
             <span class="host">{{$match['hscore']}}</span>
             <span class="away">{{$match['ascore']}}</span>
         </p>
-        @if($match['status'] > 0 && isset($match['wap_live']) && $match['wap_live']))<a href="/m/live/football/{{$match['mid']}}.html" class="live">正在直播</a>@endif
+        @if($match['status'] > 0 && isset($match['wap_live']) && $match['wap_live']))<a href="/m/live/basketball/{{$match['mid']}}.html" class="live">正在直播</a>@endif
     </div>
     <div class="team">
         <p class="img"><img src="{{$match['ateam']['icon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'"></p>
         <p class="name">{{$match['aname']}}</p>
-        <p class="rank">排名：{{$match['aLeagueRank']}}</p>
     </div>
 </div>
 <div id="Tab" class="tab">
@@ -45,208 +43,89 @@
     <label for="Type_Match"><span>赛况</span></label>
     <input type="radio" name="tab_type" id="Type_Data" value="Data">
     <label for="Type_Data"><span>分析</span></label>
-    <input type="radio" name="tab_type" id="Type_Team" value="Team">
-    <label for="Type_Team"><span>球队</span></label>
     <input type="radio" name="tab_type" id="Type_Odd" value="Odd">
     <label for="Type_Odd"><span>指数</span></label>
-    <input type="radio" name="tab_type" id="Type_SameOdd" value="SameOdd">
-    <label for="Type_SameOdd"><span>同赔</span></label>
 </div>
 <div id="Match" class="content" style="display: ;">
-    <div id="First" class="childNode" style="display: ;">
-        <div class="team host">
-            @if(isset($lineup['h_lineup_per']))
-            <p class="number">本场比赛有<b>{{isset($lineup['home']['h_first']) ? count($lineup['home']['h_first']) : 0}}</b>名主力首发</p>
-            <p class="percent">{{$lineup['h_lineup_per']}}%<span style="width: {{$lineup['h_lineup_per'] / 100 * 160}}px"></span></p><!--span的值为160*百分比-->
-            @else
-            <p class="number">本场比赛尚未有首发数据</p>
-            @endif
-            <ul>
-                @foreach($lineup['home']['first'] as $f_lineup)
-                <li>
-                    <p class="name">{{$f_lineup['name']}}</p>
-                    @if($f_lineup['first'] == 1)<p class="main">【 主 】</p>@endif
-                    <p class="jerseys">{{$f_lineup['num']}}</p>
-                </li>
-                @endforeach
-                @foreach($lineup['home']['back'] as $b_lineup)
-                    <li>
-                        <p class="name">{{$b_lineup['name']}}</p>
-                        <p class="jerseys reserve">{{$b_lineup['num']}}</p>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-        <div class="team away">
-            @if(isset($lineup['a_lineup_per']))
-                <p class="number">本场比赛有<b>{{isset($lineup['away']['h_first']) ? count($lineup['away']['h_first']) : 0}}</b>名主力首发</p>
-                <p class="percent">{{$lineup['a_lineup_per']}}%<span style="width: {{$lineup['a_lineup_per'] / 100 * 160}}px"></span></p><!--span的值为160*百分比-->
-            @else
-                <p class="number">本场比赛尚未有首发数据</p>
-            @endif
-            <ul>
-                @foreach($lineup['away']['first'] as $f_lineup)
-                    <li>
-                        <p class="name">{{$f_lineup['name']}}</p>
-                        @if($f_lineup['first'] == 1)<p class="main">【 主 】</p>@endif
-                        <p class="jerseys">{{$f_lineup['num']}}</p>
-                    </li>
-                @endforeach
-                @foreach($lineup['away']['back'] as $b_lineup)
-                    <li>
-                        <p class="name">{{$b_lineup['name']}}</p>
-                        <p class="jerseys reserve">{{$b_lineup['num']}}</p>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-    </div>
-    <div id="Event" class="childNode" style="display: none;">
-        <div class="technology default">
-            <div class="title">技术统计<button class="close"></button></div>
-            <ul>
-                <li>
-                    <dl class="team">
-                        <dd class="host"><p class="img"><img src="{{$match['hteam']['icon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'"></p></dd>
-                        <dt>VS</dt>
-                        <dd class="away"><p class="img"><img src="{{$match['ateam']['icon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'"></p></dd>
-                    </dl>
-                    <dl>
-                        <dd class="host"><p>{{$match['h_yellow']}}</p><span style="width: {{108 * $match['h_y_p']}}px;"></span></dd><!--span的值为108*百分比-->
-                        <dt>黄牌</dt>
-                        <dd class="away"><p>{{$match['a_yellow']}}</p><span style="width: {{108 * $match['a_y_p']}}px;"></span></dd>
-                    </dl>
-                    <dl>
-                        <dd class="host"><p>{{$match['h_red']}}</p><span style="width: {{108 * $match['h_r_p']}}px;"></span></dd>
-                        <dt>红牌</dt>
-                        <dd class="away"><p>{{$match['a_red']}}</p><span style="width: {{108 * $match['a_r_p']}}px;"></span></dd>
-                    </dl>
-                    <dl>
-                        <dd class="host"><p>{{empty($match['h_corner']) ? 0 : $match['h_corner']}}</p><span style="width: {{108 * $match['h_cor_p']}}px;"></span></dd>
-                        <dt>角球</dt>
-                        <dd class="away"><p>{{empty($match['a_corner']) ? 0 : $match['a_corner']}}</p><span style="width: {{108 * $match['a_cor_p']}}px;"></span></dd>
-                    </dl>
-                    <dl>
-                        <dd class="host"><p>{{empty($match['h_shoot']) ? 0 : $match['h_shoot']}}</p><span style="width: {{108 * $match['h_sh_p']}}px;"></span></dd>
-                        <dt>射门</dt>
-                        <dd class="away"><p>{{empty($match['a_shoot']) ? 0 : $match['a_shoot']}}</p><span style="width: {{108 * $match['a_sh_p']}}px;"></span></dd>
-                    </dl>
-                    <dl>
-                        <dd class="host"><p>{{empty($match['h_shoot_target']) ? 0 : $match['h_shoot_target']}}</p><span style="width: {{108 * $match['h_sht_p']}}px;"></span></dd>
-                        <dt>射正</dt>
-                        <dd class="away"><p>{{empty($match['a_shoot_target']) ? 0 : $match['a_shoot_target']}}</p><span style="width: {{108 * $match['a_sht_p']}}px;"></span></dd>
-                    </dl>
-                    <dl>
-                        <dd class="host"><p>{{empty($match['h_control']) ? 0 :$match['h_control'] }}%</p><span style="width: {{108 * $match['h_con_p']}}px;"></span></dd>
-                        <dt>控球率</dt>
-                        <dd class="away"><p>{{empty($match['a_control']) ? 0 : $match['a_control']}}%</p><span style="width: {{108 * $match['a_con_p']}}px;"></span></dd>
-                    </dl>
-                    <dl>
-                        <dd class="host"><p>{{empty($match['h_half_control']) ? 0 : $match['h_half_control']}}%</p><span style="width: {{108 * $match['h_hcon_p']}}px;"></span></dd>
-                        <dt>半场控球率</dt>
-                        <dd class="away"><p>{{empty($match['a_half_control']) ? 0 : $match['a_half_control']}}%</p><span style="width: {{108 * $match['a_hcon_p']}}px;"></span></dd>
-                    </dl>
-                </li>
-            </ul>
-        </div>
-        <div class="event default">
-            <div class="title">比赛事件<button class="close"></button></div>
-            <dl style="margin-top: 100px;">
-                <dt class="end">比赛结束</dt>
-                @if(isset($events))
-                @foreach($events as $event)
-                    <dd class="{{$event['is_home'] == 1 ? 'host' : 'away'}}">
-                        <p class="minute">{{$event['happen_time']}}<span>'</span></p>
-                        @if($event['kind'] == 11)
-                        <ul>
-                            <li><img src="{{env('CDN_URL')}}/img/pc/icon_video_up.png">{{$event['player_name_j']}}</li>
-                            <li><img src="{{env('CDN_URL')}}/img/pc/icon_video_down.png">{{$event['player_name_j2']}}</li>
-                        </ul>
-                        @elseif ($event['kind'] == 2)
-                            <ul>
-                                <li><img src="{{env('CDN_URL')}}/img/pc/icon_video_red.png">{{$event['player_name_j']}}</li>
-                            </ul>
-                        @elseif ($event['kind'] == 3)
-                        <ul>
-                            <li><img src="{{env('CDN_URL')}}/img/pc/icon_video_yellow.png">{{$event['player_name_j']}}</li>
-                        </ul>
-                        @elseif ($event['kind'] == 9)
-                            <ul>
-                                <li><img src="{{env('CDN_URL')}}/img/pc/icon_video_red.png">{{$event['player_name_j']}}（两黄一红）</li>
-                            </ul>
-                        @elseif ($event['kind'] == 1)
-                            <ul>
-                                <li><img src="{{env('CDN_URL')}}/img/pc/icon_video_goal.png">{{$event['player_name_j']}}</li>
-                            </ul>
-                        @elseif ($event['kind'] == 7)
-                            <ul>
-                                <li><img src="{{env('CDN_URL')}}/img/pc/icon_video_goal.png">{{$event['player_name_j']}}（点球）</li>
-                            </ul>
-                        @elseif ($event['kind'] == 8)
-                            <ul>
-                                <li><img src="{{env('CDN_URL')}}/img/pc/icon_video_own.png">{{$event['player_name_j']}}（乌龙）</li>
-                            </ul>
-                        @endif
-                    </dd>
-                @endforeach
-                @endif
-                <dt>比赛开始</dt>
-            </dl>
-        </div>
-    </div>
-    <div class="bottom">
-        <div class="btn">
-            <input type="radio" name="Match" id="Match_First" value="First" checked>
-            <label for="Match_First">首发对比</label>
-            <input type="radio" name="Match" id="Match_Event" value="Event">
-            <label for="Match_Event">比赛事件</label>
+    <div id="Event" class="childNode" style="display: ;">
+        <div class="score default">
+            <div class="title">比分统计<button class="close"></button></div>
+            <table>
+                <thead>
+                <tr>
+                    <th>球队</th>
+                    <th>1st</th>
+                    <th>2nd</th>
+                    <th>3rd</th>
+                    <th>4th</th>
+                    @if((array_key_exists('h_ot',$match) && strlen($match['h_ot']) > 0)||(array_key_exists('a_ot',$match) && strlen($match['a_ot']) > 0))
+                        <th>OT</th>
+                    @endif
+                    <th>总分</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><img src="{{strlen($match['hteam']['icon']) > 0 ? $match['hteam']['icon'] : '/img/icon_teamDefault.png'}}"></td>
+                    <td
+                            @if($match['status'] == 1)
+                            class="now"
+                            @endif
+                    >{{$match['hscore_1st'] or '/'}}</td>
+                    <td
+                            @if($match['status'] == 2)
+                            class="now"
+                            @endif
+                    >{{$match['hscore_2nd'] or '/'}}</td>
+                    <td
+                            @if($match['status'] == 3)
+                            class="now"
+                            @endif
+                    >{{$match['hscore_3rd'] or '/'}}</td>
+                    <td
+                            @if($match['status'] == 4)
+                            class="now"
+                            @endif
+                    >{{$match['hscore_4th'] or '/'}}</td>
+                    @if((array_key_exists('h_ot',$match) && strlen($match['h_ot']) > 0)||(array_key_exists('a_ot',$match) && strlen($match['a_ot']) > 0))
+                        <td>{{$match['h_ot'] or '/'}}</td>
+                    @endif
+                    <td>{{$match['hscore'] or '/'}}</td>
+                </tr>
+                <tr>
+                    <td><img src="{{strlen($match['ateam']['icon']) > 0 ? $match['ateam']['icon'] : '/img/icon_teamDefault.png'}}"></td>
+                    <td
+                            @if($match['status'] == 1)
+                            class="now"
+                            @endif
+                    >{{$match['ascore_1st'] or '/'}}</td>
+                    <td
+                            @if($match['status'] == 2)
+                            class="now"
+                            @endif
+                    >{{$match['ascore_2nd'] or '/'}}</td>
+                    <td
+                            @if($match['status'] == 3)
+                            class="now"
+                            @endif
+                    >{{$match['ascore_3rd'] or '/'}}</td>
+                    <td
+                            @if($match['status'] == 4)
+                            class="now"
+                            @endif
+                    >{{$match['ascore_4th'] or '/'}}</td>
+                    @if((array_key_exists('h_ot',$match) && strlen($match['h_ot']) > 0)||(array_key_exists('a_ot',$match) && strlen($match['a_ot']) > 0))
+                        <td>{{$match['a_ot'] or '/'}}</td>
+                    @endif
+                    <td>{{$match['ascore'] or '/'}}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 <div id="Data" class="content" style="display: none;">
     <div class="odd default"></div>
-    <div class="rank default">
-        <div class="title">积分排名<button class="close"></button></div>
-        <table>
-            <thead>
-            <tr>
-                <th>排名</th>
-                <th>球队</th>
-                <th>赛</th>
-                <th>胜/平/负</th>
-                <th>进/失</th>
-                <th>净</th>
-                <th>积分</th>
-            </tr>
-            </thead>
-            <tbody>
-            @if(isset($base['rank']['host']['all']))
-            <?php $host_rank = $base['rank']['host']['all']; ?>
-            <tr>
-                <td class="red">{{$host_rank['rank']}}</td>
-                <td>{{$match['hname']}}</td>
-                <td>{{$host_rank['count']}}</td>
-                <td>{{$host_rank['win']}}/{{$host_rank['draw']}}/{{$host_rank['lose']}}</td>
-                <td>{{$host_rank['goal']}}/{{$host_rank['fumble']}}</td>
-                <td>{{$host_rank['goal'] - $host_rank['fumble']}}</td>
-                <td>{{$host_rank['score']}}</td>
-            </tr>
-            @endif
-            @if(isset($base['rank']['away']['all']))
-            <?php $away_rank = $base['rank']['away']['all']; ?>
-            <tr>
-                <td class="red">{{$away_rank['rank']}}</td>
-                <td>{{$match['aname']}}</td>
-                <td>{{$away_rank['count']}}</td>
-                <td>{{$away_rank['win']}}/{{$away_rank['draw']}}/{{$away_rank['lose']}}</td>
-                <td>{{$away_rank['goal']}}/{{$away_rank['fumble']}}</td>
-                <td>{{$away_rank['goal'] - $away_rank['fumble']}}</td>
-                <td>{{$away_rank['score']}}</td>
-            </tr>
-            @endif
-            </tbody>
-        </table>
-    </div>
     @if(isset($base['historyBattle']))
     <div class="battle matchTable default" ha="0" le="0">
         <div class="title">
@@ -256,13 +135,13 @@
                 <label for="Battle_LE"><input type="checkbox" name="battle" value="le" id="Battle_LE"><span></span>同赛事</label>
             </div>
         </div>
-        @component("mobile.cell.football_detail_hbattle",['data'=>$base['historyBattle']['nhnl'],'league'=>0,'ha'=>0,'hid'=>$match['hid']])
+        @component("mobile.basketball_detail_cell.cell.basketball_detail_hbattle",['base'=>$match,'data'=>$base['historyBattle']['nhnl'],'league'=>0,'ha'=>0,'hid'=>$match['hid']])
         @endcomponent
-        @component("mobile.cell.football_detail_hbattle",['data'=>$base['historyBattle']['shnl'],'league'=>0,'ha'=>1,'hid'=>$match['hid']])
+        @component("mobile.basketball_detail_cell.cell.basketball_detail_hbattle",['base'=>$match,'data'=>$base['historyBattle']['shnl'],'league'=>0,'ha'=>1,'hid'=>$match['hid']])
         @endcomponent
-        @component("mobile.cell.football_detail_hbattle",['data'=>$base['historyBattle']['nhsl'],'league'=>1,'ha'=>0,'hid'=>$match['hid']])
+        @component("mobile.basketball_detail_cell.cell.basketball_detail_hbattle",['base'=>$match,'data'=>$base['historyBattle']['nhsl'],'league'=>1,'ha'=>0,'hid'=>$match['hid']])
         @endcomponent
-        @component("mobile.cell.football_detail_hbattle",['data'=>$base['historyBattle']['shsl'],'league'=>1,'ha'=>1,'hid'=>$match['hid']])
+        @component("mobile.basketball_detail_cell.cell.basketball_detail_hbattle",['base'=>$match,'data'=>$base['historyBattle']['shsl'],'league'=>1,'ha'=>1,'hid'=>$match['hid']])
         @endcomponent
     </div>
     @endif
@@ -276,26 +155,36 @@
                 <label for="History_LE"><input type="checkbox" name="history" value="le" id="History_LE"><span></span>同赛事</label>
             </div>
         </div>
+
+        @component("mobile.basketball_detail_cell.cell.basketball_detail_recenet_battle_head", ['base'=>$match,'ha'=>0, 'le'=>0, 'hmatch'=>$recent['home']['all'], 'hid'=>$match['hid'],'amatch'=>$recent['away']['all'], 'aid'=>$match['aid']])
+        @endcomponent
+        @component("mobile.basketball_detail_cell.cell.basketball_detail_recenet_battle_head", ['base'=>$match,'ha'=>1, 'le'=>0, 'hmatch'=>$recent['home']['sameHA'], 'hid'=>$match['hid'],'amatch'=>$recent['away']['sameHA'], 'aid'=>$match['aid']])
+        @endcomponent
+        @component("mobile.basketball_detail_cell.cell.basketball_detail_recenet_battle_head", ['base'=>$match,'ha'=>0, 'le'=>1, 'hmatch'=>$recent['home']['sameL'], 'hid'=>$match['hid'],'amatch'=>$recent['away']['sameL'], 'aid'=>$match['aid']])
+        @endcomponent
+        @component("mobile.basketball_detail_cell.cell.basketball_detail_recenet_battle_head", ['base'=>$match,'ha'=>1, 'le'=>1, 'hmatch'=>$recent['home']['sameHAL'], 'hid'=>$match['hid'],'amatch'=>$recent['away']['sameHAL'], 'aid'=>$match['aid']])
+        @endcomponent
+
         @if(isset($recent['home']))
             <p class="teamName"><span>{{$match['hname']}}</span></p>
-            @component("mobile.cell.football_detail_recent_battle", ['ha'=>0, 'le'=>0, 'data'=>$recent['home']['all'], 'hid'=>$match['hid']])
+            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['ha'=>0, 'le'=>0, 'data'=>$recent['home']['all'], 'hid'=>$match['hid']])
             @endcomponent
-            @component("mobile.cell.football_detail_recent_battle", ['ha'=>1, 'le'=>0, 'data'=>$recent['home']['sameHA'], 'hid'=>$match['hid']])
+            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['ha'=>1, 'le'=>0, 'data'=>$recent['home']['sameHA'], 'hid'=>$match['hid']])
             @endcomponent
-            @component("mobile.cell.football_detail_recent_battle", ['ha'=>0, 'le'=>1, 'data'=>$recent['home']['sameL'], 'hid'=>$match['hid']])
+            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['ha'=>0, 'le'=>1, 'data'=>$recent['home']['sameL'], 'hid'=>$match['hid']])
             @endcomponent
-            @component("mobile.cell.football_detail_recent_battle", ['ha'=>1, 'le'=>1, 'data'=>$recent['home']['sameHAL'], 'hid'=>$match['hid']])
+            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['ha'=>1, 'le'=>1, 'data'=>$recent['home']['sameHAL'], 'hid'=>$match['hid']])
             @endcomponent
         @endif
         @if(isset($recent['away']))
             <p class="teamName"><span>{{$match['aname']}}</span></p>
-            @component("mobile.cell.football_detail_recent_battle", ['ha'=>0, 'le'=>0, 'data'=>$recent['away']['all'], 'hid'=>$match['aid']])
+            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['ha'=>0, 'le'=>0, 'data'=>$recent['away']['all'], 'hid'=>$match['aid']])
             @endcomponent
-            @component("mobile.cell.football_detail_recent_battle", ['ha'=>1, 'le'=>0, 'data'=>$recent['away']['sameHA'], 'hid'=>$match['aid']])
+            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['ha'=>1, 'le'=>0, 'data'=>$recent['away']['sameHA'], 'hid'=>$match['aid']])
             @endcomponent
-            @component("mobile.cell.football_detail_recent_battle", ['ha'=>0, 'le'=>1, 'data'=>$recent['away']['sameL'], 'hid'=>$match['aid']])
+            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['ha'=>0, 'le'=>1, 'data'=>$recent['away']['sameL'], 'hid'=>$match['aid']])
             @endcomponent
-            @component("mobile.cell.football_detail_recent_battle", ['ha'=>1, 'le'=>1, 'data'=>$recent['away']['sameHAL'], 'hid'=>$match['aid']])
+            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['ha'=>1, 'le'=>1, 'data'=>$recent['away']['sameHAL'], 'hid'=>$match['aid']])
             @endcomponent
         @endif
     </div>
@@ -330,44 +219,6 @@
         @endif
     </div>
     @endif
-</div>
-<div id="Team" class="content" style="display: none;">
-    <div id="Trait" class="childNode" style="display: ;">
-        @if(isset($base['attribute']))
-        <div class="strength default" ha="0" le="0">
-            <div class="title">
-                攻防能力<button class="close"></button>
-                <div class="labelbox">
-                    <label for="Strength_HA"><input type="checkbox" name="battle" value="ha" id="Strength_HA"><span></span>同主客</label>
-                    <label for="Strength_LE"><input type="checkbox" name="battle" value="le" id="Strength_LE"><span></span>同赛事</label>
-                </div>
-            </div>
-            @if(isset($base['attribute']))
-                @component("mobile.cell.football_detail_attr",
-                    ['hname'=>$match['hname'], 'aname'=>$match['aname'], 'data'=>$base['attribute'], 'ha'=>0, 'le'=>'0', 'key'=>'all'])
-                @endcomponent
-                @component("mobile.cell.football_detail_attr",
-                    ['hname'=>$match['hname'], 'aname'=>$match['aname'], 'data'=>$base['attribute'], 'ha'=>1, 'le'=>'0', 'key'=>'host'])
-                @endcomponent
-                @component("mobile.cell.football_detail_attr",
-                    ['hname'=>$match['hname'], 'aname'=>$match['aname'], 'data'=>$base['attribute'], 'ha'=>0, 'le'=>'1', 'key'=>'league'])
-                @endcomponent
-                @component("mobile.cell.football_detail_attr",
-                    ['hname'=>$match['hname'], 'aname'=>$match['aname'], 'data'=>$base['attribute'], 'ha'=>1, 'le'=>'1', 'key'=>'both'])
-                @endcomponent
-            @endif
-        </div>
-        @endif
-    </div>
-    <div id="Corner" class="childNode" style="display: none;"></div>
-    <div class="bottom">
-        <div class="btn">
-            <input type="radio" name="Team" id="Team_Trait" value="Trait" checked>
-            <label for="Team_Trait">特点</label>
-            <input type="radio" name="Team" id="Team_Corner" value="Corner">
-            <label for="Team_Corner">角球</label>
-        </div>
-    </div>
 </div>
 <div id="Odd" class="content" style="display: none;">
     <div id="Asia" class="asia default childNode" style="display: ;">
@@ -483,7 +334,6 @@
         </div>
     </div>
 </div>
-<div id="SameOdd" class="content" style="display: none;"></div>
 @endsection
 @section('js')
 <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/jquery.js"></script>
@@ -505,7 +355,8 @@
     }
     window.mid = '{{$id}}';
     window.startTime = '{{date('Ymd', strtotime($match['time']))}}';
-    var indexOddUrl = getCdnUrl('/m/football/detail/odd/' + window.startTime + '/{{$id}}.html');
+    var indexOddUrl = getCdnUrl('/m/basketball/detail/odd/' + window.startTime + '/{{$id}}.html');
+    indexOddUrl = '/m/basketball/detail/odd/' + window.startTime + '/{{$id}}.html';
     $.ajax({
         url: indexOddUrl,
         success:function (html) {
@@ -521,5 +372,29 @@
             //$('#Data_Odd')[0].style.display = 'none';
         }
     });
+
+    function getOddIndex(id) {
+        Alert('loading', '加载中');
+        var oddIndexUrl = getCdnUrl('/m/basketball/detail/odd_index/' + window.startTime + '/' + window.mid + '.html');
+        oddIndexUrl = '/m/basketball/detail/odd_index/' + window.startTime + '/' + window.mid + '.html';
+        $.ajax({
+            'url': oddIndexUrl,
+            'type': 'get',
+            'dataType': 'html',
+            'success': function (html) {
+                window.oddIndexGet = true;
+                $("#" + id).html(html);
+                var BottomTab = $('#' + id + ' .bottom input');
+                BottomTab.change(function(){
+                    $(this).parents('.content').children('.childNode').css('display','none');
+                    $('#' + this.value).css('display','');
+                });
+                closeLoading();
+            },
+            "error": function () {
+                closeLoading();
+            }
+        });
+    }
 </script>
 @endsection

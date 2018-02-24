@@ -39,24 +39,24 @@
 
         @if(isset($recent['home']))
             <p class="teamName"><span>{{$match['hname']}}</span></p>
-            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['ha'=>0, 'le'=>0, 'data'=>$recent['home']['all'], 'hid'=>$match['hid']])
+            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['base'=>$base,'ha'=>0, 'le'=>0, 'data'=>$recent['home']['all'], 'hid'=>$match['hid']])
             @endcomponent
-            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['ha'=>1, 'le'=>0, 'data'=>$recent['home']['sameHA'], 'hid'=>$match['hid']])
+            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['base'=>$base,'ha'=>1, 'le'=>0, 'data'=>$recent['home']['sameHA'], 'hid'=>$match['hid']])
             @endcomponent
-            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['ha'=>0, 'le'=>1, 'data'=>$recent['home']['sameL'], 'hid'=>$match['hid']])
+            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['base'=>$base,'ha'=>0, 'le'=>1, 'data'=>$recent['home']['sameL'], 'hid'=>$match['hid']])
             @endcomponent
-            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['ha'=>1, 'le'=>1, 'data'=>$recent['home']['sameHAL'], 'hid'=>$match['hid']])
+            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['base'=>$base,'ha'=>1, 'le'=>1, 'data'=>$recent['home']['sameHAL'], 'hid'=>$match['hid']])
             @endcomponent
         @endif
         @if(isset($recent['away']))
             <p class="teamName"><span>{{$match['aname']}}</span></p>
-            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['ha'=>0, 'le'=>0, 'data'=>$recent['away']['all'], 'hid'=>$match['aid']])
+            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['base'=>$base,'ha'=>0, 'le'=>0, 'data'=>$recent['away']['all'], 'hid'=>$match['aid']])
             @endcomponent
-            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['ha'=>1, 'le'=>0, 'data'=>$recent['away']['sameHA'], 'hid'=>$match['aid']])
+            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['base'=>$base,'ha'=>1, 'le'=>0, 'data'=>$recent['away']['sameHA'], 'hid'=>$match['aid']])
             @endcomponent
-            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['ha'=>0, 'le'=>1, 'data'=>$recent['away']['sameL'], 'hid'=>$match['aid']])
+            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['base'=>$base,'ha'=>0, 'le'=>1, 'data'=>$recent['away']['sameL'], 'hid'=>$match['aid']])
             @endcomponent
-            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['ha'=>1, 'le'=>1, 'data'=>$recent['away']['sameHAL'], 'hid'=>$match['aid']])
+            @component("mobile.basketball_detail_cell.cell.basketball_detail_recent_battle", ['base'=>$base,'ha'=>1, 'le'=>1, 'data'=>$recent['away']['sameHAL'], 'hid'=>$match['aid']])
             @endcomponent
         @endif
     </div>
