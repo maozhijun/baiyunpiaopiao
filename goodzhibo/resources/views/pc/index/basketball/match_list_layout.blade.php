@@ -26,9 +26,19 @@
                     隐藏<b id="hideMatchCount">{{$hideMatchCount}}</b>场&nbsp;&nbsp;<span onclick="matchFilter('all')">[ 显示 ]</span>
                 </p>
             </div>
-            @foreach($matches as $match)
+            <?php
+                $ad_1 = random_int(0, min(count($matches), 13));
+                $ad_2 = random_int(0, min(count($matches), 15));
+            ?>
+            @foreach($matches as $index=>$match)
                 @component("pc.index.basketball.cell.basket_list_cell", ['match'=>$match])
                 @endcomponent
+                @if($ad_1 == $index)
+                    <div class="adbanner default"><a target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_1.gif"><button class="close"></button></a></div>
+                @endif
+                @if($ad_2 == $index)
+                    <div class="adbanner default"><a target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_2.gif"><button class="close"></button></a></div>
+                @endif
             @endforeach
             @foreach($exceptionMatches as $match)
                 @component("pc.index.basketball.cell.basket_list_cell", ['match'=>$match])
@@ -60,6 +70,14 @@
                 @endforeach
             </ul>
         </div>
+    </div>
+    <div class="adflag left">
+        <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
+        <a target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left.gif"></a>
+    </div>
+    <div class="adflag right">
+        <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
+        <a target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right.gif"></a>
     </div>
 @endsection
 @section('js')
