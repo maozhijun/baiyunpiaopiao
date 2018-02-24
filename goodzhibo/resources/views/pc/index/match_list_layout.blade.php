@@ -82,13 +82,13 @@
                         @component("pc.index.cell.match_list_cell", ['match'=>$match])
                         @endcomponent
                         @if($bj == ($random_keys[0]) && !$match['hide'])
-                            <tr class="bannerAD"><td colspan="11"><a href="" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_1.gif"></a></td></tr>
+                            <tr class="bannerAD"><td colspan="11"><a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_1.gif"></a></td></tr>
                         @elseif($bj == ($random_keys[1]) && !$match['hide'])
-                            <tr class="bannerAD"><td colspan="11"><a href="" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_2.gif"></a></td></tr>
+                            <tr class="bannerAD"><td colspan="11"><a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_2.gif"></a></td></tr>
                         @elseif($bj == ($random_keys[2]) && !$match['hide'])
                             {{--<tr class="bannerAD"><td colspan="12"><a><img src="/img/ad/all.jpg"></a></td></tr>--}}
                         @elseif($bj == ($random_keys[3]) && !$match['hide'])
-                            <tr class="bannerAD"><td colspan="11"><a href="" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_2.gif"></a></td></tr>
+                            {{--<tr class="bannerAD"><td colspan="11"><a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_2.gif"></a></td></tr>--}}
                         @endif
                         <?php
                         if(!$match['hide'])
@@ -209,11 +209,11 @@
     <div class="adflag left">
         <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
         {{--<a><img src="{{env('CDN_URL')}}/img/ad/double.jpg"></a>--}}
-        <a href="" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left.gif"></a>
+        <a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left.gif"></a>
     </div>
     <div class="adflag right">
         <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
-        <a href="" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right.gif"></a>
+        <a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right.gif"></a>
         {{--<a><img src="{{env('CDN_URL')}}/img/ad/double.jpg"></a>--}}
     </div>
 @endsection

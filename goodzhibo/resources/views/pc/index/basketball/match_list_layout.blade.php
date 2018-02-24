@@ -34,10 +34,10 @@
                 @component("pc.index.basketball.cell.basket_list_cell", ['match'=>$match])
                 @endcomponent
                 @if($ad_1 == $index)
-                    <div class="adbanner default"><a target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_1.gif"><button class="close"></button></a></div>
+                    <div class="adbanner default"><a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_1.gif"><button class="close"></button></a></div>
                 @endif
                 @if($ad_2 == $index)
-                    <div class="adbanner default"><a target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_2.gif"><button class="close"></button></a></div>
+                    <div class="adbanner default"><a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_2.gif"><button class="close"></button></a></div>
                 @endif
             @endforeach
             @foreach($exceptionMatches as $match)
@@ -73,11 +73,11 @@
     </div>
     <div class="adflag left">
         <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
-        <a target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left.gif"></a>
+        <a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left.gif"></a>
     </div>
     <div class="adflag right">
         <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
-        <a target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right.gif"></a>
+        <a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right.gif"></a>
     </div>
 @endsection
 @section('js')
