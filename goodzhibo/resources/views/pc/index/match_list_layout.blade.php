@@ -72,14 +72,30 @@
                 </tr>
                 </thead>
                 <tbody>
+                <?php
+                $a = array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+                $random_keys=array_rand($a, 8);
+                $bj = 0;
+                ?>
                 @if(isset($matches))
                     @foreach($matches as $match)
                         @component("pc.index.cell.match_list_cell", ['match'=>$match])
                         @endcomponent
+                        @if($bj == ($random_keys[0]) && !$match['hide'])
+                            <tr class="bannerAD"><td colspan="11"><a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_1.gif"></a></td></tr>
+                        @elseif($bj == ($random_keys[1]) && !$match['hide'])
+                            <tr class="bannerAD"><td colspan="11"><a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_2.gif"></a></td></tr>
+                        @elseif($bj == ($random_keys[2]) && !$match['hide'])
+                            {{--<tr class="bannerAD"><td colspan="12"><a><img src="/img/ad/all.jpg"></a></td></tr>--}}
+                        @elseif($bj == ($random_keys[3]) && !$match['hide'])
+                            {{--<tr class="bannerAD"><td colspan="11"><a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_2.gif"></a></td></tr>--}}
+                        @endif
+                        <?php
+                        if(!$match['hide'])
+                            $bj++;
+                        ?>
                     @endforeach
                 @endif
-                {{--<tr class="bannerAD"><td colspan="11"><p><a href="http://www.lg310.com" target="_blank">广告：&nbsp;&nbsp;专注小联赛直播，多场同屏看球模式！</a></p></td></tr>--}}
-                {{--<tr class="bannerAD"><td colspan="11"><a href="http://91889188.87.cn" target="_blank"><img src="{{env('CDN_URL')}}/img/pc/ad_1.jpg"></td></a></tr>--}}
                 </tbody>
                 <tfoot>
                 @if(isset($exceptionMatches))
@@ -189,6 +205,16 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="adflag left">
+        <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
+        {{--<a><img src="{{env('CDN_URL')}}/img/ad/double.jpg"></a>--}}
+        <a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left.gif"></a>
+    </div>
+    <div class="adflag right">
+        <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
+        <a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right.gif"></a>
+        {{--<a><img src="{{env('CDN_URL')}}/img/ad/double.jpg"></a>--}}
     </div>
 @endsection
 @section('js')

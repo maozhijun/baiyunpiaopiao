@@ -1,8 +1,8 @@
-@extends('pc.layout.base')
+@extends('pc.layout.base_new')
 @section('content')
     <div id="Content">
         <div class="inner">
-            {{--<div class="adbanner inner"><a href="https://www.liaogou168.com/merchant/detail/10008" target="_blank"><img src="/img/ad_1.jpg"><button class="close"></button></a></div>--}}
+            <div class="adbanner inner"><a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_1.gif"><button class="close"></button></a></div>
             <div id="Info">
                 <p class="name">{{$match['lname']}}直播：{{$match['hname']}}&nbsp;&nbsp;VS&nbsp;&nbsp;{{$match['aname']}}</p>
                 <p class="line">
@@ -43,13 +43,15 @@
                 复制此地址分享：<input type="text" name="share" value="" onclick="Copy()"><span></span>
             </div>
         </div>
-        {{--<div class="adbanner inner"><a href="http://91889188.87.cn" target="_blank"><img src="/img/ad_1.jpg"><button class="close"></button></a></div>--}}
+        <div class="adbanner inner"><a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_2.gif"><button class="close"></button></a></div>
         <div class="clear"></div>
     </div>
     <div class="adflag left">
+        <a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left.gif"></a>
         <img src="/img/pc/qrcode_for_ht_n.jpg"><p>扫码关注，每日抽千元大奖</p>
     </div>
     <div class="adflag right">
+        <a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right.gif"></a>
         <img src="/img/pc/qrcode_for_ht_n.jpg"><p>扫码关注，每日抽千元大奖</p>
     </div>
 @endsection

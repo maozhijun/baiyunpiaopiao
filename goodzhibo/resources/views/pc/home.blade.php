@@ -74,7 +74,7 @@
                 </table>
             </div>
             @endif
-            {{--<div class="adbanner default"><a href="http://91889188.87.cn" target="_blank"><img src="img/ad_1.jpg"><button class="close"></button></a></div>--}}
+            <div class="adbanner default"><a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_1.gif"><button class="close"></button></a></div>
             <div class="default">
                 <div class="title">
                     <p>稍后直播</p>
@@ -175,14 +175,14 @@
             @endif
         </div>
     </div>
-    {{--<div class="adflag left">--}}
-        {{--<a href="http://91889188.87.cn" target="_blank"><img src="img/ad.jpg"><button class="close"></button></a>--}}
-        {{--<a href="http://91889188.87.cn" target="_blank"><img src="img/ad.jpg"><button class="close"></button></a>--}}
-    {{--</div>--}}
-    {{--<div class="adflag right">--}}
-        {{--<a href="http://91889188.87.cn" target="_blank"><img src="img/ad.jpg"><button class="close"></button></a>--}}
-        {{--<a href="http://91889188.87.cn" target="_blank"><img src="img/ad.jpg"><button class="close"></button></a>--}}
-    {{--</div>--}}
+    <div class="adflag left">
+        <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
+        <a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left.gif"></a>
+    </div>
+    <div class="adflag right">
+        <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
+        <a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right.gif"></a>
+    </div>
 @endsection
 @section('js')
 <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/home.js"></script>

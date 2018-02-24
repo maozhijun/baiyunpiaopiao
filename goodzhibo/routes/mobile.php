@@ -33,15 +33,18 @@ Route::group(["namespace" => 'Live'], function () {
     Route::get('/basketball/lives.html', 'BasketBallController@lives');//篮球直播页面列表
     Route::get('/lives/cache/details', 'LiveController@liveDetailsStatic');//篮球直播页面列表
 
-    Route::get('/basketball/detail/{date}/{id}.html',"BasketBallController@basketballDetail");
     Route::get('/basketball/detail/odd/{date}/{id}.html', 'BasketBallController@basketballOdd');
     Route::get('/basketball/detail/odd_index/{date}/{id}.html', 'BasketBallController@basketballOddIndex');
+    Route::get('/basketball/detail/{sp}/{id}.html',"BasketBallController@basketballDetail");//篮球终端页面
 
     /////////////////======================================================================/////////////////
     //Route::get('/', 'Live\LiveController@lives');
     //Route::get('/index.html', 'LiveController@lives');
 });
 
+/**
+ * 足球WAP终端页面相关
+ */
 Route::group(["namespace" => 'Detail'], function () {
     Route::get('/football/detail/tab/{type}/{index}/wap{id}.html', 'DetailController@detailCell');
 
@@ -49,6 +52,15 @@ Route::group(["namespace" => 'Detail'], function () {
     Route::get('/football/detail/analyse_cell/{date}/{id}.html', 'DetailController@analyseCell');
     Route::get('/football/detail/base_cell/{date}/{id}.html', 'DetailController@baseCell');
 });
+
+/**
+ * 篮球WAP终端页面相关
+ */
+Route::group(["namespace" => 'Detail'], function () {
+
+    Route::get("/basketball/detail/tab/{tab}/{index}/wap{id}.html", "BasketballDetailController@detailCell");
+});
+
 
 /**
  * 直播入口

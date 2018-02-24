@@ -11,14 +11,16 @@ namespace App\Http\Controllers\Mobile\Live;
 
 use App\Console\DetailCommands\Football\FootballDetailCommonCommand;
 use App\Http\Controllers\CacheInterface\BasketballInterface;
+use App\Http\Controllers\CacheInterface\CacheTool;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Mobile\Detail\BasketballDetailController;
+use App\Http\Controllers\Mobile\Match\MatchDetailTool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
 class BasketBallController extends Controller
 {
-    use FootballDetailCommonCommand;
+    use MatchDetailTool;
     /**
      * 即时篮球赛事列表
      * @param Request $request
@@ -79,7 +81,18 @@ class BasketBallController extends Controller
         return view('mobile.basketIndex', $json);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     * 篮球终端页
+     * @param Request $request
+     * @param $sp   比赛id的前2位数字
+     * @param $id   比赛id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function basketballDetail(Request $request, $sp, $id){
+        $data = $this->basketballDetailData($id);
+        dump($data);
+        return view('mobile.basketballDetail', ['match'=>$data]);
+    }
 
     public function basketballData($date = '') {
         $cacheInterface = new BasketballInterface();
@@ -100,40 +113,19 @@ class BasketBallController extends Controller
     }
 
     /**
-     * 篮球终端页
-     * @param Request $request
-     * @param $date
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function basketballDetail(Request $request, $date, $id){
-        $data = $this->basketballDetailData($id);
-        if (!isset($data['match'])) {
-            // abort(404);
-        }
-
-        $controller = new BasketballDetailController();
-        $base = $controller->analyseBaseData($date, $id);
-        $data = $base;
-        $data['id'] = $id;
-        return view('mobile.basketballDetail', $data);
-    }
-
-    /**
-     * 篮球比赛终端数据
+     * 篮球比赛终端数据 先从缓存文件获取数据，如果没有则从接口中获取。
      * @param $id
      * @return mixed
      */
     public function basketballDetailData($id) {
-        $ch = curl_init();
-        $url = env('LIAOGOU_URL')."intf/basket/detail/" . $id;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $json = curl_exec ($ch);
-        curl_close ($ch);
-        $json = json_decode($json, true);
-//        dump($url);
-        return $this->convertEmptyJson($json);
+        //先从缓存文件获取
+//        $patch = CacheTool::getCacheJsonPatch('public/json/detail/0/2/' . $id . '/match.json');
+//        $json = CacheTool::getFileContent($patch);
+//        if (!is_null($json)) {
+//            return json_decode($json);
+//        }
+        $json = $this->basketballDetailMatchData($id);
+        return $json;
     }
 
     /**
@@ -142,15 +134,16 @@ class BasketBallController extends Controller
      * @param $platform
      * @return mixed
      */
-    public function basketballOddIndexData($id, $platform = '') {
+    public function basketballOddIndexData($id, $platform = '')
+    {
         $ch = curl_init();
         $param = $platform == 'pc' ? '?platform=pc' : '';
         $prefix = env('LIAOGOU_URL');
         $url = $prefix . "intf/basket/odd_index/" . $id . $param;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $json = curl_exec ($ch);
-        curl_close ($ch);
+        $json = curl_exec($ch);
+        curl_close($ch);
         $json = json_decode($json, true);
         return $this->convertEmptyJson($json);
     }
