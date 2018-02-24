@@ -1,4 +1,4 @@
-@extends('app.layout.match_base')
+@extends('app.layout.bk_match_base')
 
 @section('content')
     @if(isset($html))

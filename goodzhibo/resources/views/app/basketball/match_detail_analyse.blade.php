@@ -1,4 +1,4 @@
-@extends('app.layout.match_base')
+@extends('app.layout.bk_match_base')
 
 @section('content')
     <!--
@@ -10,7 +10,7 @@
                     @endcomponent
                 </div>
             @endif
-            @component("app.football.cell.basketball_detail_analyse",['base'=>$base, 'match'=>$match])
+            @component("app.basketball.cell.basketball_detail_analyse",['base'=>$base, 'match'=>$match])
             @endcomponent
         </div>
     @endif
