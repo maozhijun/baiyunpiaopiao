@@ -108,14 +108,14 @@ class GoodsTopicController extends Controller{
 
     //历史浏览,传id过来
     public function getMerchantTopicByIdsV140(Request $request) {
-        $topicController = new TopicController();
-
         $ids = $request->input("ids");
-        if (is_null($ids) || strlen($ids) == 0) {
-            return Response::json(AppCommonResponse::createAppCommonResponse(-1,'参数错误'));
-        }
-        $array = $topicController->getTopicsByIds(explode(',', $ids));
-
-        return Response::json(AppCommonResponse::createAppCommonResponse(0,'',$array,false));
+        $ch = curl_init();
+        $url = 'https://shop.liaogou168.com/api/v140/app/topic/getMerchantTopicByIds?ids='.$ids;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $json = curl_exec ($ch);
+        curl_close ($ch);
+        $json = json_decode($json, true);
+        return $json;
     }
 }

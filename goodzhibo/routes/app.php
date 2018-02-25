@@ -14,4 +14,6 @@ Route::group([], function () {
 
     //发现频道
     Route::get('app/discover/list', 'DiscoverController@appLinks');
+    //资讯根据id获取(我关注的资讯用)
+    Route::get('app/topic/getMerchantTopicByIds', 'GoodsTopicController@getMerchantTopicByIdsV140');
 });
