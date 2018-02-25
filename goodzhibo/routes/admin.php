@@ -19,4 +19,9 @@ Route::group(['middleware' => 'admin_auth'], function () {
     Route::get('/links/list', 'LinkController@index');
     Route::post('/links/save', 'LinkController@saveLink');
     Route::get('/links/del', 'LinkController@delLink');
+
+    //app发现tab
+    Route::get('/discover/list', 'DiscoverController@index');
+    Route::post('/discover/save', 'DiscoverController@saveLink');
+    Route::get('/discover/del', 'DiscoverController@delLink');
 });

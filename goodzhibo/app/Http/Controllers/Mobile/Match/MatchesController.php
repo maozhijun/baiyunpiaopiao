@@ -28,6 +28,8 @@ class MatchesController
             case "schedule":
                 $defaultDate = date('Y-m-d', strtotime('+1 days'));
                 break;
+            case 'matchesByIds': //这个需要单独处理
+                return $this->convert($request, $sport, $tab);
         }
         $date = $request->input('date', $defaultDate);
 
@@ -70,5 +72,16 @@ class MatchesController
         }
         $data['matches'] = $matches;
         return Response::json(AppCommonResponse::createAppCommonResponse(0, '', $data, false));
+    }
+
+    public function convert($request, $sport, $tab){
+        $ch = curl_init();
+        $url = 'https://shop.liaogou168.com/api/v140/app/matches/'.$sport.'/matchesByIds?ids='.$request->input('ids',0);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $json = curl_exec ($ch);
+        curl_close ($ch);
+        $json = json_decode($json, true);
+        return $json;
     }
 }
