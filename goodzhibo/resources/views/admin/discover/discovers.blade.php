@@ -45,7 +45,7 @@
                 <tbody>
                 @if(isset($links))
                 @foreach($links as $key=>$link)
-                    <form method="post" action="/admin/links/save">
+                    <form method="post" action="/admin/discover/save">
                         {{csrf_field()}}
                         <input type="hidden" name="id" value="{{$key}}">
                         <tr>
