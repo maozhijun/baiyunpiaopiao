@@ -89,9 +89,21 @@ class BasketBallController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function basketballDetail(Request $request, $sp, $id){
-        $data = $this->basketballDetailData($id);
-        dump($data);
-        return view('mobile.basketballDetail', ['match'=>$data]);
+        $match = $this->basketballDetailData($id);
+        if (!isset($data['match'])) {
+            // abort(404);
+        }
+
+        $controller = new BasketballDetailController();
+        $base = $controller->analyseBaseData($sp, $id);
+        $odd = $controller->analyseOddData($sp, $id);
+        $data['base'] = $base;
+        $data['odd'] = $odd;
+
+        $data['match'] = $match;
+        $data['id'] = $id;
+//        dump($data);
+        return view('mobile.basketballDetail', $data);
     }
 
     public function basketballData($date = '') {
