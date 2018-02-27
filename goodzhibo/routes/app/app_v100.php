@@ -2,9 +2,9 @@
 
 Route::group([], function () {
     //资讯首页
-    Route::get("app/topic/home", 'GoodsTopicController@homeIndex');
+    Route::get("app/topic/home.json", 'GoodsTopicController@homeIndex');
     //资讯分类信息
-    Route::get('app/topic/types', 'GoodsTopicController@topicTypes');
+    Route::get('app/topic/types.json', 'GoodsTopicController@topicTypes');
     //资讯分类列表
     Route::get('app/topic/list', 'GoodsTopicController@topicTypeList');
     //资讯终端

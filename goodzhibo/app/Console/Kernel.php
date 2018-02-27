@@ -68,6 +68,8 @@ class Kernel extends ConsoleKernel
 
         BasketImmediateHtmlCommands::class,
         BasketResultHtmlCommands::class,
+
+        AppTopicCommand::class,
     ];
 
     /**
@@ -128,6 +130,8 @@ class Kernel extends ConsoleKernel
         //篮球终端页面缓存
         $schedule->command('basket_detail_immediate_html:run')->everyMinute();
         $schedule->command('basket_detail_result_html:run')->everyTenMinutes();
+
+        $schedule->command('app_topic_list_cache:run')->everyFiveMinutes();
     }
 
     /**
