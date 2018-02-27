@@ -6,16 +6,11 @@
  * Time: 17:14
  */
 
-namespace App\Console;
+namespace App\Console\AppCommands;
 
 
 use App\Http\Controllers\App\GoodsTopicController;
-use App\Http\Controllers\PC\Live\LiveController;
-use App\Http\Controllers\PC\RecommendsController;
-use App\Http\Controllers\PC\TaskController;
-use App\Http\Controllers\PC\TopicController;
 use Illuminate\Console\Command;
-use Illuminate\Http\Request;
 
 class AppTopicCommand extends Command
 {

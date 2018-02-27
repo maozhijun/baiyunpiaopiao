@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\AppCommands\AppTopicCommand;
 use App\Console\CacheCommands\BasketballListCommands;
 use App\Console\CacheCommands\BasketballLiveJsonCommands;
 use App\Console\CacheCommands\EventsHtmlCommands;
