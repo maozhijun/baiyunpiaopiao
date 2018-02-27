@@ -42,7 +42,7 @@ class GoodsTopicController extends Controller{
             if ($code >= 400 || empty($json)) {
                 return;
             }
-            Storage::disk("public")->put("/static/topic/json/home.json", $json);
+            Storage::disk("public")->put("/static/m/v100/app/topic/home.json", $json);
         } catch (\Exception $exception) {
             Log::error($exception);
         }
@@ -86,7 +86,7 @@ class GoodsTopicController extends Controller{
                 $tmp = $json;
             }
             $tmp = json_encode($tmp);
-            Storage::disk("public")->put("/static/topic/json/types.json", $tmp);
+            Storage::disk("public")->put("/static/m/v100/app/topic/types.json", $tmp);
         } catch (\Exception $exception) {
             Log::error($exception);
         }

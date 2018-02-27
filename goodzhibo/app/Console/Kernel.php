@@ -132,7 +132,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('basket_detail_immediate_html:run')->everyMinute();
         $schedule->command('basket_detail_result_html:run')->everyTenMinutes();
 
-        $schedule->command('app_topic_list_cache:run')->everyFiveMinutes();
+//        $schedule->command('app_topic_list_cache:run')->everyFiveMinutes();
     }
 
     /**
