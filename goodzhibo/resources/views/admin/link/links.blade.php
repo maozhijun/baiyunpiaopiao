@@ -1,6 +1,6 @@
 @extends('admin.layout.layout')
 @section('content')
-    <h1 class="page-header">热门频道列表</h1>
+    <h1 class="page-header">友情链接</h1>
     {{--<div>--}}
         {{--<form class="form-inline" action="/cms/tvs">--}}
             {{--<div class="form-group">--}}
