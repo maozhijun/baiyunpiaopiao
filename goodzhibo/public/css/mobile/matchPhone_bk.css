@@ -754,7 +754,7 @@ div#Data .battle[ha="0"][le="0"] .proportionBox[ha="0"][le="0"],
 div#Data .battle[ha="1"][le="0"] .proportionBox[ha="1"][le="0"],
 div#Data .battle[ha="0"][le="1"] .proportionBox[ha="0"][le="1"],
 div#Data .battle[ha="1"][le="1"] .proportionBox[ha="1"][le="1"]{
-	display: flex;
+	display: block;
 }
 div#Data .battle[ha="0"][le="0"] table[ha="0"][le="0"],
 div#Data .battle[ha="1"][le="0"] table[ha="1"][le="0"],

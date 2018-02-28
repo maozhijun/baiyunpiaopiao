@@ -39,6 +39,20 @@ return [
             'prefix' => '',
         ],
 
+        'heitu' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_HT', '127.0.0.1'),
+            'port' => env('DB_PORT_HT', '3306'),
+            'database' => env('DB_DATABASE_HT', 'liaogou'),
+            'username' => env('DB_USERNAME_HT', 'root'),
+            'password' => env('DB_PASSWORD_HT', 'root'),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+            'engine' => null,
+        ],
+
         'match' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST_MATCH', '127.0.0.1'),

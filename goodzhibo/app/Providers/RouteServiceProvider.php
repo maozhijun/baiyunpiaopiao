@@ -40,6 +40,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
 
         //
+        $this->matAppRoutes();
     }
 
     /**
@@ -61,11 +62,6 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/mobile.php'));
 
         Route::middleware('web')
-            ->prefix('m')
-            ->namespace($this->namespace . '\App')
-            ->group(base_path('routes/app.php'));
-
-        Route::middleware('web')
             ->prefix('static')
             ->namespace($this->namespace . '\StaticHtml')
             ->group(base_path('routes/static.php'));
@@ -74,6 +70,22 @@ class RouteServiceProvider extends ServiceProvider
             ->prefix('admin')
             ->namespace($this->namespace . '\Admin')
             ->group(base_path('routes/admin.php'));
+    }
+
+    protected function matAppRoutes(){
+        Route::middleware('api')
+            ->prefix('m')
+            ->namespace($this->namespace . '\App')
+            ->group(base_path('routes/app.php'));
+
+        Route::middleware('api')
+            ->prefix('m/v100')
+            ->namespace($this->namespace . '\App')
+            ->group(base_path('routes/app/app_v100.php'));
+
+        //刷新图片验证码
+        Route::middleware('web')
+            ->get("/app/user/refresh_verify_code", $this->namespace . '\App'."\\AuthController@refreshVerifyCode");
     }
 
     /**

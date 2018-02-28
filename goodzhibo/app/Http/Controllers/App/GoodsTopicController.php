@@ -8,23 +8,22 @@
 
 namespace App\Http\Controllers\App;
 
-use App\Http\Controllers\App\Model\AppCommonResponse;
-use App\Http\Controllers\Common\Topic\TopicController;
-use App\Models\CMS\PcArticle;
-use App\Models\Match\MatchLive;
-use App\Models\Shop\Business\GoodsArticles;
 use App\Models\Shop\Business\GoodsTopics;
 use App\Models\Shop\Business\Order;
 use App\Models\Shop\Business\TopicBanner;
 use App\Models\Shop\Business\TopicTypes;
-use App\Models\Shop\Customer\AccountFavor;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 class GoodsTopicController extends Controller{
     //静态化
-
+    public function staticData(){
+        $this->homeIndex(new Request());
+        $this->topicTypes(new Request());
+    }
 
     /**
      * 主页
@@ -32,14 +31,25 @@ class GoodsTopicController extends Controller{
      * @return json
      */
     public function homeIndex(Request $request) {
-        $ch = curl_init();
-        $url = 'https://shop.liaogou168.com/api/v140/app/topic/home';
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $json = curl_exec ($ch);
-        curl_close ($ch);
-        $json = json_decode($json, true);
-        return $json;
+        try {
+            $ch = curl_init();
+            $url = 'https://shop.liaogou168.com/api/v140/app/topic/home';
+            curl_setopt($ch, CURLOPT_URL,$url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $json = curl_exec ($ch);
+            $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close ($ch);
+            if ($code >= 400 || empty($json)) {
+                return;
+            }
+            Storage::disk("public")->put("/static/m/v100/app/topic/home.json", $json);
+        } catch (\Exception $exception) {
+            Log::error($exception);
+        }
+        if ($json) {
+            $json = json_decode($json, true);
+            return $json;
+        }
     }
 
     /**
@@ -48,14 +58,42 @@ class GoodsTopicController extends Controller{
      * @return json
      */
     public function topicTypes(Request $request) {
-        $ch = curl_init();
-        $url = 'https://shop.liaogou168.com/api/v140/app/topic/types';
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $json = curl_exec ($ch);
-        curl_close ($ch);
-        $json = json_decode($json, true);
-        return $json;
+        try {
+            $ch = curl_init();
+            $url = 'https://shop.liaogou168.com/api/v140/app/topic/types';
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $json = curl_exec ($ch);
+            $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close ($ch);
+            if ($code >= 400 || empty($json)) {
+                return;
+            }
+            $json = json_decode($json, true);
+            $tmp = array();
+            if ($json['code'] == 0){
+                foreach ($json['data'] as $item){
+                    if (stristr($item['name'],'彩')){
+
+                    }
+                    else{
+                        $tmp['data'][] = $item;
+                    }
+                }
+                $tmp['code'] = $json['code'];
+            }
+            else{
+                $tmp = $json;
+            }
+            $tmp = json_encode($tmp);
+            Storage::disk("public")->put("/static/m/v100/app/topic/types.json", $tmp);
+        } catch (\Exception $exception) {
+            Log::error($exception);
+        }
+        if ($tmp) {
+            $json = json_decode($tmp, true);
+            return $json;
+        }
     }
 
     /**

@@ -43,7 +43,7 @@ class AuthorController extends Controller
             if ($remember == 1) {
                 $token = uniqid('htc-', true);
                 Redis::setEx($token, 60 * 60 * 24 * 7, $nickname);
-                $c = cookie(self::HEI_TU_AUTH_TOKEN, $token, 60 * 24 * 7, '/', 'liaogou168.com', false, true);
+                $c = cookie(self::HEI_TU_AUTH_TOKEN, $token, 60 * 24 * 7, '/', 'goodzhibo.com', false, true);
                 return response()->redirectTo($target)->withCookies([$c]);
             } else {
                 return response()->redirectTo($target);
