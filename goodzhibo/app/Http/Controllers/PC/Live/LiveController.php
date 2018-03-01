@@ -758,7 +758,7 @@ class LiveController extends Controller
     public function staticLiveUrl(Request $request, $id) {
         try {
             $ch = curl_init();
-            $url = env('AIKQ_URL')."/match/live/url/channel/" . $id .".json?breakTTZB=break&isMobile=0";
+            $url = env('LIAOGOU_URL')."match/live/url/channel/" . $id ."?breakTTZB=break&isMobile=0";
             curl_setopt($ch, CURLOPT_URL,$url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $json = curl_exec ($ch);
@@ -768,7 +768,7 @@ class LiveController extends Controller
             }
 
             $ch = curl_init();
-            $url = env('AIKQ_URL')."/match/live/url/channel/mobile/" . $id .".json?breakTTZB=break&isMobile=1";
+            $url = env('LIAOGOU_URL')."match/live/url/channel/mobile/" . $id ."?breakTTZB=break&isMobile=1";
             curl_setopt($ch, CURLOPT_URL,$url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $json = curl_exec ($ch);
