@@ -768,7 +768,7 @@ class LiveController extends Controller
             }
 
             $ch = curl_init();
-            $url = env('AIKQ_URL')."match/live/url/channel/mobile/" . $id ."?breakTTZB=break&isMobile=1";
+            $url = env('AIKQ_URL')."match/live/url/channel/" . $id ."?breakTTZB=break&isMobile=1";
             curl_setopt($ch, CURLOPT_URL,$url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $json = curl_exec ($ch);
