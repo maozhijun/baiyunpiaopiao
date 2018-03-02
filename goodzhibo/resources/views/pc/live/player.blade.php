@@ -30,7 +30,7 @@
     window.host = '{{$_SERVER['HTTP_HOST']}}';
     window.isMobile = '{{\App\Http\Controllers\Controller::isMobileUAgent($_SERVER['HTTP_USER_AGENT'])}}';
 </script>
-<script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/player.js?t=0180129"></script>
+<script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/player.js?t=0180129113"></script>
 <script>
     var _hmt = _hmt || [];
     (function() {
