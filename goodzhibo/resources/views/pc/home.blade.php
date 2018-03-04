@@ -75,7 +75,7 @@
             </div>
             @endif
                 <?php
-                $ads = array('ad_center_1.gif','ad_center_2.png','ad_center_3.gif','ad_center_4.gif','ad_center_5.gif','ad_center_6.gif','ad_center_7.gif');
+                $ads = array('ad_center_8.gif','ad_center_2.png','ad_center_3.gif','ad_center_4.gif','ad_center_5.gif','ad_center_6.gif','ad_center_7.gif');
                 $random_ad_keys=array_rand($ads, 1);
                 ?>
             <div class="adbanner default"><a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL').'/img/'.$ads[$random_ad_keys[0]]}}"><button class="close"></button></a></div>
@@ -181,11 +181,11 @@
     </div>
     <div class="adflag left">
         <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
-        <a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left.gif"></a>
+        <a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left2.gif"></a>
     </div>
     <div class="adflag right">
         <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
-        <a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right.gif"></a>
+        <a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right2.gif"></a>
     </div>
 @endsection
 @section('js')

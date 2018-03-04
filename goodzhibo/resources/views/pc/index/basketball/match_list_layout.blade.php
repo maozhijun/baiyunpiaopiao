@@ -30,7 +30,7 @@
                 $ad_1 = random_int(0, min(count($matches), 13));
                 $ad_2 = random_int(0, min(count($matches), 15));
 
-            $ads = array('ad_center_1.gif','ad_center_2.png','ad_center_3.gif','ad_center_4.gif','ad_center_5.gif','ad_center_6.gif','ad_center_7.gif');
+            $ads = array('ad_center_8.gif','ad_center_2.png','ad_center_3.gif','ad_center_4.gif','ad_center_5.gif','ad_center_6.gif','ad_center_7.gif');
             $random_ad_keys=array_rand($ads, 2);
             ?>
             @foreach($matches as $index=>$match)
@@ -76,11 +76,11 @@
     </div>
     <div class="adflag left">
         <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
-        <a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left.gif"></a>
+        <a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left2.gif"></a>
     </div>
     <div class="adflag right">
         <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
-        <a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right.gif"></a>
+        <a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right2.gif"></a>
     </div>
 @endsection
 @section('js')

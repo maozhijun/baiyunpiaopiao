@@ -74,7 +74,7 @@
                 <tbody>
                 <?php
                 $a = array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
-                $ads = array('ad_center_1.gif','ad_center_2.png','ad_center_3.gif','ad_center_4.gif','ad_center_5.gif','ad_center_6.gif','ad_center_7.gif');
+                $ads = array('ad_center_8.gif','ad_center_2.png','ad_center_3.gif','ad_center_4.gif','ad_center_5.gif','ad_center_6.gif','ad_center_7.gif');
                 $random_ad_keys=array_rand($ads, 4);
                 $random_keys=array_rand($a, 8);
                 $bj = 0;
@@ -211,11 +211,11 @@
     <div class="adflag left">
         <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
         {{--<a><img src="{{env('CDN_URL')}}/img/ad/double.jpg"></a>--}}
-        <a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left.gif"></a>
+        <a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left2.gif"></a>
     </div>
     <div class="adflag right">
         <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
-        <a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right.gif"></a>
+        <a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right2.gif"></a>
         {{--<a><img src="{{env('CDN_URL')}}/img/ad/double.jpg"></a>--}}
     </div>
 @endsection
