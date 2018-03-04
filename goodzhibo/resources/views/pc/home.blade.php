@@ -74,7 +74,11 @@
                 </table>
             </div>
             @endif
-            <div class="adbanner default"><a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_1.gif"><button class="close"></button></a></div>
+                <?php
+                $ads = array('ad_center_1.gif','ad_center_2.png','ad_center_3.gif','ad_center_4.gif','ad_center_5.gif','ad_center_6.gif','ad_center_7.gif');
+                $random_ad_keys=array_rand($ads, 1);
+                ?>
+            <div class="adbanner default"><a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL').'/img/'.$ads[$random_ad_keys[0]]}}"><button class="close"></button></a></div>
             <div class="default">
                 <div class="title">
                     <p>稍后直播</p>
@@ -177,11 +181,11 @@
     </div>
     <div class="adflag left">
         <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
-        <a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left.gif"></a>
+        <a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left.gif"></a>
     </div>
     <div class="adflag right">
         <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
-        <a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right.gif"></a>
+        <a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right.gif"></a>
     </div>
 @endsection
 @section('js')

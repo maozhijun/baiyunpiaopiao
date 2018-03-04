@@ -73,7 +73,9 @@
                 </thead>
                 <tbody>
                 <?php
-                $a = array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+                $a = array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+                $ads = array('ad_center_1.gif','ad_center_2.png','ad_center_3.gif','ad_center_4.gif','ad_center_5.gif','ad_center_6.gif','ad_center_7.gif');
+                $random_ad_keys=array_rand($ads, 4);
                 $random_keys=array_rand($a, 8);
                 $bj = 0;
                 ?>
@@ -82,13 +84,13 @@
                         @component("pc.index.cell.match_list_cell", ['match'=>$match])
                         @endcomponent
                         @if($bj == ($random_keys[0]) && !$match['hide'])
-                            <tr class="bannerAD"><td colspan="11"><a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_1.gif"></a></td></tr>
+                            <tr class="bannerAD"><td colspan="11"><a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL').'/img/'.$ads[$random_ad_keys[0]]}}"></a></td></tr>
                         @elseif($bj == ($random_keys[1]) && !$match['hide'])
-                            <tr class="bannerAD"><td colspan="11"><a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_2.gif"></a></td></tr>
+                            <tr class="bannerAD"><td colspan="11"><a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL').'/img/'.$ads[$random_ad_keys[1]]}}"></a></td></tr>
                         @elseif($bj == ($random_keys[2]) && !$match['hide'])
-                            {{--<tr class="bannerAD"><td colspan="12"><a><img src="/img/ad/all.jpg"></a></td></tr>--}}
+                            <tr class="bannerAD"><td colspan="11"><a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL').'/img/'.$ads[$random_ad_keys[2]]}}"></a></td></tr>
                         @elseif($bj == ($random_keys[3]) && !$match['hide'])
-                            {{--<tr class="bannerAD"><td colspan="11"><a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_2.gif"></a></td></tr>--}}
+                            <tr class="bannerAD"><td colspan="11"><a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL').'/img/'.$ads[$random_ad_keys[3]]}}"></a></td></tr>
                         @endif
                         <?php
                         if(!$match['hide'])
@@ -209,11 +211,11 @@
     <div class="adflag left">
         <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
         {{--<a><img src="{{env('CDN_URL')}}/img/ad/double.jpg"></a>--}}
-        <a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left.gif"></a>
+        <a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left.gif"></a>
     </div>
     <div class="adflag right">
         <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
-        <a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right.gif"></a>
+        <a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right.gif"></a>
         {{--<a><img src="{{env('CDN_URL')}}/img/ad/double.jpg"></a>--}}
     </div>
 @endsection

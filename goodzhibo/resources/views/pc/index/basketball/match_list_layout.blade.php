@@ -29,15 +29,18 @@
             <?php
                 $ad_1 = random_int(0, min(count($matches), 13));
                 $ad_2 = random_int(0, min(count($matches), 15));
+
+            $ads = array('ad_center_1.gif','ad_center_2.png','ad_center_3.gif','ad_center_4.gif','ad_center_5.gif','ad_center_6.gif','ad_center_7.gif');
+            $random_ad_keys=array_rand($ads, 2);
             ?>
             @foreach($matches as $index=>$match)
                 @component("pc.index.basketball.cell.basket_list_cell", ['match'=>$match])
                 @endcomponent
                 @if($ad_1 == $index)
-                    <div class="adbanner default"><a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_1.gif"><button class="close"></button></a></div>
+                    <div class="adbanner default"><a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/{{$ads[$random_ad_keys[0]]}}"><button class="close"></button></a></div>
                 @endif
                 @if($ad_2 == $index)
-                    <div class="adbanner default"><a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_center_2.gif"><button class="close"></button></a></div>
+                    <div class="adbanner default"><a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/{{$ads[$random_ad_keys[1]]}}"><button class="close"></button></a></div>
                 @endif
             @endforeach
             @foreach($exceptionMatches as $match)
@@ -73,11 +76,11 @@
     </div>
     <div class="adflag left">
         <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
-        <a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left.gif"></a>
+        <a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_left.gif"></a>
     </div>
     <div class="adflag right">
         <button class="close" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
-        <a href="https://www.fun881351.com/zh-cn/home.htm?aff=329333" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right.gif"></a>
+        <a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL')}}/img/ad_right.gif"></a>
     </div>
 @endsection
 @section('js')
