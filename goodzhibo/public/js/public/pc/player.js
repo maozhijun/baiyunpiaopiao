@@ -234,6 +234,31 @@ function PlayVideoShare (CID){
 							LoadRtmp (Link)
 						}else if (PlayType == 17) { //clappr
                             LoadClappr (Link);
+                        } else if(PlayType == 100){//腾讯体育专用
+                            $.ajax({
+                                url: Link,
+                                dataType: "jsonp",
+                                success: function (data) {
+                                    if(data.playurl) {
+                                        Link = data.playurl;
+                                        if (isMobileWithJS()) {
+                                            Link = Link.replace('.flv', 'm3u8');
+                                            LoadCK(Link);
+                                        }
+                                        else {
+                                            if (Link.indexOf('.flv') != -1) {
+                                                LoadFlv(Link);
+                                            }
+                                            else{
+                                                LoadCK(Link);
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        document.getElementById('MyFrame').innerHTML = '<p class="loading">暂无直播信号</p>';
+                                    }
+                                }
+                            });
                         } else {
 							CheckPlayerType(Link,0);
 						}
@@ -354,6 +379,14 @@ function countDownHour() {
     } else {
         hours.html(hour);
     }
+}
+
+function isMobileWithJS() {
+    var u = navigator.userAgent;
+    var isAndroid = u.indexOf('Android') > -1; //android终端或者uc浏览器
+    var isiPhone = u.indexOf('iPhone') > -1; //是否为iPhone或者QQ HD浏览器
+    var isiPad = u.indexOf('iPad') > -1; //是否iPad
+    return (isAndroid || isiPhone || isiPad) ? '1' : '';
 }
 
 
