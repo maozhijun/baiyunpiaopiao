@@ -61,7 +61,6 @@
                 @endif
                 </tbody>
             </table>
-            {{$tvs or ''}}
         </div>
     </div>
 @endsection

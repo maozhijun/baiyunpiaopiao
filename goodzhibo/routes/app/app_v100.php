@@ -29,6 +29,26 @@ Route::group([], function () {
     Route::get("/app/user/info", 'AuthController@getInfo');
 });
 
+/**
+ * 论坛相关 开始
+ */
+Route::group([], function () {
+    Route::any('/app/communities.json', 'Community\CommunityController@communities');//获取社区    静态化
+    Route::any('/app/community/topics', 'Community\CommunityController@topics');//获取社区下的帖子
+
+    Route::any('/app/topic/detail/{id}', 'Community\TopicController@detail');//帖子终端
+    Route::any('/app/topic/comments', 'Community\TopicController@topicComments');//帖子的回复分页
+});
+
+/**
+ * 需要登陆才能操作
+ */
+Route::group(["middleware" => "app_auth"], function () {
+    Route::post('/app/topic/create', 'Community\TopicController@createTopic');//发帖
+    Route::post('/app/comment/create', 'Community\TopicController@saveComment');//回帖，生成评论
+});
+//论坛相关 结束
+
 //config
 Route::group([], function () {
     Route::post("/app/config/device", 'ConfigController@device');

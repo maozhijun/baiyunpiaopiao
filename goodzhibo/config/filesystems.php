@@ -54,6 +54,12 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+        'cover' => [
+            'driver' => 'local',
+            'root' => storage_path('app/cover'),
+            'url' => env('APP_URL').'/cover',
+            'visibility' => 'public',
+        ],
         'matches' => [
             'driver' => 'local',
             'root' => base_path('public/json/matches'),

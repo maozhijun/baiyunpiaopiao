@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: BJ
- * Date: 2018/2/26
- * Time: 下午12:09
+ * User: Administrator
+ * Date: 2017/3/3
+ * Time: 17:16
  */
 namespace App\Http\Middleware;
 
@@ -12,22 +12,25 @@ use App\Models\User\AccountLogin;
 use Closure;
 use Illuminate\Http\Request;
 
-class ApiInsertAuth
+class AppAuthVerify
 {
 
     public function handle(Request $request, Closure $next)
     {
-        $this->insertAuthToRequest($request);
-        $response = $next($request);
-        return $response;
+        if ($this->hasAuth($request)) {
+            return $next($request);
+        } else {
+            return response()->json(['code' => 401, 'msg' => '抱歉，您尚未登陆不能操作。']);
+        }
     }
+
 
     /**
      * 判断是登录
      * @param Request $request
      * @return bool
      */
-    public function insertAuthToRequest(Request $request)
+    public function hasAuth(Request $request)
     {
         $login = session('_login');
         if ($login) {
@@ -43,9 +46,7 @@ class ApiInsertAuth
                     if (strtotime($login->expired_at) > strtotime('now')) {
                         $request->_login = $login;
                         session(['_login' => $login]);
-                    } else {
-                        $login->status = 0;
-                        $login->save();
+                        return true;
                     }
                 }
             }

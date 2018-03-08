@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\AdminAuthVerify;
 use App\Http\Middleware\ApiInsertAuth;
+use App\Http\Middleware\AppAuthVerify;
 use App\Http\Middleware\NoCacheHeader;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -65,5 +66,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'admin_auth' => AdminAuthVerify::class,
+        'app_auth' => AppAuthVerify::class,
     ];
 }

@@ -40,6 +40,7 @@ class AuthController extends Controller
         if ($request->isMethod('post')) {
             $phone = $request->input("phone");
             $password = $request->input('password');
+            echo sha1($password);
             if (empty($phone) || empty($password)) {//数据验证
                 return Response::json(AppCommonResponse::createAppCommonResponse(-1, '账号或密码不能为空'));
             } else {

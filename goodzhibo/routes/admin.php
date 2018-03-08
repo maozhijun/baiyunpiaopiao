@@ -25,3 +25,13 @@ Route::group(['middleware' => 'admin_auth'], function () {
     Route::post('/discover/save', 'DiscoverController@saveLink');
     Route::get('/discover/del', 'DiscoverController@delLink');
 });
+
+/**
+ * 社区相关
+ */
+Route::group(['middleware' => 'admin_auth'], function () {
+    Route::get('/comm/communities', 'Community\CommunityController@communities');//社区列表
+    Route::post('/comm/communities/save', 'Community\CommunityController@saveCommunity');//新建/保存 社区
+    Route::get('/comm/communities/change', 'Community\CommunityController@changeCommunity');//隐藏/删除 社区
+
+});
