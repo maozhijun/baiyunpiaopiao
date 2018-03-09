@@ -3,6 +3,9 @@
 namespace App\Models\User;
 
 use App\Models\AccountLogin;
+use App\Models\Community\AccountFocus;
+use App\Models\Community\Comment;
+use App\Models\Community\Topic;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Redis;
 
@@ -99,6 +102,42 @@ class Account extends Model
     public static function isNewRegAccount($account_id) {
         $key = self::NEW_REG_ACCOUNT_PREFIX . $account_id;
         return Redis::exists($key);
+    }
+
+    /**
+     * 发帖数
+     * @return int
+     */
+    public function topicCount() {
+        $count = Topic::query()->where('uid', $this->id)->where('status', Topic::kStatusValid)->count();
+        return $count;
+    }
+
+    /**
+     * 回复数
+     * @return int
+     */
+    public function commentCount() {
+        $count = Comment::query()->where('uid', $this->id)->where('status', Comment::kStatusValid)->count();
+        return $count;
+    }
+
+    /**
+     * 关注用户数
+     * @return int
+     */
+    public function focusCount() {
+        $count = AccountFocus::query()->where('uid', $this->id)->where('type', AccountFocus::kTypeFocus)->count();
+        return $count;
+    }
+
+    /**
+     * 被关注数
+     * @return int
+     */
+    public function fansCount() {
+        $count = AccountFocus::query()->where('uid', $this->id)->where('type', AccountFocus::kTypeFocus)->count();
+        return $count;
     }
 
 }

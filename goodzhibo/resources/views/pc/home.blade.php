@@ -76,7 +76,7 @@
             @endif
                 <?php
                 $ads = array('ad_center_8.gif','ad_center_2.png','ad_center_3.gif','ad_center_4.gif','ad_center_5.gif','ad_center_6.gif','ad_center_7.gif');
-                $random_ad_keys=array_rand($ads, 1);
+                $random_ad_keys=array_rand($ads, 2);
                 ?>
             <div class="adbanner default"><a href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL').'/img/'.$ads[$random_ad_keys[0]]}}"><button class="close"></button></a></div>
             <div class="default">

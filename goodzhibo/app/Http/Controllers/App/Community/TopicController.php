@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\App\Community;
 
 
+use App\Http\Controllers\App\Model\AppCommonResponse;
 use App\Models\Community\Comment;
 use App\Models\Community\Community;
 use App\Models\Community\CommunityExt;
@@ -28,12 +29,21 @@ class TopicController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function detail(Request $request, $id) {
-        $id = $request->input('id');
+        $json = $this->detailJson($id);
+        return response()->json($json);
+    }
+
+    /**
+     * 获取 帖子终端 json
+     * @param $id
+     * @return AppCommonResponse
+     */
+    public function detailJson($id) {
         $topic = Topic::query()->find($id);
-        if (!isset($topic)) {
-            return response()->json(['code'=>404, 'msg'=>'帖子不存在']);
+        if (!isset($topic) || $topic->status != Topic::kStatusValid) {
+            return AppCommonResponse::createAppCommonResponse(-1, '帖子不存在');
         }
-        return response()->json(['topic'=>$topic->topic2Json(), 'code'=>200]);
+        return AppCommonResponse::createAppCommonResponse(0, '', ['topic'=>$topic->topic2Json()]);
     }
 
     /**
@@ -52,27 +62,27 @@ class TopicController extends Controller
 
         //判断参数开始
         if ($uid == 0) {//判断用户
-            return response()->json(['code'=>401, 'msg'=>'抱歉，您尚未登陆，不能发帖。']);
+            return response()->json(AppCommonResponse::createAppCommonResponse(-1 , '抱歉，您尚未登陆，不能发帖'));
         }
         if (isset($_SERVER['HTTP_X_WAP_PROFILE']) && !in_array($from, [Topic::kFromAndroid, Topic::kFromIOS])) {//如果是移动设备 一定要传递 from 参数
-            return response()->json(['code'=>401, 'msg'=>'移动设备请务必传递正确得from参数。']);
+            return response()->json(AppCommonResponse::createAppCommonResponse(-1 , '移动设备请务必传递正确得from参数'));
         }
         if (empty($title) || empty(trim($title))) {
-            return response()->json(['code'=>401, 'msg'=>'标题不能为空']);
+            return response()->json(AppCommonResponse::createAppCommonResponse(-1 , '标题不能为空'));
         }
         if (empty($content) || empty(trim($content))) {
-            return response()->json(['code'=>401, 'msg'=>'内容不能为空']);
+            return response()->json(AppCommonResponse::createAppCommonResponse(-1 , '内容不能为空'));
         }
         if ($isPicTex == 1) {
             $content_array = json_decode($content, true);
             if (is_null($content_array)) {
-                return response()->json(['code'=>401, 'msg'=>'内容格式错误']);
+                return response()->json(AppCommonResponse::createAppCommonResponse(-1 , '内容格式错误'));
             }
         } else {
             //$content 转化为JSON todo
         }
         if (is_null($content_array)) {
-            return response()->json(['code'=>401, 'msg'=>'内容格式错误2222']);
+            return response()->json(AppCommonResponse::createAppCommonResponse(-1 , '内容格式错误'));
         }
         //判断参数结束
 
@@ -91,13 +101,13 @@ class TopicController extends Controller
         //处理 内容 开始
         $content_array = $this->checkContent($content_array);
         if (count($content_array) == 0) {
-            return response()->json(['code'=>-1, 'msg'=>'内容为空或者格式错误']);
+            return response()->json(AppCommonResponse::createAppCommonResponse(-1 , '内容为空或者格式错误'));
         }
         //处理 内容 结束
 
         $community = Community::query()->find($cid);
         if (is_null($community)) {
-            return response()->json(['code'=>401, 'msg'=>'社区不存在。']);
+            return response()->json(AppCommonResponse::createAppCommonResponse(-1 , '社区不存在'));
         }
 
         //保存开始
@@ -130,7 +140,7 @@ class TopicController extends Controller
         //保存帖子标签 结束
 
         //保存结束
-        return response()->json(['code'=>200, 'msg'=>'发帖成功']);
+        return response()->json(AppCommonResponse::createAppCommonResponse(0 , '发帖成功'));
     }
 
     /**
@@ -152,18 +162,18 @@ class TopicController extends Controller
 
         //判断参数 开始
         if ($uid == 0) {//判断用户
-            return response()->json(['code'=>401, 'msg'=>'抱歉，您尚未登陆，不能回复。']);
+            return response()->json(AppCommonResponse::createAppCommonResponse(-1 , '抱歉，您尚未登陆，不能回复'));
         }
         if (isset($_SERVER['HTTP_X_WAP_PROFILE']) && !in_array($from, [Topic::kFromAndroid, Topic::kFromIOS])) {//如果是移动设备 一定要传递 from 参数
-            return response()->json(['code'=>401, 'msg'=>'移动设备请务必传递正确得from参数。']);
+            return response()->json(AppCommonResponse::createAppCommonResponse(-1 , '移动设备请务必传递正确得from参数'));
         }
         if (!is_numeric($tid)) {
-            return response()->json(['code'=>401, 'msg'=>'您的回复内容错误']);
+            return response()->json(AppCommonResponse::createAppCommonResponse(-1 , '您的回复内容错误'));
         }
         if ($isPicTex == 1) {
             $content_array = json_decode($content, true);
             if (is_null($content_array)) {
-                return response()->json(['code'=>401, 'msg'=>'内容格式错误']);
+                return response()->json(AppCommonResponse::createAppCommonResponse(-1 , '内容格式错误'));
             }
         } else {
             $content_array = null;
@@ -171,20 +181,19 @@ class TopicController extends Controller
         }
 
         if (is_null($content_array)) {
-
-            return response()->json(['code'=>401, 'msg'=>'内容格式错误']);
+            return response()->json(AppCommonResponse::createAppCommonResponse(-1 , '内容格式错误'));
         }
         //判断参数 结束
 
         $topic = Topic::query()->find($tid);
         if (!isset($topic) || Topic::kStatusValid != $topic->status) {
-            return response()->json(['code'=>401, 'msg'=>'您回复的帖子不存在']);
+            return response()->json(AppCommonResponse::createAppCommonResponse(-1 , '您回复的帖子不存在'));
         }
 
         if (is_numeric($reply)) {
             $comment = Comment::query()->find($reply);
             if (!isset($comment) || $comment->status !== Comment::kStatusValid  || $comment->tid != $tid) {
-                return response()->json(['code'=>401, 'msg'=>'您回复的评论不存在']);
+                return response()->json(AppCommonResponse::createAppCommonResponse(-1 , '您回复的评论不存在'));
             }
             if (is_numeric($reply_root)) {
                 $root_comment = Comment::query()->find($reply_root);
@@ -217,8 +226,7 @@ class TopicController extends Controller
         $topic->last_reply_time = date('Y-m-d H:i:s');
         $topic->save();
         //帖子增加最大楼层
-
-        return response()->json(['code'=>200, 'msg'=>'回复成功']);
+        return response()->json(AppCommonResponse::createAppCommonResponse(0 , '回复成功'));
     }
 
     /**
@@ -262,26 +270,32 @@ class TopicController extends Controller
 
     /**
      * @param Request $request
+     * @param $tid
+     * @param $page
      * @return \Illuminate\Http\JsonResponse
      */
-    public function topicComments(Request $request) {
-        $tid = $request->input('tid');
-        $pageSize = $request->input('pageSize');//每页数量
+    public function topicComments(Request $request, $tid, $page) {
+//        $tid = $request->input('tid');
+        $pageSize = $request->input('pageSize', 20);//每页数量
 
-        if (!is_numeric($tid)) {
-            return response()->json(['code'=>401, 'msg'=>'参数错误']);
-        }
+//        if (!is_numeric($tid)) {
+//            return response()->json(AppCommonResponse::createAppCommonResponse(-1 , '参数错误'));
+//        }
         $topic = Topic::query()->find($tid);
         if (!isset($topic) || $topic->status != Topic::kStatusValid) {
-            return response()->json(['code'=>403, 'msg'=>'帖子不存在']);
+            return response()->json(AppCommonResponse::createAppCommonResponse(-1 , '帖子不存在'));
         }
         $query = Comment::query()->where('tid', $tid)->where('status', Comment::kStatusValid);
-        $page = $query->paginate($pageSize);
+        $skip = ($page - 1) * $pageSize;
+        $skip = $skip < 0 ? 0 : $skip;
+        $query->orderBy('created_at','desc');
+        $query->skip($skip)->take($pageSize);
+        $array = $query->get();
         $comments = [];
-        foreach ($page->items() as $comment) {
+        foreach ($array as $comment) {
             $comments[] = $comment->comment2Json();
         }
-        return response()->json(['code'=>200, 'comments'=>$comments]);
+        return response()->json(AppCommonResponse::createAppCommonResponse(0 , '', ['comments'=>$comments]));
     }
 
     /**
@@ -289,7 +303,7 @@ class TopicController extends Controller
      * @param Request $request
      * @return int
      */
-    protected function getUserId(Request $request) {
+    public static function getUserId(Request $request) {
         $login = session('_login');
         return isset($login) ? $login->account_id : 0;
     }

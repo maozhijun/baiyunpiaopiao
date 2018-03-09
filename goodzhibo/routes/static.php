@@ -22,3 +22,12 @@ Route::group([],function (){
     Route::get('/football/detail/wap_html', 'ResultHtmlController@wapDetailToHtml');//手机足球终端页面静态化
     Route::get('/football/detail/pc_html', 'ResultHtmlController@pcDetailToHtml');//电脑足球终端页面静态化
 });
+
+/**
+ * 静态化 社区相关接口
+ */
+Route::group([], function () {
+    Route::get('/community/topic-detail/{id}',"CommunityController@staticTopicDetail");//帖子终端 静态化json
+    Route::get('/community/account-info/{id}',"CommunityController@staticAccountInfo");//用户信息 静态化json
+
+});

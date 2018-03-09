@@ -9,6 +9,7 @@
 namespace App\Models\Community;
 
 
+use App\Http\Controllers\Mobile\AppCommonResponse;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
@@ -63,7 +64,7 @@ class Community extends Model
      */
     public static function staticCommunities() {
         $communities = Community::getCommunities();
-        Storage::disk('public')->put('/static/m/v100/app/communities.json', json_encode($communities));
+        Storage::disk('public')->put('/static/m/v100/app/communities.json', json_encode(AppCommonResponse::createAppCommonResponse(0, '', ['communities'=>$communities])));
     }
 
 }

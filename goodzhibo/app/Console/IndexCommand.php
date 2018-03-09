@@ -10,9 +10,6 @@ namespace App\Console;
 
 
 use App\Http\Controllers\PC\Live\LiveController;
-use App\Http\Controllers\PC\RecommendsController;
-use App\Http\Controllers\PC\TaskController;
-use App\Http\Controllers\PC\TopicController;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 

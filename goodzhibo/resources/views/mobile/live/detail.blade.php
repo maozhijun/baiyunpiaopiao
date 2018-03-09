@@ -2,7 +2,7 @@
 @section('title')
     <title>我在黑土直播看【{{$match['hname']}}vs{{$match['aname']}}】</title>
 @section('css')
-    <link rel="stylesheet" type="text/css" href="{{env('CDN_URL')}}/css/videoPhone.css">
+    <link rel="stylesheet" type="text/css" href="{{env('CDN_URL')}}/css/videoPhone.css?time=2018030300001">
 @endsection
 @section('banner')
     <div id="Navigation">
@@ -80,6 +80,8 @@
         {{--<img src="{{env('CDN_URL')}}/img/code.jpg">--}}
         {{--<p>扫二维码进入群</p>--}}
     {{--</div>--}}
+    <a href="http://www.hg6879.com/?intr=hhhffff" class="banner"><img src="{{env('CDN_URL')}}/img/ad_center_4.gif"></a>
+    <a href="http://www.hg6879.com/?intr=hhhffff" class="banner"><img src="{{env('CDN_URL')}}/img/ad_center_8.gif"></a>
 @endsection
 @section('js')
     <script src="{{env('CND_URL')}}/js/public/mobile/videoPhone.js"></script>

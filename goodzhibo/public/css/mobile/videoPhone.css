@@ -474,9 +474,14 @@ div#Event dl dd.away ul li img{
 
 
 
-
-
-
+/*广告*/
+.banner{
+	position: absolute; bottom: 0; left: 0; right: 0;
+}
+.banner img{
+	width: 100%;
+	display: block;
+}
 
 
 

@@ -407,17 +407,21 @@ div#Filter div.btnline button.comfirm{
 	background: #f3f3f3;
 	line-height: 60px; color: #494949;
 }
+
 .nolist{
 	padding-top: 300px !important;
-	background: url(/img/pc/bg_vip_nolist.png) no-repeat center 50px; background-size: 240px;
+	background:/* url(/img/bg_vip_nolist.png)*/ no-repeat center 50px; background-size: 240px;
 	color: #bdbdbd;
 }
 
-
-
-
-
-
+/*广告*/
+.banner{
+	display: block;
+}
+.banner img{
+	width: 100%;
+	display: block;
+}
 
 
 

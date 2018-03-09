@@ -3,6 +3,8 @@
 namespace App\Console;
 
 use App\Console\AppCommands\AppTopicCommand;
+use App\Console\AppCommands\Community\AccountInfoCommand;
+use App\Console\AppCommands\Community\TopicsDetailCommand;
 use App\Console\CacheCommands\BasketballListCommands;
 use App\Console\CacheCommands\BasketballLiveJsonCommands;
 use App\Console\CacheCommands\EventsHtmlCommands;
@@ -45,9 +47,11 @@ class Kernel extends ConsoleKernel
         LivesJsonCommand::class,
         FootballListCommands::class,
         BasketballListCommands::class,
+
         ImmediateHtmlCommands::class,
         ResultHtmlCommands::class,
         ScheduleHtmlCommands::class,
+
         FootballLiveJsonCommands::class,
         BasketballLiveJsonCommands::class,
 
@@ -71,6 +75,8 @@ class Kernel extends ConsoleKernel
         BasketResultHtmlCommands::class,
 
         AppTopicCommand::class,
+        TopicsDetailCommand::class, //帖子终端json静态化
+        AccountInfoCommand::class,  //用户信息json静态化
     ];
 
     /**
@@ -133,6 +139,11 @@ class Kernel extends ConsoleKernel
         $schedule->command('basket_detail_result_html:run')->everyTenMinutes();
 
         $schedule->command('app_topic_list_cache:run')->everyFiveMinutes();
+
+        //社区相关定时任务 开始
+        $schedule->command('app_community_topics_detail_cache:run')->everyTenMinutes();
+        $schedule->command('app_account_info_cache:run')->everyTenMinutes();
+        //社区相关定时任务 结束
     }
 
     /**

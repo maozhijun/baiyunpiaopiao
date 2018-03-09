@@ -3,7 +3,7 @@
     <title>黑土直播</title>
 @endsection
 @section('css')
-    <link rel="stylesheet" type="text/css" href="{{env('CDN_URL')}}/css/mobile/homePhone.css">
+    <link rel="stylesheet" type="text/css" href="{{env('CDN_URL')}}/css/mobile/homePhone.css?time=201803030001">
 @endsection
 @section('content')
 <body onscroll="ScrollBottom();" style="padding-top: {{$type == 'immediate' ? '178' : '259'}}px;"><!--无日期时178px，有日期时259px-->
@@ -33,7 +33,27 @@
     </div>
     @if(isset($matches) && count($matches) > 0)
     <ul id="List" class="football" style="display: block;">
+        <?php
+            $a = array(3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+            $ads = array('ad_center_8.gif','ad_center_2.png','ad_center_3.gif','ad_center_4.gif','ad_center_5.gif','ad_center_6.gif','ad_center_7.gif');
+            $random_ad_keys=array_rand($ads, 4);
+            $random_keys=array_rand($a, 8);
+            $bj = 0;
+        ?>
         @foreach($matches as $match)
+            @if($bj == ($random_keys[0]) && !$match['hide'])
+                <a class="banner" href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL').'/img/'.$ads[$random_ad_keys[0]]}}"></a>
+            @elseif($bj == ($random_keys[1]) && !$match['hide'])
+                <a class="banner" href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL').'/img/'.$ads[$random_ad_keys[1]]}}"></a>
+            @elseif($bj == ($random_keys[2]) && !$match['hide'])
+                <a class="banner" href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL').'/img/'.$ads[$random_ad_keys[2]]}}"></a>
+            @elseif($bj == ($random_keys[3]) && !$match['hide'])
+                <a class="banner" href="http://www.hg6879.com/?intr=hhhffff" target="_blank"><img src="{{env('CDN_URL').'/img/'.$ads[$random_ad_keys[3]]}}"></a>
+            @endif
+            <?php
+            if(!$match['hide'])
+                $bj++;
+            ?>
             <?php $isFirst = $type == 'lives' || (($match['genre'] >> 1 & 1) == 1); ?>
             <a @if(!$isFirst) style="display: none;" @endif class="li" href="/m/football/detail/{{date('Ymd', strtotime($match['time']))}}/{{$match['mid']}}.html" lid="{{$match['lid']}}">
                 <div class="part">
