@@ -50,7 +50,7 @@ class AuthorController extends Controller
                 return response()->redirectTo($target);
             }
         }
-        return view('admin.auth.login');
+        return view('admin.auth.login', ['target'=>$target]);
     }
 
     /**
