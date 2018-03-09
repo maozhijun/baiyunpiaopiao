@@ -19,6 +19,11 @@ class HeiEncodesController extends BaseController
         'hei-5' => '/lives/hei-5',
     ];
 
+    public function __construct()
+    {
+        $this->middleware('filter')->except(['createdAliRoom']);
+    }
+
     public function index(Request $request)
     {
         $ets = EncodeTask::query()->where('from', 'QQ')->where('to', 'HEITU')->where('status', 1)->get();

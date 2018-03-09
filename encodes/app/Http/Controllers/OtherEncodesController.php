@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 class OtherEncodesController extends BaseController
 {
 
+    public function __construct()
+    {
+        $this->middleware('filter')->except([]);
+    }
+
     public function index(Request $request)
     {
         $ets = EncodeTask::query()->where('from', 'Other')->where('to', 'Other')->where('status', 1)->get();

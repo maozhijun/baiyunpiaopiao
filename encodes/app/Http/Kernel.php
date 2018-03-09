@@ -53,5 +53,6 @@ class Kernel extends HttpKernel
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'auth' => \App\Http\Middleware\AuthVerify::class,
+        'filter' => \App\Http\Middleware\FilterVerify::class,
     ];
 }

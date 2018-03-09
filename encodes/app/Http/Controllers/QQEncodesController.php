@@ -21,6 +21,10 @@ class QQEncodesController extends BaseController
         '10004' => '/lives/10004',
         '10005' => '/lives/10005',
         '10006' => '/lives/10006',
+        '10007' => '/lives/10007',
+        '10008' => '/lives/10008',
+        '10009' => '/lives/10009',
+        '10010' => '/lives/10010',
     ];
     private $ggcdns = [
 //        'aikanqiu188' => '141370?pwd=fe2cb6c6f525f295',
@@ -33,6 +37,11 @@ class QQEncodesController extends BaseController
 //        'sportslive188' => '141444?pwd=fb038eb31899d412',
         'aikanqiu001' => '141445?pwd=bcee1f58bbd860ba',
     ];
+
+    public function __construct()
+    {
+        $this->middleware('filter')->except(['createdAliRoom']);
+    }
 
     public function index(Request $request)
     {
@@ -127,18 +136,20 @@ class QQEncodesController extends BaseController
 
     public function createdAliRoom(Request $request)
     {
+        $roomIds = ['10001','10002','10003','10004','10005','10006','10007','10008','10009','10010'];
+        $roomId = array_random($roomIds);
         $timestamp = time() + 10800;
-        $sstring = $this->alicdns['10002'] . "-$timestamp-0-0-" . $this->ali_key;
+        $sstring = $this->alicdns[$roomId] . "-$timestamp-0-0-" . $this->ali_key;
         $auth_key = "$timestamp-0-0-" . md5($sstring);
-        $rtmp = $this->ali_rtmp . $this->alicdns['10002'] . '?vhost=' . $this->ali_host . '&auth_key=' . $auth_key;
+        $rtmp = $this->ali_rtmp . $this->alicdns[$roomId] . '?vhost=' . $this->ali_host . '&auth_key=' . $auth_key;
 
-        $sstring = $this->alicdns['10002'] . ".m3u8-$timestamp-0-0-" . $this->ali_key;
+        $sstring = $this->alicdns[$roomId] . ".m3u8-$timestamp-0-0-" . $this->ali_key;
         $auth_key = "$timestamp-0-0-" . md5($sstring);
-        $output_m3u8 = "http://" . $this->ali_host . $this->alicdns['10002'] . ".m3u8?auth_key=" . $auth_key;
+        $output_m3u8 = "http://" . $this->ali_host . $this->alicdns[$roomId] . ".m3u8?auth_key=" . $auth_key;
 
-        $sstring = $this->alicdns['10002'] . ".flv-$timestamp-0-0-" . $this->ali_key;
+        $sstring = $this->alicdns[$roomId] . ".flv-$timestamp-0-0-" . $this->ali_key;
         $auth_key = "$timestamp-0-0-" . md5($sstring);
-        $output_flv = "http://" . $this->ali_host . $this->alicdns['10002'] . ".flv?auth_key=" . $auth_key;
+        $output_flv = "http://" . $this->ali_host . $this->alicdns[$roomId] . ".flv?auth_key=" . $auth_key;
         echo $rtmp . '<br>' . $output_m3u8 . '<br>' . $output_flv;
     }
 }
