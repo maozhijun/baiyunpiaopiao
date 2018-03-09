@@ -10,9 +10,10 @@
 |
 */
 Route::group([], function (){
-    Route::get('/', 'AuthorController@sign');
-    Route::get('/login.html', 'AuthorController@sign');
-    Route::post('/login.html', 'AuthorController@sign');
+    Route::get('/', 'AuthorController@sign');//登陆页面
+    Route::get('/login.html', 'AuthorController@sign');//登陆页面
+    Route::post('/login.html', 'AuthorController@sign');//登陆
+    Route::get('/logout', 'AuthorController@logout');//退出登陆
 });
 
 Route::group(['middleware' => 'admin_auth'], function () {

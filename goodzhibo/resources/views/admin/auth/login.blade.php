@@ -54,6 +54,7 @@
     <div class="container">
         <form class="form-signin" action="/admin/login.html" method="post" onsubmit="return formSubmit(this);">
             {{ csrf_field() }}
+            <input type="hidden" name="target" value="{{request('target')}}">
             <h2 class="form-signin-heading">Please sign in</h2>
             <label for="inputEmail" class="sr-only">nickname</label>
             <input id="inputEmail" name="nickname" value="{{ request('nickname','') }}" class="form-control"

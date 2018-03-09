@@ -43,7 +43,7 @@ class AdminAuthVerify
         if (isset($token)) {
 
         }
-        return true;
+        return false;
     }
 
 }

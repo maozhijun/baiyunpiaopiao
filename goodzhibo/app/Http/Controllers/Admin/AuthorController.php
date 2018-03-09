@@ -19,9 +19,10 @@ class AuthorController extends Controller
     const HEI_TU_AUTH_TOKEN = "HEI_TU_AUTH_TOKEN";
     const ACCOUNT_ARRAY = ['admin'=>'f9f3b93aa04585220b1292c97abbbee68e5c0347'];//原始密码333333
     const SALT = "HEITU_MIMA_JIAMI";
+
     public function __construct()
     {
-        $this->middleware('admin_auth')->except(['login.html', 'logout']);
+        //$this->middleware('admin_auth')->except(['login.html', 'logout']);
     }
 
     public function sign(Request $request) {
@@ -50,6 +51,16 @@ class AuthorController extends Controller
             }
         }
         return view('admin.auth.login');
+    }
+
+    /**
+     * 退出登陆
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function logout(Request $request) {
+        session([self::HEI_TU_AUTH_SESSION=>null]);
+        return response()->redirectTo('/admin');
     }
 
     public static function shaPassword($salt, $password)
