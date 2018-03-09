@@ -80,8 +80,8 @@
         {{--<img src="{{env('CDN_URL')}}/img/code.jpg">--}}
         {{--<p>扫二维码进入群</p>--}}
     {{--</div>--}}
-    <a href="http://www.hg6879.com/?intr=hhhffff" class="banner"><img src="{{env('CDN_URL')}}/img/ad_center_4.gif"></a>
-    <a href="http://www.hg6879.com/?intr=hhhffff" class="banner"><img src="{{env('CDN_URL')}}/img/ad_center_8.gif"></a>
+    {{--<a href="http://www.hg6879.com/?intr=hhhffff" class="banner"><img src="{{env('CDN_URL')}}/img/ad_center_4.gif"></a>--}}
+    <a href="http://www.hg6879.com/?intr=hhhffff" class="banner"><img src="{{env('CDN_URL')}}/img/liuliang_lh.gif"></a>
 @endsection
 @section('js')
     <script src="{{env('CND_URL')}}/js/public/mobile/videoPhone.js"></script>

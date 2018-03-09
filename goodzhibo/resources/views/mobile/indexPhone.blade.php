@@ -34,8 +34,9 @@
     @if(isset($matches) && count($matches) > 0)
     <ul id="List" class="football" style="display: block;">
         <?php
-            $a = array(3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
-            $ads = array('ad_center_8.gif','ad_center_2.png','ad_center_3.gif','ad_center_4.gif','ad_center_5.gif','ad_center_6.gif','ad_center_7.gif');
+            $a = array(2,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+            //$ads = array('ad_center_8.gif','ad_center_2.png','ad_center_3.gif','ad_center_4.gif','ad_center_5.gif','ad_center_6.gif','ad_center_7.gif');
+            $ads = ['liuliang_lh.gif', 'liuliang_lh.gif', 'liuliang_lh.gif', 'liuliang_lh.gif', 'liuliang_lh.gif'];
             $random_ad_keys=array_rand($ads, 4);
             $random_keys=array_rand($a, 8);
             $bj = 0;
