@@ -21,16 +21,23 @@
 <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/ckplayer/ckplayer.js"></script>
 
 <script type="text/javascript">
+    function isMobileWithJS() {
+        var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1; //android终端或者uc浏览器
+        var isiPhone = u.indexOf('iPhone') > -1; //是否为iPhone或者QQ HD浏览器
+        var isiPad = u.indexOf('iPad') > -1; //是否iPad
+        return (isAndroid || isiPhone || isiPad) ? '1' : '';
+    }
     function ShareWarm (Text) {
         var P = document.createElement('p');
         P.id = 'ShareWarm';
         P.innerHTML = Text;
         document.body.appendChild(P)
     }
-    window.host = '{{$_SERVER['HTTP_HOST']}}';
-    window.isMobile = '{{\App\Http\Controllers\Controller::isMobileUAgent($_SERVER['HTTP_USER_AGENT'])}}';
+    window.host = window.location.host;
+    window.isMobile = isMobileWithJS();
 </script>
-<script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/player.js?t=2018030300001"></script>
+<script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/player.js?t=2018030300002"></script>
 <script>
     var _hmt = _hmt || [];
     (function() {

@@ -776,6 +776,10 @@ class LiveController extends Controller
             if (!empty($json)) {
                 Storage::disk("public")->put("/match/live/url/channel/mobile/". $id . '.json', $json);
             }
+//            $playerHtml = $this->player($request);
+//            if (!empty($playerHtml)) {
+//                Storage::disk("public")->put("/live/player.html", $playerHtml);
+//            }
         } catch (\Exception $e) {
             Log::error($e);
         }

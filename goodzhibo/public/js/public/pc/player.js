@@ -242,7 +242,7 @@ function PlayVideoShare (CID){
                                     if(data.playurl) {
                                         Link = data.playurl;
                                         if (isMobileWithJS()) {
-                                            Link = Link.replace('.flv', 'm3u8');
+                                            Link = Link.replace('.flv', '.m3u8');
                                             LoadCK(Link);
                                         }
                                         else {
