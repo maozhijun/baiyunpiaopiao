@@ -18,6 +18,7 @@ use App\Console\CacheCommands\FootballWapDetailCommands;
 use App\Console\CacheCommands\FootballWapDetailResultCommands;
 use App\Console\CacheCommands\FootballWapDetailScheduleCommands;
 use App\Console\CacheCommands\ImmediateHtmlCommands;
+use App\Console\CacheCommands\LiveHtmlCommands;
 use App\Console\CacheCommands\MatchesDataCommands;
 use App\Console\CacheCommands\ResultHtmlCommands;
 use App\Console\CacheCommands\ScheduleHtmlCommands;
@@ -48,9 +49,10 @@ class Kernel extends ConsoleKernel
         FootballListCommands::class,
         BasketballListCommands::class,
 
-        ImmediateHtmlCommands::class,
-        ResultHtmlCommands::class,
-        ScheduleHtmlCommands::class,
+        ImmediateHtmlCommands::class,//篮球、足球 即时列表 静态化
+        ResultHtmlCommands::class,//篮球、足球 结果列表 静态化
+        ScheduleHtmlCommands::class,//篮球、足球 赛程列表 静态化
+        LiveHtmlCommands::class,//篮球、足球 直播列表 静态化
 
         FootballLiveJsonCommands::class,
         BasketballLiveJsonCommands::class,
@@ -110,6 +112,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('imm_html_cache:run')->everyMinute();//即时列表html静态化。
         $schedule->command('result_html_cache:run')->everyFiveMinutes();//赛果列表html静态化。
         $schedule->command('schedule_html_cache:run')->everyThirtyMinutes();//赛程列表html静态化。
+        $schedule->command('live_html_cache:run')->everyFiveMinutes();//m站 直播列表html静态化。
 
         $schedule->command('events_cache:run')->everyFiveMinutes();//每五分钟刷新一次正在比赛的足球赛事事件。
         $schedule->command('events_result_cache:run')->everyTenMinutes();//每10分钟刷新一次昨天已结束的足球赛事事件。
