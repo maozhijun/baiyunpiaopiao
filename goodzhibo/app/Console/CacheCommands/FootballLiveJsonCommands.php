@@ -47,18 +47,25 @@ class FootballLiveJsonCommands extends Command
 
         $seconds = 60;
         $sleep_time = 5;
-        for ($time = 0; $time < $seconds;) {
-            $start = time();
-            $fb->staticFootballLiveJson();//每五秒一次。
-            sleep(1);
-            $fb->staticFootballRollJson();
-            $exc_time = time() - $start;
-            if ($exc_time < $sleep_time) {
-                sleep($sleep_time - $exc_time);
-            }
-            $exc_time = time() - $start;
-            $time += $exc_time;
-            echo $time . ',,,';
-        }
+        $fb->staticFootballLiveJson();//每五秒一次。
+        sleep(1);
+        $fb->staticFootballRollJson();
+        sleep(5);
+        $fb->staticFootballLiveJson();//每五秒一次。
+        sleep(1);
+        $fb->staticFootballRollJson();
+//        for ($time = 0; $time < $seconds;) {
+//            $start = time();
+//            $fb->staticFootballLiveJson();//每五秒一次。
+//            sleep(1);
+//            $fb->staticFootballRollJson();
+//            $exc_time = time() - $start;
+//            if ($exc_time < $sleep_time) {
+//                sleep($sleep_time - $exc_time);
+//            }
+//            $exc_time = time() - $start;
+//            $time += $exc_time;
+//            echo $time . ',,,';
+//        }
     }
 }

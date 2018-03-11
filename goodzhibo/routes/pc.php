@@ -118,9 +118,10 @@ Route::group(["namespace" => 'Live'], function () {
     //Route::get("/video/channel/{id}", 'VideoController@videoChannel');//热门频道线路
 
     //Route::get('/live/ex-link/{id}', 'LiveController@exLink');//外链跳转
-    //Route::get('/live/player-json/{id}', 'LiveController@staticLiveUrl');
 
     //静态化
+    Route::get('/live/player-json/{id}', 'LiveController@staticLiveUrl');//单个json线路接口静态化
+
     Route::get('/live/cache/live-json', 'LiveController@allLiveJsonStatic');//直播赛事接口静态化
     Route::get('/live/cache/match/detail', 'LiveController@staticLiveDetail');//静态化当前所有比赛的直播终端
     Route::get('/live/cache/player/json', 'LiveController@staticPlayerJson');//静态化所有当前正在比赛的线路

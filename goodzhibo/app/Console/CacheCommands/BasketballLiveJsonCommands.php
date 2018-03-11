@@ -46,18 +46,27 @@ class BasketballLiveJsonCommands extends Command
         $fb = new JsonController();
         $seconds = 60;
         $sleep_time = 5;
-        for ($time = 0; $time < $seconds;) {
-            $start = time();
-            $fb->staticBasketballLiveJson();//每五秒一次。
-            sleep(1);
-            $fb->staticBasketballRollJson();
-            $exc_time = time() - $start;
-            if ($exc_time < $sleep_time) {
-                sleep($sleep_time - $exc_time);
-            }
-            $exc_time = time() - $start;
-            $time += $exc_time;
-            echo $time . ',,,';
-        }
+
+        $fb->staticBasketballLiveJson();//每五秒一次。
+        sleep(1);
+        $fb->staticBasketballRollJson();
+        sleep(5);
+        $fb->staticBasketballLiveJson();//每五秒一次。
+        sleep(1);
+        $fb->staticBasketballRollJson();
+
+//        for ($time = 0; $time < $seconds;) {
+//            $start = time();
+//            $fb->staticBasketballLiveJson();//每五秒一次。
+//            sleep(1);
+//            $fb->staticBasketballRollJson();
+//            $exc_time = time() - $start;
+//            if ($exc_time < $sleep_time) {
+//                sleep($sleep_time - $exc_time);
+//            }
+//            $exc_time = time() - $start;
+//            $time += $exc_time;
+//            echo $time . ',,,';
+//        }
     }
 }

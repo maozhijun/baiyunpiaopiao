@@ -729,26 +729,26 @@ class LiveController extends Controller
      * 静态化播放页面异步请求
      * @param Request $request
      */
-    public function staticPlayerJson(Request $request) {
-        $json = $this->getLivesCache();
-        $matches = $json['matches'];
-        foreach ($matches as $match_array) {
-            foreach ($match_array as $match) {
-                if (isset($match) && isset($match['channels']) && isset($match['time'])) {
-                    $m_time = strtotime($match['time']);
-                    if ($m_time - time() < (60 * 60) ) {//1小时内的比赛静态化接口
-                        $channels = $match['channels'];
-                        foreach ($channels as $channel) {
-                            if ($channel['type'] != MatchLiveChannel::kTypeTTZB) {//天天不做静态化。
-                                $ch_id = $channel['id'];
-                                $this->staticLiveUrl($request, $ch_id);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+//    public function staticPlayerJson(Request $request) {
+//        $json = $this->getLivesCache();
+//        $matches = $json['matches'];
+//        foreach ($matches as $match_array) {
+//            foreach ($match_array as $match) {
+//                if (isset($match) && isset($match['channels']) && isset($match['time'])) {
+//                    $m_time = strtotime($match['time']);
+//                    if ($m_time - time() < (60 * 60) ) {//1小时内的比赛静态化接口
+//                        $channels = $match['channels'];
+//                        foreach ($channels as $channel) {
+//                            if ($channel['type'] != MatchLiveChannel::kTypeTTZB) {//天天不做静态化。
+//                                $ch_id = $channel['id'];
+//                                $this->staticLiveUrl($request, $ch_id);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     /**
      * 静态化直播线路的json

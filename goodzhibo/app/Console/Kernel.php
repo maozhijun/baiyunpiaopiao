@@ -76,9 +76,12 @@ class Kernel extends ConsoleKernel
         BasketImmediateHtmlCommands::class,
         BasketResultHtmlCommands::class,
 
+        DeleteExpireFileCommand::class,//删除文件
+
         AppTopicCommand::class,
         TopicsDetailCommand::class, //帖子终端json静态化
         AccountInfoCommand::class,  //用户信息json静态化
+        HasLiveCommand::class,//是否有直播定时任务
     ];
 
     /**
@@ -105,6 +108,8 @@ class Kernel extends ConsoleKernel
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         $schedule->command('fb_live_json_cache:run')->everyMinute();//每分钟执行一次 足球当天列表的定时任务
         $schedule->command('bb_live_json_cache:run')->everyMinute();//篮球即时比赛数据、赔率数据
+
+        $schedule->command('has_live_cache:run')->everyMinute();//生成判断是否有直播的静态文件.
 
         $schedule->command('fb_list_json_cache:run')->everyMinute();//每分钟执行一次 足球当天列表的定时任务
         $schedule->command('bb_list_json_cache:run')->everyMinute();//每分钟执行一次 篮球当天列表的定时任务

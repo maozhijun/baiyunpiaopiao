@@ -47,9 +47,9 @@ class DeleteExpireFileCommand extends Command
     {
         $del_time = strtotime('-3 days');//3天前的文件删除
 
-        $this->delStorageFiles('/public/live/basketball', $del_time);
-        $this->delStorageFiles('/public/live/football', $del_time);
-        $this->delStorageFiles('/public/match/live/url/channel', $del_time);
+        $this->delStorageFiles('/public/live/football/has_live', $del_time);//删除过期的是否有直播判断文件
+        $this->delStorageFiles('/public/match/live/url/channel', $del_time);//删除以前的线路静态文件
+
     }
 
     /**
