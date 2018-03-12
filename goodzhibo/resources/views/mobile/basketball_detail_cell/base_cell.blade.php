@@ -9,7 +9,7 @@
                     <th>2nd</th>
                     <th>3rd</th>
                     <th>4th</th>
-                    @if((array_key_exists('h_ot',$match) && strlen($match['h_ot']) > 0)||(array_key_exists('a_ot',$match) && strlen($match['a_ot']) > 0))
+                    @if((isset($match['h_ot']) && strlen($match['h_ot']) > 0)||(isset($match['a_ot']) && strlen($match['a_ot']) > 0))
                         <th>OT</th>
                     @endif
                     <th>总分</th>
@@ -38,7 +38,7 @@
                             class="now"
                             @endif
                     >{{$match['hscore_4th'] or '/'}}</td>
-                    @if((array_key_exists('h_ot',$match) && strlen($match['h_ot']) > 0)||(array_key_exists('a_ot',$match) && strlen($match['a_ot']) > 0))
+                    @if((isset($match['h_ot']) && strlen($match['h_ot']) > 0)||(isset($match['a_ot']) && strlen($match['a_ot']) > 0))
                         <td>{{$match['h_ot'] or '/'}}</td>
                     @endif
                     <td>{{$match['hscore'] or '/'}}</td>
@@ -65,7 +65,7 @@
                             class="now"
                             @endif
                     >{{$match['ascore_4th'] or '/'}}</td>
-                    @if((array_key_exists('h_ot',$match) && strlen($match['h_ot']) > 0)||(array_key_exists('a_ot',$match) && strlen($match['a_ot']) > 0))
+                    @if((isset($match['h_ot']) && strlen($match['h_ot']) > 0)||(isset($match['a_ot']) && strlen($match['a_ot']) > 0))
                         <td>{{$match['a_ot'] or '/'}}</td>
                     @endif
                     <td>{{$match['ascore'] or '/'}}</td>
