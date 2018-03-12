@@ -41,10 +41,12 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         IndexCommand::class,
-        LiveDetailCommand::class,
+        LiveDetailCommand::class,//PC直播终端静态化
+        MobileDetailCommand::class,//手机直播终端静态化
+        UnStartLiveDetailCommand::class,//开赛时间大于当前时间1小时的比赛终端（PC\WAP）静态化
         PlayerJsonCommand::class,
         DeleteExpireFileCommand::class,
-        MobileDetailCommand::class,
+
         LivesJsonCommand::class,
         FootballListCommands::class,
         BasketballListCommands::class,
@@ -94,11 +96,14 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('live_json_cache:run')->everyMinute();//每分钟刷新一次赛事缓存
         $schedule->command('index_cache:run')->everyMinute();//每分钟刷新主页缓存
-        $schedule->command('live_detail_cache:run')->everyFiveMinutes();//每五分钟刷新终端缓存
+
         $schedule->command('player_json_cache:run')->everyFiveMinutes();//五分钟刷新一次正在直播的比赛的线路内容
         $schedule->command('delete_cache:run')->dailyAt('07:00');//每天删除一次文件
 
+        $schedule->command('live_detail_cache:run')->everyFiveMinutes();//每五分钟刷新终端缓存
         $schedule->command('mobile_detail_cache:run')->everyFiveMinutes();//每五分钟刷新移动直播终端缓存
+        //每五分钟刷新 pc、wap 未开始且开始时间距离现在大于1小时的比赛 每次执行35条。1小时后重更新执行
+        $schedule->command('un_start_live_detail_cache:run')->everyFiveMinutes();
 
         $mController = new LiveController();
         $schedule->call(function() use($mController){
