@@ -58,19 +58,22 @@ class HasLiveCommand extends Command
             return;
         }
         $matches = $lives['matches'];
+        $now = time();
         foreach ($matches as $live) {
             //["live"=>0, "pc_live"=>0]
             if (!isset($live['mid']) || !isset($live['status']) || (!isset($live['live']) && !isset($live['wap_live'])) ) {
                 continue;
             }
             $mid = $live['mid'];
-//            echo $mid;
+            $m_time = isset($live['time']) ? strtotime($live['time']) : 0;//比赛时间
+            $isBeforeFiveMinute = $now > $m_time && $m_time + 50 * 60 > $now;//是否在比赛开始前50分钟
+
             $status = $live['status'];
             $live = isset($live['live']) ? $live['live'] : false;
             $mLive = isset($live['wap_live']) ? $live['wap_live'] : false;
 
-            $pcLive = ($status > 0 && $live) ? 1 : 0;
-            $wapLive = ($status > 0 && $mLive) ? 1 : 0;
+            $pcLive = (($status > 0 || $isBeforeFiveMinute) && $live) ? 1 : 0;
+            $wapLive = (($status > 0 || $isBeforeFiveMinute) && $mLive) ? 1 : 0;
             $json = ['live'=>$wapLive , 'pc_live'=>$pcLive];
             ///data/app/goodzhibo/storage/app/public/static/football
             Storage::disk('public')->put('static/football/has_live/' . $mid . '.json', json_encode($json));
