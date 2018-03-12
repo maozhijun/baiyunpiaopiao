@@ -31,7 +31,8 @@ Route::group(["namespace" => 'Live'], function () {
     Route::get('/basketball/result.html', 'BasketBallController@result');//篮球赛果页面列表
     Route::get('/basketball/schedule.html', 'BasketBallController@schedule');//篮球赛程页面列表
     Route::get('/basketball/lives.html', 'BasketBallController@lives');//篮球直播页面列表
-    Route::get('/lives/cache/details', 'LiveController@liveDetailsStatic');//篮球直播页面列表
+
+    Route::get('/lives/cache/details', 'LiveController@liveDetailsStatic');//直播终端静态化
 
     Route::get('/basketball/detail/odd/{date}/{id}.html', 'BasketBallController@basketballOdd');
     Route::get('/basketball/detail/odd_index/{date}/{id}.html', 'BasketBallController@basketballOddIndex');
@@ -76,21 +77,8 @@ Route::group(["namespace" => 'Live'], function () {
     Route::get("/live/football/{id}.html", "LiveController@footballdetail");//直播终端
     Route::get("/live/basketball/{id}.html", "LiveController@basketballDetail");//直播终端
 
-//    Route::get('/lives/player.html', function () {return view('mobile.live.player');});
-//    Route::get("/lives/roll/{time}/{id}.html", "LiveController@roll");//直播滚球
-//    Route::get("/lives/data/{time}/{id}.html", "LiveController@match_data");//直播数据
-//    Route::get("/lives/tip/{time}/{id}.html", "LiveController@matchTip");//直播提点数据
     Route::get("/lives/data/refresh.json", "LiveController@match_live");//比赛比分数据
-
-//    Route::get("/live/football/recommend/{mid}", "LiveController@getArticleOfFMid");//直播终端足球推荐
-//    Route::get("/live/basketball/recommend/{mid}", "LiveController@getArticleOfBMid");//直播终端篮球推荐
-
-//    //天天直播
-//    Route::get("/match/live/url/zb/{id}", 'LiveController@getTTZBLiveUrl');
-//    //无插件
-//    Route::get("/match/live/url/wcj/{id}", 'LiveController@getWCJLiveUrl');
-//    //channel通用
-//    Route::get("/match/live/url/channel/{id}.json", 'LiveController@getLiveUrl');
+    Route::get("/static/detail/{mid}-{sport}.html", 'LiveController@liveDetailStatic');//静态化单个移动终端页
 });
 
 //app相关

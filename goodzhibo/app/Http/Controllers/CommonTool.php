@@ -241,4 +241,18 @@ class CommonTool
         }
         return $ret;
     }
+
+    /**
+     * 判断比赛时间是否在这之间
+     * @param $before_time 比赛开始前的时间 秒 （例如 60* 60 一小时）
+     * @param $after_time  比赛开始后的时间 秒 （例如 60* 60 一小时）
+     * @param $m_time      比赛开始时间 秒
+     * @return bool
+     */
+    public static function isExec($before_time, $after_time, $m_time) {
+        $now = time();
+        $flg1 = $m_time > $now && $now + $before_time > $m_time;
+        $flg2 = $m_time < $now && $m_time + $after_time > $now;
+        return $flg1 || $flg2;
+    }
 }

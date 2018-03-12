@@ -444,48 +444,11 @@ div#Event dl dd.host ul li img{
 div#Event dl dd.away ul li img{
 	left: 47px;
 }
-
-
-
-/*@media only screen and (min-device-width: 320px) and (min-device-height: 568px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait){ 
-	#Video{
-		position: sticky; position: -webkit-sticky; top: 88px; z-index: 2;
-	}
-	.tabbox{
-		position: sticky; position: -webkit-sticky; top: 596px; z-index: 2;
-	}
+/*gg*/
+.banner{
+	position: absolute; bottom: 0; left: 0; right: 0;
 }
-@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation : portrait){ 
-	#Video{
-		position: sticky; position: -webkit-sticky; top: 88px; z-index: 2;
-	}
-	.tabbox{
-		position: sticky; position: -webkit-sticky; top: 596px; z-index: 2;
-	}
+.banner img{
+	width: 100%;
+	display: block;
 }
-@media only screen and (min-device-width: 414px) and (max-device-width: 736px) and (orientation : portrait){ 
-	#Video{
-		position: sticky; position: -webkit-sticky; top: 88px; z-index: 2;
-	}
-	.tabbox{
-		position: sticky; position: -webkit-sticky; top: 596px; z-index: 2;
-	}
-}*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

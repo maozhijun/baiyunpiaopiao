@@ -9,6 +9,9 @@
 namespace App\Console;
 
 
+use App\Http\Controllers\CommonTool;
+use App\Http\Controllers\PC\Live\LiveController;
+use App\Models\Match\MatchLive;
 use Illuminate\Console\Command;
 
 class LiveDetailCommand extends Command
@@ -44,14 +47,25 @@ class LiveDetailCommand extends Command
      */
     public function handle()
     {
-        //$controller = new LiveController();
-        //$controller->staticLiveDetail(new Request());
-        $url = asset('/live/cache/match/detail');
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_exec($ch);
-        curl_close ($ch);
+        $liveCon = new LiveController();
+        $json = $liveCon->getLivesCache();
+        $json = $json['matches'];
+        $url_pre = '/live/flush/pc-detail/';
+        foreach ($json as $index=>$datas){
+            foreach ($datas as $match){
+                if (!isset($match['mid']) || !isset($match['time']) || !isset($match['sport'])) {
+                    continue;
+                }
+                $mid = $match['mid'];
+                $m_time = strtotime($match['time']);
+                $sport = $match['sport'];
+                $after_time = $sport == MatchLive::kSportFootball ? 2 * 60 * 60 : 3 * 60 * 60;
+                if (CommonTool::isExec(60 * 60, $after_time, $m_time)) {
+                    //echo $match['time'] . '   ' . $sport .' url ' . $url_pre . $mid . '-' . $sport . '.html' . '...' ;
+                    PlayerJsonCommand::execUrl($url_pre . $mid . '-' . $sport . '.html');
+                }
+            }
+        }
     }
 
 }

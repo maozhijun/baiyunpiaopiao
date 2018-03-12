@@ -9,6 +9,8 @@
 namespace App\Console;
 
 
+use App\Http\Controllers\CommonTool;
+use App\Http\Controllers\Mobile\Live\LiveController;
 use Illuminate\Console\Command;
 
 class MobileDetailCommand extends Command
@@ -44,12 +46,43 @@ class MobileDetailCommand extends Command
      */
     public function handle()
     {
-        $url = asset('/m/lives/cache/details');
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_exec($ch);
-        curl_close ($ch);
+
+        $mCon = new LiveController();
+        $url = '/m/static/detail/';
+        //获取今天所有足球赛事
+        $json = $mCon->getFootballMatches();
+        if (isset($json['matches'])) {
+            $matches = $json['matches'];
+            foreach ($matches as $time=>$match_array) {
+                foreach ($match_array as $match) {
+                    if (!isset($match['mid']) || !isset($match['time'])) {
+                        continue;
+                    }
+                    $mid = $match['mid'];
+                    $m_time = strtotime($match['time']);
+                    if (CommonTool::isExec(60 * 60, 3 * 60 * 60, $m_time)) {
+                        PlayerJsonCommand::execUrl($url . $mid . '-1.html');
+                    }
+                }
+            }
+        }
+        //获取今天所有篮球赛事
+        $json = $mCon->getBasketballMatches();
+        if (isset($json['matches'])) {
+            $matches = $json['matches'];
+            foreach ($matches as $time=>$match_array) {
+                foreach ($match_array as $match) {
+                    if (!isset($match['mid']) || !isset($match['time'])) {
+                        continue;
+                    }
+                    $mid = $match['mid'];
+                    $m_time = strtotime($match['time']);
+                    if (CommonTool::isExec(60 * 60, 4 * 60 * 60, $m_time)) {
+                        PlayerJsonCommand::execUrl($url . $mid . '-2.html');
+                    }
+                }
+            }
+        }
     }
 
 }

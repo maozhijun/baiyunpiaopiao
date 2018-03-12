@@ -424,7 +424,7 @@ class LiveController extends Controller
      * 获取今天的足球比赛
      * @return mixed 无比赛则返回 空数组
      */
-    protected function getFootballMatches() {
+    public function getFootballMatches() {
         $ch = curl_init();
         $url = env('LIAOGOU_URL')."/heitu/footballLivesJson?isMobile=1";
         curl_setopt($ch, CURLOPT_URL,$url);
@@ -443,7 +443,7 @@ class LiveController extends Controller
      * 获取今天的足球比赛
      * @return mixed 无比赛则返回 空数组
      */
-    protected function getBasketballMatches() {
+    public function getBasketballMatches() {
         $ch = curl_init();
         $url = env('LIAOGOU_URL')."/heitu/basketballLivesJson?isMobile=1";
         curl_setopt($ch, CURLOPT_URL,$url);

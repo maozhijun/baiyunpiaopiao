@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\PC\Live;
 
+use App\Models\Match\MatchLive;
 use App\Models\Match\MatchLiveChannel;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -603,7 +604,27 @@ class LiveController extends Controller
 
     //===========================================================================================================================//
 
+    /**
+     * 刷新单个pc终端
+     * @param Request $request
+     * @param $id
+     * @param $sport
+     */
+    public function staticPcDetail(Request $request, $id, $sport) {
+        if ($sport == MatchLive::kSportFootball) {
+            $html = $this->detail($request, $id);
+            Storage::disk("public")->put("/live/football/". $id. ".html", $html);
+        } else {
+            $html = $this->basketDetail($request, $id);
+            Storage::disk("public")->put("/live/basketball/". $id. ".html", $html);
+        }
+    }
 
+    /**
+     * 刷新单个 pc、wap、线路json 终端
+     * @param Request $request
+     * @return string
+     */
     public function flushDetailAndJsonCache(Request $request) {
         $id = $request->input('id');
         $ch_id = $request->input('ch_id');
@@ -776,10 +797,6 @@ class LiveController extends Controller
             if (!empty($json)) {
                 Storage::disk("public")->put("/match/live/url/channel/mobile/". $id . '.json', $json);
             }
-//            $playerHtml = $this->player($request);
-//            if (!empty($playerHtml)) {
-//                Storage::disk("public")->put("/live/player.html", $playerHtml);
-//            }
         } catch (\Exception $e) {
             Log::error($e);
         }

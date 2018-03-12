@@ -1201,10 +1201,10 @@
                 "dataType": "json",
                 "success": function (json) {
                     if ($('div.video').length > 0) {
-                        $('div.video')[0].style.display = json['live'] == 0 ? 'none' : '';
+                        $('div.video')[0].style.display = (json['pc_live'] && json['pc_live'] == 0) ? 'none' : '';
                     }
                     if ($('div.analysis').length > 0) {
-                        $('div.analysis')[0].style.display = json['live'] == 0 ? '' : 'none';
+                        $('div.analysis')[0].style.display = (json['pc_live'] && json['pc_live'] == 0) ? '' : 'none';
                     }
                     if ($('#Info div.sameOdd').length > 0) {
                         if (json['live'] == 0) {
