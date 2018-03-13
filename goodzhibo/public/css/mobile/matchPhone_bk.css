@@ -353,8 +353,9 @@ div.content .default .title .labelbox input:checked + span{
 	position: relative;
 }
 .proportion:after{
-	border: 4px solid #fff; border-radius: 13px;
-	position: absolute; top: -4px; left: -2px; right: -2px; bottom: -4px; z-index: 2;
+	height: 18px;
+	border: 8px solid #fff; border-radius: 17px;
+	position: absolute; left: 0px; right: 0px; bottom: -8px; z-index: 2;
 	content: '';
 }
 .proportion p{
@@ -690,8 +691,7 @@ div#Player .score table td:nth-child(1){
 
 /*分析*/
 div#Data{
-	width: 100%;
-	overflow: hidden;
+
 }
 div#Data .odd{
 
@@ -768,6 +768,9 @@ div#Data .history{
 }
 div#Data .history .proportion{
 	padding: 40px 0 180px;
+}
+div#Data .history .proportion:after{
+	top: 32px; bottom: auto;
 }
 div#Data .history .proportion div.host{
 	padding-left: 60px;
