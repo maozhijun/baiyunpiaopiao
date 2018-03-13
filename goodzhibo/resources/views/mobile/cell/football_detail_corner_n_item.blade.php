@@ -23,29 +23,29 @@ if ($total > 0){
         <th>日期</th>
         <th>赛事</th>
         <th colspan="3">角球比分</th>
-        <th>主让</th>
+        <th>盘口</th>
     </tr>
     </thead>
     <tbody>
     @foreach($data as $match)
         <tr>
             <td>{{substr($match['time'], 0, 10)}}</td>
-            <td>{{isset($match['lname'])?$match['lname']:$match['win_lname']}}</td>
+            <td>{{$match['league']}}</td>
             <td @if($tid == $match['hid']) class="host" @endif >{{$match['hname']}}</td>
             <td>{{$match['h_corner']}}-{{$match['a_corner']}}<p class="goal">{{$match['h_half_corner']}}-{{$match['a_half_corner']}}</p></td>
             <td @if($tid == $match['aid']) class="host" @endif >{{$match['aname']}}</td>
-            <td>{{$match['goalmiddle2']}}
-            @if(isset($match['goalmiddle2']))
-                @if($match['h_corner'] + $match['a_corner'] > $match['goalmiddle2'])
-                    <p class="big">大</p>
-                @elseif($match['h_corner'] + $match['a_corner'] < $match['goalmiddle2'])
-                    <p class="draw">小</p>
+            <td>{{$match['middle2']}}
+                @if(isset($match['middle2']))
+                    @if($match['h_corner'] + $match['a_corner'] > $match['middle2'])
+                        <p class="big">大</p>
+                    @elseif($match['h_corner'] + $match['a_corner'] < $match['middle2'])
+                        <p class="draw">小</p>
+                    @else
+                        <p class="small">走</p>
+                    @endif
                 @else
-                    <p class="small">走</p>
+                    <p>-</p>
                 @endif
-            @else
-                <p>-</p>
-            @endif
             </td>
         </tr>
     @endforeach

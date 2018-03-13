@@ -6,7 +6,8 @@
     </select>
     <button class="close"></button>
 </div>
-@foreach($bankers as $index=>$banker)
+<?php $index = 0;?>
+@foreach($bankers as $banker)
     <table id="Data_Odd_{{$banker['id']}}" style="display: {{$index > 0 ? 'none' : ''}};">
         <thead>
         <tr>
@@ -36,14 +37,22 @@
         <tr>
             <td>欧赔</td>
             @if(isset($banker['ou']['middle1']))
-                <td><p>{{$banker['ou']['up1']}}</p><p>{{\App\Models\Match\Odd::getOddMiddleString($banker['ou']['middle1'])}}</p><p>{{$banker['ou']['down1']}}</p></td>
+                <td><p>{{$banker['ou']['up1']}}</p><p>{{number_format($banker['ou']['middle1'],2)}}</p><p>{{$banker['ou']['down1']}}</p></td>
+            @elseif(isset($banker['ou']['up1']))
+                <td><p>{{$banker['ou']['up1']}}</p><p>-</p><p>{{$banker['ou']['down1']}}</p></td>
             @else
                 <td><p>-</p><p>-</p><p>-</p></td>
             @endif
             @if(isset($banker['ou']['middle2']))
                 <td>
                     <p @if($banker['ou']['up2'] > $banker['ou']['up1']) class="red" @elseif($banker['ou']['up2'] < $banker['ou']['up1']) class="green" @endif>{{$banker['ou']['up2']}}</p>
-                    <p @if($banker['ou']['middle2'] > $banker['ou']['middle1']) class="red" @elseif($banker['ou']['middle2'] < $banker['ou']['middle1']) class="green" @endif>{{\App\Models\Match\Odd::getOddMiddleString($banker['ou']['middle2'])}}</p>
+                    <p @if($banker['ou']['middle2'] > $banker['ou']['middle1']) class="red" @elseif($banker['ou']['middle2'] < $banker['ou']['middle1']) class="green" @endif>{{number_format($banker['ou']['middle2'],2)}}</p>
+                    <p @if($banker['ou']['down2'] > $banker['ou']['down1']) class="red" @elseif($banker['ou']['down2'] < $banker['ou']['down1']) class="green" @endif>{{$banker['ou']['down2']}}</p>
+                </td>
+            @elseif(isset($banker['ou']['up2']))
+                <td>
+                    <p @if($banker['ou']['up2'] > $banker['ou']['up1']) class="red" @elseif($banker['ou']['up2'] < $banker['ou']['up1']) class="green" @endif>{{$banker['ou']['up2']}}</p>
+                    <p>-</p>
                     <p @if($banker['ou']['down2'] > $banker['ou']['down1']) class="red" @elseif($banker['ou']['down2'] < $banker['ou']['down1']) class="green" @endif>{{$banker['ou']['down2']}}</p>
                 </td>
             @else
@@ -69,4 +78,5 @@
         </tr>
         </tbody>
     </table>
+    <?php $index++; ?>
 @endforeach

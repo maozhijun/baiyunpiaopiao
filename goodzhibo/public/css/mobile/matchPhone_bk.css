@@ -690,7 +690,8 @@ div#Player .score table td:nth-child(1){
 
 /*分析*/
 div#Data{
-
+	width: 100%;
+	overflow: hidden;
 }
 div#Data .odd{
 

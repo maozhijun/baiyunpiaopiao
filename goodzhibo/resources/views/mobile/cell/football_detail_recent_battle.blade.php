@@ -18,8 +18,8 @@ foreach($data as $match){
             $ouWin++;
     else
         $ouDraw++;
-    if (isset($match['middle1'])) {
-        $asia_host_score = $match['hscore'] - $match['middle1'];
+    if (isset($match['asiamiddle1'])) {
+        $asia_host_score = $match['hscore'] - $match['asiamiddle1'];
         if ($asia_host_score > $match['ascore']) {
             $asia_win_count++;
         }
@@ -47,8 +47,8 @@ foreach($data as $match){
     @foreach($data as $match)
         <?php
         $goal_total = $match['hscore'] + $match['ascore'];
-        $goal_result = $goal_total > $match['goalMiddle1'] ? '大' : ($goal_total == $match['goalMiddle1'] ? '走' : '小');
-        $asia_host_score = $match['hscore'] - $match['middle1'];
+        $goal_result = $goal_total > $match['goalmiddle1'] ? '大' : ($goal_total == $match['goalmiddle1'] ? '走' : '小');
+        $asia_host_score = $match['hscore'] - $match['asiamiddle1'];
         if ($asia_host_score > $match['ascore']) {
             if ($match['hid'] == $hid)
                 $asia_result = '<p class="win">赢</p>';
@@ -62,19 +62,19 @@ foreach($data as $match){
             else
                 $asia_result = '<p class="win">赢</p>';
         }
-        if ($match['middle1'] == null)
+        if ($match['asiamiddle1'] == null)
             $asia_result = '<p class="">-</p>';
         ?>
         <tr>
             <td>{{substr($match['time'],0, 10)}}</td>
             <td>{{$match['league']}}</td>
             <td @if($match['hid'] == $hid) class="host red" @endif>{{$match['hname']}}</td>
-            <td>{{$match['hscore']}} - {{$match['ascore']}}<p class="goal">{{$goal_result}}{{\App\Models\Match\Odd::getOddMiddleString($match['goalMiddle1'])}}</p></td>
+            <td>{{$match['hscore']}} - {{$match['ascore']}}<p class="goal">{{$goal_result}}{{\App\Models\Match\Odd::getOddMiddleString($match['goalmiddle1'])}}</p></td>
             <td @if($match['aid'] == $hid) class="host red" @endif>{{$match['aname']}}</td>
-            @if($match['middle1'] == null)
+            @if($match['asiamiddle1'] == null)
                 <td>{{''}}{!! $asia_result !!}</td>
             @else
-                <td>{{\App\Models\Match\Odd::getOddMiddleString($match['middle1'])}}{!! $asia_result !!}</td>
+                <td>{{\App\Models\Match\Odd::getOddMiddleString($match['asiamiddle1'])}}{!! $asia_result !!}</td>
             @endif
         </tr>
     @endforeach

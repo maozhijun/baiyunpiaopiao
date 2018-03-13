@@ -18,8 +18,8 @@ foreach($hmatch as $match){
             $ouWin++;
     else
         $ouDraw++;
-    if (isset($match['middle1'])) {
-        $asia_host_score = $match['hscore'] - $match['middle1'];
+    if (isset($match['asiamiddle1'])) {
+        $asia_host_score = $match['hscore'] - $match['asiamiddle1'];
         if ($asia_host_score > $match['ascore']) {
             $asia_win_count++;
         }
@@ -45,8 +45,8 @@ foreach($amatch as $match){
             $ouWin2++;
     else
         $ouDraw2++;
-    if (isset($match['middle1'])) {
-        $asia_host_score2 = $match['hscore'] - $match['middle1'];
+    if (isset($match['asiamiddle1'])) {
+        $asia_host_score2 = $match['hscore'] - $match['asiamiddle1'];
         if ($asia_host_score2 > $match['ascore']) {
             $asia_win_count2++;
         }
@@ -59,12 +59,12 @@ foreach($amatch as $match){
         <p class="host" style="width: {{($ouWin + $ouWin2) > 0 ? round($ouWin/($ouWin + $ouWin2), 3) * 100 : 0}}%;"></p>
         <p class="away" style="width: {{($ouWin + $ouWin2) > 0 ? round($ouWin2/($ouWin + $ouWin2), 3) * 100 : 0}}%;"></p>
         <div class="host">
-            <img src="{{$base['hteam']['icon']}}">
+            <img src="{{$base['hicon']}}">
             <p class="match"><b>{{$ouWin}}</b>胜<b class="lose">{{$ouLose}}</b>负</p>
             <p class="score">胜<span>{{$count > 0 ? round($ouWin/$count, 4) * 100 : 0}}%</span>赢盘<span>{{$count > 0 ? round($asia_win_count/$count, 4) * 100 : 0}}%</span></p>
         </div>
         <div class="away">
-            <img src="{{$base['ateam']['icon']}}">
+            <img src="{{$base['aicon']}}">
             <p class="match"><b>{{$ouWin2}}</b>胜<b class="lose">{{$ouLose2}}</b>负</p>
             <p class="score">胜<span>{{$count2 > 0 ? round($ouWin2/$count2, 4) * 100 : 0}}%</span>赢盘<span>{{$count2 > 0 ? round($asia_win_count2/$count2, 4) * 100 : 0}}%</span></p>
         </div>

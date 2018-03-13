@@ -32,11 +32,12 @@ class MatchDetailController
         }
     }
 
-    public function footballDetailTab(Request $request,$tab,$index,$id) {
-        if ($index != FileTool::getMidIndex($id)) return "";
-
+    public function footballDetailTab(Request $request,$index1,$index2,$id,$tab) {
+        if ($index1 != FileTool::getMidIndex1($id) || $index2 != FileTool::getMidIndex2($id)) {
+            abort(404);
+        }
         $detailController = new DetailController();
-        $tabHtml = $detailController->detailCell($request, $tab, $index, $id);
+        $tabHtml = $detailController->detailCell($request,$index1,$index2,$id,$tab);
         return $this->footballDetailTabDetail($tab, $tabHtml);
     }
 
@@ -160,11 +161,13 @@ class MatchDetailController
         return Response::json(AppCommonResponse::createAppCommonResponse(0, '', $reset, false));
     }
 
-    public function basketballDetailTab(Request $request, $tab,$index, $id) {
-        if ($index != FileTool::getMidIndex($id)) return "";
+    public function basketballDetailTab(Request $request,$index1,$index2,$id,$tab) {
+        if ($index1 != FileTool::getMidIndex1($id) || $index2 != FileTool::getMidIndex2($id)) {
+            abort(404);
+        }
 
         $detailController = new BasketballDetailController();
-        $tabHtml = $detailController->detailCell($request, $tab, $index, $id);
+        $tabHtml = $detailController->detailCell($request,$index1,$index2,$id,$tab);
         return $this->basketballDetailTabDetail($tab, $tabHtml);
     }
 

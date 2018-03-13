@@ -56,7 +56,7 @@
                 $bj++;
             ?>
             <?php $isFirst = $type == 'lives' || (($match['genre'] >> 1 & 1) == 1); ?>
-            <a @if(!$isFirst) style="display: none;" @endif class="li" href="/m/football/detail/{{date('Ymd', strtotime($match['time']))}}/{{$match['mid']}}.html" lid="{{$match['lid']}}">
+            <a @if(!$isFirst) style="display: none;" @endif class="li" href="/m/football/detail/{{$match['mid']}}.html" lid="{{$match['lid']}}">
                 <div class="part">
                     <p class="time">{{date('H:i', strtotime($match['time']))}}</p>
                     <p class="league">{{$match['league_name']}}</p>

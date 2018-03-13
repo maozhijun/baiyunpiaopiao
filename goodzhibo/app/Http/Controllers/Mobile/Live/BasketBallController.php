@@ -13,6 +13,7 @@ use App\Console\DetailCommands\Football\FootballDetailCommonCommand;
 use App\Http\Controllers\CacheInterface\BasketballInterface;
 use App\Http\Controllers\CacheInterface\CacheTool;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\FileTool;
 use App\Http\Controllers\Mobile\Detail\BasketballDetailController;
 use App\Http\Controllers\Mobile\Match\MatchDetailTool;
 use Illuminate\Http\Request;
@@ -84,25 +85,26 @@ class BasketBallController extends Controller
     /**
      * 篮球终端页
      * @param Request $request
-     * @param $sp   比赛id的前2位数字
      * @param $id   比赛id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function basketballDetail(Request $request, $sp, $id){
-        $match = $this->basketballDetailData($id);
-        if (!isset($data['match'])) {
-            // abort(404);
+    public function basketballDetail(Request $request, $id){
+        $match = $this->basketballDetailMatchData($id);
+        if (!isset($match)) {
+             abort(404);
         }
 
         $controller = new BasketballDetailController();
-        $base = $controller->analyseBaseData($sp, $id);
-        $odd = $controller->analyseOddData($sp, $id);
-        $data['base'] = $base;
-        $data['odd'] = $odd;
+        $base = $controller->basketballDetailAnalyseData($id);
+        $odd = $controller->basketballOddData($id);
+        $tech = $controller->basketballDetailData($id, 'tech');
+        $players = $controller->basketballDetailData($id, 'player');
 
         $data['match'] = $match;
-        $data['id'] = $id;
-//        dump($data);
+        $data['base'] = $base;
+        $data['odds'] = $odd;
+        $data['tech'] = $tech;
+        $data['players'] = $players;
         return view('mobile.basketballDetail', $data);
     }
 
@@ -121,22 +123,6 @@ class BasketBallController extends Controller
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
-        return $json;
-    }
-
-    /**
-     * 篮球比赛终端数据 先从缓存文件获取数据，如果没有则从接口中获取。
-     * @param $id
-     * @return mixed
-     */
-    public function basketballDetailData($id) {
-        //先从缓存文件获取
-//        $patch = CacheTool::getCacheJsonPatch('public/json/detail/0/2/' . $id . '/match.json');
-//        $json = CacheTool::getFileContent($patch);
-//        if (!is_null($json)) {
-//            return json_decode($json);
-//        }
-        $json = $this->basketballDetailMatchData($id);
         return $json;
     }
 

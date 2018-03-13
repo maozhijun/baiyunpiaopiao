@@ -14,8 +14,10 @@ foreach ($asia_six as $r) {
         $asia_six_html .= '<p class="win asia">赢</p>';
     } else if ($r == 1) {
         $asia_six_html .= '<p class="draw asia">走</p>';
-    } else {
+    } else if ($r == 0) {
         $asia_six_html .= '<p class="lose asia">输</p>';
+    } else {
+        $asia_six_html .= '<p class="draw asia">-</p>';
     }
 }
 
@@ -24,8 +26,10 @@ foreach ($goal_six as $r) {
         $goal_six_html .= '<p class="big goal">大</p>';
     } else if ($r == 1) {
         $goal_six_html .= '<p class="draw goal">走</p>';
-    } else {
+    } else if ($r == 0) {
         $goal_six_html .= '<p class="small goal">小</p>';
+    } else {
+        $goal_six_html .= '<p class="draw goal">-</p>';
     }
 }
 ?>

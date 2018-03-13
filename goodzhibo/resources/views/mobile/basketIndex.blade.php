@@ -56,7 +56,7 @@
                 $bj++;
             ?>
             <?php $live_str = \App\Models\Match\BasketMatch::getBasketCurrentTime($match['status'], $match['live_time_str'], $match['system'] == 1) ?>
-            <a class="li" lid="{{$match['lid']}}">
+            <a class="li" lid="{{$match['lid']}}" href="/m/basketball/detail/{{$match['mid']}}.html">
                 <div class="part">
                     <p class="team"><img src="http://nba.win007.com{{$match['home_icon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'">{{$match['hname']}}</p>
                     <p class="team"><img src="http://nba.win007.com{{$match['away_icon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'">{{$match['aname']}}</p>
@@ -78,8 +78,8 @@
                     <p class="score run">@if($match['system'] != 1){{$match['ascore_4th'] or '-'}}@endif</p>
                 </div>
                 <div class="part">
-                    <p class="total">{{$match['h_ot'] or '-'}}</p>
-                    <p class="total">{{$match['a_ot'] or '-'}}</p>
+                    <p class="total">{{$match['hscore'] or '-'}}</p>
+                    <p class="total">{{$match['ascore'] or '-'}}</p>
                 </div>
                 <div class="part" onclick="event.preventDefault();location.href='/m/live/basketball/{{$match['id']}}.html'"><!--直播中的比赛，直接进入直播界面-->
                     <p class="live">

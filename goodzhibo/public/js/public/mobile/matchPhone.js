@@ -5,30 +5,20 @@ window.cornerGet = false;
 function setPage(){
     var Tab = $('#Tab input');
     Tab.change(function(){
-        if (this.value == 'SameOdd' && !window.sameOddGet) {
-            getSameOdd('SameOdd');//获取历史同赔
-        } else if (this.value == 'Odd' && !window.oddIndexGet) {
-            getOddIndex('Odd');//获取指数数据
-        } else if (this.value == 'Team' && !window.teamStyleGet) {
-            getTeamStyle('Team');//获取球队风格数据
-        }
         $('.content').css('display','none');
         $('#' + this.value).css('display','');
 
         if ((document.documentElement.scrollTop || document.body.scrollTop) > 252) {
             document.documentElement.scrollTop = 252;
         }
-    });
+    })
 
 
     var BottomTab = $('.bottom input');
     BottomTab.change(function(){
-        if (this.value == 'Corner' && !window.cornerGet) {
-            getCorner('Corner');
-        }
         $(this).parents('.content').children('.childNode').css('display','none');
         $('#' + this.value).css('display','');
-    });
+    })
 
     var BtnClose = $('button.close');
     BtnClose.click(function(){
@@ -37,18 +27,18 @@ function setPage(){
         }else{
             $(this).parents('.default').attr('close','close');
         }
-    });
+    })
 
     var Sel = $('select');
     Sel.change(function(){
         $(this).parents('.default').children('table').css('display','none');
         $('#' + $(this).children('option:selected').val()).css('display','');
-    });
+    })
 
     var Hale = $('.content input[value=ha],.content input[value=le]');
     Hale.change(function(){
         $(this).parents('.default').attr(this.value,this.checked?1:0)
-    });
+    })
 }
 
 function setHead () {

@@ -11,11 +11,14 @@ namespace App\Http\Controllers\Mobile\Live;
 
 use App\Http\Controllers\CacheInterface\FootballInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Mobile\Match\MatchDetailTool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
 class HomeController extends Controller
 {
+    use MatchDetailTool;
+
     const WEEK_CN_ARRAY = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
     /**
      * 手机首页
@@ -86,309 +89,43 @@ class HomeController extends Controller
     /**
      * 足球终端页
      * @param Request $request
-     * @param $date
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function footballDetail(Request $request, $date, $id){
-//        $key = 'footballDetail_' . $id;
-        //$cache = Redis::get($key);
-        //$cache = '';
-//        if (!empty($cache)) {
-//            $data = json_decode($cache, true);
-//        } else {
-            $data = $this->footballDetailData($id);
-            //Redis::setex($key, 60 * 60, json_encode($data));
-//        }
-        if (!isset($data['match'])) {
-           // abort(404);
+    public function footballDetail(Request $request, $id){
+        $match = $this->footballDetailMatchData($id);
+        if (!isset($match)) {
+            abort(404);
         }
-        //dump($data);
-        if (isset($data['match'])) {
-            $match = $data['match'];
-            $match['h_y_p'] = $this->dataPercent($match, 'h_yellow', 'a_yellow');
-            $match['a_y_p'] = $this->dataPercent($match, 'a_yellow', 'h_yellow');
-            $match['h_r_p'] = $this->dataPercent($match, 'h_red', 'a_red');
-            $match['a_r_p'] = $this->dataPercent($match, 'a_red', 'h_red');
-            $match['h_cor_p'] = $this->dataPercent($match, 'h_corner', 'a_corner');
-            $match['a_cor_p'] = $this->dataPercent($match, 'a_corner', 'h_corner');
-            $match['h_sh_p'] = $this->dataPercent($match, 'h_shoot', 'a_shoot');
-            $match['a_sh_p'] = $this->dataPercent($match, 'a_shoot', 'h_shoot');
-            $match['h_sht_p'] = $this->dataPercent($match, 'h_shoot_target', 'a_shoot_target');
-            $match['a_sht_p'] = $this->dataPercent($match, 'a_shoot_target', 'h_shoot_target');
-            $match['h_con_p'] = $this->dataPercent($match, 'h_control', 'a_control');
-            $match['a_con_p'] = $this->dataPercent($match, 'a_control', 'h_control');
-            $match['h_hcon_p'] = $this->dataPercent($match, 'h_half_control', 'h_half_control');
-            $match['a_hcon_p'] = $this->dataPercent($match, 'a_half_control', 'a_half_control');
-            $data['match'] = $match;
-        }
+
         $data['id'] = $id;
+        $base = $this->footballDetailAnalyseData($id);
+        $odds = $this->footballOddData($id);
+        $tech = $this->footballTechData($id);
+        $lineup = $this->footballLineupData($id);
+        if (isset($lineup) && count($lineup) > 0) {
+            $data['lineup'] = $lineup;
+        } else {
+            $data['lineup']['home'] = null;
+            $data['lineup']['away'] = null;
+        }
+        if (isset($tech) && count($tech) > 0) {
+            $data['tech'] = $tech['tech'];
+            if (isset($tech['event'])) {
+                $event = $tech['event'];
+                $data['events'] = $event['events'];
+                $data['last_event_time'] = $event['last_event_time'];
+            } else {
+                $data['events'] = null;
+            }
+        } else {
+            $data['tech'] = null;
+            $data['events'] = null;
+        }
+
+        $data['match'] = $match;
+        $data['base'] = $base;
+        $data['odds'] = $odds;
         return view('mobile.footballDetail', $data);
-    }
-
-    protected function dataPercent($match, $hkey, $akey) {
-        if (!isset($match) || empty($hkey) || empty($akey) || !isset($match[$hkey]) || !isset($match[$akey])
-            || ($match[$hkey] + $match[$akey]) == 0
-        ) {
-            return 0;
-        }
-        return $match[$hkey] / ($match[$hkey] + $match[$akey]);
-    }
-
-    /**
-     * 足球终端也赔率数据html
-     * @param Request $request
-     * @param $date
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function footballOdd(Request $request, $date, $id) {
-        $data = $this->footballOddData($id);
-        //dump($data);
-        if (!isset($data['bankers']) || count($data['bankers']) == 0) {
-            return "";
-        }
-        return view('mobile.cell.football_detail_odd', $data);
-    }
-
-    /**
-     * 足球比赛终端，球队角球数据。
-     * @param Request $request
-     * @param $date
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function footballDetailCorner(Request $request, $date, $id) {
-        $data = $this->footballCornerData($id);
-        //dump($data);
-        return view('mobile.cell.football_detail_corner', $data);
-    }
-
-    /**
-     * 球队终端球队风格数据
-     * @param Request $request
-     * @param $date
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function footballDetailStyle(Request $request, $date, $id) {
-        $data = $this->footballStyleData($id);
-        return view('mobile.cell.football_detail_style', $data);
-    }
-
-    /**
-     *
-     * @param Request $request
-     * @param $date
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function footballOddIndex(Request $request, $date, $id) {
-        $json = $this->footballOddIndexData($id);
-        return view('mobile.cell.football_detail_odd_index', $json);
-    }
-
-    /**
-     * 赛事得历史同赔
-     * @param Request $request
-     * @param $date
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function footballSameOdd(Request $request, $date, $id) {
-        $json = $this->footballSameOddData($id);
-        return view('mobile.cell.football_detail_same_odd', $json);
-    }
-    //==============================================================================================================================================//
-
-    /**
-     * @param string $date
-     * @param $cookie
-     * @return mixed
-     */
-    public function footballData($date = '', $cookie = '') {
-        $cache = new FootballInterface();
-        $json = $cache->matchListDataJson($date);
-        if (!empty($json)) {
-            $json = json_decode($json, true);
-            return $json;
-        }
-
-        $ch = curl_init();
-        $url = env('LIAOGOU_URL')."intf/foot/data?date=" . $date;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $json = curl_exec ($ch);
-        curl_close ($ch);
-        $json = json_decode($json, true);
-        return $this->convertEmptyJson($json);
-    }
-
-    /**
-     * 足球比赛终端数据
-     * @param $id
-     * @return mixed
-     */
-    public function footballDetailData($id) {
-        $ch = curl_init();
-        $url = env('LIAOGOU_URL')."intf/foot/detail/" . $id;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $json = curl_exec ($ch);
-        curl_close ($ch);
-        $json = json_decode($json, true);
-        return $this->convertEmptyJson($json);
-    }
-
-    /**
-     * 足球比赛赔率
-     * @param $id
-     * @return mixed
-     */
-    public function footballOddData($id) {
-        $ch = curl_init();
-        $url = env('LIAOGOU_URL')."intf/foot/odd/" . $id;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $json = curl_exec ($ch);
-        curl_close ($ch);
-        $json = json_decode($json, true);
-        return $this->convertEmptyJson($json);
-    }
-
-    /**
-     * 比赛终端事件、统计数据
-     * @param $id
-     * @return mixed
-     */
-    public function footballBaseData($id) {
-        $ch = curl_init();
-        $url = env('LIAOGOU_URL')."intf/foot/base/" . $id;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $json = curl_exec ($ch);
-        curl_close ($ch);
-        $json = json_decode($json, true);
-        return $this->convertEmptyJson($json);
-    }
-
-    public function footballCornerData($id) {
-        $ch = curl_init();
-        $url = env('LIAOGOU_URL')."intf/foot/corner/" . $id;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $json = curl_exec ($ch);
-        curl_close ($ch);
-        $json = json_decode($json, true);
-        return $this->convertEmptyJson($json);
-    }
-
-    /**
-     * 足球终端、球队风格数据。
-     * @param $id
-     * @return mixed
-     */
-    public function footballStyleData($id) {
-        $ch = curl_init();
-        $url = env('LIAOGOU_URL')."intf/foot/team_style/" . $id;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $json = curl_exec ($ch);
-        curl_close ($ch);
-        $json = json_decode($json, true);
-        return $this->convertEmptyJson($json);
-    }
-
-    /**
-     * 比赛赔率指数
-     * @param $id
-     * @param $platform
-     * @return mixed
-     */
-    public function footballOddIndexData($id, $platform = '') {
-        $ch = curl_init();
-        $param = $platform == 'pc' ? '?platform=pc' : '';
-        $prefix = env('LIAOGOU_URL');
-        $url = $prefix . "intf/foot/odd_index/" . $id . $param;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $json = curl_exec ($ch);
-        curl_close ($ch);
-        $json = json_decode($json, true);
-        return $this->convertEmptyJson($json);
-    }
-
-    /**
-     * 比赛赔率指数
-     * @param $id
-     * @return mixed
-     */
-    public function footballSameOddData($id) {
-        $ch = curl_init();
-        $url = env('LIAOGOU_URL')."intf/foot/same_odd/" . $id;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $json = curl_exec ($ch);
-        curl_close ($ch);
-        $json = json_decode($json, true);
-        return $this->convertEmptyJson($json);
-    }
-
-    /**
-     * PC比赛终端 特殊数据
-     * @param $id
-     * @return mixed
-     */
-    public function footballCharacteristicData($id) {
-        $ch = curl_init();
-        $prifex = env('LIAOGOU_URL');
-        $url = $prifex . "intf/foot/characteristic/" . $id;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $json = curl_exec ($ch);
-        curl_close ($ch);
-        $json = json_decode($json, true);
-        return $this->convertEmptyJson($json);
-    }
-
-    /**
-     * 获取PC足球比赛终端页的 基本状况数据。
-     * @param $id
-     * @return mixed
-     */
-    public function footballBaseData4PC($id) {
-        $ch = curl_init();
-        $prifex = env('LIAOGOU_URL');//'http://user.liaogou168.com:8089/';//
-        $url = $prifex . "intf/foot/base_pc/" . $id;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $json = curl_exec ($ch);
-        curl_close ($ch);
-        $json = json_decode($json, true);
-        return $this->convertEmptyJson($json);
-    }
-
-    /**
-     * 足球比赛是否又直播。
-     * @param $id
-     * @return mixed
-     */
-    public function footballMatchIsLive($id) {
-        $ch = curl_init();
-        $prifex = env('LIAOGOU_URL');'http://user.liaogou168.com:8089/';//
-        $url = $prifex . "api/match/live/" . $id;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $json = curl_exec ($ch);
-        curl_close ($ch);
-        $json = json_decode($json, true);
-        return $this->convertEmptyJson($json);
-    }
-
-    private function convertEmptyJson($json) {
-        if (is_null($json)) {
-            return [];
-        }
-        return $json;
     }
 }

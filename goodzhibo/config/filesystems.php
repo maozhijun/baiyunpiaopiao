@@ -72,6 +72,30 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+        'schedule' => [
+            'driver' => 'local',
+            'root' => base_path('public/json/schedule'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+        'terminal' => [
+            'driver' => 'local',
+            'root' => base_path('public/json/terminal'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+        'change' => [
+            'driver' => 'local',
+            'root' => base_path('public/json/change'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+        'league' => [
+            'driver' => 'local',
+            'root' => base_path('public/json/league'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_KEY'),

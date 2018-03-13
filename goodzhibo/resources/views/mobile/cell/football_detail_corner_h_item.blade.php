@@ -12,15 +12,15 @@ if ($total > 0){
 <div class="canvasBox" ha="{{$ha}}" le="{{$le}}">
     <div class="canvasArea">
         <div class="circle"><canvas width="140px" height="140px" value="{{$win/100}}" color="#F9423D"></canvas></div>
-        <p>主胜<b class="red">{{$analyse['win']}}</b></p>
+        <p>大球<b class="red">{{$analyse['win']}}</b></p>
     </div>
     <div class="canvasArea">
         <div class="circle"><canvas width="140px" height="140px" value="{{$draw/100}}" color="#32C47C"></canvas></div>
-        <p>平局<b class="green">{{$analyse['draw']}}</b></p>
+        <p>走水<b class="green">{{$analyse['draw']}}</b></p>
     </div>
     <div class="canvasArea">
         <div class="circle"><canvas width="140px" height="140px" value="{{$lose/100}}" color="#6E6E6E"></canvas></div>
-        <p>主负<b class="gray">{{$analyse['lose']}}</b></p>
+        <p>小球<b class="gray">{{$analyse['lose']}}</b></p>
     </div>
     <p class="summary">共{{$total}}场，大球率：<b>{{$win}}%</b></p>
 </div>

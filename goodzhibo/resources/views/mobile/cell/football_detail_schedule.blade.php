@@ -10,14 +10,14 @@
     </thead>
     <tbody>
     @foreach($data as $match)
-    <tr>
-        <td class="red">{{substr($match['time'], 0, 10)}}</td>
-        <td>{{isset($match['lname'])?$match['lname']:$match['win_lname']}}</td>
-        <td @if($tid == $match['hid'] || $match['hname'] == $tname) class="red" @endif >{{$match['hname']}}</td>
-        <td>VS</td>
-        <td @if($tid == $match['aid'] || $match['aname'] == $tname) class="red" @endif >{{$match['aname']}}</td>
-        <td>{{$match['day']}}</td>
-    </tr>
+        <tr>
+            <td class="red">{{substr($match['time'], 0, 10)}}</td>
+            <td>{{$match['league']}}</td>
+            <td @if($tid == $match['hid'] || $match['hname'] == $tname) class="red" @endif >{{$match['hname']}}</td>
+            <td>VS</td>
+            <td @if($tid == $match['aid'] || $match['aname'] == $tname) class="red" @endif >{{$match['aname']}}</td>
+            <td>{{$match['day']}}</td>
+        </tr>
     @endforeach
     </tbody>
 </table>

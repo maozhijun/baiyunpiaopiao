@@ -1,4 +1,4 @@
-@if(isset($base['historyBattle']))
+@if(isset($base['historyBattle']) && isset($base['historyBattle']['historyBattle']))
     <div class="battle matchTable default" ha="0" le="0">
         <div class="title">
             交锋往绩<button class="close"></button>
@@ -7,13 +7,13 @@
                 <label for="Battle_LE"><input type="checkbox" name="battle" value="le" id="Battle_LE"><span></span>同赛事</label>
             </div>
         </div>
-        @component("mobile.basketball_detail_cell.cell.basketball_detail_hbattle",['base'=>$match,'data'=>$base['historyBattle']['nhnl'],'league'=>0,'ha'=>0,'hid'=>$match['hid']])
+        @component("mobile.basketball_detail_cell.cell.basketball_detail_hbattle",['base'=>$match,'data'=>$base['historyBattle']['historyBattle']['nhnl'],'league'=>0,'ha'=>0,'hid'=>$match['hid']])
         @endcomponent
-        @component("mobile.basketball_detail_cell.cell.basketball_detail_hbattle",['base'=>$match,'data'=>$base['historyBattle']['shnl'],'league'=>0,'ha'=>1,'hid'=>$match['hid']])
+        @component("mobile.basketball_detail_cell.cell.basketball_detail_hbattle",['base'=>$match,'data'=>$base['historyBattle']['historyBattle']['shnl'],'league'=>0,'ha'=>1,'hid'=>$match['hid']])
         @endcomponent
-        @component("mobile.basketball_detail_cell.cell.basketball_detail_hbattle",['base'=>$match,'data'=>$base['historyBattle']['nhsl'],'league'=>1,'ha'=>0,'hid'=>$match['hid']])
+        @component("mobile.basketball_detail_cell.cell.basketball_detail_hbattle",['base'=>$match,'data'=>$base['historyBattle']['historyBattle']['nhsl'],'league'=>1,'ha'=>0,'hid'=>$match['hid']])
         @endcomponent
-        @component("mobile.basketball_detail_cell.cell.basketball_detail_hbattle",['base'=>$match,'data'=>$base['historyBattle']['shsl'],'league'=>1,'ha'=>1,'hid'=>$match['hid']])
+        @component("mobile.basketball_detail_cell.cell.basketball_detail_hbattle",['base'=>$match,'data'=>$base['historyBattle']['historyBattle']['shsl'],'league'=>1,'ha'=>1,'hid'=>$match['hid']])
         @endcomponent
     </div>
 @endif

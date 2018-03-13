@@ -1,46 +1,51 @@
-<div class="rank default">
-    <div class="title">积分排名<button class="close"></button></div>
-    <table>
-        <thead>
-        <tr>
-            <th>排名</th>
-            <th>球队</th>
-            <th>赛</th>
-            <th>胜/平/负</th>
-            <th>进/失</th>
-            <th>净</th>
-            <th>积分</th>
-        </tr>
-        </thead>
-        <tbody>
-        @if(isset($base['rank']['host']['all']))
-            <?php $host_rank = $base['rank']['host']['all']; ?>
+@if(isset($base['rank']) && isset($base['rank']['rank'])
+ && (isset($base['rank']['rank']['host']['all']) || isset($base['rank']['rank']['away']['all'])))
+    <?php $rank = $base['rank']['rank']; ?>
+    <div class="rank default">
+        <div class="title">积分排名<button class="close"></button></div>
+        <table>
+            <thead>
             <tr>
-                <td class="red">{{$host_rank['rank']}}</td>
-                <td>{{$match['hname']}}</td>
-                <td>{{$host_rank['count']}}</td>
-                <td>{{$host_rank['win']}}/{{$host_rank['draw']}}/{{$host_rank['lose']}}</td>
-                <td>{{$host_rank['goal']}}/{{$host_rank['fumble']}}</td>
-                <td>{{$host_rank['goal'] - $host_rank['fumble']}}</td>
-                <td>{{$host_rank['score']}}</td>
+                <th>排名</th>
+                <th>球队</th>
+                <th>赛</th>
+                <th>胜/平/负</th>
+                <th>进/失</th>
+                <th>净</th>
+                <th>积分</th>
             </tr>
-        @endif
-        @if(isset($base['rank']['away']['all']))
-            <?php $away_rank = $base['rank']['away']['all']; ?>
-            <tr>
-                <td class="red">{{$away_rank['rank']}}</td>
-                <td>{{$match['aname']}}</td>
-                <td>{{$away_rank['count']}}</td>
-                <td>{{$away_rank['win']}}/{{$away_rank['draw']}}/{{$away_rank['lose']}}</td>
-                <td>{{$away_rank['goal']}}/{{$away_rank['fumble']}}</td>
-                <td>{{$away_rank['goal'] - $away_rank['fumble']}}</td>
-                <td>{{$away_rank['score']}}</td>
-            </tr>
-        @endif
-        </tbody>
-    </table>
-</div>
-@if(isset($base['historyBattle']))
+            </thead>
+            <tbody>
+            @if(isset($rank['host']['all']))
+                <?php $host_rank = $rank['host']['all']; ?>
+                <tr>
+                    <td class="red">{{$host_rank['rank']}}</td>
+                    <td>{{$match['hname']}}</td>
+                    <td>{{$host_rank['count']}}</td>
+                    <td>{{$host_rank['win']}}/{{$host_rank['draw']}}/{{$host_rank['lose']}}</td>
+                    <td>{{$host_rank['goal']}}/{{$host_rank['fumble']}}</td>
+                    <td>{{$host_rank['goal'] - $host_rank['fumble']}}</td>
+                    <td>{{$host_rank['score']}}</td>
+                </tr>
+            @endif
+            @if(isset($rank['away']['all']))
+                <?php $away_rank = $rank['away']['all']; ?>
+                <tr>
+                    <td class="red">{{$away_rank['rank']}}</td>
+                    <td>{{$match['aname']}}</td>
+                    <td>{{$away_rank['count']}}</td>
+                    <td>{{$away_rank['win']}}/{{$away_rank['draw']}}/{{$away_rank['lose']}}</td>
+                    <td>{{$away_rank['goal']}}/{{$away_rank['fumble']}}</td>
+                    <td>{{$away_rank['goal'] - $away_rank['fumble']}}</td>
+                    <td>{{$away_rank['score']}}</td>
+                </tr>
+            @endif
+            </tbody>
+        </table>
+    </div>
+@endif
+@if(isset($base['historyBattle']) && isset($base['historyBattle']['historyBattle']))
+    <?php $historyBattle = $base['historyBattle']['historyBattle']; ?>
     <div class="battle matchTable default" ha="0" le="0">
         <div class="title">
             交锋往绩<button class="close"></button>
@@ -49,13 +54,13 @@
                 <label for="Battle_LE"><input type="checkbox" name="battle" value="le" id="Battle_LE"><span></span>同赛事</label>
             </div>
         </div>
-        @component("mobile.cell.football_detail_hbattle",['data'=>$base['historyBattle']['nhnl'],'league'=>0,'ha'=>0,'hid'=>$match['hid']])
+        @component("mobile.cell.football_detail_hbattle",['data'=>$historyBattle['nhnl'],'league'=>0,'ha'=>0,'hid'=>$match['hid']])
         @endcomponent
-        @component("mobile.cell.football_detail_hbattle",['data'=>$base['historyBattle']['shnl'],'league'=>0,'ha'=>1,'hid'=>$match['hid']])
+        @component("mobile.cell.football_detail_hbattle",['data'=>$historyBattle['shnl'],'league'=>0,'ha'=>1,'hid'=>$match['hid']])
         @endcomponent
-        @component("mobile.cell.football_detail_hbattle",['data'=>$base['historyBattle']['nhsl'],'league'=>1,'ha'=>0,'hid'=>$match['hid']])
+        @component("mobile.cell.football_detail_hbattle",['data'=>$historyBattle['nhsl'],'league'=>1,'ha'=>0,'hid'=>$match['hid']])
         @endcomponent
-        @component("mobile.cell.football_detail_hbattle",['data'=>$base['historyBattle']['shsl'],'league'=>1,'ha'=>1,'hid'=>$match['hid']])
+        @component("mobile.cell.football_detail_hbattle",['data'=>$historyBattle['shsl'],'league'=>1,'ha'=>1,'hid'=>$match['hid']])
         @endcomponent
     </div>
 @endif
@@ -108,18 +113,20 @@
         @endif
     </div>
 @endif
-@if(isset($base['schedule']))
+@if(isset($base['schedule']) &&
+(count($base['schedule']['home']) > 0 || count($base['schedule']['away']) > 0))
     <div class="future matchTable default">
         <div class="title">
             未来赛程<button class="close"></button>
         </div>
-        @if(isset($base['schedule']['home']))
+        @if(count($base['schedule']['home']) > 0)
             @component("mobile.cell.football_detail_schedule",['tname'=>$match['hname'], 'data'=>$base['schedule']['home'], 'tid'=>$match['hid']])
             @endcomponent
         @endif
-        @if(isset($base['schedule']['away']))
+        @if(count($base['schedule']['away']) > 0)
             @component("mobile.cell.football_detail_schedule",['tname'=>$match['aname'], 'data'=>$base['schedule']['away'], 'tid'=>$match['aid']])
             @endcomponent
         @endif
     </div>
 @endif
+<div class="nolist">暂无数据</div>
