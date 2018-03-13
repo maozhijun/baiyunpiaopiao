@@ -322,7 +322,7 @@
 @section('js')
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/public.js"></script>
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/match.js"></script>
-    <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/self/football-detail.js"></script>
+    <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/self/football-detail.js?version=201803030003"></script>
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/self/football-detail-util.js"></script>
     <script type="text/javascript">
         //setCurr(2);
@@ -1195,19 +1195,20 @@
         }
         function hasLive() {
             //直播刷新
-            var url = getCdnUrl('/football/has_live/{{$id}}.json');
+            var url = getCdnUrl('/football/has_live/{{$id}}.json') + '?time' + (new Date()).getTime();
             $.ajax({
                 "url": url,
                 "dataType": "json",
                 "success": function (json) {
+                    var no_live = (json['pc_live'] && json['pc_live'] == 0);
                     if ($('div.video').length > 0) {
-                        $('div.video')[0].style.display = (json['pc_live'] && json['pc_live'] == 0) ? 'none' : '';
+                        $('div.video')[0].style.display = no_live ? 'none' : '';
                     }
                     if ($('div.analysis').length > 0) {
-                        $('div.analysis')[0].style.display = (json['pc_live'] && json['pc_live'] == 0) ? '' : 'none';
+                        $('div.analysis')[0].style.display = no_live ? '' : 'none';
                     }
                     if ($('#Info div.sameOdd').length > 0) {
-                        if (json['live'] == 0) {
+                        if (no_live) {
                             $('#Info div.sameOdd').show();
                         } else {
                             $('#Info div.sameOdd').hide();
