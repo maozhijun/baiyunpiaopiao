@@ -33,6 +33,8 @@ class BasketballDetailController extends Controller
                 if (isset($odds) && count($odds) > 0) {
                     ksort($odds);
                     $data['odds'] = $odds;
+                } else {
+                    $data['odds'] = null;
                 }
                 $data['isBasket'] = true;
                 $views = "mobile.cell.football_detail_odd_index";
@@ -42,6 +44,8 @@ class BasketballDetailController extends Controller
                 if (isset($odds) && count($odds) > 0) {
                     ksort($odds);
                     $data['odds'] = $odds;
+                } else {
+                    $data['odds'] = null;
                 }
                 $data['base'] = $this->basketballDetailAnalyseData($id);
                 $views = "mobile.basketball_detail_cell.analyse_cell";
