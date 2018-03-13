@@ -59,12 +59,12 @@ foreach($amatch as $match){
         <p class="host" style="width: {{($ouWin + $ouWin2) > 0 ? round($ouWin/($ouWin + $ouWin2), 3) * 100 : 0}}%;"></p>
         <p class="away" style="width: {{($ouWin + $ouWin2) > 0 ? round($ouWin2/($ouWin + $ouWin2), 3) * 100 : 0}}%;"></p>
         <div class="host">
-            <img src="{{$base['hicon']}}">
+            <img src="{{$base['hicon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'">
             <p class="match"><b>{{$ouWin}}</b>胜<b class="lose">{{$ouLose}}</b>负</p>
             <p class="score">胜<span>{{$count > 0 ? round($ouWin/$count, 4) * 100 : 0}}%</span>赢盘<span>{{$count > 0 ? round($asia_win_count/$count, 4) * 100 : 0}}%</span></p>
         </div>
         <div class="away">
-            <img src="{{$base['aicon']}}">
+            <img src="{{$base['aicon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'">
             <p class="match"><b>{{$ouWin2}}</b>胜<b class="lose">{{$ouLose2}}</b>负</p>
             <p class="score">胜<span>{{$count2 > 0 ? round($ouWin2/$count2, 4) * 100 : 0}}%</span>赢盘<span>{{$count2 > 0 ? round($asia_win_count2/$count2, 4) * 100 : 0}}%</span></p>
         </div>
