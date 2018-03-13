@@ -44,7 +44,8 @@ class Kernel extends ConsoleKernel
         LiveDetailCommand::class,//PC直播终端静态化
         MobileDetailCommand::class,//手机直播终端静态化
         UnStartLiveDetailCommand::class,//开赛时间大于当前时间1小时的比赛终端（PC\WAP）静态化
-        PlayerJsonCommand::class,
+        PlayerJsonCommand::class,//线路接口静态化
+        PlayerHtmlCommand::class,//player 页面静态化
         DeleteExpireFileCommand::class,
 
         LivesJsonCommand::class,
@@ -98,6 +99,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('index_cache:run')->everyMinute();//每分钟刷新主页缓存
 
         $schedule->command('player_json_cache:run')->everyFiveMinutes();//五分钟刷新一次正在直播的比赛的线路内容
+        $schedule->command('player_html_cache:run')->everyFiveMinutes();//五分钟刷新一次player.html  页面
+
         $schedule->command('delete_cache:run')->dailyAt('07:00');//每天删除一次文件
 
         $schedule->command('live_detail_cache:run')->everyFiveMinutes();//每五分钟刷新终端缓存

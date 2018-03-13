@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Storage;
 class LiveController extends Controller
 {
     const BET_MATCH = 1;
+    const LIVE_HD_CODE_KEY = "LIVE_HD_CODE_KEY";
 
     /**
      * 首页（首页、竞彩、足球、篮球）缓存
@@ -866,6 +867,36 @@ class LiveController extends Controller
             }
         }
         return $links;
+    }
+
+
+    /**
+     * 输入验证码
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function validCode(Request $request) {
+        $code = $request->input('code');
+        if (empty($code)) {
+            return response()->json(['code'=>401, 'msg'=>'请输入验证码']);
+        }
+        $r_code = Redis::get(self::LIVE_HD_CODE_KEY);
+        $code = strtoupper($code);
+        if ($code != $r_code) {
+            return response()->json(['code'=>403, 'msg'=>'验证码错误']);
+        }
+        //$c = cookie(self::LIVE_HD_CODE_KEY, $code, strtotime('+10 years'), '/');
+        setcookie(self::LIVE_HD_CODE_KEY, $code, strtotime('+10 years'), '/');
+        return response()->json(['code'=>200, 'msg'=>'验证码正确']);//->withCookie($c);
+    }
+
+    /**
+     * 静态化
+     * @param Request $request
+     */
+    public function staticPlayer(Request $request) {
+        $html = $this->player($request);
+        Storage::disk('public')->put('live/player.html', $html);
     }
 
 }

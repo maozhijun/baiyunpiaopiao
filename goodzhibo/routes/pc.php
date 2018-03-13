@@ -122,6 +122,7 @@ Route::group(["namespace" => 'Live'], function () {
     //静态化
     Route::get('/live/player-json/{id}', 'LiveController@staticLiveUrl');//单个json线路接口静态化
     Route::get('/live/flush/pc-detail/{id}-{sport}.html', 'LiveController@staticPcDetail');//单个pc终端静态化
+    Route::get('/live/static/player', 'LiveController@staticPlayer');//
 
     //Route::get('/live/cache/live-json', 'LiveController@allLiveJsonStatic');//直播赛事接口静态化
     //Route::get('/live/cache/match/detail', 'LiveController@staticLiveDetail');//静态化当前所有比赛的直播终端
@@ -133,6 +134,7 @@ Route::group(["namespace" => 'Live'], function () {
 });
 
 //邀请注册
-Route::group([],function (){
+Route::group(["namespace" => 'Live'],function (){
    //Route::get('/invitation/{code}',"HomeController@invitation");
+    Route::post('/live/valid/code', 'LiveController@validCode');//验证高清验证码
 });

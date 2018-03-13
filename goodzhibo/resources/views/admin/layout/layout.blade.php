@@ -32,6 +32,8 @@
                 <li><a href="/admin/links/list">友链列表</a></li>
                 <li><a href="/admin/discover/list">发现列表</a></li>
                 <li><a href="/admin/comm/communities">社区列表</a></li>
+                <li><a href="/admin/live/player/images">播放器广告设置</a></li>
+                <li><a href="/admin/live/player/actives">播放器活动设置</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
