@@ -41,12 +41,12 @@ foreach($data as $tmpMatch){
         <p class="host" style="width: {{$count == 0 ? 0 : round($ouWin/$count, 1)*100}}%;"></p>
         <p class="away" style="width: {{$count == 0 ? 0 : round($ouLose/$count, 1)*100}}%;"></p>
         <div class="host">
-            <img src="{{$base['hicon']}}">
+            <img src="{{$base['hicon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'" >
             <p class="match"><b>{{$ouWin}}</b>胜</p>
             <p class="score">（场均<span>{{$count > 0 ? round($hscore/$count,1) : '-'}}</span>分）</p>
         </div>
         <div class="away">
-            <img src="{{$base['aicon']}}">
+            <img src="{{$base['aicon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'">
             <p class="match"><b>{{$ouLose}}</b>胜</p>
             <p class="score">（场均<span>{{$count > 0 ? round($ascore/$count,1) : '-'}}</span>分）</p>
         </div>
