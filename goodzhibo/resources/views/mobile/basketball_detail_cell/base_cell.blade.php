@@ -169,7 +169,7 @@
                             <td></td>
                             <td>{{$player['min']}}</td>
                             <td>{{$player['pts']}}</td>
-                            <td>{{str_replace("-","/",$player['ft'])}}</td>
+                            <td>{{str_replace("-","/",$player['fg'])}}</td>
                             <td>{{str_replace("-","/",$player['3pt'])}}</td>
                             <td>{{str_replace("-","/",$player['ft'])}}</td>
                             <td>{{$player['tot']}}</td>
