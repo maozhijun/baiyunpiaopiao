@@ -56,7 +56,7 @@
                 $bj++;
             ?>
             <?php $live_str = \App\Models\Match\BasketMatch::getBasketCurrentTime($match['status'], $match['live_time_str'], $match['system'] == 1) ?>
-            <a class="li" lid="{{$match['lid']}}" href="/m/basketball/detail/{{$match['mid']}}.html">
+            <a class="li" lid="{{$match['lid']}}" href="/m/basketball/detail/{{date('Ymd', strtotime($match['time']))}}/{{$match['mid']}}.html">
                 <div class="part">
                     <p class="team"><img src="http://nba.win007.com{{$match['home_icon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'">{{$match['hname']}}</p>
                     <p class="team"><img src="http://nba.win007.com{{$match['away_icon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'">{{$match['aname']}}</p>

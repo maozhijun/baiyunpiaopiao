@@ -86,9 +86,10 @@ class BasketBallController extends Controller
      * 篮球终端页
      * @param Request $request
      * @param $id   比赛id
+     * @param $date   比赛时间
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function basketballDetail(Request $request, $id){
+    public function basketballDetail(Request $request, $date, $id){
         $match = $this->basketballDetailMatchData($id);
         if (!isset($match)) {
              abort(404);
@@ -102,7 +103,7 @@ class BasketBallController extends Controller
 
         $data['match'] = $match;
         $data['base'] = $base;
-        $data['odds'] = $odd;
+        $data['odds'] = isset($odd) && count($odd) > 0 ? $odd : null;
         $data['tech'] = $tech;
         $data['players'] = $players;
         return view('mobile.basketballDetail', $data);

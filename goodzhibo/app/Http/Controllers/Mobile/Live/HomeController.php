@@ -90,9 +90,10 @@ class HomeController extends Controller
      * 足球终端页
      * @param Request $request
      * @param $id
+     * @param $date
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function footballDetail(Request $request, $id){
+    public function footballDetail(Request $request, $date, $id){
         $match = $this->footballDetailMatchData($id);
         if (!isset($match)) {
             abort(404);
