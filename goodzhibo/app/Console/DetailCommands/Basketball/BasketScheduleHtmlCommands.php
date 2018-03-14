@@ -44,6 +44,6 @@ class BasketScheduleHtmlCommands extends Command
      */
     public function handle()
     {
-        $this->onTabHtmlStatic(['base'], date('Ymd', strtotime('+1 day')));
+        $this->onTabHtmlStatic(['base','analyse','odd'], date('Ymd', strtotime('+1 day')));
     }
 }

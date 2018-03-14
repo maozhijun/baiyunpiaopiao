@@ -44,6 +44,6 @@ class BasketImmediateHtmlCommands extends Command
      */
     public function handle()
     {
-        $this->onTabHtmlStatic(['base'], date('Ymd'));
+        $this->onTabHtmlStatic(['base','odd'], date('Ymd'));
     }
 }
