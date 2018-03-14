@@ -131,11 +131,11 @@ class MatchDetailController
         $index2 = FileTool::getMidIndex2($mid);
         //终端底部tab
         $reset['tabs'] = [
-            ["name"=>"分析", "url"=>env('APP_URL')."m/football/detail/tab/$index1/$index2/$mid/appanalyse.html"],
-            ["name"=>"赛况", "url"=>env('APP_URL')."m/football/detail/tab/$index1/$index2/$mid/appbase.html"],
-            ["name"=>"球队", "url"=>env('APP_URL')."m/football/detail/tab/$index1/$index2/$mid/appteam.html"],
-            ["name"=>"指数", "url"=>env('APP_URL')."m/football/detail/tab/$index1/$index2/$mid/appodd.html"],
-            ["name"=>"同赔", "url"=>env('APP_URL')."m/football/detail/tab/$index1/$index2/$mid/appsame_odd.html"],
+            ["name"=>"分析", "url"=>env('APP_URL')."/m/football/detail/tab/$index1/$index2/$mid/appanalyse.html"],
+            ["name"=>"赛况", "url"=>env('APP_URL')."/m/football/detail/tab/$index1/$index2/$mid/appbase.html"],
+            ["name"=>"球队", "url"=>env('APP_URL')."/m/football/detail/tab/$index1/$index2/$mid/appteam.html"],
+            ["name"=>"指数", "url"=>env('APP_URL')."/m/football/detail/tab/$index1/$index2/$mid/appodd.html"],
+            ["name"=>"同赔", "url"=>env('APP_URL')."/m/football/detail/tab/$index1/$index2/$mid/appsame_odd.html"],
         ];
         return Response::json(AppCommonResponse::createAppCommonResponse(0, '', $reset, false));
     }
@@ -155,9 +155,9 @@ class MatchDetailController
         $index2 = FileTool::getMidIndex2($mid);
         //终端底部tab
         $reset['tabs'] = [
-            ["name"=>"分析", "url"=>env('APP_URL')."m/basketball/detail/tab/$index1/$index2/$mid/appanalyse.html"],
-            ["name"=>"赛况", "url"=>env('APP_URL')."m/basketball/detail/tab/$index1/$index2/$mid/appbase.html"],
-            ["name"=>"指数", "url"=>env('APP_URL')."m/basketball/detail/tab/$index1/$index2/$mid/appodd.html"],
+            ["name"=>"分析", "url"=>env('APP_URL')."/m/basketball/detail/tab/$index1/$index2/$mid/appanalyse.html"],
+            ["name"=>"赛况", "url"=>env('APP_URL')."/m/basketball/detail/tab/$index1/$index2/$mid/appbase.html"],
+            ["name"=>"指数", "url"=>env('APP_URL')."/m/basketball/detail/tab/$index1/$index2/$mid/appodd.html"],
 //            ["name"=>"推荐", "url"=>"https://www.liaogou168.com/basket_detail/$tempStr.html#Corner_Data"]
         ];
         return Response::json(AppCommonResponse::createAppCommonResponse(0, '', $reset, false));
