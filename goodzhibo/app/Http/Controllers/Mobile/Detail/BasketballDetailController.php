@@ -53,4 +53,14 @@ class BasketballDetailController extends Controller
         }
         return view($views, $data);
     }
+
+    const locations = ['G' => '后卫', 'F' => '前锋', 'C' => '中锋'];
+
+    public static function getPlayerLocationCn($index) {
+        $locationStr = "";
+        if (array_key_exists($index, self::locations)) {
+            $locationStr = self::locations[$index];
+        }
+        return $locationStr;
+    }
 }
