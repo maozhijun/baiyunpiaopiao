@@ -21,6 +21,8 @@ Route::group([],function (){
 
     Route::get('/football/detail/wap_html', 'ResultHtmlController@wapDetailToHtml');//手机足球终端页面静态化
     Route::get('/football/detail/pc_html', 'ResultHtmlController@pcDetailToHtml');//电脑足球终端页面静态化
+
+    Route::get('/basketball/wap/detail/{date}/{id}', 'BasketballController@staticWapDetail');//篮球wap端静态化
 });
 
 /**

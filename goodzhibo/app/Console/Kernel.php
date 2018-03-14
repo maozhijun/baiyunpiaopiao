@@ -5,6 +5,10 @@ namespace App\Console;
 use App\Console\AppCommands\AppTopicCommand;
 use App\Console\AppCommands\Community\AccountInfoCommand;
 use App\Console\AppCommands\Community\TopicsDetailCommand;
+use App\Console\CacheCommands\Basket\BasketImmWapDetailCommands;
+use App\Console\CacheCommands\Basket\BasketIngWapDetailCommands;
+use App\Console\CacheCommands\Basket\BasketResultWapDetailCommands;
+use App\Console\CacheCommands\Basket\BasketScheduleWapDetailCommands;
 use App\Console\CacheCommands\BasketballListCommands;
 use App\Console\CacheCommands\BasketballLiveJsonCommands;
 use App\Console\CacheCommands\EventsHtmlCommands;
@@ -24,6 +28,7 @@ use App\Console\CacheCommands\ResultHtmlCommands;
 use App\Console\CacheCommands\ScheduleHtmlCommands;
 use App\Console\DetailCommands\Basketball\BasketImmediateHtmlCommands;
 use App\Console\DetailCommands\Basketball\BasketResultHtmlCommands;
+use App\Console\DetailCommands\Basketball\BasketScheduleHtmlCommands;
 use App\Console\DetailCommands\Football\FootImmediateHtmlCommands;
 use App\Console\DetailCommands\Football\FootResultHtmlCommands;
 use App\Console\DetailCommands\Football\FootScheduleHtmlCommands;
@@ -40,34 +45,34 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        IndexCommand::class,
+        IndexCommand::class,//直播首页静态化
         LiveDetailCommand::class,//PC直播终端静态化
         MobileDetailCommand::class,//手机直播终端静态化
         UnStartLiveDetailCommand::class,//开赛时间大于当前时间1小时的比赛终端（PC\WAP）静态化
         PlayerJsonCommand::class,//线路接口静态化
         PlayerHtmlCommand::class,//player 页面静态化
-        DeleteExpireFileCommand::class,
+        DeleteExpireFileCommand::class,//删除过期文件
 
-        LivesJsonCommand::class,
-        FootballListCommands::class,
-        BasketballListCommands::class,
+        LivesJsonCommand::class,//直播数据静态化
+        FootballListCommands::class,//即时足球json数据静态化
+        BasketballListCommands::class,//即时篮球json数据静态化
 
         ImmediateHtmlCommands::class,//篮球、足球 即时列表 静态化
         ResultHtmlCommands::class,//篮球、足球 结果列表 静态化
         ScheduleHtmlCommands::class,//篮球、足球 赛程列表 静态化
         LiveHtmlCommands::class,//篮球、足球 直播列表 静态化
 
-        FootballLiveJsonCommands::class,
-        BasketballLiveJsonCommands::class,
+        FootballLiveJsonCommands::class,//足球直播json数据静态化
+        BasketballLiveJsonCommands::class,//篮球直播json数据静态化
 
         EventsHtmlCommands::class,//即时事件缓存
         EventsHtmlResultCommands::class,//赛果（昨天的事件缓存）
 
-        MatchesDataCommands::class,
+        MatchesDataCommands::class,//3天前-3天后的比赛数据静态化
 
-        FootImmediateHtmlCommands::class,
-        FootScheduleHtmlCommands::class,
-        FootResultHtmlCommands::class,
+        FootImmediateHtmlCommands::class,//app足球 即时终端页面静态化
+        FootScheduleHtmlCommands::class,//app足球 赛事终端页面静态化
+        FootResultHtmlCommands::class,//app足球 赛程终端页面静态化
 
         FootballDetailCommands::class,//即时赛事静态化
         FootballDetailScheduleCommands::class,//赛程终端静态化
@@ -76,12 +81,16 @@ class Kernel extends ConsoleKernel
         FootballWapDetailResultCommands::class,//wap赛果终端静态化
         FootballWapDetailScheduleCommands::class,//wap赛程终端静态化
 
-        BasketImmediateHtmlCommands::class,
-        BasketResultHtmlCommands::class,
+        BasketImmediateHtmlCommands::class,//app篮球 即时终端静态化
+        BasketResultHtmlCommands::class,//app篮球 赛果终端静态化
+        BasketScheduleHtmlCommands::class,//app篮球 赛程终端静态化
 
-        DeleteExpireFileCommand::class,//删除文件
+        BasketResultWapDetailCommands::class,//wap 篮球赛果终端静态化
+        BasketScheduleWapDetailCommands::class,//wap 篮球赛程终端静态化
+        BasketImmWapDetailCommands::class,//wap 篮球即时赛事终端静态化
+        BasketIngWapDetailCommands::class,//wap 篮球正在比赛的赛事终端静态化
 
-        AppTopicCommand::class,
+        AppTopicCommand::class,//app资讯静态化
         TopicsDetailCommand::class, //帖子终端json静态化
         AccountInfoCommand::class,  //用户信息json静态化
         HasLiveCommand::class,//是否有直播定时任务
@@ -145,14 +154,22 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('matches_data_cache:run')->hourly();//足球列表、篮球列表数据（3天前 - 3天后）缓存
 
-        //足球终端页面缓存
+        //足球终端页面缓存 app
         $schedule->command('foot_detail_immediate_html:run')->everyMinute();
         $schedule->command('foot_detail_result_html:run')->everyTenMinutes();
         $schedule->command('foot_detail_schedule_html:run')->everyTenMinutes();
 
-        //篮球终端页面缓存
+        //篮球终端页面缓存 app
         $schedule->command('basket_detail_immediate_html:run')->everyMinute();
         $schedule->command('basket_detail_result_html:run')->everyTenMinutes();
+        $schedule->command('basket_detail_schedule_html:run')->everyTenMinutes();
+
+        //篮球终端页面静态化 wap 开始
+        $schedule->command('basket_result_wap_detail_html:run')->everyTenMinutes();//赛果终端
+        $schedule->command('basket_schedule_wap_detail_html:run')->everyTenMinutes();//赛程终端
+        $schedule->command('basket_imm_wap_detail_html:run')->everyTenMinutes();//即时赛事终端
+        $schedule->command('basket_ing_wap_detail_html:run')->everyMinute();//正在比赛的赛事终端静态化
+        //篮球终端页面静态化 wap 结束
 
         $schedule->command('app_topic_list_cache:run')->everyFiveMinutes();
 
