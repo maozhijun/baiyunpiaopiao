@@ -63,10 +63,10 @@ trait FootballDetailCommonCommand
                     $tabHtml = $matchDetailController->detailCell($request, $index1, $index2, $mid, $tab);
                     $appTabHtml = $appDetailController->footballDetailTabDetail($tab, $tabHtml);
 
-                    $patch = "/html/football/detail/tab/$index1/$index2/$mid/wap"."$tab.html";
-                    $appPatch = "/html/football/detail/tab/$index1/$index2/$mid/app"."$tab.html";
+//                    $patch = "/static/m/football/detail/tab/$index1/$index2/$mid/wap"."$tab.html";
+                    $appPatch = "/static/m/football/detail/tab/$index1/$index2/$mid/app"."$tab.html";
 
-                    Storage::disk("public")->put($patch, $tabHtml);
+//                    Storage::disk("public")->put($patch, $tabHtml);
                     Storage::disk("public")->put($appPatch, $appTabHtml);
                 }
                 if ($match['status'] <= 0) {

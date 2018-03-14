@@ -148,7 +148,7 @@
                     @if($player['type'] == 'player')
                         <tr>
                             <td>{{$player['name']}}</td>
-                            <td>{{$locations[$player['location']]}}</td>
+                            <td>{{\App\Http\Controllers\Mobile\Detail\BasketballDetailController::getPlayerLocationCn($player['location'])}}</td>
                             <td>{{$player['min']}}</td>
                             <td>{{$player['pts']}}</td>
                             <td>{{str_replace("-","/",$player['fg'])}}</td>
@@ -169,7 +169,7 @@
                             <td></td>
                             <td>{{$player['min']}}</td>
                             <td>{{$player['pts']}}</td>
-                            <td>{{str_replace("-","/",$player['ft'])}}</td>
+                            <td>{{str_replace("-","/",$player['fg'])}}</td>
                             <td>{{str_replace("-","/",$player['3pt'])}}</td>
                             <td>{{str_replace("-","/",$player['ft'])}}</td>
                             <td>{{$player['tot']}}</td>
@@ -231,7 +231,7 @@
                     @if($player['type'] == 'player')
                         <tr>
                             <td>{{$player['name']}}</td>
-                            <td>{{$locations[$player['location']]}}</td>
+                            <td>{{\App\Http\Controllers\Mobile\Detail\BasketballDetailController::getPlayerLocationCn($player['location'])}}</td>
                             <td>{{$player['min']}}</td>
                             <td>{{$player['pts']}}</td>
                             <td>{{str_replace("-","/",$player['fg'])}}</td>
@@ -252,7 +252,7 @@
                             <td></td>
                             <td>{{$player['min']}}</td>
                             <td>{{$player['pts']}}</td>
-                            <td>{{str_replace("-","/",$player['ft'])}}</td>
+                            <td>{{str_replace("-","/",$player['fg'])}}</td>
                             <td>{{str_replace("-","/",$player['3pt'])}}</td>
                             <td>{{str_replace("-","/",$player['ft'])}}</td>
                             <td>{{$player['tot']}}</td>

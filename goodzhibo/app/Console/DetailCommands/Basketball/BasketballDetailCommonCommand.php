@@ -58,14 +58,15 @@ trait BasketballDetailCommonCommand
             $mid = $match['mid'];
             if (!in_array($mid, $savedMids)) {
                 foreach ($tabs as $tab) {
-                    $index = FileTool::getMidIndex($mid);
-                    $tabHtml = $matchDetailController->detailCell($request, $tab, $index, $mid);
+                    $index1 = FileTool::getMidIndex1($mid);
+                    $index2 = FileTool::getMidIndex2($mid);
+                    $tabHtml = $matchDetailController->detailCell($request, $index1, $index2, $mid, $tab);
                     $appTabHtml = $appDetailController->basketballDetailTabDetail($tab, $tabHtml);
 
-                    $patch = "/static/m/basketball/detail/tab/$tab/$index/"."wap"."$mid.html";
-                    $appPatch = "/static/m/basketball/detail/tab/$tab/$index/"."app"."$mid".".html";
+//                    $patch = "/static/m/basketball/detail/tab/$index1/$index2/$mid/wap"."$tab".".html";
+                    $appPatch = "/static/m/basketball/detail/tab/$index1/$index2/$mid/app"."$tab".".html";
 
-                    Storage::disk("public")->put($patch, $tabHtml);
+//                    Storage::disk("public")->put($patch, $tabHtml);
                     Storage::disk("public")->put($appPatch, $appTabHtml);
                 }
                 if ($match['status'] <= 0) {
