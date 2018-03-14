@@ -165,9 +165,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('basket_detail_schedule_html:run')->everyTenMinutes();
 
         //篮球终端页面静态化 wap 开始
-        $schedule->command('basket_result_wap_detail_html:run')->everyTenMinutes();//赛果终端
-        $schedule->command('basket_schedule_wap_detail_html:run')->everyTenMinutes();//赛程终端
-        $schedule->command('basket_imm_wap_detail_html:run')->everyTenMinutes();//即时赛事终端
+        $schedule->command('basket_result_wap_detail_html:run')->everyFiveMinutes();//赛果终端
+        $schedule->command('basket_schedule_wap_detail_html:run')->everyFiveMinutes();//赛程终端
+        $schedule->command('basket_imm_wap_detail_html:run')->everyFiveMinutes();//即时赛事终端
         $schedule->command('basket_ing_wap_detail_html:run')->everyMinute();//正在比赛的赛事终端静态化
         //篮球终端页面静态化 wap 结束
 

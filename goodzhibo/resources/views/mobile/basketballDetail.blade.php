@@ -70,15 +70,9 @@
 @section('js')
 <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/jquery.js"></script>
 <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/mobile/publicPhone.js"></script>
-<script type="text/javascript" src="{{env('CDN_URL')}}/js/public/mobile/matchPhone.js"></script>
+<script type="text/javascript" src="{{env('CDN_URL')}}/js/public/mobile/b_matchPhone.js"></script>
 <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/mobile/match_bk.js"></script>
 <script type="text/javascript">
-    {{--function getCdnUrl(url) {--}}
-        {{--var http = location.href.indexOf('https://') != -1 ? 'https:' : 'http:';--}}
-        {{--var url = http + '{{env('CDN_URL')}}' + url;--}}
-        {{--return url;--}}
-    {{--}--}}
-    {{--window.cdn_url = '{{env('CDN_URL')}}';--}}
     window.onload = function () {
         setPage()
     }

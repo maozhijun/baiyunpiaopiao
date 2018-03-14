@@ -75,7 +75,7 @@ class FootballController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function detail(Request $request, $date, $id) {
-        $interface = new HomeController();
+        $interface = new DataController();
         $data = $interface->footballDetailData($id);
         $data['id'] = $id;
         return view('pc.detail.football_detail', $data);
@@ -101,7 +101,7 @@ class FootballController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function footballCornerCell(Request $request, $date, $id) {
-        $interface = new HomeController();
+        $interface = new DataController();
         $data = $interface->footballCornerData($id);
         return view('pc.detail.football_cell.corner', $data);
     }
@@ -114,7 +114,7 @@ class FootballController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function footballCharacteristicCell(Request $request, $date, $id) {
-        $interface = new HomeController();
+        $interface = new DataController();
         $data = $interface->footballCharacteristicData($id);
         return view('pc.detail.football_cell.characteristic', $data);
     }
@@ -127,7 +127,7 @@ class FootballController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function footballBaseCell(Request $request, $date, $id) {
-        $interface = new HomeController();
+        $interface = new DataController();
         $data = $interface->footballBaseData4PC($id);
         return view('pc.detail.football_cell.base', $data);
     }
@@ -139,7 +139,7 @@ class FootballController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function footballHasLive(Request $request, $id) {
-        $interface = new HomeController();
+        $interface = new DataController();
         $data = $interface->footballMatchIsLive($id);
         return response()->json($data);
     }
@@ -164,7 +164,7 @@ class FootballController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     function footballOddIndex(Request $request, $id) {
-        $interface = new HomeController();
+        $interface = new DataController();
         $data = $interface->footballOddIndexData($id, 'pc');
         $data['type'] = 'asia';
         return view('pc.detail.football_odd', $data);
