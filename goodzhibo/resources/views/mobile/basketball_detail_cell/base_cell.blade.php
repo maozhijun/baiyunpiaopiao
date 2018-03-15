@@ -11,8 +11,14 @@
                 <th>2nd</th>
                 <th>3rd</th>
                 <th>4th</th>
-                @if((isset($match['h_ot']) && strlen($match['h_ot']) > 0)||(isset($match['a_ot']) && strlen($match['a_ot']) > 0))
-                    <th>OT</th>
+                @if((isset($match['h_ot']) && count($match['h_ot']) > 0)||(isset($match['a_ot']) && count($match['a_ot']) > 0))
+                    @if(count($match['h_ot']) == 1)
+                        <th>OT</th>
+                    @else
+                        @foreach($match['h_ot'] as $key=>$ot)
+                            <th>OT{{$key+1}}</th>
+                        @endforeach
+                    @endif
                 @endif
                 <th>总分</th>
             </tr>
@@ -40,8 +46,10 @@
                         class="now"
                         @endif
                 >{{$match['hscore_4th'] or '/'}}</td>
-                @if((isset($match['h_ot']) && strlen($match['h_ot']) > 0)||(isset($match['a_ot']) && strlen($match['a_ot']) > 0))
-                    <td>{{$match['h_ot'] or '/'}}</td>
+                @if(isset($match['h_ot']) && count($match['h_ot']) > 0)
+                    @foreach($match['h_ot'] as $ot)
+                        <td>{{$ot or '/'}}</td>
+                    @endforeach
                 @endif
                 <td>{{$match['hscore'] or '/'}}</td>
             </tr>
@@ -67,8 +75,10 @@
                         class="now"
                         @endif
                 >{{$match['ascore_4th'] or '/'}}</td>
-                @if((isset($match['h_ot']) && strlen($match['h_ot']) > 0)||(isset($match['a_ot']) && strlen($match['a_ot']) > 0))
-                    <td>{{$match['a_ot'] or '/'}}</td>
+                @if(isset($match['a_ot']) && count($match['a_ot']) > 0)
+                    @foreach($match['a_ot'] as $ot)
+                        <td>{{$ot or '/'}}</td>
+                    @endforeach
                 @endif
                 <td>{{$match['ascore'] or '/'}}</td>
             </tr>
@@ -120,7 +130,6 @@
     <div id="Player" class="childNode default" style="display: none;">
         <div class="title">球员数据 - {{$match['hname']}}</div>
         <div class="score default">
-            <?php $locations = ['G' => '后卫', 'F' => '前锋', 'C' => '中锋']; ?>
             <table>
                 <thead>
                 <tr>
