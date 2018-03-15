@@ -19,7 +19,7 @@
             </thead>
             <tbody>
             <tr>
-                <td><img src="{{strlen($match['hicon']) > 0 ? $match['hicon'] : '/img/icon_teamDefault.png'}}"></td>
+                <td><img src="{{$match['hicon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'"></td>
                 <td
                         @if($match['status'] == 1)
                         class="now"
@@ -46,7 +46,7 @@
                 <td>{{$match['hscore'] or '/'}}</td>
             </tr>
             <tr>
-                <td><img src="{{strlen($match['aicon']) > 0 ? $match['aicon'] : '/img/icon_teamDefault.png'}}"></td>
+                <td><img src="{{$match['aicon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'"></td>
                 <td
                         @if($match['status'] == 1)
                         class="now"
@@ -83,12 +83,10 @@
             <ul>
                 <li>
                     <dl class="team">
-                        <dd class="host"><p class="img"><img
-                                        src="{{(isset($match['hicon']) && strlen($match['hicon']) > 0) ? $match['hicon'] : asset('img/customer3/icon_team_default.png')}}">
+                        <dd class="host"><p class="img"><img src="{{$match['hicon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'">
                             </p></dd>
                         <dt>VS</dt>
-                        <dd class="away"><p class="img"><img
-                                        src="{{(isset($match['aicon']) && strlen($match['aicon']) > 0) ? $match['aicon'] : asset('img/customer3/icon_team_default.png')}}">
+                        <dd class="away"><p class="img"><img src="{{$match['aicon']}}" onerror="this.src='{{env('CDN_URL')}}/img/icon_teamDefault.png'">
                             </p></dd>
                     </dl>
 
