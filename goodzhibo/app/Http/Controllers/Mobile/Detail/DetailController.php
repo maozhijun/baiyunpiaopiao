@@ -34,7 +34,7 @@ class DetailController extends Controller
                     $data['lineup']['away'] = null;
                 }
                 if (isset($tech) && count($tech) > 0) {
-                    $data['tech'] = $tech['tech'];
+                    $data['tech'] = isset($tech['tech']) ? $tech['tech'] : null;
                     if (isset($tech['event'])) {
                         $event = $tech['event'];
                         $data['events'] = $event['events'];

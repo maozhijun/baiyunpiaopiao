@@ -54,7 +54,7 @@
                 <td>-</td>
                 <td>-</td>
             @endif
-            @if($banker['goal']['middle1'])
+            @if(isset($banker['goal']['middle1']))
                 <td>{{$banker['goal']['up1']}}</td>
                 <td>{{\App\Models\Match\Odd::getOddMiddleString($banker['goal']['middle1'])}}</td>
                 <td>{{$banker['goal']['down1']}}</td>
@@ -119,7 +119,7 @@
             @else
                 <td>-</td><td>-</td><td>-</td>
             @endif
-            @if($banker['goal']['middle1'])
+            @if(isset($banker['goal']['middle1']))
             <td
                     @if($banker['goal']['up2'] > $banker['goal']['up1'])
                     class="red"

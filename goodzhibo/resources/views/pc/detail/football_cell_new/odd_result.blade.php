@@ -1,8 +1,8 @@
 <?php
-$hLeagueName = $match['hLeagueName'];
-$aLeagueName = $match['aLeagueName'];
-$hLeagueRank = $match['hLeagueRank'];
-$aLeagueRank = $match['aLeagueRank'];
+    $hLeagueName = $rank['leagueRank']['hLeagueName'];
+    $aLeagueName = $rank['leagueRank']['aLeagueName'];
+    $hLeagueRank = $rank['leagueRank']['hLeagueRank'];
+    $aLeagueRank = $rank['leagueRank']['aLeagueRank'];
 ?>
 <div class="track default" id="Data_Track">
     <div class="title">
@@ -29,7 +29,7 @@ $aLeagueRank = $match['aLeagueRank'];
                 <th class="most">小球率</th>
             </tr>
             </thead>
-            @component("pc.detail.football_cell_new.odd_result_item",['data'=>$data['home']])
+            @component("pc.detail.football_cell.odd_result_item",['data'=>$data['home']])
             @endcomponent
         </table>
     </div>
@@ -54,7 +54,7 @@ $aLeagueRank = $match['aLeagueRank'];
                 <th class="most">小球率</th>
             </tr>
             </thead>
-            @component("pc.detail.football_cell_new.odd_result_item",['data'=>$data['away']])
+            @component("pc.detail.football_cell.odd_result_item",['data'=>$data['away']])
             @endcomponent
         </table>
     </div>

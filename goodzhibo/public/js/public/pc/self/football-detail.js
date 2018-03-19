@@ -123,7 +123,10 @@ function hasLiveNew(id) {
         "url": url,
         "dataType": "json",
         "success": function (json) {
-            var no_live = (json['pc_live'] && json['pc_live'] == 0);
+            var no_live = true;
+            if (json['pc_live'] && json['pc_live'] == 1) {
+                no_live = false;
+            }
             if ($('div.video').length > 0) {
                 $('div.video')[0].style.display = no_live ? 'none' : '';
             }

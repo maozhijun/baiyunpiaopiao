@@ -75,10 +75,21 @@ class FootballController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function detail(Request $request, $date, $id) {
-        $interface = new DataController();
-        $data = $interface->footballDetailData($id);
-        $data['id'] = $id;
-        return view('pc.detail.football_detail', $data);
+        $interface = new HomeController();
+        $match = $interface->footballDetailMatchData($id);
+        if (empty($match)) {
+            return abort(404);
+        }
+        $result = array();
+        $result['match'] = $match;
+        $result['analyse'] = $interface->footballDetailAnalyseData($id);//基本数据
+        $result['tech'] = $interface->footballTechData($id);//统计
+        $result['lineup'] = $interface->footballLineupData($id);//阵容;
+//        $interface = new DataController();
+//        $data = $interface->footballDetailData($id);
+//        dump($result['tech']);
+        $result['id'] = $id;
+        return view('pc.detail.football_detail', $result);
     }
 
     /**
@@ -90,7 +101,9 @@ class FootballController extends Controller
     public function footballOddCell(Request $request, $id) {
         $interface = new HomeController();
         $data = $interface->footballOddData($id);
-        return view('pc.detail.football_cell.odd', $data);
+        $result['mid'] = $id;
+        $result['bankers'] = $data;
+        return view('pc.detail.football_cell.odd', $result);
     }
 
     /**

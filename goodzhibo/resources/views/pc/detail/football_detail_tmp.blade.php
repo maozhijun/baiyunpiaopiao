@@ -1,12 +1,11 @@
 @extends('pc.layout.base_new')
 @section('content')
     <?php
-    $rank = $analyse['rank'];
-    $hLeagueName = $rank['leagueRank']['hLeagueName'];
-    $aLeagueName = $rank['leagueRank']['aLeagueName'];
-    $hLeagueRank = $rank['leagueRank']['hLeagueRank'];
-    $aLeagueRank = $rank['leagueRank']['aLeagueRank'];
-    $isLive = false;
+    $hLeagueName = $match['hLeagueName'];
+    $aLeagueName = $match['aLeagueName'];
+    $hLeagueRank = $match['hLeagueRank'];
+    $aLeagueRank = $match['aLeagueRank'];
+    $isLive = false;//\App\Models\Match\MatchLive::isLive($match->id);
     $startTime = date('Ymd', strtotime($match['time']));
     ?>
     <div id="Content" class="inner">
@@ -43,18 +42,280 @@
             </p>
             <p class="Talent" style="display: none;"></p>
         </div>
-        @component("pc.detail.football_cell_new.head",['match'=>$match, 'analyse'=>$analyse]) @endcomponent
+        <div id="Info">
+            <div class="mes">
+                <p>{{isset($match['lname']) ? $match['lname'] : $match['win_lname']}}&nbsp;{{isset($match['round'])?'-&nbsp;第'.$match['round'].'轮':''}}</p>
+                <?php
+                $week = array('周日','周一','周二','周三','周四','周五','周六');
+                ?>
+                <p>比赛时间：{{ Carbon\Carbon::parse($match['time'])->format('Y-m-d') }}&nbsp;&nbsp;{{ Carbon\Carbon::parse($match['time'])->format('H:i') }}&nbsp;&nbsp;{{$week[date("w",strtotime($match['time']))]}}</p>
+            </div>
+            <div class="team host">
+                <div class="icon">
+                    <img src="{{strlen($match['hteam']['icon']) > 0 ? $match['hteam']['icon'] : (env('CDN_URL') . '/img/icon_teamDefault.png') }}">
+                </div>
+                <p>
+                    <span class="team">{{$match['hname']}}</span>
+                    @if($hLeagueRank > 0)<span class="league">【 {{$hLeagueName}}{{$hLeagueRank}} 】</span>@endif
+                </p>
+            </div>
+            @if($match['status'] > 0 || $match['status'] == -1)
+                <div class="score">{{$match['hscore']}} - {{$match['ascore']}}</div>
+            @else
+                <div class="score">VS</div>
+            @endif
+            <div class="team away">
+                <div class="icon">
+                    <img src="{{strlen($match['ateam']['icon']) > 0 ? $match['ateam']['icon'] : (env('CDN_URL') . '/img/icon_teamDefault.png') }}">
+                </div>
+                <p>
+                    <span class="team">{{$match['aname']}}</span>
+                    @if($aLeagueRank > 0)
+                        <span class="league">【 {{$aLeagueName}}{{$aLeagueRank}} 】</span>
+                    @endif
+                </p>
+            </div>
+            <div class="odd">
+                @if(isset($asiaOdd))
+                    <p>亚：{{\App\Http\Controllers\CommonTool::float2Decimal($asiaOdd['up2'])}}&nbsp;&nbsp;{{\App\Http\Controllers\CommonTool::float2Decimal($asiaOdd['middle2'], true)}}&nbsp;&nbsp;{{\App\Http\Controllers\CommonTool::float2Decimal($asiaOdd['down2'])}}</p>
+                @else
+                    <p>亚：-&nbsp;&nbsp;-&nbsp;&nbsp;-</p>
+                @endif
+                @if(isset($europeOdd))
+                    <p>欧：{{\App\Http\Controllers\CommonTool::float2Decimal($europeOdd['up2'])}}&nbsp;&nbsp;{{\App\Http\Controllers\CommonTool::float2Decimal($europeOdd['middle2'])}}&nbsp;&nbsp;{{\App\Http\Controllers\CommonTool::float2Decimal($europeOdd['down2'])}}</p>
+                @else
+                    <p>欧：-&nbsp;&nbsp;-&nbsp;&nbsp;-</p>
+                @endif
+                @if(isset($ouOdd))
+                    <p>大：{{\App\Http\Controllers\CommonTool::float2Decimal($ouOdd['up2'])}}&nbsp;&nbsp;{{\App\Http\Controllers\CommonTool::getHandicapCn($ouOdd['middle2'], '', \App\Models\Match\Odd::k_odd_type_ou)}}&nbsp;&nbsp;{{\App\Http\Controllers\CommonTool::float2Decimal($ouOdd['down2'])}}</p>
+                @else
+                    <p>大：-&nbsp;&nbsp;-&nbsp;&nbsp;-</p>
+                @endif
+            </div>
+            <div class="clear"></div>
+            <div class="analysis"
+                 @if($base['matches'] && $base['matches']['status'] > 0 && $isLive)
+                 style="display: none"
+                 @else
+                 style="display: block"
+                    @endif
+            >
+                <?php
+                if (isset($base['odd'])){
+                    $odd = $base['odd'];
+                    if(isset($odd['up1']) && isset($odd['middle1']) && isset($odd['down1'])){
+                        $up = $odd['up1'] > 0 ? round(90/$odd['up1'],0) : 0;
+                        $middle = $odd['middle1'] > 0 ? round(90/$odd['middle1'],0) : 0;
+                    }
+                }
+                //                $down = $odd['down1'] > 0 ? round(90/$odd['down1'],2) : 0;
+                ?>
+                <canvas class="host" width="130px" height="130px" value="{{isset($middle) ? $middle + $up : 0}}" color="#bc1c25"></canvas>
+                <canvas class="away" width="130px" height="130px" value="{{isset($middle) ? 100 - $middle - $up : 0}}" color="#58A1F6"></canvas>
+                <div class="cover host">
+                    <p><b>
+                            @if(isset($middle))
+                                {{$middle + $up}}%
+                            @else
+                                -%
+                            @endif
+                        </b></p>
+                    <p>不败</p>
+                </div>
+                <div class="cover away">
+                    <p><b>
+                            @if(isset($middle))
+                                {{100 - $middle - $up}}%
+                            @else
+                                -%
+                            @endif
+                        </b></p>
+                    <p>获胜</p>
+                </div>
+                <p class="title">赛果概率</p>
+                <dl>
+                    <?php
+                    $winh = 0;
+                    $drawh = 0;
+                    $loseh = 0;
+                    $wina = 0;
+                    $drawa = 0;
+                    $losea = 0;
+                    $hid = $base['matches']['hid'];
+                    $aid = $base['matches']['aid'];
+                    if (isset($base['historyBattle']['nhnl'])){
+                        foreach($base['historyBattle']['nhnl'] as $match){
+                            if($match['hscore'] > $match['ascore'])
+                                if($match['hid'] == $hid)
+                                    $winh++;
+                                else
+                                    $loseh++;
+                            elseif($match['hscore'] < $match['ascore'])
+                                if($match['hid'] == $hid)
+                                    $loseh++;
+                                else
+                                    $winh++;
+                            else
+                                $drawh++;
+                        }
+
+                        foreach($base['historyBattle']['nhnl'] as $match){
+                            if($match['hscore'] > $match['ascore'])
+                                if($match['hid'] == $aid)
+                                    $wina++;
+                                else
+                                    $losea++;
+                            elseif($match['hscore'] < $match['ascore'])
+                                if($match['hid'] == $aid)
+                                    $losea++;
+                                else
+                                    $wina++;
+                            else
+                                $drawa++;
+                        }
+                    }
+
+
+                    $homePer = ($winh + $drawa + $wina) > 0 ? round(100*($winh/($winh+$drawa+$wina)),0) : 0;
+                    $awayPer = ($winh + $drawa + $wina) > 0 ? round(100*($wina/($winh+$drawa+$wina)),0) : 0;
+
+                    ?>
+                    <dt>
+                        <p class="host"><b>{{$winh}}</b>&nbsp;胜&nbsp;<b>{{$drawh}}</b>&nbsp;平&nbsp;<b>{{$loseh}}</b>&nbsp;负</p>
+                        <p class="away"><b>{{$wina}}</b>&nbsp;胜&nbsp;<b>{{$drawa}}</b>&nbsp;平&nbsp;<b>{{$losea}}</b>&nbsp;负</p>
+                        <p>历史交锋</p>
+                    </dt>
+                    <dd>
+                        <p class="host" style="width: {{($homePer+$awayPer) > 0 ? 100*$homePer/($homePer+$awayPer) : 0}}%;"></p><span class="host">主胜&nbsp;{{$homePer}}%</span>
+                        <p class="away" style="width: {{($homePer+$awayPer) > 0 ? 100*$awayPer/($homePer+$awayPer) : 0}}%;"></p><span class="away">{{$awayPer}}%&nbsp;客胜</span>
+                    </dd>
+                    <?php
+                    $winh = 0;
+                    $drawh = 0;
+                    $loseh = 0;
+                    $wina = 0;
+                    $drawa = 0;
+                    $losea = 0;
+                    $hid = $base['matches']['hid'];
+                    //                            dump($base['recentBattle']['home']);
+                    if (isset($base['recentBattle']['home'])){
+                        foreach($base['recentBattle']['home']['all'] as $match){
+                            if($match['hscore'] > $match['ascore'])
+                                if($match['hid'] == $hid)
+                                    $winh++;
+                                else
+                                    $loseh++;
+                            elseif($match['hscore'] < $match['ascore'])
+                                if($match['hid'] == $hid)
+                                    $loseh++;
+                                else
+                                    $winh++;
+                            else
+                                $drawh++;
+                        }
+                    }
+                    if (isset($base['recentBattle']['away'])){
+                        foreach($base['recentBattle']['away']['all'] as $match){
+                            if($match['hscore'] > $match['ascore'])
+                                if($match['hid'] == $aid)
+                                    $wina++;
+                                else
+                                    $losea++;
+                            elseif($match['hscore'] < $match['ascore'])
+                                if($match['hid'] == $aid)
+                                    $losea++;
+                                else
+                                    $wina++;
+                            else
+                                $drawa++;
+                        }
+                    }
+
+                    $homePer = ($winh +$drawh + $loseh) > 0 ? round(100*($winh/($winh+$loseh+$drawh)),0) : 0;
+                    $awayPer = ($wina + $drawa + $losea) > 0 ? round(100*($wina/($wina+$drawa+$losea)),0) : 0;
+
+                    ?>
+                    <dt>
+                        <p class="host"><b>{{$winh}}</b>&nbsp;胜&nbsp;<b>{{$drawh}}</b>&nbsp;平&nbsp;<b>{{$loseh}}</b>&nbsp;负</p>
+                        <p class="away"><b>{{$wina}}</b>&nbsp;胜&nbsp;<b>{{$drawa}}</b>&nbsp;平&nbsp;<b>{{$losea}}</b>&nbsp;负</p>
+                        <p>近期战绩</p>
+                    </dt>
+                    <dd>
+                        <p class="host" style="width: {{($homePer+$awayPer) == 0 ? 0 : (100*$homePer/($homePer+$awayPer))}}%;"></p><span class="host">主胜&nbsp;{{$homePer}}%</span>
+                        <p class="away" style="width: {{($homePer+$awayPer) == 0 ? 0 : (100*$awayPer/($homePer+$awayPer))}}%;"></p><span class="away">{{$awayPer}}%&nbsp;客胜</span>
+                    </dd>
+                </dl>
+            </div>
+            @if(isset($sameOdd) && isset($sameOdd['match_win']) && (strlen($sameOdd['match_win']) > 0))
+                <div class="sameOdd"
+                     @if($base['matches'] && $base['matches']['status'] > 0 && $isLive)
+                     style="display: none"
+                     @else
+                     style="display: block"
+                        @endif
+                >
+                    <p class="name">统计共<b>10</b>场相同赔率比赛</p>
+                    <p class="win">主胜<b>{{$sameOdd['match_win']}}%</b></p>
+                    <p class="draw">平局<b>{{$sameOdd['match_draw']}}%</b></p>
+                    <p class="lose">客胜<b>{{$sameOdd['match_lose']}}%</b></p>
+                    <a onclick="SameOdd()">详细历史同赔数据</a>
+                </div>
+            @endif
+            @if(isset($base['matches']))
+                <div class="video"
+                     @if($base['matches'] && $base['matches']['status'] > 0 && $isLive) style="display: block"
+                     @else style="display: none" @endif
+                >
+                    <a target="_blank" href="{{\App\Http\Controllers\CommonTool::matchLiveFullPathWithId($id)}}" class="goVideo">正在直播</a>
+                    <a target="_blank" href="{{\App\Http\Controllers\CommonTool::matchLiveFullPathWithId($id)}}"><img src="{{env('CDN_URL')}}/img/pc/icon_home_video_live.gif"></a>
+                </div>
+            @endif
+        </div>
         <div id="Tabbar">
             <button id="Tab_Match" onclick="clickMatchBase()">比赛赛况</button><button id="Tab_Characteristic" onclick="clickCharacteristic(0)">特色数据</button><button id="Tab_Data" onclick="onChangeTab('Data')" class="on">数据分析</button><button id="Tab_Corner" onclick="clickCorner()">角球数据</button>
         </div>
-        @component("pc.detail.football_cell_new.base",['match'=>$match, 'rank'=>$analyse['rank'],'tech'=>$tech,'lineup'=>$lineup]) @endcomponent
-        @component("pc.detail.football_cell_new.data",['match'=>$match, 'base'=>$analyse]) @endcomponent
+        <div id="Match" class="tabContent" style="display: none;">
+        </div>
+        <div id="Characteristic" class="tabContent" style="display: none;">
+        </div>
+        <div id="Data" class="tabContent" style="display: block;">
+            @if(isset($base['attribute']))
+                <div class="strength default" id="Data_Strength">
+                    @component("pc.detail.football_cell.attribute",['data'=>$base['attribute'],'match'=>$base['matches']])
+                    @endcomponent
+                </div>
+            @endif
+            {{--<a href="https://www.liaogou168.com/merchant/detail/10008" target="_blank" class="bannerAD default"><img src="{{env('CDN_URL')}}/img/ad_t2_all.jpg"></a>--}}
+            <div class="odd default" id="Data_Odd"></div>
+            @if(isset($base['rank']) && (count($base['rank']['host']) > 1 || count($base['rank']['away']) > 1))
+                <div class="league default" id="Data_League">
+                    @component("pc.detail.football_cell.league",['data'=>$base['rank'],'match'=>$base['matches']])
+                    @endcomponent
+                </div>
+            @endif
+            @if(isset($base['historyBattle']))
+                <div class="battle default" id="Data_Battle" league="0" ha="0">
+                    @component("pc.detail.football_cell.battle",['data'=>$base['historyBattle'],'analyse'=>$base['historyBattleResult'],'hid'=>$base['matches']['hid']])
+                    @endcomponent
+                </div>
+            @endif
+            @if(isset($base['recentBattle']))
+                <div class="history default" id="Data_History">
+                    @component("pc.detail.football_cell.history",['data'=>$base['recentBattle'],'match'=>$base['matches']])
+                    @endcomponent
+                </div>
+            @endif
+            @if(isset($base['oddResult']))
+                @component("pc.detail.football_cell.odd_result",['data'=>$base['oddResult'],'match'=>$base['matches']])
+                @endcomponent
+            @endif
+            @if(isset($base['schedule']))
+                @component("pc.detail.football_cell.schedule",['data'=>$base['schedule'],'match'=>$base['matches']])
+                @endcomponent
+            @endif
+        </div>
         <div id="Corner" class="tabContent" style="display: none;"></div>
-        @component('pc.detail.football_cell_new.character',['match'=>$match,'ws'=>$analyse['ws'],'referee'=>$analyse['referee'], 'sameOdd'=>$analyse['sameOdd'] ])
-        @endcomponent
-        @component('pc.detail.football_cell_new.corner',['match'=>$match, 'anaylse'=>$analyse['cornerAnalyse'], 'historyBattle'=>$analyse['cornerHistoryBattle']['historyBattle']
-            ,'historyBattleResult'=>$analyse['cornerHistoryBattle']['historyBattleResult'], 'recentBattle'=>$analyse['cornerRecentBattle']])
-        @endcomponent
+        <div id="Talent" class="tabContent" style="display: none;"></div>
         <div class="clear"></div>
     </div>
 @endsection
@@ -93,8 +354,7 @@
         }
     </script>
     <script type="text/javascript">
-        var BaseData = $.parseJSON('{!!json_encode($analyse)!!}');
-        var BaseData = [];
+        var BaseData = $.parseJSON('{!!json_encode($base)!!}');
         var BaseResultData = [];
         sortData(BaseData, BaseResultData);
         getOddHtml();{{-- 获取数据分析 赔率指数 单元 --}}
@@ -195,7 +455,7 @@
                 var tmp = tmps[i];
                 var hscore = tmp["hscore"];
                 var ascore = tmp["ascore"];
-                var isHost = (tmp["hid"] == '{{$match['hid']}}');
+                var isHost = (tmp["hid"] == '{{$base['matches']['hid']}}');
                 var result = getMatchResult(hscore,ascore,isHost);
                 switch (result){
                     case 3:
@@ -287,7 +547,7 @@
                 var tmp = tmps[i];
                 var hscore = tmp["hscore"];
                 var ascore = tmp["ascore"];
-                var isHost = (tmp["hid"] == '{{$match['hid']}}');
+                var isHost = (tmp["hid"] == '{{$base['matches']['hid']}}');
                 var result = getMatchResult(hscore,ascore,isHost);
                 switch (result){
                     case 3:
@@ -889,7 +1149,7 @@
             $('div.leftBar p.Data a[name=future]')[0].className = 'hide';
         }
 
-        @if(isset($id) && $match['status'] > 0 && $match['status'] < 4)
+        @if(isset($id) && $base['matches']['status'] > 0 && $base['matches']['status'] < 4)
         function refresh() {
             refreshMatch();
             hasLiveNew('{{$id}}');
@@ -988,7 +1248,7 @@
             });
         }
         @endif
-        @if(isset($match['status']) && $match['status'] > 0 && $match['status'] < 4)
+        @if(isset($base['matches']['status']) && $base['matches']['status'] > 0 && $base['matches']['status'] < 4)
         setInterval(getMatchData, 5000);
         @endif
     </script>
