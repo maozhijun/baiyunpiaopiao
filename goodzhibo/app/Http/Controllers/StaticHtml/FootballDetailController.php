@@ -104,9 +104,9 @@ class FootballDetailController extends Controller
     public function flushPcDetailAllCache(Request $request, $date, $id) {
         $pc = new FootballController();
         $this->pcDetailHtml($request, $date, $id, $pc);//分析数据
-        $this->pcBaseHtml($request, $date, $id, $pc);//基本赛况
-        $this->pcCornerHtml($request, $date, $id, $pc);//角球数据
-        $this->pcCharaHtml($request, $date, $id, $pc);//特色数据
+//        $this->pcBaseHtml($request, $date, $id, $pc);//基本赛况
+//        $this->pcCornerHtml($request, $date, $id, $pc);//角球数据
+//        $this->pcCharaHtml($request, $date, $id, $pc);//特色数据
     }
 
     /**

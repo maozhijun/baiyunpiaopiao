@@ -59,26 +59,31 @@ class FootballDetailResultCommands extends Command
             $json =$home->footballData($match_date);
         }
         $matches = isset($json['matches']) ? $json['matches'] : [];
-        $excMidStr = Redis::get(self::PC_REDIS_KEY);
+        $key = self::PC_REDIS_KEY . date('Ymd') . (date('H') > 12 ? 1 : 0);
+        $excMidStr = Redis::get($key);
         $excArray = json_decode($excMidStr, true);;
         if (is_null($excArray)) {
             $excArray = [];
         }
         $excIndex = 0;
+        $excTotal = 6;
+
         //每10分钟一次，一次缓存5场比赛。
         foreach ($matches as $match) {
-            if ($excIndex > 4) break;
+            if ($excIndex > $excTotal) break;
             $id = $match['mid'];
             if (in_array($id, $excArray)) {
                 continue;
             }
             $excArray[] = $id;
             $start_time = $match['time'];
+//            echo 'time: ' . $start_time . "\n";
             $date = date('Ymd', strtotime($start_time));
             FootballDetailController::curlToHtml($date, $id);
             $excIndex++;
             sleep(1);
         }
-        Redis::setEx(self::PC_REDIS_KEY, 24 * 60 * 60, json_encode($excArray));
+        Redis::setEx($key, 12 * 60 * 60, json_encode($excArray));
+//        echo 'cache : ' . json_encode($excArray);
     }
 }
