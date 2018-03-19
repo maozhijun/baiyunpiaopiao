@@ -27,7 +27,7 @@ class FootballController extends Controller
     public function immediate(Request $request) {
         //$cks = $request->cookies;
         $homeController = new HomeController();
-        $data = $homeController->footballData();
+        $data = $homeController->footballDataFirstCache();//footballData();
         $data['nav'] = 'football';
         return view('pc.index.immediate', $data);
     }
@@ -60,7 +60,7 @@ class FootballController extends Controller
             $date = $request->input('date', date('Y-m-d', strtotime('+1 days')));
         }
         $homeController = new HomeController();
-        $data = $homeController->footballData($date);
+        $data = $homeController->footballDataFirstCache($date);//footballData($date);
         $data['nav'] = 'football';
         return view('pc.index.schedule', $data);
     }

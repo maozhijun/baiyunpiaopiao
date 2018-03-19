@@ -130,6 +130,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('fb_list_json_cache:run')->everyMinute();//每分钟执行一次 足球当天列表的定时任务
         $schedule->command('bb_list_json_cache:run')->everyMinute();//每分钟执行一次 篮球当天列表的定时任务
+        $schedule->command('matches_data_cache:run')->hourly();//足球列表、篮球列表数据（3天前 - 3天后）缓存
 
         $schedule->command('imm_html_cache:run')->everyMinute();//即时列表html静态化。
         $schedule->command('result_html_cache:run')->everyFiveMinutes();//赛果列表html静态化。
@@ -151,8 +152,6 @@ class Kernel extends ConsoleKernel
         ///////
 
         //$schedule->command('fb_detail_cache:run')->everyMinute();//足球即时比赛数据、赔率数据
-
-        $schedule->command('matches_data_cache:run')->hourly();//足球列表、篮球列表数据（3天前 - 3天后）缓存
 
         //足球终端页面缓存 app
         $schedule->command('foot_detail_immediate_html:run')->everyMinute();

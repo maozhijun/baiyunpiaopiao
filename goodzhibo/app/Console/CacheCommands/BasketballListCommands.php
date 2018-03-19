@@ -50,6 +50,6 @@ class BasketballListCommands extends Command
         $request = new Request();
         $jc->staticBasketballMatchesJson($request);//缓存当天的 篮球列表数据
         //sleep(20);
-        $jc->staticBasketballMatchesJson($request);//缓存当天的 篮球列表数据
+        //$jc->staticBasketballMatchesJson($request);//缓存当天的 篮球列表数据
     }
 }

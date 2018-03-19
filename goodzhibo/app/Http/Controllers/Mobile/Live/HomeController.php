@@ -26,7 +26,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function immediate(Request $request) {
-        $json = $this->footballData();
+        $json = $this->footballDataFirstCache();//footballData();
         $json['type'] = 'immediate';
         return view('mobile.indexPhone', $json);
     }
@@ -52,7 +52,7 @@ class HomeController extends Controller
      */
     public function schedule(Request $request) {
         $date = $request->input("date", date('Y-m-d', strtotime('+1 days')));
-        $json = $this->footballData($date);
+        $json = $this->footballDataFirstCache($date);//footballData($date);
         $json['type'] = 'schedule';
         $json['date'] = $date;
         $json['week'] = self::WEEK_CN_ARRAY[date('w', strtotime($date))];

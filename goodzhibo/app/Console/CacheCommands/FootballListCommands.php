@@ -50,6 +50,6 @@ class FootballListCommands extends Command
         $request = new Request();
         $jc->staticFootballMatchesJson($request);//缓存当天的 足球列表数据
         //sleep(20);
-        $jc->staticFootballMatchesJson($request);//缓存当天的 足球列表数据
+        //$jc->staticFootballMatchesJson($request);//缓存当天的 足球列表数据
     }
 }
