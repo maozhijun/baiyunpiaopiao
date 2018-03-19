@@ -24,6 +24,7 @@ class DataController extends Controller
         $url = env('LIAOGOU_URL')."intf/foot/detail/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
@@ -35,6 +36,7 @@ class DataController extends Controller
         $url = env('LIAOGOU_URL')."intf/foot/corner/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
@@ -53,6 +55,7 @@ class DataController extends Controller
         $url = $prifex . "intf/foot/characteristic/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
@@ -70,6 +73,7 @@ class DataController extends Controller
         $url = $prifex . "intf/foot/base_pc/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
@@ -87,6 +91,7 @@ class DataController extends Controller
         $url = $prifex . "api/match/live/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
@@ -107,6 +112,7 @@ class DataController extends Controller
         $url = $prefix . "intf/foot/odd_index/" . $id . $param;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);

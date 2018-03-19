@@ -85,6 +85,7 @@ class JsonController extends Controller
         $url = env('LIAOGOU_URL')."intf/foot/data?date=" . $date;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $json = curl_exec ($ch);
         curl_close ($ch);

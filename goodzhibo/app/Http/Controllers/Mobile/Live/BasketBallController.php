@@ -121,6 +121,7 @@ class BasketBallController extends Controller
         $url = env('LIAOGOU_URL')."/intf/basket/data?date=" . $date;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
@@ -141,6 +142,7 @@ class BasketBallController extends Controller
         $url = $prefix . "intf/basket/odd_index/" . $id . $param;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         $json = curl_exec($ch);
         curl_close($ch);
         $json = json_decode($json, true);
@@ -193,6 +195,7 @@ class BasketBallController extends Controller
         $url = env('LIAOGOU_URL')."intf/basket/odd/" . $id;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);

@@ -48,6 +48,7 @@ class MatchesController
             $url = env('MATCH_URL') . "/app/matches/" . $formatDate . "/" . $sport . "/" . $type . ".json";
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 8);
             $json = curl_exec($ch);
             curl_close($ch);
 
@@ -79,6 +80,7 @@ class MatchesController
         $url = 'https://shop.liaogou168.com/api/v140/app/matches/'.$sport.'/matchesByIds?ids='.$request->input('ids',0);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);

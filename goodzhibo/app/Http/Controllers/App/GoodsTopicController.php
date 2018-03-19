@@ -36,6 +36,7 @@ class GoodsTopicController extends Controller{
             $url = 'https://shop.liaogou168.com/api/v140/app/topic/home';
             curl_setopt($ch, CURLOPT_URL,$url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 30);
             $json = curl_exec ($ch);
             $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             curl_close ($ch);
@@ -63,6 +64,7 @@ class GoodsTopicController extends Controller{
             $url = 'https://shop.liaogou168.com/api/v140/app/topic/types';
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 20);
             $json = curl_exec ($ch);
             $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             curl_close ($ch);
@@ -109,6 +111,7 @@ class GoodsTopicController extends Controller{
         $url = 'https://shop.liaogou168.com/api/v140/app/topic/list'.'?type='.$type.'&pageSize='.$pageSize.'&pageNo='.$pageNo;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 15);
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
@@ -124,6 +127,7 @@ class GoodsTopicController extends Controller{
         $url = $url.'?id='.$request->input('id');
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 15);
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
@@ -138,6 +142,7 @@ class GoodsTopicController extends Controller{
         $url = 'https://shop.liaogou168.com/api/v140/app/topic/detailOthers?id='.$request->input('id',0);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
@@ -151,6 +156,7 @@ class GoodsTopicController extends Controller{
         $url = 'https://shop.liaogou168.com/api/v140/app/topic/getMerchantTopicByIds?ids='.$ids;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
