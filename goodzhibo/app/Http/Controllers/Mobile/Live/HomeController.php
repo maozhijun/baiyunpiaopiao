@@ -38,7 +38,7 @@ class HomeController extends Controller
      */
     public function result(Request $request) {
         $date = $request->input('date', date('Y-m-d', strtotime('-1 days')));
-        $json = $this->footballData($date);
+        $json = $this->footballDataFirstCache($date);//footballData($date);
         $json['type'] = 'result';
         $json['date'] = $date;
         $json['week'] = self::WEEK_CN_ARRAY[date('w', strtotime($date))];

@@ -9,6 +9,7 @@
 
 namespace App\Http\Controllers\Mobile\Match;
 
+use App\Http\Controllers\CacheInterface\FootballInterface;
 use App\Http\Controllers\FileTool;
 use App\Models\Match\MatchLive;
 
@@ -27,7 +28,7 @@ trait MatchDetailTool
             $url = env('MATCH_URL') . "/static/terminal/$sport/" . substr($id, 0, 2) . "/" . substr($id, 2, 2) . "/$id/$name.json";
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 15);
             $json = curl_exec($ch);
             curl_close($ch);
             $json = json_decode($json, true);
@@ -113,11 +114,26 @@ trait MatchDetailTool
         $url = env('LIAOGOU_URL')."/intf/foot/data?date=" . $date;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 8);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 15);
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
 
+        return $json;
+    }
+
+    /**
+     * 有先获取静态化文件
+     * @param string $date
+     * @return mixed
+     */
+    public function footballDataFirstCache($date = '') {
+        $interface = new FootballInterface();
+        $json_str = $interface->matchListDataJson($date);
+        if (!isset($json_str)) {
+            return $this->footballData($date);
+        }
+        $json = json_decode($json_str, true);
         return $json;
     }
 

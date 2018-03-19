@@ -43,7 +43,7 @@ class FootballController extends Controller
             $date = $request->input('date', date('Y-m-d', strtotime('-1 days')));
         }
         $homeController = new HomeController();
-        $data = $homeController->footballData($date);
+        $data = $homeController->footballDataFirstCache($date);//footballData($date);
         $data['type'] = 'result';
         $data['nav'] = 'football';
         return view('pc.index.result', $data);

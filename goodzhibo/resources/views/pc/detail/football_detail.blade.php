@@ -61,7 +61,7 @@
 @section('js')
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/public.js"></script>
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/match.js"></script>
-    <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/self/football-detail.js?version=201803030003"></script>
+    <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/self/football-detail.js?version=201803030004"></script>
     <script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/self/football-detail-util.js"></script>
     <script type="text/javascript">
         //setCurr(2);
