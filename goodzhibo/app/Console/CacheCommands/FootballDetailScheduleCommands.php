@@ -68,9 +68,9 @@ class FootballDetailScheduleCommands extends Command
             $excArray = [];
         }
         $excIndex = 0;
-        //每10分钟一次，一次缓存5场比赛。
+        //每10分钟一次，一次缓存15场比赛。
         foreach ($matches as $match) {
-            if ($excIndex > 4) break;
+            if ($excIndex > 15) break;
             $id = $match['mid'];
             if (in_array($id, $excArray)) {
                 continue;
@@ -82,6 +82,6 @@ class FootballDetailScheduleCommands extends Command
             $excIndex++;
             sleep(1);
         }
-        Redis::setEx($key, 24 * 60 * 60, json_encode($excArray));
+        Redis::setEx($key, 4 * 60 * 60, json_encode($excArray));
     }
 }

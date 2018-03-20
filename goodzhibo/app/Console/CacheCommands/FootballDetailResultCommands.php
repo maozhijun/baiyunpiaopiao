@@ -66,7 +66,7 @@ class FootballDetailResultCommands extends Command
             $excArray = [];
         }
         $excIndex = 0;
-        $excTotal = 6;
+        $excTotal = 15;
 
         //每10分钟一次，一次缓存5场比赛。
         foreach ($matches as $match) {

@@ -48,7 +48,6 @@ class FootballWapDetailCommands extends Command
      */
     public function handle()
     {
-        $request = new Request();
         $fbIntf = new FootballInterface();
         $jsonStr = $fbIntf->matchListDataJson();//获取即时的比赛信息。
         $json = json_decode($jsonStr, true);
@@ -70,84 +69,6 @@ class FootballWapDetailCommands extends Command
             }
         }
         //首先加载pc终端
-    }
-
-    /**
-     * 终端页HTML
-     * @param $request
-     * @param $date
-     * @param $id
-     * @param $wap
-     */
-    protected function detailHtml($request, $date, $id, $wap) {
-        $detailHtml = $wap->footballDetail($request, $date, $id);
-        $patch = '/static/m/football/detail/' . $date . '/' . $id . '.html';
-        Storage::disk('public')->put($patch, $detailHtml);
-    }
-
-    /**
-     * 终端页 分析赔率
-     * @param $request
-     * @param $date
-     * @param $id
-     * @param $wap
-     */
-    protected function oddHtml($request, $date, $id, $wap) {
-        $oddHtml = $wap->footballOdd($request, $date, $id);
-        $patch = '/static/m/football/detail/odd/' . $date . '/' . $id . '.html';
-        Storage::disk('public')->put($patch, $oddHtml);
-    }
-
-    /**
-     * 终端页 分析赔率
-     * @param $request
-     * @param $date
-     * @param $id
-     * @param $wap
-     */
-    protected function cornerHtml($request, $date, $id, $wap) {
-        $cornerHtml = $wap->footballDetailCorner($request, $date, $id);
-        $patch = '/static/m/football/corner/odd/' . $date . '/' . $id . '.html';
-        Storage::disk('public')->put($patch, $cornerHtml);
-    }
-
-    /**
-     * 终端页 风格
-     * @param $request
-     * @param $date
-     * @param $id
-     * @param $wap
-     */
-    protected function styleHtml($request, $date, $id, $wap) {
-        $styleHtml = $wap->footballDetailCorner($request, $date, $id);
-        $patch = '/static/m/football/corner/style/' . $date . '/' . $id . '.html';
-        Storage::disk('public')->put($patch, $styleHtml);
-    }
-
-    /**
-     * 终端页 风格
-     * @param $request
-     * @param $date
-     * @param $id
-     * @param $wap
-     */
-    protected function oddIndexHtml($request, $date, $id, $wap) {
-        $oddIndexHtml = $wap->footballDetailCorner($request, $date, $id);
-        $patch = '/static/m/football/corner/odd_index/' . $date . '/' . $id . '.html';
-        Storage::disk('public')->put($patch, $oddIndexHtml);
-    }
-
-    /**
-     * 终端页 通赔
-     * @param $request
-     * @param $date
-     * @param $id
-     * @param $wap
-     */
-    protected function sameOddHtml($request, $date, $id, $wap) {
-        $sameOddHtml = $wap->footballDetailCorner($request, $date, $id);
-        $patch = '/static/m/football/corner/same_odd/' . $date . '/' . $id . '.html';
-        Storage::disk('public')->put($patch, $sameOddHtml);
     }
 
 }

@@ -58,16 +58,17 @@ class FootballWapDetailScheduleCommands extends Command
             $home = new HomeController();
             $json =$home->footballData($match_date);
         }
+        $key = self::PC_REDIS_KEY . date('Ymd') . floor(date('H') / 4);
         $matches = isset($json['matches']) ? $json['matches'] : [];
-        $excMidStr = Redis::get(self::PC_REDIS_KEY);
+        $excMidStr = Redis::get($key);
         $excArray = json_decode($excMidStr, true);;
         if (is_null($excArray)) {
             $excArray = [];
         }
         $excIndex = 0;
-        //每10分钟一次，一次缓存5场比赛。
+        //每10分钟一次，一次缓存15场比赛。
         foreach ($matches as $match) {
-            if ($excIndex > 4) break;
+            if ($excIndex > 15) break;
             $id = $match['mid'];
             if (in_array($id, $excArray)) {
                 continue;
@@ -80,6 +81,6 @@ class FootballWapDetailScheduleCommands extends Command
             sleep(1);
         }
         //echo $excIndex . ',,' . json_encode($excArray);
-        Redis::setEx(self::PC_REDIS_KEY, 24 * 60 * 60, json_encode($excArray));
+        Redis::setEx($key, 4 * 60 * 60, json_encode($excArray));
     }
 }

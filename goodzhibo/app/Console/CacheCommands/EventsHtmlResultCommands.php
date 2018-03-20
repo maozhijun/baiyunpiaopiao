@@ -50,7 +50,7 @@ class EventsHtmlResultCommands extends Command
     {
         $home = new HomeController();
         $match_date = date('Y-m-d', strtotime('-1 days'));
-        $json = $home->footballData($match_date);
+        $json = $home->footballDataFirstCache($match_date);//footballData($match_date);
         $matches = isset($json['matches']) ? $json['matches'] : [];
 
         $key = self::Redis_Key_Prefix . $match_date;

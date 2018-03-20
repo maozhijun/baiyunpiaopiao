@@ -59,16 +59,11 @@ class UnStartLiveDetailCommand extends Command
         $url_pre = '/live/flush_cache/detail';
         $exc_index = 0;
         $once_exc_total = 25;
-
-        $exc_time = Redis::get(self::UnStartLiveDetailCommandTimeKey);
-        if (empty($exc_time)) $exc_time = 0;
-
-        $cache = Redis::get(self::UnStartLiveDetailCommandKey);
+        $key = self::UnStartLiveDetailCommandKey . date('YmdH');
+        $cache = Redis::get($key);
         $exc_json = !empty($cache) ? json_decode($cache) : [];
         if (is_null($exc_json)) $exc_json = [];
-
         $now = time();
-
         foreach ($json as $index=>$datas){
             foreach ($datas as $match){
                 if (!isset($match['mid']) || !isset($match['time']) || !isset($match['sport'])) {
@@ -85,17 +80,7 @@ class UnStartLiveDetailCommand extends Command
                 }
             }
         }
-        $exc_time += 5;
-        //echo 'exc_time:' . $exc_time . ' ,index:' . $exc_index;
-        //echo json_encode($exc_json);
-        if ($exc_time > 60) {
-            $exc_time = 0;
-            Redis::setEx(self::UnStartLiveDetailCommandKey, 1, json_encode($exc_json));
-        } else {
-            Redis::setEx(self::UnStartLiveDetailCommandKey, 60 * 60, json_encode($exc_json));
-        }
-
-        Redis::set(self::UnStartLiveDetailCommandTimeKey, $exc_time);
+        Redis::setEx($key, 60 * 60, json_encode($exc_json));
         echo '本次执行时间：' . (time() - $star_time) . '秒';
     }
 

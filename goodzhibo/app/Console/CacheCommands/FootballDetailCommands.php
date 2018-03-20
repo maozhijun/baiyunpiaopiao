@@ -47,7 +47,6 @@ class FootballDetailCommands extends Command
      */
     public function handle()
     {
-        $request = new Request();
         $fbIntf = new FootballInterface();
         $jsonStr = $fbIntf->matchListDataJson();//获取即时的比赛信息。
         $json = json_decode($jsonStr, true);
@@ -56,13 +55,15 @@ class FootballDetailCommands extends Command
         }
         $matches = isset($json['matches']) ? $json['matches'] : [];
 //        $pc = new FootballController();
+        $index = 0;
         foreach ($matches as $match) {
             $status = $match['status'];
-            if ($status > 0) {
+            if ($status > 0 && $index < 30) {//每次只做30个正在进行得比赛终端，其他随缘。
                 $start_time = $match['time'];
                 $date = date('Ymd', strtotime($start_time));
                 $id = $match['mid'];
                 FootballDetailController::curlToHtml($date, $id);
+                $index++;
             }
         }
         //首先加载pc终端

@@ -88,11 +88,11 @@ class FootballDetailController extends Controller
     public function flushWapDetailAllCache(Request $request, $date, $id) {
         $wap = new HomeController();
         $this->wapDetailHtml($request, $date, $id, $wap);
-        $this->wapOddHtml($request, $date, $id, $wap);
-        $this->wapCornerHtml($request, $date, $id, $wap);
-        $this->wapStyleHtml($request, $date, $id, $wap);
-        $this->wapOddIndexHtml($request, $date, $id, $wap);
-        $this->wapSameOddHtml($request, $date, $id, $wap);
+//        $this->wapOddHtml($request, $date, $id, $wap);
+//        $this->wapCornerHtml($request, $date, $id, $wap);
+//        $this->wapStyleHtml($request, $date, $id, $wap);
+//        $this->wapOddIndexHtml($request, $date, $id, $wap);
+//        $this->wapSameOddHtml($request, $date, $id, $wap);
     }
 
     /**
