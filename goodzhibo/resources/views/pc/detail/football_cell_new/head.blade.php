@@ -1,10 +1,15 @@
 <?php
     $week = array('周日','周一','周二','周三','周四','周五','周六');
-    $rank = $analyse['rank'];
-    $hLeagueName = $rank['leagueRank']['hLeagueName'];
-    $aLeagueName = $rank['leagueRank']['aLeagueName'];
-    $hLeagueRank = $rank['leagueRank']['hLeagueRank'];
-    $aLeagueRank = $rank['leagueRank']['aLeagueRank'];
+    $hLeagueRank = $match['hrank'];
+    $aLeagueRank = $match['arank'];
+    if (isset($analyse['rank'])) {
+        $rank = $analyse['rank'];
+        $hLeagueName = $rank['leagueRank']['hLeagueName'];
+        $aLeagueName = $rank['leagueRank']['aLeagueName'];
+    } else {
+        $hLeagueName = '';
+        $aLeagueName = '';
+    }
 ?>
 <div id="Info">
     <div class="mes">
@@ -54,7 +59,7 @@
         @endif
     </div>
     <div class="clear"></div>
-    <div class="analysis" @if($match['status'] > 0 && $match['pc_live']) style="display: none" @else style="display: block" @endif >
+    <div class="analysis" @if($match['status'] > 0 && isset($match['pc_live']) && $match['pc_live'] > 0) style="display: none" @else style="display: block" @endif >
         <?php
         if (isset($match['oumiddle1'])){
             if(isset($match['ouup1']) && isset($match['oumiddle1']) && isset($match['oudown1'])){
@@ -188,7 +193,7 @@
         </dl>
     </div>
 
-    <div class="sameOdd" @if($match['status'] > 0 && $match['pc_live']) style="display: none" @else style="display: block" @endif >
+    <div class="sameOdd" @if($match['status'] > 0 && isset($match['pc_live']) && $match['pc_live'] > 0) style="display: none" @else style="display: block" @endif >
         <p class="name">统计共<b>10</b>场相同赔率比赛</p>
         <p class="win">主胜<b>{{$analyse['sameOdd']['asia']['win']}}%</b></p>
         <p class="draw">平局<b>{{$analyse['sameOdd']['asia']['draw']}}%</b></p>
@@ -196,7 +201,7 @@
         <a onclick="SameOdd()">详细历史同赔数据</a>
     </div>
 
-    <div class="video" @if($match['status'] > 0 && $match['pc_live']) style="display: block" @else style="display: none" @endif >
+    <div class="video" @if($match['status'] > 0 && isset($match['pc_live']) && $match['pc_live'] > 0) style="display: block" @else style="display: none" @endif >
         <a target="_blank" href="{{\App\Http\Controllers\CommonTool::matchLiveFullPathWithId($match['mid'])}}" class="goVideo">正在直播</a>
         <a target="_blank" href="{{\App\Http\Controllers\CommonTool::matchLiveFullPathWithId($match['mid'])}}"><img src="{{env('CDN_URL')}}/img/pc/icon_home_video_live.gif"></a>
     </div>

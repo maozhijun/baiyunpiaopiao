@@ -1,12 +1,17 @@
 @extends('pc.layout.base_new')
 @section('content')
     <?php
-    $rank = $analyse['rank'];
-    $hLeagueName = $rank['leagueRank']['hLeagueName'];
-    $aLeagueName = $rank['leagueRank']['aLeagueName'];
-    $hLeagueRank = $rank['leagueRank']['hLeagueRank'];
-    $aLeagueRank = $rank['leagueRank']['aLeagueRank'];
-    $isLive = false;
+    $hLeagueRank = $match['hrank'];
+    $aLeagueRank = $match['arank'];
+    if (isset($analyse['rank'])) {
+        $rank = $analyse['rank'];
+        $hLeagueName = $rank['leagueRank']['hLeagueName'];
+        $aLeagueName = $rank['leagueRank']['aLeagueName'];
+    } else {
+        $hLeagueName = '';
+        $aLeagueName = '';
+    }
+    $isLive = isset($match['pc_live']) && $match['pc_live'] > 0;
     $startTime = date('Ymd', strtotime($match['time']));
     ?>
     <div id="Content" class="inner">
@@ -47,13 +52,12 @@
         <div id="Tabbar">
             <button id="Tab_Match" onclick="clickMatchBase()">比赛赛况</button><button id="Tab_Characteristic" onclick="clickCharacteristic(0)">特色数据</button><button id="Tab_Data" onclick="onChangeTab('Data')" class="on">数据分析</button><button id="Tab_Corner" onclick="clickCorner()">角球数据</button>
         </div>
-        @component("pc.detail.football_cell_new.base",['match'=>$match, 'rank'=>$analyse['rank'],'tech'=>$tech,'lineup'=>$lineup]) @endcomponent
+        @component("pc.detail.football_cell_new.base",['match'=>$match, 'tech'=>$tech,'lineup'=>$lineup]) @endcomponent
         @component("pc.detail.football_cell_new.data",['match'=>$match, 'base'=>$analyse]) @endcomponent
         <div id="Corner" class="tabContent" style="display: none;"></div>
-        @component('pc.detail.football_cell_new.character',['match'=>$match,'ws'=>$analyse['ws'],'referee'=>$analyse['referee'], 'sameOdd'=>$analyse['sameOdd'] ])
+        @component('pc.detail.football_cell_new.character',['match'=>$match,'base'=>$analyse ])
         @endcomponent
-        @component('pc.detail.football_cell_new.corner',['match'=>$match, 'anaylse'=>$analyse['cornerAnalyse'], 'historyBattle'=>$analyse['cornerHistoryBattle']['historyBattle']
-            ,'historyBattleResult'=>$analyse['cornerHistoryBattle']['historyBattleResult'], 'recentBattle'=>$analyse['cornerRecentBattle']])
+        @component('pc.detail.football_cell_new.corner',['match'=>$match, 'base'=>$analyse])
         @endcomponent
         <div class="clear"></div>
     </div>

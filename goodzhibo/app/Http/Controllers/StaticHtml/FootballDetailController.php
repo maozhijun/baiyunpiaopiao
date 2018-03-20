@@ -119,7 +119,7 @@ class FootballDetailController extends Controller
         $url = asset('/static/football/detail/' . $date . '/' . $mid);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 25);
         curl_exec ($ch);
         curl_close ($ch);
     }
@@ -134,7 +134,7 @@ class FootballDetailController extends Controller
         $url = asset('/static/football/detail/wap/' . $date . '/' . $mid);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 20);
         curl_exec ($ch);
         curl_close ($ch);
     }

@@ -1,4 +1,9 @@
 <div id="Characteristic" class="tabContent" style="display: none;">
+<?php
+    $ws = isset($base['ws']) ? $base['ws'] : [];
+    $referee = isset($base['referee']) ? $base['referee'] : [];
+    $sameOdd = isset($base['sameOdd']) ? $base['sameOdd'] : ['asia'=>[], 'ou'=>[], 'goal'=>[]];
+?>
 @if(isset($ws) && (isset($ws['home']) || isset($ws['away'])))
     <div class="strength default" id="Characteristic_Strength">
         <div class="title">
@@ -194,7 +199,7 @@
         </table>
     </div>
 @endif
-<?php $od_type = isset($sameOdd) ? 1 : ( isset($sameOdd2) ? '2' : (isset($sameOdd3) ? 3 : 1) ) ?>
+<?php $od_type = isset($sameOdd['asia']) ? 1 : ( isset($sameOdd['ou']) ? '2' : (isset($sameOdd['ou']) ? 3 : 1) ) ?>
 <div class="sameOdd default" id="Characteristic_SameOdd" type="{{$od_type}}" count="10">
     <div class="title">
         <p>历史同赔</p>

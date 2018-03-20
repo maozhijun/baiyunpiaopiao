@@ -59,7 +59,7 @@ class FootballDetailResultCommands extends Command
             $json =$home->footballData($match_date);
         }
         $matches = isset($json['matches']) ? $json['matches'] : [];
-        $key = self::PC_REDIS_KEY . date('Ymd') . (date('H') > 12 ? 1 : 0);
+        $key = self::PC_REDIS_KEY . date('Ymd') . floor(date('H') / 4);
         $excMidStr = Redis::get($key);
         $excArray = json_decode($excMidStr, true);;
         if (is_null($excArray)) {
@@ -83,7 +83,7 @@ class FootballDetailResultCommands extends Command
             $excIndex++;
             sleep(1);
         }
-        Redis::setEx($key, 12 * 60 * 60, json_encode($excArray));
+        Redis::setEx($key, 4 * 60 * 60, json_encode($excArray));
 //        echo 'cache : ' . json_encode($excArray);
     }
 }

@@ -1,5 +1,11 @@
 <div id="Corner" class="tabContent" style="display: none;">
-<?php $hname = $match['hname']; $aname = $match['aname']; ?>
+<?php
+    $hname = $match['hname']; $aname = $match['aname'];
+    $anaylse = isset($base['cornerAnalyse']) ? $base['cornerAnalyse'] : [];
+    $historyBattle = isset($base['cornerHistoryBattle']['historyBattle']) ? $base['cornerHistoryBattle']['historyBattle'] : ['nhnl'=>[], 'shnl'=>[], 'nhsl'=>[], 'shsl'=>[]];
+    $historyBattleResult = isset($base['cornerHistoryBattle']['historyBattleResult']) ? [] : [];
+    $recentBattle = isset($base['cornerRecentBattle']) ? $base['cornerRecentBattle'] : [];
+?>
 @if((isset($match['cornermiddle1']) || isset($match['cornermiddle2'])))
     <div class="odd default" id="Corner_Odd">
         <div class="title">

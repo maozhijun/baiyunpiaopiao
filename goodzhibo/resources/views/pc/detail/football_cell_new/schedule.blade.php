@@ -1,8 +1,13 @@
 <?php
-    $hLeagueName = $rank['leagueRank']['hLeagueName'];
-    $aLeagueName = $rank['leagueRank']['aLeagueName'];
-    $hLeagueRank = $rank['leagueRank']['hLeagueRank'];
-    $aLeagueRank = $rank['leagueRank']['aLeagueRank'];
+    if (isset($rank)) {
+        $hLeagueName = $rank['leagueRank']['hLeagueName'];
+        $aLeagueName = $rank['leagueRank']['aLeagueName'];
+    } else {
+        $hLeagueName = '';
+        $aLeagueName = '';
+    }
+    $hLeagueRank = $match['hrank'];
+    $aLeagueRank = $match['arank'];
 ?>
 @if(count($data['home']) > 0 || count($data['away']) > 0)
     <div class="future default" id="Data_Future">

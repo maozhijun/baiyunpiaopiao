@@ -2,6 +2,13 @@
     <?php
     $px = 0;
     $c_time = preg_replace('/[^\d]+/', '', $curTime);
+    if (!is_numeric($c_time)) {
+        if ($curTime == "中场") {
+            $c_time = 45;
+        }  else if ($curTime == "已结束") {
+            $c_time = 90;
+        }
+    }
     $status = $match['status'];
     if ($status == -1) {
         $px = 780;

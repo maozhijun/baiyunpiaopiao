@@ -61,7 +61,7 @@ class FootballDetailScheduleCommands extends Command
             $json =$home->footballData($match_date);
         }
         $matches = isset($json['matches']) ? $json['matches'] : [];
-        $key = self::PC_REDIS_KEY . date('Ymd') . (date('H') > 12 ? 0 : 1);
+        $key = self::PC_REDIS_KEY . date('Ymd') . floor(date('H') / 4);
         $excMidStr = Redis::get($key);
         $excArray = json_decode($excMidStr, true);;
         if (is_null($excArray)) {
