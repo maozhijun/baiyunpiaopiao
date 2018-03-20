@@ -1,3 +1,4 @@
+@if(isset($data))
 <div class="name">
     {{$name}}
     <span class="league {{$key == 'H'?'leagueRankH':'leagueRankA'}}"></span>
@@ -22,3 +23,4 @@
     @component('pc.detail.football_cell_new.corner_recent_item_content',['teamId'=>('H' == $key ? $match['hid'] : $match['aid']),'teamName'=>$name,'key'=>$key,'data'=>$data['sameHAL'],'league'=>1,'ha'=>1,'analyse'=>$data['statistic']['sameHAL']])
     @endcomponent
 </div>
+@endif

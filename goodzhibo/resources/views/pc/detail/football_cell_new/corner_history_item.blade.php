@@ -1,3 +1,4 @@
+@if(isset($data))
 <div class="Corner_History_Content" league="{{$league}}" ha="{{$ha}}">
     <?php
     $total = ($analyse['win'] + $analyse['draw'] + $analyse['lose']);
@@ -45,7 +46,7 @@
                 $g = $bgRgb['g'];
                 $b = $bgRgb['b'];
                 ?>
-                <td><p style="background: rgb({{$r}}, {{$g}}, {{$b}});">{{!empty($match['league'])?$match['league']:$match['win_lname']}}</p></td>
+                <td><p style="background: rgb({{$r}}, {{$g}}, {{$b}});">{{!empty($match['league'])?$match['league']: ''}}</p></td>
                 <td>{{ Carbon\Carbon::parse($match['time'])->format('Y-m-d') }}</td>
                 <td @if($match['hid'] == $hid) class="red" @endif>{{$match['hname']}}</td>
                 <td>{{$match['h_corner']}}-{{$match['a_corner']}} ({{$match['h_half_corner']}}-{{$match['a_half_corner']}})</td>
@@ -69,3 +70,4 @@
         </tbody>
     </table>
 </div>
+@endif

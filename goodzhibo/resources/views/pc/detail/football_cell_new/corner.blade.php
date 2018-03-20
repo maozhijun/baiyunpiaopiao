@@ -2,9 +2,9 @@
 <?php
     $hname = $match['hname']; $aname = $match['aname'];
     $anaylse = isset($base['cornerAnalyse']) ? $base['cornerAnalyse'] : [];
-    $historyBattle = isset($base['cornerHistoryBattle']['historyBattle']) ? $base['cornerHistoryBattle']['historyBattle'] : ['nhnl'=>[], 'shnl'=>[], 'nhsl'=>[], 'shsl'=>[]];
-    $historyBattleResult = isset($base['cornerHistoryBattle']['historyBattleResult']) ? [] : [];
-    $recentBattle = isset($base['cornerRecentBattle']) ? $base['cornerRecentBattle'] : [];
+    $historyBattle = isset($base['cornerHistoryBattle']['historyBattle']) ? $base['cornerHistoryBattle']['historyBattle'] : ['nhnl'=>null, 'shnl'=>null, 'nhsl'=>null, 'shsl'=>null];
+    $historyBattleResult = isset($base['cornerHistoryBattle']['historyBattleResult']) ? $base['cornerHistoryBattle']['historyBattleResult'] : ['all'=>[], 'league'=>[], 'team'=>[], 'both'=>[]];
+    $recentBattle = isset($base['cornerRecentBattle']) ? $base['cornerRecentBattle'] : ['home'=>null, 'away'=>null];
 ?>
 @if((isset($match['cornermiddle1']) || isset($match['cornermiddle2'])))
     <div class="odd default" id="Corner_Odd">

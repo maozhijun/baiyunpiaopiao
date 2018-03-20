@@ -79,7 +79,7 @@ if (isset($data)){
                 $g = $bgRgb['g'];
                 $b = $bgRgb['b'];
                 ?>
-                <td><p style="background: rgb({{$r}}, {{$g}}, {{$b}});">{{isset($match['lname'])?$match['lname']:$match['win_lname']}}</p></td>
+                <td><p style="background: rgb({{$r}}, {{$g}}, {{$b}});">{{isset($match['league'])?$match['league']: ''}}</p></td>
                 <td>{{Carbon\Carbon::parse($match['time'])->format('y-m-d')}}</td>
                 <td>{{$match['hname']}}</td>
                 <td>{{$match['hscore']}}-{{$match['ascore']}} ({{$match['hscorehalf']}}-{{$match['ascorehalf']}})</td>
