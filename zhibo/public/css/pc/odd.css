@@ -1,0 +1,384 @@
+#Content{
+	min-height: 700px;
+}
+
+/*用户信息*/
+/*信息*/
+#Info{
+	min-height: 260px;
+	padding: 0 24%;
+	background: url(/img/pc/image_bg_n.jpg) no-repeat center top #fff; background-size: auto 260px;
+	position: relative;
+	overflow: hidden;
+}
+
+#Info div.score{
+	width: 24%; height: 50px;
+	font-size: 24px; line-height: 40px; text-align: center; color: #fff;
+	position: relative; z-index: 2;
+	float: left;
+}
+#Info div.team{
+	width: 38%; height: 40px;
+	font-size: 28px; line-height: 40px; color: #fff;
+	position: relative; z-index: 2;
+	display: inline-block;
+}
+#Info div.host{
+	text-align: left;
+	float: left;
+}
+#Info div.away{
+	text-align: right;
+	float: right;
+}
+#Info div.team p{
+	display: inline-block;
+}
+#Info div.team span.team{
+	height: 40px;
+	letter-spacing: 2px;
+	overflow: hidden;
+	display: inline-block;
+}
+#Info div.team span.league{
+	font-size: 14px; line-height: 28px; text-align: center; color: rgba(255,255,255,0.7); letter-spacing: 1px;
+	display: block;
+}
+#Info div.icon{
+	width: 92px; height: 92px;
+	padding: 19px; margin-top: -65px;
+    border-radius: 50%;
+    background: #fff;
+    position: absolute; top: 50%; z-index: 2;
+    overflow: hidden;
+    behavior: url(PIE.htc);
+}
+#Info .host div.icon{
+	left: -150px;
+}
+#Info .away div.icon{
+	right: -150px;
+}
+#Info div.icon img{
+	width: 92px; height: 92px;
+}
+
+#Info div.mes{
+	padding: 24px 0 40px;
+	font-size: 14px; line-height: 18px; text-align: center; color: #808488; letter-spacing: 1px;
+}
+#Info div.mes p{
+	padding-top: 16px;
+}
+#Info div.odd{
+	height: 44px; width: 546px;
+	margin-left: -273px;
+	background: rgba(242,242,242,0.2);
+	position: absolute; top: 216px; left: 50%;
+}
+#Info div.odd p{
+	width: 32.3%; height: 44px;
+	font-size: 12px; line-height: 44px; text-align: center; color: #fff;
+	position: relative;
+	display: inline-block;
+}
+#Info div.odd p + p:before{
+	width: 1px; 
+	background: #fff;
+	position: absolute; top: 10px; bottom: 10px; left: 0;
+	content: '';
+}
+#Info div.mes span,
+#Info div.odd span{
+	padding: 0 10px;
+}
+
+#Info div.analysis{
+	height: 160px;
+	padding: 0 180px 20px; margin: 100px -34% 0;
+	position: relative; z-index: 2;
+}
+#Info div.analysis canvas{
+	width: 130px; height: 130px;
+	border-radius: 50%; -moz-border-radius: 50%; -webkit-border-radius: 50%;
+	background: #f7f7f7;
+	position: absolute; top: 20px;
+	behavior: url(PIE.htc);
+}
+#Info div.analysis canvas.host{
+	left: 0;
+}
+#Info div.analysis canvas.away{
+	right: 0;
+}
+#Info div.analysis div.cover{
+	width: 110px; height: 64px;
+	padding: 23px 0;
+	border-radius: 50%;
+	background: #fff;
+	font-size: 20px; line-height: 32px; text-align: center;
+	position: absolute; top: 30px;
+	behavior: url(PIE.htc);
+}
+#Info div.analysis div.cover b{
+	font-size: 22px;
+}
+#Info div.analysis div.cover[class*=host]{
+	left: 10px;
+}
+#Info div.analysis div.cover[class*=away]{
+	right: 10px;
+}
+#Info div.analysis p.title{
+	font-size: 21px; line-height: 32px; text-align: center; font-weight: bold; letter-spacing: 1px;
+}
+#Info div.analysis dl{
+	padding: 16px 60px 0;
+}
+#Info div.analysis dl dt{
+	padding: 0 8px;
+	font-size: 15px; line-height: 24px; text-align: center; color: #999;
+}
+#Info div.analysis dl dt p.host{
+	color: #333;
+	float: left;
+}
+#Info div.analysis dl dt p.away{
+	text-align: right; color: #333;
+	float: right;
+}
+#Info div.analysis dl dt p.host b{
+	color: #bc1c25;
+}
+#Info div.analysis dl dt p.away b{
+	color: #58A1F6;
+}
+#Info div.analysis dl dd{
+	height: 8px;
+	margin: 8px 0 14px;
+	border-radius: 4px;
+	background: #f7f7f7;
+	position: relative;
+}
+#Info div.analysis dl dd:before{
+	height: 8px;
+	margin: -4px -4px 0 -4px;
+	border: 4px solid #fff; border-radius: 8px;
+	position: absolute; top: 0; left: 0; right: 0; z-index: 2;
+	content: '';
+}
+#Info div.analysis dl dd p{
+	position: absolute; top: 0; bottom: 0;
+}
+#Info div.analysis dl dd p.host{
+	border-radius: 4px 0 0 4px;
+	background: #bc1c25;
+	left: 0;
+}
+#Info div.analysis dl dd p.away{
+	border-radius: 0 4px 4px 0;
+	background: #58A1F6;
+	right: 0;
+}
+#Info div.analysis dl dd span{
+	width: 100px;
+	font-size: 14px; line-height: 16px;
+	position: absolute; top: -4px; bottom: 0;
+}
+#Info div.analysis dl dd span.host{
+	text-align: right; color: #bc1c25;
+	left: -110px;
+}
+#Info div.analysis dl dd span.away{
+	color: #58A1F6;
+	right: -110px;
+}
+#Info div.video{
+	height: 50px;
+	padding: 25px 0; margin: 78px -306px 0;
+	background: #fff;
+	line-height: 50px; text-align: center; vertical-align: middle;
+	position: relative; z-index: 1;
+}
+#Info div.video:before{
+	width: 50%;
+	background: url(/img/pc/image_left_live.png) no-repeat left center; background-size: auto 100px;
+	position: absolute; top: 0; bottom: 0; left: 0;
+	content: '';
+}
+#Info div.video:after{
+	width: 50%;
+	background: url(/img/pc/iamge_right_live.png) no-repeat right center; background-size: auto 100px;
+	position: absolute; top: 0; bottom: 0; right: 0;
+	content: '';
+}
+#Info div.video a.goVideo{
+	width: 100px; height: 44px;
+	border-radius: 4px;
+	background: #bc1c25;
+	font-size: 18px; line-height: 44px; text-align: center; color: #fff;
+	position: relative; z-index: 1;
+	display: inline-block;
+}
+#Info div.video a:hover{
+	color: #fff !important;
+}
+#Info div.video img{
+	margin-left: 15px;
+}
+
+#Info div.sameOdd{
+	height: 45px;
+	padding-bottom: 20px; margin: 10px -34%;
+	position: relative; z-index: 2;
+}
+#Info div.sameOdd p{
+	height: 43px;
+	border: 1px solid #e6e6e6; border-right: none;
+	font-size: 15px; line-height: 42px; text-align: center;
+	float: left;
+}
+#Info div.sameOdd p.name{
+	min-width: 200px; width: 30%;
+}
+#Info div.sameOdd p.name b{
+	padding: 0 4px;
+	color: #bc1c25;
+}
+#Info div.sameOdd p.win,
+#Info div.sameOdd p.draw,
+#Info div.sameOdd p.lose{
+	min-width: 100px; width: 15%;
+}
+#Info div.sameOdd p.win b,
+#Info div.sameOdd p.draw b,
+#Info div.sameOdd p.lose b{
+	padding-left: 8px;
+	font-size: 24px;
+}
+#Info div.sameOdd p.win b{
+	color: #bc1c25;
+}
+#Info div.sameOdd p.draw b{
+	color: #999;
+}
+#Info div.sameOdd p.lose b{
+	color: #58A1F6;
+}
+#Info div.sameOdd a{
+	height: 43px; min-width: 100px; width: 24%;
+	border: 1px solid #e6e6e6;
+	background: #f7f7f7;
+	font-size: 15px; line-height: 42px; color: #666; text-align: center;
+	float: left;
+}
+#Info div.sameOdd a:hover{
+	border-color: #2f333c;
+	background: #2f333c;
+	color: #fff !important;
+}
+
+/*内容区域*/
+#Tabbar{
+	height: 38px;
+	margin-top: 30px;
+	border-bottom: 4px solid #2f333c;
+}
+#Tabbar a.tab{
+	width: 120px; height: 32px;
+	border-top: 1px solid #e6e6e6; border-left: 1px solid #e6e6e6; border-radius: 0;
+	background: #fff;
+	font-size: 16px; line-height: 33px; text-align: center; color: #333; vertical-align: bottom;
+	display: inline-block;
+}
+#Tabbar a.tab:hover{
+	border-color: #2f333c;
+	background: #2f333c;
+	color: #fff !important;
+}
+#Tabbar a.tab.on{
+	width: 120px; height: 37px;
+	border-color: #2f333c;
+	background: #2f333c;
+	font-size: 18px; line-height: 38px; color: #fff;
+	cursor: default;
+}
+#Tabbar a.tab:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+#Tabbar a.match{
+	height: 38px;
+	padding: 0 10px; margin-right: 10px;
+	line-height: 38px; color: #999;
+	display: block;
+	float: right;
+}
+
+#Odd{
+	margin-bottom: 20px; padding-top: 70px;
+	background: no-repeat right top #fff;
+}
+#Odd table{
+	width: 100%;
+	border-top: 1px solid #e6e6e6;
+}
+#Odd table th{
+	height: 34px;
+	font-size: 14px; line-height: 34px; text-align: center; color: #999;
+}
+#Odd table td{
+	height: 54px;
+	border-top: 1px solid #e6e6e6;
+	font-size: 14px; line-height: 20px; text-align: center; color: #333;
+	position: relative;
+}
+#Odd table .company{
+	width: 140px;
+	border-left: none;
+}
+#Odd table .sameOdd{
+	width: 280px;
+}
+#Odd table .aisaOdd{
+	width: 100px;
+}
+#Odd table span{
+	padding-right: 4px;
+}
+#Odd table span.red{
+	color: #bc1c25;
+}
+
+
+#Odd table th.red,
+.red{
+	color: #bc1c25;
+}
+#Odd table th.blue,
+.blue{
+	color: #4587e8;
+}
+.green{
+	color: #1CC075;
+}
+.gray{
+	color: #999;
+}
+
+/*底色效果*/
+#Odd table tbody tr:hover,
+#Odd table.bg_1 td:nth-child(1),#Odd table.bg_2 td:nth-child(2),#Odd table.bg_3 td:nth-child(3),#Odd table.bg_4 td:nth-child(4),
+#Odd table.bg_5 td:nth-child(5),#Odd table.bg_6 td:nth-child(6),#Odd table.bg_7 td:nth-child(7),#Odd table.bg_8 td:nth-child(8),
+#Odd table.bg_9 td:nth-child(9),#Odd table.bg_10 td:nth-child(10),#Odd table.bg_11 td:nth-child(11){
+	background: #cbd1d6;
+}
+#Odd table td:hover{
+	background: #838587 !important;
+}
+
+
+
+
+
+

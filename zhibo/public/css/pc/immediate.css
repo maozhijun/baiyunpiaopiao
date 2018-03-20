@@ -1,0 +1,980 @@
+
+td.red{
+	color: #bc1c25;
+}
+
+#Content{
+	min-height: 700px;
+}
+
+#MatchList{
+	margin: 20px 0;
+}
+#MatchList .title{
+	height: 34px;
+	border-bottom: 4px solid #fff;
+	background: none;
+}
+#MatchList .title p{
+	width: 120px; height: 34px;
+	background: #fff;
+	font-size: 18px; line-height: 38px; color: #2f333c;	
+	display: inline-block;
+	float: none;
+}
+#MatchList .title p:before, #MatchList .title p:after{
+	display: none;
+}
+#MatchList .title a{
+	width: 120px; height: 33px;
+	margin: 0;
+	border-top: 1px solid #2f333c; border-right: 1px solid #2f333c;
+	background: #c5c5c5;
+	font-size: 16px; line-height: 33px; text-align: center; color: #2f333c; vertical-align: bottom;
+	display: inline-block;
+	position: relative; top: 4px;
+	float: none;
+}
+#MatchList .title p + a,#MatchList .title .date + a{
+	border-left: 1px solid #2f333c;
+}
+#MatchList .title a:hover{
+	background: #fff;
+}
+
+#MatchList div.date{
+	height: 38px;
+	position: relative; top: -2px;
+	float: right;
+}
+#MatchList div.date label{
+	height: 24px;
+	margin-top: 10px; padding: 0 16px;
+	border-radius: 2px;
+	font-size: 14px; line-height: 24px; text-align: center; color: #333;
+	display: inline-block;
+}
+#MatchList div.date label:hover{
+	color: #bc1c25;
+}
+#MatchList div.date input[type=radio]{
+	width: 0; height: 0;
+	opacity: 0; filter:Alpha(opacity=0);
+	position: absolute; top: 0; left: 0;
+}
+#MatchList div.date input[type=radio]:checked + label{
+	background: #fdeaec;
+	color: #bc1c25;
+}
+#MatchList div.date input[type=date]{
+	height: 30px; width: 186px;
+	margin-top: 2px; padding-left: 10px;
+	border: none; border-radius: 4px 0 0 4px;
+	line-height: 30px;
+}
+#MatchList div.date button.sreach{
+	width: 70px; height: 30px;
+	margin-top: 2px;
+	border-radius: 0 4px 4px 0;
+	background: #2f333c;
+	font-size: 14px; color: #fff; line-height: 30px;
+	float: right;
+	position: relative; z-index: 2;
+}
+
+#MatchList .control{
+	height: 32px;
+	padding: 23px 10px 15px 10px;
+	background: #fff;
+	font-size: 12px; line-height: 32px;
+	position: relative;
+}
+#MatchList .control > button{
+	height: 32px;
+	padding: 0 16px;
+	border: 1px solid #e6e6e6; border-radius: 0;
+	background: #fff;
+	font-size: 12px; text-align: center; color: #808488;
+	float: left;
+}
+#MatchList .control button.save,
+#MatchList .control button.league{
+	margin-right: 10px;
+}
+#MatchList .control button.del{
+	margin-right: 50px;
+}
+#MatchList .control button.all{
+	margin-right: 20px;
+}
+#MatchList .control button.lottery,
+#MatchList .control button.video,
+#MatchList .control button.all{
+	border-left: none;
+}
+#MatchList .control button.show{
+	float: right;
+}
+#MatchList .control div.multiScreen{
+	width: 100px; height: 26px;
+	margin-right: 10px; padding: 3px 4px;
+	border-radius: 16px;
+	background: #e5e5e5;
+	cursor: pointer;
+	float: right;
+}
+#MatchList .control div.multiScreen p{
+	height: 26px;
+	padding: 0 8px 0 36px;
+	border-radius: 13px;
+	background: #fff;
+	box-shadow: 0px 0px 2px 0px rgba(88, 0, 0, 0.36);
+	font-size: 12px; line-height: 26px; text-align: center;
+	position: relative;
+}
+#MatchList .control div.multiScreen p img{
+	width: 20px; height: 20px;
+	margin-top: -10px;
+	position: absolute; top: 50%; left: 8px;
+}
+#MatchList .control button.on{
+	border-color: #2f333c;
+	background: #2f333c;
+	color: #fff;
+}
+#MatchList .control button:hover{
+	border-color: #2f333c;
+	background: #2f333c !important;
+	color: #fff;
+}
+#MatchList .control b{
+	padding: 0 5px;
+	color: #292b2e;
+}
+#MatchList .control p{
+	color: #808488;
+}
+#MatchList .control p span{
+	cursor: pointer;
+}
+#MatchList .control p span:hover{
+	color: #2f333c;
+}
+#MatchList .control button#Sound{
+	padding-left: 30px; margin-left: 10px;
+	background: #fff !important;
+	color: #808488 !important;
+	position: relative;
+}
+#MatchList .control button#Sound:after{
+	width: 14px; height: 14px;
+	margin-top: -7px;
+	border-radius: 2px; border: 1px solid #ddd;
+	position: absolute; top: 50%; left: 5px;
+	content: '';
+}
+#MatchList .control button#Sound.on:after{
+	background: url(/img/pc/icon_match_popUp_icon_hook_n.png) no-repeat center; background-size: 12px;
+}
+
+#MatchList table{
+	width: 100%;
+	background: #fff;
+}
+
+#MatchList table button{
+	width: 16px; height: 16px;
+	border-radius: 2px; border: 1px solid #e6e6e6;
+	background: #fff;
+	display: inline-block;
+}
+#MatchList table button.on{
+	background: url(/img/pc/icon_match_popUp_icon_hook_n.png) no-repeat center #fff; background-size: 18px;
+}
+#MatchList table{
+	border-top: 5px solid #2f333c;
+}
+#MatchList table th{
+	height: 34px;
+	background: #737373;
+	font-size: 14px; line-height: 34px; text-align: center; color: #dadada;
+	position: relative;
+}
+#MatchList table th:nth-child(1){
+	width: 34px;
+}
+#MatchList table th:nth-child(2){
+	max-width: 100px; width: 7.6%;
+}
+#MatchList table th:nth-child(3){
+	min-width: 70px; width: 6%;
+}
+#MatchList table th:nth-child(4){
+	min-width: 60px; width: 5%;
+}
+#MatchList table th:nth-child(5){
+	
+}
+#MatchList table th:nth-child(6){
+	min-width: 60px; width: 5%;
+}
+#MatchList table th:nth-child(7){
+	min-width: 50px; width: 4%;
+}
+#MatchList table th:nth-child(8){
+	width: 220px;
+}
+#MatchList table th:nth-child(9){
+	min-width: 120px; width: 10%;
+}
+#MatchList table th:nth-child(10){
+	width: 70px;
+}
+#MatchList table tbody tr, #MatchList table tfoot tr{
+	background: #2f333c;
+}
+#MatchList table td{
+	height: 60px;
+	border-top: 1px solid #1e2228;
+	font-size: 14px; line-height: 24px; text-align: center; color: #fff;
+	position: relative;
+}
+#MatchList table td:nth-child(4):before,
+#MatchList table td:nth-child(5):before,
+#MatchList table td:nth-child(7) ~ td:before{
+	height: 40px; width: 1px;
+	background: #e6e6e6;
+	position: absolute; top: 10px; left: 0;
+	/*content: '';*/
+}
+#MatchList table td:nth-child(1){
+	
+}
+#MatchList table td:nth-child(2){
+	color: #fff;
+}
+#MatchList table td:nth-child(3){
+	line-height: 22px;
+}
+#MatchList table td:nth-child(5){
+	width: 133px;
+	padding: 0 30px 0 10px;
+	text-align: right;
+	position: relative;
+}
+#MatchList table td:nth-child(6){
+	width: 80px;
+	font-size: 16px; color: #bc1c25;
+}
+#MatchList table td:nth-child(7){
+	width: 133px;
+	padding: 0 10px 0 30px;
+	text-align: left;
+}
+#MatchList table td:nth-child(8){
+	
+}
+#MatchList table td:nth-child(9){
+	color: #999;
+}
+#MatchList table td:nth-child(10){
+	padding: 0 10px;
+}
+#MatchList table td:nth-child(11){
+	
+}
+#MatchList table td:nth-child(12){
+	color: #999;
+}
+
+#MatchList table td:nth-child(2) p{
+	height: 34px;
+	margin: 0 5px;
+	border-radius: 4px;
+	line-height: 34px;
+	overflow: hidden;
+}
+#MatchList table td:nth-child(3) p{
+	font-size: 12px; color: #999;
+}
+#MatchList table td span.minute{
+	padding-left: 2px;
+	-moz-animation: minute 0.5s cubic-bezier(0.25,0.1,0.25,1) infinite; -webkit-animation: minute 0.5s cubic-bezier(0.25,0.1,0.25,1) infinite; -o-animation: minute 0.5s cubic-bezier(0.25,0.1,0.25,1) infinite; animation: minute 0.5s cubic-bezier(0.25,0.1,0.25,1) infinite;
+}
+@keyframes minute{
+	from {opacity: 100;}
+	to {opacity: 0;}
+}
+#MatchList table td:nth-child(5):after{
+	width: 30px; height: 60px;
+	margin-left: -30px;
+	background: #2f333c;
+	position: absolute; top: 0; left: 100%; z-index: 1;
+	content: '';
+}
+#MatchList table td:nth-child(7):after{
+	width: 30px; height: 60px;
+	background: #2f333c;
+	position: absolute; top: 0; left: 0; z-index: 1;
+	content: '';
+}
+#MatchList input[type=checkbox]{
+	width: 0; height: 0;
+	opacity: 0; filter:Alpha(opacity=0);
+	position: absolute; top: 0; left: 0;
+}
+#MatchList table td span.yellowCard,
+#MatchList table td span.redCard{
+	height: 18px;
+	padding: 0 4px;
+	border-radius: 2px;
+	font-size: 12px; color: #fff; line-height: 18px;
+	vertical-align: middle;
+	display: inline-block;
+	position: relative; top: -1px;
+}
+#MatchList table td span.yellowCard{
+    background: #fd9609;
+}
+#MatchList table td span.redCard{
+	background: #ac061d;
+}
+#MatchList table td:nth-child(10) p{
+	line-height: 20px;
+}
+#MatchList table td:nth-child(10) p + p{
+	padding-top: 4px;
+}
+#MatchList table td:nth-child(10) span{
+	width: 23%; max-width: 80px;
+	border-radius: 2px;
+	display: inline-block;
+}
+#MatchList table td:nth-child(10) span:nth-child(2){
+	width: 50%; max-width: 104px;
+	margin: 0 2%;
+}
+#MatchList table td:nth-child(5) p,
+#MatchList table td:nth-child(7) p{
+	max-height: 48px;
+	overflow: hidden;
+}
+#MatchList table td p.half{
+	font-size: 12px; line-height: 12px; color: #999;
+}
+#MatchList table td p.asia{
+	color: #de1a25;
+}
+#MatchList table td span.up{
+	background: #bc1c25;
+	color: #fff;
+}
+#MatchList table td span.down{
+	background: #1CC075;
+	color: #fff;
+}
+#MatchList table td img.icon{
+	width: 24px; height: 24px;
+	position: absolute; top: 18px; z-index: 2;
+}
+#MatchList table td:nth-child(5) img.icon{
+	right: 0;
+}
+#MatchList table td:nth-child(7) img.icon{
+	left: 0;
+}
+#MatchList table td:nth-child(12) a{
+	color: #bc1c25;
+}
+
+/*底色效果*/
+#MatchList table tr:hover{
+	background: #444850;
+}
+#MatchList table td:hover,
+#MatchList table tr.matchHover td:nth-child(5),
+#MatchList table tr.matchHover td:nth-child(6),
+#MatchList table tr.matchHover td:nth-child(7),
+#MatchList table tr.matchHover td:nth-child(5):after,
+#MatchList table tr.matchHover td:nth-child(7):after{
+	background: #3a3e46 !important;
+	/*background: #edf7ff !important;*/
+}
+#MatchList table tr:hover td:nth-child(5):after,#MatchList table tr:hover td:nth-child(7):after,
+#MatchList table.bg_5 td:nth-child(5):after,#MatchList table.bg_5 td:nth-child(7):after,
+#MatchList table.bg_6 td:nth-child(5):after,#MatchList table.bg_6 td:nth-child(7):after,
+#MatchList table.bg_7 td:nth-child(5):after,#MatchList table.bg_7 td:nth-child(7):after{
+	background: #444850;
+}
+#MatchList table.bg_1 th:nth-child(1),#MatchList table.bg_1 td:nth-child(1),
+#MatchList table.bg_2 th:nth-child(2),#MatchList table.bg_2 td:nth-child(2),
+#MatchList table.bg_3 th:nth-child(3),#MatchList table.bg_3 td:nth-child(3),
+#MatchList table.bg_4 th:nth-child(4),#MatchList table.bg_4 td:nth-child(4),
+#MatchList table.bg_5 th:nth-child(5),#MatchList table.bg_5 td:nth-child(5),#MatchList table.bg_5 td:nth-child(6),#MatchList table.bg_5 td:nth-child(7),
+#MatchList table.bg_6 th:nth-child(5),#MatchList table.bg_6 td:nth-child(5),#MatchList table.bg_6 td:nth-child(6),#MatchList table.bg_6 td:nth-child(7),
+#MatchList table.bg_7 th:nth-child(5),#MatchList table.bg_7 td:nth-child(5),#MatchList table.bg_7 td:nth-child(6),#MatchList table.bg_7 td:nth-child(7),
+#MatchList table.bg_8 th:nth-child(6),#MatchList table.bg_8 td:nth-child(8),
+#MatchList table.bg_9 th:nth-child(7),#MatchList table.bg_9 td:nth-child(9),
+#MatchList table.bg_10 th:nth-child(8),#MatchList table.bg_10 td:nth-child(10),
+#MatchList table.bg_11 th:nth-child(9),#MatchList table.bg_11 td:nth-child(11),
+#MatchList table.bg_12 th:nth-child(10),#MatchList table.bg_12 td:nth-child(12),
+#MatchList table.bg_13 th:nth-child(11),#MatchList table.bg_13 td:nth-child(13),
+#MatchList table.bg_14 th:nth-child(12),#MatchList table.bg_14 td:nth-child(14){
+	background: #444850;
+}
+
+
+
+/*事件层*/
+#MatchList table td .even{
+	width: 400px;
+	margin-left: -200px;
+	background: #fff;
+	position: absolute; top: 60px; left: 50%; z-index: 3;
+	box-shadow: 0 0 4px #999;
+	display: none;
+}
+#MatchList table td .even[class*=top]{
+	top: auto; bottom: 60px;
+}
+#MatchList table td a:hover .even{
+	display: block;
+}
+#MatchList table td .even .head{
+	height: 24px;
+	background: #f7f7f7;
+}
+#MatchList table td .even .head p{
+	font-size: 12px; line-height: 24px; text-align: center; color: #999;
+	float: left;
+}
+#MatchList table td .even .head p.time{
+	width: 60px;
+}
+#MatchList table td .even .head p.team{
+	width: 170px;
+}
+#MatchList table td .even ul li{
+	height: 24px;
+	border-top: 1px solid #e6e6e6;
+}
+#MatchList table td .even ul li:nth-child(even){
+	background: #fbfbfb;
+}
+#MatchList table td .even ul li p{
+	font-size: 12px; line-height: 24px; color: #333;
+}
+#MatchList table td .even ul li p.time{
+	width: 60px;
+	background: #F3A423;
+	text-align: center; color: #fff;
+	float: left;
+}
+#MatchList table td .even ul li p.host{
+	margin-left: -10px;
+	text-align: left;
+	overflow: hidden;
+}
+#MatchList table td .even ul li p.away{
+	margin-left: -10px;
+	text-align: right;
+	overflow: hidden;
+}
+#MatchList table td .even ul li p img{
+	height: 14px;
+	margin: 5px 10px 0;
+	vertical-align: middle;
+}
+#MatchList table td .even ul li p span{
+	max-width: 36%; height: 24px;
+	display: inline-block;
+	overflow: hidden;
+}
+#MatchList table td .even ul li p.host img,
+#MatchList table td .even ul li p.host span{
+	float: left;
+}
+#MatchList table td .even ul li p.host span ~ span{
+	padding-left: 10px;
+}
+#MatchList table td .even ul li p.away span,
+#MatchList table td .even ul li p.away img{
+	float: right;
+}
+#MatchList table td .even ul li p.away span ~ span{
+	padding-right: 10px;
+}
+
+/*首发层*/
+#MatchList table td .first{
+	width: 400px;
+	margin-left: -200px;
+	background: #fff;
+	position: absolute; top: 60px; left: 50%; z-index: 3;
+	box-shadow: 0 0 4px #999;
+	display: none;
+}
+#MatchList table td a:hover .first{
+	display: block;
+}
+#MatchList table td .first ul li{
+	height: 36px;
+	padding: 0 15px;
+	background: #fff;
+	font-size: 12px; line-height: 36px;
+}
+#MatchList table td .first ul li.host{
+	background: #f7f7f7;
+	color: #bc1c25;
+}
+#MatchList table td .first ul li.away{
+	color: #58A1F6;
+}
+#MatchList table td .first ul li > *{
+	float: right;
+}
+#MatchList table td .first ul li p.name{
+	width: 100px; height: 36px;
+	text-align: left; color: #333;
+	white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+	float: left;
+}
+#MatchList table td .first ul li p.percen{
+	width: 50px;
+	text-align: right;
+}
+#MatchList table td .first ul li p.chart{
+	height: 4px; width: 100px;
+	margin: 16px;
+	border-radius: 2px;
+	background: #d5d5d5;
+	text-align: right;
+	overflow: hidden;
+}
+#MatchList table td .first ul li span{
+	color: #999;
+}
+#MatchList table td .first ul li p.chart span{
+	height: 4px;
+	border-radius: 2px;
+	display: inline-block;
+}
+#MatchList table td .first ul li.host p.chart span{
+	background: #bc1c25;
+}
+#MatchList table td .first ul li.away p.chart span{
+	background: #58A1F6;
+}
+
+
+#MatchList table tr.goal td,
+#MatchList table td.goal{
+	background: #bc1c25 !important;
+	color: #fff !important;
+	/*-moz-animation: goal 0.5s cubic-bezier(0.25,0.1,0.25,1) infinite; -webkit-animation: goal 0.5s cubic-bezier(0.25,0.1,0.25,1) infinite; -o-animation: goal 0.5s cubic-bezier(0.25,0.1,0.25,1) infinite; animation: goal 0.5s cubic-bezier(0.25,0.1,0.25,1) infinite;*/
+}
+@keyframes goal{
+	0% {}
+	25% {background: #bc1c25; color: #fff;}
+	50% {}
+	75% {background: #bc1c25; color: #fff;}
+	100% {}
+}
+
+#Goal{
+	width: 600px;
+	margin-left: -300px;
+	position: fixed; top: 0; left: 50%; z-index: 26;
+	transform: translateY(-140%); -ms-transform: translateY(-140%); -webkit-transform: translateY(-140%); -o-transform: translateY(-140%); -moz-transform: scale(0.8,1) translateY(-140%);
+	-moz-transform-origin: center top;
+	transition: transform 0.5s; -moz-transition: transform 0.5s; -webkit-transition: transform 0.5s; -o-transition: transform 0.5s;
+}
+#Goal.show{
+	transform: translateY(20px); -ms-transform: translateY(20px); -webkit-transform: translateY(20px); -o-transform: translateY(20px);
+	-moz-transform: scale(0.8,1) translateY(30px);
+}
+#Goal .title{
+	height: 30px;
+	padding-top: 60px; margin-bottom: 0;
+	border-bottom: none;
+	background: url(/img/pc/iamge_goal_n.png) no-repeat center bottom; background-size: cover;
+}
+#Goal .title p{
+	height: 30px;
+	background: none;
+	font-size: 18px; line-height: 30px; text-align: center; color: #fff;
+	display: block;
+	float: none;
+}
+#Goal .title p:before{
+	display: none;
+}
+#Goal table{
+	width: 100%;
+	background: #fff;
+}
+#Goal table td{
+	height: 50px;
+	border-top: 1px solid #e6e6e6;
+	font-size: 14px; line-height: 22px; text-align: center;
+}
+#Goal table tr:nth-child(even) td{
+	background: #f7f7f7;
+}
+#Goal table td:nth-child(1){
+	width: 80px;
+	padding-left: 20px;
+}
+#Goal table td:nth-child(2){
+	width: 40px;
+}
+#Goal table td:nth-child(3){
+	width: 140px;
+}
+#Goal table td:nth-child(4){
+	width: 60px;
+}
+#Goal table td:nth-child(5){
+	width: 160px;
+}
+#Goal table .goal{
+	color: #bc1c25;
+}
+
+
+/*通栏广告*/
+tr.bannerAD{
+	display: table-row;
+}
+tr.bannerAD td{
+	height: auto !important; min-height: 32px;
+	padding: 0;
+}
+tr.bannerAD td a{
+	display: block;
+}
+tr.bannerAD img{
+	width: 100%;
+	display: block;
+}
+
+/*模拟顶部*/
+#TableHead{
+	border-bottom: 1px solid #1e2228; border-top: none;
+	position: fixed; top: 60px; left: 14%; z-index: 3;
+	transition: top 0.1s; -moz-transition: top 0.1s; -webkit-transition: top 0.1s; -o-transition: top 0.1s;
+	display: none;
+}
+#TableHead th:nth-child(5){
+	width: 423px;
+}
+
+@media screen and (max-width: 1400px) and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	#Goal{
+		-ms-transform: scale(0.8) translateY(-110%); -ms-transform-origin: center top;
+	}
+	#Goal.show{
+		-ms-transform: scale(0.8) translateY(30px);
+	}
+}
+
+/*弹框样式*/
+.pop div.filter{
+	width: 766px;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0px 0px 29px 0px rgba(1, 0, 62, 0.58);
+	position: absolute; top: 50%; left: 50%;
+	overflow: hidden;
+}
+.pop div.filter .title{
+	height: 32px;
+	padding: 20px 70px 20px 35px;
+	background: #fff;
+	font-size: 22px; line-height: 32px;
+	position: absolute; top: 0; left: 0; right: 0; z-index: 1;
+}
+.pop div.filter .title button.tab{
+	width: 88px; height: 32px;
+	border: 1px solid #2f333c; border-radius: 0;
+	font-size: 16px; color: #2f333c;
+	float: right;
+}
+.pop div.filter .title button.tab + button.tab{
+	margin-right: 30px;
+}
+.pop div.filter .title button.tab.on,
+.pop div.filter .title button.tab:hover{
+	background: #2f333c;
+	color: #fff;
+}
+.pop div.filter .bottom{
+	height: 30px;
+	padding: 20px 62px 20px 35px;
+	background: #fff;
+	position: absolute; bottom: 0; left: 0; right: 0; z-index: 1;
+}
+.pop div.filter .bottom button{
+	height: 30px;
+	padding: 0 15px;
+	border-radius: 4px;
+	font-size: 14px;
+}
+.pop div.filter .bottom button.all{
+	background: #fff;
+	border: 1px solid #e6e6e6;
+	color: #868686;
+}
+.pop div.filter .bottom button.opposite{
+	margin-left: 10px;
+	background: #2f333c;
+	color: #fff;
+}
+.pop div.filter .bottom button.confirm{
+	width: 98px;
+	background: #2f333c;
+	color: #fff;
+	float: right;
+}
+
+#LeagueFilter div.filter{
+	height: 612px;
+	margin: -306px 0 0 -383px;
+}
+#LeagueFilter div.filter ul{
+	position: absolute; top: 72px; bottom: 70px; left: 0; right: 0;
+	overflow-x: hidden; overflow-y: auto;
+}
+#LeagueFilter div.filter li{
+	padding: 20px 0 8px 70px;
+	background: #eee;
+	position: relative;
+}
+#LeagueFilter div.filter li + li:before{
+	height: 1px;
+	background: #c5d0d8;
+	position: absolute; top: 0; left: 90px; right: 0;
+	content: '';
+}
+#LeagueFilter div.filter li b{
+	width: 40px; height: 40px;
+	margin-top: -20px;
+	border-radius: 4px;
+	background: #d2d2d2;
+	font-size: 34px; line-height: 40px; text-align: center; color: #fff; font-weight: normal;
+	position: absolute; top: 50%; left: 25px;
+}
+#LeagueFilter div.filter li button{
+	width: 136px; height: 30px;
+	margin-bottom: 12px; margin-left: 20px; padding-left: 30px;
+	font-size: 14px; text-align: left; color: #868686;
+	position: relative;
+}
+#LeagueFilter div.filter li button.on,
+#LeagueFilter div.filter li button:hover{
+	background: #2f333c;
+	color: #fff;
+}
+#LeagueFilter div.filter li button span{
+	width: 12px; height: 12px;
+	margin-top: -7px;
+	border: 1px solid #e6e6e6; border-radius: 4px;
+	position: absolute; top: 50%; left: 8px;
+	display: block;
+}
+#LeagueFilter div.filter li button:hover span{
+	border-color: #2f333c;
+	background: #fff;
+}
+#LeagueFilter div.filter li button.on span{
+	border-color: #2f333c;
+	background: url(/img/pc/icon_match_popUp_icon_hook_n.png) no-repeat center #fff; background-size: 14px;
+}
+
+#OddFilter div.filter{
+	height: 500px;
+	margin: -250px 0 0 -383px;
+}
+#OddFilter .oddlist{
+	border: 1px solid #e6e6e6; border-top: 2px solid #2f333c;
+	position: absolute; top: 126px; bottom: 70px; left: 20px; right: 20px;
+}
+#OddFilter .oddlist button.asia,
+#OddFilter .oddlist button.goal{
+	height: 52px;
+	border-radius: 6px 6px 0 0;
+	background: #eee;
+	font-size: 18px; color: #868686;
+	position: absolute; top: -54px;
+}
+#OddFilter .oddlist button.asia{
+	width: 70px;
+	left: 0;
+}
+#OddFilter .oddlist button.goal{
+	width: 100px;
+	left: 70px;
+}
+#OddFilter .oddlist button.asia.on,
+#OddFilter .oddlist button.goal.on{
+	background: #2f333c;
+	color: #fff;
+}
+#OddFilter .oddlist div.itembox{
+	padding: 20px 0;
+	position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+	overflow-y: auto;
+}
+#OddFilter .oddlist div.itembox p + p{
+	padding-top: 10px;
+}
+#OddFilter .oddlist button.item{
+	min-width: 134px; height: 30px;
+	padding-right: 10px; 
+	margin-bottom: 12px; margin-left: 20px; padding-left: 30px;
+	border: 1px solid #e6e6e6;
+	font-size: 14px; text-align: left; color: #868686;
+	position: relative;
+}
+#OddFilter .oddlist button.item.on,
+#OddFilter .oddlist button.item:hover{
+	border-color: #2f333c;
+	background: #2f333c;
+	color: #fff;
+}
+#OddFilter .oddlist button.item span{
+	width: 12px; height: 12px;
+	margin-top: -7px;
+	border: 1px solid #e6e6e6; border-radius: 4px;
+	position: absolute; top: 50%; left: 8px;
+	display: block;
+}
+
+#OddFilter .oddlist button.item:hover span{
+	border-color: #2f333c;
+	background: #fff;
+}
+#OddFilter .oddlist button.item.on span{
+	border-color: #2f333c;
+	background: url(/img/pc/icon_search_seleted.png) no-repeat center #fff; background-size: 10px;
+}
+
+#VideoFilter .filter{
+	width: 500px; height: 600px;
+	margin: -300px 0 0 -250px;
+	border-radius: 20px;
+	overflow: hidden;
+}
+#VideoFilter .title{
+	height: 56px;
+	padding: 0;
+	background: #bc1c25;
+}
+#VideoFilter .title p{
+	font-size: 18px; line-height: 56px; text-align: center; color: #fff;
+	float: none;
+}
+#VideoFilter .title p img{
+	width: 32px;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+#VideoFilter button.close{
+	margin-top: -15px;
+	background: url(/img/pc/icon_multiScreen_close.png) no-repeat center; background-size: 24px;
+	position: absolute; top: 50%; right: 10px;
+}
+#VideoFilter .bottom{
+	height: 40px;
+	padding: 15px 0;
+	box-shadow: 0px -2px 6px 0px rgba(194, 183, 183, 0.4);
+	text-align: center;
+}
+#VideoFilter div.filter .bottom button.confirm{
+	height: 40px; width: 150px;
+	font-size: 16px;
+	float: none;
+}
+#VideoFilter .prompt{
+	height: 30px;
+	background: #ebebeb;
+	font-size: 12px; line-height: 30px; text-align: center; color: #808488;
+	position: absolute; top: 56px; left: 0; right: 0;
+}
+#VideoFilter ul{
+	position: absolute; top: 86px; bottom: 70px; left: 0; right: 0;
+	overflow-x: hidden; overflow-y: auto;
+}
+#VideoFilter ul li{
+	height: 80px;
+	padding: 0 60px;
+	border-bottom: 1px solid #e6e6e6;
+	position: relative;
+}
+#VideoFilter ul li p.league{
+	padding-top: 6px;
+	font-size: 14px; line-height: 32px; text-align: center; color: #999;
+}
+#VideoFilter ul li p.match{
+	font-size: 16px; line-height: 32px; text-align: center;
+}
+#VideoFilter ul li p.match span{
+	width: 40%; height: 32px;
+	padding: 0;
+	color: #333;
+	display: inline-block;
+	overflow: hidden;
+}
+#VideoFilter ul li p.match span.vs{
+	width: 12%;
+	color: #bc1c25;
+}
+#VideoFilter ul li p.match span.host{
+	text-align: right;
+}
+#VideoFilter ul li p.match span.away{
+	text-align: left;
+}
+#VideoFilter ul li button{
+	width: 30px; height: 30px;
+	margin-top: -15px;
+	border-radius: 50%; border: 1px solid #999;
+	position: absolute; top: 50%; right: 40px;
+}
+#VideoFilter ul li button.on,
+#VideoFilter ul li button:hover{
+	border-color: #bc1c25;
+	background: url(/img/pc/icon_multiScreen_ok.png) no-repeat center #bc1c25; background-size: 30px;
+}
+
+#BackTop{
+	width: 48px; height: 48px;
+	background: url(/img/pc/icon_top.png) no-repeat center #2f333c; background-size: 48px;
+	position: fixed; right: 6%; bottom: 155px;
+	cursor: pointer;
+}
+
+
+@media screen and (max-width: 1400px){
+	#MatchList table th:nth-child(2){
+		max-width: 100px; width: 7%;
+	}
+	#MatchList table th:nth-child(8){
+		width: 180px;
+	}
+	#MatchList table td, #MatchList table th{
+		font-size: 12px;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+

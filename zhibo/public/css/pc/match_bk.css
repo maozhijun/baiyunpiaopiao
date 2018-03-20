@@ -1,0 +1,1533 @@
+#Content{
+	min-height: 700px;
+}
+#Content .default{
+	background: url(/img/pc/bg_pattern.png) no-repeat right top #fff;
+}
+#Content .default .title{
+	padding: 20px 0 20px 32px;
+	border-bottom: none;
+	background: none;
+}
+#Content .default .title p:before{
+	width: 4px; height: 26px;
+	margin-top: -13px;
+	position: absolute; top: 50%; left: -12px;
+}
+
+.red{
+	color: #bc1c25 !important;
+}
+.green{
+	color: #1CC075 !important;
+}
+.blue{
+	color: #58a1f6;
+}
+.gray{
+	color: #999;
+}
+
+
+/*信息*/
+#Info{
+	min-height: 260px;
+	padding: 0 306px;
+	background: url(/img/pc/bg_match_bk.jpg) no-repeat center top #fff; background-size: auto 260px;
+	position: relative;
+	overflow: hidden;
+}
+
+#Info div.score{
+	width: 24%; height: 50px;
+	font-size: 24px; line-height: 40px; text-align: center; color: #fff;
+	position: relative; z-index: 2;
+	float: left;
+}
+#Info div.team{
+	width: 38%; height: 40px;
+	font-size: 28px; line-height: 40px; color: #fff;
+	position: relative; z-index: 2;
+	display: inline-block;
+}
+#Info div.host{
+	text-align: left;
+	float: left;
+}
+#Info div.away{
+	text-align: right;
+	float: right;
+}
+#Info div.team p{
+	display: inline-block;
+}
+#Info div.team span.team{
+	height: 40px;
+	letter-spacing: 2px;
+	overflow: hidden;
+	display: inline-block;
+}
+#Info div.team span.league{
+	font-size: 14px; line-height: 28px; text-align: center; color: rgba(255,255,255,0.7); letter-spacing: 1px;
+	display: block;
+}
+#Info div.icon{
+	width: 92px; height: 92px;
+	padding: 19px; margin-top: -65px;
+    border-radius: 50%;
+    background: #fff;
+    position: absolute; top: 50%; z-index: 2;
+    behavior: url(PIE.htc);
+}
+#Info .host div.icon{
+	left: -150px;
+}
+#Info .away div.icon{
+	right: -150px;
+}
+#Info div.icon img{
+	width: 92px; height: 92px;
+}
+
+#Info div.mes{
+	padding: 24px 0 40px;
+	font-size: 14px; line-height: 18px; text-align: center; color: #808488; letter-spacing: 1px;
+}
+#Info div.mes p{
+	padding-top: 16px;
+}
+#Info div.odd{
+	height: 44px; width: 546px;
+	margin-left: -273px;
+	background: rgba(242,242,242,0.2);
+	position: absolute; top: 216px; left: 50%;
+}
+#Info div.odd p{
+	width: 32.3%; height: 44px;
+	font-size: 12px; line-height: 44px; text-align: center; color: #fff;
+	position: relative;
+	display: inline-block;
+}
+#Info div.odd p + p:before{
+	width: 1px; 
+	background: #fff;
+	position: absolute; top: 10px; bottom: 10px; left: 0;
+	content: '';
+}
+#Info div.mes span,
+#Info div.odd span{
+	padding: 0 10px;
+}
+
+#Info div.video{
+	height: 50px;
+	padding: 25px 0; margin: 78px -306px 0;
+	background: #fff;
+	line-height: 50px; text-align: center; vertical-align: middle;
+	position: relative; z-index: 1;
+}
+#Info div.video:before{
+	width: 50%;
+	background: url(/img/pc/image_left_live.png) no-repeat left center; background-size: auto 100px;
+	position: absolute; top: 0; bottom: 0; left: 0;
+	content: '';
+}
+#Info div.video:after{
+	width: 50%;
+	background: url(/img/pc/iamge_right_live.png) no-repeat right center; background-size: auto 100px;
+	position: absolute; top: 0; bottom: 0; right: 0;
+	content: '';
+}
+#Info div.video a.goVideo{
+	width: 100px; height: 44px;
+	border-radius: 4px;
+	background: #bc1c25;
+	font-size: 18px; line-height: 44px; text-align: center; color: #fff;
+	position: relative; z-index: 1;
+	display: inline-block;
+}
+#Info div.video a:hover{
+	color: #fff !important;
+}
+#Info div.video img{
+	margin-left: 15px;
+}
+
+#MatchList{
+	margin: 20px 0;
+}
+#MatchList .title{
+	height: 38px;
+	border-bottom: 4px solid #bc1c25;
+}
+#MatchList .title p{
+	width: 120px; height: 38px;
+	background: #bc1c25;
+	font-size: 18px; line-height: 38px; color: #fff;	
+	display: inline-block;
+	float: initial;
+}
+#MatchList .title p:before{
+	display: none;
+}
+#MatchList .title a{
+	width: 120px; height: 33px;
+	margin: 0;
+	border-top: 1px solid #e6e6e6; border-left: 1px solid #e6e6e6;
+	background: #fff;
+	font-size: 16px; line-height: 33px; text-align: center; color: #333; vertical-align: bottom;
+	display: inline-block;
+	float: initial;
+}
+#MatchList .title p + a{
+	border-left-color: #fff;
+}
+#MatchList .title a:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+#MatchList .title a:hover{
+	border-color: #bc1c25;
+	background: #bc1c25;
+	color: #fff !important;
+}
+/*内容区域*/
+#Tabbar{
+	height: 38px;
+	margin-top: 30px;
+	border-bottom: 4px solid #bc1c25;
+}
+#Tabbar button{
+	width: 120px; height: 33px;
+	border-top: 1px solid #e6e6e6; border-left: 1px solid #e6e6e6; border-radius: 0;
+	background: #fff;
+	font-size: 16px; line-height: 33px; text-align: center; color: #333; vertical-align: bottom;
+	display: inline-block;
+}
+#Tabbar button:hover{
+	border-color: #bc1c25;
+	background: #bc1c25;
+	color: #fff
+}
+#Tabbar button.on{
+	width: 120px; height: 38px;
+	border-color: #bc1c25;
+	background: #bc1c25;
+	font-size: 18px; line-height: 38px; color: #fff;
+}
+#Tabbar button:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+
+/*内容公用*/
+.default{
+	border-top: 4px solid #bc1c25;
+}
+.default:first-child{
+	border-top: none;
+}
+.default .title .selectParent{
+	width: 88px; height: 32px;
+	margin: 0 16px 0 10px; padding-left: 10px; padding-right: 16px; 
+    border-radius: 2px; border: 1px solid #e6e6e6;
+	background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
+    font-size: 14px; line-height: 24px; text-align: center; color: #333;
+    display: inline-block;
+    overflow: hidden;
+	float: right;
+}
+.default .title select{
+	width: 128px; height: 32px;
+	background: transparent;
+    border:none;
+}
+.default .title .control{
+	height: 32px; width: 500px;
+	margin-left: -250px;
+	font-size: 14px; line-height: 32px;
+	text-align: center; vertical-align: middle;
+	position: absolute; left: 50%;
+}
+.default .title .control .selectParent{
+	position: relative; top: 12px;
+	float: none;
+}
+.default label{
+	height: 24px;
+	margin: 12px 16px 0 0; padding-left: 22px;
+	font-size: 14px; line-height: 24px;
+	display: inline-block;
+	position: relative;
+	float: right;
+}
+.default label input{
+	width: 0; height: 0;
+	opacity: 0; filter:Alpha(opacity=0);
+	position: absolute; left: 0; right: 0;
+}
+.default .title button{
+	width: 16px; height: 16px;
+	margin: 0 6px;
+	border: 1px solid #e6e6e6;
+	position: relative; top: 2px;
+}
+.default label span{
+	width: 14px; height: 14px;
+	margin-top: -8px;
+	border: 1px solid #e6e6e6;
+	position: absolute; top: 50%; left: 0;
+	display: inline-block;
+}
+.default label input[type=checkbox] + span,
+.default .title button.checkbox{
+	border-radius: 2px;
+}
+.default label input[type=radio] + span,
+.default .title button.radio{
+	border-radius: 50%;
+}
+.default label input[type=checkbox]:checked + span,
+.default .title button.checkbox.on{
+	background: url(/img/pc/icon_search_seleted.png) no-repeat center; background-size: 10px;
+}
+.default label input[type=radio]:checked + span:before,
+.default .title button.radio.on:before{
+	width: 8px; height: 8px;
+	border-radius: 50%;
+	background: #bc1c25;
+	position: absolute; top: 3px; left: 3px;
+	content: '';
+}
+.default table{
+	width: 100%;
+	table-layout: auto;
+}
+.default table th{
+	height: 34px;
+	border-top: 1px solid #e6e6e6; border-left: 1px solid #e6e6e6;
+	font-size: 14px; line-height: 34px; text-align: center; color: #999;
+}
+.default table td{
+	height: 34px;
+	border-top: 1px solid #e6e6e6; border-left: 1px solid #e6e6e6;
+	font-size: 14px; line-height: 20px; text-align: center;
+	position: relative;
+}
+
+/*左侧快捷栏*/
+#LeftBar{
+	width: 80px;
+	margin-left: 635px;
+	position: fixed; left: 50%; bottom: 312px;
+}
+#LeftBar a{
+	background: rgba(0,0,0,0.45);
+	font-size: 14px; line-height: 40px; text-align: center; color: #fff;
+	display: block;
+}
+#LeftBar a + a{
+	margin-top: 4px;
+}
+#LeftBar a:hover{
+	background: #bc1c25;
+	color: #fff !important;
+}
+@media screen and (max-width: 1160px) {
+	#LeftBar{
+		display: none;
+	}
+}
+
+
+/*比赛赛况*/
+#Match{
+	margin-bottom: 20px;
+}
+#Match .first{
+	margin-bottom: 20px;
+}
+#Match .first .host{
+	width: 571px;
+	margin-left: 16px; padding-bottom: 16px; padding-right: 20px;
+	float: left;
+}
+#Match .first .away{
+	width: 571px;
+	margin-right: 16px; padding-bottom: 16px; padding-left: 20px;
+	float: right;
+}
+#Match .first div.name{
+	padding: 10px 0;
+	font-size: 18px; line-height: 40px; text-align: center;
+	position: relative;
+}
+#Match .first div.name span{
+	padding: 0 10px;
+	font-size: 13px; color: #999;
+}
+#Match .first div.name .number{
+	margin-top: -4px; padding-bottom: 30px;
+	font-size: 14px; line-height: 24px; color: #666;
+	position: relative;
+}
+#Match .first .host div.name .number{
+	padding-right: 330px;
+	text-align: right;
+}
+#Match .first .away div.name .number{
+	padding-left: 330px;
+	text-align: left;
+}
+#Match .first div.name .number b{
+	padding: 0 4px;
+	color: #bc1c25;
+}
+#Match .first div.name dl{
+	height: 8px; width: 210px;
+	border-radius: 4px;
+	background: #eee;
+	position: absolute; top: 50%; 
+}
+#Match .first .host div.name dl{
+	right: 100px;
+}
+#Match .first .away div.name dl{
+	left: 100px;
+}
+#Match .first div.name dl dt{
+	margin-top: -12px;
+	font-size: 14px; line-height: 24px; color: #666; font-weight: bold;
+	position: absolute; top: 50%;
+}
+#Match .first .host div.name dl dt{
+	right: -90px;
+}
+#Match .first .away div.name dl dt{
+	left: -90px;
+}
+#Match .first .host div.name dl dt{
+	color: #bc1c25;
+}
+#Match .first .away div.name dl dt{
+	color: #58A1F6;
+}
+#Match .first div.name dl dd{
+	height: 8px;
+	border-radius: 4px;
+}
+#Match .first .host div.name dl dd{
+	float: right;
+}
+#Match .first .away div.name dl dd{
+	float: left;
+}
+#Match .first .host div.name dl dd{
+	background: #bc1c25;
+}
+#Match .first .away div.name dl dd{
+	background: #58A1F6;
+}
+#Match .first table{
+	width: 444px;
+	margin: 0 auto;
+	border-bottom: 1px solid #e6e6e6;
+}
+#Match .first table th{
+	width: 50%;
+	padding-left: 54px;
+	border: none;
+	font-size: 12px;
+}
+#Match .first table td{
+	height: 40px;
+	padding-left: 54px;
+}
+#Match .first table td:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+#Match .first table td:nth-child(even){
+	color: #808488;
+}
+#Match .first table tr:nth-child(even) td{
+	background: #f1f8fd;
+}
+#Match .first table td p{
+	width: 18px; height: 18px;
+	background: #bc1c25;
+	font-size: 12px; line-height: 18px; color: #fff;
+	position: absolute; top: 11px; left: 26px;
+}
+#Match .first .away table td p{
+	background: #58A1F6;
+}
+#Match .first table td:nth-child(even) p{
+	opacity: 0.5; filter:Alpha(opacity=50);
+}
+#Match .first table .number{
+	width: 16%;
+}
+
+#Match .technology{
+	margin-bottom: 20px;
+	padding: 0 140px;
+}
+#Match .technology .title{
+	margin: 0 -140px; padding-bottom: 40px;
+}
+#Match .technology .tecBox{
+	width: 50%; height: 70px;
+	position: relative;
+	float: left;
+}
+#Match .technology .tecBox dl{
+	height: 40px; width: 300px;
+	margin: -4px 0 0 -150px;
+	position: absolute; left: 50%; top: 0;
+}
+#Match .technology .tecBox dl dt{
+	font-size: 14px; line-height: 40px; text-align: center;
+}
+#Match .technology .tecBox dl dt.host{
+	font-size: 14px; text-align: right; font-weight: bold;
+	position: absolute; top: 0; right: 310px;
+}
+#Match .technology .tecBox dl dt.away{
+	font-size: 14px; text-align: left; font-weight: bold;
+	position: absolute; top: 0; left: 310px;
+}
+#Match .technology .tecBox dl dd{
+	height: 8px;
+	margin-top: -4px;
+	border-radius: 4px;
+	background: #eee;
+	position: absolute; top: 50%;
+}
+#Match .technology .tecBox dl dd.host{
+	right: 195px; left: 0;
+}
+#Match .technology .tecBox dl dd.away{
+	left: 195px; right: 0;
+}
+#Match .technology .tecBox dl dd p{
+	height: 8px;
+	border-radius: 4px;
+	position: absolute; top: 0;
+}
+#Match .technology .tecBox dl dd.host p{
+	background: #bc1c25;
+	right: 0;
+}
+#Match .technology .tecBox dl dd.away p{
+	background: #58A1F6;
+	left: 0;
+}
+#Match .technology .clear{
+	padding-top: 20px;
+}
+
+#Match .player{
+	margin-bottom: 20px;
+}
+#Match .player .name{
+	padding: 10px 0 45px;
+	font-size: 18px; line-height: 40px; text-align: center;
+}
+#Match .player table + .name{
+	padding-top: 80px;
+	border-top: 1px solid #e6e6e6;
+}
+#Match .player .name span.league{
+	padding: 0 10px;
+    font-size: 13px; color: #999;
+}
+#Match .player table{
+	border-top: 1px solid #e6e6e6;
+}
+#Match .player table th{
+	height: 24px; width: 74px;
+	border-left: none; border-top: none;
+	font-size: 12px; line-height: 24px;
+}
+#Match .player table th[colspan]{
+	height: 36px;
+	padding-top: 4px;
+	font-size: 14px; line-height: 36px; color: #333;
+	position: relative;
+}
+#Match .player table th[colspan] + th[colspan]:before{
+	width: 1px; height: 34px;
+	background: #e6e6e6;
+	position: absolute; top: 16px; left: 0;
+	content: '';
+}
+#Match .player table th.pname{
+	width: 194px;
+}
+#Match .player table td{
+	height: 60px;
+	border-left: none;
+}
+#Match .player table tbody tr:hover{
+	background: #f6fbff;
+}
+#Match .player table tbody td:hover{
+	background: #d4ecff !important;
+}
+#Match .player table.bg_1 tbody td:nth-child(1),
+#Match .player table.bg_2 tbody td:nth-child(2),
+#Match .player table.bg_3 tbody td:nth-child(3),
+#Match .player table.bg_4 tbody td:nth-child(4),
+#Match .player table.bg_5 tbody td:nth-child(5),
+#Match .player table.bg_6 tbody td:nth-child(6),
+#Match .player table.bg_7 tbody td:nth-child(7),
+#Match .player table.bg_8 tbody td:nth-child(8),
+#Match .player table.bg_9 tbody td:nth-child(9),
+#Match .player table.bg_10 tbody td:nth-child(10),
+#Match .player table.bg_11 tbody td:nth-child(11),
+#Match .player table.bg_12 tbody td:nth-child(12),
+#Match .player table.bg_13 tbody td:nth-child(13),
+#Match .player table.bg_14 tbody td:nth-child(14),
+#Match .player table.bg_15 tbody td:nth-child(15){
+	background: #f6fbff;
+}
+
+#Match .score{
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+}
+#Match .score table{
+	width: 900px;
+	margin: 20px auto 0;
+	border-bottom: 1px solid #e6e6e6;
+}
+#Match .score table th{
+	width: 32.5%;
+	border: none;
+}
+#Match .score table th:nth-child(1){
+	width: 35%;
+}
+#Match .score table td{
+	height: 60px;
+	border-left: none;
+}
+#Match .score table td:first-child{
+	border-left: 1px solid #e6e6e6;
+}
+#Match .score table td:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+
+
+/*数据分析*/
+#Data{
+	margin-bottom: 20px;
+}
+
+#Data > .odd{
+	margin-bottom: 20px; padding: 0 44px 20px;
+}
+#Data .odd .title{
+	margin: 0 -44px; padding-bottom: 70px;
+}
+#Data .odd .title .abox{
+	width: 180px; height: 40px;
+	padding: 0 12px;
+	border-radius: 10px;
+	background: #f2f2f2;
+	position: absolute; top: 50px; right: 10px;
+}
+#Data .odd .title a{
+	width: 33.3%;
+	margin: 0;
+	line-height: 40px; text-align: center; color: #333;
+	display: inline-block;
+}
+#Data .odd table{
+	border-bottom: 1px solid #e6e6e6;
+}
+#Data .odd table th{
+	width: 10%;
+	border: none;
+}
+#Data .odd table td:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+#Data .odd table .comity{
+	width: 140px;
+}
+
+#Data .league{
+	margin-bottom: 20px;
+}
+#Data .league .host{
+	width: 571px;
+	margin-left: 16px; padding-bottom: 16px; padding-right: 20px;
+	float: left;
+}
+#Data .league .away{
+	width: 571px;
+	margin-right: 16px; padding-bottom: 16px; padding-left: 20px;
+	float: right;
+}
+#Data .league div.name{
+	padding: 10px 0;
+	font-size: 18px; line-height: 40px; text-align: center;
+	position: relative;
+}
+#Data .league div.name span{
+	padding: 0 10px;
+	font-size: 13px; color: #999;
+}
+#Data .league table{
+	width: 100%;
+	margin: 0 auto;
+	border-bottom: 1px solid #e6e6e6;
+}
+#Data .league table thead th{
+	height: 34px; width: 60px;
+	border: none;
+	font-size: 12px;
+}
+#Data .league table th:first-child{
+	width: 90px;
+}
+#Data .league table tbody th{
+	height: 20px;
+	border: none;
+	background: #f3e2e3;
+	font-size: 12px; line-height: 20px; color: #bc1c25;
+}
+#Data .league table td{
+	height: 40px;
+}
+#Data .league table td:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+
+#Data .battle{
+	margin-bottom: 20px;
+}
+#Data .battle .title{
+	padding-bottom: 80px;
+}
+#Data .battle .title .control{
+	top: 65px;
+}
+#Data .battle .progressBox{
+	height: 12px; width: 500px;
+	margin: 50px auto 50px;
+	border-radius: 6px;
+	background: #f7f7f7;
+	position: relative;
+}
+#Data .battle .progressBox:before{
+	height: 12px;
+	border: 8px solid #fff; border-radius: 14px;
+	position: absolute; top: -8px; left: -2px; right: -2px; z-index: 2;
+	content: '';
+}
+#Data .battle dl.progressBox dt{
+	width: 200px;
+	margin-left: -100px;
+	font-size: 13px; line-height: 32px; text-align: center; color: #999;
+	position: absolute; left: 50%; top: -32px;
+}
+#Data .battle dl.progressBox dd{
+	height: 12px;
+	box-sizing: border-box;
+	display: inline-block;
+	float: left;
+}
+#Data .battle dl.progressBox dd.win{
+	border-right: 4px solid #fff;
+	background: #bc1c25;
+}
+#Data .battle dl.progressBox dd.draw{
+	border-right: 4px solid #fff;
+	background: #1CC075;
+}
+#Data .battle dl.progressBox dd.lose{
+	background: #58A1F6;
+}
+#Data .battle dl.progressBox dd p{
+	width: 250px;
+	font-size: 13px; line-height: 32px; text-align: center;
+	position: absolute; top: -32px; z-index: 3;
+}
+#Data .battle dl.progressBox dd.win p{
+	left: 0;
+}
+#Data .battle dl.progressBox dd.lose p{
+	right: 0;
+}
+#Data .battle dl.progressBox dd p b{
+	padding: 0 4px;
+	font-size: 18px; color: #bc1c25;
+}
+#Data .battle dl.progressBox dd span{
+	width: 100px;
+	margin-top: -16px;
+	font-size: 14px; line-height: 32px;
+	position: absolute; top: 50%; z-index: 3;
+}
+#Data .battle dl.progressBox dd.win span{
+	padding-right: 16px;
+	text-align: right;
+	right: 100%;
+}
+#Data .battle dl.progressBox dd.lose span{
+	padding-left: 16px;
+	text-align: left;
+	left: 100%;
+}
+#Data .battle dl.progressBox dd span b{
+	padding: 0 2px;
+	color: #bc1c25;
+}
+#Data .battle table th{
+	border: none;
+}
+#Data .battle table td{
+	height: 60px;
+	border-left: none; border-right: none;
+}
+#Data .battle table .league{
+	width: 106px;
+}
+#Data .battle table .team{
+	width: 120px;
+}
+#Data .battle table .date{
+	width: 80px;
+}
+#Data .battle table .score{
+	width: 130px;
+}
+#Data .battle table .odd{
+	width: 56px; height: 24px;
+	border-top: none;
+	font-size: 12px;
+}
+#Data .battle table .comity{
+	width: 80px; height: 24px;
+	border-top: none;
+	font-size: 12px;
+}
+#Data .battle table .result{
+	width: 54px;
+}
+#Data .battle table td:nth-child(1){
+	border-left: none;
+}
+#Data .battle table td:first-child p{
+	width: 86px; height: 34px;
+	margin: 0 auto;
+	border-radius: 4px;
+	line-height: 34px; color: #fff;
+}
+#Data .battle table .selectParent{
+	height: 24px; width: 45px;
+	padding-left: 8px; padding-right: 16px;
+    border: none;
+    background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
+    font-size: 14px; line-height: 24px; text-align: center; color: #333;
+    display: inline-block;
+	overflow: hidden;
+}
+#Data .battle table .selectParent + .selectParent{
+	margin-left: 10px;
+}
+#Data .battle table .selectParent select{
+	height: 24px; width: 80px;
+	margin-right: -16px;
+	background: transparent;
+    border:none;
+}
+
+#Data .history{
+	margin-bottom: 20px;
+}
+#Data .history .name{
+	padding: 10px 0 70px;
+	font-size: 18px; line-height: 40px; text-align: center;
+}
+#Data .history table + .name{
+	padding-top: 44px;
+	border-top: 1px solid #e6e6e6;
+}
+#Data .history .name span.league{
+	padding: 0 10px;
+    font-size: 13px; color: #999;
+}
+#Data .history .name .control{
+	height: 32px; width: 500px;
+	margin-left: -250px;
+	font-size: 14px; line-height: 32px;
+	text-align: center; vertical-align: middle;
+	position: absolute; left: 50%;
+}
+#Data .history .name .selectParent{
+	width: 90px; height: 24px;
+	margin: 6px 16px 0 0; padding-left: 10px; padding-right: 16px; 
+    border-radius: 2px; border: 1px solid #e6e6e6;
+	background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
+    font-size: 14px; line-height: 24px; text-align: center; color: #333;
+    display: inline-block;
+    overflow: hidden;
+	float: right;
+}
+#Data .history .name .selectParent{
+	margin-left: 10px;
+	position: relative; top: 8px;
+	float: none;
+}
+#Data .history .name select{
+	width: 130px; height: 24px;
+	background: transparent;
+    border: none;
+}
+#Data .history .name .control button{
+	width: 16px; height: 16px;
+	margin: 0 6px;
+	border: 1px solid #e6e6e6;
+	position: relative; top: 2px;
+}
+#Data .history .name .control button.checkbox{
+	border-radius: 2px;
+}
+#Data .history .name .control button.radio{
+	border-radius: 50%;
+}
+#Data .history .name .control button.checkbox.on{
+	background: url(/img/pc/icon_search_seleted.png) no-repeat center; background-size: 10px;
+}
+#Data .history .name .control button.radio.on:before{
+	width: 8px; height: 8px;
+	border-radius: 50%;
+	background: #bc1c25;
+	position: absolute; top: 3px; left: 3px;
+	content: '';
+}
+#Data .history .name label{
+	margin-top: 6px;
+}
+#Data .history .canvasBox{
+	height: 235px;
+	position: relative;
+}
+#Data .history canvas{
+	width: 140px; height: 140px;
+	border-radius: 50%; -moz-border-radius: 50%; -webkit-border-radius: 50%;
+	background: #f7f7f7;
+	position: absolute; top: 25px;
+	behavior: url(PIE.htc);
+}
+#Data .history canvas.europe{
+	left: 170px;
+}
+#Data .history canvas.asia{
+	left: 50%; margin-left: -70px;
+}
+#Data .history canvas.goal{
+	right: 170px;
+}
+#Data .history .cover{
+	width: 100px; height: 100px;
+	border-radius: 50%;
+	background: #fff;
+	position: absolute; top: 45px;
+	behavior: url(PIE.htc);
+}
+#Data .history .cover[class*=europe]{
+	left: 190px;
+}
+#Data .history .cover[class*=asia]{
+	margin-left: -50px;
+	left: 50%;
+}
+#Data .history .cover[class*=goal]{
+	right: 190px;
+}
+#Data .history .canvasBox p{
+	width: 400px;
+	font-size: 14px; line-height: 24px; text-align: center;
+	position: absolute; top: 185px;
+}
+#Data .history .canvasBox p.europe{
+	left: 40px;
+}
+#Data .history .canvasBox p.asia{
+	left: 50%; margin-left: -200px;
+}
+#Data .history .canvasBox p.goal{
+	right: 40px;
+}
+#Data .history .canvasBox p span{
+	padding-left: 26px;
+	position: relative;
+}
+#Data .history .canvasBox p span:before{
+	width: 14px; height: 14px;
+	margin-top: -7px;
+	border-radius: 2px;
+	position: absolute; top: 50%; left: 8px;
+	content: '';
+}
+#Data .history .canvasBox p span.win:before{
+	background: #f1333e;
+}
+#Data .history .canvasBox p span.draw:before{
+	background: #58a1f6;
+}
+#Data .history .canvasBox p span.lose:before{
+	background: #999;
+}
+#Data .history table td{
+	height: 60px;
+}
+#Data .history table td,
+#Data .history table th{
+	border-left: none; border-right: none;
+}
+#Data .history table .league{
+	width: 80px;
+	border-left: none;
+}
+#Data .history table .team{
+	width: 120px;
+}
+#Data .history table .date{
+	width: 80px;
+}
+#Data .history table .score{
+	width: 110px;
+}
+#Data .history table .odd{
+	width: 56px;
+	border-top: none;
+	font-size: 12px;
+}
+#Data .history table .comity{
+	width: 80px; height: 24px;
+	border-top: none;
+	font-size: 12px;
+}
+#Data .history table .result{
+	width: 54px;
+}
+#Data .history table td:first-child{
+	width: 120px;
+	border-left: none;
+}
+#Data .history table td:first-child p{
+	width: 86px; height: 34px;
+	margin: 0 auto;
+	border-radius: 4px;
+	line-height: 34px; color: #fff;
+}
+#Data .history table .selectParent{
+	height: 24px; width: 45px;
+	padding-left: 8px; padding-right: 16px; margin-top: 5px;
+    border: none;
+    background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
+    font-size: 14px; line-height: 24px; text-align: center; color: #333;
+    display: inline-block;
+    overflow: hidden;
+}
+#Data .history table .selectParent + .selectParent{
+	margin-left: 10px;
+}
+#Data .history table .selectParent select{
+	height: 24px; width: 80px;
+	margin-right: -16px;
+	background: transparent;
+    border:none;
+}
+
+#Data .future{
+	margin-bottom: 20px;
+}
+#Data .future .host{
+	width: 591px;
+	margin-left: 16px; padding-bottom: 16px;
+	float: left;
+}
+#Data .future .away{
+	width: 591px;
+	margin-right: 16px; padding-bottom: 16px;
+	float: right;
+}
+#Data .future p.name{
+	padding: 10px 0 24px;
+	font-size: 18px; line-height: 22px; text-align: center;
+}
+#Data .future p.name span{
+	padding: 0 10px;
+	font-size: 13px; color: #999;
+}
+#Data .future table{
+	border-bottom: 1px solid #e6e6e6;
+}
+#Data .future table th{
+	border: none;
+	font-size: 12px;
+}
+#Data .future table th:nth-child(1){
+	width: 120px;
+}
+#Data .future table th:nth-child(2){
+	width: 80px;
+}
+#Data .future tr td{
+	height: 60px;
+	border-left: none; border-right: none;
+}
+#Data .future tr td:first-child{
+	border-left: 1px solid #e6e6e6;
+}
+#Data .future tr td:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+#Data .future table .league{
+	width: 100px;
+}
+#Data .future table .date{
+	width: 100px;
+}
+#Data .future table .separated{
+	width: 80px;
+}
+#Data .future table p{
+    width: 86px; height: 34px;
+    margin: 0 auto;
+    border-radius: 4px;
+    line-height: 34px; color: #fff;
+}
+
+/*统计比较*/
+#Statistics{
+	margin-bottom: 20px;
+}
+#Statistics .asia{
+	margin-bottom: 20px;
+}
+#Statistics .asia .host{
+	width: 591px;
+	margin-left: 16px; padding-bottom: 16px;
+	position: relative;
+	float: left;
+}
+#Statistics .asia .away{
+	width: 591px;
+	margin-right: 16px; padding-bottom: 16px;
+	position: relative;
+	float: right;
+}
+#Statistics .asia .labelbox{
+	height: 30px; width: 140px;
+	margin: 0 auto 10px;
+}
+#Statistics .asia .labelbox label{
+	height: 28px; width: 69px;
+	padding: 0; margin: 0;
+ 	border: 1px solid #e6e6e6;
+	font-size: 14px; line-height: 28px; text-align: center;
+	cursor: pointer;
+}
+#Statistics .asia .labelbox label[type=full]{
+	border-radius: 4px 0 0 4px; border-right: none;
+	float: left;
+}
+#Statistics .asia .labelbox label[type=half]{
+	border-radius: 0 4px 4px 0; border-left: none;
+	float: right;
+}
+#Statistics .asia .labelbox label.on{
+	border-color: #bc1c25;
+	background: #bc1c25;
+	color: #fff;
+}
+#Statistics .asia p.name{
+	padding: 10px 0 24px;
+	font-size: 18px; line-height: 22px; text-align: center;
+}
+#Statistics .asia p.name span{
+	padding: 0 10px;
+	font-size: 13px; color: #999;
+}
+#Statistics .asia .selectParent{
+	width: 90px; height: 24px;
+	margin: 6px 16px 0 0; padding-left: 10px; padding-right: 16px; 
+    border-radius: 2px; border: 1px solid #e6e6e6;
+	background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
+    font-size: 14px; line-height: 24px; text-align: center; color: #333;
+    display: inline-block;
+    overflow: hidden;
+	float: right;
+}
+#Statistics .asia .selectParent{
+	margin-right: 0;
+	position: absolute; top: 0; right: 0;
+}
+#Statistics .asia select{
+	width: 130px; height: 24px;
+	background: transparent;
+    border: none;
+}
+#Statistics .asia table{
+	border-bottom: 1px solid #e6e6e6;
+}
+#Statistics .asia table th{
+	width: 100px;
+	border: none;
+	font-size: 12px;
+}
+#Statistics .asia table th:nth-child(1){
+	width: 80px;
+}
+#Statistics .asia tr td{
+	height: 40px;
+	border-left: none;
+}
+#Statistics .asia tr td:first-child{
+	border-left: 1px solid #e6e6e6;
+}
+#Statistics .asia tr td:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+#Statistics .asia .sameOdd{
+	margin-top: 30px;
+}
+#Statistics .asia .sameOdd .name span{
+	padding-left: 16px;
+	font-size: 12px; line-height: 26px;
+	position: absolute;
+}
+#Statistics .asia .sameOdd th{
+	width: 24px;
+}
+#Statistics .asia .sameOdd .league{
+	width: 30px;
+}
+#Statistics .asia .sameOdd .time{
+	width: 40px;
+}
+#Statistics .asia .sameOdd .bar{
+	width: 10px;
+}
+#Statistics .asia .sameOdd .hscore{
+	width: 20px;
+	text-align: right;
+}
+#Statistics .asia .sameOdd .ascore{
+	width: 20px;
+	text-align: left;
+}
+#Statistics .asia .sameOdd .control{
+	font-size: 14px; color: #999;
+	position: absolute; top: 11px; right: 0;
+}
+#Statistics .asia .sameOdd .control button.checkbox{
+	width: 16px; height: 16px;
+	margin: 0 6px;
+	border: 1px solid #e6e6e6;
+	position: relative; top: 2px;
+}
+
+#Statistics .average{
+	margin-bottom: 20px;
+}
+#Statistics .average .host{
+	width: 591px;
+	margin-left: 16px; padding-bottom: 16px;
+	position: relative;
+	float: left;
+}
+#Statistics .average .away{
+	width: 591px;
+	margin-right: 16px; padding-bottom: 16px;
+	position: relative;
+	float: right;
+}
+#Statistics .average p.name{
+	padding: 10px 0 24px;
+	font-size: 18px; line-height: 22px; text-align: center;
+}
+#Statistics .average p.name span{
+	padding: 0 10px;
+	font-size: 13px; color: #999;
+}
+#Statistics .average .selectParent{
+	width: 90px; height: 24px;
+	margin: 6px 16px 0 0; padding-left: 10px; padding-right: 16px; 
+    border-radius: 2px; border: 1px solid #e6e6e6;
+	background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
+    font-size: 14px; line-height: 24px; text-align: center; color: #333;
+    display: inline-block;
+    overflow: hidden;
+	float: right;
+}
+#Statistics .average .selectParent{
+	margin-right: 0;
+	position: absolute; top: 0; right: 0;
+}
+#Statistics .average select{
+	width: 130px; height: 24px;
+	background: transparent;
+    border: none;
+}
+#Statistics .average table{
+	border: 1px solid #e6e6e6;
+}
+#Statistics .average table th{
+	width: 50px;
+	border: none;
+	font-size: 12px;
+}
+#Statistics .average table th[colspan],
+#Statistics .average table th[rowspan]{
+	font-size: 14px; color: #333;
+}
+#Statistics .average table tr:nth-child(1) th:nth-child(1){
+	width: 100px;
+}
+#Statistics .average table tr:nth-child(1) th:nth-child(2){
+	width: 80px;
+}
+#Statistics .average tr td{
+	height: 40px;
+	border-left: none;
+}
+
+#Statistics .total{
+	margin-bottom: 20px;
+}
+#Statistics .total .host{
+	width: 591px;
+	margin-left: 16px; padding-bottom: 16px;
+	position: relative;
+	float: left;
+}
+#Statistics .total .away{
+	width: 591px;
+	margin-right: 16px; padding-bottom: 16px;
+	position: relative;
+	float: right;
+}
+#Statistics .total p.name{
+	padding: 10px 0 24px;
+	font-size: 18px; line-height: 22px; text-align: center;
+}
+#Statistics .total p.name span{
+	padding: 0 10px;
+	font-size: 13px; color: #999;
+}
+#Statistics .total .selectParent{
+	width: 90px; height: 24px;
+	margin: 6px 16px 0 0; padding-left: 10px; padding-right: 16px; 
+    border-radius: 2px; border: 1px solid #e6e6e6;
+	background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
+    font-size: 14px; line-height: 24px; text-align: center; color: #333;
+    display: inline-block;
+    overflow: hidden;
+	float: right;
+}
+#Statistics .total .selectParent{
+	margin-right: 0;
+	position: absolute; top: 0; right: 0;
+}
+#Statistics .total select{
+	width: 130px; height: 24px;
+	background: transparent;
+    border: none;
+}
+#Statistics .total table{
+	border: 1px solid #e6e6e6;
+}
+#Statistics .total table th{
+	width: 66px;
+	border-top: none;
+	font-size: 12px;
+}
+#Statistics .total table th:nth-child(1){
+	width: 100px;
+	border-left: none;
+}
+#Statistics .total table th:nth-child(2){
+	width: 80px;
+}
+#Statistics .total tr td{
+	height: 40px;
+}
+#Statistics .total tr td:first-child{
+	border-left: none;
+}
+
+#Statistics .difference{
+	margin-bottom: 20px;
+}
+#Statistics .difference .host{
+	width: 591px;
+	margin-left: 16px; padding-bottom: 16px;
+	position: relative;
+	float: left;
+}
+#Statistics .difference .away{
+	width: 591px;
+	margin-right: 16px; padding-bottom: 16px;
+	position: relative;
+	float: right;
+}
+#Statistics .difference p.name{
+	padding: 10px 0 24px;
+	font-size: 18px; line-height: 22px; text-align: center;
+}
+#Statistics .difference p.name span{
+	padding: 0 10px;
+	font-size: 13px; color: #999;
+}
+#Statistics .difference .selectParent{
+	width: 90px; height: 24px;
+	margin: 6px 16px 0 0; padding-left: 10px; padding-right: 16px; 
+    border-radius: 2px; border: 1px solid #e6e6e6;
+	background: url(/img/pc/icon_select_arrow.png) no-repeat scroll right center transparent;
+    font-size: 14px; line-height: 24px; text-align: center; color: #333;
+    display: inline-block;
+    overflow: hidden;
+	float: right;
+}
+#Statistics .difference .selectParent{
+	margin-right: 0;
+	position: absolute; top: 0; right: 0;
+}
+#Statistics .difference select{
+	width: 130px; height: 24px;
+	background: transparent;
+    border: none;
+}
+#Statistics .difference table{
+	border-bottom: 1px solid #e6e6e6;
+}
+#Statistics .difference table th{
+	width: 66px;
+	border: none;
+	font-size: 12px;
+}
+#Statistics .difference table th:nth-child(1){
+	width: 100px;
+	border-left: none;
+}
+#Statistics .difference table th:nth-child(2){
+	width: 80px;
+}
+#Statistics .difference tr td{
+	height: 40px;
+	border-left: none;
+}
+#Statistics .difference tr td:first-child{
+	border-left: 1px solid #e6e6e6;
+}
+#Statistics .difference tr td:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+#Statistics .technology{
+	margin-bottom: 20px;
+}
+#Statistics .technology .host{
+	width: 591px;
+	margin-left: 16px; padding-bottom: 16px;
+	float: left;
+}
+#Statistics .technology .away{
+	width: 591px;
+	margin-right: 16px; padding-bottom: 16px;
+	float: right;
+}
+#Statistics .technology p.name{
+	padding: 10px 0 24px;
+	font-size: 18px; line-height: 22px; text-align: center;
+}
+#Statistics .technology p.name span{
+	padding: 0 10px;
+	font-size: 13px; color: #999;
+}
+#Statistics .technology table{
+	border-bottom: 1px solid #e6e6e6;
+}
+#Statistics .technology table th{
+	border: none;
+	font-size: 12px;
+}
+#Statistics .technology table th:nth-child(1){
+	width: 100px;
+}
+#Statistics .technology tr td{
+	height: 40px;
+}
+#Statistics .technology tr td:last-child{
+	border-right: 1px solid #e6e6e6;
+}
+
+/*专家推荐*/
+#Talent{
+	margin-bottom: 20px;
+}
+
+#Package.default .title{
+	height: 50px;
+	padding: 0;
+	border-bottom: none;
+	background: #bc1c25;
+	background-image: linear-gradient(-85deg, #dd380b 0%, #bc1c25 100%);
+}
+#Package.default .title p{
+	height: 50px;
+	padding-left: 36px;
+	line-height: 50px; color: #fff;
+}
+#Package.default .title p:before{
+	height: 26px; width: 4px;
+	margin-bottom: -13px;
+	background: #fff;
+	position: absolute; bottom: 50%; left: 19px;
+	content: '';
+}
+#Recommend{
+	margin-top: 10px;
+	border-top: none;
+}
+#Recommend.default .title{
+	padding-top: 10px;
+}
+#Recommend .remlist li.remEv:first-child{
+	border-top: none;
+}
+
+
+@media screen and (max-width: 1400px) and (-ms-high-contrast: none), (-ms-high-contrast: active){
+	#LeftBar{
+		bottom: 256px;
+		margin-left: 508px;
+		-ms-transform: scale(0.8); -ms-transform-origin: left bottom;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

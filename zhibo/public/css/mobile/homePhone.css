@@ -1,0 +1,434 @@
+﻿body{padding: 0;}
+/*导航*/
+#Navigation button.filter{
+	width: 88px; height: 88px;
+	background: url(/img/icon_match_nav_icon_filter_n.png) no-repeat center; background-size: 44px;
+	position: absolute; top: 0; right: 4px;
+}
+#Navigation .banner{
+	display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;
+	-webkit-box-align: center; -webkit-align-items: center; -moz-align-items: center; -ms-align-items: center; -o-align-items: center; align-items: center;
+	-webkit-box-pack: center; -webkit-justify-content: center; -moz-justify-content: center; -ms-justify-content: center; -o-justify-content: center;justify-content: center;
+}
+#Navigation .tabBox{
+	height: 60px;
+	border-radius: 30px;
+	background: #494949;
+	line-height: 30px;
+}
+#Navigation .tabBox a{
+	width: 120px; height: 60px;
+	border-radius: 30px;
+	font-size: 28px; line-height: 60px; text-align: center; color: #a7a1a1; font-weight: normal;
+	display: inline-block;
+}
+#Navigation .tabBox a.on{
+	background: #fff;
+	color: #292b2e;
+}
+
+#Navigation .date{
+	height: 80px;
+	background: #f3f3f3;
+	font-size: 24px; line-height: 80px; text-align: center; color: #494949;
+}
+#Navigation .date .week{
+	padding: 0 44px 0 20px;
+}
+#Navigation .date button.calendar{
+	width: 44px; height: 44px;
+	background: url(/img/icon_match_icon_date_n.png) no-repeat center; background-size: 44px;
+	vertical-align: middle;
+	position: relative; top: -4px;
+}
+#Navigation .date button.left{
+	width: 44px; height: 44px;
+	margin-right: 88px;
+	background: url(/img/icon_match_icon_left_n.png) no-repeat center; background-size: 44px;
+	vertical-align: middle;
+	position: relative; top: -4px;
+}
+#Navigation .date button.right{
+	width: 44px; height: 44px;
+	margin-left: 88px;
+	background: url(/img/icon_match_icon_right_n.png) no-repeat center; background-size: 44px;
+	vertical-align: middle;
+	position: relative; top: -4px;
+}
+#Navigation .date button.left:disabled,
+#Navigation .date button.right:disabled{
+	opacity: 0.5;
+}
+#Navigation .date input[type=date]{
+	width: 0; height: 0;
+	opacity: 0;
+	position: absolute; top: 0; left: 0;
+}
+
+/*足球列表*/
+ul.football{
+	background: #fff;
+}
+ul.football a.li{
+	height: 150px;
+	display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;
+	-webkit-box-align: center; -webkit-align-items: center; -moz-align-items: center; -ms-align-items: center; -o-align-items: center; align-items: center;
+	-webkit-box-pack: center; -webkit-justify-content: center; -moz-justify-content: center; -ms-justify-content: center; -o-justify-content: center; justify-content: center;
+}
+ul.football a.li ~ a.li{
+	border-top: 1px solid #e6e6e6;
+}
+
+ul.football .part{
+
+}
+ul.football .part:nth-child(1){
+	width: 146px; height: 150px;
+	padding-left: 24px;
+	vertical-align: top;
+}
+ul.football .part:nth-child(2){
+	-webkit-box-flex: 1; -moz-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1;
+}
+ul.football .part:nth-child(3){
+	width: 60px;
+}
+ul.football .part:nth-child(4){
+	width: 160px;
+	padding-left: 30px;
+}
+ul.football .part:nth-child(5){
+	width: 44px;
+	padding: 0 24px;
+}
+
+ul.football p.time{
+	padding-top: 36px;
+	font-size: 30px; line-height: 30px;
+}
+ul.football p.league{
+	font-size: 22px; line-height: 50px; color: #999;
+}
+ul.football p.team{
+	height: 58px;
+	padding: 0 10px 0 59px;
+	font-size: 28px; line-height: 58px;
+	overflow: hidden;
+	position: relative;
+}
+ul.football p.team img{
+	width: 44px; height: 44px;
+	margin-top: -22px;
+	position: absolute; top: 50%; left: 0;
+}
+ul.football p.score{
+	font-size: 28px; line-height: 58px; text-align: center;
+}
+ul.football p.live{
+	padding-left: 40px;
+	font-size: 20px; line-height: 44px; color: #cb3e39;
+	position: relative;
+}
+ul.football p.live em{
+	margin-left: -20px;
+	color: #999;
+}
+ul.football p.live img{
+	width: 30px;
+	vertical-align: middle;
+}
+ul.football p.live span + img{
+	margin-top: -10px;
+	position: absolute; top: 50%; left: 0;
+}
+ul.football p.recommend{
+	font-size: 22px; line-height: 38px; color: #999;
+}
+ul.football p.recommend b{
+	padding-right: 4px;
+	color: #bc1c25;
+}
+ul.football input[type=checkbox]{
+	width: 0; height: 0;
+	opacity: 0; visibility: hidden;
+	position: absolute; top: 0; left: 0;
+}
+ul.football label{
+	width: 44px; height: 150px;
+	background: url(/img/icon_match_icon_focus_n.png) no-repeat center; background-size: 44px;
+	display: block;
+}
+ul.football input:checked + label{
+	background: url(/img/icon_match_icon_focus_s.png) no-repeat center; background-size: 44px;
+}
+
+/*篮球列表*/
+ul.basketball{
+	background: #fff;
+}
+ul.basketball a.li{
+	height: 150px;
+	padding: 48px 0 2px 24px;
+	display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;
+	-webkit-box-align: center; -webkit-align-items: center; -moz-align-items: center; -ms-align-items: center; -o-align-items: center; align-items: center;
+	-webkit-box-pack: center; -webkit-justify-content: center; -moz-justify-content: center; -ms-justify-content: center; -o-justify-content: center; justify-content: center;
+	position: relative;
+}
+ul.basketball a.li ~ a.li{
+	border-top: 1px solid #e6e6e6;
+}
+
+ul.basketball .part{
+
+}
+ul.basketball .part:nth-child(1){
+	-webkit-box-flex: 1; -moz-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1;
+}
+ul.basketball .part:nth-child(2),ul.basketball .part:nth-child(3),ul.basketball .part:nth-child(4),ul.basketball .part:nth-child(5){
+	width: 40px;
+	padding-left: 10px;
+}
+ul.basketball .part:nth-child(6){
+	width: 60px;
+	padding-left: 16px;
+}
+ul.basketball .part:nth-child(7){
+	width: 128px;
+}
+ul.basketball .part:nth-child(8){
+	width: 44px;
+	padding: 0 24px;
+}
+
+ul.basketball p.team{
+	height: 50px;
+	padding-left: 59px;
+	font-size: 28px; line-height: 50px;
+	overflow: hidden;
+	position: relative;
+}
+ul.basketball p.team img{
+	width: 44px; height: 44px;
+	margin-top: -22px;
+	position: absolute; top: 50%; left: 0;
+}
+ul.basketball p.score{
+	font-size: 28px; line-height: 50px; text-align: center; color: #999;
+}
+ul.basketball p.score.run{
+	color: #333;
+}
+ul.basketball p.total{
+	font-size: 28px; line-height: 50px; text-align: center; color: #494949; font-weight: bold;
+}
+ul.basketball p.live{
+	font-size: 20px; line-height: 32px; color: #cb3e39; text-align: center;
+}
+ul.basketball p.live em{
+	color: #999;
+}
+ul.basketball p.live img{
+	width: 30px;
+	margin: 6px auto 6px;
+	display: block;
+}
+ul.basketball input[type=checkbox]{
+	width: 0; height: 0;
+	opacity: 0; visibility: hidden;
+	position: absolute; top: 0; left: 0;
+}
+ul.basketball label{
+	width: 44px; height: 44px;
+	background: url(/img/icon_match_icon_focus_n.png) no-repeat center; background-size: 44px;
+	display: block;
+}
+ul.basketball input:checked + label{
+	background: url(/img/icon_match_icon_focus_s.png) no-repeat center; background-size: 44px;
+}
+
+ul.basketball div.info{
+	height: 24px;
+	font-size: 22px; line-height: 24px; color: #999;
+	position: absolute; top: 24px; left: 24px; right: 24px;
+}
+ul.basketball div.info p{
+	font-size: 22px; line-height: 24px; color: #999;
+	float: left;
+}
+ul.basketball div.info p.number{
+	padding-right: 20px;
+}
+ul.basketball div.info p.league{
+	padding-right: 40px;
+}
+ul.basketball div.info p.time{
+	padding-right: 20px;
+}
+ul.basketball div.info p.period{
+	padding-right: 20px;
+	color: #494949;
+}
+ul.basketball div.info p.recommend{
+	float: right;
+}
+ul.basketball div.info p.recommend b{
+	padding-right: 4px;
+	color: #494949;
+}
+ul.basketball div.info p.ot{
+	padding: 0 6px;
+	border-radius: 4px;
+	background: #494949;
+	font-size: 20px; color: #fff;
+}
+
+
+#Filter{
+	background: rgba(0,0,0,0.6);
+	position: fixed; top: 0; bottom: 0; left: 0; right: 0; z-index: 60;
+	display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;
+	-webkit-box-align: center; -webkit-align-items: center; -moz-align-items: center; -ms-align-items: center; -o-align-items: center; align-items: center;
+}
+div#Filter > div.default{
+	width: 80%; max-width: 80%;
+	margin: auto;
+	border: none; border-radius: 30px;
+	text-align: center;
+	-webkit-box-flex: 1; -moz-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1;
+}
+div#Filter .default .title{
+	height: 124px;
+	border: none; border-radius: 30px 30px 0 0;
+	background: url(/img/bg_popUp_iamge_bg_n.jpg) no-repeat center bottom; background-size: cover;
+	font-size: 32px; line-height: 124px; text-align: center; color: #fff;
+	position: initial;
+}
+div#Filter .default .title:before{
+	display: none;
+}
+div#Filter div.title > button.close{
+	width: 54px; height: 54px;
+	border-radius: 50%;
+	background: url(/img/icon_match_popUp_icon_delete_n.png) no-repeat center #fff; background-size: 54px;
+	position: absolute; top: -16px; right: -16px;
+}
+div#Filter div.title > button.close:before{
+	display: none;
+}
+
+div#Filter div.league{
+	height: 72px;
+	margin-top: 100%; padding: 0 40px;
+	border-top: 1px solid #e6e6e6;
+	display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;
+}
+div#Filter div.league input{
+	width: 0; height: 0;
+	opacity: 0; visibility: hidden;
+	position: absolute; top: 0; left: 0;
+}
+div#Filter div.league label[for*=League_Type]{
+	height: 72px;
+	font-size: 24px; line-height: 72px; text-align: center; color: #999;
+	-webkit-box-flex: 1; -moz-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1;
+}
+div#Filter div.league input[type=radio]:checked + label{
+	color: #292b2e;
+}
+div#Filter div.league ul{
+	padding: 12px 30px 40px 10px;
+	text-align: left;
+	position: absolute; top: 124px; bottom: 188px; left: 0; right: 0;
+	overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch;
+}
+div#Filter div.league ul li{
+	width: 33.3%; height: 94px;
+	padding: 28px 0 0 20px; 
+	box-sizing: border-box;
+	float: left;
+}
+div#Filter div.league ul li label{
+	height: 66px; padding: 0 10px;
+	border-radius: 9px;
+	background: #eee;
+	font-size: 24px; line-height: 66px; text-align: center; color: #666;
+	white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+	display: block;
+}
+div#Filter div.league ul li input[name=league]:checked + label{
+	background: #292b2e;
+	color: #fff;
+}
+
+
+div#Filter div.btnline{
+	height: 60px;
+	padding: 16px 42px 40px;
+	text-align: left;
+}
+div#Filter div.btnline input[type=checkbox]{
+	width: 0; height: 0;
+	opacity: 0; visibility: hidden;
+	position: absolute; top: 0; left: 0;
+}
+div#Filter div.btnline label{
+	height: 60px;
+	padding: 0 10px 0 68px; margin-right: 34px;
+	background: url(/img/icon_match_popUp_icon_all_n.png) no-repeat left center; background-size: 44px;
+	font-size: 28px; line-height: 60px;
+	display: inline-block;
+}
+div#Filter div.btnline input:checked + label{
+	background: url(/img/icon_match_popUp_icon_all_s.png) no-repeat left center; background-size: 44px;
+}
+div#Filter div.btnline button.reset{
+	height: 60px;
+	padding: 0 10px;
+	background: #fff;
+	font-size: 28px; color: #b5b5b5;
+}
+div#Filter div.btnline button.comfirm{
+	width: 130px; height: 60px;
+	border-radius: 9px;
+	background: #292b2e;
+	font-size: 28px; color: #fff;
+	float: right;
+}
+
+
+
+
+
+/*关注区域日期间隔*/
+.separated{
+	height: 60px;
+	margin-bottom: 0; padding: 0;
+	border-top: 1px solid #e6e6e6;
+	background: #f3f3f3;
+	line-height: 60px; color: #494949;
+}
+
+.nolist{
+	padding-top: 300px !important;
+	background:/* url(/img/bg_vip_nolist.png)*/ no-repeat center 50px; background-size: 240px;
+	color: #bdbdbd;
+}
+
+/*广告*/
+.banner{
+	display: block;
+}
+.banner img{
+	width: 100%;
+	display: block;
+}
+
+
+
+
+
+
+
+
+
+

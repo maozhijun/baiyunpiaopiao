@@ -1,0 +1,195 @@
+/*bj自己加 切换用*/
+/*最近比赛*/
+table.history_H_item[num="10"] tr:nth-child(n+11),
+table.history_H_item[num="10"] tr[ten="1"] ~ tr{
+    display: none;
+}
+
+table.history_H_item[num="20"] tr:nth-child{
+    display: table-row;
+}
+
+table.history_A_item[num="10"] tr:nth-child(n+11),
+table.history_A_item[num="10"] tr[ten="1"] ~ tr{
+    display: none;
+}
+
+table.history_A_item[num="20"] tr:nth-child{
+    display: table-row;
+}
+
+/*历史交锋*/
+div#Data div.battle[league="0"][ha="0"] div.battle_content[league="0"][ha="0"],
+div#Data div.battle[league="1"][ha="0"] div.battle_content[league="1"][ha="0"],
+div#Data div.battle[league="0"][ha="1"] div.battle_content[league="0"][ha="1"],
+div#Data div.battle[league="1"][ha="1"] div.battle_content[league="1"][ha="1"]{
+    display: block;
+}
+
+div.battle_content{
+    display: none;
+}
+
+div#Data div.commonBox[ou="2"] .ou2,
+div#Data div.commonBox[ou="1"] .ou1,
+div#Data div.commonBox[asia="2"] .asia2,
+div#Data div.commonBox[asia="1"] .asia1,
+div#Data div.commonBox[goal="2"] .goal2,
+div#Data div.commonBox[goal="1"] .goal1{
+    /*display: table-row;*/
+}
+
+div#Data div.commonBox[ou="1"] .ou2,
+div#Data div.commonBox[ou="2"] .ou1,
+div#Data div.commonBox[asia="1"] .asia2,
+div#Data div.commonBox[asia="2"] .asia1,
+div#Data div.commonBox[goal="1"] .goal2,
+div#Data div.commonBox[goal="2"] .goal1{
+    display: none;
+}
+
+table.commonTable[num="10"] tr:nth-child(n+11),
+table.commonTable[num="10"] tr[ten="1"] ~ tr{
+    display: none;
+}
+
+table.commonTable[num="20"] tr:nth-child{
+    display: table-row;
+}
+
+div#Data div.History_A[league="0"][ha="0"] div.history_A_content[league="0"][ha="0"],
+div#Data div.History_A[league="1"][ha="0"] div.history_A_content[league="1"][ha="0"],
+div#Data div.History_A[league="0"][ha="1"] div.history_A_content[league="0"][ha="1"],
+div#Data div.History_A[league="1"][ha="1"] div.history_A_content[league="1"][ha="1"]{
+    display: block;
+}
+
+div#Data div.History_H[league="0"][ha="0"] .history_H_content[league="0"][ha="0"],
+div#Data div.History_H[league="1"][ha="0"] div.history_H_content[league="1"][ha="0"],
+div#Data div.History_H[league="0"][ha="1"] div.history_H_content[league="0"][ha="1"],
+div#Data div.History_H[league="1"][ha="1"] div.history_H_content[league="1"][ha="1"]{
+    display: block;
+}
+
+div.history_A_content{
+    display: none;
+}
+
+div.history_H_content{
+    display: none;
+}
+
+div#Characteristic_SameOdd[type="1"][count="10"] div.Same_Odd_Content[type="1"][count="10"],
+div#Characteristic_SameOdd[type="1"][count="20"] div.Same_Odd_Content[type="1"][count="20"],
+div#Characteristic_SameOdd[type="2"][count="10"] div.Same_Odd_Content[type="2"][count="10"],
+div#Characteristic_SameOdd[type="2"][count="20"] div.Same_Odd_Content[type="2"][count="20"],
+div#Characteristic_SameOdd[type="3"][count="10"] div.Same_Odd_Content[type="3"][count="10"],
+div#Characteristic_SameOdd[type="3"][count="20"] div.Same_Odd_Content[type="3"][count="20"]{
+    display: block;
+}
+
+div.Same_Odd_Content{
+    display: none;
+}
+
+div#Corner_Data[count="10"] table.Corner_Data_table[count="10"],
+div#Corner_Data[count="20"] table.Corner_Data_table[count="20"]{
+    display: table;
+}
+
+table.Corner_Data_table{
+    display: none;
+}
+
+div#Corner_Data_A_Content[league="0"][ha="0"] div.Corner_Data_A_Content[league="0"][ha="0"],
+div#Corner_Data_A_Content[league="1"][ha="0"] div.Corner_Data_A_Content[league="1"][ha="0"],
+div#Corner_Data_A_Content[league="0"][ha="1"] div.Corner_Data_A_Content[league="0"][ha="1"],
+div#Corner_Data_A_Content[league="1"][ha="1"] div.Corner_Data_A_Content[league="1"][ha="1"]{
+    display: block;
+}
+
+div#Corner_Data_H_Content[league="0"][ha="0"] div.Corner_Data_H_Content[league="0"][ha="0"],
+div#Corner_Data_H_Content[league="1"][ha="0"] div.Corner_Data_H_Content[league="1"][ha="0"],
+div#Corner_Data_H_Content[league="0"][ha="1"] div.Corner_Data_H_Content[league="0"][ha="1"],
+div#Corner_Data_H_Content[league="1"][ha="1"] div.Corner_Data_H_Content[league="1"][ha="1"]{
+    display: block;
+}
+
+div.Corner_Data_H_Content{
+    display: none;
+}
+
+div.Corner_Data_A_Content{
+    display: none;
+}
+
+table.corner_H_item[num="10"] tr:nth-child(n+11),
+table.corner_H_item[num="10"] tr[ten="1"] ~ tr{
+    display: none;
+}
+
+table.corner_H_item[num="20"] tr:nth-child{
+    display: table-row;
+}
+
+table.corner_A_item[num="10"] tr:nth-child(n+11),
+table.corner_A_item[num="10"] tr[ten="1"] ~ tr{
+    display: none;
+}
+
+table.corner_A_item[num="20"] tr:nth-child{
+    display: table-row;
+}
+
+
+div#Corner_Battle[league="0"][ha="0"] div.Corner_History_Content[league="0"][ha="0"],
+div#Corner_Battle[league="1"][ha="0"] div.Corner_History_Content[league="1"][ha="0"],
+div#Corner_Battle[league="0"][ha="1"] div.Corner_History_Content[league="0"][ha="1"],
+div#Corner_Battle[league="1"][ha="1"] div.Corner_History_Content[league="1"][ha="1"]{
+    display: block;
+}
+
+div.Corner_History_Content{
+    display: none;
+}
+
+table.corner_battle_item[num="10"] tr:nth-child(n+11),
+table.corner_battle_item[num="10"] tr[ten="1"] ~ tr{
+    display: none;
+}
+
+table.corner_battle_item[num="20"] tr:nth-child{
+    display: table-row;
+}
+
+div#History_A[num="10"] div.svgbox[num="10"],
+div#History_A[num="20"] div.svgbox[num="20"],
+div#History_H[num="10"] div.svgbox[num="10"],
+div#History_H[num="20"] div.svgbox[num="20"]{
+    display: block;
+}
+
+div.svgbox{
+    display: none;
+}
+
+div#LeftBar a.hide{
+    display: none;
+}
+
+div#LeftBar a.show{
+    display: block;
+}
+
+#Data .Border + .Border {
+    padding-top: 44px;
+    border-top: 1px solid #e6e6e6;
+}
+
+#Corner .history div.Border + .name {
+    padding-top: 44px;
+}
+
+span.blue, .default table th.blue, td.blue, p.blue {
+    color: #5fa4f3;
+}

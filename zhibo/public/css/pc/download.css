@@ -1,0 +1,39 @@
+body{
+	background: url(/img/pc/download_image_bg.jpg) no-repeat center top #ececec; background-size: auto 760px;
+}
+#Content{
+	padding: 510px 0 0; margin: 0;
+}
+#Content .code{
+	width: 194px; height: 194px;
+	margin-left: -308px;
+	background: url(/img/pc/phone_image_qr.png) no-repeat center top; background-size: 194px;
+	position: absolute; top: 230px; left: 50%;
+}
+#Content .code .img{
+	width: 108px; height: 108px;
+	padding: 30px; margin: 13px;
+	border-radius: 50%;
+	background: #fff;
+	display: block;
+}
+#Content .code img{
+	width: 108px; height:108px;
+}
+#Content .code p{
+	padding-top: 20px;
+	font-size: 22px; line-height: 22px; text-align: center; color: #fff;
+}
+#Content > img{
+	width: 180px; height: 180px;
+	margin: 0 auto;
+	display: block;
+}
+
+
+
+
+
+#Bottom, #Bottom a, a:link, a:visited, a:active{
+	color: #7d7d7d;
+}
