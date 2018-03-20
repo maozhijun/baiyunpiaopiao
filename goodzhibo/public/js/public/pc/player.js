@@ -547,12 +547,13 @@ function showWXCode (Text,Code) { //文字和二维码图片地址，文字可�
 
 function CloseWXCode () {
     var cookie_code = getCookie('LIVE_HD_CODE_KEY');
-    if (cookie_code != valid_code) {//判断是否也已经输入验证码，或者验证码是否正确
-        CKobject.getObjectById('ckplayer_a1').quitFullScreen();
-        ShowADCode();
-    }else{
-        CKobject.getObjectById('ckplayer_a1').textBoxClose('AttWX');
-    }
+    // if (cookie_code != valid_code) {//判断是否也已经输入验证码，或者验证码是否正确
+    //     CKobject.getObjectById('ckplayer_a1').quitFullScreen();
+    //     ShowADCode();
+    // }else{
+    //     CKobject.getObjectById('ckplayer_a1').textBoxClose('AttWX');
+    // }
+    CKobject.getObjectById('ckplayer_a1').textBoxClose('AttWX');
 }
 
 function ShowADCode () {

@@ -37,7 +37,7 @@
     window.host = window.location.host;
     window.isMobile = isMobileWithJS();
 </script>
-<script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/player.js?t=2018030300002"></script>
+<script type="text/javascript" src="{{env('CDN_URL')}}/js/public/pc/player.js?t=2018030300003"></script>
 <script>
     var _hmt = _hmt || [];
     (function() {
