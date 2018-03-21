@@ -59,7 +59,7 @@ class LiveDetailCommand extends Command
                 $mid = $match['mid'];
                 $m_time = strtotime($match['time']);
                 $sport = $match['sport'];
-                $after_time = $sport == MatchLive::kSportFootball ? 2 * 60 * 60 : 3 * 60 * 60;
+                $after_time = 0;//$sport == MatchLive::kSportFootball ? 2 * 60 * 60 : 3 * 60 * 60;
                 if (CommonTool::isExec(60 * 60, $after_time, $m_time)) {
                     //echo $match['time'] . '   ' . $sport .' url ' . $url_pre . $mid . '-' . $sport . '.html' . '...' ;
                     PlayerJsonCommand::execUrl($url_pre . $mid . '-' . $sport . '.html');

@@ -42,7 +42,7 @@
 <body>
 <div id="Navigation">
     <div class="inner">
-        <img class="icon" src="{{env('CDN_URL')}}/img/pc/logo_heitu.png">
+        <img style="cursor: pointer;" onclick="location.href = '/';" class="icon" src="{{env('CDN_URL')}}/img/bf_logo_n.png">
         <a class="column {{$nav == 'football' ? 'on' : ''}}" @if($nav != 'football') href="/football/immediate.html" @endif ><span>足球</span></a>
         <a class="column {{$nav == 'basketball' ? 'on' : ''}}" @if($nav != 'basketball') href="/basketball/immediate.html" @endif ><span>篮球</span></a>
         <a class="column {{$nav == 'lives' ? 'on' : ''}}" @if($nav != 'lives') href="/lives.html" @endif ><span>直播</span></a>

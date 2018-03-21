@@ -60,7 +60,7 @@ class MobileDetailCommand extends Command
                     }
                     $mid = $match['mid'];
                     $m_time = strtotime($match['time']);
-                    if (CommonTool::isExec(60 * 60, 3 * 60 * 60, $m_time)) {
+                    if (CommonTool::isExec(60 * 60, 0, $m_time)) {
                         PlayerJsonCommand::execUrl($url . $mid . '-1.html');
                     }
                 }
@@ -77,7 +77,7 @@ class MobileDetailCommand extends Command
                     }
                     $mid = $match['mid'];
                     $m_time = strtotime($match['time']);
-                    if (CommonTool::isExec(60 * 60, 4 * 60 * 60, $m_time)) {
+                    if (CommonTool::isExec(60 * 60, 0, $m_time)) {
                         PlayerJsonCommand::execUrl($url . $mid . '-2.html');
                     }
                 }

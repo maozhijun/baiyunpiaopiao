@@ -57,7 +57,7 @@ class PlayerJsonCommand extends Command
                     $m_time = strtotime($match['time']);
 
                     $flg1 = $now < $m_time && $now + 60 * 60 > $m_time;//比赛前一小时
-                    $flg2 = $now > $m_time && $m_time + 3 * 60 * 60 > $now;//比赛开始后3小时内
+                    $flg2 = false;//$now > $m_time && $m_time + 3 * 60 * 60 > $now;//比赛开始后3小时内
 
                     if ($flg1 || $flg2) {
                         $channels = $match['channels'];
