@@ -49,12 +49,19 @@ class OtherEncodesController extends BaseController
                     $execs[] = '-headers "' . $request->input('header3') . '"';
                 }
             }
-            $execs[] = '-i "' . $input . '"';
+            $execs[] = '-c:v h264_cuvid -i "' . $input . '"';
             $execs[] = '-vcodec h264_nvenc -acodec aac';
 
             if ($request->has('watermark')) {
                 $watermark = $request->input('watermark');
-                $vf = '-vf "format=yuv444p,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=fontfile=/root/Fangsong.ttf:text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12,format=yuv420p"';
+                $location = $request->input('location', 'top');
+                if ($location == 'top') {
+                    $vf = '-vf "format=yuv444p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12,format=yuv420p"';
+                } elseif ($location = 'bottom') {
+                    $vf = '-vf "format=yuv444p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=(ih-48):color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=(h-36),format=yuv420p"';
+                } else {
+                    $vf = '-vf "format=yuv444p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12,format=yuv420p"';
+                }
                 $execs[] = $vf;
                 //logo遮拦
                 //,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill
@@ -62,10 +69,10 @@ class OtherEncodesController extends BaseController
 
             $execs[] = '-f flv "' . $channel . '"';
             $date = date('YmdHis');
-            $execs[] = "> /tmp/ffmpeg/other-$date.log &";
+            $execs[] = "> /tmp/ffmpeg-other-$date.log &";
             $exec = join($execs, ' ');
 //            dump($exec);
-            exec("mkdir -p /tmp/ffmpeg/");
+//            exec("mkdir -p /tmp/ffmpeg/");
             shell_exec($exec);
             $pid = exec('pgrep -f "' . explode('?', $channel)[0] . '"');
 //            dump($pid);

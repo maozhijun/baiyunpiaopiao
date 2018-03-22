@@ -17,6 +17,13 @@ class FilterVerify
 {
     public function handle(Request $request, Closure $next)
     {
-        return response('编码系统不可用');
+        $output = [];
+        $result = 0;
+        exec('ffmpeg -version', $output, $result);
+        if ($result == 0 || env('APP_DEBUG') == 'true') {
+            return $next($request);
+        } else {
+            return response('编码系统不可用');
+        }
     }
 }

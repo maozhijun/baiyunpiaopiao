@@ -72,7 +72,14 @@ class QQEncodesController extends BaseController
             $input = $request->input('input');
             $watermark = $request->input('watermark');
 //            $vf = '-vf "format=yuv444p,drawbox=color=black:x=iw-180:y=20:width=170:height=30:t=fill,drawbox=y=ih/PHI:color=black@0.4:enable=lt(mod(t\,30)\,10):width=iw:height=48:t=fill,drawtext=fontfile=/root/Fangsong.ttf:text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=(h/PHI)+12:enable=lt(mod(t\,30)\,10),format=yuv420p"';
-            $vf = '-vf "format=yuv444p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=fontfile=/root/Fangsong.ttf:text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12,format=yuv420p"';
+            $location = $request->input('location', 'top');
+            if ($location == 'top') {
+                $vf = '-vf "format=yuv444p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12,format=yuv420p"';
+            } elseif ($location = 'bottom') {
+                $vf = '-vf "format=yuv444p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=(ih-48):color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=(h-36),format=yuv420p"';
+            } else {
+                $vf = '-vf "format=yuv444p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12,format=yuv420p"';
+            }
             $channel = $request->input('channel');
             list($type, $value) = explode('##', $channel);
             $rtmp = "";
@@ -90,8 +97,7 @@ class QQEncodesController extends BaseController
                 $output = "https://goodgame.ru/player?" . explode('?', $this->ggcdns[$value])[0];
             }
             $date = date('Y-m-d');
-            exec("mkdir -p /tmp/ffmpeg/$date/");
-            $exec = "nohup /usr/bin/ffmpeg -re $user_agent $referer $header -i \"$input\" $encodes $vf -f flv  \"$rtmp\" > /tmp/ffmpeg/$date/$channel.log &";
+            $exec = "nohup /usr/bin/ffmpeg -re $user_agent $referer $header -c:v h264_cuvid -i \"$input\" $encodes $vf -f flv  \"$rtmp\" > /tmp/ffmpeg-qq-$date-$channel.log &";
 //            dump($exec);
 //            dump($output);
             shell_exec($exec);
@@ -136,7 +142,7 @@ class QQEncodesController extends BaseController
 
     public function createdAliRoom(Request $request)
     {
-        $roomIds = ['10001','10002','10003','10004','10005','10006','10007','10008','10009','10010'];
+        $roomIds = ['10001', '10002', '10003', '10004', '10005', '10006', '10007', '10008', '10009', '10010'];
         $roomId = array_random($roomIds);
         $timestamp = time() + 10800;
         $sstring = $this->alicdns[$roomId] . "-$timestamp-0-0-" . $this->ali_key;

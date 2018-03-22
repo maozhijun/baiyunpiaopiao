@@ -25,6 +25,7 @@
             <ul class="nav nav-tabs">
                 <li role="presentation" class="active"><a href="/manager/hei/">黑土转码</a></li>
                 <li role="presentation"><a href="/manager/qq/">料狗转码</a></li>
+                <li role="presentation"><a href="/manager/other/">自定义转码</a></li>
             </ul>
             <br>
         </div>
@@ -37,8 +38,15 @@
                 </div>
                 <div class="form-group">
                     <label for="label-watermark">水印内容</label>
-                    <input name="watermark" type="text" value="看球网址：goodzhibo.com，微信搜索公众号【goodzhibo01】领取千元现金"
+                    <input name="watermark" type="text" value="足球专家微信：bet6879，篮球专家微信：bet8679a"
                            class="form-control" id="label-watermark">
+                </div>
+                <div class="form-group">
+                    <label for="label-watermark-location">水印位置</label>
+                    <select id="label-watermark-location" name="location" class="form-control">
+                        <option value="top">上面</option>
+                        <option value="bottom">下面</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="label-resource">源URL</label>

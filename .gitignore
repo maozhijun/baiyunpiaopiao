@@ -5,3 +5,5 @@ encodes/publish.sh
 encodes/publish.sh
 zhibo/storage/app
 zhibo/composer.lock
+
+*.sh
