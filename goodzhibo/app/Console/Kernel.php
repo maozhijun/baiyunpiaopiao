@@ -26,6 +26,7 @@ use App\Console\CacheCommands\LiveHtmlCommands;
 use App\Console\CacheCommands\MatchesDataCommands;
 use App\Console\CacheCommands\ResultHtmlCommands;
 use App\Console\CacheCommands\ScheduleHtmlCommands;
+use App\Console\Manual\FlushGoodZhiBoCommand;
 use App\Console\DetailCommands\Basketball\BasketImmediateHtmlCommands;
 use App\Console\DetailCommands\Basketball\BasketResultHtmlCommands;
 use App\Console\DetailCommands\Basketball\BasketScheduleHtmlCommands;
@@ -94,6 +95,7 @@ class Kernel extends ConsoleKernel
         TopicsDetailCommand::class, //帖子终端json静态化
         AccountInfoCommand::class,  //用户信息json静态化
         HasLiveCommand::class,//是否有直播定时任务
+        FlushGoodZhiBoCommand::class,//手动执行的定时任务
     ];
 
     /**
