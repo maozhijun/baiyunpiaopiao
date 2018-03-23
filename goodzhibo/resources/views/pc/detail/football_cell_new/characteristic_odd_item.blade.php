@@ -5,19 +5,19 @@ if (isset($data)){
     $lose = 0;
     switch ($count){
         case 10:
-            $win = $data['win10'];
-            $draw = $data['draw10'];
-            $lose = $data['lose10'];
+            $win = isset($data['win10']) ? $data['win10'] : 0;
+            $draw = isset($data['draw10']) ? $data['draw10'] : 0;
+            $lose = isset($data['draw10']) ? $data['draw10'] : 0;
             break;
         case 20:
-            $win = $data['win20'];
-            $draw = $data['draw20'];
-            $lose = $data['lose20'];
+            $win = isset($data['win20']) ? $data['win20'] : 0;
+            $draw = isset($data['draw20']) ? $data['draw20'] : 0;
+            $lose = isset($data['lose20']) ? $data['lose20'] : 0;
             break;
     }
 }
 ?>
-@if(isset($data))
+@if(isset($data) && isset($date['matches']))
     <?php
     $winText = '主赢';
     $drawText = '走水';

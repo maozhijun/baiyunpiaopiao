@@ -1,4 +1,4 @@
-@if(array_key_exists('h_lineup_per',$lineup) || array_key_exists('a_lineup_per',$lineup))
+@if(isset($lineup['h_lineup_per']) || isset($lineup['a_lineup_per']))
 <div class="first default" id="Match_First">
     <div class="title">
         <p>首发阵容</p>
@@ -6,7 +6,7 @@
     <div class="host">
         <div class="name">
             <p><span class="leagueRankA"></span>{{$match['hname']}}</p>
-            @if(array_key_exists('h_lineup_per',$lineup) && is_numeric($lineup['h_lineup_per']))
+            @if(isset($lineup['h_lineup_per']) && is_numeric($lineup['h_lineup_per']))
                 <p class="number">本场比赛有<b>{{number_format($lineup['h_lineup_per']*0.01*11,0)}}</b>名主力首发</p>
                 <dl>
                     <dt>（{{round($lineup['h_lineup_per'],2)}}%）</dt>
@@ -46,7 +46,7 @@
     <div class="away">
         <div class="name">
             <p><span class="leagueRankA"></span>{{$match['aname']}}</p>
-            @if(array_key_exists('a_lineup_per',$lineup))
+            @if(isset($lineup['a_lineup_per']))
                 <p class="number">本场比赛有<b>{{number_format($lineup['a_lineup_per']*0.01*11,0)}}</b>名主力首发</p>
                 <dl>
                     <dt>（{{round($lineup['a_lineup_per'],2)}}%）</dt>
