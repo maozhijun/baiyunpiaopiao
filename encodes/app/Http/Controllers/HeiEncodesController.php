@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 
 class HeiEncodesController extends BaseController
 {
-    private $ali_host = "hls.cdn.vcgood.net";
-    private $ali_key = "At7Trm3V0SgZ";
     private $ali_rtmp = "rtmp://video-center.alivecdn.com";
     private $alicdns = [
         'hei-1' => '/lives/hei-1',
@@ -17,11 +15,16 @@ class HeiEncodesController extends BaseController
         'hei-3' => '/lives/hei-3',
         'hei-4' => '/lives/hei-4',
         'hei-5' => '/lives/hei-5',
+        'hei-6' => '/lives/hei-6',
+        'hei-7' => '/lives/hei-7',
+        'hei-8' => '/lives/hei-8',
     ];
 
     public function __construct()
     {
-//        $this->middleware('filter')->except(['createdAliRoom']);
+        $this->middleware('filter')->except(['createdAliRoom']);
+        $this->ali_host = env('ALI_CDN_HOST', '');
+        $this->ali_key = env('ALI_CDN_KEY', '');
     }
 
     public function index(Request $request)

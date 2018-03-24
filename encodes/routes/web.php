@@ -14,17 +14,21 @@
 Route::match(["get", "post"], "/login", 'AuthController@index');//登录
 
 Route::group(["middleware" => "auth"], function () {
-    Route::get("/manager/", "QQEncodesController@index");
-
-    Route::get("/manager/qq/", "QQEncodesController@index");
-    Route::post("/manager/qq/created/", "QQEncodesController@created");
-    Route::get("/manager/qq/stop/{id}", "QQEncodesController@stop");
-    Route::get("/manager/ali-live-room", "QQEncodesController@createdAliRoom");
-
-    Route::get("/manager/hei/", "HeiEncodesController@index");
-    Route::post("/manager/hei/created/", "HeiEncodesController@created");
-    Route::get("/manager/hei/stop/{id}", "HeiEncodesController@stop");
-    Route::get("/manager/hei/ali-live-room", "HeiEncodesController@createdAliRoom");
+    if (env('APP_NAME') == 'good') {
+        Route::get("/manager/", "HeiEncodesController@index");
+        Route::get("/manager/hei/", "HeiEncodesController@index");
+        Route::post("/manager/hei/created/", "HeiEncodesController@created");
+        Route::get("/manager/hei/stop/{id}", "HeiEncodesController@stop");
+        Route::get("/manager/hei/ali-live-room", "HeiEncodesController@createdAliRoom");
+    } elseif (env('APP_NAME') == 'aikq') {
+        Route::get("/manager/", "QQEncodesController@index");
+        Route::get("/manager/qq/", "QQEncodesController@index");
+        Route::post("/manager/qq/created/", "QQEncodesController@created");
+        Route::get("/manager/qq/stop/{id}", "QQEncodesController@stop");
+        Route::get("/manager/ali-live-room", "QQEncodesController@createdAliRoom");
+    } else {
+        Route::get("/manager/", "OtherEncodesController@index");
+    }
 
     Route::get("/manager/other/", "OtherEncodesController@index");
     Route::post("/manager/other/created/", "OtherEncodesController@created");

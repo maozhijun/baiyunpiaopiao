@@ -15,7 +15,7 @@
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
     </button>
     <div class="navbar-header">
-        <a class="navbar-brand" href="/manager/">料狗转码(卫星信号，腾讯体育)</a>
+        <a class="navbar-brand" href="/manager/">推流后台</a>
     </div>
 </nav>
 
@@ -23,9 +23,13 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12">
             <ul class="nav nav-tabs">
-                <li role="presentation"><a href="/manager/hei/">黑土转码</a></li>
-                <li role="presentation"><a href="/manager/qq/">料狗转码</a></li>
+                @if(env('APP_NAME')=='good')
+                    <li role="presentation"><a href="/manager/hei/">黑土转码</a></li>
+                @elseif(env('APP_NAME')=='aikq')
+                    <li role="presentation"><a href="/manager/qq/">爱看球转码</a></li>
+                @endif
                 <li role="presentation" class="active"><a href="/manager/other/">自定义转码</a></li>
+                <li role="presentation"><a href="/manager/qie/">企鹅直播</a></li>
             </ul>
             <br>
         </div>

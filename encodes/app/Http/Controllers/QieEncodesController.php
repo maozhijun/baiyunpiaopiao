@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class QieEncodesController extends BaseController
 {
-
     private $channels = [
         '老铁扣波666##10061563##3c4068b47d194772',
     ];
@@ -109,8 +108,8 @@ class QieEncodesController extends BaseController
     {
         $et = EncodeTask::query()->find($id);
         if (isset($et)) {
-            $roomId = array_last(explode('##', $et->channel));
-            $this->closeLive($roomId);
+            $token = array_last(explode('##', $et->channel));
+            $this->closeLive($token);
 
             $pid = exec('pgrep -f "' . explode('?', $et->rtmp)[0] . '"');
             if (!empty($pid)) {

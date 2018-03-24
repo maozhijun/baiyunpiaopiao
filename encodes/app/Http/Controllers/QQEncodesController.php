@@ -8,10 +8,6 @@ use Illuminate\Http\Request;
 
 class QQEncodesController extends BaseController
 {
-//    private $ali_host = "hls.cdn.vcgood.net";
-//    private $ali_key = "6dUCKVycRs";
-    private $ali_host = "live.cdn.dlfyb.com";
-    private $ali_key = "XxOoJj88jJoOxX";
     private $ali_rtmp = "rtmp://video-center.alivecdn.com";
     private $gg_rtmp = "rtmp://msk.goodgame.ru:1940/live/";
     private $alicdns = [
@@ -41,6 +37,8 @@ class QQEncodesController extends BaseController
     public function __construct()
     {
         $this->middleware('filter')->except(['createdAliRoom']);
+        $this->ali_host = env('ALI_CDN_HOST', '');
+        $this->ali_key = env('ALI_CDN_KEY', '');
     }
 
     public function index(Request $request)

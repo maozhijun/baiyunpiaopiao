@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class OtherEncodesController extends BaseController
 {
-
     public function __construct()
     {
         $this->middleware('filter')->except([]);
