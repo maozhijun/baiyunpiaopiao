@@ -31,6 +31,7 @@
                 <li role="presentation" class="active"><a href="/manager/other/">自定义推流</a></li>
                 <li role="presentation"><a href="/manager/qie/">企鹅直播</a></li>
                 <li role="presentation"><a href="/manager/zhibo/">中国直播</a></li>
+                <li role="presentation"><a href="/manager/longzhu/">龙珠直播</a></li>
             </ul>
             <br>
         </div>

@@ -40,11 +40,16 @@ Route::group(["middleware" => "auth"], function () {
     Route::post("/manager/qie/created/", "QieEncodesController@created");
     Route::get("/manager/qie/stop/{id}", "QieEncodesController@stop");
     Route::get("/manager/qie/stopQie/{id}", "QieEncodesController@stopQie");
-//    Route::get("/manager/qie/test", "QieEncodesController@test");
+    Route::get("/manager/qie/test", "QieEncodesController@test");
 
     Route::get("/manager/zhibo/", "ZhiboEncodesController@index");
     Route::post("/manager/zhibo/created/", "ZhiboEncodesController@created");
     Route::get("/manager/zhibo/stop/{id}", "ZhiboEncodesController@stop");
+
+    Route::get("/manager/longzhu/", "LongzhuEncodesController@index");
+    Route::post("/manager/longzhu/created/", "LongzhuEncodesController@created");
+    Route::get("/manager/longzhu/stop/{id}", "LongzhuEncodesController@stop");
+    Route::get("/manager/longzhu/test", "LongzhuEncodesController@test");
 });
 
 //定时任务

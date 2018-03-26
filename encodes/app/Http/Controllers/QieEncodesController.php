@@ -70,18 +70,17 @@ class QieEncodesController extends BaseController
                         $watermark = $request->input('watermark');
                         $location = $request->input('location', 'top');
                         if ($location == 'top') {
-                            $vf = '-vf "format=yuv444p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12,format=yuv420p"';
+                            $vf = '-vf "scale=800:480,format=pix_fmts=yuv420p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12"';
                         } elseif ($location = 'bottom') {
-                            $vf = '-vf "format=yuv444p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=(ih-48):color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=(h-36),format=yuv420p"';
+                            $vf = '-vf "scale=800:480,format=pix_fmts=yuv420p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=(ih-48):color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=(h-36)"';
                         } else {
-                            $vf = '-vf "format=yuv444p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12,format=yuv420p"';
+                            $vf = '-vf "scale=800:480,format=pix_fmts=yuv420p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12"';
                         }
                         $execs[] = $vf;
-                        //logo遮拦
-                        //,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill
                     }
 
-                    $execs[] = '-f flv "' . $rtmp_url . '"';
+                    $execs[] = '-b:v:0 1200k -pixel_format yuv420p -s 800x480 -f flv "' . $rtmp_url . '"';
+
                     $date = date('YmdHis');
                     $execs[] = "> /tmp/ffmpeg-qie-$date.log &";
                     $exec = join($execs, ' ');
@@ -297,8 +296,8 @@ class QieEncodesController extends BaseController
         return '';
     }
 
-//    public function test()
-//    {
+    public function test()
+    {
 //        list($roomName, $roomId, $token) = explode('##', '老铁扣波666##10061563##3c4068b47d194772');
 //        $rtmp_json = $this->getRtmp($token);
 //        $fms_val = $rtmp_json['fms_val'];
@@ -311,5 +310,23 @@ class QieEncodesController extends BaseController
 //            dump($flvUrl);
 //            dump($m3u8Url);
 //        }
-//    }
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'http://www.zhangyu.tv/home/mychannel');
+//        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+        curl_setopt($ch, CURLOPT_COOKIE, 'u=1705905; p=1b083f34a16446c373e1e755fc7f1065;');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+        $response = curl_exec($ch);
+        if ($error = curl_error($ch)) {
+            die($error);
+        }
+        curl_close($ch);
+//        dump($response);
+        $rtmp_url = 'rtmp://upload.rtmp.kukuplay.com/live/' . explode('"', explode('直播码', $response)[1])[3];
+        dump($rtmp_url);
+        return '';
+    }
 }

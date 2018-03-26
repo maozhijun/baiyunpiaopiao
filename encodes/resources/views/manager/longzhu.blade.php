@@ -29,14 +29,14 @@
                     <li role="presentation"><a href="/manager/qq/">爱看球转码</a></li>
                 @endif
                 <li role="presentation"><a href="/manager/other/">自定义转码</a></li>
-                <li role="presentation" class="active"><a href="/manager/qie/">企鹅直播</a></li>
+                <li role="presentation"><a href="/manager/qie/">企鹅直播</a></li>
                 <li role="presentation"><a href="/manager/zhibo/">中国直播</a></li>
-                <li role="presentation"><a href="/manager/longzhu/">龙珠直播</a></li>
+                <li role="presentation" class="active"><a href="/manager/longzhu/">龙珠直播</a></li>
             </ul>
             <br>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-12">
-            <form action="/manager/qie/created/" method="post">
+            <form action="/manager/longzhu/created/" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="label-title">名称</label>
@@ -71,8 +71,8 @@
                     <label for="label-channel">直播间</label>
                     <select name="channel" class="form-control" id="label-channel">
                         @foreach($channels as $channel)
-                            @if(!$ets->contains('channel',$channel))
-                                <option value="{{ $channel }}">{{ $channel }}</option>
+                            @if(!$ets->contains('channel',explode('##',$channel)[0]))
+                                <option value="{{ $channel }}">{{ explode('##',$channel)[0] }}</option>
                             @endif
                         @endforeach
                     </select>
@@ -107,11 +107,7 @@
                             </td>
                             <td>
                                 @if($et->status == 1)
-                                    <a class="btn btn-xs btn-danger" href="/manager/qie/stop/{{ $et->id }}">停止</a>
-                                    <a class="btn btn-xs btn-danger" href="/manager/qie/stopQie/{{ $et->id }}">企鹅关播</a>
-                                @endif
-                                @if($et->status == 2)
-                                    <a class="btn btn-xs btn-danger" href="/manager/qie/stop/{{ $et->id }}">停止</a>
+                                    <a class="btn btn-xs btn-danger" href="/manager/longzhu/stop/{{ $et->id }}">停止</a>
                                 @endif
                             </td>
                         </tr>

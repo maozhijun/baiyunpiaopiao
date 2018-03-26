@@ -57,7 +57,7 @@ class ZhiboEncodesController extends BaseController
             $channel = $request->input('channel');
             list($roomName, $roomId) = explode('##', $channel);
             $rtmp_url = 'rtmp://stream.bo8.tv/8live/' . $roomId;//获取rtmp地址
-            $live_rtmp_url = 'rtmp://zhibo.tv/8live/' . $roomId;//播放rtmp地址
+            $live_rtmp_url = 'rtmp://live.zhibo.tv/8live/' . $roomId;//播放rtmp地址
             $live_m3u8_url = 'http://hls.live.zhibo.tv/8live/' . $roomId . '/index.m3u8';//播放m3u8地址
             $execs = ['nohup /usr/bin/ffmpeg -re'];
             if (starts_with($input, 'http')) {
@@ -82,18 +82,17 @@ class ZhiboEncodesController extends BaseController
                 $watermark = $request->input('watermark');
                 $location = $request->input('location', 'top');
                 if ($location == 'top') {
-                    $vf = '-vf "format=yuv444p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12,format=yuv420p"';
+                    $vf = '-vf "scale=800:480,format=pix_fmts=yuv420p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12"';
                 } elseif ($location = 'bottom') {
-                    $vf = '-vf "format=yuv444p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=(ih-48):color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=(h-36),format=yuv420p"';
+                    $vf = '-vf "scale=800:480,format=pix_fmts=yuv420p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=(ih-48):color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=(h-36)"';
                 } else {
-                    $vf = '-vf "format=yuv444p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12,format=yuv420p"';
+                    $vf = '-vf "scale=800:480,format=pix_fmts=yuv420p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12"';
                 }
                 $execs[] = $vf;
-                //logo遮拦
-                //,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill
             }
 
-            $execs[] = '-f flv "' . $rtmp_url . '"';
+            $execs[] = '-b:v:0 1200k -pixel_format yuv420p -s 800x480 -f flv "' . $rtmp_url . '"';
+
             $date = date('YmdHis');
             $execs[] = "> /tmp/ffmpeg-zhibo-$date.log &";
             $exec = join($execs, ' ');
