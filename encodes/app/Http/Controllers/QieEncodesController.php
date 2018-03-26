@@ -15,6 +15,10 @@ class QieEncodesController extends BaseController
     public function __construct()
     {
         $this->middleware('filter')->except([]);
+        if (env('APP_NAME') == 'good') {
+        } elseif (env('APP_NAME') == 'aikq') {
+            $this->channels[] = '老铁扣波666##10061563##3c4068b47d194772';
+        }
     }
 
     public function index(Request $request)
@@ -79,7 +83,7 @@ class QieEncodesController extends BaseController
 
                     $execs[] = '-f flv "' . $rtmp_url . '"';
                     $date = date('YmdHis');
-                    $execs[] = "> /tmp/ffmpeg-other-$date.log &";
+                    $execs[] = "> /tmp/ffmpeg-qie-$date.log &";
                     $exec = join($execs, ' ');
                     shell_exec($exec);
                     $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');
@@ -89,7 +93,7 @@ class QieEncodesController extends BaseController
                         $et->channel = $channel;
                         $et->input = $input;
                         $et->rtmp = $rtmp_url;
-                        $et->out = $flvUrl . "\n" . $m3u8Url;
+                        $et->out = $flvUrl . "\n\n" . $m3u8Url;
                         $et->from = 'Qie';
                         $et->to = 'Qie';
                         $et->status = 1;
@@ -293,19 +297,19 @@ class QieEncodesController extends BaseController
         return '';
     }
 
-    public function test()
-    {
-        list($roomName, $roomId, $token) = explode('##', '老铁扣波666##10061563##3c4068b47d194772');
-        $rtmp_json = $this->getRtmp($token);
-        $fms_val = $rtmp_json['fms_val'];
-        $rtmp_id = array_first(array_keys($rtmp_json['list']));
-        $rtmp_url = array_first(array_values($rtmp_json['list']));
-        if ($this->startLive($token, $fms_val, $rtmp_id)) {//开播成功
-            $flvUrl = $this->getFlv($roomId);
-            $m3u8Url = $this->getM3u8($roomId);
-            dump($rtmp_url);
-            dump($flvUrl);
-            dump($m3u8Url);
-        }
-    }
+//    public function test()
+//    {
+//        list($roomName, $roomId, $token) = explode('##', '老铁扣波666##10061563##3c4068b47d194772');
+//        $rtmp_json = $this->getRtmp($token);
+//        $fms_val = $rtmp_json['fms_val'];
+//        $rtmp_id = array_first(array_keys($rtmp_json['list']));
+//        $rtmp_url = array_first(array_values($rtmp_json['list']));
+//        if ($this->startLive($token, $fms_val, $rtmp_id)) {//开播成功
+//            $flvUrl = $this->getFlv($roomId);
+//            $m3u8Url = $this->getM3u8($roomId);
+//            dump($rtmp_url);
+//            dump($flvUrl);
+//            dump($m3u8Url);
+//        }
+//    }
 }

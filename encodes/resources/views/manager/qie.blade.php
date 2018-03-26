@@ -30,6 +30,7 @@
                 @endif
                 <li role="presentation"><a href="/manager/other/">自定义转码</a></li>
                 <li role="presentation" class="active"><a href="/manager/qie/">企鹅直播</a></li>
+                <li role="presentation"><a href="/manager/zhibo/">中国直播</a></li>
             </ul>
             <br>
         </div>
@@ -55,6 +56,15 @@
                 <div class="form-group">
                     <label for="label-resource">源URL</label>
                     <input name="input" type="text" class="form-control" id="label-resource">
+                    <label for="label-referer">Referer(Http源可选)</label>
+                    <input name="referer" type="text" class="form-control" id="label-referer">
+                    <label for="label-header1">Header1(Http源可选)</label>
+                    <input name="header1" type="text" class="form-control" id="label-header1"
+                           value="X-Requested-With:ShockwaveFlash/28.0.0.126">
+                    <label for="label-header2">Header2(Http源可选)</label>
+                    <input name="header2" type="text" class="form-control" id="label-header2">
+                    <label for="label-header3">Header3(Http源可选)</label>
+                    <input name="header3" type="text" class="form-control" id="label-header3">
                 </div>
                 <div class="form-group">
                     <label for="label-channel">直播间</label>
@@ -86,13 +96,13 @@
                             <td width="15%">{{ $et->name }}</td>
                             <td>{{ $et->channel }}</td>
                             <td width="50%">
-                                <textarea style="width:100%;" readonly>{{ $et->out }}</textarea>
+                                <textarea rows="6" style="width:100%;" readonly>{{ $et->out }}</textarea>
                             </td>
                             <td>
                                 {{ substr($et->created_at,5,11) }}
                             </td>
                             <td>
-                                <label class="label label-{{ $et->status>1?'success':'danger' }}">{{ $et->status>1?'正常':'停止' }}</label>
+                                <label class="label label-{{ $et->status >= 1?'success':'danger' }}">{{ $et->status >= 1?'正常':'停止' }}</label>
                             </td>
                             <td>
                                 @if($et->status == 1)

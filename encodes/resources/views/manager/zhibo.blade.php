@@ -28,14 +28,14 @@
                 @elseif(env('APP_NAME')=='aikq')
                     <li role="presentation"><a href="/manager/qq/">爱看球推流</a></li>
                 @endif
-                <li role="presentation" class="active"><a href="/manager/other/">自定义推流</a></li>
+                <li role="presentation"><a href="/manager/other/">自定义推流</a></li>
                 <li role="presentation"><a href="/manager/qie/">企鹅直播</a></li>
-                <li role="presentation"><a href="/manager/zhibo/">中国直播</a></li>
+                <li role="presentation" class="active"><a href="/manager/zhibo/">中国直播</a></li>
             </ul>
             <br>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-12">
-            <form action="/manager/other/created/" method="post">
+            <form action="/manager/zhibo/created/" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="label-title">名称</label>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="form-group">
                     <label for="label-watermark">水印内容</label>
-                    <input name="watermark" type="text" value="免费网址：aikq.cc，加微信【fs188fs】进群聊球抢红包赢iPhone X"
+                    <input name="watermark" type="text" value="免费看球网址：aikq.cc，加微信【fs188fs】进群聊球抢红包赢iPhone X"
                            class="form-control" id="label-watermark">
                 </div>
                 <div class="form-group">
@@ -54,7 +54,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="label-resource">源URL(支持HTTP,RTMP,UDP)</label>
+                    <label for="label-resource">源URL</label>
                     <input name="input" type="text" class="form-control" id="label-resource">
                     <label for="label-referer">Referer(Http源可选)</label>
                     <input name="referer" type="text" class="form-control" id="label-referer">
@@ -67,15 +67,16 @@
                     <input name="header3" type="text" class="form-control" id="label-header3">
                 </div>
                 <div class="form-group">
-                    <label for="label-channel">推送URL</label>
-                    <input name="channel" type="text" class="form-control" id="label-channel">
-                </div>
-                <div class="form-group">
-                    <label for="label-output">播放地址</label>
-                    <input name="output" type="text" class="form-control" id="label-output">
+                    <label for="label-channel">直播间</label>
+                    <select name="channel" class="form-control" id="label-channel">
+                        @foreach($channels as $channel)
+                            @if(!$ets->contains('channel',$channel))
+                                <option value="{{ $channel }}">{{ $channel }}</option>
+                            @endif
+                        @endforeach
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary">新建转码</button>
-                {{--<p>{{ $exec or '' }}</p>--}}
             </form>
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -101,11 +102,11 @@
                                 {{ substr($et->created_at,5,11) }}
                             </td>
                             <td>
-                                <label class="label label-{{ $et->status==1?'success':'danger' }}">{{ $et->status==1?'正常':'停止' }}</label>
+                                <label class="label label-{{ $et->status == 1?'success':'danger' }}">{{ $et->status == 1?'正常':'停止' }}</label>
                             </td>
                             <td>
-                                @if($et->status==1)
-                                    <a class="btn btn-xs btn-danger" href="/manager/other/stop/{{ $et->id }}">停止</a>
+                                @if($et->status == 1)
+                                    <a class="btn btn-xs btn-danger" href="/manager/zhibo/stop/{{ $et->id }}">停止</a>
                                 @endif
                             </td>
                         </tr>

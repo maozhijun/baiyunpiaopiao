@@ -30,6 +30,7 @@
                 @endif
                 <li role="presentation"><a href="/manager/other/">自定义转码</a></li>
                 <li role="presentation"><a href="/manager/qie/">企鹅直播</a></li>
+                <li role="presentation"><a href="/manager/zhibo/">中国直播</a></li>
             </ul>
             <br>
         </div>
@@ -95,7 +96,7 @@
                             <td width="15%">{{ $et->name }}</td>
                             <td>{{ $et->channel }}</td>
                             <td width="50%">
-                                <textarea style="width:100%;" readonly>{{ $et->out }}</textarea>
+                                <textarea rows="6" style="width:100%;" readonly>{{ $et->out }}</textarea>
                             </td>
                             <td>
                                 {{ substr($et->created_at,5,11) }}
