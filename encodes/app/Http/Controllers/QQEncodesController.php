@@ -8,8 +8,21 @@ use Illuminate\Http\Request;
 
 class QQEncodesController extends BaseController
 {
+    private $ali_host = "";
+    private $ali_key = "";
     private $ali_rtmp = "rtmp://video-center.alivecdn.com";
     private $gg_rtmp = "rtmp://msk.goodgame.ru:1940/live/";
+    private $ggcdns = [
+//        'aikanqiu188' => '141370?pwd=fe2cb6c6f525f295',
+        'aikanqiu888' => '141371?pwd=e424794ba6687601',
+        'aikanqiu168' => '141373?pwd=b876ef2042dd7474',
+        'sportslive001' => '140136?pwd=941cdfeddec09d20',
+//        'aizhibo188' => '141427?pwd=ab870a742642f687',
+        'aizhibo168' => '141428?pwd=72f23b1b5788d9d3',
+        'sportslive168' => '141443?pwd=4725d0025dd63ddb',
+//        'sportslive188' => '141444?pwd=fb038eb31899d412',
+        'aikanqiu001' => '141445?pwd=bcee1f58bbd860ba',
+    ];
     private $alicdns = [
         '10001' => '/lives/10001',
         '10002' => '/lives/10002',
@@ -21,17 +34,6 @@ class QQEncodesController extends BaseController
         '10008' => '/lives/10008',
         '10009' => '/lives/10009',
         '10010' => '/lives/10010',
-    ];
-    private $ggcdns = [
-//        'aikanqiu188' => '141370?pwd=fe2cb6c6f525f295',
-        'aikanqiu888' => '141371?pwd=e424794ba6687601',
-        'aikanqiu168' => '141373?pwd=b876ef2042dd7474',
-        'sportslive001' => '140136?pwd=941cdfeddec09d20',
-//        'aizhibo188' => '141427?pwd=ab870a742642f687',
-        'aizhibo168' => '141428?pwd=72f23b1b5788d9d3',
-        'sportslive168' => '141443?pwd=4725d0025dd63ddb',
-//        'sportslive188' => '141444?pwd=fb038eb31899d412',
-        'aikanqiu001' => '141445?pwd=bcee1f58bbd860ba',
     ];
 
     public function __construct()
@@ -63,50 +65,42 @@ class QQEncodesController extends BaseController
             && $request->has('name')
         ) {
             $name = str_replace(' ', '-', $request->input('name'));
-            $user_agent = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
-            $referer = '-headers "Referer:http://sports.qq.com/kbsweb/game.htm?mid=100000:1471287"';
-            $header = '-headers "X-Requested-With:ShockwaveFlash/28.0.0.126"';
-            $encodes = "-vcodec h264_nvenc -acodec aac";
             $input = $request->input('input');
-            $watermark = $request->input('watermark');
-//            $vf = '-vf "format=yuv444p,drawbox=color=black:x=iw-180:y=20:width=170:height=30:t=fill,drawbox=y=ih/PHI:color=black@0.4:enable=lt(mod(t\,30)\,10):width=iw:height=48:t=fill,drawtext=fontfile=/root/Fangsong.ttf:text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=(h/PHI)+12:enable=lt(mod(t\,30)\,10),format=yuv420p"';
-            $location = $request->input('location', 'top');
-            if ($location == 'top') {
-                $vf = '-vf "scale=800:480,format=pix_fmts=yuv420p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12"';
-            } elseif ($location = 'bottom') {
-                $vf = '-vf "scale=800:480,format=pix_fmts=yuv420p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=(ih-48):color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=(h-36)"';
-            } else {
-                $vf = '-vf "scale=800:480,format=pix_fmts=yuv420p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12"';
-            }
             $channel = $request->input('channel');
             list($type, $value) = explode('##', $channel);
-            $rtmp = "";
+            $rtmp_url = "";
             $output = "";
             if ($type == '阿里云') {
                 $timestamp = time() + 10800;
                 $sstring = $this->alicdns[$value] . "-$timestamp-0-0-" . $this->ali_key;
                 $auth_key = "$timestamp-0-0-" . md5($sstring);
-                $rtmp = $this->ali_rtmp . $this->alicdns[$value] . '?vhost=' . $this->ali_host . '&auth_key=' . $auth_key;
+                $rtmp_url = $this->ali_rtmp . $this->alicdns[$value] . '?vhost=' . $this->ali_host . '&auth_key=' . $auth_key;
                 $sstring = $this->alicdns[$value] . ".m3u8-$timestamp-0-0-" . $this->ali_key;
                 $auth_key = "$timestamp-0-0-" . md5($sstring);
                 $output = "http://" . $this->ali_host . $this->alicdns[$value] . ".m3u8?auth_key=" . $auth_key;
             } elseif ($type == 'GG') {
-                $rtmp = $this->gg_rtmp . $this->ggcdns[$value];
+                $rtmp_url = $this->gg_rtmp . $this->ggcdns[$value];
                 $output = "https://goodgame.ru/player?" . explode('?', $this->ggcdns[$value])[0];
             }
-            $date = date('Y-m-d');
-            $exec = "nohup /usr/bin/ffmpeg -re $user_agent $referer $header -c:v h264_cuvid -i \"$input\" $encodes $vf -b:v:0 1200k -pixel_format yuv420p -s 800x480 -f flv  \"$rtmp\" > /tmp/ffmpeg-qq-$date-$channel.log &";
-//            dump($exec);
-//            dump($output);
+
+            $fontsize = $request->input('fontsize', 20);
+            $watermark = $request->input('watermark', '');
+            $location = $request->input('location', 'top');
+            $has_logo = $request->input('logo');
+            $referer = $request->input('referer', '');
+            $header1 = $request->input('header1', '');
+            $header2 = $request->input('header2', '');
+            $header3 = $request->input('header3', '');
+            $exec = $this->generateFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $referer, $header1, $header2, $header3);
+
             shell_exec($exec);
-            $pid = exec('pgrep -f "' . explode('?', $rtmp)[0] . '"');
-//            dump($pid);
+            $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');
             if (!empty($pid)) {
                 $et = new EncodeTask();
                 $et->name = $name;
                 $et->channel = $channel;
                 $et->input = $input;
-                $et->rtmp = $rtmp;
+                $et->rtmp = $rtmp_url;
                 $et->out = $output;
                 $et->from = 'QQ';
                 $et->to = 'AIKQ';

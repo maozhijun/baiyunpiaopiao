@@ -59,43 +59,17 @@ class ZhiboEncodesController extends BaseController
             $rtmp_url = 'rtmp://stream.bo8.tv/8live/' . $roomId;//获取rtmp地址
             $live_rtmp_url = 'rtmp://live.zhibo.tv/8live/' . $roomId;//播放rtmp地址
             $live_m3u8_url = 'http://hls.live.zhibo.tv/8live/' . $roomId . '/index.m3u8';//播放m3u8地址
-            $execs = ['nohup /usr/bin/ffmpeg -re'];
-            if (starts_with($input, 'http')) {
-                $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
-                if (!empty($request->input('referer'))) {
-                    $execs[] = '-headers "Referer:' . $request->input('referer') . '"';
-                }
-                if (!empty($request->input('header1'))) {
-                    $execs[] = '-headers "' . $request->input('header1') . '"';
-                }
-                if (!empty($request->input('header2'))) {
-                    $execs[] = '-headers "' . $request->input('header2') . '"';
-                }
-                if (!empty($request->input('header3'))) {
-                    $execs[] = '-headers "' . $request->input('header3') . '"';
-                }
-            }
-            $execs[] = '-c:v h264_cuvid -i "' . $input . '"';
-            $execs[] = '-vcodec h264_nvenc -acodec aac';
 
-            if ($request->has('watermark')) {
-                $watermark = $request->input('watermark');
-                $location = $request->input('location', 'top');
-                if ($location == 'top') {
-                    $vf = '-vf "scale=800:480,format=pix_fmts=yuv420p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12"';
-                } elseif ($location = 'bottom') {
-                    $vf = '-vf "scale=800:480,format=pix_fmts=yuv420p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=(ih-48):color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=(h-36)"';
-                } else {
-                    $vf = '-vf "scale=800:480,format=pix_fmts=yuv420p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12"';
-                }
-                $execs[] = $vf;
-            }
+            $fontsize = $request->input('fontsize', 20);
+            $watermark = $request->input('watermark', '');
+            $location = $request->input('location', 'top');
+            $has_logo = $request->input('logo');
+            $referer = $request->input('referer', '');
+            $header1 = $request->input('header1', '');
+            $header2 = $request->input('header2', '');
+            $header3 = $request->input('header3', '');
+            $exec = $this->generateFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $referer, $header1, $header2, $header3);
 
-            $execs[] = '-b:v:0 1200k -pixel_format yuv420p -s 800x480 -f flv "' . $rtmp_url . '"';
-
-            $date = date('YmdHis');
-            $execs[] = "> /tmp/ffmpeg-zhibo-$date.log &";
-            $exec = join($execs, ' ');
             shell_exec($exec);
             $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');
             if (!empty($pid)) {
@@ -104,7 +78,7 @@ class ZhiboEncodesController extends BaseController
                 $et->channel = $channel;
                 $et->input = $input;
                 $et->rtmp = $rtmp_url;
-                $et->out = $live_rtmp_url . "\n\n" . $live_m3u8_url;
+                $et->out = $live_rtmp_url . "\n" . $live_m3u8_url;
                 $et->from = 'Zhibo';
                 $et->to = 'Zhibo';
                 $et->status = 1;

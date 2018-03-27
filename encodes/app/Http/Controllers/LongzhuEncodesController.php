@@ -55,49 +55,22 @@ class LongzhuEncodesController extends BaseController
                 if ($url['ext'] == 'flv') {
                     $live_url .= $url['securityUrl'];
                 } elseif ($url['ext'] == 'rtmp') {
-                    $live_url .= "\n\n" . $url['securityUrl'];
+                    $live_url .= "\n" . $url['securityUrl'];
                 } elseif ($url['ext'] == 'm3u8') {
-                    $live_url .= "\n\n" . $url['securityUrl'];
+                    $live_url .= "\n" . $url['securityUrl'];
                 }
             }
 
-            $execs = ['nohup /usr/bin/ffmpeg -re'];
-            if (starts_with($input, 'http')) {
-                $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
-                if (!empty($request->input('referer'))) {
-                    $execs[] = '-headers "Referer:' . $request->input('referer') . '"';
-                }
-                if (!empty($request->input('header1'))) {
-                    $execs[] = '-headers "' . $request->input('header1') . '"';
-                }
-                if (!empty($request->input('header2'))) {
-                    $execs[] = '-headers "' . $request->input('header2') . '"';
-                }
-                if (!empty($request->input('header3'))) {
-                    $execs[] = '-headers "' . $request->input('header3') . '"';
-                }
-            }
-            $execs[] = '-c:v h264_cuvid -i "' . $input . '"';
-            $execs[] = '-vcodec h264_nvenc -acodec aac';
+            $fontsize = $request->input('fontsize', 20);
+            $watermark = $request->input('watermark', '');
+            $location = $request->input('location', 'top');
+            $has_logo = $request->input('logo');
+            $referer = $request->input('referer', '');
+            $header1 = $request->input('header1', '');
+            $header2 = $request->input('header2', '');
+            $header3 = $request->input('header3', '');
+            $exec = $this->generateFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $referer, $header1, $header2, $header3);
 
-            if ($request->has('watermark')) {
-                $watermark = $request->input('watermark');
-                $location = $request->input('location', 'top');
-                if ($location == 'top') {
-                    $vf = '-vf "scale=800:480,format=pix_fmts=yuv420p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12"';
-                } elseif ($location = 'bottom') {
-                    $vf = '-vf "scale=800:480,format=pix_fmts=yuv420p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=(ih-48):color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=(h-36)"';
-                } else {
-                    $vf = '-vf "scale=800:480,format=pix_fmts=yuv420p,drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,drawbox=y=0:color=black@0.4:width=iw:height=48:t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=24:x=(w-tw)/2:y=12"';
-                }
-                $execs[] = $vf;
-            }
-
-            $execs[] = '-b:v:0 1200k -pixel_format yuv420p -s 800x480 -f flv "' . $rtmp_url . '"';
-
-            $date = date('YmdHis');
-            $execs[] = "> /tmp/ffmpeg-longzhu-$date.log &";
-            $exec = join($execs, ' ');
             shell_exec($exec);
             $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');
             if (!empty($pid)) {
