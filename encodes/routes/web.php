@@ -50,6 +50,10 @@ Route::group(["middleware" => "auth"], function () {
     Route::post("/manager/longzhu/created/", "LongzhuEncodesController@created");
     Route::get("/manager/longzhu/stop/{id}", "LongzhuEncodesController@stop");
     Route::get("/manager/longzhu/test", "LongzhuEncodesController@test");
+
+    Route::get("/manager/quanmin/", "QuanminEncodesController@index");
+    Route::post("/manager/quanmin/created/", "QuanminEncodesController@created");
+    Route::get("/manager/quanmin/stop/{id}", "QuanminEncodesController@stop");
 });
 
 //定时任务

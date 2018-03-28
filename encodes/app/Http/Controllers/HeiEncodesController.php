@@ -20,10 +20,12 @@ class HeiEncodesController extends BaseController
         'hei-6' => '/lives/hei-6',
         'hei-7' => '/lives/hei-7',
         'hei-8' => '/lives/hei-8',
+        'hei-9' => '/lives/hei-9',
     ];
 
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('filter')->except(['createdAliRoom']);
         $this->ali_host = env('ALI_CDN_HOST', '');
         $this->ali_key = env('ALI_CDN_KEY', '');

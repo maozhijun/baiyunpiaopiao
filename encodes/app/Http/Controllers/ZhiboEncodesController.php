@@ -12,6 +12,7 @@ class ZhiboEncodesController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('filter')->except([]);
         if (env('APP_NAME') == 'good') {
             $this->channels[] = '中国直播0##s_773580';

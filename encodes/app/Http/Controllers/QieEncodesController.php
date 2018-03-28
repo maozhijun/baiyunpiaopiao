@@ -12,6 +12,7 @@ class QieEncodesController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('filter')->except([]);
         if (env('APP_NAME') == 'good') {
 

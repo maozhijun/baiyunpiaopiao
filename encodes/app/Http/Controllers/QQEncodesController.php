@@ -38,6 +38,7 @@ class QQEncodesController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
         $this->middleware('filter')->except(['createdAliRoom']);
         $this->ali_host = env('ALI_CDN_HOST', '');
         $this->ali_key = env('ALI_CDN_KEY', '');

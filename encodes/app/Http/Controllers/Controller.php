@@ -3,9 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\View;
 
 class Controller extends BaseController
 {
+
+    public function __construct()
+    {
+        if (env('APP_NAME') == 'good') {
+            View::share('watermark', '足球专家微信：bet6879，篮球专家微信：bet8679a');
+        } elseif (env('APP_NAME') == 'aikq') {
+            View::share('watermark', '免费网址：aikq.cc，加微信【fs188fs】进群聊球抢红包赢iPhone X');
+        } else {
+            View::share('watermark', '');
+        }
+    }
+
     /**
      * 生成转码推流命令
      * @param string $input_uri 源地址

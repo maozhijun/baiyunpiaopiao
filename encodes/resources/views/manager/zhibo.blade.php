@@ -8,7 +8,7 @@
         </div>
         <div class="form-inline form-group">
             <label for="label-watermark">水印内容</label>
-            <input name="watermark" type="text" value="免费网址：aikq.cc，加微信【fs188fs】进群聊球抢红包赢iPhone X"
+            <input name="watermark" type="text" value="{{ $watermark }}"
                    class="form-control" id="label-watermark" size="60">
             <label for="label-watermark-location">水印位置</label>
             <select id="label-watermark-location" name="location" class="form-control">
