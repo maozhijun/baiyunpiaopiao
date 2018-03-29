@@ -7,7 +7,7 @@ use App\Models\EncodeTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class ZhiboEncodesController extends BaseController
+class VeryEncodesController extends BaseController
 {
     private $channels = [];
 
@@ -16,34 +16,34 @@ class ZhiboEncodesController extends BaseController
         parent::__construct();
         $this->middleware('filter')->except([]);
         if (env('APP_NAME') == 'good') {
-            $this->channels[] = '中国直播0##s_773580';
-            $this->channels[] = '中国直播1##s_773581';
-            $this->channels[] = '中国直播2##s_773582';
-            $this->channels[] = '中国直播3##s_773583';
-            $this->channels[] = '中国直播4##s_773584';
-            $this->channels[] = '中国直播5##s_773585';
-            $this->channels[] = '中国直播6##s_773586';
-            $this->channels[] = '中国直播7##s_773587';
-            $this->channels[] = '中国直播8##s_773588';
-            $this->channels[] = '中国直播9##s_773589';
+            $this->channels[] = '云端直播0##s_773580';
+            $this->channels[] = '云端直播1##s_773581';
+            $this->channels[] = '云端直播2##s_773582';
+            $this->channels[] = '云端直播3##s_773583';
+            $this->channels[] = '云端直播4##s_773584';
+            $this->channels[] = '云端直播5##s_773585';
+            $this->channels[] = '云端直播6##s_773586';
+            $this->channels[] = '云端直播7##s_773587';
+            $this->channels[] = '云端直播8##s_773588';
+            $this->channels[] = '云端直播9##s_773589';
         } elseif (env('APP_NAME') == 'aikq') {
-            $this->channels[] = '中国直播0##s_873580';
-            $this->channels[] = '中国直播1##s_873581';
-            $this->channels[] = '中国直播2##s_873582';
-            $this->channels[] = '中国直播3##s_873583';
-            $this->channels[] = '中国直播4##s_873584';
-            $this->channels[] = '中国直播5##s_873585';
-            $this->channels[] = '中国直播6##s_873586';
-            $this->channels[] = '中国直播7##s_873587';
-            $this->channels[] = '中国直播8##s_873588';
-            $this->channels[] = '中国直播9##s_873589';
+            $this->channels[] = '云端直播0##s_873580';
+            $this->channels[] = '云端直播1##s_873581';
+            $this->channels[] = '云端直播2##s_873582';
+            $this->channels[] = '云端直播3##s_873583';
+            $this->channels[] = '云端直播4##s_873584';
+            $this->channels[] = '云端直播5##s_873585';
+            $this->channels[] = '云端直播6##s_873586';
+            $this->channels[] = '云端直播7##s_873587';
+            $this->channels[] = '云端直播8##s_873588';
+            $this->channels[] = '云端直播9##s_873589';
         }
     }
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', 'Zhibo')->where('to', 'Zhibo')->where('status', '>=', 1)->get();
-        return view('manager.zhibo', ['ets' => $ets, 'channels' => $this->channels]);
+        $ets = EncodeTask::query()->where('from', 'Very')->where('to', 'Very')->where('status', '>=', 1)->get();
+        return view('manager.very', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
     public function created(Request $request)
@@ -58,9 +58,9 @@ class ZhiboEncodesController extends BaseController
 
             $channel = $request->input('channel');
             list($roomName, $roomId) = explode('##', $channel);
-            $rtmp_url = 'rtmp://stream.bo8.tv/8live/' . $roomId;//获取rtmp地址
-            $live_rtmp_url = 'rtmp://live.zhibo.tv/8live/' . $roomId;//播放rtmp地址
-            $live_m3u8_url = 'http://hls.live.zhibo.tv/8live/' . $roomId . '/index.m3u8';//播放m3u8地址
+            $rtmp_url = 'rtmp://push1.cdn.dlfyb.com/live/' . $roomId;//获取rtmp地址
+            $live_rtmp_url = 'http://flv1.cdn.dlfyb.com/live/' . $roomId . '.flv';//播放flv地址
+            $live_m3u8_url = 'http://hls1.cdn.dlfyb.com/live/' . $roomId . '.m3u8';//播放m3u8地址
 
             $fontsize = $request->input('fontsize', 20);
             $watermark = $request->input('watermark', '');
@@ -81,8 +81,8 @@ class ZhiboEncodesController extends BaseController
                 $et->input = $input;
                 $et->rtmp = $rtmp_url;
                 $et->out = $live_rtmp_url . "\n" . $live_m3u8_url;
-                $et->from = 'Zhibo';
-                $et->to = 'Zhibo';
+                $et->from = 'Very';
+                $et->to = 'Very';
                 $et->status = 1;
                 $et->save();
             }

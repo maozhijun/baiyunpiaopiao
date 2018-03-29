@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller as BaseController;
 use App\Models\EncodeTask;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class LongzhuEncodesController extends BaseController
 {
@@ -71,7 +72,7 @@ class LongzhuEncodesController extends BaseController
             $header2 = $request->input('header2', '');
             $header3 = $request->input('header3', '');
             $exec = $this->generateFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $referer, $header1, $header2, $header3);
-
+            Log::info($exec);
             shell_exec($exec);
             $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');
             if (!empty($pid)) {
