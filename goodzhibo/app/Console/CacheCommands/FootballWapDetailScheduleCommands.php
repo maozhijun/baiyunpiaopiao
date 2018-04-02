@@ -78,7 +78,7 @@ class FootballWapDetailScheduleCommands extends Command
             $date = date('Ymd', strtotime($start_time));
             FootballDetailController::curlToWapHtml($date, $id);
             $excIndex++;
-            sleep(1);
+            usleep(300);
         }
         //echo $excIndex . ',,' . json_encode($excArray);
         Redis::setEx($key, 4 * 60 * 60, json_encode($excArray));
