@@ -81,6 +81,6 @@ class FootballWapDetailScheduleCommands extends Command
             usleep(300);
         }
         //echo $excIndex . ',,' . json_encode($excArray);
-        Redis::setEx($key, 4 * 60 * 60, json_encode($excArray));
+        Redis::setEx($key, 5 * 60 * 60, json_encode($excArray));
     }
 }
