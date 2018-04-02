@@ -81,6 +81,6 @@ class FootballWapDetailResultCommands extends Command
             sleep(1);
         }
         //echo $excIndex . ',,' . json_encode($excArray);
-        Redis::setEx(self::PC_REDIS_KEY, 4 * 60 * 60, json_encode($excArray));
+        Redis::setEx(self::PC_REDIS_KEY, 5 * 60 * 60, json_encode($excArray));
     }
 }
