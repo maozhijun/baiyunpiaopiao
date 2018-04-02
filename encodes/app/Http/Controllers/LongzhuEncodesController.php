@@ -31,7 +31,7 @@ class LongzhuEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', 'Longzhu')->where('to', 'Longzhu')->where('status', '>=', 1)->get();
+        $ets = EncodeTask::query()->where('to', 'Longzhu')->where('status', '>=', 1)->get();
         return view('manager.longzhu', ['ets' => $ets, 'channels' => $this->channels]);
     }
 

@@ -7,7 +7,7 @@ use App\Models\EncodeTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class VeryEncodesController extends BaseController
+class KukuEncodesController extends BaseController
 {
     private $channels = [];
 
@@ -16,34 +16,23 @@ class VeryEncodesController extends BaseController
         parent::__construct();
         $this->middleware('filter')->except([]);
         if (env('APP_NAME') == 'good') {
-            $this->channels[] = '云端直播0##vod_3180361';
-            $this->channels[] = '云端直播1##vod_3180362';
-            $this->channels[] = '云端直播2##vod_3180363';
-            $this->channels[] = '云端直播3##vod_3180364';
-            $this->channels[] = '云端直播4##vod_3180365';
-            $this->channels[] = '云端直播5##vod_3180366';
-            $this->channels[] = '云端直播6##vod_3180367';
-            $this->channels[] = '云端直播7##vod_3180368';
-            $this->channels[] = '云端直播8##vod_3180369';
-            $this->channels[] = '云端直播9##vod_3180370';
         } elseif (env('APP_NAME') == 'aikq') {
-            $this->channels[] = '云端直播0##vod_3183361';
-            $this->channels[] = '云端直播1##vod_3183362';
-            $this->channels[] = '云端直播2##vod_3183363';
-            $this->channels[] = '云端直播3##vod_3183364';
-            $this->channels[] = '云端直播4##vod_3183365';
-            $this->channels[] = '云端直播5##vod_3183366';
-            $this->channels[] = '云端直播6##vod_3183367';
-            $this->channels[] = '云端直播7##vod_3183368';
-            $this->channels[] = '云端直播8##vod_3183369';
-            $this->channels[] = '云端直播9##vod_3183370';
+            $this->channels[] = '酷酷直播1##12163331_12163331';
+            $this->channels[] = '酷酷直播2##12163332_12163332';
+            $this->channels[] = '酷酷直播3##12163333_12163333';
+            $this->channels[] = '酷酷直播4##12163334_12163334';
+            $this->channels[] = '酷酷直播5##12163335_12163335';
+            $this->channels[] = '酷酷直播6##12163336_12163336';
+            $this->channels[] = '酷酷直播7##12163337_12163337';
+            $this->channels[] = '酷酷直播8##12163338_12163338';
+            $this->channels[] = '酷酷直播9##12163339_12163339';
         }
     }
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('to', 'Very')->where('status', '>=', 1)->get();
-        return view('manager.very', ['ets' => $ets, 'channels' => $this->channels]);
+        $ets = EncodeTask::query()->where('to', 'Kuku')->where('status', '>=', 1)->get();
+        return view('manager.kuku', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
     public function created(Request $request)
@@ -58,9 +47,9 @@ class VeryEncodesController extends BaseController
 
             $channel = $request->input('channel');
             list($roomName, $roomId) = explode('##', $channel);
-            $rtmp_url = 'rtmp://push.china0736.com/vod/' . $roomId;//获取rtmp地址
-            $live_rtmp_url = 'rtmp://live.china0736.com/vod/' . $roomId;//播放rtmp地址
-            $live_m3u8_url = 'http://hls.china0736.com/vod/' . $roomId . '.m3u8';//播放m3u8地址
+            $rtmp_url = 'rtmp://rtmp.zhubo123.com/kuxing/' . $roomId;//获取rtmp地址
+            $live_rtmp_url = 'rtmp://rtmplive.zhubo123.com/kuxing/' . $roomId;//播放rtmp地址
+            $live_m3u8_url = 'http://hlslive.zhubo123.com/kuxing/' . $roomId . '.m3u8';//播放m3u8地址
 
             $fontsize = $request->input('fontsize', 20);
             $watermark = $request->input('watermark', '');
@@ -81,8 +70,8 @@ class VeryEncodesController extends BaseController
                 $et->input = $input;
                 $et->rtmp = $rtmp_url;
                 $et->out = $live_rtmp_url . "\n" . $live_m3u8_url;
-                $et->from = 'Very';
-                $et->to = 'Very';
+                $et->from = 'Kuku';
+                $et->to = 'Kuku';
                 $et->status = 1;
                 $et->save();
             }

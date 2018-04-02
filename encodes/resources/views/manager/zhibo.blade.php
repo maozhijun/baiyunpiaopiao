@@ -5,6 +5,15 @@
         <div class="form-inline form-group">
             <label for="label-title">名称</label>
             <input name="name" type="text" class="form-control" id="label-title" size="40">
+            <label class="checkbox-logo">
+                <input name="logo" type="checkbox" id="checkbox-logo" value="1" checked> Logo挡板
+            </label>
+            <label for="label-size">分辨率</label>
+            <select name="size" class="form-control" id="label-size">
+                @foreach($sizes as $key=>$size)
+                    <option value="{{ $key }}">{{ $size['name'] }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-inline form-group">
             <label for="label-watermark">水印内容</label>
@@ -17,9 +26,6 @@
             </select>
             <label for="label-fontsize">字体大小</label>
             <input name="fontsize" type="text" value="{{ $fontsize }}" class="form-control" id="label-fontsize" size="4">
-            <label class="checkbox-logo">
-                <input name="logo" type="checkbox" id="checkbox-logo" value="1" checked> Logo挡板
-            </label>
         </div>
         <div class="form-inline form-group">
             <label for="label-resource">源地址</label>

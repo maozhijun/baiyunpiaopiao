@@ -24,7 +24,7 @@ class QieEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', 'Qie')->where('to', 'Qie')->where('status', '>=', 1)->get();
+        $ets = EncodeTask::query()->where('to', 'Qie')->where('status', '>=', 1)->get();
         return view('manager.qie', ['ets' => $ets, 'channels' => $this->channels]);
     }
 

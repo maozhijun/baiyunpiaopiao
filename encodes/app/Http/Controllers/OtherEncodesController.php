@@ -17,7 +17,7 @@ class OtherEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', 'Other')->where('to', 'Other')->where('status', 1)->get();
+        $ets = EncodeTask::query()->where('to', 'Other')->where('status', 1)->get();
         return view('manager.other', ['ets' => $ets]);
     }
 

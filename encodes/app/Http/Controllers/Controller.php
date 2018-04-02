@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\View;
 class Controller extends BaseController
 {
 
+    protected $sizes = [
+        'sd' => ['name' => '480p', 'w' => 800, 'h' => 480],
+        'md' => ['name' => '540p', 'w' => 900, 'h' => 540],
+        'hd' => ['name' => '720p', 'w' => 1200, 'h' => 720],
+        'hhd' => ['name' => '1080p', 'w' => 1800, 'h' => 1080],
+    ];
+
     public function __construct()
     {
         if (env('APP_NAME') == 'good') {
@@ -18,6 +25,7 @@ class Controller extends BaseController
             View::share('watermark', '');
         }
         View::share('fontsize', 18);
+        View::share('sizes', $this->sizes);
     }
 
     /**
@@ -27,7 +35,8 @@ class Controller extends BaseController
      * @param string $watermark 水印文案
      * @param int $fontsize 水印字体
      * @param string $location 水印位置
-     * @param bool $has_logo 是否有logo
+     * @param bool|string $has_logo 是否有logo
+     * @param string $size 分辨率
      * @param string $referer 源Referer
      * @param string $header1 源Http Header 1
      * @param string $header2 源Http Header 2
@@ -40,6 +49,7 @@ class Controller extends BaseController
                                          $fontsize = 20,
                                          $location = 'top',
                                          $has_logo = '1',
+                                         $size = 'md',
                                          $referer = '',
                                          $header1 = '',
                                          $header2 = '',
@@ -47,6 +57,10 @@ class Controller extends BaseController
     {
         if (empty($input_uri) || empty($rtmp_url)) {
             return '';
+        }
+        $size = $this->sizes[$size];
+        if (empty($size)) {
+            $size = $this->sizes['md'];
         }
         $execs = ['nohup /usr/bin/ffmpeg'];
         if (starts_with($input_uri, 'http')) {
@@ -73,16 +87,16 @@ class Controller extends BaseController
                 $logo_code = 'drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,';
             }
             if ($location == 'top') {
-                $vf = '-vf "scale=800:480,format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=0:color=black@0.4:width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2) . '"';
+                $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=0:color=black@0.4:width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2) . '"';
             } elseif ($location = 'bottom') {
-                $vf = '-vf "scale=800:480,format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=(ih-' . ($fontsize * 2) . '):color=black@0.4:width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=(h-' . ($fontsize + $fontsize / 2) . ')"';
+                $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=(ih-' . ($fontsize * 2) . '):color=black@0.4:width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=(h-' . ($fontsize + $fontsize / 2) . ')"';
             } else {
-                $vf = '-vf "scale=800:480,format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=0:color=black@0.4:width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2) . '"';
+                $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=0:color=black@0.4:width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2) . '"';
             }
             $execs[] = $vf;
         }
 
-        $execs[] = '-b:v:0 1200k -pixel_format yuv420p -s 800x480 -f flv "' . $rtmp_url . '"';
+        $execs[] = '-b:v:0 1200k -pixel_format yuv420p -s ' . $size['w'] . 'x' . $size['h'] . ' -f flv "' . $rtmp_url . '"';
 
         $date = date('YmdHis');
         $execs[] = ">> /tmp/ffmpeg-$date.log &";

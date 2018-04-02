@@ -1,6 +1,6 @@
 @extends('layouts.push')
 @section('content')
-    <form action="/manager/qq/created/" method="post">
+    <form action="/manager/kuku/created/" method="post">
         {{ csrf_field() }}
         <div class="form-inline form-group">
             <label for="label-title">名称</label>
@@ -25,7 +25,8 @@
                 <option value="bottom">下面</option>
             </select>
             <label for="label-fontsize">字体大小</label>
-            <input name="fontsize" type="text" value="{{ $fontsize }}" class="form-control" id="label-fontsize" size="4">
+            <input name="fontsize" type="text" value="{{ $fontsize }}" class="form-control" id="label-fontsize"
+                   size="4">
         </div>
         <div class="form-inline form-group">
             <label for="label-resource">源地址</label>
@@ -46,22 +47,13 @@
             <input name="header3" type="text" class="form-control" id="label-header3" size="50">
         </div>
         <div class="form-inline form-group">
-            <label for="label-channel">直播间</label>
+            <label for="label-channel">推流地址</label>
             <select name="channel" class="form-control" id="label-channel">
-                <optgroup label="阿里云">
-                    @foreach($alicdns as $key=>$value)
-                        @if(!$ets->contains('channel','阿里云##'.$key))
-                            <option value="阿里云##{{ $key }}">阿里云##{{ $key }}</option>
-                        @endif
-                    @endforeach
-                </optgroup>
-                <optgroup label="GG平台">
-                    @foreach($ggcdns as $key=>$value)
-                        @if(!$ets->contains('channel','GG##'.$key))
-                            <option value="GG##{{ $key }}">GG##{{ $key }}</option>
-                        @endif
-                    @endforeach
-                </optgroup>
+                @foreach($channels as $channel)
+                    @if(!$ets->contains('channel',$channel))
+                        <option value="{{ $channel }}">{{ $channel }}</option>
+                    @endif
+                @endforeach
             </select>
         </div>
         <button type="submit" class="btn btn-primary">新建转码</button>
@@ -90,11 +82,11 @@
                         {{ substr($et->created_at,5,11) }}
                     </td>
                     <td>
-                        <label class="label label-{{ $et->status==1?'success':'danger' }}">{{ $et->status==1?'正常':'停止' }}</label>
+                        <label class="label label-{{ $et->status == 1?'success':'danger' }}">{{ $et->status == 1?'正常':'停止' }}</label>
                     </td>
                     <td>
-                        @if($et->status==1)
-                            <a class="btn btn-xs btn-danger" href="/manager/qq/stop/{{ $et->id }}">停止</a>
+                        @if($et->status == 1)
+                            <a class="btn btn-xs btn-danger" href="/manager/kuku/stop/{{ $et->id }}">停止</a>
                         @endif
                     </td>
                 </tr>

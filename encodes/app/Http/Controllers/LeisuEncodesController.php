@@ -7,7 +7,7 @@ use App\Models\EncodeTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class VeryEncodesController extends BaseController
+class LeisuEncodesController extends BaseController
 {
     private $channels = [];
 
@@ -42,8 +42,28 @@ class VeryEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('to', 'Very')->where('status', '>=', 1)->get();
-        return view('manager.very', ['ets' => $ets, 'channels' => $this->channels]);
+        $LSLives = $this->getLeiSuLives();
+        $lives = [];
+        foreach ($LSLives['matches'] as $live) {
+            if ($live[10] == 1 && $live[2] <= 4) {
+                $lives[] = $live;
+            }
+        }
+        $leagues = $LSLives['events'];
+//        dump($lives);
+//        dump($leagues);
+        $ets = EncodeTask::query()->where('from', 'LS')->where('status', 1)->get();
+        return view('manager.leisu', ['lives' => $lives, 'leagues' => $leagues, 'ets' => $ets, 'channels' => $this->channels]);
+    }
+
+    public function getRtmp(Request $request, $id)
+    {
+        $pcurl = $this->getLeiSuLivestream($id);
+        if (!empty($pcurl)){
+            $rtmp = $this->getLeiSuRtmp($id, $pcurl);
+            return response($rtmp);
+        }
+        return response('404');
     }
 
     public function created(Request $request)
@@ -112,6 +132,85 @@ class VeryEncodesController extends BaseController
         return back();
     }
 
+    private function getLeiSuRtmp($id, $liveurl)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $liveurl);
+//        curl_setopt($ch, CURLOPT_COOKIE, 'SERVERID=e8e4d482877771492d8d82843185eeb8|1522664175|1522659461; public_token=leisu_test;');
+//        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Referer:http://live.leisu.com/stream-' . $id, 'Upgrade-Insecure-Requests:1']);
+        curl_setopt($ch, CURLINFO_CONTENT_TYPE, 'application/x-www-form-urlencoded');
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+//        curl_setopt($ch, CURLOPT_HEADER, true);
+        $response = curl_exec($ch);
+        if ($error = curl_error($ch)) {
+            die($error);
+        }
+        curl_close($ch);
+//        dump($response);
+        preg_match('#\"(rtmp://live\S+)\"#', $response, $matches);
+        if (!empty($matches)) {
+            return array_last($matches);
+        }
+        return '';
+    }
+
+    private function getLeiSuLivestream($id)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://api.leisu.com/api/livestream?app=0&platform=2&sid=' . $id . '&time=1522661124&type=1&ver=2.6.2');
+        curl_setopt($ch, CURLOPT_COOKIE, 'SERVERID=e8e4d482877771492d8d82843185eeb8|1522664175|1522659461; public_token=leisu_test;');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+        curl_setopt($ch, CURLINFO_CONTENT_TYPE, 'application/x-www-form-urlencoded');
+        curl_setopt($ch, CURLOPT_USERAGENT, "Sports/2.6.2 (iPhone; iOS 11.2.6; Scale/2.00)");
+        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+//        curl_setopt($ch, CURLOPT_HEADER, true);
+        $response = curl_exec($ch);
+        if ($error = curl_error($ch)) {
+            die($error);
+        }
+        curl_close($ch);
+//        dump($response);
+        $json = json_decode($response, true);
+//        dump($json);
+        if (isset($json) && !empty($json['url'])) {
+            return $json['url']['pc'];
+        } else {
+            return null;
+        }
+    }
+
+    private function getLeiSuLives()
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'https://api.leisu.com/app/live/live?app=0&lang=0&platform=2&ver=2.6.2');
+        curl_setopt($ch, CURLOPT_COOKIE, 'SERVERID=e8e4d482877771492d8d82843185eeb8|1522664175|1522659461; public_token=leisu_test;');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+        curl_setopt($ch, CURLINFO_CONTENT_TYPE, 'application/x-www-form-urlencoded');
+        curl_setopt($ch, CURLOPT_USERAGENT, "Sports/2.6.2 (iPhone; iOS 11.2.6; Scale/2.00)");
+        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+//        curl_setopt($ch, CURLOPT_HEADER, true);
+        $response = curl_exec($ch);
+        if ($error = curl_error($ch)) {
+            die($error);
+        }
+        curl_close($ch);
+//        dump($response);
+        $json = json_decode($response, true);
+//        dump($json);
+        if (isset($json) && !empty($json['matches'])) {
+            return $json;
+        } else {
+            return null;
+        }
+    }
 
     public function test()
     {

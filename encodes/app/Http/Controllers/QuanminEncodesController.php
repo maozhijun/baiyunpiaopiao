@@ -24,7 +24,7 @@ class QuanminEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', 'Quanmin')->where('to', 'Quanmin')->where('status', '>=', 1)->get();
+        $ets = EncodeTask::query()->where('to', 'Quanmin')->where('status', '>=', 1)->get();
         return view('manager.quanmin', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
