@@ -46,6 +46,10 @@ Route::group(["middleware" => "auth"], function () {
     Route::post("/manager/zhibo/created/", "ZhiboEncodesController@created");
     Route::get("/manager/zhibo/stop/{id}", "ZhiboEncodesController@stop");
 
+    Route::get("/manager/very/", "VeryEncodesController@index");
+    Route::post("/manager/very/created/", "VeryEncodesController@created");
+    Route::get("/manager/very/stop/{id}", "VeryEncodesController@stop");
+
     Route::get("/manager/longzhu/", "LongzhuEncodesController@index");
     Route::post("/manager/longzhu/created/", "LongzhuEncodesController@created");
     Route::get("/manager/longzhu/stop/{id}", "LongzhuEncodesController@stop");

@@ -16,7 +16,7 @@
                 <option value="bottom">下面</option>
             </select>
             <label for="label-fontsize">字体大小</label>
-            <input name="fontsize" type="text" value="20" class="form-control" id="label-fontsize" size="4">
+            <input name="fontsize" type="text" value="{{ $fontsize }}" class="form-control" id="label-fontsize" size="4">
             <label class="checkbox-logo">
                 <input name="logo" type="checkbox" id="checkbox-logo" value="1" checked> Logo挡板
             </label>

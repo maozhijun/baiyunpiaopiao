@@ -33,6 +33,7 @@
                     <li role="presentation" {{ starts_with(request()->path(),'manager/zhibo')?'class=active':'' }}><a href="/manager/zhibo/">中国直播</a></li>
                     <li role="presentation" {{ starts_with(request()->path(),'manager/qie')?'class=active':'' }}><a href="/manager/qie/">企鹅直播</a></li>
                     <li role="presentation" {{ starts_with(request()->path(),'manager/quanmin')?'class=active':'' }}><a href="/manager/quanmin/">全民直播</a></li>
+                    <li role="presentation" {{ starts_with(request()->path(),'manager/very')?'class=active':'' }}><a href="/manager/very/">云端直播</a></li>
             </ul>
             <br>
         </div>

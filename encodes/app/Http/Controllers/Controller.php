@@ -13,10 +13,11 @@ class Controller extends BaseController
         if (env('APP_NAME') == 'good') {
             View::share('watermark', '足球专家微信：bet6879，篮球专家微信：bet8679a');
         } elseif (env('APP_NAME') == 'aikq') {
-            View::share('watermark', '免费网址：aikq.cc，加微信【fs188fs】进群聊球抢红包赢iPhone X');
+            View::share('watermark', '看球网址：aikq.cc，加微信【fs188fs】进群聊球，每天188红包+每月送1台iPhone X');
         } else {
             View::share('watermark', '');
         }
+        View::share('fontsize', 18);
     }
 
     /**
@@ -47,7 +48,7 @@ class Controller extends BaseController
         if (empty($input_uri) || empty($rtmp_url)) {
             return '';
         }
-        $execs = ['nohup /usr/bin/ffmpeg -re'];
+        $execs = ['nohup /usr/bin/ffmpeg'];
         if (starts_with($input_uri, 'http')) {
             $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
             if (!empty($referer)) {

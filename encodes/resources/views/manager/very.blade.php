@@ -1,6 +1,6 @@
 @extends('layouts.push')
 @section('content')
-    <form action="/manager/other/created/" method="post">
+    <form action="/manager/very/created/" method="post">
         {{ csrf_field() }}
         <div class="form-inline form-group">
             <label for="label-title">名称</label>
@@ -40,15 +40,16 @@
             <input name="header3" type="text" class="form-control" id="label-header3" size="50">
         </div>
         <div class="form-inline form-group">
-            <label for="label-channel">推送地址</label>
-            <input name="channel" type="text" class="form-control" id="label-channel" size="120">
-        </div>
-        <div class="form-inline form-group">
-            <label for="label-output">播放地址</label>
-            <input name="output" type="text" class="form-control" id="label-output" size="120">
+            <label for="label-channel">推流地址</label>
+            <select name="channel" class="form-control" id="label-channel">
+                @foreach($channels as $channel)
+                    @if(!$ets->contains('channel',$channel))
+                        <option value="{{ $channel }}">{{ $channel }}</option>
+                    @endif
+                @endforeach
+            </select>
         </div>
         <button type="submit" class="btn btn-primary">新建转码</button>
-        {{--<p>{{ $exec or '' }}</p>--}}
     </form>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -74,11 +75,11 @@
                         {{ substr($et->created_at,5,11) }}
                     </td>
                     <td>
-                        <label class="label label-{{ $et->status==1?'success':'danger' }}">{{ $et->status==1?'正常':'停止' }}</label>
+                        <label class="label label-{{ $et->status == 1?'success':'danger' }}">{{ $et->status == 1?'正常':'停止' }}</label>
                     </td>
                     <td>
-                        @if($et->status==1)
-                            <a class="btn btn-xs btn-danger" href="/manager/other/stop/{{ $et->id }}">停止</a>
+                        @if($et->status == 1)
+                            <a class="btn btn-xs btn-danger" href="/manager/very/stop/{{ $et->id }}">停止</a>
                         @endif
                     </td>
                 </tr>
