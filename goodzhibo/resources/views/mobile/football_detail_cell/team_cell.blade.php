@@ -42,10 +42,14 @@
             $odd['down2'] = $match['goaldown2'];
         }
         ?>
+        @if(isset($base['cornerAnalyse']) && isset($base['cornerHistoryBattle']['historyBattle']) &&
+            isset($base['cornerHistoryBattle']['historyBattleResult']) && isset($base['cornerRecentBattle']))
             @component("mobile.cell.football_detail_corner",['base'=>$base, 'odd'=>$odd,
                     'hname'=>$match['hname'], 'aname'=>$match['aname'], 'hid'=>$match['hid'], 'aid'=>$match['aid'],
-                    'anaylse'=>$base['cornerAnalyse'], 'historyBattle'=>$base['cornerHistoryBattle']['historyBattle'], 'historyBattleResult'=>$base['cornerHistoryBattle']['historyBattleResult'], 'recentBattle'=>$base['cornerRecentBattle']])
+                    'anaylse'=>$base['cornerAnalyse'], 'historyBattle'=>$base['cornerHistoryBattle']['historyBattle'],
+                    'historyBattleResult'=>$base['cornerHistoryBattle']['historyBattleResult'], 'recentBattle'=>$base['cornerRecentBattle']])
             @endcomponent
+        @endif
     </div>
     <div class="bottom">
         <div class="btn">

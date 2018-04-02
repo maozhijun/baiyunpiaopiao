@@ -23,6 +23,9 @@ trait MatchDetailTool
      */
     private function matchDetailData($sport, $id, $name){
         $json = FileTool::getFileFromTerminal($sport, $id, $name);
+        if (isset($json)) {
+            $json = json_decode($json, true);
+        }
         if (!isset($json)) {
             $ch = curl_init();
             $url = env('MATCH_URL') . "/static/terminal/$sport/" . substr($id, 0, 2) . "/" . substr($id, 2, 2) . "/$id/$name.json";

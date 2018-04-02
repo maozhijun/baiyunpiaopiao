@@ -59,7 +59,7 @@ class FootballWapDetailResultCommands extends Command
             $json =$home->footballData($match_date);
         }
         $matches = isset($json['matches']) ? $json['matches'] : [];
-        $key = self::PC_REDIS_KEY . date('Ymd') . floor(date('H') / 4);
+        $key = self::PC_REDIS_KEY . date('Ymd') . floor(date('H') / 5);
         $excMidStr = Redis::get($key);
         $excArray = json_decode($excMidStr, true);;
         if (is_null($excArray)) {
@@ -68,7 +68,7 @@ class FootballWapDetailResultCommands extends Command
         $excIndex = 0;
         //每10分钟一次，一次缓存20场比赛。
         foreach ($matches as $match) {
-            if ($excIndex > 15) break;
+            if ($excIndex > 20) break;
             $id = $match['mid'];
             if (in_array($id, $excArray)) {
                 continue;

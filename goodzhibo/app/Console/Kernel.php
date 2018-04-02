@@ -149,8 +149,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('schedule_detail_cache:run')->everyTenMinutes();//每10分钟执行一次 每次缓存5个页面
         $schedule->command('result_detail_cache:run')->everyTenMinutes();//每10分钟执行一次 每次缓存5个页面
 
-        $schedule->command('wap_schedule_detail_cache:run')->everyTenMinutes();//每10分钟执行一次 每次缓存5个页面
-        $schedule->command('wap_result_detail_cache:run')->everyTenMinutes();//每10分钟执行一次 每次缓存5个页面
+        $schedule->command('wap_schedule_detail_cache:run')->everyFiveMinutes();//每10分钟执行一次 每次缓存20个页面
+        $schedule->command('wap_result_detail_cache:run')->everyFiveMinutes();//每10分钟执行一次 每次缓存20个页面
         ///////
 
         //$schedule->command('fb_detail_cache:run')->everyMinute();//足球即时比赛数据、赔率数据

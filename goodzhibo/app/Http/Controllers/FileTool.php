@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class FileTool extends Controller
@@ -34,7 +35,13 @@ class FileTool extends Controller
     private static function getFile($disk, $filePath) {
         $data = null;
         try {
-            $data = Storage::disk($disk)->get($filePath);
+            $public_path = public_path('static/' . $disk . $filePath);
+            //$storage_path = storage_path($disk.$filePath);
+            //dump($public_path);
+            //dump($storage_path);
+            //Log::info("public_path：" . $public_path);
+            //Log::info("storage_path：" . $storage_path);
+            $data = file_get_contents($public_path);//Storage::disk($disk)->get($filePath);
         } catch (\Exception $exception) {
 //            dump($exception->getMessage());
         }
