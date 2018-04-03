@@ -42,7 +42,8 @@ class OtherEncodesController extends BaseController
             $header1 = $request->input('header1', '');
             $header2 = $request->input('header2', '');
             $header3 = $request->input('header3', '');
-            $exec = $this->generateFfmpegCmd($input, $channel, $watermark, $fontsize, $location, $has_logo, $referer, $header1, $header2, $header3);
+            $size = $request->input('size', 'md');
+            $exec = $this->generateFfmpegCmd($input, $channel, $watermark, $fontsize, $location, $has_logo, $size, $referer, $header1, $header2, $header3);
             Log::info($exec);
             shell_exec($exec);
             $pid = exec('pgrep -f "' . explode('?', $channel)[0] . '"');

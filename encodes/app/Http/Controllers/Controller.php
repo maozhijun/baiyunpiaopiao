@@ -9,10 +9,10 @@ class Controller extends BaseController
 {
 
     protected $sizes = [
-        'sd' => ['name' => '480p', 'w' => 800, 'h' => 480],
-        'md' => ['name' => '540p', 'w' => 900, 'h' => 540],
-        'hd' => ['name' => '720p', 'w' => 1200, 'h' => 720],
-        'hhd' => ['name' => '1080p', 'w' => 1800, 'h' => 1080],
+        'sd' => ['name' => '480p', 'w' => 800, 'h' => 480, 'factor' => 1],
+        'md' => ['name' => '540p', 'w' => 900, 'h' => 540, 'factor' => 1.125],
+        'hd' => ['name' => '720p', 'w' => 1200, 'h' => 720, 'factor' => 1.5],
+        'hhd' => ['name' => '1080p', 'w' => 1800, 'h' => 1080, 'factor' => 2.25],
     ];
 
     public function __construct()
@@ -84,7 +84,7 @@ class Controller extends BaseController
         if (!empty($watermark)) {
             $logo_code = '';
             if (!empty($has_logo)) {
-                $logo_code = 'drawbox=color=black:x=iw-188:y=23:width=170:height=30:t=fill,';
+                $logo_code = 'drawbox=color=black:x=iw-(188*' . $size['factor'] . '):y=(23*' . $size['factor'] . '):width=(170*' . $size['factor'] . '):height=(30*' . $size['factor'] . '):t=fill,';
             }
             if ($location == 'top') {
                 $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=0:color=black@0.4:width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2) . '"';
@@ -96,7 +96,7 @@ class Controller extends BaseController
             $execs[] = $vf;
         }
 
-        $execs[] = '-b:v:0 1200k -pixel_format yuv420p -s ' . $size['w'] . 'x' . $size['h'] . ' -f flv "' . $rtmp_url . '"';
+        $execs[] = '-b:v:0 ' . (1200 * $size['factor']) . 'k -pixel_format yuv420p -s ' . $size['w'] . 'x' . $size['h'] . ' -f flv "' . $rtmp_url . '"';
 
         $date = date('YmdHis');
         $execs[] = ">> /tmp/ffmpeg-$date.log &";

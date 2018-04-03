@@ -21,8 +21,8 @@
                    class="form-control" id="label-watermark" size="60">
             <label for="label-watermark-location">水印位置</label>
             <select id="label-watermark-location" name="location" class="form-control">
-                <option value="top">上面</option>
                 <option value="bottom">下面</option>
+                <option value="top">上面</option>
             </select>
             <label for="label-fontsize">字体大小</label>
             <input name="fontsize" type="text" value="{{ $fontsize }}" class="form-control" id="label-fontsize" size="4">
@@ -34,16 +34,16 @@
         <div class="form-inline form-group">
             <label for="label-referer">Referer(Http源)</label>
             <input name="referer" type="text" class="form-control" id="label-referer"
-                   value="http://sports.qq.com/kbsweb/" size="50">
+                   value="http://sports.qq.com/kbsweb/" size="40">
             <label for="label-header1">Header1(Http源)</label>
             <input name="header1" type="text" class="form-control" id="label-header1"
-                   value="X-Requested-With:ShockwaveFlash/28.0.0.126" size="50">
+                   value="X-Requested-With:ShockwaveFlash/28.0.0.126" size="40">
         </div>
         <div class="form-inline form-group">
             <label for="label-header2">Header2(Http源)</label>
-            <input name="header2" type="text" class="form-control" id="label-header2" size="50">
+            <input name="header2" type="text" class="form-control" id="label-header2" size="40">
             <label for="label-header3">Header3(Http源)</label>
-            <input name="header3" type="text" class="form-control" id="label-header3" size="50">
+            <input name="header3" type="text" class="form-control" id="label-header3" size="40">
         </div>
         <div class="form-inline form-group">
             <label for="label-channel">推流地址</label>
