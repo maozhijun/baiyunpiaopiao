@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Push;
 
 use App\Http\Controllers\Controller as BaseController;
 use App\Models\EncodeTask;
@@ -25,7 +25,7 @@ class QieEncodesController extends BaseController
     public function index(Request $request)
     {
         $ets = EncodeTask::query()->where('to', 'Qie')->where('status', '>=', 1)->get();
-        return view('manager.qie', ['ets' => $ets, 'channels' => $this->channels]);
+        return view('manager.push.qie', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
     public function created(Request $request)

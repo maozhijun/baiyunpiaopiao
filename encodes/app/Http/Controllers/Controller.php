@@ -84,7 +84,7 @@ class Controller extends BaseController
         if (!empty($watermark)) {
             $logo_code = '';
             if (!empty($has_logo)) {
-                $logo_code = 'drawbox=color=black:x=iw-(188*' . $size['factor'] . '):y=(23*' . $size['factor'] . '):width=(170*' . $size['factor'] . '):height=(30*' . $size['factor'] . '):t=fill,';
+                $logo_code = 'drawbox=color=black:x=iw-(180*' . $size['factor'] . '):y=(20*' . $size['factor'] . '):width=(165*' . $size['factor'] . '):height=(30*' . $size['factor'] . '):t=fill,';
             }
             if ($location == 'top') {
                 $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=0:color=black@0.4:width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2) . '"';

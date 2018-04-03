@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Push;
 
 use App\Http\Controllers\Controller as BaseController;
 use App\Models\EncodeTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class KukuEncodesController extends BaseController
+class QuanminEncodesController extends BaseController
 {
     private $channels = [];
 
@@ -16,23 +16,16 @@ class KukuEncodesController extends BaseController
         parent::__construct();
         $this->middleware('filter')->except([]);
         if (env('APP_NAME') == 'good') {
+
         } elseif (env('APP_NAME') == 'aikq') {
-            $this->channels[] = '酷酷直播1##12163331_12163331';
-            $this->channels[] = '酷酷直播2##12163332_12163332';
-            $this->channels[] = '酷酷直播3##12163333_12163333';
-            $this->channels[] = '酷酷直播4##12163334_12163334';
-            $this->channels[] = '酷酷直播5##12163335_12163335';
-            $this->channels[] = '酷酷直播6##12163336_12163336';
-            $this->channels[] = '酷酷直播7##12163337_12163337';
-            $this->channels[] = '酷酷直播8##12163338_12163338';
-            $this->channels[] = '酷酷直播9##12163339_12163339';
+            $this->channels[] = '北极熊老铁##1910147888?key=c8c17467886fcfa53f96a0973fb0aa89';
         }
     }
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('to', 'Kuku')->where('status', '>=', 1)->get();
-        return view('manager.kuku', ['ets' => $ets, 'channels' => $this->channels]);
+        $ets = EncodeTask::query()->where('to', 'Quanmin')->where('status', '>=', 1)->get();
+        return view('manager.push.quanmin', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
     public function created(Request $request)
@@ -47,9 +40,9 @@ class KukuEncodesController extends BaseController
 
             $channel = $request->input('channel');
             list($roomName, $roomId) = explode('##', $channel);
-            $rtmp_url = 'rtmp://rtmp.zhubo123.com/kuxing/' . $roomId;//获取rtmp地址
-            $live_rtmp_url = 'rtmp://rtmplive.zhubo123.com/kuxing/' . $roomId;//播放rtmp地址
-            $live_m3u8_url = 'http://hlslive.zhubo123.com/kuxing/' . $roomId . '.m3u8';//播放m3u8地址
+            $rtmp_url = 'rtmp://up4.quanmin.tv/live/' . $roomId;//获取rtmp地址
+            $live_rtmp_url = 'https://liveal.quanmin.tv/live/' . explode('?', $roomId)[0] . '.flv';//播放rtmp地址
+            $live_m3u8_url = 'http://alhls.quanmin.tv/live/' . explode('?', $roomId)[0] . '.m3u8';//播放m3u8地址
 
             $fontsize = $request->input('fontsize', 20);
             $watermark = $request->input('watermark', '');
@@ -71,8 +64,8 @@ class KukuEncodesController extends BaseController
                 $et->input = $input;
                 $et->rtmp = $rtmp_url;
                 $et->out = $live_rtmp_url . "\n" . $live_m3u8_url;
-                $et->from = 'Kuku';
-                $et->to = 'Kuku';
+                $et->from = 'Quanmin';
+                $et->to = 'Quanmin';
                 $et->status = 1;
                 $et->save();
             }

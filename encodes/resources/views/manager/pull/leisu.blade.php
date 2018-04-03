@@ -19,10 +19,20 @@
                     <td>{{ date('Y-m-d H:i',$live[3]) }}</td>
                     <td>{!! $live[5][1].'&nbsp;VS&nbsp;'.$live[6][1] !!}</td>
                     <td>
-                        {{ $live[2] }}
+                        @if($live[2] == 1)
+                            <label class="label label-default">未开始</label>
+                        @elseif($live[2] == 2)
+                            <label class="label label-info">上半场</label>
+                        @elseif($live[2] == 3)
+                            <label class="label label-warning">中场</label>
+                        @elseif($live[2] == 4)
+                            <label class="label label-success">下半场</label>
+                        @else
+                            {{ $live[2] }}
+                        @endif
                     </td>
                     <td>
-                        <a href="/resources/leisu/get_rtmp/{{ $live[0] }}" target="_blank" title="右击复制地址">
+                        <a href="/resources/leisu/get_live_url/{{ $live[0] }}" target="_blank" title="右击复制地址">
                             获取RTMP地址
                         </a>
                     </td>

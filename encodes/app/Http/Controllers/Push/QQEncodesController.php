@@ -1,27 +1,41 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Push;
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller as BaseController;
 use App\Models\EncodeTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class HeiEncodesController extends BaseController
+class QQEncodesController extends BaseController
 {
     private $ali_host = "";
     private $ali_key = "";
     private $ali_rtmp = "rtmp://video-center.alivecdn.com";
+    private $gg_rtmp = "rtmp://msk.goodgame.ru:1940/live/";
+    private $ggcdns = [
+//        'aikanqiu188' => '141370?pwd=fe2cb6c6f525f295',
+        'aikanqiu888' => '141371?pwd=e424794ba6687601',
+        'aikanqiu168' => '141373?pwd=b876ef2042dd7474',
+        'sportslive001' => '140136?pwd=941cdfeddec09d20',
+//        'aizhibo188' => '141427?pwd=ab870a742642f687',
+        'aizhibo168' => '141428?pwd=72f23b1b5788d9d3',
+        'sportslive168' => '141443?pwd=4725d0025dd63ddb',
+//        'sportslive188' => '141444?pwd=fb038eb31899d412',
+        'aikanqiu001' => '141445?pwd=bcee1f58bbd860ba',
+    ];
     private $alicdns = [
-        'hei-1' => '/lives/hei-1',
-        'hei-2' => '/lives/hei-2',
-        'hei-3' => '/lives/hei-3',
-        'hei-4' => '/lives/hei-4',
-        'hei-5' => '/lives/hei-5',
-        'hei-6' => '/lives/hei-6',
-        'hei-7' => '/lives/hei-7',
-        'hei-8' => '/lives/hei-8',
-        'hei-9' => '/lives/hei-9',
+        '10001' => '/lives/10001',
+        '10002' => '/lives/10002',
+        '10003' => '/lives/10003',
+        '10004' => '/lives/10004',
+        '10005' => '/lives/10005',
+        '10006' => '/lives/10006',
+        '10007' => '/lives/10007',
+        '10008' => '/lives/10008',
+        '10009' => '/lives/10009',
+        '10010' => '/lives/10010',
     ];
 
     public function __construct()
@@ -34,13 +48,16 @@ class HeiEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('to', 'HEITU')->where('status', 1)->get();
+        $ets = EncodeTask::query()->where('to', 'AIKQ')->where('status', 1)->get();
+        $result['ets'] = $ets;
+        $result['ggcdns'] = $this->ggcdns;
         $user = session(AuthController::K_LOGIN_SESSION_KEY);
         if ($user['role'] == 'admin') {
-            return view('manager.hei', ['ets' => $ets, 'alicdns' => $this->alicdns]);
+            $result['alicdns'] = $this->alicdns;
         } else {
-            return view('manager.hei', ['ets' => $ets, 'alicdns' => []]);
+            $result['alicdns'] = [];
         }
+        return view('manager.push.qq', $result);
     }
 
     public function created(Request $request)
@@ -52,7 +69,6 @@ class HeiEncodesController extends BaseController
         ) {
             $name = str_replace(' ', '-', $request->input('name'));
             $input = $request->input('input');
-
             $channel = $request->input('channel');
             list($type, $value) = explode('##', $channel);
             $rtmp_url = "";
@@ -66,8 +82,8 @@ class HeiEncodesController extends BaseController
                 $auth_key = "$timestamp-0-0-" . md5($sstring);
                 $output = "http://" . $this->ali_host . $this->alicdns[$value] . ".m3u8?auth_key=" . $auth_key;
             } elseif ($type == 'GG') {
-//                $rtmp = $this->gg_rtmp . $this->ggcdns[$value];
-//                $output = "https://goodgame.ru/player?" . explode('?', $this->ggcdns[$value])[0];
+                $rtmp_url = $this->gg_rtmp . $this->ggcdns[$value];
+                $output = "https://goodgame.ru/player?" . explode('?', $this->ggcdns[$value])[0];
             }
 
             $fontsize = $request->input('fontsize', 20);
@@ -83,7 +99,6 @@ class HeiEncodesController extends BaseController
             Log::info($exec);
             shell_exec($exec);
             $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');
-//            dump($pid);
             if (!empty($pid)) {
                 $et = new EncodeTask();
                 $et->name = $name;
@@ -92,7 +107,7 @@ class HeiEncodesController extends BaseController
                 $et->rtmp = $rtmp_url;
                 $et->out = $output;
                 $et->from = 'QQ';
-                $et->to = 'HEITU';
+                $et->to = 'AIKQ';
                 $et->status = 1;
                 $et->save();
             }
@@ -123,13 +138,20 @@ class HeiEncodesController extends BaseController
 
     public function createdAliRoom(Request $request)
     {
+        $roomIds = ['10001', '10002', '10003', '10004', '10005', '10006', '10007', '10008', '10009', '10010'];
+        $roomId = array_random($roomIds);
         $timestamp = time() + 10800;
-        $sstring = $this->alicdns['hei-3'] . "-$timestamp-0-0-" . $this->ali_key;
+        $sstring = $this->alicdns[$roomId] . "-$timestamp-0-0-" . $this->ali_key;
         $auth_key = "$timestamp-0-0-" . md5($sstring);
-        $rtmp = $this->ali_rtmp . $this->alicdns['hei-3'] . '?vhost=' . $this->ali_host . '&auth_key=' . $auth_key;
-        $sstring = $this->alicdns['hei-3'] . ".m3u8-$timestamp-0-0-" . $this->ali_key;
+        $rtmp = $this->ali_rtmp . $this->alicdns[$roomId] . '?vhost=' . $this->ali_host . '&auth_key=' . $auth_key;
+
+        $sstring = $this->alicdns[$roomId] . ".m3u8-$timestamp-0-0-" . $this->ali_key;
         $auth_key = "$timestamp-0-0-" . md5($sstring);
-        $output = "http://" . $this->ali_host . $this->alicdns['hei-3'] . ".m3u8?auth_key=" . $auth_key;
-        echo $rtmp . '<br>' . $output;
+        $output_m3u8 = "http://" . $this->ali_host . $this->alicdns[$roomId] . ".m3u8?auth_key=" . $auth_key;
+
+        $sstring = $this->alicdns[$roomId] . ".flv-$timestamp-0-0-" . $this->ali_key;
+        $auth_key = "$timestamp-0-0-" . md5($sstring);
+        $output_flv = "http://" . $this->ali_host . $this->alicdns[$roomId] . ".flv?auth_key=" . $auth_key;
+        echo $rtmp . '<br>' . $output_m3u8 . '<br>' . $output_flv;
     }
 }

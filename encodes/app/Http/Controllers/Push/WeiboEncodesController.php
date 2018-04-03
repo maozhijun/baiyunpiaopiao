@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Push;
 
 use App\Http\Controllers\Controller as BaseController;
 use App\Models\EncodeTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class ZhiboEncodesController extends BaseController
+class WeiboEncodesController extends BaseController
 {
     private $channels = [];
 
@@ -16,34 +16,23 @@ class ZhiboEncodesController extends BaseController
         parent::__construct();
         $this->middleware('filter')->except([]);
         if (env('APP_NAME') == 'good') {
-            $this->channels[] = '中国直播0##s_773580';
-            $this->channels[] = '中国直播1##s_773581';
-            $this->channels[] = '中国直播2##s_773582';
-            $this->channels[] = '中国直播3##s_773583';
-            $this->channels[] = '中国直播4##s_773584';
-            $this->channels[] = '中国直播5##s_773585';
-            $this->channels[] = '中国直播6##s_773586';
-            $this->channels[] = '中国直播7##s_773587';
-            $this->channels[] = '中国直播8##s_773588';
-            $this->channels[] = '中国直播9##s_773589';
         } elseif (env('APP_NAME') == 'aikq') {
-            $this->channels[] = '中国直播0##s_873580';
-            $this->channels[] = '中国直播1##s_873581';
-            $this->channels[] = '中国直播2##s_873582';
-            $this->channels[] = '中国直播3##s_873583';
-            $this->channels[] = '中国直播4##s_873584';
-            $this->channels[] = '中国直播5##s_873585';
-            $this->channels[] = '中国直播6##s_873586';
-            $this->channels[] = '中国直播7##s_873587';
-            $this->channels[] = '中国直播8##s_873588';
-            $this->channels[] = '中国直播9##s_873589';
+            $this->channels[] = '微博直播3##a373bf0f54fb7af96ccdee26da2e333f?auth_key=1523248893-0-0-b43875786b3f26e420086f64ceb0079e';
+            $this->channels[] = '微博直播4##bd96ebcee8163a354765023e2233c6a9?auth_key=1523248979-0-0-b7a0460075ea05ae379427b01ed4ff3b';
+            $this->channels[] = '微博直播5##6e4b8cb076e781fc6441559d1f240df8?auth_key=1523249016-0-0-d5de2d7330d2d50cd7e1f3826722c409';
+            $this->channels[] = '微博直播6##0caf46e2a0a49f4dd88e0eb49673ccf5?auth_key=1523249067-0-0-f57da90f1f1c667c35f8214fc1180d15';
+            $this->channels[] = '微博直播7##69f18fd96b68724ddbb6f92dd8e09c17?auth_key=1523249108-0-0-97166bc840f48f883fd4fe32e68fb5fc';
+            $this->channels[] = '微博直播8##93cc150f6a8061e0bc5320bd816246a6?auth_key=1523249151-0-0-4c48d1706472bb60735d272b77e3cc04';
+            $this->channels[] = '微博直播9##9246a027a69d9d987b2bbadb6168bd10?auth_key=1523249190-0-0-bebd62a82416fa42971a36c0aa5c10ba';
+//            $this->channels[] = '微博直播1##0b22872125a654d6f377a57aaa985f62?auth_key=1522836208-0-0-799c578571c2d9827df425ddbffaf82c';
+//            $this->channels[] = '微博直播2##e48c8c66077fb1e584c9277d697d4df5?auth_key=1522858370-0-0-a49051ecce80e4ddfaf3911c499a80e7';
         }
     }
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('to', 'Zhibo')->where('status', '>=', 1)->get();
-        return view('manager.zhibo', ['ets' => $ets, 'channels' => $this->channels]);
+        $ets = EncodeTask::query()->where('to', 'Weibo')->where('status', '>=', 1)->get();
+        return view('manager.push.weibo', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
     public function created(Request $request)
@@ -58,9 +47,9 @@ class ZhiboEncodesController extends BaseController
 
             $channel = $request->input('channel');
             list($roomName, $roomId) = explode('##', $channel);
-            $rtmp_url = 'rtmp://stream.bo8.tv/8live/' . $roomId;//获取rtmp地址
-            $live_rtmp_url = 'rtmp://live.zhibo.tv/8live/' . $roomId;//播放rtmp地址
-            $live_m3u8_url = 'http://hls.live.zhibo.tv/8live/' . $roomId . '/index.m3u8';//播放m3u8地址
+            $rtmp_url = 'rtmp://ps.live.weibo.com/alicdn/' . $roomId;//获取rtmp地址
+            $live_rtmp_url = 'rtmp://pl.live.weibo.com/alicdn/' . explode('?', $roomId)[0] . '_wb720';//播放rtmp地址
+            $live_m3u8_url = 'https://pl.live.weibo.com/alicdn/' . explode('?', $roomId)[0] . '_wb720.m3u8';//播放m3u8地址
 
             $fontsize = $request->input('fontsize', 20);
             $watermark = $request->input('watermark', '');
@@ -82,8 +71,8 @@ class ZhiboEncodesController extends BaseController
                 $et->input = $input;
                 $et->rtmp = $rtmp_url;
                 $et->out = $live_rtmp_url . "\n" . $live_m3u8_url;
-                $et->from = 'Zhibo';
-                $et->to = 'Zhibo';
+                $et->from = 'Weibo';
+                $et->to = 'Weibo';
                 $et->status = 1;
                 $et->save();
             }

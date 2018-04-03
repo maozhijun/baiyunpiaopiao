@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Push;
 
 use App\Http\Controllers\Controller as BaseController;
 use App\Models\EncodeTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class QuanminEncodesController extends BaseController
+class ZhiboEncodesController extends BaseController
 {
     private $channels = [];
 
@@ -16,16 +16,34 @@ class QuanminEncodesController extends BaseController
         parent::__construct();
         $this->middleware('filter')->except([]);
         if (env('APP_NAME') == 'good') {
-
+            $this->channels[] = '中国直播0##s_773580';
+            $this->channels[] = '中国直播1##s_773581';
+            $this->channels[] = '中国直播2##s_773582';
+            $this->channels[] = '中国直播3##s_773583';
+            $this->channels[] = '中国直播4##s_773584';
+            $this->channels[] = '中国直播5##s_773585';
+            $this->channels[] = '中国直播6##s_773586';
+            $this->channels[] = '中国直播7##s_773587';
+            $this->channels[] = '中国直播8##s_773588';
+            $this->channels[] = '中国直播9##s_773589';
         } elseif (env('APP_NAME') == 'aikq') {
-            $this->channels[] = '北极熊老铁##1910147888?key=c8c17467886fcfa53f96a0973fb0aa89';
+            $this->channels[] = '中国直播0##s_873580';
+            $this->channels[] = '中国直播1##s_873581';
+            $this->channels[] = '中国直播2##s_873582';
+            $this->channels[] = '中国直播3##s_873583';
+            $this->channels[] = '中国直播4##s_873584';
+            $this->channels[] = '中国直播5##s_873585';
+            $this->channels[] = '中国直播6##s_873586';
+            $this->channels[] = '中国直播7##s_873587';
+            $this->channels[] = '中国直播8##s_873588';
+            $this->channels[] = '中国直播9##s_873589';
         }
     }
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('to', 'Quanmin')->where('status', '>=', 1)->get();
-        return view('manager.quanmin', ['ets' => $ets, 'channels' => $this->channels]);
+        $ets = EncodeTask::query()->where('to', 'Zhibo')->where('status', '>=', 1)->get();
+        return view('manager.push.zhibo', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
     public function created(Request $request)
@@ -40,9 +58,9 @@ class QuanminEncodesController extends BaseController
 
             $channel = $request->input('channel');
             list($roomName, $roomId) = explode('##', $channel);
-            $rtmp_url = 'rtmp://up4.quanmin.tv/live/' . $roomId;//获取rtmp地址
-            $live_rtmp_url = 'https://liveal.quanmin.tv/live/' . explode('?', $roomId)[0] . '.flv';//播放rtmp地址
-            $live_m3u8_url = 'http://alhls.quanmin.tv/live/' . explode('?', $roomId)[0] . '.m3u8';//播放m3u8地址
+            $rtmp_url = 'rtmp://stream.bo8.tv/8live/' . $roomId;//获取rtmp地址
+            $live_rtmp_url = 'rtmp://live.zhibo.tv/8live/' . $roomId;//播放rtmp地址
+            $live_m3u8_url = 'http://hls.live.zhibo.tv/8live/' . $roomId . '/index.m3u8';//播放m3u8地址
 
             $fontsize = $request->input('fontsize', 20);
             $watermark = $request->input('watermark', '');
@@ -64,8 +82,8 @@ class QuanminEncodesController extends BaseController
                 $et->input = $input;
                 $et->rtmp = $rtmp_url;
                 $et->out = $live_rtmp_url . "\n" . $live_m3u8_url;
-                $et->from = 'Quanmin';
-                $et->to = 'Quanmin';
+                $et->from = 'Zhibo';
+                $et->to = 'Zhibo';
                 $et->status = 1;
                 $et->save();
             }

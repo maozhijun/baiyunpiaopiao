@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Pull;
 
 use App\Http\Controllers\Controller as BaseController;
 use App\Models\EncodeTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class LeisuEncodesController extends BaseController
+class SSportsEncodesController extends BaseController
 {
     private $channels = [];
 
@@ -42,28 +42,25 @@ class LeisuEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $LSLives = $this->getLeiSuLives();
+        $SSLives = $this->getSSportsLives();
         $lives = [];
-        foreach ($LSLives['matches'] as $live) {
-            if ($live[10] == 1 && $live[2] <= 4) {
+        foreach ($SSLives as $live) {
+            if (isset($live['matchId'])) {
                 $lives[] = $live;
             }
         }
-        $leagues = $LSLives['events'];
-//        dump($lives);
-//        dump($leagues);
-        $ets = EncodeTask::query()->where('from', 'LS')->where('status', 1)->get();
-        return view('manager.leisu', ['lives' => $lives, 'leagues' => $leagues, 'ets' => $ets, 'channels' => $this->channels]);
+        $ets = EncodeTask::query()->where('from', 'SS')->where('status', 1)->get();
+        return view('manager.pull.ssports', ['lives' => $lives, 'ets' => $ets, 'channels' => $this->channels]);
     }
 
-    public function getRtmp(Request $request, $id)
+    public function getLiveUrl(Request $request, $id)
     {
-        $pcurl = $this->getLeiSuLivestream($id);
-        if (!empty($pcurl)){
-            $rtmp = $this->getLeiSuRtmp($id, $pcurl);
-            return response($rtmp);
+        $keys = $this->getSSKeys($id);
+        $lines = $this->getSSM3U8Lines($id, $keys);
+        if (!empty($lines)) {
+            return view('manager.pull.ssports_lines', ['lines' => $lines]);
         }
-        return response('404');
+        return response('信号还在路上，等会再来看看！');
     }
 
     public function created(Request $request)
@@ -133,17 +130,17 @@ class LeisuEncodesController extends BaseController
         return back();
     }
 
-    private function getLeiSuRtmp($id, $liveurl)
+    private function getSSM3U8Lines($id, $keys)
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $liveurl);
+        curl_setopt($ch, CURLOPT_URL, "http://json.ssports.com/matchinfo/app/matchinfo_$id.json");
 //        curl_setopt($ch, CURLOPT_COOKIE, 'SERVERID=e8e4d482877771492d8d82843185eeb8|1522664175|1522659461; public_token=leisu_test;');
 //        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Referer:http://live.leisu.com/stream-' . $id, 'Upgrade-Insecure-Requests:1']);
-        curl_setopt($ch, CURLINFO_CONTENT_TYPE, 'application/x-www-form-urlencoded');
-        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+//        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Referer:http://live.leisu.com/stream-' . $id, 'Upgrade-Insecure-Requests:1']);
+//        curl_setopt($ch, CURLINFO_CONTENT_TYPE, 'application/x-www-form-urlencoded');
+        curl_setopt($ch, CURLOPT_USERAGENT, "%E6%96%B0%E8%8B%B1%E4%BD%93%E8%82%B2/226 CFNetwork/894 Darwin/17.4.0");
         curl_setopt($ch, CURLOPT_COOKIESESSION, true);
 //        curl_setopt($ch, CURLOPT_HEADER, true);
         $response = curl_exec($ch);
@@ -151,51 +148,47 @@ class LeisuEncodesController extends BaseController
             die($error);
         }
         curl_close($ch);
-//        dump($response);
-        preg_match('#\"(rtmp://live\S+)\"#', $response, $matches);
-        if (!empty($matches)) {
-            return array_last($matches);
-        }
-        return '';
-    }
-
-    private function getLeiSuLivestream($id)
-    {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://api.leisu.com/api/livestream?app=0&platform=2&sid=' . $id . '&time=1522661124&type=1&ver=2.6.2');
-        curl_setopt($ch, CURLOPT_COOKIE, 'SERVERID=e8e4d482877771492d8d82843185eeb8|1522664175|1522659461; public_token=leisu_test;');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
-        curl_setopt($ch, CURLINFO_CONTENT_TYPE, 'application/x-www-form-urlencoded');
-        curl_setopt($ch, CURLOPT_USERAGENT, "Sports/2.6.2 (iPhone; iOS 11.2.6; Scale/2.00)");
-        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
-//        curl_setopt($ch, CURLOPT_HEADER, true);
-        $response = curl_exec($ch);
-        if ($error = curl_error($ch)) {
-            die($error);
-        }
-        curl_close($ch);
-//        dump($response);
         $json = json_decode($response, true);
 //        dump($json);
-        if (isset($json) && !empty($json['url'])) {
-            return $json['url']['pc'];
+        if (isset($json) && !empty($json['retData']['security'])) {
+            $security = $json['retData']['security'];
+            $lines = [];
+            $rooms = $security['language_list'];
+            foreach ($rooms as $room) {
+                foreach ($room['rooms'] as $r) {
+                    if (!isset($lines[$r]['language'])) {
+                        $lines[$r]['language'] = $room['title'];
+                    }
+                }
+            }
+            foreach ($lines as $room => &$value) {
+                $roomInfo = $security[$room];
+                $value['commentary'] = $roomInfo['commentary'];
+                foreach ($security['clarity'] as $c) {
+                    if (isset($roomInfo['line_1_' . $c['format']]) && isset($keys[$room]['line_1'])) {
+                        $value['line_1'][$c['format']] = $roomInfo['line_1_' . $c['format']] . '?' . $keys[$room]['line_1'];
+                    }
+                    if (isset($roomInfo['line_2_' . $c['format']]) && isset($keys[$room]['line_2'])) {
+                        $value['line_2'][$c['format']] = $roomInfo['line_2_' . $c['format']] . '?' . $keys[$room]['line_2'];
+                    }
+                }
+            }
+            return $lines;
         } else {
             return null;
         }
     }
 
-    private function getLeiSuLives()
+    private function getSSKeys($id)
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://api.leisu.com/app/live/live?app=0&lang=0&platform=2&ver=2.6.2');
-        curl_setopt($ch, CURLOPT_COOKIE, 'SERVERID=e8e4d482877771492d8d82843185eeb8|1522664175|1522659461; public_token=leisu_test;');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+        curl_setopt($ch, CURLOPT_URL, "http://security.ssports.com/api/channel/v3/watchMatch/match/$id/device/app?userId=17951244&uuid=36695AD5D460A8D1D6CB8850DB58AF7B");
+//        curl_setopt($ch, CURLOPT_COOKIE, 'SERVERID=e8e4d482877771492d8d82843185eeb8|1522664175|1522659461; public_token=leisu_test;');
+//        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
-        curl_setopt($ch, CURLINFO_CONTENT_TYPE, 'application/x-www-form-urlencoded');
-        curl_setopt($ch, CURLOPT_USERAGENT, "Sports/2.6.2 (iPhone; iOS 11.2.6; Scale/2.00)");
+//        curl_setopt($ch, CURLINFO_CONTENT_TYPE, 'application/x-www-form-urlencoded');
+        curl_setopt($ch, CURLOPT_USERAGENT, "%E6%96%B0%E8%8B%B1%E4%BD%93%E8%82%B2/226 CFNetwork/894 Darwin/17.4.0");
         curl_setopt($ch, CURLOPT_COOKIESESSION, true);
 //        curl_setopt($ch, CURLOPT_HEADER, true);
         $response = curl_exec($ch);
@@ -206,8 +199,46 @@ class LeisuEncodesController extends BaseController
 //        dump($response);
         $json = json_decode($response, true);
 //        dump($json);
-        if (isset($json) && !empty($json['matches'])) {
-            return $json;
+        if (isset($json) && !empty($json['retData']['security'])) {
+            $keys = [];
+
+            $security = $json['retData']['security'];
+            foreach ($security as $s) {
+                if (isset($s['line_1'])) {
+                    $keys[$s['room']]['line_1'] = $s['line_1'];
+                }
+                if (isset($s['line_2'])) {
+                    $keys[$s['room']]['line_2'] = $s['line_2'];
+                }
+            }
+            return $keys;
+        } else {
+            return null;
+        }
+    }
+
+    private function getSSportsLives()
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'http://json.ssports.com/matchData/appMatchList_recommend_1.json');
+//        curl_setopt($ch, CURLOPT_COOKIE, 'SERVERID=e8e4d482877771492d8d82843185eeb8|1522664175|1522659461; public_token=leisu_test;');
+//        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+//        curl_setopt($ch, CURLINFO_CONTENT_TYPE, 'application/x-www-form-urlencoded');
+        curl_setopt($ch, CURLOPT_USERAGENT, "%E6%96%B0%E8%8B%B1%E4%BD%93%E8%82%B2/226 CFNetwork/894 Darwin/17.4.0");
+        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+//        curl_setopt($ch, CURLOPT_HEADER, true);
+        $response = curl_exec($ch);
+        if ($error = curl_error($ch)) {
+            die($error);
+        }
+        curl_close($ch);
+//        dump($response);
+        $json = json_decode($response, true);
+//        dump($json);
+        if (isset($json) && !empty($json['retData']) && !empty($json['retData']['list'])) {
+            return $json['retData']['list'];
         } else {
             return null;
         }

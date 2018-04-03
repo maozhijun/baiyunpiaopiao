@@ -12,10 +12,9 @@
 */
 
 Route::match(["get", "post"], "/login", 'AuthController@index');//登录
+Route::get("/manager/list/", "EncodesController@index");
 
-Route::group(["middleware" => "auth"], function () {
-    Route::get("/manager/list/", "EncodesController@index");
-
+Route::group(["middleware" => "auth", "namespace" => "Push"], function () {
     if (env('APP_NAME') == 'good') {
         Route::get("/manager/", "HeiEncodesController@index");
         Route::get("/manager/hei/", "HeiEncodesController@index");
@@ -69,13 +68,19 @@ Route::group(["middleware" => "auth"], function () {
 
 });
 
-Route::group(["middleware" => "auth"], function () {
+Route::group(["middleware" => "auth", "namespace" => "Pull"], function () {
     Route::get("/resources/", "KBallEncodesController@index");
+
     Route::get("/resources/kball/", "KBallEncodesController@index");
 
-    Route::get("/resources/", "KBallEncodesController@index");
     Route::get("/resources/leisu/", "LeisuEncodesController@index");
-    Route::get("/resources/leisu/get_rtmp/{id}", "LeisuEncodesController@getRtmp");
+    Route::get("/resources/leisu/get_live_url/{id}", "LeisuEncodesController@getLiveUrl");
+
+    Route::get("/resources/ssports/", "SSportsEncodesController@index");
+    Route::get("/resources/ssports/get_live_url/{id}", "SSportsEncodesController@getLiveUrl");
+
+    Route::get("/resources/longzhu/", "LongzhuEncodesController@index");
+    Route::get("/resources/longzhu/get_live_url/{id}", "LongzhuEncodesController@getLiveUrl");
 });
 
 //定时任务

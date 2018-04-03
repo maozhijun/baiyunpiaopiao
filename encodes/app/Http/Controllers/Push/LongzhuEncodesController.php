@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Push;
 
 use App\Http\Controllers\Controller as BaseController;
 use App\Models\EncodeTask;
@@ -32,7 +32,7 @@ class LongzhuEncodesController extends BaseController
     public function index(Request $request)
     {
         $ets = EncodeTask::query()->where('to', 'Longzhu')->where('status', '>=', 1)->get();
-        return view('manager.longzhu', ['ets' => $ets, 'channels' => $this->channels]);
+        return view('manager.push.longzhu', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
     public function created(Request $request)
