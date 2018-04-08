@@ -47,7 +47,7 @@
                 复制此地址分享：<input type="text" name="share" value="" onclick="Copy()"><span></span>
             </div>
         </div>
-        <div class="adbanner inner"><a href="https://126hg.com/?intr=ssszhibo" target="_blank"><img src="{{env('CDN_URL').'/img/dd_hg126.gif'}}"><button class="close"></button></a></div>
+        <div class="adbanner inner"><a href="https://126hg.me/?intr=ssszhibo" target="_blank"><img src="{{env('CDN_URL').'/img/dd_hg126.gif'}}"><button class="close"></button></a></div>
         <div class="clear"></div>
     </div>
     <div class="adflag left">
