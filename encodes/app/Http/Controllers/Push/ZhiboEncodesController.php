@@ -16,16 +16,16 @@ class ZhiboEncodesController extends BaseController
         parent::__construct();
         $this->middleware('filter')->except([]);
         if (env('APP_NAME') == 'good') {
-            $this->channels[] = '中国直播0##s_773580';
-            $this->channels[] = '中国直播1##s_773581';
-            $this->channels[] = '中国直播2##s_773582';
-            $this->channels[] = '中国直播3##s_773583';
-            $this->channels[] = '中国直播4##s_773584';
-            $this->channels[] = '中国直播5##s_773585';
-            $this->channels[] = '中国直播6##s_773586';
-            $this->channels[] = '中国直播7##s_773587';
-            $this->channels[] = '中国直播8##s_773588';
-            $this->channels[] = '中国直播9##s_773589';
+//            $this->channels[] = '中国直播0##s_773580';
+//            $this->channels[] = '中国直播1##s_773581';
+//            $this->channels[] = '中国直播2##s_773582';
+//            $this->channels[] = '中国直播3##s_773583';
+//            $this->channels[] = '中国直播4##s_773584';
+//            $this->channels[] = '中国直播5##s_773585';
+//            $this->channels[] = '中国直播6##s_773586';
+//            $this->channels[] = '中国直播7##s_773587';
+//            $this->channels[] = '中国直播8##s_773588';
+//            $this->channels[] = '中国直播9##s_773589';
         } elseif (env('APP_NAME') == 'aikq') {
             $this->channels[] = '中国直播0##s_873580';
             $this->channels[] = '中国直播1##s_873581';
@@ -62,7 +62,7 @@ class ZhiboEncodesController extends BaseController
             $live_rtmp_url = 'rtmp://live.zhibo.tv/8live/' . $roomId;//播放rtmp地址
             $live_m3u8_url = 'http://hls.live.zhibo.tv/8live/' . $roomId . '/index.m3u8';//播放m3u8地址
 
-            $fontsize = $request->input('fontsize', 20);
+            $fontsize = $request->input('fontsize', 18);
             $watermark = $request->input('watermark', '');
             $location = $request->input('location', 'top');
             $has_logo = $request->input('logo');

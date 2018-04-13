@@ -54,7 +54,7 @@
                         <label class="label label-info">进行中</label>
                     </td>
                     <td>
-                        <a href="/resources/longzhu/get_live_url/{{ $live['matchId'] }}" target="_blank">
+                        <a href="/resources/longzhu/get_live_url/{{ $live['liveRoomId'] }}" target="_blank">
                             获取M3U8地址
                         </a>
                     </td>
@@ -74,7 +74,7 @@
                         <label class="label label-default">未开始</label>
                     </td>
                     <td>
-                        <a href="/resources/longzhu/get_live_url/{{ $live['matchId'] }}" target="_blank">
+                        <a href="/resources/longzhu/get_live_url/{{ $live['liveRoomId'] }}" target="_blank">
                             获取M3U8地址
                         </a>
                     </td>

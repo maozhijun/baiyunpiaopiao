@@ -39,9 +39,9 @@
                             @foreach($room['line_1'] as $key=>$value)
                                 <tr>
                                     @if ($loop->first)
-                                        <td rowspan="3" style="text-align: center;vertical-align: middle;">线路1</td>
+                                        <td rowspan="{{ $loop->count }}" style="text-align: center;vertical-align: middle;">线路1</td>
                                     @endif
-                                    <td>{{ $key }}P</td>
+                                    <td>{{ $key }}</td>
                                     <td>{{ $value }}</td>
                                 </tr>
                             @endforeach
@@ -50,9 +50,9 @@
                             @foreach($room['line_2'] as $key=>$value)
                                 <tr>
                                     @if ($loop->first)
-                                        <td rowspan="3" style="text-align: center;vertical-align: middle;">线路2</td>
+                                        <td rowspan="{{ $loop->count }}" style="text-align: center;vertical-align: middle;">线路2</td>
                                     @endif
-                                    <td>{{ $key }}P</td>
+                                    <td>{{ $key }}</td>
                                     <td>{{ $value }}</td>
                                 </tr>
                             @endforeach

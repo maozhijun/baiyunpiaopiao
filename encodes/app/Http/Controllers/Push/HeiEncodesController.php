@@ -71,7 +71,7 @@ class HeiEncodesController extends BaseController
 //                $output = "https://goodgame.ru/player?" . explode('?', $this->ggcdns[$value])[0];
             }
 
-            $fontsize = $request->input('fontsize', 20);
+            $fontsize = $request->input('fontsize', 18);
             $watermark = $request->input('watermark', '');
             $location = $request->input('location', 'top');
             $has_logo = $request->input('logo');

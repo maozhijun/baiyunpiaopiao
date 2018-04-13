@@ -24,8 +24,8 @@
                 <option value="bottom">下面</option>
                 <option value="top">上面</option>
             </select>
-            <label for="label-fontsize">字体大小</label>
-            <input name="fontsize" type="text" value="{{ $fontsize }}" class="form-control" id="label-fontsize" size="4">
+            {{--<label for="label-fontsize">字体大小</label>--}}
+            {{--<input name="fontsize" type="text" value="{{ $fontsize }}" class="form-control" id="label-fontsize" size="4">--}}
         </div>
         <div class="form-inline form-group">
             <label for="label-resource">源地址</label>
@@ -85,11 +85,11 @@
                     </td>
                     <td>
                         @if($et->status == 1)
-                            <a class="btn btn-xs btn-danger" href="/manager/qie/stop/{{ $et->id }}">停止</a>
-                            <a class="btn btn-xs btn-danger" href="/manager/qie/stopQie/{{ $et->id }}">企鹅关播</a>
+                            <a class="btn btn-xs btn-danger" href="javascript:if(confirm('确认删除')) location.href='/manager/qie/stop/{{ $et->id }}'">停止</a>
+                            <a class="btn btn-xs btn-danger" href="javascript:if(confirm('确认删除')) location.href='/manager/qie/stopQie/{{ $et->id }}'">企鹅关播</a>
                         @endif
                         @if($et->status == 2)
-                            <a class="btn btn-xs btn-danger" href="/manager/qie/stop/{{ $et->id }}">停止</a>
+                            <a class="btn btn-xs btn-danger" href="javascript:if(confirm('确认删除')) location.href='/manager/qie/stop/{{ $et->id }}'">停止</a>
                         @endif
                     </td>
                 </tr>

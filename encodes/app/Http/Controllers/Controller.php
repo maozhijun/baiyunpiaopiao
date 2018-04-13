@@ -20,7 +20,7 @@ class Controller extends BaseController
         if (env('APP_NAME') == 'good') {
             View::share('watermark', '足球专家微信：bet6879，篮球专家微信：bet8679a');
         } elseif (env('APP_NAME') == 'aikq') {
-            View::share('watermark', '看球网址：aikq.cc，加微信【fs188fs】进群聊球，每天188红包+每月送1台iPhone X');
+            View::share('watermark', '加微信【kanqiu616】进群聊球，群花福利+大神免费推单，每天轻松收米！');
         } else {
             View::share('watermark', '');
         }
@@ -46,7 +46,7 @@ class Controller extends BaseController
     protected function generateFfmpegCmd($input_uri = '',
                                          $rtmp_url = '',
                                          $watermark = '',
-                                         $fontsize = 20,
+                                         $fontsize = 18,
                                          $location = 'top',
                                          $has_logo = '1',
                                          $size = 'md',
@@ -62,20 +62,30 @@ class Controller extends BaseController
         if (empty($size)) {
             $size = $this->sizes['md'];
         }
+        $fontsize *= $size['factor'];
         $execs = ['nohup /usr/bin/ffmpeg'];
         if (starts_with($input_uri, 'http')) {
-            $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
-            if (!empty($referer)) {
-                $execs[] = '-headers "Referer:' . $referer . '"';
-            }
-            if (!empty($header1)) {
-                $execs[] = '-headers "' . $header1 . '"';
-            }
-            if (!empty($header2)) {
-                $execs[] = '-headers "' . $header2 . '"';
-            }
-            if (!empty($header3)) {
-                $execs[] = '-headers "' . $header3 . '"';
+            if (starts_with($input_uri, 'http://live.5club.cctv.cn')) {
+                $execs[] = '-user_agent "cctv_app_phone_cctv5"';
+                $execs[] = '-headers "UID:4044A747-5BF0-4465-A894-99E2FEBAC4C1"';
+            }elseif (starts_with($input_uri, 'http://gmcllc.de')) {
+                $execs[] = '-user_agent "BLUEIOS"';
+                $execs[] = '-headers "Range: bytes=0-"';
+                $execs[] = '-headers "Icy-MetaData: 1"';
+            } else {
+                $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
+                if (!empty($referer)) {
+                    $execs[] = '-headers "Referer:' . $referer . '"';
+                }
+                if (!empty($header1)) {
+                    $execs[] = '-headers "' . $header1 . '"';
+                }
+                if (!empty($header2)) {
+                    $execs[] = '-headers "' . $header2 . '"';
+                }
+                if (!empty($header3)) {
+                    $execs[] = '-headers "' . $header3 . '"';
+                }
             }
         }
         $execs[] = '-c:v h264_cuvid -i "' . $input_uri . '"';

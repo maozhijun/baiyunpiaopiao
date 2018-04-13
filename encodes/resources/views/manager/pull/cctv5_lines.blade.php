@@ -22,28 +22,28 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li {{ starts_with(request()->path(),'manager')?'class=active':'' }}>
-                    <a href="/manager/longzhu/">推流</a>
-                </li>
-                @if(env('APP_NAME')=='aikq')
-                    <li {{ starts_with(request()->path(),'resources')?'class=active':'' }}>
-                        <a href="/resources/longzhu/">直播源</a>
-                    </li>
-                @endif
-            </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            @yield('navTabs')
-            <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                    @yield('content')
-                </div>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="table-responsive">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr class="active">
+                        <td>格式</td>
+                        <td>地址</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($lines as $key=>$line)
+                        <tr>
+                            <td>{{ $key }}</td>
+                            <td>{{ $line }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-
+</div>
 </div>
 </body>
 <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>

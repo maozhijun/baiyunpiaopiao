@@ -24,8 +24,8 @@
                 <option value="top">上面</option>
                 <option value="bottom">下面</option>
             </select>
-            <label for="label-fontsize">字体大小</label>
-            <input name="fontsize" type="text" value="{{ $fontsize }}" class="form-control" id="label-fontsize" size="4">
+            {{--<label for="label-fontsize">字体大小</label>--}}
+            {{--<input name="fontsize" type="text" value="{{ $fontsize }}" class="form-control" id="label-fontsize" size="4">--}}
         </div>
         <div class="form-inline form-group">
             <label for="label-resource">源地址</label>

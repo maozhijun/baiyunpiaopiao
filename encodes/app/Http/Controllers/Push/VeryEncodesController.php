@@ -16,16 +16,16 @@ class VeryEncodesController extends BaseController
         parent::__construct();
         $this->middleware('filter')->except([]);
         if (env('APP_NAME') == 'good') {
-            $this->channels[] = '云端直播0##vod_3180361';
-            $this->channels[] = '云端直播1##vod_3180362';
-            $this->channels[] = '云端直播2##vod_3180363';
-            $this->channels[] = '云端直播3##vod_3180364';
-            $this->channels[] = '云端直播4##vod_3180365';
-            $this->channels[] = '云端直播5##vod_3180366';
-            $this->channels[] = '云端直播6##vod_3180367';
-            $this->channels[] = '云端直播7##vod_3180368';
-            $this->channels[] = '云端直播8##vod_3180369';
-            $this->channels[] = '云端直播9##vod_3180370';
+//            $this->channels[] = '云端直播0##vod_3180361';
+//            $this->channels[] = '云端直播1##vod_3180362';
+//            $this->channels[] = '云端直播2##vod_3180363';
+//            $this->channels[] = '云端直播3##vod_3180364';
+//            $this->channels[] = '云端直播4##vod_3180365';
+//            $this->channels[] = '云端直播5##vod_3180366';
+//            $this->channels[] = '云端直播6##vod_3180367';
+//            $this->channels[] = '云端直播7##vod_3180368';
+//            $this->channels[] = '云端直播8##vod_3180369';
+//            $this->channels[] = '云端直播9##vod_3180370';
         } elseif (env('APP_NAME') == 'aikq') {
             $this->channels[] = '云端直播0##vod_3183361';
             $this->channels[] = '云端直播1##vod_3183362';
@@ -62,7 +62,7 @@ class VeryEncodesController extends BaseController
             $live_rtmp_url = 'rtmp://live.china0736.com/vod/' . $roomId;//播放rtmp地址
             $live_m3u8_url = 'http://hls.china0736.com/vod/' . $roomId . '.m3u8';//播放m3u8地址
 
-            $fontsize = $request->input('fontsize', 20);
+            $fontsize = $request->input('fontsize', 18);
             $watermark = $request->input('watermark', '');
             $location = $request->input('location', 'top');
             $has_logo = $request->input('logo');

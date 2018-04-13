@@ -34,7 +34,7 @@ class OtherEncodesController extends BaseController
             $channel = $request->input('channel');
             $output = $request->input('output');
 
-            $fontsize = $request->input('fontsize', 20);
+            $fontsize = $request->input('fontsize', 18);
             $watermark = $request->input('watermark', '');
             $location = $request->input('location', 'top');
             $has_logo = $request->input('logo');

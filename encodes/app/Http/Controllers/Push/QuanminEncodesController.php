@@ -44,7 +44,7 @@ class QuanminEncodesController extends BaseController
             $live_rtmp_url = 'https://liveal.quanmin.tv/live/' . explode('?', $roomId)[0] . '.flv';//播放rtmp地址
             $live_m3u8_url = 'http://alhls.quanmin.tv/live/' . explode('?', $roomId)[0] . '.m3u8';//播放m3u8地址
 
-            $fontsize = $request->input('fontsize', 20);
+            $fontsize = $request->input('fontsize', 18);
             $watermark = $request->input('watermark', '');
             $location = $request->input('location', 'top');
             $has_logo = $request->input('logo');

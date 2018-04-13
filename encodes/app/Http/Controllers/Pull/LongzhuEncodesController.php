@@ -43,7 +43,8 @@ class LongzhuEncodesController extends BaseController
     public function index(Request $request)
     {
         $LZLives = $this->getLongzhuLives();
-        $ets = EncodeTask::query()->where('from', 'SS')->where('status', 1)->get();
+//        dump($LZLives);
+        $ets = EncodeTask::query()->where('from', 'LZ')->where('status', 1)->get();
         return view('manager.pull.longzhu', ['lives' => $LZLives, 'ets' => $ets, 'channels' => $this->channels]);
     }
 
@@ -72,7 +73,7 @@ class LongzhuEncodesController extends BaseController
             $live_rtmp_url = 'rtmp://live.china0736.com/vod/' . $roomId;//播放rtmp地址
             $live_m3u8_url = 'http://hls.china0736.com/vod/' . $roomId . '.m3u8';//播放m3u8地址
 
-            $fontsize = $request->input('fontsize', 20);
+            $fontsize = $request->input('fontsize', 18);
             $watermark = $request->input('watermark', '');
             $location = $request->input('location', 'top');
             $has_logo = $request->input('logo');
@@ -143,8 +144,9 @@ class LongzhuEncodesController extends BaseController
         curl_close($ch);
         $json = json_decode($response, true);
 //        dump($json);
-        if (isset($json) && isset($json['playLines']['urls'])) {
-            $urls = $json['playLines']['urls'];
+
+        if (isset($json) && isset(array_last($json['playLines'])['urls'])) {
+            $urls = array_last($json['playLines'])['urls'];
             return $urls;
         } else {
             return null;

@@ -79,7 +79,7 @@ class SSportsEncodesController extends BaseController
             $live_rtmp_url = 'rtmp://live.china0736.com/vod/' . $roomId;//播放rtmp地址
             $live_m3u8_url = 'http://hls.china0736.com/vod/' . $roomId . '.m3u8';//播放m3u8地址
 
-            $fontsize = $request->input('fontsize', 20);
+            $fontsize = $request->input('fontsize', 18);
             $watermark = $request->input('watermark', '');
             $location = $request->input('location', 'top');
             $has_logo = $request->input('logo');
@@ -166,10 +166,16 @@ class SSportsEncodesController extends BaseController
                 $value['commentary'] = $roomInfo['commentary'];
                 foreach ($security['clarity'] as $c) {
                     if (isset($roomInfo['line_1_' . $c['format']]) && isset($keys[$room]['line_1'])) {
-                        $value['line_1'][$c['format']] = $roomInfo['line_1_' . $c['format']] . '?' . $keys[$room]['line_1'];
+                        $value['line_1'][$c['format'] . '_M3U8'] = $roomInfo['line_1_' . $c['format']] . '?' . $keys[$room]['line_1'];
+                        if (str_contains($roomInfo['line_1_' . $c['format']], 'hls.zb.ssports.com')) {
+                            $value['line_1'][$c['format'] . '_FLV'] = str_replace('.m3u8', '.flv', $roomInfo['line_1_' . $c['format']]) . '?' . $keys[$room]['line_1'];
+                        }
                     }
                     if (isset($roomInfo['line_2_' . $c['format']]) && isset($keys[$room]['line_2'])) {
-                        $value['line_2'][$c['format']] = $roomInfo['line_2_' . $c['format']] . '?' . $keys[$room]['line_2'];
+                        $value['line_2'][$c['format'] . '_M3U8'] = $roomInfo['line_2_' . $c['format']] . '?' . $keys[$room]['line_2'];
+                        if (str_contains($roomInfo['line_2_' . $c['format']], 'hls.zb.ssports.com')) {
+                            $value['line_2'][$c['format'] . '_FLV'] = str_replace('.m3u8', '.flv', $roomInfo['line_2_' . $c['format']]) . '?' . $keys[$room]['line_2'];
+                        }
                     }
                 }
             }
@@ -206,6 +212,7 @@ class SSportsEncodesController extends BaseController
             foreach ($security as $s) {
                 if (isset($s['line_1'])) {
                     $keys[$s['room']]['line_1'] = $s['line_1'];
+
                 }
                 if (isset($s['line_2'])) {
                     $keys[$s['room']]['line_2'] = $s['line_2'];

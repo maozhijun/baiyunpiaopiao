@@ -16,6 +16,7 @@ class KukuEncodesController extends BaseController
         parent::__construct();
         $this->middleware('filter')->except([]);
         if (env('APP_NAME') == 'good') {
+
         } elseif (env('APP_NAME') == 'aikq') {
             $this->channels[] = '酷酷直播1##12163331_12163331';
             $this->channels[] = '酷酷直播2##12163332_12163332';
@@ -51,7 +52,7 @@ class KukuEncodesController extends BaseController
             $live_rtmp_url = 'rtmp://rtmplive.zhubo123.com/kuxing/' . $roomId;//播放rtmp地址
             $live_m3u8_url = 'http://hlslive.zhubo123.com/kuxing/' . $roomId . '.m3u8';//播放m3u8地址
 
-            $fontsize = $request->input('fontsize', 20);
+            $fontsize = $request->input('fontsize', 18);
             $watermark = $request->input('watermark', '');
             $location = $request->input('location', 'top');
             $has_logo = $request->input('logo');

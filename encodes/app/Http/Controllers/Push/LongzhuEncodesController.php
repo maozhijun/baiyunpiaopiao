@@ -18,7 +18,7 @@ class LongzhuEncodesController extends BaseController
         if (env('APP_NAME') == 'good') {
 
         } elseif (env('APP_NAME') == 'aikq') {
-            $this->channels[] = '老铁扣波666##d5426c54d0e05f72779b6deb8ac786c7625b26848edd89a38b40674048863f349cd8fe6588aa47d0bdbf9c8c7f9d13b165775a7f7671c893';
+            $this->channels[] = '老铁扣波666##5fc97c48e734ff8eb36a14e55af63cfe367deb720797d377f13e9873422df0e1e1b98cee2eb7520e353496dcc940db7f3d78ec51246414bb';
             $this->channels[] = '17053909336##b549ea62aeed49629c366ddad87184a87a596abbf93f85ba60f61738a39204f68cf7254bcb936c6b579d05a4bb091dd44eb9f14bb0b82fb9';
             $this->channels[] = '17053904825##c4753865f18d1f43c3cdf90b1389f8ca09ce99a65cf3cdd118e3333f6f2509b61f757c7e09b01fe7b0204517e2a73ff8b24993520bb67c35';
             $this->channels[] = '17121075951##cab81477be823772f0a238f07a4a1bf167e550823f16c4e0ed7d45bc2c803dd20bb50395073f13ad28e6bfb1d3c07960f3c344d07519a995';
@@ -63,7 +63,7 @@ class LongzhuEncodesController extends BaseController
                 }
             }
 
-            $fontsize = $request->input('fontsize', 20);
+            $fontsize = $request->input('fontsize', 18);
             $watermark = $request->input('watermark', '');
             $location = $request->input('location', 'top');
             $has_logo = $request->input('logo');

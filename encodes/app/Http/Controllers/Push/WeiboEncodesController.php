@@ -16,16 +16,17 @@ class WeiboEncodesController extends BaseController
         parent::__construct();
         $this->middleware('filter')->except([]);
         if (env('APP_NAME') == 'good') {
+
         } elseif (env('APP_NAME') == 'aikq') {
-            $this->channels[] = '微博直播3##a373bf0f54fb7af96ccdee26da2e333f?auth_key=1523248893-0-0-b43875786b3f26e420086f64ceb0079e';
-            $this->channels[] = '微博直播4##bd96ebcee8163a354765023e2233c6a9?auth_key=1523248979-0-0-b7a0460075ea05ae379427b01ed4ff3b';
-            $this->channels[] = '微博直播5##6e4b8cb076e781fc6441559d1f240df8?auth_key=1523249016-0-0-d5de2d7330d2d50cd7e1f3826722c409';
-            $this->channels[] = '微博直播6##0caf46e2a0a49f4dd88e0eb49673ccf5?auth_key=1523249067-0-0-f57da90f1f1c667c35f8214fc1180d15';
-            $this->channels[] = '微博直播7##69f18fd96b68724ddbb6f92dd8e09c17?auth_key=1523249108-0-0-97166bc840f48f883fd4fe32e68fb5fc';
-            $this->channels[] = '微博直播8##93cc150f6a8061e0bc5320bd816246a6?auth_key=1523249151-0-0-4c48d1706472bb60735d272b77e3cc04';
-            $this->channels[] = '微博直播9##9246a027a69d9d987b2bbadb6168bd10?auth_key=1523249190-0-0-bebd62a82416fa42971a36c0aa5c10ba';
-//            $this->channels[] = '微博直播1##0b22872125a654d6f377a57aaa985f62?auth_key=1522836208-0-0-799c578571c2d9827df425ddbffaf82c';
-//            $this->channels[] = '微博直播2##e48c8c66077fb1e584c9277d697d4df5?auth_key=1522858370-0-0-a49051ecce80e4ddfaf3911c499a80e7';
+            $this->channels[] = '微博直播1##b848d9b3ede2fc12df68510646266a65?auth_key=1523878343-0-0-6f0d40f1ac2b95a255786e1ff85a0633';
+            $this->channels[] = '微博直播2##2d03f93105438d6ecb077aa7fadbe23b?auth_key=1523878397-0-0-a299fb2ad2f6d71935ae504f8fabd0a5';
+            $this->channels[] = '微博直播3##9ed5a0ee53b217561a27070ee1a85a89?auth_key=1523878137-0-0-d9321d3c25853f933b7a41a4cd3c9e4c';
+            $this->channels[] = '微博直播4##707110e94198d75143284f0130fa1b88?auth_key=1523878434-0-0-6550363ea9c3a462de63518ac7f4607a';
+            $this->channels[] = '微博直播5##06c5bea6ae185f01bd782e71658d87c9?auth_key=1523878469-0-0-bbab050e8cc82577a38f6dc733a0cf00';
+            $this->channels[] = '微博直播6##d70d2c6971daac49b928b6645341def6?auth_key=1523878518-0-0-3dda89a4105c84433e58522bbbd12b4e';
+            $this->channels[] = '微博直播7##32d417179229aee654e98fdd58667da1?auth_key=1523878598-0-0-cfc8c33190b3c995370cd1526ca264f2';
+            $this->channels[] = '微博直播8##f213d7bbe605ddb0f825820b109c8724?auth_key=1523878639-0-0-fbd7b7ed1dc713711a0eb178ade37630';
+            $this->channels[] = '微博直播9##8b835518db37e2bf453966139ac97eab?auth_key=1523878674-0-0-e82e52a8b3cbb03756464f3f5ea2aef5';
         }
     }
 
@@ -51,7 +52,7 @@ class WeiboEncodesController extends BaseController
             $live_rtmp_url = 'rtmp://pl.live.weibo.com/alicdn/' . explode('?', $roomId)[0] . '_wb720';//播放rtmp地址
             $live_m3u8_url = 'https://pl.live.weibo.com/alicdn/' . explode('?', $roomId)[0] . '_wb720.m3u8';//播放m3u8地址
 
-            $fontsize = $request->input('fontsize', 20);
+            $fontsize = $request->input('fontsize', 18);
             $watermark = $request->input('watermark', '');
             $location = $request->input('location', 'top');
             $has_logo = $request->input('logo');

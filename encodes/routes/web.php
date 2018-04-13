@@ -81,6 +81,18 @@ Route::group(["middleware" => "auth", "namespace" => "Pull"], function () {
 
     Route::get("/resources/longzhu/", "LongzhuEncodesController@index");
     Route::get("/resources/longzhu/get_live_url/{id}", "LongzhuEncodesController@getLiveUrl");
+
+    Route::get("/resources/cntv/", "CNTVEncodesController@index");
+    Route::get("/resources/cntv/get_live_url/{id}", "CNTVEncodesController@getLiveUrl");
+
+    Route::get("/resources/baitv/", "BaiTVEncodesController@index");
+    Route::get("/resources/baitv/get_live_url/{id}", "BaiTVEncodesController@getLiveUrl");
+
+    Route::get("/resources/cctv5/", "CCTV5EncodesController@index");
+    Route::get("/resources/cctv5/get_live_url/{id}", "CCTV5EncodesController@getLiveUrl");
+
+    Route::get("/resources/sportlive/", "SportLiveEncodesController@index");
+    Route::get("/resources/sportlive/get_live_url/{id}", "SportLiveEncodesController@getLiveUrl");
 });
 
 //定时任务
