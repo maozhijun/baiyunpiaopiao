@@ -17,16 +17,20 @@ class QQEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $QQLives = $this->getQQLives();
+        $date = $request->input('date', date('Y-m-d',strtotime('-1 day')));
+//        dump($date);
+//        dump(date('Y-m-d',strtotime('-3 day',strtotime($date))));
+        $QQLives = $this->getQQLives($date);
         $records = [];
         foreach ($QQLives as $dlives) {
             foreach ($dlives['list'] as $live) {
-                if ($live['matchInfo']['liveType'] == 4 && ($live['matchInfo']['livePeriod'] == 0 || $live['matchInfo']['livePeriod'] == 2)) {
+                if (($live['matchInfo']['liveType'] == 1 || $live['matchInfo']['liveType'] == 4) && ($live['matchInfo']['livePeriod'] == 0 || $live['matchInfo']['livePeriod'] == 2)) {
                     $records[] = $live;
                 }
             }
         }
-        return view('manager.record.qq', ['records' => $records]);
+//        date_add(date_create($date),new \DateInterval('+3day'));
+        return view('manager.record.qq', ['records' => $records, 'date' => $date]);
     }
 
     public function getRecordUrl(Request $request, $id)
@@ -69,10 +73,10 @@ class QQEncodesController extends BaseController
         }
     }
 
-    private function getQQLives()
+    private function getQQLives($date)
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://app.sports.qq.com/match/hotMatchList');
+        curl_setopt($ch, CURLOPT_URL, "https://app.sports.qq.com/match/hotMatchList?appvid=5.8.1&date=$date");
         curl_setopt($ch, CURLOPT_COOKIE, 'business=1001; guid=0DEA21909F244210941DCD2B272735D0; lskey=0003000029da41bc6c76aea60fef32cb474dc8ca9f17d510e8dc7ffb6abcc43539c1c190db8a617bbeae7328; luin=o0373566342; main_login=qq; skey=M6AEoAJvHT; uid=1537651510241919015; uin=o0373566342');
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

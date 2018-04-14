@@ -22,7 +22,7 @@
 
 <div class="container-fluid">
     <h2>
-        {{ $detail['matchInfo']['matchDesc'] }}-{{ $detail['matchInfo']['leftName'] }} VS {{ $detail['matchInfo']['rightName'] }}({{ $detail['matchInfo']['startTime'] }})
+        {{ $detail['matchInfo']['matchDesc'] }}-{{ $detail['matchInfo']['leftName'] or '' }} VS {{ $detail['matchInfo']['rightName'] or '' }}({{ $detail['matchInfo']['startTime'] }})
     </h2>
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -43,10 +43,10 @@
                     @if(!empty($detail['afterRecord']['list']))
                         @foreach($detail['afterRecord']['list'] as $records)
                             <tr>
-                                <td>{{ $records['title'] }}</td>
-                                <td>{{ $records['cateDesc'] }}</td>
-                                <td>{{ $records['tag'] }}</td>
-                                <td>{{ $records['duration'] }}</td>
+                                <td>{{ $records['title'] or '' }}</td>
+                                <td>{{ $records['cateDesc'] or '' }}</td>
+                                <td>{{ $records['tag'] or '' }}</td>
+                                <td>{{ $records['duration'] or '' }}</td>
                                 <td>
                                     <img width="150" src="{{ $records['pic'] }}">
                                     <br>
@@ -74,10 +74,10 @@
                     @if(!empty($detail['afterVideos']['list']))
                         @foreach($detail['afterVideos']['list'] as $records)
                             <tr>
-                                <td>{{ $records['title'] }}</td>
-                                <td>{{ $records['cateDesc'] }}</td>
-                                <td>{{ $records['tag'] }}</td>
-                                <td>{{ $records['duration'] }}</td>
+                                <td>{{ $records['title'] or '' }}</td>
+                                <td>{{ $records['cateDesc'] or '' }}</td>
+                                <td>{{ $records['tag'] or '' }}</td>
+                                <td>{{ $records['duration'] or '' }}</td>
                                 <td>
                                     <img width="150" src="{{ $records['pic'] }}">
                                     <br>
@@ -105,10 +105,10 @@
                     @if(!empty($detail['relatedNews']['items']))
                         @foreach($detail['relatedNews']['items'] as $records)
                             <tr>
-                                <td>{{ $records['title'] }}</td>
-                                <td>{{ $records['pub_time'] }}</td>
-                                <td>{{ $records['abstract'] }}</td>
-                                <td>{{ $records['source'] }}</td>
+                                <td>{{ $records['title'] or '' }}</td>
+                                <td>{{ $records['pub_time'] or '' }}</td>
+                                <td>{{ $records['abstract'] or '' }}</td>
+                                <td>{{ $records['source'] or '' }}</td>
                                 <td>
                                     <img width="150" src="{{ $records['imgurl2'] }}">
                                     <br>

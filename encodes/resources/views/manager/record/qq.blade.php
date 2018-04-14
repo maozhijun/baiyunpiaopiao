@@ -1,5 +1,9 @@
 @extends('layouts.records')
 @section('content')
+    <div class="btn-group" role="group" aria-label="...">
+        <a type="button" class="btn btn-default" href="?date={{ date('Y-m-d',strtotime('-3 day',strtotime($date))) }}">前一页</a>
+        <a type="button" class="btn btn-default" href="?date={{ date('Y-m-d',strtotime('+3 day',strtotime($date))) }}">后一页</a>
+    </div>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
