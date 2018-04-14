@@ -82,6 +82,9 @@ Route::group(["middleware" => "auth", "namespace" => "Pull"], function () {
     Route::get("/resources/longzhu/", "LongzhuEncodesController@index");
     Route::get("/resources/longzhu/get_live_url/{id}", "LongzhuEncodesController@getLiveUrl");
 
+    Route::get("/resources/qq/", "QQEncodesController@index");
+    Route::get("/resources/qq/get_live_url/{id}", "QQEncodesController@getLiveUrl");
+
     Route::get("/resources/cntv/", "CNTVEncodesController@index");
     Route::get("/resources/cntv/get_live_url/{id}", "CNTVEncodesController@getLiveUrl");
 
@@ -93,6 +96,13 @@ Route::group(["middleware" => "auth", "namespace" => "Pull"], function () {
 
     Route::get("/resources/sportlive/", "SportLiveEncodesController@index");
     Route::get("/resources/sportlive/get_live_url/{id}", "SportLiveEncodesController@getLiveUrl");
+});
+
+Route::group(["middleware" => "auth", "namespace" => "Record"], function () {
+
+    Route::get("/records/qq/", "QQEncodesController@index");
+    Route::get("/records/qq/get_record_url/{id}", "QQEncodesController@getRecordUrl");
+
 });
 
 //定时任务

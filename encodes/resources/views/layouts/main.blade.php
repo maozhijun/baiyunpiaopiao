@@ -29,7 +29,10 @@
                 </li>
                 @if(env('APP_NAME')=='aikq')
                     <li {{ starts_with(request()->path(),'resources')?'class=active':'' }}>
-                        <a href="/resources/longzhu/">直播源</a>
+                        <a href="/resources/qq/">直播源</a>
+                    </li>
+                    <li {{ starts_with(request()->path(),'records')?'class=active':'' }}>
+                        <a href="/records/qq/">录像、集锦</a>
                     </li>
                 @endif
             </ul>
