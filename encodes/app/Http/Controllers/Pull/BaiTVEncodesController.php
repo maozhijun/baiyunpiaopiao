@@ -130,7 +130,14 @@ class BaiTVEncodesController extends BaseController
         $json = json_decode($response, true);
 //        dump($json);
         if (!empty($json['data'])) {
-            return array_last($json['data']);
+            $data = array_pop($json['data']);
+            if (empty($data['live'])) {
+                $data = array_pop($json['data']);
+            }
+            if (empty($data['live'])) {
+                $data = array_pop($json['data']);
+            }
+            return $data;
         } else {
             return null;
         }

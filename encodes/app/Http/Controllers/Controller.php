@@ -20,7 +20,9 @@ class Controller extends BaseController
         if (env('APP_NAME') == 'good') {
             View::share('watermark', '足球专家微信：bet6879，篮球专家微信：bet8679a');
         } elseif (env('APP_NAME') == 'aikq') {
-            View::share('watermark', '加微信【kanqiu616】进群聊球，群花福利+大神免费推单，每天轻松收米！');
+            View::share('watermark', '加微信【kanqiu616】进群聊球，美女福利+大神免费推单，每天轻松收米！');
+        } elseif (env('APP_NAME') == 'leqiuba') {
+            View::share('watermark', '看球  聊球  微信群，进群加微信：zhibo556  红包福利天天有！');
         } else {
             View::share('watermark', '');
         }
@@ -53,7 +55,8 @@ class Controller extends BaseController
                                          $referer = '',
                                          $header1 = '',
                                          $header2 = '',
-                                         $header3 = '')
+                                         $header3 = '',
+                                         $logo_text = '加微信：kanqiu616')
     {
         if (empty($input_uri) || empty($rtmp_url)) {
             return '';
@@ -95,6 +98,7 @@ class Controller extends BaseController
             $logo_code = '';
             if (!empty($has_logo)) {
                 $logo_code = 'drawbox=color=black:x=iw-(180*' . $size['factor'] . '):y=(20*' . $size['factor'] . '):width=(165*' . $size['factor'] . '):height=(30*' . $size['factor'] . '):t=fill,';
+                $logo_code .= 'drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $logo_text . '\':fontcolor=0xf7f14e:fontsize=' . $fontsize . ':x=(w-(180*' . $size['factor'] . ')+(165*' . $size['factor'] . '-tw)/2):y=(20*' . $size['factor'] . ')+(((30*' . $size['factor'] . ')-' . $fontsize . ')/2),';
             }
             if ($location == 'top') {
                 $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=0:color=black@0.4:width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2) . '"';
