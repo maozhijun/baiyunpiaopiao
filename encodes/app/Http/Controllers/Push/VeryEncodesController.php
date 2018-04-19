@@ -37,6 +37,17 @@ class VeryEncodesController extends BaseController
             $this->channels[] = '云端直播7##vod_3183368';
             $this->channels[] = '云端直播8##vod_3183369';
             $this->channels[] = '云端直播9##vod_3183370';
+        } elseif (env('APP_NAME') == 'leqiuba') {
+            $this->channels[] = '云端直播0##vod_3173361';
+            $this->channels[] = '云端直播1##vod_3173362';
+            $this->channels[] = '云端直播2##vod_3173363';
+            $this->channels[] = '云端直播3##vod_3173364';
+            $this->channels[] = '云端直播4##vod_3173365';
+            $this->channels[] = '云端直播5##vod_3173366';
+            $this->channels[] = '云端直播6##vod_3173367';
+            $this->channels[] = '云端直播7##vod_3173368';
+            $this->channels[] = '云端直播8##vod_3173369';
+            $this->channels[] = '云端直播9##vod_3173370';
         }
     }
 
@@ -66,12 +77,14 @@ class VeryEncodesController extends BaseController
             $watermark = $request->input('watermark', '');
             $location = $request->input('location', 'top');
             $has_logo = $request->input('logo');
+            $logo_position = $request->input('logo_position', '');
+            $logo_text = $request->input('logo_text', '');
             $referer = $request->input('referer', '');
             $header1 = $request->input('header1', '');
             $header2 = $request->input('header2', '');
             $header3 = $request->input('header3', '');
             $size = $request->input('size', 'md');
-            $exec = $this->generateFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $size, $referer, $header1, $header2, $header3);
+            $exec = $this->generateFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $size, $referer, $header1, $header2, $header3, $logo_position, $logo_text);
             Log::info($exec);
             shell_exec($exec);
             $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');

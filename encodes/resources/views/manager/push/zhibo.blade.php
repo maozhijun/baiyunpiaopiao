@@ -4,21 +4,35 @@
         {{ csrf_field() }}
         <div class="form-inline form-group">
             <label for="label-title">名称</label>
-            <input name="name" type="text" class="form-control" id="label-title" size="40">
-            <label class="checkbox-logo">
-                <input name="logo" type="checkbox" id="checkbox-logo" value="1" checked> Logo挡板
-            </label>
+            <input name="name" type="text" class="form-control" id="label-title" size="50">
+        </div>
+        <div class="form-inline form-group">
             <label for="label-size">分辨率</label>
             <select name="size" class="form-control" id="label-size">
                 @foreach($sizes as $key=>$size)
                     <option value="{{ $key }}">{{ $size['name'] }}</option>
                 @endforeach
             </select>
+
+            <label class="checkbox-logo">
+                <input name="logo" type="checkbox" id="checkbox-logo" value="1" checked> 是否显示Logo挡板
+            </label>
+
+            <label for="label-logo-text">Logo文案</label>
+            <input name="logo_text" type="text" value="{{ $logo_text }}" class="form-control" id="label-logo-text"
+                   size="20">
+
+            <label for="label-position">Logo位置</label>
+            <select name="logo_position" class="form-control" id="label-position">
+                @foreach($logo_position as $key=>$position)
+                    <option value="{{ $key }}">{{ $position['name'] }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-inline form-group">
             <label for="label-watermark">水印内容</label>
             <input name="watermark" type="text" value="{{ $watermark }}"
-                   class="form-control" id="label-watermark" size="60">
+                   class="form-control" id="label-watermark" size="70">
             <label for="label-watermark-location">水印位置</label>
             <select id="label-watermark-location" name="location" class="form-control">
                 <option value="bottom">下面</option>

@@ -31,6 +31,10 @@ Route::group(["middleware" => "auth", "namespace" => "Push"], function () {
         Route::get("/manager/", "OtherEncodesController@index");
     }
 
+    Route::get("/", function (){
+        return redirect('/manager/longzhu/');
+    });
+
     Route::get("/manager/other/", "OtherEncodesController@index");
     Route::post("/manager/other/created/", "OtherEncodesController@created");
     Route::get("/manager/other/stop/{id}", "OtherEncodesController@stop");

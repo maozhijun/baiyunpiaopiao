@@ -28,15 +28,16 @@ class WeiboEncodesController extends BaseController
 //            $this->channels[] = '微博直播8##';
 //            $this->channels[] = '微博直播9##';
         } elseif (env('APP_NAME') == 'leqiuba') {
-            $this->channels[] = '微博直播1##';
-            $this->channels[] = '微博直播2##';
-            $this->channels[] = '微博直播3##';
-            $this->channels[] = '微博直播4##';
-            $this->channels[] = '微博直播5##';
-            $this->channels[] = '微博直播6##';
-//            $this->channels[] = '微博直播7##';
-//            $this->channels[] = '微博直播8##';
-//            $this->channels[] = '微博直播9##';
+            $this->channels[] = '微博直播1##c919b926ff7562f37c67257eff58c434?auth_key=1524545325-0-0-dc68dce56ba4136d4fdf7cdbfd9b86ea';
+            $this->channels[] = '微博直播2##088b5b8df70cdcddbda9e532f78f1543?auth_key=1524545381-0-0-e95f5fb4866b332c11f733e760074a10';
+            $this->channels[] = '微博直播3##a09ef424038947e012bfe76bcd972fc0?auth_key=1524545401-0-0-d543f804d93f4417476a250846d143a8';
+            $this->channels[] = '微博直播4##e8aa03be8a6fdfc60ec917c0780b9804?auth_key=1524545419-0-0-b1e823c23563a932c934d1f351b5cf27';
+            $this->channels[] = '微博直播5##80497a4b57aa1ba070db8a7f7e157de2?auth_key=1524545435-0-0-c184c310ea7bdd296339bda81afec66d';
+            $this->channels[] = '微博直播6##1963ec187be7a238d735866c5f9f829c?auth_key=1524545454-0-0-ebfd9d9fe5a68b7cabca41254d2b8df0';
+            $this->channels[] = '微博直播7##91c127d720b3c4e640305208760d4cd8?auth_key=1524545472-0-0-2a2440b1654234d58c6c8ad8eed4a153';
+            $this->channels[] = '微博直播8##41b12f0028bdccba21c14e02505c4461?auth_key=1524545487-0-0-7b6e35d4e03822bbec82a300f92a98a9';
+            $this->channels[] = '微博直播9##a741d1aaa68e2472cc0549f64e0a2f74?auth_key=1524545510-0-0-e2acb2a2903c2539c6c6d30298258bbf';
+            $this->channels[] = '微博直播10##2ad18f433e08d160a4cef41b9ac1f5e8?auth_key=1524545528-0-0-71f8f09c773befbb00f1bf5d1476d6dc';
         }
     }
 
@@ -66,12 +67,14 @@ class WeiboEncodesController extends BaseController
             $watermark = $request->input('watermark', '');
             $location = $request->input('location', 'top');
             $has_logo = $request->input('logo');
+            $logo_position = $request->input('logo_position', '');
+            $logo_text = $request->input('logo_text', '');
             $referer = $request->input('referer', '');
             $header1 = $request->input('header1', '');
             $header2 = $request->input('header2', '');
             $header3 = $request->input('header3', '');
             $size = $request->input('size', 'md');
-            $exec = $this->generateFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $size, $referer, $header1, $header2, $header3);
+            $exec = $this->generateFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $size, $referer, $header1, $header2, $header3, $logo_position, $logo_text);
             Log::info($exec);
             shell_exec($exec);
             $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');

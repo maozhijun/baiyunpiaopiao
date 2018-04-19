@@ -27,6 +27,16 @@ class KukuEncodesController extends BaseController
             $this->channels[] = '酷酷直播7##12163337_12163337';
             $this->channels[] = '酷酷直播8##12163338_12163338';
             $this->channels[] = '酷酷直播9##12163339_12163339';
+        } elseif (env('APP_NAME') == 'leqiuba') {
+            $this->channels[] = '酷酷直播1##11163331_11163331';
+            $this->channels[] = '酷酷直播2##11163332_11163332';
+            $this->channels[] = '酷酷直播3##11163333_11163333';
+            $this->channels[] = '酷酷直播4##11163334_11163334';
+            $this->channels[] = '酷酷直播5##11163335_11163335';
+            $this->channels[] = '酷酷直播6##11163336_11163336';
+            $this->channels[] = '酷酷直播7##11163337_11163337';
+            $this->channels[] = '酷酷直播8##11163338_11163338';
+            $this->channels[] = '酷酷直播9##11163339_11163339';
         }
     }
 
@@ -56,12 +66,14 @@ class KukuEncodesController extends BaseController
             $watermark = $request->input('watermark', '');
             $location = $request->input('location', 'top');
             $has_logo = $request->input('logo');
+            $logo_position = $request->input('logo_position', '');
+            $logo_text = $request->input('logo_text', '');
             $referer = $request->input('referer', '');
             $header1 = $request->input('header1', '');
             $header2 = $request->input('header2', '');
             $header3 = $request->input('header3', '');
             $size = $request->input('size', 'md');
-            $exec = $this->generateFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $size, $referer, $header1, $header2, $header3);
+            $exec = $this->generateFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $size, $referer, $header1, $header2, $header3, $logo_position, $logo_text);
             Log::info($exec);
             shell_exec($exec);
             $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');

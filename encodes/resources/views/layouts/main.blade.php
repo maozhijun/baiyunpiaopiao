@@ -5,10 +5,10 @@
     <title>推流后台</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <!-- Bootstrap -->
-    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.css" rel="stylesheet">
-    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
-    <link href="//cdn.bootcss.com/toastr.js/latest/css/toastr.css" rel="stylesheet">
-    <link href="//cdn.bootcss.com/bootstrap/3.3.7/fonts/glyphicons-halflings-regular.svg" rel="stylesheet">
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/toastr.css" rel="stylesheet">
+    <link href="/css/glyphicons-halflings-regular.svg" rel="stylesheet">
     <link href="{{ asset('/css/dashboard.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -34,6 +34,10 @@
                     <li {{ starts_with(request()->path(),'records')?'class=active':'' }}>
                         <a href="/records/qq/">录像、集锦</a>
                     </li>
+                @elseif(env('APP_NAME')=='leqiuba')
+                    <li {{ starts_with(request()->path(),'resources')?'class=active':'' }}>
+                        <a href="/resources/qq/">直播源</a>
+                    </li>
                 @endif
             </ul>
         </div>
@@ -49,7 +53,7 @@
 
 </div>
 </body>
-<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
-<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
-<script src="//cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/toastr.min.js"></script>
 </html>

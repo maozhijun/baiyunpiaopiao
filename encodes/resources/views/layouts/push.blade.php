@@ -10,10 +10,10 @@
             <li role="presentation" {{ starts_with(request()->path(),'manager/qq')?'class=active':'' }}>
                 <a href="/manager/qq/">爱看球转码</a>
             </li>
+            <li role="presentation" {{ starts_with(request()->path(),'manager/other')?'class=active':'' }}>
+                <a href="/manager/other/">自定义转码</a>
+            </li>
         @endif
-        <li role="presentation" {{ starts_with(request()->path(),'manager/other')?'class=active':'' }}>
-            <a href="/manager/other/">自定义转码</a>
-        </li>
         <li role="presentation" {{ starts_with(request()->path(),'manager/longzhu')?'class=active':'' }}>
             <a href="/manager/longzhu/">龙珠直播</a>
         </li>

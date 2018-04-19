@@ -9,25 +9,49 @@ class Controller extends BaseController
 {
 
     protected $sizes = [
-        'sd' => ['name' => '480p', 'w' => 800, 'h' => 480, 'factor' => 1],
         'md' => ['name' => '540p', 'w' => 900, 'h' => 540, 'factor' => 1.125],
+        'sd' => ['name' => '480p', 'w' => 800, 'h' => 480, 'factor' => 1],
         'hd' => ['name' => '720p', 'w' => 1200, 'h' => 720, 'factor' => 1.5],
         'hhd' => ['name' => '1080p', 'w' => 1800, 'h' => 1080, 'factor' => 2.25],
     ];
+
+    protected $logo_position = [
+        'right' => [
+            'name' => '右上',
+            'x' => 620,
+            'y' => 20,
+            'w' => 170,
+            'h' => 30
+        ],
+        'left' => [
+            'name' => '左上',
+            'x' => 20,
+            'y' => 20,
+            'w' => 170,
+            'h' => 30
+        ]
+    ];
+
+    protected $fontsize = 18;
 
     public function __construct()
     {
         if (env('APP_NAME') == 'good') {
             View::share('watermark', '足球专家微信：bet6879，篮球专家微信：bet8679a');
+            View::share('logo_text', '加微信：bet6879');
         } elseif (env('APP_NAME') == 'aikq') {
             View::share('watermark', '加微信【kanqiu616】进群聊球，美女福利+大神免费推单，每天轻松收米！');
+            View::share('logo_text', '加微信：kanqiu616');
         } elseif (env('APP_NAME') == 'leqiuba') {
-            View::share('watermark', '看球  聊球  微信群，进群加微信：zhibo556  红包福利天天有！');
+            View::share('watermark', '看球 聊球 微信群，进群加微信：zhibo556 红包福利天天有！');
+            View::share('logo_text', '加微信：zhibo556');
         } else {
             View::share('watermark', '');
+            View::share('logo_text', '');
         }
-        View::share('fontsize', 18);
+        View::share('fontsize', $this->fontsize);
         View::share('sizes', $this->sizes);
+        View::share('logo_position', $this->logo_position);
     }
 
     /**
@@ -43,6 +67,8 @@ class Controller extends BaseController
      * @param string $header1 源Http Header 1
      * @param string $header2 源Http Header 2
      * @param string $header3 源Http Header 3
+     * @param string $logo_position
+     * @param string $logo_text
      * @return string 返回转码推流命令
      */
     protected function generateFfmpegCmd($input_uri = '',
@@ -56,7 +82,8 @@ class Controller extends BaseController
                                          $header1 = '',
                                          $header2 = '',
                                          $header3 = '',
-                                         $logo_text = '加微信：kanqiu616')
+                                         $logo_position = 'right',
+                                         $logo_text = '')
     {
         if (empty($input_uri) || empty($rtmp_url)) {
             return '';
@@ -66,12 +93,19 @@ class Controller extends BaseController
             $size = $this->sizes['md'];
         }
         $fontsize *= $size['factor'];
+        $lp = $this->logo_position[$logo_position];
+        $lp = [
+            'x' => $lp['x'] * $size['factor'],
+            'y' => $lp['y'] * $size['factor'],
+            'w' => $lp['w'] * $size['factor'],
+            'h' => $lp['h'] * $size['factor']
+        ];
         $execs = ['nohup /usr/bin/ffmpeg'];
         if (starts_with($input_uri, 'http')) {
             if (starts_with($input_uri, 'http://live.5club.cctv.cn')) {
                 $execs[] = '-user_agent "cctv_app_phone_cctv5"';
                 $execs[] = '-headers "UID:4044A747-5BF0-4465-A894-99E2FEBAC4C1"';
-            }elseif (starts_with($input_uri, 'http://gmcllc.de')) {
+            } elseif (starts_with($input_uri, 'http://gmcllc.de')) {
                 $execs[] = '-user_agent "BLUEIOS"';
                 $execs[] = '-headers "Range: bytes=0-"';
                 $execs[] = '-headers "Icy-MetaData: 1"';
@@ -97,8 +131,12 @@ class Controller extends BaseController
         if (!empty($watermark)) {
             $logo_code = '';
             if (!empty($has_logo)) {
-                $logo_code = 'drawbox=color=black:x=iw-(180*' . $size['factor'] . '):y=(20*' . $size['factor'] . '):width=(165*' . $size['factor'] . '):height=(30*' . $size['factor'] . '):t=fill,';
-                $logo_code .= 'drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $logo_text . '\':fontcolor=0xf7f14e:fontsize=' . $fontsize . ':x=(w-(180*' . $size['factor'] . ')+(165*' . $size['factor'] . '-tw)/2):y=(20*' . $size['factor'] . ')+(((30*' . $size['factor'] . ')-' . $fontsize . ')/2),';
+//                $logo_code = 'drawbox=color=black:x=iw-(180*' . $size['factor'] . '):y=(20*' . $size['factor'] . '):width=(170*' . $size['factor'] . '):height=(30*' . $size['factor'] . '):t=fill,';
+                $logo_code = 'drawbox=color=black:x=' . $lp['x'] . ':y=' . $lp['y'] . ':width=' . $lp['w'] . ':height=' . $lp['h'] . ':t=fill,';
+                if (!empty($logo_text)) {
+//                $logo_code .= 'drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $logo_text . '\':fontcolor=0xf7f14e:fontsize=' . $fontsize . ':x=(w-(180*' . $size['factor'] . ')+(170*' . $size['factor'] . '-tw)/2):y=(20*' . $size['factor'] . ')+(((30*' . $size['factor'] . ')-' . $fontsize . ')/2),';
+                    $logo_code .= 'drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $logo_text . '\':fontcolor=0xf7f14e:fontsize=' . $fontsize . ':x=(' . $lp['x'] . '+(' . $lp['w'] . '-tw)/2):y=(' . $lp['y'] . '+(' . $lp['h'] . '-' . $fontsize . ')/2),';
+                }
             }
             if ($location == 'top') {
                 $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=0:color=black@0.4:width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2) . '"';

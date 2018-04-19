@@ -37,6 +37,17 @@ class ZhiboEncodesController extends BaseController
             $this->channels[] = '中国直播7##s_873587';
             $this->channels[] = '中国直播8##s_873588';
             $this->channels[] = '中国直播9##s_873589';
+        } elseif (env('APP_NAME') == 'leqiuba') {
+            $this->channels[] = '中国直播0##s_673580';
+            $this->channels[] = '中国直播1##s_673581';
+            $this->channels[] = '中国直播2##s_673582';
+            $this->channels[] = '中国直播3##s_673583';
+            $this->channels[] = '中国直播4##s_673584';
+            $this->channels[] = '中国直播5##s_673585';
+            $this->channels[] = '中国直播6##s_673586';
+            $this->channels[] = '中国直播7##s_673587';
+            $this->channels[] = '中国直播8##s_673588';
+            $this->channels[] = '中国直播9##s_673589';
         }
     }
 
@@ -66,12 +77,14 @@ class ZhiboEncodesController extends BaseController
             $watermark = $request->input('watermark', '');
             $location = $request->input('location', 'top');
             $has_logo = $request->input('logo');
+            $logo_position = $request->input('logo_position', '');
+            $logo_text = $request->input('logo_text', '');
             $referer = $request->input('referer', '');
             $header1 = $request->input('header1', '');
             $header2 = $request->input('header2', '');
             $header3 = $request->input('header3', '');
             $size = $request->input('size', 'md');
-            $exec = $this->generateFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $size, $referer, $header1, $header2, $header3);
+            $exec = $this->generateFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $size, $referer, $header1, $header2, $header3, $logo_position, $logo_text);
             Log::info($exec);
             shell_exec($exec);
             $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');

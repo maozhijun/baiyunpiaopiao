@@ -19,6 +19,12 @@ class AuthController extends BaseController
             'role' => 'admin'
         ],
         [
+            'account' => 'leqiuba',
+            'password' => '141efbfed999db378707878803b34fb7585f7a6f',//leqiuba88
+            'salt' => '6dalIaEsi35Cs',
+            'role' => 'admin'
+        ],
+        [
             'account' => 'gg-user',
             'password' => '73b7873465e24754faeb01a5158b0ea97db49b72',
             'salt' => '6dalIdJiO2Vt',
