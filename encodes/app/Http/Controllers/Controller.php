@@ -8,14 +8,15 @@ use Illuminate\Support\Facades\View;
 class Controller extends BaseController
 {
 
-    protected $sizes = [
+    protected $sizes = [//视频输出分辨率
         'md' => ['name' => '540p', 'w' => 900, 'h' => 540, 'factor' => 1.125],
         'sd' => ['name' => '480p', 'w' => 800, 'h' => 480, 'factor' => 1],
+        'ssd' => ['name' => '320p', 'w' => 600, 'h' => 320, 'factor' => 0.75],
         'hd' => ['name' => '720p', 'w' => 1200, 'h' => 720, 'factor' => 1.5],
         'hhd' => ['name' => '1080p', 'w' => 1800, 'h' => 1080, 'factor' => 2.25],
     ];
 
-    protected $logo_position = [
+    protected $logo_position = [//水印位置
         'right' => [
             'name' => '右上',
             'x' => 620,
@@ -32,7 +33,9 @@ class Controller extends BaseController
         ]
     ];
 
-    protected $fontsize = 18;
+    protected $fontsize = 18;//水印字体大小
+
+    protected $watermark_alpha = 0.7;//水印透明度
 
     public function __construct()
     {
@@ -40,8 +43,12 @@ class Controller extends BaseController
             View::share('watermark', '足球专家微信：bet6879，篮球专家微信：bet8679a');
             View::share('logo_text', '加微信：bet6879');
         } elseif (env('APP_NAME') == 'aikq') {
-            View::share('watermark', '加微信【kanqiu616】进群聊球，美女福利+大神免费推单，每天轻松收米！');
-            View::share('logo_text', '加微信：kanqiu616');
+//            View::share('watermark', '加微信【kanqiu616】进群聊球，美女福利+大神免费推单，每天轻松收米！');
+//            View::share('logo_text', '加微信：kanqiu616');
+            View::share('watermark', '加微信【zhibo616】进群聊球，美女福利+大神免费推单，每天轻松收米！');
+            View::share('logo_text', '加微信：zhibo616');
+//            View::share('watermark', '加微信【fs188fs】进群聊球，美女福利+大神免费推单，每天轻松收米！');
+//            View::share('logo_text', '加微信：fs188fs');
         } elseif (env('APP_NAME') == 'leqiuba') {
             View::share('watermark', '看球 聊球 微信群，进群加微信：zhibo556 红包福利天天有！');
             View::share('logo_text', '加微信：zhibo556');
@@ -105,10 +112,18 @@ class Controller extends BaseController
             if (starts_with($input_uri, 'http://live.5club.cctv.cn')) {
                 $execs[] = '-user_agent "cctv_app_phone_cctv5"';
                 $execs[] = '-headers "UID:4044A747-5BF0-4465-A894-99E2FEBAC4C1"';
+            } elseif (str_contains($input_uri, 'zijian.hls.video.qq.com')) {
+                $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
+                $execs[] = '-headers "Referer: http://sports.qq.com/kbsweb/"';
+                $execs[] = '-headers "X-Requested-With:ShockwaveFlash/28.0.0.126"';
             } elseif (starts_with($input_uri, 'http://gmcllc.de')) {
                 $execs[] = '-user_agent "BLUEIOS"';
                 $execs[] = '-headers "Range: bytes=0-"';
                 $execs[] = '-headers "Icy-MetaData: 1"';
+            } elseif (starts_with($input_uri, 'https://m3u8.zhibo1.cc/')) {
+                $execs[] = '-user_agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"';
+                $execs[] = '-headers "origin: https://www.ballbar.cc"';
+                $execs[] = '-headers "referer: https://www.ballbar.cc/live/17240"';
             } else {
                 $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
                 if (!empty($referer)) {
@@ -131,19 +146,17 @@ class Controller extends BaseController
         if (!empty($watermark)) {
             $logo_code = '';
             if (!empty($has_logo)) {
-//                $logo_code = 'drawbox=color=black:x=iw-(180*' . $size['factor'] . '):y=(20*' . $size['factor'] . '):width=(170*' . $size['factor'] . '):height=(30*' . $size['factor'] . '):t=fill,';
                 $logo_code = 'drawbox=color=black:x=' . $lp['x'] . ':y=' . $lp['y'] . ':width=' . $lp['w'] . ':height=' . $lp['h'] . ':t=fill,';
                 if (!empty($logo_text)) {
-//                $logo_code .= 'drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $logo_text . '\':fontcolor=0xf7f14e:fontsize=' . $fontsize . ':x=(w-(180*' . $size['factor'] . ')+(170*' . $size['factor'] . '-tw)/2):y=(20*' . $size['factor'] . ')+(((30*' . $size['factor'] . ')-' . $fontsize . ')/2),';
                     $logo_code .= 'drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $logo_text . '\':fontcolor=0xf7f14e:fontsize=' . $fontsize . ':x=(' . $lp['x'] . '+(' . $lp['w'] . '-tw)/2):y=(' . $lp['y'] . '+(' . $lp['h'] . '-' . $fontsize . ')/2),';
                 }
             }
             if ($location == 'top') {
-                $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=0:color=black@0.4:width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2) . '"';
+                $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=0:color=black@' . $this->watermark_alpha . ':width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2) . '"';
             } elseif ($location = 'bottom') {
-                $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=(ih-' . ($fontsize * 2) . '):color=black@0.4:width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=(h-' . ($fontsize + $fontsize / 2) . ')"';
+                $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=(ih-' . ($fontsize * 2) . '):color=black@' . $this->watermark_alpha . ':width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=(h-' . ($fontsize + $fontsize / 2) . ')"';
             } else {
-                $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=0:color=black@0.4:width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2) . '"';
+                $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=0:color=black@' . $this->watermark_alpha . ':width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2) . '"';
             }
             $execs[] = $vf;
         }

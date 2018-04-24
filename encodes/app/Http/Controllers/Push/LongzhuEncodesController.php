@@ -20,7 +20,7 @@ class LongzhuEncodesController extends BaseController
         } elseif (env('APP_NAME') == 'aikq') {
             $this->channels[] = '老铁扣波666##caa04c73446e5a328603ebd2fa45e21642eb907d0361bc21b548ae2a657070a85086849a62e9d43096261973c4be472a6991024b2ef30fff';
             $this->channels[] = '17053909336##501d37c3feecf2692e6ab0c50b655a986b7eb1923034d1e7f146da52cee8cd8885b76fbe32c92b126495f831a34f8a21c27ae52761b4fa3d';
-            $this->channels[] = '17053904825##b43d50c00e46f8f8b0054058b77d8ba6a7d521069a048ad8a8aa59705e496adb9066eb3699bea38b99f62174559d0ccd232870f0cfd1b0aa';
+//            $this->channels[] = '17053904825##2b6ca9aaabe91fae858e8ad4f57da6501ff84f56435507765bce6c84305c572c94b9374cdd8f14c6ac91ac934ec81333b9ad1a75f8dbe439';
             $this->channels[] = '17121075951##b26db27b727ed633f841dae7cf51ec6135b54eb39abf72b9c8f0e8d23a4151471aaad1ae103e245025e6ffa130e618162ea4c140548fd045';
             $this->channels[] = '17121073783##aeb411ed6c388ef2f1bb8f43880c69683e1e4d23540e06dc47181357dd9a1a5e07e5b59e4213593cbf39f58d91d716b77220e2ab65266a79';
             $this->channels[] = '17172859893##2d0f3f8dabf8f95b49f1ae9646419ab6a8136edf15b1a38a40630f59601c98f9d5170c13cf925f9279586b99e293f9dc1c42e0422fec1367';
@@ -40,7 +40,7 @@ class LongzhuEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('to', 'Longzhu')->where('status', '>=', 1)->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Longzhu')->where('status', '>=', 1)->get();
         return view('manager.push.longzhu', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
@@ -94,7 +94,7 @@ class LongzhuEncodesController extends BaseController
                 $et->input = $input;
                 $et->rtmp = $rtmp_url;
                 $et->out = $live_url;
-                $et->from = 'Longzhu';
+                $et->from = env('APP_NAME');
                 $et->to = 'Longzhu';
                 $et->status = 1;
                 $et->save();

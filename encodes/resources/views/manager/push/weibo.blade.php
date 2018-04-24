@@ -99,7 +99,8 @@
                     </td>
                     <td>
                         @if($et->status == 1)
-                            <a class="btn btn-xs btn-danger" href="javascript:if(confirm('确认删除')) location.href='/manager/weibo/stop/{{ $et->id }}'">停止</a>
+                            <a class="btn btn-xs btn-danger"
+                               href="javascript:if(confirm('确认删除')) location.href='/manager/weibo/stop/{{ $et->id }}'">停止</a>
                         @endif
                     </td>
                 </tr>

@@ -53,7 +53,7 @@ class VeryEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('to', 'Very')->where('status', '>=', 1)->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Very')->where('status', '>=', 1)->get();
         return view('manager.push.very', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
@@ -95,7 +95,7 @@ class VeryEncodesController extends BaseController
                 $et->input = $input;
                 $et->rtmp = $rtmp_url;
                 $et->out = $live_rtmp_url . "\n" . $live_m3u8_url;
-                $et->from = 'Very';
+                $et->from = env('APP_NAME');
                 $et->to = 'Very';
                 $et->status = 1;
                 $et->save();

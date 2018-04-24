@@ -17,7 +17,7 @@ class OtherEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('to', 'Other')->where('status', 1)->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Other')->where('status', 1)->get();
         return view('manager.push.other', ['ets' => $ets]);
     }
 
@@ -31,7 +31,7 @@ class OtherEncodesController extends BaseController
         ) {
             $name = str_replace(' ', '-', $request->input('name'));
             $input = $request->input('input');
-            $channel = $request->input('channel');
+            $rtmp_url = $request->input('channel');
             $output = $request->input('output');
 
             $fontsize = $request->input('fontsize', 18);
@@ -48,15 +48,15 @@ class OtherEncodesController extends BaseController
             $exec = $this->generateFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $size, $referer, $header1, $header2, $header3, $logo_position, $logo_text);
             Log::info($exec);
             shell_exec($exec);
-            $pid = exec('pgrep -f "' . explode('?', $channel)[0] . '"');
+            $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');
             if (!empty($pid)) {
                 $et = new EncodeTask();
                 $et->name = $name;
                 $et->channel = 'Other';
                 $et->input = $input;
-                $et->rtmp = $channel;
+                $et->rtmp = $rtmp_url;
                 $et->out = $output;
-                $et->from = 'Other';
+                $et->from = env('APP_NAME');
                 $et->to = 'Other';
                 $et->status = 1;
                 $et->save();

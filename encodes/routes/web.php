@@ -60,15 +60,13 @@ Route::group(["middleware" => "auth", "namespace" => "Push"], function () {
     Route::get("/manager/longzhu/stop/{id}", "LongzhuEncodesController@stop");
     Route::get("/manager/longzhu/test", "LongzhuEncodesController@test");
 
-    Route::get("/manager/quanmin/", "QuanminEncodesController@index");
-    Route::post("/manager/quanmin/created/", "QuanminEncodesController@created");
-    Route::get("/manager/quanmin/stop/{id}", "QuanminEncodesController@stop");
+    Route::get("/manager/netease/", "NeteaseEncodesController@index");
+    Route::post("/manager/netease/created/", "NeteaseEncodesController@created");
+    Route::get("/manager/netease/stop/{id}", "NeteaseEncodesController@stop");
 
-    Route::get("/manager/qie/", "QieEncodesController@index");
-    Route::post("/manager/qie/created/", "QieEncodesController@created");
-    Route::get("/manager/qie/stop/{id}", "QieEncodesController@stop");
-    Route::get("/manager/qie/stopQie/{id}", "QieEncodesController@stopQie");
-    Route::get("/manager/qie/test", "QieEncodesController@test");
+    Route::get("/manager/mi/", "MiEncodesController@index");
+    Route::post("/manager/mi/created/", "MiEncodesController@created");
+    Route::get("/manager/mi/stop/{id}", "MiEncodesController@stop");
 
 });
 
@@ -97,6 +95,9 @@ Route::group(["middleware" => "auth", "namespace" => "Pull"], function () {
 
     Route::get("/resources/cctv5/", "CCTV5EncodesController@index");
     Route::get("/resources/cctv5/get_live_url/{id}", "CCTV5EncodesController@getLiveUrl");
+
+    Route::get("/resources/ballbar/", "BallbarEncodesController@index");
+    Route::get("/resources/ballbar/get_live_url/{id}", "BallbarEncodesController@getLiveUrl");
 
     Route::get("/resources/sportlive/", "SportLiveEncodesController@index");
     Route::get("/resources/sportlive/get_live_url/{id}", "SportLiveEncodesController@getLiveUrl");

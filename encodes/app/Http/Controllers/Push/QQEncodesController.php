@@ -48,7 +48,7 @@ class QQEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('to', 'AIKQ')->where('status', 1)->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'AIKQ')->where('status', 1)->get();
         $result['ets'] = $ets;
         $result['ggcdns'] = $this->ggcdns;
         $user = session(AuthController::K_LOGIN_SESSION_KEY);
@@ -108,7 +108,7 @@ class QQEncodesController extends BaseController
                 $et->input = $input;
                 $et->rtmp = $rtmp_url;
                 $et->out = $output;
-                $et->from = 'QQ';
+                $et->from = env('APP_NAME');
                 $et->to = 'AIKQ';
                 $et->status = 1;
                 $et->save();

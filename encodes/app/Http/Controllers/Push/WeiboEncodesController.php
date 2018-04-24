@@ -18,12 +18,12 @@ class WeiboEncodesController extends BaseController
         if (env('APP_NAME') == 'good') {
 
         } elseif (env('APP_NAME') == 'aikq') {
-            $this->channels[] = '微博直播1##813d9256bfd2580005edc5944b980793?auth_key=1524491653-0-0-3f9d7e953a68953bcfb58189249f6b1c';
-            $this->channels[] = '微博直播2##0a85ea45ce181b7fabff8c6a3c3c1b0a?auth_key=1524491730-0-0-933e12b6e7cf353cf653c22d108a8e9e';
-            $this->channels[] = '微博直播3##21765011c5f7717d2c726eeee8879d7f?auth_key=1524491763-0-0-9ecf49847bf7d083e1305d631e80d182';
-            $this->channels[] = '微博直播4##3652d8de9b7625640cdeb6143f96e2b6?auth_key=1524491805-0-0-e24965c32c9d0ea870b90a97c633a645';
-            $this->channels[] = '微博直播5##be537d3b033e31422e76e7d3b547e890?auth_key=1524491836-0-0-b311ab4248de4d2d91cea1daa1e9d6c2';
-            $this->channels[] = '微博直播6##111dc60ef7cdfcfdd169c60cdf838116?auth_key=1524491866-0-0-4fb86a7852f5e013e402da38791d17d4';
+            $this->channels[] = '微博直播1##cb4200bd9e741b6a9aa2867113964b65?auth_key=1525140281-0-0-e158d94ccf356544bfc762de1fe2781f';
+            $this->channels[] = '微博直播2##1f35e14ad95eaa162c2cf1dfe23e4af2?auth_key=1525140396-0-0-7d7288ad0f1439ab0c45952a29bcce72';
+            $this->channels[] = '微博直播3##081723d42cf99fcfa88bd9372ddef20b?auth_key=1525140434-0-0-cb3cbf2ea77982ee870a1a825452696c';
+            $this->channels[] = '微博直播4##33782e1aac65e5b1613d83b1bbc6cce7?auth_key=1525140468-0-0-6ee3b78d339c0aecf49e3e9abb211ab7';
+            $this->channels[] = '微博直播5##6dc55a448b10a7beccb41c29cfc582a5?auth_key=1525140502-0-0-06d6958bd9d55b47edae07bf7f4e2ba9';
+            $this->channels[] = '微博直播6##63490e1095b8485769e6aa6e53ae2733?auth_key=1525140538-0-0-620fedc34f36fee41e3ae231d13d7370';
 //            $this->channels[] = '微博直播7##';
 //            $this->channels[] = '微博直播8##';
 //            $this->channels[] = '微博直播9##';
@@ -43,7 +43,7 @@ class WeiboEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('to', 'Weibo')->where('status', '>=', 1)->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Weibo')->where('status', '>=', 1)->get();
         return view('manager.push.weibo', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
@@ -85,7 +85,7 @@ class WeiboEncodesController extends BaseController
                 $et->input = $input;
                 $et->rtmp = $rtmp_url;
                 $et->out = $live_rtmp_url . "\n" . $live_m3u8_url;
-                $et->from = 'Weibo';
+                $et->from = env('APP_NAME');
                 $et->to = 'Weibo';
                 $et->status = 1;
                 $et->save();

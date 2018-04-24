@@ -53,7 +53,7 @@ class ZhiboEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('to', 'Zhibo')->where('status', '>=', 1)->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Zhibo')->where('status', '>=', 1)->get();
         return view('manager.push.zhibo', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
@@ -95,7 +95,7 @@ class ZhiboEncodesController extends BaseController
                 $et->input = $input;
                 $et->rtmp = $rtmp_url;
                 $et->out = $live_rtmp_url . "\n" . $live_m3u8_url;
-                $et->from = 'Zhibo';
+                $et->from = env('APP_NAME');
                 $et->to = 'Zhibo';
                 $et->status = 1;
                 $et->save();
