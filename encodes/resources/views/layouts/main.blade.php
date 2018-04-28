@@ -15,8 +15,10 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="margin-bottom: 0">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
     </button>
-    <div class="navbar-header">
-        <a class="navbar-brand" href="/manager/">推流后台</a>
+    <div class="navbar-header" style="background-color: {{ $banner_color or '' }};width: 100%;">
+        <a class="navbar-brand" href="/manager/" style="color: #fff;">
+            推流后台-{{ $banner_text or '' }}-当前推流数：<label class="label label-danger">{{ $banner_count or 0 }}条</label>
+        </a>
     </div>
 </nav>
 
@@ -56,4 +58,9 @@
 <script src="/js/jquery.js"></script>
 <script src="/js/bootstrap.js"></script>
 <script src="/js/toastr.min.js"></script>
+@if(session('error'))
+    <script>
+        toastr.error('{{ session('error') }}');
+    </script>
+@endif
 </html>

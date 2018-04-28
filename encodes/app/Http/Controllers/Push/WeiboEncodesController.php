@@ -24,8 +24,17 @@ class WeiboEncodesController extends BaseController
             $this->channels[] = '微博直播4##33782e1aac65e5b1613d83b1bbc6cce7?auth_key=1525140468-0-0-6ee3b78d339c0aecf49e3e9abb211ab7';
             $this->channels[] = '微博直播5##6dc55a448b10a7beccb41c29cfc582a5?auth_key=1525140502-0-0-06d6958bd9d55b47edae07bf7f4e2ba9';
             $this->channels[] = '微博直播6##63490e1095b8485769e6aa6e53ae2733?auth_key=1525140538-0-0-620fedc34f36fee41e3ae231d13d7370';
-//            $this->channels[] = '微博直播7##';
-//            $this->channels[] = '微博直播8##';
+            $this->channels[] = '微博直播7##9557ee984130e8f5a7a52dccf3c201b0?auth_key=1525323073-0-0-d6ede4c59017d0dd01a03415c06fcf98';
+            $this->channels[] = '微博直播8##a8a4bed731f00861df0efbe44f68b8d5?auth_key=1525323198-0-0-659e09417696d598a1a9db676555e933';
+        } elseif (env('APP_NAME') == 'aikq1') {
+            $this->channels[] = '微博直播1##00863d444f8998e91469aebbf3c6a076?auth_key=1525501686-0-0-bcd25725c133a8712ac231c07d8c6a23';
+            $this->channels[] = '微博直播2##9fe74cdb6ccd5185a492d8db4c472d77?auth_key=1525501721-0-0-dde0cd7bb3e57a6011c38b3d674ec153';
+            $this->channels[] = '微博直播3##3d07e3a07c43875fd46d6eb38b21f76d?auth_key=1525501775-0-0-1246586dbcb421eebe3adafa542672e0';
+            $this->channels[] = '微博直播4##9e6e187dc100e4f089f66f014f92504f?auth_key=1525501805-0-0-397dd8a74727b72d173936d63c6839cd';
+            $this->channels[] = '微博直播5##4bde556c506e792ec3cc39c27144d759?auth_key=1525501854-0-0-09a89d1cd05ddaf13bc309bccf5fdf96';
+            $this->channels[] = '微博直播6##cb3eb8e49d5bd218d48864445bab6b63?auth_key=1525501887-0-0-ce70c85bce54f9a9bd9a0beac72ed158';
+            $this->channels[] = '微博直播7##5bea76b1d90a8994801d92b54b808b88?auth_key=1525501917-0-0-cb9f89a7edaff9bf1609f1a72ad621a6';
+            $this->channels[] = '微博直播8##79698c174f835179e71808971da112cb?auth_key=1525501951-0-0-a0382000c83f8ae0f119299dc752d8b3';
 //            $this->channels[] = '微博直播9##';
         } elseif (env('APP_NAME') == 'leqiuba') {
             $this->channels[] = '微博直播1##c919b926ff7562f37c67257eff58c434?auth_key=1524545325-0-0-dc68dce56ba4136d4fdf7cdbfd9b86ea';
@@ -57,7 +66,19 @@ class WeiboEncodesController extends BaseController
             $name = str_replace(' ', '-', $request->input('name'));
             $input = $request->input('input');
 
+//            $channel = $request->input('channel');
             $channel = $request->input('channel');
+            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Mi')->where('status', '>=', 1)->inRandomOrder()->get();
+            if ($ets->contains('channel', $channel)) {
+                foreach ($this->channels as $ch) {
+                    if (!$ets->contains('channel', $ch)) {
+                        $channel = $ch;
+                    }
+                }
+            }
+            if (empty($channel)) {
+                return back()->with(['error' => '没有可用的直播间咯']);
+            }
             list($roomName, $roomId) = explode('##', $channel);
             $rtmp_url = 'rtmp://ps.live.weibo.com/alicdn/' . $roomId;//获取rtmp地址
             $live_rtmp_url = 'rtmp://pl.live.weibo.com/alicdn/' . explode('?', $roomId)[0] . '_wb720';//播放rtmp地址

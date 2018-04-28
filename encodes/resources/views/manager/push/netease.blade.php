@@ -49,7 +49,7 @@
             <label for="label-referer">Referer(Http源)</label>
             <input name="referer" type="text" class="form-control" id="label-referer" size="40">
             <label for="label-header1">Header1(Http源)</label>
-            <input name="header1" type="text" class="form-control" id="label-header1"size="40">
+            <input name="header1" type="text" class="form-control" id="label-header1" size="40">
         </div>
         <div class="form-inline form-group">
             <label for="label-header2">Header2(Http源)</label>
@@ -61,8 +61,8 @@
             <label for="label-channel">推流地址</label>
             <select name="channel" class="form-control" id="label-channel">
                 @foreach($channels as $channel)
-                    @if(!$ets->contains('channel',explode('##',$channel)[0]))
-                        <option value="{{ $channel }}">{{ explode('##',$channel)[0] }}</option>
+                    @if(!$ets->contains('channel',$channel))
+                        <option value="{{ $channel }}">{{ explode('?',$channel)[0] }}</option>
                     @endif
                 @endforeach
             </select>

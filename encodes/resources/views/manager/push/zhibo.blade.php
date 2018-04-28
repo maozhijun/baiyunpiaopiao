@@ -47,11 +47,9 @@
         </div>
         <div class="form-inline form-group">
             <label for="label-referer">Referer(Http源)</label>
-            <input name="referer" type="text" class="form-control" id="label-referer"
-                   value="http://sports.qq.com/kbsweb/" size="40">
+            <input name="referer" type="text" class="form-control" id="label-referer" size="40">
             <label for="label-header1">Header1(Http源)</label>
-            <input name="header1" type="text" class="form-control" id="label-header1"
-                   value="X-Requested-With:ShockwaveFlash/28.0.0.126" size="40">
+            <input name="header1" type="text" class="form-control" id="label-header1" size="40">
         </div>
         <div class="form-inline form-group">
             <label for="label-header2">Header2(Http源)</label>

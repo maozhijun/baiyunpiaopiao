@@ -16,16 +16,6 @@ class ZhiboEncodesController extends BaseController
         parent::__construct();
         $this->middleware('filter')->except([]);
         if (env('APP_NAME') == 'good') {
-//            $this->channels[] = '中国直播0##s_773580';
-//            $this->channels[] = '中国直播1##s_773581';
-//            $this->channels[] = '中国直播2##s_773582';
-//            $this->channels[] = '中国直播3##s_773583';
-//            $this->channels[] = '中国直播4##s_773584';
-//            $this->channels[] = '中国直播5##s_773585';
-//            $this->channels[] = '中国直播6##s_773586';
-//            $this->channels[] = '中国直播7##s_773587';
-//            $this->channels[] = '中国直播8##s_773588';
-//            $this->channels[] = '中国直播9##s_773589';
         } elseif (env('APP_NAME') == 'aikq') {
             $this->channels[] = '中国直播0##s_873580';
             $this->channels[] = '中国直播1##s_873581';
@@ -37,6 +27,17 @@ class ZhiboEncodesController extends BaseController
             $this->channels[] = '中国直播7##s_873587';
             $this->channels[] = '中国直播8##s_873588';
             $this->channels[] = '中国直播9##s_873589';
+        } elseif (env('APP_NAME') == 'aikq1') {
+            $this->channels[] = '中国直播0##s_873880';
+            $this->channels[] = '中国直播1##s_873881';
+            $this->channels[] = '中国直播2##s_873882';
+            $this->channels[] = '中国直播3##s_873883';
+            $this->channels[] = '中国直播4##s_873884';
+            $this->channels[] = '中国直播5##s_873885';
+            $this->channels[] = '中国直播6##s_873886';
+            $this->channels[] = '中国直播7##s_873887';
+            $this->channels[] = '中国直播8##s_873888';
+            $this->channels[] = '中国直播9##s_873889';
         } elseif (env('APP_NAME') == 'leqiuba') {
             $this->channels[] = '中国直播0##s_673580';
             $this->channels[] = '中国直播1##s_673581';
@@ -67,7 +68,19 @@ class ZhiboEncodesController extends BaseController
             $name = str_replace(' ', '-', $request->input('name'));
             $input = $request->input('input');
 
+//            $channel = $request->input('channel');
             $channel = $request->input('channel');
+            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Mi')->where('status', '>=', 1)->inRandomOrder()->get();
+            if ($ets->contains('channel', $channel)) {
+                foreach ($this->channels as $ch) {
+                    if (!$ets->contains('channel', $ch)) {
+                        $channel = $ch;
+                    }
+                }
+            }
+            if (empty($channel)) {
+                return back()->with(['error' => '没有可用的直播间咯']);
+            }
             list($roomName, $roomId) = explode('##', $channel);
             $rtmp_url = 'rtmp://stream.bo8.tv/8live/' . $roomId;//获取rtmp地址
             $live_rtmp_url = 'rtmp://live.zhibo.tv/8live/' . $roomId;//播放rtmp地址

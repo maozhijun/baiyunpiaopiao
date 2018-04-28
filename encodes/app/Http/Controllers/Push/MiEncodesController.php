@@ -26,6 +26,15 @@ class MiEncodesController extends BaseController
             $this->channels[] = '小米直播6##cid201804241146222057579';
             $this->channels[] = '小米直播7##cid201804241147222057579';
             $this->channels[] = '小米直播8##cid201804241148222057579';
+        } elseif (env('APP_NAME') == 'aikq1') {
+            $this->channels[] = '小米直播1##cid201804241141222057599';
+            $this->channels[] = '小米直播2##cid201804241142222057599';
+            $this->channels[] = '小米直播3##cid201804241143222057599';
+            $this->channels[] = '小米直播4##cid201804241144222057599';
+            $this->channels[] = '小米直播5##cid201804241145222057599';
+            $this->channels[] = '小米直播6##cid201804241146222057599';
+            $this->channels[] = '小米直播7##cid201804241147222057599';
+            $this->channels[] = '小米直播8##cid201804241148222057599';
         } elseif (env('APP_NAME') == 'leqiuba') {
             $this->channels[] = '小米直播1##cid201803241141222057579';
             $this->channels[] = '小米直播2##cid201803241142222057579';
@@ -55,10 +64,22 @@ class MiEncodesController extends BaseController
             $input = $request->input('input');
 
             $channel = $request->input('channel');
+            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Mi')->where('status', '>=', 1)->inRandomOrder()->get();
+            if ($ets->contains('channel', $channel)) {
+                foreach ($this->channels as $ch) {
+                    if (!$ets->contains('channel', $ch)) {
+                        $channel = $ch;
+                    }
+                }
+            }
+            if (empty($channel)) {
+                return back()->with(['error' => '没有可用的直播间咯']);
+            }
+
             list($roomName, $roomId) = explode('##', $channel);
             $rtmp_url = 'rtmp://r1.zb.mi.com/live/' . $roomId;//获取rtmp地址
-            $live_flv_url = 'http://v1.zb.mi.com/live/' . explode('?', $roomId)[0] . '.flv';//flv地址
-            $live_m3u8_url = 'http://hls.zb.mi.com/live/' . explode('?', $roomId)[0] . '.m3u8';//m3u8地址
+            $live_flv_url = 'http://v2.zb.mi.com/live/' . explode('?', $roomId)[0] . '.flv';//flv地址
+            $live_m3u8_url = 'http://hls.zb.mi.com/live/' . explode('?', $roomId)[0] . '/playlist.m3u8';//m3u8地址
 
             $fontsize = $request->input('fontsize', 18);
             $watermark = $request->input('watermark', '');

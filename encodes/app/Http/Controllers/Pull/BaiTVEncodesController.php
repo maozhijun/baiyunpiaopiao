@@ -113,16 +113,7 @@ class BaiTVEncodesController extends BaseController
         curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
         curl_setopt($ch, CURLOPT_USERAGENT, "BesTV/1 CFNetwork/897.15 Darwin/17.5.0");
         curl_setopt($ch, CURLOPT_COOKIESESSION, true);
-//        curl_setopt($ch, CURLOPT_HEADER, true);
-//        curl_setopt($ch, CURLINFO_HEADER_OUT, true);
-//        curl_setopt($ch, CURLOPT_VERBOSE, true);
-//        $verbose = fopen('php://temp', 'w+');
-//        curl_setopt($ch, CURLOPT_STDERR, $verbose);
         $response = curl_exec($ch);
-//        dump($response);
-//        rewind($verbose);
-//        $verboseLog = stream_get_contents($verbose);
-//        echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
         if ($error = curl_error($ch)) {
             die($error);
         }

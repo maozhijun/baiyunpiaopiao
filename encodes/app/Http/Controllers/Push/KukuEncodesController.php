@@ -27,6 +27,16 @@ class KukuEncodesController extends BaseController
             $this->channels[] = '酷酷直播7##12163337_12163337';
             $this->channels[] = '酷酷直播8##12163338_12163338';
             $this->channels[] = '酷酷直播9##12163339_12163339';
+        } elseif (env('APP_NAME') == 'aikq1') {
+            $this->channels[] = '酷酷直播1##12166331_12166331';
+            $this->channels[] = '酷酷直播2##12166332_12166332';
+            $this->channels[] = '酷酷直播3##12166333_12166333';
+            $this->channels[] = '酷酷直播4##12166334_12166334';
+            $this->channels[] = '酷酷直播5##12166335_12166335';
+            $this->channels[] = '酷酷直播6##12166336_12166336';
+            $this->channels[] = '酷酷直播7##12166337_12166337';
+            $this->channels[] = '酷酷直播8##12166338_12166338';
+            $this->channels[] = '酷酷直播9##12166339_12166339';
         } elseif (env('APP_NAME') == 'leqiuba') {
             $this->channels[] = '酷酷直播1##11163331_11163331';
             $this->channels[] = '酷酷直播2##11163332_11163332';
@@ -56,7 +66,19 @@ class KukuEncodesController extends BaseController
             $name = str_replace(' ', '-', $request->input('name'));
             $input = $request->input('input');
 
+//            $channel = $request->input('channel');
             $channel = $request->input('channel');
+            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Mi')->where('status', '>=', 1)->inRandomOrder()->get();
+            if ($ets->contains('channel', $channel)) {
+                foreach ($this->channels as $ch) {
+                    if (!$ets->contains('channel', $ch)) {
+                        $channel = $ch;
+                    }
+                }
+            }
+            if (empty($channel)) {
+                return back()->with(['error' => '没有可用的直播间咯']);
+            }
             list($roomName, $roomId) = explode('##', $channel);
             $rtmp_url = 'rtmp://rtmp.zhubo123.com/kuxing/' . $roomId;//获取rtmp地址
             $live_rtmp_url = 'rtmp://rtmplive.zhubo123.com/kuxing/' . $roomId;//播放rtmp地址

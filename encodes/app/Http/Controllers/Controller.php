@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EncodeTask;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\View;
 
@@ -39,10 +40,15 @@ class Controller extends BaseController
 
     public function __construct()
     {
+        View::share('banner_text', env('banner_text', '爱看球'));
+        View::share('banner_color', env('banner_color', ''));
+//        $count = EncodeTask::query()->where('from', env('APP_NAME'))->where('status', '>=', 1)->count();
+        $count = EncodeTask::query()->where('status', '>=', 1)->count();
+        View::share('banner_count', $count);
         if (env('APP_NAME') == 'good') {
             View::share('watermark', '足球专家微信：bet6879，篮球专家微信：bet8679a');
             View::share('logo_text', '加微信：bet6879');
-        } elseif (env('APP_NAME') == 'aikq') {
+        } elseif (env('APP_NAME') == 'aikq' || env('APP_NAME') == 'aikq1') {
 //            View::share('watermark', '加微信【kanqiu616】进群聊球，美女福利+大神免费推单，每天轻松收米！');
 //            View::share('logo_text', '加微信：kanqiu616');
             View::share('watermark', '加微信【zhibo616】进群聊球，美女福利+大神免费推单，每天轻松收米！');

@@ -61,8 +61,8 @@
             <label for="label-channel">推流地址</label>
             <select name="channel" class="form-control" id="label-channel">
                 @foreach($channels as $channel)
-                    @if(!$ets->contains('channel',explode('##',$channel)[0]))
-                        <option value="{{ $channel }}">{{ explode('##',$channel)[0] }}</option>
+                    @if(!$ets->contains('channel',$channel))
+                        <option value="{{ $channel }}">{{ explode('?',$channel)[0] }}</option>
                     @endif
                 @endforeach
             </select>

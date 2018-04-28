@@ -16,16 +16,7 @@ class VeryEncodesController extends BaseController
         parent::__construct();
         $this->middleware('filter')->except([]);
         if (env('APP_NAME') == 'good') {
-//            $this->channels[] = '云端直播0##vod_3180361';
-//            $this->channels[] = '云端直播1##vod_3180362';
-//            $this->channels[] = '云端直播2##vod_3180363';
-//            $this->channels[] = '云端直播3##vod_3180364';
-//            $this->channels[] = '云端直播4##vod_3180365';
-//            $this->channels[] = '云端直播5##vod_3180366';
-//            $this->channels[] = '云端直播6##vod_3180367';
-//            $this->channels[] = '云端直播7##vod_3180368';
-//            $this->channels[] = '云端直播8##vod_3180369';
-//            $this->channels[] = '云端直播9##vod_3180370';
+
         } elseif (env('APP_NAME') == 'aikq') {
             $this->channels[] = '云端直播0##vod_3183361';
             $this->channels[] = '云端直播1##vod_3183362';
@@ -37,6 +28,17 @@ class VeryEncodesController extends BaseController
             $this->channels[] = '云端直播7##vod_3183368';
             $this->channels[] = '云端直播8##vod_3183369';
             $this->channels[] = '云端直播9##vod_3183370';
+        } elseif (env('APP_NAME') == 'aikq1') {
+            $this->channels[] = '云端直播0##vod_3183661';
+            $this->channels[] = '云端直播1##vod_3183662';
+            $this->channels[] = '云端直播2##vod_3183663';
+            $this->channels[] = '云端直播3##vod_3183664';
+            $this->channels[] = '云端直播4##vod_3183665';
+            $this->channels[] = '云端直播5##vod_3183666';
+            $this->channels[] = '云端直播6##vod_3183667';
+            $this->channels[] = '云端直播7##vod_3183668';
+            $this->channels[] = '云端直播8##vod_3183669';
+            $this->channels[] = '云端直播9##vod_3183670';
         } elseif (env('APP_NAME') == 'leqiuba') {
             $this->channels[] = '云端直播0##vod_3173361';
             $this->channels[] = '云端直播1##vod_3173362';
@@ -67,7 +69,19 @@ class VeryEncodesController extends BaseController
             $name = str_replace(' ', '-', $request->input('name'));
             $input = $request->input('input');
 
+//            $channel = $request->input('channel');
             $channel = $request->input('channel');
+            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Mi')->where('status', '>=', 1)->inRandomOrder()->get();
+            if ($ets->contains('channel', $channel)) {
+                foreach ($this->channels as $ch) {
+                    if (!$ets->contains('channel', $ch)) {
+                        $channel = $ch;
+                    }
+                }
+            }
+            if (empty($channel)) {
+                return back()->with(['error' => '没有可用的直播间咯']);
+            }
             list($roomName, $roomId) = explode('##', $channel);
             $rtmp_url = 'rtmp://push.china0736.com/vod/' . $roomId;//获取rtmp地址
             $live_rtmp_url = 'rtmp://live.china0736.com/vod/' . $roomId;//播放rtmp地址
