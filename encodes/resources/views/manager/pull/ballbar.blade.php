@@ -18,6 +18,7 @@
                     <td colspan="6" class="danger">{{ $date }}</td>
                 </tr>
                 @foreach($dlives as $live)
+                    @if($live['league']=='足球' || $live['league']=='篮球')
                     <tr>
                         <td>{{ $live['league'] }}</td>
                         <td>
@@ -36,6 +37,7 @@
                             {{--<a class="btn btn-xs btn-danger" href="/resources/ssports/created/">推流</a>--}}
                         </td>
                     </tr>
+                    @endif
                 @endforeach
             @endforeach
             </tbody>

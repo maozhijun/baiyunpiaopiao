@@ -8,9 +8,14 @@
         <li role="presentation" {{ starts_with(request()->path(),'resources/leisu')?'class=active':'' }}>
             <a href="/resources/leisu/">雷速</a>
         </li>
-        <li role="presentation" {{ starts_with(request()->path(),'resources/ballbar')?'class=active':'' }}>
-            <a href="/resources/ballbar/">播吧</a>
-        </li>
+        @if(env('APP_NAME')=='aikq' || env('APP_NAME')=='aikq1')
+            <li role="presentation" {{ starts_with(request()->path(),'resources/ballbar')?'class=active':'' }}>
+                <a href="/resources/ballbar/">播吧</a>
+            </li>
+            <li role="presentation" {{ starts_with(request()->path(),'resources/xbet')?'class=active':'' }}>
+                <a href="/resources/xbet/">1XBet</a>
+            </li>
+        @endif
         <li role="presentation" {{ starts_with(request()->path(),'resources/ssports')?'class=active':'' }}>
             <a href="/resources/ssports/">新英</a>
         </li>

@@ -78,6 +78,9 @@ Route::group(["middleware" => "auth", "namespace" => "Pull"], function () {
     Route::get("/resources/leisu/", "LeisuEncodesController@index");
     Route::get("/resources/leisu/get_live_url/{id}", "LeisuEncodesController@getLiveUrl");
 
+    Route::get("/resources/xbet/", "XBetEncodesController@index");
+    Route::get("/resources/xbet/get_live_url/{id}", "XBetEncodesController@getLiveUrl");
+
     Route::get("/resources/ssports/", "SSportsEncodesController@index");
     Route::get("/resources/ssports/get_live_url/{id}", "SSportsEncodesController@getLiveUrl");
 

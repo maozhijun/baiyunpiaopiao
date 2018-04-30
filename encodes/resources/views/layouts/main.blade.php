@@ -29,7 +29,7 @@
                 <li {{ starts_with(request()->path(),'manager')?'class=active':'' }}>
                     <a href="/manager/longzhu/">推流</a>
                 </li>
-                @if(env('APP_NAME')=='aikq')
+                @if(env('APP_NAME')=='aikq' || env('APP_NAME')=='aikq1')
                     <li {{ starts_with(request()->path(),'resources')?'class=active':'' }}>
                         <a href="/resources/qq/">直播源</a>
                     </li>
