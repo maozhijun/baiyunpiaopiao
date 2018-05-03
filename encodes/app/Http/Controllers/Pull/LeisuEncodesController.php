@@ -179,7 +179,7 @@ class LeisuEncodesController extends BaseController
 //        dump($response);
         $json = json_decode($response, true);
 //        dump($json);
-        if (isset($json) && !empty($json['url'])) {
+        if (isset($json) && !empty($json['url']['pc'])) {
             return $json['url']['pc'];
         } else {
             return null;

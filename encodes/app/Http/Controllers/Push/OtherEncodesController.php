@@ -24,10 +24,10 @@ class OtherEncodesController extends BaseController
     public function created(Request $request)
     {
         if ($request->isMethod('post')
-            && $request->has('input')
-            && $request->has('channel')
-            && $request->has('output')
-            && $request->has('name')
+            && !empty($request->input('input'))
+            && !empty($request->input('channel'))
+            && !empty($request->input('output'))
+            && !empty($request->input('name'))
         ) {
             $name = str_replace(' ', '-', $request->input('name'));
             $input = $request->input('input');
@@ -70,7 +70,7 @@ class OtherEncodesController extends BaseController
         $et = EncodeTask::query()->find($id);
         if (isset($et)) {
             $pid = exec('pgrep -f "' . explode('?', $et->rtmp)[0] . '"');
-            if (!empty($pid)) {
+            if (!empty($et->rtmp) && !empty($pid)) {
                 exec('kill -9 ' . $pid, $output_array, $return_var);
                 if ($return_var == 0) {
                     $et->status = 0;

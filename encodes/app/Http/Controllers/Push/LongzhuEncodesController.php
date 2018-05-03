@@ -35,7 +35,7 @@ class LongzhuEncodesController extends BaseController
             $this->channels[] = '17139230362##da29927e480ebdd68a3e67a2d6d02cd82bac7a75b2fb77e5594129673cdb16728b703370b2ec575d26cbc5ac50c85d92e4e244d9fc503aac';//未开包
             $this->channels[] = '17151290942##589ada982cab2a8b10c09e1733ec67bc2c020eeb175979d0d8b1136c52a51db1cec200855d9f675ed767cfd4c15c9392bed3cbf0f8e5aaf3';//未开包
             $this->channels[] = '17165142105##76eb7bf7c8d722b6ede5554f543ef8203a3fcb3a086904b55af2d2d8c9a0eaf3376576a1ec020f6a9d298d50fef1f424a20e88c80fe779ee';//未开包
-            $this->channels[] = '17177160082##2d34119c68b7a42cdb78752fb42ca497bd29a2adcceafd22654cca25d5e3bfb45a7ee172bab41d18c294a48c907a83c6a300ad845377b385';//未开包
+            $this->channels[] = '17177160082##8d9c77462fc912374a2f9d4965562b69912ebd6ff2658fc5f73f5f8dc8966a4ab620403cdf3d3fcd7be005c2f74ddde0bf36e83bdc5076ae';//未开包
 //            $this->channels[] = '17053903117##';//未开包
         } elseif (env('APP_NAME') == 'leqiuba') {
             $this->channels[] = '17160980733##6bcd216d1ebb3357f8665c43e3e38ae2838aa313b489c18418a792bb70c520c886cd9a62ab792c84d1e05b2bceb146577d95ca21323f933f';

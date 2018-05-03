@@ -10,21 +10,24 @@
             {{--<li role="presentation" {{ starts_with(request()->path(),'manager/qq')?'class=active':'' }}>--}}
             {{--<a href="/manager/qq/">爱看球转码</a>--}}
             {{--</li>--}}
-            <li role="presentation" {{ starts_with(request()->path(),'manager/other')?'class=active':'' }}>
-                <a href="/manager/other/">自定义转码</a>
-            </li>
         @endif
+        <li role="presentation" {{ starts_with(request()->path(),'manager/other')?'class=active':'' }}>
+            <a href="/manager/other/">自定义转码</a>
+        </li>
         <li role="presentation" {{ starts_with(request()->path(),'manager/longzhu')?'class=active':'' }}>
             <a href="/manager/longzhu/">龙珠直播</a>
         </li>
         <li role="presentation" {{ starts_with(request()->path(),'manager/weibo')?'class=active':'' }}>
             <a href="/manager/weibo/">微博直播</a>
         </li>
+        <li role="presentation" {{ starts_with(request()->path(),'manager/huajiao')?'class=active':'' }}>
+            <a href="/manager/huajiao/">花椒直播</a>
+        </li>
         <li role="presentation" {{ starts_with(request()->path(),'manager/mi')?'class=active':'' }}>
             <a href="/manager/mi/">小米直播</a>
         </li>
         {{--<li role="presentation" {{ starts_with(request()->path(),'manager/netease')?'class=active':'' }}>--}}
-            {{--<a href="/manager/netease/">黄易直播</a>--}}
+        {{--<a href="/manager/netease/">黄易直播</a>--}}
         {{--</li>--}}
         <li role="presentation" {{ starts_with(request()->path(),'manager/kuku')?'class=active':'' }}>
             <a href="/manager/kuku/">酷酷直播</a>
