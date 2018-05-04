@@ -48,7 +48,7 @@ class QQEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'AIKQ')->where('status', 1)->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'AIKQ')->where('created_at', '>', date_create('-2 hour'))->whereIn('status', [1, 2, -1])->get();
         $result['ets'] = $ets;
         $result['ggcdns'] = $this->ggcdns;
         $user = session(AuthController::K_LOGIN_SESSION_KEY);
@@ -101,13 +101,15 @@ class QQEncodesController extends BaseController
             Log::info($exec);
             shell_exec($exec);
             $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');
-            if (!empty($pid)) {
+            if (!empty($pid) && is_numeric($pid) && $pid > 0) {
                 $et = new EncodeTask();
                 $et->name = $name;
                 $et->channel = $channel;
                 $et->input = $input;
                 $et->rtmp = $rtmp_url;
                 $et->out = $output;
+                $et->exec = $exec;
+                $et->pid = $pid;
                 $et->from = env('APP_NAME');
                 $et->to = 'AIKQ';
                 $et->status = 1;
@@ -119,22 +121,13 @@ class QQEncodesController extends BaseController
 
     public function stop(Request $request, $id)
     {
-        $et = EncodeTask::query()->find($id);
-        if (isset($et)) {
-            $pid = exec('pgrep -f "' . explode('?', $et->rtmp)[0] . '"');
-            if (!empty($pid)) {
-                exec('kill -9 ' . $pid, $output_array, $return_var);
-                if ($return_var == 0) {
-                    $et->status = 0;
-                    $et->stop_at = date_create();
-                    $et->save();
-                }
-            } else {
-                $et->status = 0;
-                $et->stop_at = date_create();
-                $et->save();
-            }
-        }
+        $this->stopPush($id);
+        return back();
+    }
+
+    public function repeat(Request $request, $id)
+    {
+        $this->repeatPush($id);
         return back();
     }
 

@@ -96,8 +96,10 @@
                         <label class="label label-{{ $et->status == 1?'success':'danger' }}">{{ $et->status == 1?'正常':'停止' }}</label>
                     </td>
                     <td>
-                        @if($et->status == 1)
+                        @if($et->status != 0)
                             <a class="btn btn-xs btn-danger" href="javascript:if(confirm('确认删除')) location.href='/manager/netease/stop/{{ $et->id }}'">停止</a>
+                            <br><br>
+                            <a class="btn btn-xs btn-warning" href="javascript:if(confirm('确认重推')) location.href='/manager/netease/repeat/{{ $et->id }}'">重推</a>
                         @endif
                     </td>
                 </tr>

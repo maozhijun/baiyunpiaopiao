@@ -10,11 +10,12 @@ class CrontabController extends BaseController
 {
     public function checkFFMPEG(Request $request)
     {
-        $ets = EncodeTask::query()->where('status', 1)->get();
+        $ets = EncodeTask::query()->where('status', '>=', 1)->get();
         foreach ($ets as $et) {
             $pid = exec('pgrep -f "' . explode('?', $et->rtmp)[0] . '"');
-            if (empty($pid)) {
-                $et->status = 0;
+            echo $pid;
+            if (empty($pid) || $et->pid != $pid) {
+                $et->status = -1;
                 $et->stop_at = date_create();
                 $et->save();
             }

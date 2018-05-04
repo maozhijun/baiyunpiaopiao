@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\EncodeTask;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\View;
 
@@ -173,5 +174,60 @@ class Controller extends BaseController
         $execs[] = ">> /tmp/ffmpeg-$date.log &";
         $exec = join($execs, ' ');
         return $exec;
+    }
+
+
+    protected function stopPush($id)
+    {
+        $et = EncodeTask::query()->find($id);
+        if (isset($et)) {
+            $pid = exec('pgrep -f "' . explode('?', $et->rtmp)[0] . '"');
+            if (!empty($pid) && $et->pid == $pid) {
+                exec('kill -9 ' . $et->pid, $output_array, $return_var);
+                if ($return_var == 0) {
+                    $et->status = 0;
+                    $et->stop_at = date_create();
+                    $et->save();
+                }
+            } else {
+                $et->status = 0;
+                $et->stop_at = date_create();
+                $et->save();
+            }
+        }
+    }
+
+    protected function repeatPush($id)
+    {
+        $et = EncodeTask::query()->find($id);
+        if (isset($et)) {
+            $pid = exec('pgrep -f "' . explode('?', $et->rtmp)[0] . '"');
+            if (!empty($pid)) {
+                if ($et->pid == $pid) {
+                    exec('kill -9 ' . $et->pid, $output_array, $return_var);
+                    if ($return_var == 0) {
+                        $et->status = 0;
+                        $et->stop_at = date_create();
+                        $et->save();
+                        sleep(1);
+                        shell_exec($et->exec);
+                        $pid = exec('pgrep -f "' . explode('?', $et->rtmp)[0] . '"');
+                        if (!empty($pid) && is_numeric($pid) && $pid > 0) {
+                            $et->status = 1;
+                            $et->pid = $pid;
+                            $et->save();
+                        }
+                    }
+                }
+            } else {
+                shell_exec($et->exec);
+                $pid = exec('pgrep -f "' . explode('?', $et->rtmp)[0] . '"');
+                if (!empty($pid) && is_numeric($pid) && $pid > 0) {
+                    $et->status = 1;
+                    $et->pid = $pid;
+                    $et->save();
+                }
+            }
+        }
     }
 }

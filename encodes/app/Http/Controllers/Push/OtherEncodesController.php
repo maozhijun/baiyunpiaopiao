@@ -17,7 +17,7 @@ class OtherEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Other')->where('status', 1)->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Other')->where('created_at', '>', date_create('-2 hour'))->whereIn('status', [1, 2, -1])->get();
         return view('manager.push.other', ['ets' => $ets]);
     }
 
@@ -49,12 +49,14 @@ class OtherEncodesController extends BaseController
             Log::info($exec);
             shell_exec($exec);
             $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');
-            if (!empty($pid)) {
+            if (!empty($pid) && is_numeric($pid) && $pid > 0) {
                 $et = new EncodeTask();
                 $et->name = $name;
                 $et->channel = 'Other';
                 $et->input = $input;
                 $et->rtmp = $rtmp_url;
+                $et->exec = $exec;
+                $et->pid = $pid;
                 $et->out = $output;
                 $et->from = env('APP_NAME');
                 $et->to = 'Other';
@@ -67,22 +69,13 @@ class OtherEncodesController extends BaseController
 
     public function stop(Request $request, $id)
     {
-        $et = EncodeTask::query()->find($id);
-        if (isset($et)) {
-            $pid = exec('pgrep -f "' . explode('?', $et->rtmp)[0] . '"');
-            if (!empty($et->rtmp) && !empty($pid)) {
-                exec('kill -9 ' . $pid, $output_array, $return_var);
-                if ($return_var == 0) {
-                    $et->status = 0;
-                    $et->stop_at = date_create();
-                    $et->save();
-                }
-            } else {
-                $et->status = 0;
-                $et->stop_at = date_create();
-                $et->save();
-            }
-        }
+        $this->stopPush($id);
+        return back();
+    }
+
+    public function repeat(Request $request, $id)
+    {
+        $this->repeatPush($id);
         return back();
     }
 

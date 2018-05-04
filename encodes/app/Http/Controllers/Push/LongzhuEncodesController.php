@@ -66,7 +66,7 @@ class LongzhuEncodesController extends BaseController
             $input = $request->input('input');
 
             $channel = $request->input('channel');
-            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Mi')->where('status', '>=', 1)->inRandomOrder()->get();
+            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Longzhu')->where('status', '>=', 1)->inRandomOrder()->get();
             if ($ets->contains('channel', $channel)) {
                 foreach ($this->channels as $ch) {
                     if (!$ets->contains('channel', $ch)) {
@@ -109,13 +109,15 @@ class LongzhuEncodesController extends BaseController
             Log::info($exec);
             shell_exec($exec);
             $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');
-            if (!empty($pid)) {
+            if (!empty($pid) && is_numeric($pid) && $pid > 0) {
                 $et = new EncodeTask();
                 $et->name = $name;
                 $et->channel = $roomName;
                 $et->input = $input;
                 $et->rtmp = $rtmp_url;
                 $et->out = $live_url;
+                $et->exec = $exec;
+                $et->pid = $pid;
                 $et->from = env('APP_NAME');
                 $et->to = 'Longzhu';
                 $et->status = 1;
@@ -129,25 +131,13 @@ class LongzhuEncodesController extends BaseController
 
     public function stop(Request $request, $id)
     {
-        $et = EncodeTask::query()->find($id);
-        if (isset($et)) {
-            $token = array_last(explode('##', $et->channel));
-            $this->closeLive($token);
+        $this->stopPush($id);
+        return back();
+    }
 
-            $pid = exec('pgrep -f "' . explode('?', $et->rtmp)[0] . '"');
-            if (!empty($pid)) {
-                exec('kill -9 ' . $pid, $output_array, $return_var);
-                if ($return_var == 0) {
-                    $et->status = 0;
-                    $et->stop_at = date_create();
-                    $et->save();
-                }
-            } else {
-                $et->status = 0;
-                $et->stop_at = date_create();
-                $et->save();
-            }
-        }
+    public function repeat(Request $request, $id)
+    {
+        $this->repeatPush($id);
         return back();
     }
 

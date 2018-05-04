@@ -49,7 +49,7 @@ class HuajiaoEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Huajiao')->where('status', '>=', 1)->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Huajiao')->where('created_at', '>', date_create('-2 hour'))->whereIn('status', [1, 2, -1])->get();
         return view('manager.push.huajiao', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
@@ -65,7 +65,7 @@ class HuajiaoEncodesController extends BaseController
 
 //            $channel = $request->input('channel');
             $channel = $request->input('channel');
-            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Huajiao')->where('status', '>=', 1)->inRandomOrder()->get();
+            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Huajiao')->where('created_at', '>', date_create('-2 hour'))->whereIn('status', [1, 2, -1])->inRandomOrder()->get();
             if ($ets->contains('channel', $channel)) {
                 foreach ($this->channels as $ch) {
                     if (!$ets->contains('channel', $ch)) {
@@ -97,12 +97,14 @@ class HuajiaoEncodesController extends BaseController
             Log::info($exec);
             shell_exec($exec);
             $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');
-            if (!empty($pid)) {
+            if (!empty($pid) && is_numeric($pid) && $pid > 0) {
                 $et = new EncodeTask();
                 $et->name = $name;
                 $et->channel = $channel;
                 $et->input = $input;
                 $et->rtmp = $rtmp_url;
+                $et->exec = $exec;
+                $et->pid = $pid;
                 $et->out = $live_flv_url . "\n" . $live_rtmp_url . "\n" . $live_m3u8_url;
                 $et->from = env('APP_NAME');
                 $et->to = 'Huajiao';
@@ -116,22 +118,13 @@ class HuajiaoEncodesController extends BaseController
 
     public function stop(Request $request, $id)
     {
-        $et = EncodeTask::query()->find($id);
-        if (isset($et)) {
-            $pid = exec('pgrep -f "' . explode('?', $et->rtmp)[0] . '"');
-            if (!empty($et->rtmp) && !empty($pid)) {
-                exec('kill -9 ' . $pid, $output_array, $return_var);
-                if ($return_var == 0) {
-                    $et->status = 0;
-                    $et->stop_at = date_create();
-                    $et->save();
-                }
-            } else {
-                $et->status = 0;
-                $et->stop_at = date_create();
-                $et->save();
-            }
-        }
+        $this->stopPush($id);
+        return back();
+    }
+
+    public function repeat(Request $request, $id)
+    {
+        $this->repeatPush($id);
         return back();
     }
 

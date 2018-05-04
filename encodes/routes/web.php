@@ -26,51 +26,61 @@ Route::group(["middleware" => "auth", "namespace" => "Push"], function () {
         Route::get("/manager/qq/", "QQEncodesController@index");
         Route::post("/manager/qq/created/", "QQEncodesController@created");
         Route::get("/manager/qq/stop/{id}", "QQEncodesController@stop");
+        Route::get("/manager/qq/repeat/{id}", "QQEncodesController@repeat");
         Route::get("/manager/ali-live-room", "QQEncodesController@createdAliRoom");
     } else {
         Route::get("/manager/", "OtherEncodesController@index");
     }
 
-    Route::get("/", function (){
+    Route::get("/", function () {
         return redirect('/manager/longzhu/');
     });
 
     Route::get("/manager/other/", "OtherEncodesController@index");
     Route::post("/manager/other/created/", "OtherEncodesController@created");
     Route::get("/manager/other/stop/{id}", "OtherEncodesController@stop");
+    Route::get("/manager/other/repeat/{id}", "OtherEncodesController@repeat");
 
     Route::get("/manager/zhibo/", "ZhiboEncodesController@index");
     Route::post("/manager/zhibo/created/", "ZhiboEncodesController@created");
     Route::get("/manager/zhibo/stop/{id}", "ZhiboEncodesController@stop");
+    Route::get("/manager/zhibo/repeat/{id}", "ZhiboEncodesController@repeat");
 
     Route::get("/manager/very/", "VeryEncodesController@index");
     Route::post("/manager/very/created/", "VeryEncodesController@created");
     Route::get("/manager/very/stop/{id}", "VeryEncodesController@stop");
+    Route::get("/manager/very/repeat/{id}", "VeryEncodesController@repeat");
 
     Route::get("/manager/weibo/", "WeiboEncodesController@index");
     Route::post("/manager/weibo/created/", "WeiboEncodesController@created");
     Route::get("/manager/weibo/stop/{id}", "WeiboEncodesController@stop");
+    Route::get("/manager/weibo/repeat/{id}", "WeiboEncodesController@repeat");
 
     Route::get("/manager/kuku/", "KukuEncodesController@index");
     Route::post("/manager/kuku/created/", "KukuEncodesController@created");
     Route::get("/manager/kuku/stop/{id}", "KukuEncodesController@stop");
+    Route::get("/manager/kuku/repeat/{id}", "KukuEncodesController@repeat");
 
     Route::get("/manager/longzhu/", "LongzhuEncodesController@index");
     Route::post("/manager/longzhu/created/", "LongzhuEncodesController@created");
     Route::get("/manager/longzhu/stop/{id}", "LongzhuEncodesController@stop");
+    Route::get("/manager/longzhu/repeat/{id}", "LongzhuEncodesController@repeat");
 //    Route::get("/manager/longzhu/test", "LongzhuEncodesController@test");
 
     Route::get("/manager/netease/", "NeteaseEncodesController@index");
     Route::post("/manager/netease/created/", "NeteaseEncodesController@created");
     Route::get("/manager/netease/stop/{id}", "NeteaseEncodesController@stop");
+    Route::get("/manager/netease/repeat/{id}", "NeteaseEncodesController@repeat");
 
     Route::get("/manager/huajiao/", "HuajiaoEncodesController@index");
     Route::post("/manager/huajiao/created/", "HuajiaoEncodesController@created");
     Route::get("/manager/huajiao/stop/{id}", "HuajiaoEncodesController@stop");
+    Route::get("/manager/huajiao/repeat/{id}", "HuajiaoEncodesController@repeat");
 
     Route::get("/manager/mi/", "MiEncodesController@index");
     Route::post("/manager/mi/created/", "MiEncodesController@created");
     Route::get("/manager/mi/stop/{id}", "MiEncodesController@stop");
+    Route::get("/manager/mi/repeat/{id}", "MiEncodesController@repeat");
 
 });
 
@@ -111,10 +121,16 @@ Route::group(["middleware" => "auth", "namespace" => "Pull"], function () {
 });
 
 Route::group(["middleware" => "auth", "namespace" => "Record"], function () {
-
     Route::get("/records/qq/", "QQEncodesController@index");
     Route::get("/records/qq/get_record_url/{id}", "QQEncodesController@getRecordUrl");
 
+});
+
+Route::group(["middleware" => "auth", "namespace" => "Stream"], function () {
+    Route::get("/obs/stream/", "PushStreamController@index");
+    Route::post("/obs/stream/take-stream", "PushStreamController@takeStream");
+    Route::get("/obs/stream/release-stream/{id}", "PushStreamController@releaseStream");
+    Route::get("/obs/stream/close-long-stream/{id}", "PushStreamController@closeStreamLongZhu");
 });
 
 //定时任务

@@ -49,7 +49,7 @@
             <label for="label-referer">Referer(Http源)</label>
             <input name="referer" type="text" class="form-control" id="label-referer" size="40">
             <label for="label-header1">Header1(Http源)</label>
-            <input name="header1" type="text" class="form-control" id="label-header1"  size="40">
+            <input name="header1" type="text" class="form-control" id="label-header1" size="40">
         </div>
         <div class="form-inline form-group">
             <label for="label-header2">Header2(Http源)</label>
@@ -96,8 +96,12 @@
                         <label class="label label-{{ $et->status == 1?'success':'danger' }}">{{ $et->status == 1?'正常':'停止' }}</label>
                     </td>
                     <td>
-                        @if($et->status == 1)
-                            <a class="btn btn-xs btn-danger" href="javascript:if(confirm('确认删除')) location.href='/manager/kuku/stop/{{ $et->id }}'">停止</a>
+                        @if($et->status != 0)
+                            <a class="btn btn-xs btn-danger"
+                               href="javascript:if(confirm('确认删除')) location.href='/manager/kuku/stop/{{ $et->id }}'">停止</a>
+                            <br><br>
+                            <a class="btn btn-xs btn-warning"
+                               href="javascript:if(confirm('确认重推')) location.href='/manager/kuku/repeat/{{ $et->id }}'">重推</a>
                         @endif
                     </td>
                 </tr>
