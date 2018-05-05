@@ -18,23 +18,23 @@ class WeiboEncodesController extends BaseController
         if (env('APP_NAME') == 'good') {
 
         } elseif (env('APP_NAME') == 'aikq') {
-            $this->channels[] = '微博直播1##cb4200bd9e741b6a9aa2867113964b65?auth_key=1525140281-0-0-e158d94ccf356544bfc762de1fe2781f';
-            $this->channels[] = '微博直播2##1f35e14ad95eaa162c2cf1dfe23e4af2?auth_key=1525140396-0-0-7d7288ad0f1439ab0c45952a29bcce72';
-            $this->channels[] = '微博直播3##081723d42cf99fcfa88bd9372ddef20b?auth_key=1525140434-0-0-cb3cbf2ea77982ee870a1a825452696c';
-            $this->channels[] = '微博直播4##33782e1aac65e5b1613d83b1bbc6cce7?auth_key=1525140468-0-0-6ee3b78d339c0aecf49e3e9abb211ab7';
-            $this->channels[] = '微博直播5##6dc55a448b10a7beccb41c29cfc582a5?auth_key=1525140502-0-0-06d6958bd9d55b47edae07bf7f4e2ba9';
-            $this->channels[] = '微博直播6##63490e1095b8485769e6aa6e53ae2733?auth_key=1525140538-0-0-620fedc34f36fee41e3ae231d13d7370';
-            $this->channels[] = '微博直播7##9557ee984130e8f5a7a52dccf3c201b0?auth_key=1525323073-0-0-d6ede4c59017d0dd01a03415c06fcf98';
-            $this->channels[] = '微博直播8##a8a4bed731f00861df0efbe44f68b8d5?auth_key=1525323198-0-0-659e09417696d598a1a9db676555e933';
+            $this->channels[] = '微博直播1##ae83c88971c9568ce2001255a4981a04?auth_key=1526023904-0-0-51b0d865e32f81142cac5e94e1df6456';
+            $this->channels[] = '微博直播2##54ce7a8ac29ad7c8133b3ccc7fb83d4c?auth_key=1526023997-0-0-427818fd2faa89edf47093e1b1ec1577';
+            $this->channels[] = '微博直播3##033120fbb4ba8587ecf03b43da67800d?auth_key=1526024036-0-0-1f2187b0429c78166f102170b51fa0f5';
+            $this->channels[] = '微博直播4##2919bb75e074fe0bbe919a23a6966486?auth_key=1526024071-0-0-d1ec92b89993813a56a6d38506891de8';
+            $this->channels[] = '微博直播5##fdb60b8a8b445c93345474afd38bc225?auth_key=1526024102-0-0-b835d88abd298503e5e13dd41b4d1028';
+            $this->channels[] = '微博直播6##4296b53b1f7fdf3a86fa01ed188ef97b?auth_key=1526024134-0-0-8d67330d3094a65fe250523cdba32fce';
+            $this->channels[] = '微博直播7##9891d541373a80c8584884b5697d7227?auth_key=1526024249-0-0-6546bb879a5bdafbba90dcfc4c4e167a';
+            $this->channels[] = '微博直播8##4bb6221d9a4b3a712f57202d34a75c11?auth_key=1526024279-0-0-95ea4578e34cda75dcd8efd428b390a2';
         } elseif (env('APP_NAME') == 'aikq1') {
-            $this->channels[] = '微博直播1##00863d444f8998e91469aebbf3c6a076?auth_key=1525501686-0-0-bcd25725c133a8712ac231c07d8c6a23';
-            $this->channels[] = '微博直播2##9fe74cdb6ccd5185a492d8db4c472d77?auth_key=1525501721-0-0-dde0cd7bb3e57a6011c38b3d674ec153';
-            $this->channels[] = '微博直播3##3d07e3a07c43875fd46d6eb38b21f76d?auth_key=1525501775-0-0-1246586dbcb421eebe3adafa542672e0';
-            $this->channels[] = '微博直播4##9e6e187dc100e4f089f66f014f92504f?auth_key=1525501805-0-0-397dd8a74727b72d173936d63c6839cd';
-            $this->channels[] = '微博直播5##4bde556c506e792ec3cc39c27144d759?auth_key=1525501854-0-0-09a89d1cd05ddaf13bc309bccf5fdf96';
-            $this->channels[] = '微博直播6##cb3eb8e49d5bd218d48864445bab6b63?auth_key=1525501887-0-0-ce70c85bce54f9a9bd9a0beac72ed158';
-            $this->channels[] = '微博直播7##5bea76b1d90a8994801d92b54b808b88?auth_key=1525501917-0-0-cb9f89a7edaff9bf1609f1a72ad621a6';
-            $this->channels[] = '微博直播8##79698c174f835179e71808971da112cb?auth_key=1525501951-0-0-a0382000c83f8ae0f119299dc752d8b3';
+            $this->channels[] = '微博直播1##4c39ab679371a91fe0285cdf59f2d2fa?auth_key=1526024325-0-0-e659a27523bd14d7bbc9a091e16fea8a';
+            $this->channels[] = '微博直播2##6d58e8c7a9f0d68b9cbe5dec0dbfae1a?auth_key=1526024363-0-0-2e0d14515724c87ea10ada54632b6920';
+            $this->channels[] = '微博直播3##d7774ebfe68a6c16e2771e2841f8b087?auth_key=1526024398-0-0-132f655873c8c98f9fda14c1a6a4841e';
+            $this->channels[] = '微博直播4##1783deb2a6b2bfcc2cac2f374fac05b4?auth_key=1526024426-0-0-3a308c8b1f3c457fb90b2106a4e1d583';
+            $this->channels[] = '微博直播5##c1d01193d082bb7717f3864139a75f3e?auth_key=1526024480-0-0-fd8269e070554b5551b6dfc518e8c715';
+            $this->channels[] = '微博直播6##51092da99c791c83305566f16beef9a4?auth_key=1526024626-0-0-d9427a07cbe75b9c7291d53a4353ac96';
+            $this->channels[] = '微博直播7##3010acdc38eaa25f5e054b526d98ae95?auth_key=1526024826-0-0-b240ab2dd28455f0d8a5fa9d254211c5';
+            $this->channels[] = '微博直播8##5cea5fd25289c858443e0f55e88b935a?auth_key=1526024862-0-0-99f6ad38824fcf2c9c54875be429f0fa';
 //            $this->channels[] = '微博直播9##';
         } elseif (env('APP_NAME') == 'leqiuba') {
             $this->channels[] = '微博直播1##c919b926ff7562f37c67257eff58c434?auth_key=1524545325-0-0-dc68dce56ba4136d4fdf7cdbfd9b86ea';
