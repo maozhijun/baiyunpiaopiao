@@ -27,7 +27,7 @@ class LongzhuEncodesController extends BaseController
             $this->channels[] = '17177260092##88323bf2b921839a2020a45fbbf6eb8e0d52f261656448fa0eec6d5298d0ac2d1a0abe86973c46e59be6a1e8a375a8f7dc1a503be62dab69';
             $this->channels[] = '17177260082##dd7d0ffb816ca86362c7d869e7161989e3c279a4b31e722f7aa0ec5cb0bdc6a24bebdb7cf3dada9a06b91dd00679632ef86e4ce3bfbdcb5c';
             $this->channels[] = '17121073721##5603bb4007d0c0dd00c1c70a03220f4f13bfe3595bf11c3cea703ea4bed441209355b17bfcb561e078e89f493507f7dceb1efa4ff4fd12fc';
-            $this->channels[] = '17053903117##5f9f94756f28cb05dcc6d478ab41bf2b051bd1dca9e060da8cd093d11b106cb01837b89c42e2cd3363c70c2cf5cbb20ee1c6abf0b61b9eef';//未开包
+            $this->channels[] = '17053903117##a992e4e6f4aa19296770e5b3ab623add88a530a6a62396266139517400659e0cc2994d4daa7a1c634361368e81674b4bb4b7a041e63d3030';//未开包
         } elseif (env('APP_NAME') == 'aikq1') {
             $this->channels[] = '17172850051##632b880368e10d7e482fe6bd5393609a73ee8c47fe0766ed2de143f12a35d5f53ad98c03d5bfa27a72667f933d5d27fea44b6c0bd537854d';//未开包
             $this->channels[] = '17172850057##c43839c1c8191a6a6d041fb531ddb5800a032296fd8cdef802bda48724d111e8b8eb26436bef41dd31d2a2597237f177bf7b25de9408d8da';//未开包
@@ -53,7 +53,7 @@ class LongzhuEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Longzhu')->where('status', '>=', 1)->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Longzhu')->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->get();
         return view('manager.push.longzhu', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
@@ -68,7 +68,7 @@ class LongzhuEncodesController extends BaseController
             $input = $request->input('input');
 
             $channel = $request->input('channel');
-            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Longzhu')->where('status', '>=', 1)->inRandomOrder()->get();
+            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Longzhu')->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->inRandomOrder()->get();
             if ($ets->contains('channel', $channel)) {
                 foreach ($this->channels as $ch) {
                     if (!$ets->contains('channel', $ch)) {

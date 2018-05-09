@@ -103,6 +103,7 @@ class CNTVEncodesController extends BaseController
         $html5Aauth = '';
         foreach ($lines as $line) {
             if (empty($html5Aauth) && (str_contains($line, 'html5Aauth =') || str_contains($line, 'html5Aauth='))) {
+//            if (empty($html5Aauth) && (str_contains($line, 'html5CdnStr =') || str_contains($line, 'html5CdnStr='))) {
                 $html5Aauth = $line;
             }
             if (str_contains($line, 'function setHtml5AliNewUrl')) {

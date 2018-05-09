@@ -17,7 +17,7 @@ class OtherEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Other')->where('created_at', '>', date_create('-2 hour'))->whereIn('status', [1, 2, -1])->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Other')->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->get();
         return view('manager.push.other', ['ets' => $ets]);
     }
 

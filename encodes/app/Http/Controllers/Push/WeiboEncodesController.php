@@ -18,14 +18,14 @@ class WeiboEncodesController extends BaseController
         if (env('APP_NAME') == 'good') {
 
         } elseif (env('APP_NAME') == 'aikq') {
-            $this->channels[] = '微博直播1##ae83c88971c9568ce2001255a4981a04?auth_key=1526023904-0-0-51b0d865e32f81142cac5e94e1df6456';
-            $this->channels[] = '微博直播2##54ce7a8ac29ad7c8133b3ccc7fb83d4c?auth_key=1526023997-0-0-427818fd2faa89edf47093e1b1ec1577';
-            $this->channels[] = '微博直播3##033120fbb4ba8587ecf03b43da67800d?auth_key=1526024036-0-0-1f2187b0429c78166f102170b51fa0f5';
-            $this->channels[] = '微博直播4##2919bb75e074fe0bbe919a23a6966486?auth_key=1526024071-0-0-d1ec92b89993813a56a6d38506891de8';
-            $this->channels[] = '微博直播5##fdb60b8a8b445c93345474afd38bc225?auth_key=1526024102-0-0-b835d88abd298503e5e13dd41b4d1028';
-            $this->channels[] = '微博直播6##4296b53b1f7fdf3a86fa01ed188ef97b?auth_key=1526024134-0-0-8d67330d3094a65fe250523cdba32fce';
-            $this->channels[] = '微博直播7##9891d541373a80c8584884b5697d7227?auth_key=1526024249-0-0-6546bb879a5bdafbba90dcfc4c4e167a';
-            $this->channels[] = '微博直播8##4bb6221d9a4b3a712f57202d34a75c11?auth_key=1526024279-0-0-95ea4578e34cda75dcd8efd428b390a2';
+            $this->channels[] = '微博直播1##1744208ff0af62c076caf3c505d856dd?auth_key=1526384916-0-0-7d03575231bca6d29ee01460ad89d88d';
+            $this->channels[] = '微博直播2##222c77a1b8049d1320f184912c31dd4c?auth_key=1526385178-0-0-d7e62b7c3a2f04bc060028f6e561cfa0';
+            $this->channels[] = '微博直播3##c6e9437031ab0ab4e5090049e73f0f84?auth_key=1526385235-0-0-fced4b4768568313c19a57c047a907c2';
+            $this->channels[] = '微博直播4##2fbda75ae2ca90f326db219c6ed1535a?auth_key=1526387159-0-0-712fce6f1f390f390f821f4b0d6289d7';
+            $this->channels[] = '微博直播5##f997793ad46e8034905fffe2c6770740?auth_key=1526387215-0-0-765cf0ee459ecf67c7f69a774a555620';
+            $this->channels[] = '微博直播6##53d7ab742e892424cf7c0c03f10e0ae4?auth_key=1526387307-0-0-6fbe289f40e8d6afd0d6ce8b609eea2e';
+            $this->channels[] = '微博直播7##e77210b3574eaa472fed6e51892f0fc3?auth_key=1526387363-0-0-3185a664578e85af8b09ce016c4dee3f';
+            $this->channels[] = '微博直播8##e33b544d6e732ef10187f4330d521910?auth_key=1526387397-0-0-95eac0241b99a88b3919e6b2f0fe2a57';
         } elseif (env('APP_NAME') == 'aikq1') {
             $this->channels[] = '微博直播1##4c39ab679371a91fe0285cdf59f2d2fa?auth_key=1526024325-0-0-e659a27523bd14d7bbc9a091e16fea8a';
             $this->channels[] = '微博直播2##6d58e8c7a9f0d68b9cbe5dec0dbfae1a?auth_key=1526024363-0-0-2e0d14515724c87ea10ada54632b6920';
@@ -52,7 +52,7 @@ class WeiboEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Weibo')->where('created_at', '>', date_create('-2 hour'))->whereIn('status', [1, 2, -1])->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Weibo')->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->get();
         return view('manager.push.weibo', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
@@ -68,7 +68,7 @@ class WeiboEncodesController extends BaseController
 
 //            $channel = $request->input('channel');
             $channel = $request->input('channel');
-            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Weibo')->where('created_at', '>', date_create('-2 hour'))->whereIn('status', [1, 2, -1])->inRandomOrder()->get();
+            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Weibo')->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->inRandomOrder()->get();
             if ($ets->contains('channel', $channel)) {
                 foreach ($this->channels as $ch) {
                     if (!$ets->contains('channel', $ch)) {

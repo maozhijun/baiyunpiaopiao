@@ -52,8 +52,8 @@ class Controller extends BaseController
         } elseif (env('APP_NAME') == 'aikq' || env('APP_NAME') == 'aikq1') {
 //            View::share('watermark', '加微信【kanqiu616】进群聊球，美女福利+大神免费推单，每天轻松收米！');
 //            View::share('logo_text', '加微信：kanqiu616');
-            View::share('watermark', '加微信【zhibo616】进群聊球，美女福利+大神免费推单，每天轻松收米！');
-            View::share('logo_text', '加微信：zhibo616');
+            View::share('watermark', '加主播微信【kanqiu858】进群聊球，每天免费推单，还有主播私人福利哦！');
+            View::share('logo_text', '加微信：kanqiu858');
 //            View::share('watermark', '加微信【fs188fs】进群聊球，美女福利+大神免费推单，每天轻松收米！');
 //            View::share('logo_text', '加微信：fs188fs');
         } elseif (env('APP_NAME') == 'leqiuba') {
