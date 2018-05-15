@@ -44,7 +44,7 @@ class Controller extends BaseController
         View::share('banner_text', env('banner_text', '爱看球'));
         View::share('banner_color', env('banner_color', ''));
 //        $count = EncodeTask::query()->where('from', env('APP_NAME'))->where('status', '>=', 1)->count();
-        $count = EncodeTask::query()->where('status', '>=', 1)->count();
+        $count = EncodeTask::query()->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->count();
         View::share('banner_count', $count);
         if (env('APP_NAME') == 'good') {
             View::share('watermark', '足球专家微信：bet6879，篮球专家微信：bet8679a');
@@ -123,6 +123,10 @@ class Controller extends BaseController
                 $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
                 $execs[] = '-headers "Referer: http://sports.qq.com/kbsweb/"';
                 $execs[] = '-headers "X-Requested-With:ShockwaveFlash/28.0.0.126"';
+            } elseif (starts_with($input_uri, 'qietv.douyucdn.cn')) {
+                $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
+                $execs[] = '-headers "Referer: http://live.qq.com/10003848"';
+                $execs[] = '-headers "X-Requested-With: ShockwaveFlash/29.0.0.140"';
             } elseif (starts_with($input_uri, 'http://gmcllc.de')) {
                 $execs[] = '-user_agent "BLUEIOS"';
                 $execs[] = '-headers "Range: bytes=0-"';

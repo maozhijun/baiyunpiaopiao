@@ -7,7 +7,7 @@ use App\Models\EncodeTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class InkeEncodesController extends BaseController
+class QXiuEncodesController extends BaseController
 {
     private $channels = [];
 
@@ -18,23 +18,23 @@ class InkeEncodesController extends BaseController
         if (env('APP_NAME') == 'good') {
 
         } elseif (env('APP_NAME') == 'aikq') {
-            $this->channels[] = '映客直播1##1525761803094761?sign=8dffa036e482f090MjAwLWlzdHJlYW02Lmlua2UuY24tNzAxOTU4Mjgz&ver=2&uid=701958283';
-            $this->channels[] = '映客直播2##1525761855051042?sign=8dffa036e482f090MjAwLWlzdHJlYW02Lmlua2UuY24tNzAxOTU4Mjgz&ver=2&uid=701958283';
-            $this->channels[] = '映客直播3##1525761870172893?sign=8dffa036e482f090MjAwLWlzdHJlYW02Lmlua2UuY24tNzAxOTU4Mjgz&ver=2&uid=701958283';
-            $this->channels[] = '映客直播4##1525761880145370?sign=8dffa036e482f090MjAwLWlzdHJlYW02Lmlua2UuY24tNzAxOTU4Mjgz&ver=2&uid=701958283';
-            $this->channels[] = '映客直播5##1525761899159900?sign=8dffa036e482f090MjAwLWlzdHJlYW02Lmlua2UuY24tNzAxOTU4Mjgz&ver=2&uid=701958283';
-            $this->channels[] = '映客直播6##1525761889889592?sign=8dffa036e482f090MjAwLWlzdHJlYW02Lmlua2UuY24tNzAxOTU4Mjgz&ver=2&uid=701958283';
-            $this->channels[] = '映客直播7##1525761910008081?sign=8dffa036e482f090MjAwLWlzdHJlYW02Lmlua2UuY24tNzAxOTU4Mjgz&ver=2&uid=701958283';
-            $this->channels[] = '映客直播8##1525761922554657?sign=8dffa036e482f090MjAwLWlzdHJlYW02Lmlua2UuY24tNzAxOTU4Mjgz&ver=2&uid=701958283';
+            $this->channels[] = '齐齐直播1##1525761';
+            $this->channels[] = '齐齐直播2##1525762';
+            $this->channels[] = '齐齐直播3##1525763';
+            $this->channels[] = '齐齐直播4##1525764';
+            $this->channels[] = '齐齐直播5##1525765';
+            $this->channels[] = '齐齐直播6##1525766';
+            $this->channels[] = '齐齐直播7##1525767';
+            $this->channels[] = '齐齐直播8##1525768';
         } elseif (env('APP_NAME') == 'aikq1') {
-            $this->channels[] = '映客直播1##1525925512011066?sign=750659bdd7214997MjAwLWlzdHJlYW02Lmlua2UuY24tMTA0MDk5NDE0&ver=2&uid=104099414';
-            $this->channels[] = '映客直播2##1525925474840284?sign=750659bdd7214997MjAwLWlzdHJlYW02Lmlua2UuY24tMTA0MDk5NDE0&ver=2&uid=104099414';
-            $this->channels[] = '映客直播3##1525925521680882?sign=750659bdd7214997MjAwLWlzdHJlYW02Lmlua2UuY24tMTA0MDk5NDE0&ver=2&uid=104099414';
-            $this->channels[] = '映客直播4##1525925531242280?sign=750659bdd7214997MjAwLWlzdHJlYW02Lmlua2UuY24tMTA0MDk5NDE0&ver=2&uid=104099414';
-            $this->channels[] = '映客直播5##1525925540426235?sign=750659bdd7214997MjAwLWlzdHJlYW02Lmlua2UuY24tMTA0MDk5NDE0&ver=2&uid=104099414';
-            $this->channels[] = '映客直播6##1525925551023481?sign=750659bdd7214997MjAwLWlzdHJlYW02Lmlua2UuY24tMTA0MDk5NDE0&ver=2&uid=104099414';
-            $this->channels[] = '映客直播7##1525925562347874?sign=750659bdd7214997MjAwLWlzdHJlYW02Lmlua2UuY24tMTA0MDk5NDE0&ver=2&uid=104099414';
-            $this->channels[] = '映客直播8##1525925570453696?sign=750659bdd7214997MjAwLWlzdHJlYW02Lmlua2UuY24tMTA0MDk5NDE0&ver=2&uid=104099414';
+            $this->channels[] = '齐齐直播1##1525921';
+            $this->channels[] = '齐齐直播2##1525922';
+            $this->channels[] = '齐齐直播3##1525923';
+            $this->channels[] = '齐齐直播4##1525924';
+            $this->channels[] = '齐齐直播5##1525925';
+            $this->channels[] = '齐齐直播6##1525926';
+            $this->channels[] = '齐齐直播7##1525927';
+            $this->channels[] = '齐齐直播8##1525928';
 
         } elseif (env('APP_NAME') == 'leqiuba') {
         }
@@ -42,8 +42,8 @@ class InkeEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Inke')->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->get();
-        return view('manager.push.inke', ['ets' => $ets, 'channels' => $this->channels]);
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'QXiu')->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->get();
+        return view('manager.push.qxiu', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
     public function created(Request $request)
@@ -58,7 +58,7 @@ class InkeEncodesController extends BaseController
 
 //            $channel = $request->input('channel');
             $channel = $request->input('channel');
-            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Inke')->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->inRandomOrder()->get();
+            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'QXiu')->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->inRandomOrder()->get();
             if ($ets->contains('channel', $channel)) {
                 foreach ($this->channels as $ch) {
                     if (!$ets->contains('channel', $ch)) {
@@ -70,10 +70,10 @@ class InkeEncodesController extends BaseController
                 return back()->with(['error' => '没有可用的直播间咯']);
             }
             list($roomName, $roomId) = explode('##', $channel);
-            $rtmp_url = 'rtmp://istream6.inke.cn/live/' . $roomId;//获取rtmp地址
-            $live_flv_url = '';//flv地址
-            $live_rtmp_url = 'rtmp://wssource.pull.inke.cn/live/' . explode('?', $roomId)[0];//rtmp地址
-            $live_m3u8_url = 'http://wssource.hls.inke.cn/live/' . explode('?', $roomId)[0] . '/playlist.m3u8';//m3u8地址
+            $rtmp_url = 'rtmp://up.rtmp.qxiu.com/live/' . $roomId;//获取rtmp地址
+            $live_flv_url = 'http://down.hdl.qxiu.com/live/' . explode('?', $roomId)[0] . '.flv';//flv地址
+            $live_rtmp_url = 'rtmp://down.rtmp.qxiu.com/live/' . explode('?', $roomId)[0];//rtmp地址
+            $live_m3u8_url = 'http://down.hls.qxiu.com/live/' . explode('?', $roomId)[0] . '/index.m3u8';//m3u8地址
 
             $fontsize = $request->input('fontsize', 18);
             $watermark = $request->input('watermark', '');
@@ -100,7 +100,7 @@ class InkeEncodesController extends BaseController
                 $et->pid = $pid;
                 $et->out = $live_flv_url . "\n" . $live_rtmp_url . "\n" . $live_m3u8_url;
                 $et->from = env('APP_NAME');
-                $et->to = 'Inke';
+                $et->to = 'QXiu';
                 $et->status = 1;
                 $et->save();
             }

@@ -77,10 +77,11 @@ class HuajiaoEncodesController extends BaseController
                 return back()->with(['error' => '没有可用的直播间咯']);
             }
             list($roomName, $roomId) = explode('##', $channel);
-            $rtmp_url = 'rtmp://al1.live.huajiao.com/live_huajiao_v2/' . $roomId;//获取rtmp地址
-            $live_flv_url = 'http://al1-flv.live.huajiao.com/live_huajiao_v2/' . explode('?', $roomId)[0] . '.flv';//flv地址
+//            $rtmp_url = 'rtmp://al1.live.huajiao.com/live_huajiao_v2/' . $roomId;//获取rtmp地址
+            $rtmp_url = 'rtmp://xy1.live.huajiao.com/live_huajiao_v2/' . $roomId;//获取rtmp地址
+            $live_flv_url = 'http://xy1-flv.live.huajiao.com/live_huajiao_v2/' . explode('?', $roomId)[0] . '.flv';//flv地址
             $live_rtmp_url = '';//rtmp地址
-            $live_m3u8_url = 'http://al1-hls.live.huajiao.com/live_huajiao_v2/' . explode('?', $roomId)[0] . '.m3u8';//m3u8地址
+            $live_m3u8_url = 'http://xy1-hls.live.huajiao.com/live_huajiao_v2/' . explode('?', $roomId)[0] . '.m3u8';//m3u8地址
 
             $fontsize = $request->input('fontsize', 18);
             $watermark = $request->input('watermark', '');

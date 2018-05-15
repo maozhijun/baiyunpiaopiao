@@ -18,11 +18,12 @@ class PushStreamController extends BaseController
         if (env('APP_NAME') == 'good') {
 
         } elseif (env('APP_NAME') == 'aikq') {
-            $longzhus[] = 'long##18346395094?6ecf4a8b3163dbf1801014e28c15e6821525fd219ab7f4aad7c66e5801254e0f7526992071219d5c0832947d28b72768e146525530319c07';
-            $longzhus[] = 'long##18249335694?b40dfd4e774b9baa0b921df3d7ed370fd247ff1af7577b0fb768098c1095ecbfd61b81fcd59e7d553d14f79484f0beb7d5c7181b3e0feb5e';
-            $longzhus[] = 'long##18346335974?17dbabd2015141d6e386f1649e5df3efb744a223b28a8c86d0350850a6acca1e50f3d955a3c43a684263c41850bd2376a6a31d9c7346a79f';
-            $longzhus[] = 'long##17121073689?390f18b68c6f949674d9ffa5f529dda11606f9cdde9f4ab8bc3d447438591e6e941bf15a32ec74bff783ef9fe18ed5dea209bbc588f9a55b';
-            $longzhus[] = 'long##17121073721?481ee2da017dadb3abc625c69954e6f9087007a66569d7984136a2233d77c668e7a03c30944cef086cd804fb165f78daede61d8bb767b243';
+            $longzhus[] = 'long##18346395094?f9da6c9eec936002a1dc4db17924d9e03e66ed4e4ad69e1a1abd6227238dd6c05eb8f820098718ae2edd7e2daef8ef35399fba3dfea587b9';
+            $longzhus[] = 'long##18249335694?8da6ae8eafc4d5e5d6e7a25763c16fd9833eba61e3bc24af704323f23cd6a1f746633230bc1f3db5b9c7f28df4a0cf94bedc98ce44436c8d';
+//            $longzhus[] = 'long##18346335974?9a90c4041bb3b840c36a70ee719aaa00c32fcaa409f7e2d2a96c1de0e0d7e48db42b56683615c263f9293fc8cd1d3e9e8b81403404b49116';
+//            $longzhus[] = 'long##17121073689?390f18b68c6f949674d9ffa5f529dda11606f9cdde9f4ab8bc3d447438591e6e941bf15a32ec74bff783ef9fe18ed5dea209bbc588f9a55b';
+            $longzhus[] = 'long##17121073721?6953291a869cc486290b8338660271389e6796f22c88ac2c0824533afae8d4b4ca31cdee5321ed146e540b4ae8e628f6621cc708b9f20a9b';
+            $longzhus[] = 'long##17169085461?767103cc093871c01344898faafd56b18d207e81ae9efd7ccfa1356dc8ef528ec48325fd416c5d9e6421bdded4c2b7f29f47ba9d769ed606';
             $this->channels['龙珠'] = $longzhus;
 
             $xiaomis[] = 'mi##cid201804241141222051111';
@@ -96,9 +97,9 @@ class PushStreamController extends BaseController
                 $live_lines = 'http://v2.zb.mi.com/live/' . $key . '.flv';//flv地址
                 $live_lines .= "\n" . 'http://hls.zb.mi.com/live/' . $key . '/playlist.m3u8';//m3u8地址
             } elseif ($platform == 'hua') {
-                $push_rtmp = 'rtmp://al1.live.huajiao.com/live_huajiao_v2/' . $key;//获取rtmp地址
-                $live_lines = 'http://al1-flv.live.huajiao.com/live_huajiao_v2/' . $key . '.flv';//flv地址
-                $live_lines .= "\n" . 'http://al1-hls.live.huajiao.com/live_huajiao_v2/' . $key . '.m3u8';//m3u8地址
+                $push_rtmp = 'rtmp://xy1.live.huajiao.com/live_huajiao_v2/' . $key;//获取rtmp地址
+                $live_lines = 'http://xy1-flv.live.huajiao.com/live_huajiao_v2/' . $key . '.flv';//flv地址
+                $live_lines .= "\n" . 'http://xy1-hls.live.huajiao.com/live_huajiao_v2/' . $key . '.m3u8';//m3u8地址
             }
 
             if (!empty($push_rtmp) && !empty($live_lines)) {

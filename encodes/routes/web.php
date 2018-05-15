@@ -82,6 +82,11 @@ Route::group(["middleware" => "auth", "namespace" => "Push"], function () {
     Route::get("/manager/inke/stop/{id}", "InkeEncodesController@stop");
     Route::get("/manager/inke/repeat/{id}", "InkeEncodesController@repeat");
 
+    Route::get("/manager/qxiu/", "QXiuEncodesController@index");
+    Route::post("/manager/qxiu/created/", "QXiuEncodesController@created");
+    Route::get("/manager/qxiu/stop/{id}", "QXiuEncodesController@stop");
+    Route::get("/manager/qxiu/repeat/{id}", "QXiuEncodesController@repeat");
+
     Route::get("/manager/mi/", "MiEncodesController@index");
     Route::post("/manager/mi/created/", "MiEncodesController@created");
     Route::get("/manager/mi/stop/{id}", "MiEncodesController@stop");

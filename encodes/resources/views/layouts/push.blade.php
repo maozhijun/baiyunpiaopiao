@@ -30,13 +30,16 @@
             <li role="presentation" {{ starts_with(request()->path(),'manager/inke')?'class=active':'' }}>
                 <a href="/manager/inke/">映客直播</a>
             </li>
+            <li role="presentation" {{ starts_with(request()->path(),'manager/qxiu')?'class=active':'' }}>
+                <a href="/manager/qxiu/">齐齐直播</a>
+            </li>
             {{--<li role="presentation" {{ starts_with(request()->path(),'manager/netease')?'class=active':'' }}>--}}
             {{--<a href="/manager/netease/">黄易直播</a>--}}
             {{--</li>--}}
         @endif
-        <li role="presentation" {{ starts_with(request()->path(),'manager/kuku')?'class=active':'' }}>
-            <a href="/manager/kuku/">酷酷直播</a>
-        </li>
+        {{--<li role="presentation" {{ starts_with(request()->path(),'manager/kuku')?'class=active':'' }}>--}}
+        {{--<a href="/manager/kuku/">酷酷直播</a>--}}
+        {{--</li>--}}
         <li role="presentation" {{ starts_with(request()->path(),'manager/zhibo')?'class=active':'' }}>
             <a href="/manager/zhibo/">中国直播</a>
         </li>
