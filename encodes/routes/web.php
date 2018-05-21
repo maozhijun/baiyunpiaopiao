@@ -65,7 +65,7 @@ Route::group(["middleware" => "auth", "namespace" => "Push"], function () {
     Route::post("/manager/longzhu/created/", "LongzhuEncodesController@created");
     Route::get("/manager/longzhu/stop/{id}", "LongzhuEncodesController@stop");
     Route::get("/manager/longzhu/repeat/{id}", "LongzhuEncodesController@repeat");
-//    Route::get("/manager/longzhu/test", "LongzhuEncodesController@test");
+    Route::get("/manager/longzhu/test", "LongzhuEncodesController@test");
 
     Route::get("/manager/netease/", "NeteaseEncodesController@index");
     Route::post("/manager/netease/created/", "NeteaseEncodesController@created");

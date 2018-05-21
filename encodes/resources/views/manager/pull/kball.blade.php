@@ -39,9 +39,9 @@
                             @endif
                         </td>
                         <td>
-                            @if($live['status'] == 0)
-                                <a class="btn btn-xs btn-danger" href="/manager/kball/created/">推流</a>
-                            @endif
+                            {{--@if($live['status'] == 0)--}}
+                                {{--<a class="btn btn-xs btn-danger" href="/manager/kball/created/">推流</a>--}}
+                            {{--@endif--}}
                         </td>
                     </tr>
                 @endif

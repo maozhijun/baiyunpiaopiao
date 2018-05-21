@@ -40,6 +40,9 @@
                         <a href="/records/qq/">录像、集锦</a>
                     </li>
                 @elseif(env('APP_NAME')=='leqiuba')
+                    <li {{ starts_with(request()->path(),'obs')?'class=active':'' }}>
+                        <a href="/obs/stream/">OBS推流码</a>
+                    </li>
                     <li {{ starts_with(request()->path(),'resources')?'class=active':'' }}>
                         <a href="/resources/qq/">直播源</a>
                     </li>

@@ -39,6 +39,8 @@ class Controller extends BaseController
 
     protected $watermark_alpha = 0.7;//水印透明度
 
+    protected $random_logo = '';
+
     public function __construct()
     {
         View::share('banner_text', env('banner_text', '爱看球'));
@@ -56,6 +58,7 @@ class Controller extends BaseController
             View::share('logo_text', '加微信：kanqiu858');
 //            View::share('watermark', '加微信【fs188fs】进群聊球，美女福利+大神免费推单，每天轻松收米！');
 //            View::share('logo_text', '加微信：fs188fs');
+            $this->random_logo = '爱看球直播：aikq.cc';
         } elseif (env('APP_NAME') == 'leqiuba') {
             View::share('watermark', '看球 聊球 微信群，进群加微信：zhibo556 红包福利天天有！');
             View::share('logo_text', '加微信：zhibo556');
@@ -162,12 +165,19 @@ class Controller extends BaseController
                     $logo_code .= 'drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $logo_text . '\':fontcolor=0xf7f14e:fontsize=' . $fontsize . ':x=(' . $lp['x'] . '+(' . $lp['w'] . '-tw)/2):y=(' . $lp['y'] . '+(' . $lp['h'] . '-' . $fontsize . ')/2),';
                 }
             }
+
+            //随机水印
+            $random_logo = '';
+            if (!empty($this->random_logo)) {
+                $random_logo = 'drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $this->random_logo . '\':fontcolor=0xffffff:fontsize=' . $fontsize . ':x=mod(n\,5*w)-3*w:y=h/(1.3+mod(n/(5*w)\,4)/2),';
+            }
+
             if ($location == 'top') {
-                $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=0:color=black@' . $this->watermark_alpha . ':width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2) . '"';
+                $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . $random_logo . 'drawbox=y=0:color=black@' . $this->watermark_alpha . ':width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2) . '"';
             } elseif ($location = 'bottom') {
-                $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=(ih-' . ($fontsize * 2) . '):color=black@' . $this->watermark_alpha . ':width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=(h-' . ($fontsize + $fontsize / 2) . ')"';
+                $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . $random_logo . 'drawbox=y=(ih-' . ($fontsize * 2) . '):color=black@' . $this->watermark_alpha . ':width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=(h-' . ($fontsize + $fontsize / 2) . ')"';
             } else {
-                $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . 'drawbox=y=0:color=black@' . $this->watermark_alpha . ':width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2) . '"';
+                $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . $random_logo . 'drawbox=y=0:color=black@' . $this->watermark_alpha . ':width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2) . '"';
             }
             $execs[] = $vf;
         }

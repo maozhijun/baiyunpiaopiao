@@ -25,28 +25,28 @@ class LongzhuEncodesController extends BaseController
             $this->channels[] = '17121073783##aeb411ed6c388ef2f1bb8f43880c69683e1e4d23540e06dc47181357dd9a1a5e07e5b59e4213593cbf39f58d91d716b77220e2ab65266a79';
             $this->channels[] = '17172859893##2d0f3f8dabf8f95b49f1ae9646419ab6a8136edf15b1a38a40630f59601c98f9d5170c13cf925f9279586b99e293f9dc1c42e0422fec1367';
             $this->channels[] = '17177260092##88323bf2b921839a2020a45fbbf6eb8e0d52f261656448fa0eec6d5298d0ac2d1a0abe86973c46e59be6a1e8a375a8f7dc1a503be62dab69';
-            $this->channels[] = '17177260082##dd7d0ffb816ca86362c7d869e7161989e3c279a4b31e722f7aa0ec5cb0bdc6a24bebdb7cf3dada9a06b91dd00679632ef86e4ce3bfbdcb5c';
-            $this->channels[] = '17121073721##c674626f7e130ac4b35d99434c5329b1ee2165c9647119a80e7dfc9dead2545d9a959541868c9e4125cbcd1b3432ad7f13f69b67aadeede9';
-            $this->channels[] = '17053903117##a45e71d11080f5b061ccd8421ddbb393c68c2a9f51f919dcf37028926989bfe2300788313f1b11632539da843341c957996c70e242f5952c';//未开包
+            $this->channels[] = '17177260082##7a2dac005a337af39b5dfd6ff5d306b6a83f905cc3ef13ef108af4fe8572863caa2f2cb62f7aace22322684f21727865dd9e60886409b465';
+            $this->channels[] = '17121073721##7e3d993e9ff8099b3133b52d6f8d461b14a54b593d7f6c0cd8dda031c79c22e89c72abc60f962fe8d403e91a37245c90626accbdd42c162e';
+//            $this->channels[] = '17053903117##a45e71d11080f5b061ccd8421ddbb393c68c2a9f51f919dcf37028926989bfe2300788313f1b11632539da843341c957996c70e242f5952c';//未开包
         } elseif (env('APP_NAME') == 'aikq1') {
-            $this->channels[] = '17172850051##632b880368e10d7e482fe6bd5393609a73ee8c47fe0766ed2de143f12a35d5f53ad98c03d5bfa27a72667f933d5d27fea44b6c0bd537854d';//未开包
-            $this->channels[] = '17172850057##c43839c1c8191a6a6d041fb531ddb5800a032296fd8cdef802bda48724d111e8b8eb26436bef41dd31d2a2597237f177bf7b25de9408d8da';//未开包
-            $this->channels[] = '17177260095##df58b2fca6fa2dca89aff9f5f6ca60c0140fbfd610422011cc974f04ebc0240c8b9d958aac7b11a07b0b4e022998dcb55304dc9fb4fd1292';//未开包
-            $this->channels[] = '17177260086##49487a7d4a3bb1ad36b7fdb00c3ec2c7870906e59b799f283b97cbf32c089fd40d788f8989483f7bf6ae03d54115b0d4fb6fe020a8ef7dab';//未开包
+            $this->channels[] = '17172850051##8387d763363fa5a873b608f18567e8a0d30045f570c361a8343a5be1ac8ad0dd4e002c8fff43121a1e7ee7c969a0bb14cf02047b5134fcc3';//未开包
+            $this->channels[] = '17172850057##056bdde1c8d1fb7d46d801c85e2afd619fd3278efac21d6f1de153c00e21f08792ff2cac52d2f90cdee352d864903484d797b5d26fb6039f';//未开包
+            $this->channels[] = '17177260095##f2aebab1104e17b29f8176c539366454ca5c31ae34975265f3bfafde64c0ac9099db5600928a6955ed2923ec5569d2f598583e6dd2f76d70';//未开包
+            $this->channels[] = '17177260086##6556704feaaea41bd18020e8421a5b9319a7d84ce62b14217d35f789966e0e3c3e4de62cbdfa8ef2ff89490773803566b6cf37a7772b45a5';//未开包
             $this->channels[] = '17139230362##da29927e480ebdd68a3e67a2d6d02cd82bac7a75b2fb77e5594129673cdb16728b703370b2ec575d26cbc5ac50c85d92e4e244d9fc503aac';//未开包
-            $this->channels[] = '17151290942##589ada982cab2a8b10c09e1733ec67bc2c020eeb175979d0d8b1136c52a51db1cec200855d9f675ed767cfd4c15c9392bed3cbf0f8e5aaf3';//未开包
-            $this->channels[] = '17165142105##76eb7bf7c8d722b6ede5554f543ef8203a3fcb3a086904b55af2d2d8c9a0eaf3376576a1ec020f6a9d298d50fef1f424a20e88c80fe779ee';//未开包
+            $this->channels[] = '17151290942##862286b485c30cf9dd87ff06b9d62a96f28fece293f91f39ead40e3f7a26256eb478c2ca21afdf00453e3a74bc1bc130d140e513f1cbcd91';//未开包
+            $this->channels[] = '17165142105##2f7c09340b4dca2dd36895bad9f798007ca848f394724b1a8545b940485327ae19494c68be954bdd16a973041931883d5e737f9225a94bf5';//未开包
             $this->channels[] = '17177160082##8d9c77462fc912374a2f9d4965562b69912ebd6ff2658fc5f73f5f8dc8966a4ab620403cdf3d3fcd7be005c2f74ddde0bf36e83bdc5076ae';//未开包
         } elseif (env('APP_NAME') == 'leqiuba') {
-            $this->channels[] = '17160980733##6bcd216d1ebb3357f8665c43e3e38ae2838aa313b489c18418a792bb70c520c886cd9a62ab792c84d1e05b2bceb146577d95ca21323f933f';
-            $this->channels[] = '17082248663##01ca7ce667b9d5c185893e28c9301c9a4ec9b48dcdcfe2654fec78aa661b36ee05d333471dc7059328545688f1986b6be2c9f4d45544b7d1';
-            $this->channels[] = '17177306341##6622001455a64f411da9571a652791f54edebd74b632eb871144bbe06062463f73ef41115d77349612875bccef2e84fd8d5f9d483aabafa4';
-            $this->channels[] = '17046169471##72bd71fe2fb3074be8021505dd1b68dc568f2df297e6b368d75cb646026000bcd72112a8778f51661018696af95c23dea0b6434c5ff998d4';
-            $this->channels[] = '17046165504##c6f14ba4fa174426a27afc687f69945a3e1667213b3b969d6fe60ce70ad8fc81285ed4c7ee678ec1f0f1aef33462504ecf3642df1f2c96e8';
-            $this->channels[] = '17071111418##aa12974ccbf698ba703e011547cd6e0c5dd1fa1ff989e4de73329be7e3e1874b30f52edc94618e2908278460bb628037cea11745190a4e12';
-            $this->channels[] = '17071111887##c47ac9debe9c3d21be95eac3e1836d31d1a19487038d2a7a5b10060f75e905fa070a980c6de932544128f677f865cf1209385715b0429e4b';
-            $this->channels[] = '17071111558##c8ec7567bb888f77ba427773624ef80ae316f008b73dc832dd2fc4502d4e25dc622b8913a60c07fe260f5b42065acba362407be9adfc0691';
-//            $this->channels[] = '17071111596##';
+            $this->channels[] = '17160980733##a91ab51a50ce08d1936c863529846dcbb5c0be90212f1eafa08c594bace3170c87702b900232abb8f38e8609c105cc262c1e783f85a90bc3';
+//            $this->channels[] = '17082248663##';
+            $this->channels[] = '17177306341##6874ae707391b0e72d2c407a3009de845bab28b9f8fa9ede90ccbfc3a178e0bfbd05dfbe387e3a669f699fe95511fa64460220b3bdb99599';
+            $this->channels[] = '17046169471##8fd617c2f94ce3b3968f00a7095d602631b8b537c7ccc52ee9adc77ba6682f338b82f4d50fc6897dee687614e66f5faaec6e437cef894f09';
+            $this->channels[] = '17046165504##c59d5c6509f7568c63007634e4eb93bee0e98c448bb10defab95ca19d7ac09813dfd7aa3245969f9ece34555de35e783ef6cdbaea4d0928f';
+            $this->channels[] = '17071111418##e3091cb1fd82b026f72235ed48581a8b7f109ad6058519ae70ccb02640eadb37e65f3e5f9570e052cef3eb94e2a79ddd6e05e270e0fdd5aa';
+            $this->channels[] = '17071111887##ab1ce0c74c86c6e4861d5f16aacecdd6e808df5c7c7a014978ba02ce11ee72716bcdbf8597a18587d6c37bf61028cd669f8d5833951e1d0f';
+            $this->channels[] = '17071111558##5b35c4b75cc69b068481f2ba0d53aeb6a9c9a2d15f3b774a724e3e6245bd8799204320ca8ab27fd10bb4eebe1eae8011c448eeb8f70496df';
+            $this->channels[] = '17071111596##149ba57711bda2f98aabe4525e9af999b6f8b35262e5fbb9f3b9e4fc2ac2ccc9237db5fe2def4e044e8e143ab1d6e16971840f8b25317393';
 //            $this->channels[] = '17120593903##';
         }
     }
@@ -220,18 +220,40 @@ class LongzhuEncodesController extends BaseController
     public function test()
     {
 //        $this->startLive('d5426c54d0e05f72779b6deb8ac786c7625b26848edd89a38b40674048863f349cd8fe6588aa47d0bdbf9c8c7f9d13b165775a7f7671c893');
-        $urls = $this->getLiveUrl(2295037);
-        $live_url = '';
-        foreach ($urls as $url) {
-            if ($url['ext'] == 'flv') {
-                $live_url .= $url['securityUrl'];
-            } elseif ($url['ext'] == 'rtmp') {
-                $live_url .= "\n\n" . $url['securityUrl'];
-            } elseif ($url['ext'] == 'm3u8') {
-                $live_url .= "\n\n" . $url['securityUrl'];
-            }
+//        $urls = $this->getLiveUrl(2295037);
+//        $live_url = '';
+//        foreach ($urls as $url) {
+//            if ($url['ext'] == 'flv') {
+//                $live_url .= $url['securityUrl'];
+//            } elseif ($url['ext'] == 'rtmp') {
+//                $live_url .= "\n\n" . $url['securityUrl'];
+//            } elseif ($url['ext'] == 'm3u8') {
+//                $live_url .= "\n\n" . $url['securityUrl'];
+//            }
+//        }
+//        dump($live_url);
+//        $this->closeLive('d5426c54d0e05f72779b6deb8ac786c7625b26848edd89a38b40674048863f349cd8fe6588aa47d0bdbf9c8c7f9d13b165775a7f7671c893');
+
+        $dst_url = 'http://hdl.9158.com/live/22227c7e7efe9eafd6957da277b27a6d.flv';
+// create a new cURL resource
+        $ch = curl_init();
+// set URL and other appropriate options
+        curl_setopt($ch, CURLOPT_URL, $dst_url);
+// This changes the request method to HEAD
+        curl_setopt($ch, CURLOPT_NOBODY, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 2); // connect timeout
+        curl_setopt($ch, CURLOPT_TIMEOUT, 2); // curl timeout
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // curl timeout
+// grab URL and pass it to the browser
+        if (FALSE === curl_exec($ch)) {
+            echo('open ' . $dst_url . ' failed' . "\n");
+        } else {
+            // Fetch the HTTP-code (cred: @GZipp)
+            $retcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            echo('HTTP return code=' . $retcode . "\n");
         }
-        dump($live_url);
-        $this->closeLive('d5426c54d0e05f72779b6deb8ac786c7625b26848edd89a38b40674048863f349cd8fe6588aa47d0bdbf9c8c7f9d13b165775a7f7671c893');
+// close cURL resource, and free up system resources
+        curl_close($ch);
+
     }
 }

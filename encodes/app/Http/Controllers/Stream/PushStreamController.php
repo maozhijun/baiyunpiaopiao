@@ -18,19 +18,23 @@ class PushStreamController extends BaseController
         if (env('APP_NAME') == 'good') {
 
         } elseif (env('APP_NAME') == 'aikq') {
-            $longzhus[] = 'long##18346395094?f9da6c9eec936002a1dc4db17924d9e03e66ed4e4ad69e1a1abd6227238dd6c05eb8f820098718ae2edd7e2daef8ef35399fba3dfea587b9';
-            $longzhus[] = 'long##18249335694?8da6ae8eafc4d5e5d6e7a25763c16fd9833eba61e3bc24af704323f23cd6a1f746633230bc1f3db5b9c7f28df4a0cf94bedc98ce44436c8d';
+//            $longzhus[] = 'long##18346395094?f9da6c9eec936002a1dc4db17924d9e03e66ed4e4ad69e1a1abd6227238dd6c05eb8f820098718ae2edd7e2daef8ef35399fba3dfea587b9';
+//            $longzhus[] = 'long##18249335694?8da6ae8eafc4d5e5d6e7a25763c16fd9833eba61e3bc24af704323f23cd6a1f746633230bc1f3db5b9c7f28df4a0cf94bedc98ce44436c8d';
 //            $longzhus[] = 'long##18346335974?9a90c4041bb3b840c36a70ee719aaa00c32fcaa409f7e2d2a96c1de0e0d7e48db42b56683615c263f9293fc8cd1d3e9e8b81403404b49116';
 //            $longzhus[] = 'long##17121073689?390f18b68c6f949674d9ffa5f529dda11606f9cdde9f4ab8bc3d447438591e6e941bf15a32ec74bff783ef9fe18ed5dea209bbc588f9a55b';
             $longzhus[] = 'long##17121073721?6953291a869cc486290b8338660271389e6796f22c88ac2c0824533afae8d4b4ca31cdee5321ed146e540b4ae8e628f6621cc708b9f20a9b';
             $longzhus[] = 'long##17169085461?767103cc093871c01344898faafd56b18d207e81ae9efd7ccfa1356dc8ef528ec48325fd416c5d9e6421bdded4c2b7f29f47ba9d769ed606';
+            $longzhus[] = 'long##17172850051?2954c96facb54d5c73b6ab40b6dd93e76dc79280adfc11648d60c10209162be0fec853ae1a60a5207094c0c3630a8852b23988ab2845a9e5';
+            $longzhus[] = 'long##17172850057?827ad68e3a4dadd0e3ec727d5cd75a27c53ce6d7d70aa5ef18f2ffbf2c3dbf9bb2e852defb7ba71827cffeff3ca01bf23493a3ff0bd53042';
+            $longzhus[] = 'long##17177260095?2ecab7166e7174b7e95b140dc24625d272f9a5526338b5c85b2fc28c792b7b9a444df06b54fc8f78a001b4508e9757349527f1dd4cbc92a3';
+            $longzhus[] = 'long##17177260086?d990b4fd8adc1b4314f25cf6ec26b285fa3926ea0e5800f135e7ae43c1043c13069d016e126ce54634bd267066fb83b3f46eca818895992c';
             $this->channels['龙珠'] = $longzhus;
 
-            $xiaomis[] = 'mi##cid201804241141222051111';
-            $xiaomis[] = 'mi##cid201804241141222052222';
-            $xiaomis[] = 'mi##cid201804241141222053333';
-            $xiaomis[] = 'mi##cid201804241141222054444';
-            $this->channels['小米'] = $xiaomis;
+//            $xiaomis[] = 'mi##cid201804241141222051111';
+//            $xiaomis[] = 'mi##cid201804241141222052222';
+//            $xiaomis[] = 'mi##cid201804241141222053333';
+//            $xiaomis[] = 'mi##cid201804241141222054444';
+//            $this->channels['小米'] = $xiaomis;
 
             $huajiaos[] = 'hua##_LC_AL1_5832731615253162591491111';
             $huajiaos[] = 'hua##_LC_AL1_5832731615253162591492222';
@@ -40,7 +44,15 @@ class PushStreamController extends BaseController
         } elseif (env('APP_NAME') == 'aikq1') {
 
         } elseif (env('APP_NAME') == 'leqiuba') {
-
+            //17124574019 as1231230  龙珠登录
+//            $longzhus[] = 'long##17124574019?008a055f2dbe7cd5aa752639a41dfaec5df63534b535a31447e9cfdb51893734114471d1024858b985577711d23c9dfbe843ceda3eb67df2';
+            //13285701420 hn12021  微博登录
+            $longzhus[] = 'long##13285701420?c12ad66482732f5848ae72afd186712d05e1b0a558b5578a776bac193d2a2420369b3b3bf27f6380bbcad5ac1fd93fe0497773e92a8058c1';
+            //13282093498 hn12021  微博登录
+            $longzhus[] = 'long##13282093498?1fe2a951ef8edf74cdc5f61f24e32a0afaf80bb115bc9d5e57dcc8e3c27129a9b8a079afbf57662a1dae1f8e5937401301cd1d185362143d';
+            //18708185105 aa123321 苏宁登录
+            $longzhus[] = 'long##18708185105?ca492c5fe807e35b57a5f7c2f54e6289d12432d7df557fb43490ebbb2d3a18dc355b152e3010a696179ad35ba1ff4e0e4609eb1adf25bd71';
+            $this->channels['龙珠'] = $longzhus;
         }
     }
 
@@ -77,6 +89,7 @@ class PushStreamController extends BaseController
             $live_lines = '';
             if ($platform == 'long') {
                 list($phone, $token) = explode('?', $key);
+                $this->closeLongZhuLive($token);
                 $rtmp_json = $this->startLongZhuLive($token);//获取rtmp地址
                 $push_rtmp = $rtmp_json['upStreamUrl'];
                 $roomId = $rtmp_json['roomId'];
