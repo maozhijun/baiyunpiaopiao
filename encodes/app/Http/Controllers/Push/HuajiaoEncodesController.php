@@ -49,7 +49,7 @@ class HuajiaoEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Huajiao')->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Huajiao')->where('created_at', '>', date_create('-24 hour'))->whereIn('status', [1, 2, -1])->get();
         return view('manager.push.huajiao', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
@@ -65,7 +65,7 @@ class HuajiaoEncodesController extends BaseController
 
 //            $channel = $request->input('channel');
             $channel = $request->input('channel');
-            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Huajiao')->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->inRandomOrder()->get();
+            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Huajiao')->where('created_at', '>', date_create('-24 hour'))->whereIn('status', [1, 2, -1])->inRandomOrder()->get();
             if ($ets->contains('channel', $channel)) {
                 foreach ($this->channels as $ch) {
                     if (!$ets->contains('channel', $ch)) {
@@ -78,10 +78,10 @@ class HuajiaoEncodesController extends BaseController
             }
             list($roomName, $roomId) = explode('##', $channel);
 //            $rtmp_url = 'rtmp://al1.live.huajiao.com/live_huajiao_v2/' . $roomId;//获取rtmp地址
-            $rtmp_url = 'rtmp://xy1.live.huajiao.com/live_huajiao_v2/' . $roomId;//获取rtmp地址
-            $live_flv_url = 'http://xy1-flv.live.huajiao.com/live_huajiao_v2/' . explode('?', $roomId)[0] . '.flv';//flv地址
+            $rtmp_url = 'rtmp://ps1.live.huajiao.com/live_huajiao_v2/' . $roomId;//获取rtmp地址
+            $live_flv_url = 'http://pl1.live.huajiao.com/live_huajiao_v2/' . explode('?', $roomId)[0] . '.flv';//flv地址
             $live_rtmp_url = '';//rtmp地址
-            $live_m3u8_url = 'http://xy1-hls.live.huajiao.com/live_huajiao_v2/' . explode('?', $roomId)[0] . '.m3u8';//m3u8地址
+            $live_m3u8_url = 'http://pl1-hls.live.huajiao.com/live_huajiao_v2/' . explode('?', $roomId)[0] . '/index.m3u8';//m3u8地址
 
             $fontsize = $request->input('fontsize', 18);
             $watermark = $request->input('watermark', '');

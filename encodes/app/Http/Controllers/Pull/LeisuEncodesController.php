@@ -152,7 +152,7 @@ class LeisuEncodesController extends BaseController
         }
         curl_close($ch);
 //        dump($response);
-        preg_match('#\"(rtmp://live\S+)\"#', $response, $matches);
+        preg_match('#\"(rtmp://\S+)\"#', $response, $matches);
         if (!empty($matches)) {
             return array_last($matches);
         }

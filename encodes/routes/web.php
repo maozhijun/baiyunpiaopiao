@@ -143,5 +143,12 @@ Route::group(["middleware" => "auth", "namespace" => "Stream"], function () {
     Route::get("/obs/stream/close-long-stream/{id}", "PushStreamController@closeStreamLongZhu");
 });
 
+Route::group(["namespace" => "Stream"], function () {
+    Route::get("/crontab/stream/9158/", "CrontabStreamController@get9158Rooms");
+    Route::get("/crontab/stream/9158/test/", "CrontabStreamController@test9158Rooms");
+
+    Route::get("/crontab/stream/chushou/", "CrontabStreamController@getChushouRooms");
+});
+
 //定时任务
 Route::get("/manager/check-ffmpeg", 'CrontabController@checkFFMPEG');

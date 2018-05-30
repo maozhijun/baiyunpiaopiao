@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller as BaseController;
 use App\Models\EncodeTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redis;
 
 class KukuEncodesController extends BaseController
 {
@@ -15,44 +16,45 @@ class KukuEncodesController extends BaseController
     {
         parent::__construct();
         $this->middleware('filter')->except([]);
-        if (env('APP_NAME') == 'good') {
-
-        } elseif (env('APP_NAME') == 'aikq') {
-            $this->channels[] = '酷酷直播1##12163331_12163331';
-            $this->channels[] = '酷酷直播2##12163332_12163332';
-            $this->channels[] = '酷酷直播3##12163333_12163333';
-            $this->channels[] = '酷酷直播4##12163334_12163334';
-            $this->channels[] = '酷酷直播5##12163335_12163335';
-            $this->channels[] = '酷酷直播6##12163336_12163336';
-            $this->channels[] = '酷酷直播7##12163337_12163337';
-            $this->channels[] = '酷酷直播8##12163338_12163338';
-            $this->channels[] = '酷酷直播9##12163339_12163339';
-        } elseif (env('APP_NAME') == 'aikq1') {
-            $this->channels[] = '酷酷直播1##12166331_12166331';
-            $this->channels[] = '酷酷直播2##12166332_12166332';
-            $this->channels[] = '酷酷直播3##12166333_12166333';
-            $this->channels[] = '酷酷直播4##12166334_12166334';
-            $this->channels[] = '酷酷直播5##12166335_12166335';
-            $this->channels[] = '酷酷直播6##12166336_12166336';
-            $this->channels[] = '酷酷直播7##12166337_12166337';
-            $this->channels[] = '酷酷直播8##12166338_12166338';
-            $this->channels[] = '酷酷直播9##12166339_12166339';
-        } elseif (env('APP_NAME') == 'leqiuba') {
-            $this->channels[] = '酷酷直播1##11163331_11163331';
-            $this->channels[] = '酷酷直播2##11163332_11163332';
-            $this->channels[] = '酷酷直播3##11163333_11163333';
-            $this->channels[] = '酷酷直播4##11163334_11163334';
-            $this->channels[] = '酷酷直播5##11163335_11163335';
-            $this->channels[] = '酷酷直播6##11163336_11163336';
-            $this->channels[] = '酷酷直播7##11163337_11163337';
-            $this->channels[] = '酷酷直播8##11163338_11163338';
-            $this->channels[] = '酷酷直播9##11163339_11163339';
-        }
+//        if (env('APP_NAME') == 'good') {
+//
+//        } elseif (env('APP_NAME') == 'aikq') {
+//            $this->channels[] = '酷酷直播1##12163331_12163331';
+//            $this->channels[] = '酷酷直播2##12163332_12163332';
+//            $this->channels[] = '酷酷直播3##12163333_12163333';
+//            $this->channels[] = '酷酷直播4##12163334_12163334';
+//            $this->channels[] = '酷酷直播5##12163335_12163335';
+//            $this->channels[] = '酷酷直播6##12163336_12163336';
+//            $this->channels[] = '酷酷直播7##12163337_12163337';
+//            $this->channels[] = '酷酷直播8##12163338_12163338';
+//            $this->channels[] = '酷酷直播9##12163339_12163339';
+//        } elseif (env('APP_NAME') == 'aikq1') {
+//            $this->channels[] = '酷酷直播1##12166331_12166331';
+//            $this->channels[] = '酷酷直播2##12166332_12166332';
+//            $this->channels[] = '酷酷直播3##12166333_12166333';
+//            $this->channels[] = '酷酷直播4##12166334_12166334';
+//            $this->channels[] = '酷酷直播5##12166335_12166335';
+//            $this->channels[] = '酷酷直播6##12166336_12166336';
+//            $this->channels[] = '酷酷直播7##12166337_12166337';
+//            $this->channels[] = '酷酷直播8##12166338_12166338';
+//            $this->channels[] = '酷酷直播9##12166339_12166339';
+//        } elseif (env('APP_NAME') == 'leqiuba') {
+//            $this->channels[] = '酷酷直播1##11163331_11163331';
+//            $this->channels[] = '酷酷直播2##11163332_11163332';
+//            $this->channels[] = '酷酷直播3##11163333_11163333';
+//            $this->channels[] = '酷酷直播4##11163334_11163334';
+//            $this->channels[] = '酷酷直播5##11163335_11163335';
+//            $this->channels[] = '酷酷直播6##11163336_11163336';
+//            $this->channels[] = '酷酷直播7##11163337_11163337';
+//            $this->channels[] = '酷酷直播8##11163338_11163338';
+//            $this->channels[] = '酷酷直播9##11163339_11163339';
+//        }
+        Redis::get('channel:9158:line');
     }
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Kuku')->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Kuku')->where('created_at', '>', date_create('-24 hour'))->whereIn('status', [1, 2, -1])->get();
         return view('manager.push.kuku', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
@@ -68,7 +70,7 @@ class KukuEncodesController extends BaseController
 
 //            $channel = $request->input('channel');
             $channel = $request->input('channel');
-            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Kuku')->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->inRandomOrder()->get();
+            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Kuku')->where('created_at', '>', date_create('-24 hour'))->whereIn('status', [1, 2, -1])->inRandomOrder()->get();
             if ($ets->contains('channel', $channel)) {
                 foreach ($this->channels as $ch) {
                     if (!$ets->contains('channel', $ch)) {

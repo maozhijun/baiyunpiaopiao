@@ -20,40 +20,42 @@ class LongzhuEncodesController extends BaseController
         } elseif (env('APP_NAME') == 'aikq') {
 //            $this->channels[] = '老铁扣波666##223c97b99cb3f4e1e1ca2fea94dbe89787cdec0dff3ea23877552ff965317750ee0760d805edecc0b03fce3ace1e15cbaa1b56423a64fe41';
 //            $this->channels[] = '17053904825##';//禁言
-            $this->channels[] = '17053909336##3f4472f27974c8fb36fdf4db189e494b98c9b8a73d3a23bb35990d357a4a8c44414b68616aa639ec46f6dc719d6f591642bf6cadf4d3918e';
+//            $this->channels[] = '17053909336##';//停封
             $this->channels[] = '17121075951##b26db27b727ed633f841dae7cf51ec6135b54eb39abf72b9c8f0e8d23a4151471aaad1ae103e245025e6ffa130e618162ea4c140548fd045';
             $this->channels[] = '17121073783##aeb411ed6c388ef2f1bb8f43880c69683e1e4d23540e06dc47181357dd9a1a5e07e5b59e4213593cbf39f58d91d716b77220e2ab65266a79';
             $this->channels[] = '17172859893##2d0f3f8dabf8f95b49f1ae9646419ab6a8136edf15b1a38a40630f59601c98f9d5170c13cf925f9279586b99e293f9dc1c42e0422fec1367';
             $this->channels[] = '17177260092##88323bf2b921839a2020a45fbbf6eb8e0d52f261656448fa0eec6d5298d0ac2d1a0abe86973c46e59be6a1e8a375a8f7dc1a503be62dab69';
-            $this->channels[] = '17177260082##7a2dac005a337af39b5dfd6ff5d306b6a83f905cc3ef13ef108af4fe8572863caa2f2cb62f7aace22322684f21727865dd9e60886409b465';
-            $this->channels[] = '17121073721##7e3d993e9ff8099b3133b52d6f8d461b14a54b593d7f6c0cd8dda031c79c22e89c72abc60f962fe8d403e91a37245c90626accbdd42c162e';
-//            $this->channels[] = '17053903117##a45e71d11080f5b061ccd8421ddbb393c68c2a9f51f919dcf37028926989bfe2300788313f1b11632539da843341c957996c70e242f5952c';//未开包
+            $this->channels[] = '17177260082##dc77c81c559188121252c04219dc528d30d6e7a19b1a8ab24e55b63d0cb0675a679b9fc821b88e5b72af80129d44df1f74fb6a2d3e6f9fdf';
+            $this->channels[] = '17121073721##8174a8cb73c8c22a1381077308578bbd46f75f0cc9eac6b17737cf5b40535b30b2e25a79b26b428aa3214d68f87ad2af8744669c9542fabb';
+//            $this->channels[] = '17053903117##';//停封
         } elseif (env('APP_NAME') == 'aikq1') {
-            $this->channels[] = '17172850051##8387d763363fa5a873b608f18567e8a0d30045f570c361a8343a5be1ac8ad0dd4e002c8fff43121a1e7ee7c969a0bb14cf02047b5134fcc3';//未开包
-            $this->channels[] = '17172850057##056bdde1c8d1fb7d46d801c85e2afd619fd3278efac21d6f1de153c00e21f08792ff2cac52d2f90cdee352d864903484d797b5d26fb6039f';//未开包
-            $this->channels[] = '17177260095##f2aebab1104e17b29f8176c539366454ca5c31ae34975265f3bfafde64c0ac9099db5600928a6955ed2923ec5569d2f598583e6dd2f76d70';//未开包
-            $this->channels[] = '17177260086##6556704feaaea41bd18020e8421a5b9319a7d84ce62b14217d35f789966e0e3c3e4de62cbdfa8ef2ff89490773803566b6cf37a7772b45a5';//未开包
-            $this->channels[] = '17139230362##da29927e480ebdd68a3e67a2d6d02cd82bac7a75b2fb77e5594129673cdb16728b703370b2ec575d26cbc5ac50c85d92e4e244d9fc503aac';//未开包
-            $this->channels[] = '17151290942##862286b485c30cf9dd87ff06b9d62a96f28fece293f91f39ead40e3f7a26256eb478c2ca21afdf00453e3a74bc1bc130d140e513f1cbcd91';//未开包
-            $this->channels[] = '17165142105##2f7c09340b4dca2dd36895bad9f798007ca848f394724b1a8545b940485327ae19494c68be954bdd16a973041931883d5e737f9225a94bf5';//未开包
-            $this->channels[] = '17177160082##8d9c77462fc912374a2f9d4965562b69912ebd6ff2658fc5f73f5f8dc8966a4ab620403cdf3d3fcd7be005c2f74ddde0bf36e83bdc5076ae';//未开包
+            $this->channels[] = '17172850051##9d76d26ae6f9dd0ff1742ccc14e2635fc810ad00d07dce88c943608d9ef038a463e19ae45c63d297c02229952ccc1b37694a6f3c1062dce0';
+            $this->channels[] = '17172850057##3ad8adc3021768d11d033300ee4ed631093a80f518e94a341db25792a45e4f393cebae77924e91f4e6264dce0104fbdd7b0438ba0e1ae3c5';
+            $this->channels[] = '17177260095##b0aa4442d0ccbe1376bc3356fc513f42d9dfa926fd15788666295fee93cb560e14130a319b44d2c5bb6b51d6a822df8bd46fdc08539496a5';
+            $this->channels[] = '17177260086##11a0eeda50618c319203f833704a3a78e2dfbe937170da1fefe0fb0d52975a62c202d7ed14d23d9029907a474a0fea6fd86c3adc50d634a1';
+            $this->channels[] = '17139230362##da29927e480ebdd68a3e67a2d6d02cd82bac7a75b2fb77e5594129673cdb16728b703370b2ec575d26cbc5ac50c85d92e4e244d9fc503aac';
+            $this->channels[] = '17151290942##c51bac79f8fa90e5f05e15099c04b77d5e94be548b25ebd1ea79fce10f7c4f79534e8fac98b34f3337a175c081cce16107aed50ac97166e2';
+            $this->channels[] = '17165142105##c011b58436ac77fdedd2da4285fbed90bf2597bc0175e20afc19e5483525506d1bcb8c6fd4313c2e4b3704e33eeacdee6118ef9733c9d02e';
+            $this->channels[] = '17177160082##8d9c77462fc912374a2f9d4965562b69912ebd6ff2658fc5f73f5f8dc8966a4ab620403cdf3d3fcd7be005c2f74ddde0bf36e83bdc5076ae';
         } elseif (env('APP_NAME') == 'leqiuba') {
-            $this->channels[] = '17160980733##a91ab51a50ce08d1936c863529846dcbb5c0be90212f1eafa08c594bace3170c87702b900232abb8f38e8609c105cc262c1e783f85a90bc3';
-//            $this->channels[] = '17082248663##';
-            $this->channels[] = '17177306341##6874ae707391b0e72d2c407a3009de845bab28b9f8fa9ede90ccbfc3a178e0bfbd05dfbe387e3a669f699fe95511fa64460220b3bdb99599';
-            $this->channels[] = '17046169471##8fd617c2f94ce3b3968f00a7095d602631b8b537c7ccc52ee9adc77ba6682f338b82f4d50fc6897dee687614e66f5faaec6e437cef894f09';
-            $this->channels[] = '17046165504##c59d5c6509f7568c63007634e4eb93bee0e98c448bb10defab95ca19d7ac09813dfd7aa3245969f9ece34555de35e783ef6cdbaea4d0928f';
-            $this->channels[] = '17071111418##e3091cb1fd82b026f72235ed48581a8b7f109ad6058519ae70ccb02640eadb37e65f3e5f9570e052cef3eb94e2a79ddd6e05e270e0fdd5aa';
-            $this->channels[] = '17071111887##ab1ce0c74c86c6e4861d5f16aacecdd6e808df5c7c7a014978ba02ce11ee72716bcdbf8597a18587d6c37bf61028cd669f8d5833951e1d0f';
-            $this->channels[] = '17071111558##5b35c4b75cc69b068481f2ba0d53aeb6a9c9a2d15f3b774a724e3e6245bd8799204320ca8ab27fd10bb4eebe1eae8011c448eeb8f70496df';
-            $this->channels[] = '17071111596##149ba57711bda2f98aabe4525e9af999b6f8b35262e5fbb9f3b9e4fc2ac2ccc9237db5fe2def4e044e8e143ab1d6e16971840f8b25317393';
-//            $this->channels[] = '17120593903##';
+//            $this->channels[] = '17160980733##';//待确认
+//            $this->channels[] = '17082248663##';//封
+            $this->channels[] = '17177306341##c9dbe41e3e176c25374435d1ce61a0a731349423cc95c7a335c90cf32a9b7ae04f6b5f67c368f37ee068741ca9a74dd78fd7dee65b62c06a';
+//            $this->channels[] = '17046169471##';//待确认
+            $this->channels[] = '17046165504##73b501dc5cd8ee7c2b714bb53aedfdae587b86e9a2e3a17e41cb28d7c1581a4ba4ec74ce7b73e4f61a406c1a605e23bc29890f5bd7884298';
+            $this->channels[] = '17071111418##a916f33c41efc4a3e3f9ab16ad33cbad1bb9579203288eddc4eef6d841038cb898f4aa8f7e366e16c04803bd956ffec4f823183c9f1599aa';
+            $this->channels[] = '17071111887##5e17ea19873ff511760a7c9274cef1e275053d4ca5a699da14d257bf0a857b93983174daaac555672aff55c57a5f9a3084b330991e97f068';
+            $this->channels[] = '17071111558##287db22f9e73da567ba58e09829b9396c43dd48aaf9bf137b29b790ea58688f8451a66ad6013c8c22aa62703cf08bbd4cd4a1d960db5a64e';
+            $this->channels[] = '17071111596##d74080cc9f66edb5bcffdca4fbf3791a4bef8c488ce302a7464801e3b2666ac6ac076c74bd93f9d6fafab287a20645020b5a7dacd103f646';
+//            $this->channels[] = '17120593903##';//封
+            $this->channels[] = '13408482084##88fb6dc6e3ddf5cf8a02d570b8604a1675c0d2dd169aa1b1c3ddbe0939a2fdf94ed50a229fa9fd61d1546c9362e6893e6c14ba60fbb15d94';
+            $this->channels[] = '18482344138##a6fb1e93bf72faf64024c0cb9debea3644b1733567219ef8cb8a7ec465efa6b71e531777ca7e369aca8488a55910f083173879894a7f34df';
         }
     }
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Longzhu')->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Longzhu')->where('created_at', '>', date_create('-24 hour'))->whereIn('status', [1, 2, -1])->get();
         return view('manager.push.longzhu', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
@@ -68,7 +70,7 @@ class LongzhuEncodesController extends BaseController
             $input = $request->input('input');
 
             $channel = $request->input('channel');
-            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Longzhu')->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->inRandomOrder()->get();
+            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Longzhu')->where('created_at', '>', date_create('-24 hour'))->whereIn('status', [1, 2, -1])->inRandomOrder()->get();
             if ($ets->contains('channel', $channel)) {
                 foreach ($this->channels as $ch) {
                     if (!$ets->contains('channel', $ch)) {

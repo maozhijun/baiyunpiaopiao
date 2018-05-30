@@ -54,7 +54,7 @@ class ZhiboEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Zhibo')->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Zhibo')->where('created_at', '>', date_create('-24 hour'))->whereIn('status', [1, 2, -1])->get();
         return view('manager.push.zhibo', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
@@ -70,7 +70,7 @@ class ZhiboEncodesController extends BaseController
 
 //            $channel = $request->input('channel');
             $channel = $request->input('channel');
-            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Zhibo')->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->inRandomOrder()->get();
+            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Zhibo')->where('created_at', '>', date_create('-24 hour'))->whereIn('status', [1, 2, -1])->inRandomOrder()->get();
             if ($ets->contains('channel', $channel)) {
                 foreach ($this->channels as $ch) {
                     if (!$ets->contains('channel', $ch)) {
@@ -82,40 +82,60 @@ class ZhiboEncodesController extends BaseController
                 return back()->with(['error' => '没有可用的直播间咯']);
             }
             list($roomName, $roomId) = explode('##', $channel);
-            $rtmp_url = 'rtmp://stream.bo8.tv/8live/' . $roomId;//获取rtmp地址
-            $live_rtmp_url = 'rtmp://live.zhibo.tv/8live/' . $roomId;//播放rtmp地址
-            $live_m3u8_url = 'http://hls.live.zhibo.tv/8live/' . $roomId . '/index.m3u8';//播放m3u8地址
 
-            $fontsize = $request->input('fontsize', 18);
-            $watermark = $request->input('watermark', '');
-            $location = $request->input('location', 'top');
-            $has_logo = $request->input('logo');
-            $logo_position = $request->input('logo_position', '');
-            $logo_text = $request->input('logo_text', '');
-            $referer = $request->input('referer', '');
-            $header1 = $request->input('header1', '');
-            $header2 = $request->input('header2', '');
-            $header3 = $request->input('header3', '');
-            $size = $request->input('size', 'md');
-            $exec = $this->generateFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $size, $referer, $header1, $header2, $header3, $logo_position, $logo_text);
-            Log::info($exec);
-            shell_exec($exec);
-            $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');
-            if (!empty($pid) && is_numeric($pid) && $pid > 0) {
-                $et = new EncodeTask();
-                $et->name = $name;
-                $et->channel = $channel;
-                $et->input = $input;
-                $et->rtmp = $rtmp_url;
-                $et->exec = $exec;
-                $et->pid = $pid;
-                $et->out = $live_rtmp_url . "\n" . $live_m3u8_url;
-                $et->from = env('APP_NAME');
-                $et->to = 'Zhibo';
-                $et->status = 1;
-                $et->save();
+            $i = [2, 3, 6][array_rand([2, 3, 6])];
+            switch ($i) {
+                case 2: {
+                    $rtmp_url = 'rtmp://stream2.zhibo.tv/8live/' . $roomId;//获取rtmp地址
+                    $live_rtmp_url = 'rtmp://live2.zhibo.tv/8live/' . $roomId;//播放rtmp地址
+                    $live_m3u8_url = 'http://hls.live2.zhibo.tv/8live/' . $roomId . '/playlist.m3u8';//播放m3u8地址
+                    break;
+                }
+                case 3: {
+                    $rtmp_url = 'rtmp://stream3.zhibo.tv/8live/' . $roomId;//获取rtmp地址
+                    $live_rtmp_url = 'rtmp://live3.zhibo.tv/8live/' . $roomId;//播放rtmp地址
+                    $live_m3u8_url = 'http://hls.live3.zhibo.tv/8live/' . $roomId . '/playlist.m3u8';//播放m3u8地址
+                    break;
+                }
+                case 6: {
+                    $rtmp_url = 'rtmp://stream6.zhibo.tv/8live/' . $roomId;//获取rtmp地址
+                    $live_rtmp_url = 'rtmp://live6.zhibo.tv/8live/' . $roomId;//播放rtmp地址
+                    $live_m3u8_url = 'http://hls.live6.zhibo.tv/8live/' . $roomId . '.m3u8';//播放m3u8地址
+                    break;
+                }
             }
 
+            if (isset($rtmp_url) && isset($live_rtmp_url) && isset($live_m3u8_url)) {
+                $fontsize = $request->input('fontsize', 18);
+                $watermark = $request->input('watermark', '');
+                $location = $request->input('location', 'top');
+                $has_logo = $request->input('logo');
+                $logo_position = $request->input('logo_position', '');
+                $logo_text = $request->input('logo_text', '');
+                $referer = $request->input('referer', '');
+                $header1 = $request->input('header1', '');
+                $header2 = $request->input('header2', '');
+                $header3 = $request->input('header3', '');
+                $size = $request->input('size', 'md');
+                $exec = $this->generateFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $size, $referer, $header1, $header2, $header3, $logo_position, $logo_text);
+                Log::info($exec);
+                shell_exec($exec);
+                $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');
+                if (!empty($pid) && is_numeric($pid) && $pid > 0) {
+                    $et = new EncodeTask();
+                    $et->name = $name;
+                    $et->channel = $channel;
+                    $et->input = $input;
+                    $et->rtmp = $rtmp_url;
+                    $et->exec = $exec;
+                    $et->pid = $pid;
+                    $et->out = $live_rtmp_url . "\n" . $live_m3u8_url;
+                    $et->from = env('APP_NAME');
+                    $et->to = 'Zhibo';
+                    $et->status = 1;
+                    $et->save();
+                }
+            }
         }
         return back();
     }

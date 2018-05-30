@@ -11,9 +11,9 @@ class Controller extends BaseController
 {
 
     protected $sizes = [//视频输出分辨率
-        'md' => ['name' => '540p', 'w' => 900, 'h' => 540, 'factor' => 1.125],
-        'sd' => ['name' => '480p', 'w' => 800, 'h' => 480, 'factor' => 1],
         'ssd' => ['name' => '320p', 'w' => 600, 'h' => 320, 'factor' => 0.75],
+        'sd' => ['name' => '480p', 'w' => 800, 'h' => 480, 'factor' => 1],
+        'md' => ['name' => '540p', 'w' => 900, 'h' => 540, 'factor' => 1.125],
         'hd' => ['name' => '720p', 'w' => 1200, 'h' => 720, 'factor' => 1.5],
         'hhd' => ['name' => '1080p', 'w' => 1800, 'h' => 1080, 'factor' => 2.25],
     ];
@@ -46,7 +46,10 @@ class Controller extends BaseController
         View::share('banner_text', env('banner_text', '爱看球'));
         View::share('banner_color', env('banner_color', ''));
 //        $count = EncodeTask::query()->where('from', env('APP_NAME'))->where('status', '>=', 1)->count();
-        $count = EncodeTask::query()->where('created_at', '>', date_create('-3 hour'))->whereIn('status', [1, 2, -1])->count();
+        $count = EncodeTask::query()
+            ->where('created_at', '>', date_create('-24 hour'))
+            ->whereIn('status', [1, 2, -1])
+            ->count();
         View::share('banner_count', $count);
         if (env('APP_NAME') == 'good') {
             View::share('watermark', '足球专家微信：bet6879，篮球专家微信：bet8679a');
@@ -169,7 +172,7 @@ class Controller extends BaseController
             //随机水印
             $random_logo = '';
             if (!empty($this->random_logo)) {
-                $random_logo = 'drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $this->random_logo . '\':fontcolor=0xffffff:fontsize=' . $fontsize . ':x=mod(n\,5*w)-3*w:y=h/(1.3+mod(n/(5*w)\,4)/2),';
+                $random_logo = 'drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $this->random_logo . '\':fontcolor=0xffffff:fontsize=' . $fontsize . ':x=mod(3*n\,31*w)-16*w:y=h/(1.2+mod(3*n/(31*w)\,6)/1.5),';
             }
 
             if ($location == 'top') {
