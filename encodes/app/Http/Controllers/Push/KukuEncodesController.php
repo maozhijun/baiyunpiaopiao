@@ -49,7 +49,6 @@ class KukuEncodesController extends BaseController
 //            $this->channels[] = '酷酷直播8##11163338_11163338';
 //            $this->channels[] = '酷酷直播9##11163339_11163339';
 //        }
-        Redis::get('channel:9158:line');
     }
 
     public function index(Request $request)

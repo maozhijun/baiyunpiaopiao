@@ -35,8 +35,11 @@ class QXiuEncodesController extends BaseController
             $this->channels[] = '齐齐直播6##1525926';
             $this->channels[] = '齐齐直播7##1525927';
             $this->channels[] = '齐齐直播8##1525928';
-
         } elseif (env('APP_NAME') == 'leqiuba') {
+            $this->channels[] = '齐齐直播1##1525911';
+            $this->channels[] = '齐齐直播2##1525912';
+            $this->channels[] = '齐齐直播3##1525913';
+            $this->channels[] = '齐齐直播4##1525914';
         }
     }
 

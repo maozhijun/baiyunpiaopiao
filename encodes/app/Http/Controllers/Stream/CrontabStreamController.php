@@ -143,7 +143,7 @@ class CrontabStreamController extends BaseController
             } while (empty($pushUrl) && $count < 10);
 
             if (!empty($pushUrl)) {
-                $pc = PushChannle::query()->where(['platform' => '9158', 'channel' => $token])->first();
+                $pc = PushChannle::query()->where(['platform' => 'chushou', 'channel' => $token])->first();
                 if (empty($pc)) {
                     $pc = new PushChannle();
                     $pc->channel = $token;
