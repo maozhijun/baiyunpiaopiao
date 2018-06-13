@@ -159,19 +159,118 @@ class CrontabStreamController extends BaseController
         }
     }
 
+    public function getChangbaRooms()
+    {
+        $rooms = [];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://api.changbalive.com/api_room.php?ac=gethotrank&curuserid=3310830&channelsrc=appstore&version=2.1.0&token=T286eb57e154dffd&bless=0&macaddress=4044A747-5BF0-4465-A894-99E2FEBAC4C1&ismember=0&openudid=69a214bdb8e3628de54a8ac70a773a87943377ce&systemversion=11.4&device=iPhone8,1&broken=0&build=2.1.0.1&gender=2&secret=9b1d35c3ae");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate, br');
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36");
+        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+        $response = curl_exec($ch);
+        if ($error = curl_error($ch)) {
+            die($error);
+        }
+        curl_close($ch);
+//        dump($response);
+        $json = json_decode($response, true);
+//        dump($json);
+        if (!empty($json['result']) && !empty($json['result']['sessioninfos'])) {
+            $rooms = $json['result']['sessioninfos'];
+        }
+//        dump($rooms);
+        foreach ($rooms as $room) {
+//            dump($room);
+            $roomid = $room['anchorid'];
+            $flv = explode('?', $room['rtmp_url']['subscribe_url'])[0];
+            $push_rtmp = $room['rtmp_url']['publish_url'];
+            if (str_contains($push_rtmp, 'rtmp://wspush')) {
+                $m3u8 = str_replace('http://wspull', 'http://hwspull', $flv);
+                $m3u8 = str_replace('.flv', '/playlist.m3u8', $m3u8);
+                $pc = PushChannle::query()->where(['platform' => 'changba', 'channel' => $roomid])->first();
+                if (empty($pc)) {
+                    $pc = new PushChannle();
+                    $pc->channel = $roomid;
+                    $pc->platform = 'changba';
+                }
+                $pc->name = $roomid;
+                $pc->push_rtmp = $push_rtmp;
+                $pc->live_lines = $flv . "\n" . $m3u8;
+                $pc->status = -1;
+//                $pc->updated_at = date_create();
+                $pc->save();
+
+            }
+        }
+    }
+
+    public function testChangbaRooms()
+    {
+        $pcs = PushChannle::query()
+            ->where(['platform' => 'changba'])
+            ->where('status', -1)
+            ->orderBy('updated_at', 'asc')
+            ->take(20)
+            ->get();
+        foreach ($pcs as $pc) {
+            list($flv, $m3u8) = explode("\n", $pc->live_lines);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $flv);
+            curl_setopt($ch, CURLOPT_NOBODY, true);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1); // connect timeout
+            curl_setopt($ch, CURLOPT_TIMEOUT, 1); // curl timeout
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // curl timeout
+
+            $status = 0;
+            if (FALSE === curl_exec($ch)) {
+                dump('open ' . $flv . ' failed' . "\n");
+            } else {
+                $retcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                dump('HTTP return code=' . $retcode . "\n");
+                if ($retcode == 200) {
+                    $status = -1;
+                }
+            }
+            curl_close($ch);
+            $pc->status = $status;
+            $pc->updated_at = date_create();
+            $pc->save();
+        }
+    }
+
     public function test()
     {
-//        list($roomName, $roomId, $token) = explode('##', '老铁扣波666##10061563##3c4068b47d194772');
-//        $rtmp_json = $this->getRtmp($token);
-//        $fms_val = $rtmp_json['fms_val'];
-//        $rtmp_id = array_first(array_keys($rtmp_json['list']));
-//        $rtmp_url = array_first(array_values($rtmp_json['list']));
-//        if ($this->startLive($token, $fms_val, $rtmp_id)) {//开播成功
-//            $flvUrl = $this->getFlv($roomId);
-//            $m3u8Url = $this->getM3u8($roomId);
-//            dump($rtmp_url);
-//            dump($flvUrl);
-//            dump($m3u8Url);
-//        }
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://mbl.56.com/play/v2/applyShow.ios?roomId=592044434");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate, br');
+        curl_setopt($ch, CURLOPT_USERAGENT, "zhibo/5.8.1 (iPhone; iOS 11.4; Scale/2.00)");
+        curl_setopt($ch, CURLOPT_COOKIE, "member_id=qq-109084804%4056.com; pass_hex=004073e6e98812e82cb024e8699a23038dc0ec29; qfInfo=%7B%22typePatriarch%22%3A%22%22%2C%22qfLogin%22%3A1%7D");
+        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+        $response = curl_exec($ch);
+//        dump($response);
+//        curl_setopt($ch, CURLOPT_URL, "https://mbl.56.com/play/v1/stopShow.ios?roomId=592044434");
+        curl_exec($ch);
+        if ($error = curl_error($ch)) {
+            die($error);
+        }
+        curl_close($ch);
+        $json = json_decode($response, true);
+        if (isset($json['message']['pushUrl'])) {
+            //https://hls-v-ngb.qf.56.com/live/592044434_1528710076092/playlist.m3u8
+            //https://v-ngb.qf.56.com/live/592044434_1528710076092.flv
+            $pushUrl = $json['message']['pushUrl'];
+            dump($pushUrl);
+            $m3u8Url = str_replace('rtmp://up-ngb', 'https://hls-v-ngb', explode('?', $pushUrl)[0]) . '/playlist.m3u8';
+            dump($m3u8Url);
+            $flvUrl = str_replace('rtmp://up-ngb', 'https://v-ngb', explode('?', $pushUrl)[0]) . '.flv';
+            dump($flvUrl);
+//            return $json['message']['pushUrl'];
+        } else {
+            return null;
+        }
     }
 }

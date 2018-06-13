@@ -61,6 +61,18 @@ class CustomEncodesController extends BaseController
             $maobos[] = 'maobo-ali##300223334';
             $this->channels['猫播-阿里'] = $maobos;
 
+            $huoxings[] = 'huoxing-ks##29589011';
+            $huoxings[] = 'huoxing-ks##29589022';
+            $huoxings[] = 'huoxing-ks##29589033';
+            $huoxings[] = 'huoxing-ks##29589044';
+            $this->channels['火星-金山'] = $huoxings;
+
+            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b086aa';
+            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b086bb';
+            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b086cc';
+            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b086dd';
+            $this->channels['艾米-网速'] = $imis;
+
             $kdfs[] = 'kdf-ws##wCOXzowoOsmGe_11125_1486629432113_111';
             $kdfs[] = 'kdf-ws##wCOXzowoOsmGe_11125_1486629432113_222';
             $kdfs[] = 'kdf-ws##wCOXzowoOsmGe_11125_1486629432113_333';
@@ -68,7 +80,42 @@ class CustomEncodesController extends BaseController
             $this->channels['看东方-网宿'] = $kdfs;
 
         } elseif (env('APP_NAME') == 'aikq1') {
-            $rens[] = 'renren##201804241141222056111';
+            $nagezanalis[] = 'yuntu-ali##9bfd6634-9ea6-4081-95e1-2ccee184d7aa';
+            $nagezanalis[] = 'yuntu-ali##9bfd6634-9ea6-4081-95e1-2ccee184d7bb';
+            $nagezanalis[] = 'yuntu-ali##9bfd6634-9ea6-4081-95e1-2ccee184d7cc';
+            $nagezanalis[] = 'yuntu-ali##9bfd6634-9ea6-4081-95e1-2ccee184d7dd';
+            $this->channels['云图-阿里'] = $nagezanalis;
+
+            $nagezanwss[] = 'yuntu-ws##9bfd6634-9ea6-4081-95e1-2ccee184c7aa';
+            $nagezanwss[] = 'yuntu-ws##9bfd6634-9ea6-4081-95e1-2ccee184c7bb';
+            $nagezanwss[] = 'yuntu-ws##9bfd6634-9ea6-4081-95e1-2ccee184c7cc';
+            $nagezanwss[] = 'yuntu-ws##9bfd6634-9ea6-4081-95e1-2ccee184c7dd';
+            $this->channels['云图-网宿'] = $nagezanwss;
+
+            $maobos[] = 'maobo-ali##300213331';
+            $maobos[] = 'maobo-ali##300213332';
+            $maobos[] = 'maobo-ali##300213333';
+            $maobos[] = 'maobo-ali##300213334';
+            $this->channels['猫播-阿里'] = $maobos;
+
+            $huoxings[] = 'huoxing-ks##29589111';
+            $huoxings[] = 'huoxing-ks##29589222';
+            $huoxings[] = 'huoxing-ks##29589333';
+            $huoxings[] = 'huoxing-ks##29589444';
+            $this->channels['火星-金山'] = $huoxings;
+
+            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b088aa';
+            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b088bb';
+            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b088cc';
+            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b088dd';
+            $this->channels['艾米-网速'] = $imis;
+
+            $kdfs[] = 'kdf-ws##wCOXzowoOsmGe_11125_1486629432112_111';
+            $kdfs[] = 'kdf-ws##wCOXzowoOsmGe_11125_1486629432112_222';
+            $kdfs[] = 'kdf-ws##wCOXzowoOsmGe_11125_1486629432112_333';
+            $kdfs[] = 'kdf-ws##wCOXzowoOsmGe_11125_1486629432112_444';
+            $this->channels['看东方-网宿'] = $kdfs;$rens[] = 'renren##201804241141222056111';
+
             $rens[] = 'renren##201804241141222056222';
             $rens[] = 'renren##201804241141222056333';
             $rens[] = 'renren##201804241141222056444';
@@ -91,30 +138,6 @@ class CustomEncodesController extends BaseController
             $memes[] = 'meme-ali##40290633';
             $memes[] = 'meme-ali##40290644';
             $this->channels['么么-阿里'] = $memes;
-
-            $nagezanalis[] = 'yuntu-ali##9bfd6634-9ea6-4081-95e1-2ccee184d7aa';
-            $nagezanalis[] = 'yuntu-ali##9bfd6634-9ea6-4081-95e1-2ccee184d7bb';
-            $nagezanalis[] = 'yuntu-ali##9bfd6634-9ea6-4081-95e1-2ccee184d7cc';
-            $nagezanalis[] = 'yuntu-ali##9bfd6634-9ea6-4081-95e1-2ccee184d7dd';
-            $this->channels['云图-阿里'] = $nagezanalis;
-
-            $nagezanwss[] = 'yuntu-ws##9bfd6634-9ea6-4081-95e1-2ccee184c7aa';
-            $nagezanwss[] = 'yuntu-ws##9bfd6634-9ea6-4081-95e1-2ccee184c7bb';
-            $nagezanwss[] = 'yuntu-ws##9bfd6634-9ea6-4081-95e1-2ccee184c7cc';
-            $nagezanwss[] = 'yuntu-ws##9bfd6634-9ea6-4081-95e1-2ccee184c7dd';
-            $this->channels['云图-网宿'] = $nagezanwss;
-
-            $maobos[] = 'maobo-ali##300213331';
-            $maobos[] = 'maobo-ali##300213332';
-            $maobos[] = 'maobo-ali##300213333';
-            $maobos[] = 'maobo-ali##300213334';
-            $this->channels['猫播-阿里'] = $maobos;
-
-            $kdfs[] = 'kdf-ws##wCOXzowoOsmGe_11125_1486629432112_111';
-            $kdfs[] = 'kdf-ws##wCOXzowoOsmGe_11125_1486629432112_222';
-            $kdfs[] = 'kdf-ws##wCOXzowoOsmGe_11125_1486629432112_333';
-            $kdfs[] = 'kdf-ws##wCOXzowoOsmGe_11125_1486629432112_444';
-            $this->channels['看东方-网宿'] = $kdfs;
         } elseif (env('APP_NAME') == 'leqiuba') {
 
         }
@@ -194,6 +217,18 @@ class CustomEncodesController extends BaseController
                     $rtmp_url = 'rtmp://push.maobotv.com/maozhua/' . $roomId;//获取rtmp地址
                     $live_rtmp_url = 'http://flv.maobotv.com/maozhua/' . $roomId . '.flv';//播放rtmp地址
                     $live_m3u8_url = 'http://hls.maobotv.com/maozhua/' . $roomId . '/index.m3u8';//播放m3u8地址
+                    break;
+                }
+                case 'huoxing-ks': {
+                    $rtmp_url = 'rtmp://kspush01.live.changbalive.com/live/' . $roomId;//获取rtmp地址
+                    $live_rtmp_url = 'http://hdlkspull01.live.changbalive.com/live/' . $roomId . '.flv';//播放rtmp地址
+                    $live_m3u8_url = 'http://hkspull01.live.changbalive.com/live/' . $roomId . '/index.m3u8';//播放m3u8地址
+                    break;
+                }
+                case 'imi-ws': {
+                    $rtmp_url = 'rtmp://wsmu.imifun.com/s2/' . $roomId;//获取rtmp地址
+                    $live_rtmp_url = '';//播放rtmp地址
+                    $live_m3u8_url = 'http://wsmd.imifun.com/s2/' . $roomId . '/playlist.m3u8';//播放m3u8地址
                     break;
                 }
                 case 'kdf-ws': {

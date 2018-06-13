@@ -75,7 +75,7 @@ class QXiuEncodesController extends BaseController
             list($roomName, $roomId) = explode('##', $channel);
             $rtmp_url = 'rtmp://up.rtmp.qxiu.com/live/' . $roomId;//获取rtmp地址
             $live_flv_url = 'http://down.hdl.qxiu.com/live/' . explode('?', $roomId)[0] . '.flv';//flv地址
-            $live_rtmp_url = 'rtmp://down.rtmp.qxiu.com/live/' . explode('?', $roomId)[0];//rtmp地址
+            $live_rtmp_url = 'rtmp://down.rtmp.qxiu.com/live/251314' . explode('?', $roomId)[0];//rtmp地址
             $live_m3u8_url = 'http://down.hls.qxiu.com/live/' . explode('?', $roomId)[0] . '/index.m3u8';//m3u8地址
 
             $fontsize = $request->input('fontsize', 18);

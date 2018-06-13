@@ -152,7 +152,14 @@ Route::group(["namespace" => "Stream"], function () {
     Route::get("/crontab/stream/9158/", "CrontabStreamController@get9158Rooms");
     Route::get("/crontab/stream/9158/test/", "CrontabStreamController@test9158Rooms");
 
+    Route::get("/crontab/stream/changba/", "CrontabStreamController@getChangbaRooms");
+    Route::get("/crontab/stream/changba/test/", "CrontabStreamController@testChangbaRooms");
+
     Route::get("/crontab/stream/chushou/", "CrontabStreamController@getChushouRooms");
+
+    Route::get("/crontab/stream/test/", "CrontabStreamController@test");
+
+    Route::get("/obs/stream/{name}", "OBSPushStreamController@index");
 });
 
 //定时任务

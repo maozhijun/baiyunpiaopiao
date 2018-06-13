@@ -70,7 +70,7 @@ class BaiTVEncodesController extends BaseController
     private function getLiveChannel()
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://bestvapi.bestv.cn/video/tv_list?app=ios&cid=3&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkZXZpY2VJZCI6ImlQaG9uZTgsMV8wX0VBMTcwRTY0LTRBMEMtNDM3Ny04NDc0LUU5RTFGQThBQTM0RiIsInRpbWVzdGFtcCI6MTUyMzM0MjkxNSwiY2hhbm5lbElkIjoiY2QxNTE2OTUtYThjYi00MDhkLWExYjAtYWI2MTU1NmNlNWE1In0.wdqdIRBAyfk2532OA7m4TGX8IoR08HrbaVU8fx8LKHs');
+        curl_setopt($ch, CURLOPT_URL, 'https://bestvapi.bestv.cn/video/tv_list?app=ios&cid=3&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkZXZpY2VJZCI6ImlQaG9uZTgsMV8wX0VBMTcwRTY0LTRBMEMtNDM3Ny04NDc0LUU5RTFGQThBQTM0RiIsInRpbWVzdGFtcCI6MTUyNzg0NTg0MiwiY2hhbm5lbElkIjoiY2QxNTE2OTUtYThjYi00MDhkLWExYjAtYWI2MTU1NmNlNWE1In0.rU0L402dJeWTtL7k4n4lXokPXFKKdS_rnvcErgtdT70');
         curl_setopt($ch, CURLOPT_COOKIE, 'PHPSESSID=m74odlt972oksvpfjphrbd25h3');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //跳过证书检查
@@ -102,7 +102,7 @@ class BaiTVEncodesController extends BaseController
     private function getLiveLines($channelID)
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://bestvapi.bestv.cn/video/live_rate?app=ios&tid=' . $channelID . '&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkZXZpY2VJZCI6ImlQaG9uZTgsMV8wX0VBMTcwRTY0LTRBMEMtNDM3Ny04NDc0LUU5RTFGQThBQTM0RiIsInRpbWVzdGFtcCI6MTUyMzM0MjkxNSwiY2hhbm5lbElkIjoiY2QxNTE2OTUtYThjYi00MDhkLWExYjAtYWI2MTU1NmNlNWE1In0.wdqdIRBAyfk2532OA7m4TGX8IoR08HrbaVU8fx8LKHs');
+        curl_setopt($ch, CURLOPT_URL, 'https://bestvapi.bestv.cn/video/live_rate?app=ios&tid=' . $channelID . '&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkZXZpY2VJZCI6ImlQaG9uZTgsMV8wX0VBMTcwRTY0LTRBMEMtNDM3Ny04NDc0LUU5RTFGQThBQTM0RiIsInRpbWVzdGFtcCI6MTUyNzg0NTg0MiwiY2hhbm5lbElkIjoiY2QxNTE2OTUtYThjYi00MDhkLWExYjAtYWI2MTU1NmNlNWE1In0.rU0L402dJeWTtL7k4n4lXokPXFKKdS_rnvcErgtdT70&fdn_code=se=weixin&ct=3&d=3&_fk=0&');
         curl_setopt($ch, CURLOPT_COOKIE, 'PHPSESSID=m74odlt972oksvpfjphrbd25h3');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         if (env('APP_ENV') == 'production') {//
@@ -130,7 +130,7 @@ class BaiTVEncodesController extends BaseController
             }
             return $data;
         } else {
-            return null;
+            return ['live' => $json['error']];
         }
     }
 

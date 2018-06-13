@@ -22,13 +22,13 @@ class PushStreamController extends BaseController
 //            $longzhus[] = 'long##18249335694?';
 //            $longzhus[] = 'long##18346335974?';
 //            $longzhus[] = 'long##17121073689?';
-            $longzhus[] = 'long##17169085461?767103cc093871c01344898faafd56b18d207e81ae9efd7ccfa1356dc8ef528ec48325fd416c5d9e6421bdded4c2b7f29f47ba9d769ed606';
-            $longzhus[] = 'long##17121073721?063d41cd55a3f8a5c989e7cab5d0e5bc21052154850184809cfd74123667b9e84ea0c077bbcb667de84585a4e2c9410cb8ba8ddc27291f30';
-            $longzhus[] = 'long##17172850051?b4741b90affbbb195d625a79d87b3cbff5c922ba9faae1c820afc418777cb9e3c0bcad1e4329056b949acea4556a9aa0616f0e09354909dd';
-            $longzhus[] = 'long##17172850057?511ec45902a8b983e56825bbf565537131272ca3184e3329755fe5b14300b6629b9dc413ac1d3ebcb2162e254b5a820475cb5e7f8ac69031';
-            $longzhus[] = 'long##17177260095?cd5545ff9e71f2da40b22572472a90813c12451ecf4dc41ff9c2688935d9d844ec6c2ba5ea6bb8506e512406b3ff2dadd23ff33e265552a8';
-            $longzhus[] = 'long##17177260086?2914a2e92753683983bd50c2a52513eafcd1249eb427bf02501197ebf9c7297c6905566b597c4fbc6132bcf23312b0fce1d3164fb38460bf';
-            $this->channels['龙珠'] = $longzhus;
+//            $longzhus[] = 'long##17169085461?767103cc093871c01344898faafd56b18d207e81ae9efd7ccfa1356dc8ef528ec48325fd416c5d9e6421bdded4c2b7f29f47ba9d769ed606';
+//            $longzhus[] = 'long##17121073721?063d41cd55a3f8a5c989e7cab5d0e5bc21052154850184809cfd74123667b9e84ea0c077bbcb667de84585a4e2c9410cb8ba8ddc27291f30';
+//            $longzhus[] = 'long##17172850051?b4741b90affbbb195d625a79d87b3cbff5c922ba9faae1c820afc418777cb9e3c0bcad1e4329056b949acea4556a9aa0616f0e09354909dd';
+//            $longzhus[] = 'long##17172850057?511ec45902a8b983e56825bbf565537131272ca3184e3329755fe5b14300b6629b9dc413ac1d3ebcb2162e254b5a820475cb5e7f8ac69031';
+//            $longzhus[] = 'long##17177260095?cd5545ff9e71f2da40b22572472a90813c12451ecf4dc41ff9c2688935d9d844ec6c2ba5ea6bb8506e512406b3ff2dadd23ff33e265552a8';
+//            $longzhus[] = 'long##17177260086?2914a2e92753683983bd50c2a52513eafcd1249eb427bf02501197ebf9c7297c6905566b597c4fbc6132bcf23312b0fce1d3164fb38460bf';
+//            $this->channels['龙珠'] = $longzhus;
 
 //            $xiaomis[] = 'mi##cid201804241141222051111';
 //            $xiaomis[] = 'mi##cid201804241141222052222';
@@ -36,22 +36,44 @@ class PushStreamController extends BaseController
 //            $xiaomis[] = 'mi##cid201804241141222054444';
 //            $this->channels['小米'] = $xiaomis;
 
-            $huajiaos[] = 'hua##_LC_AL1_5832731615253162591491111';
-            $huajiaos[] = 'hua##_LC_AL1_5832731615253162591492222';
-            $huajiaos[] = 'hua##_LC_AL1_5832731615253162591493333';
-            $huajiaos[] = 'hua##_LC_AL1_5832731615253162591494444';
-            $this->channels['花椒'] = $huajiaos;
+//            $huajiaos[] = 'hua##_LC_AL1_5832731615253162591491111';
+//            $huajiaos[] = 'hua##_LC_AL1_5832731615253162591492222';
+//            $huajiaos[] = 'hua##_LC_AL1_5832731615253162591493333';
+//            $huajiaos[] = 'hua##_LC_AL1_5832731615253162591494444';
+//            $this->channels['花椒'] = $huajiaos;
+
+            $memes[] = 'meme-ali##40290111';
+            $memes[] = 'meme-ali##40290222';
+            $memes[] = 'meme-ali##40290333';
+            $memes[] = 'meme-ali##40290444';
+            $this->channels['么么-阿里'] = $memes;
+
+            $pcs = PushChannle::query()
+                ->where(['platform' => 'changba'])
+                ->where('status', 0)
+                ->orderBy('updated_at', 'desc')
+                ->take(20)
+                ->get();
+            $changbas = [];
+            $i = 0;
+            foreach ($pcs as $pc) {
+                if ($i > 10 && $i < 15) {
+                    $changbas[] = 'changba##' . $pc->id;
+                }
+                $i++;
+            }
+            $this->channels['唱吧-网速'] = $changbas;
 
             $pcs = PushChannle::query()
                 ->where(['platform' => '9158'])
                 ->where('status', 0)
                 ->orderBy('updated_at', 'desc')
-                ->take(10)
+                ->take(20)
                 ->get();
             $_9158s = [];
             $i = 0;
             foreach ($pcs as $pc) {
-                if ($i > 5 && $i < 10) {
+                if ($i > 10 && $i < 15) {
                     $_9158s[] = '9158##' . $pc->id;
                 }
                 $i++;
@@ -68,7 +90,7 @@ class PushStreamController extends BaseController
             foreach ($pcs as $pc) {
                 $chushous[] = 'chushou##' . $pc->id;
             }
-            $this->channels['chushou'] = $chushous;
+            $this->channels['触手'] = $chushous;
 
         } elseif (env('APP_NAME') == 'aikq1') {
 
@@ -149,6 +171,10 @@ class PushStreamController extends BaseController
                 $push_rtmp = 'rtmp://ps1.live.huajiao.com/live_huajiao_v2/' . $key;//获取rtmp地址
                 $live_lines = 'http://pl1.live.huajiao.com/live_huajiao_v2/' . $key . '.flv';//flv地址
                 $live_lines .= "\n" . 'http://pl1-hls.live.huajiao.com/live_huajiao_v2/' . $key . '/index.m3u8';//m3u8地址
+            } elseif ($platform == 'meme-ali') {
+                $push_rtmp = 'rtmp://video-center.alivecdn.com/memeyule/' . $key . '?vhost=aliyun.memeyule.com';//获取rtmp地址
+                $live_lines = 'http://aliyun.memeyule.com/memeyule/' . $key . '.flv';//播放rtmp地址
+                $live_lines .= 'http://aliyun.memeyule.com/memeyule/' . $key . '.m3u8';//播放m3u8地址
             } elseif ($platform == '9158') {
                 $pc = PushChannle::query()->find($key);
                 if (isset($pc)) {
@@ -156,6 +182,12 @@ class PushStreamController extends BaseController
                     $pc->save();
                 }
             } elseif ($platform == 'chushou') {
+                $pc = PushChannle::query()->find($key);
+                if (isset($pc)) {
+                    $pc->status = 1;
+                    $pc->save();
+                }
+            } elseif ($platform == 'changba') {
                 $pc = PushChannle::query()->find($key);
                 if (isset($pc)) {
                     $pc->status = 1;
