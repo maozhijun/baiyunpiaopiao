@@ -73,10 +73,10 @@ class QXiuEncodesController extends BaseController
                 return back()->with(['error' => '没有可用的直播间咯']);
             }
             list($roomName, $roomId) = explode('##', $channel);
-            $rtmp_url = 'rtmp://up.rtmp.qxiu.com/live/' . $roomId;//获取rtmp地址
-            $live_flv_url = 'http://down.hdl.qxiu.com/live/' . explode('?', $roomId)[0] . '.flv';//flv地址
-            $live_rtmp_url = 'rtmp://down.rtmp.qxiu.com/live/251314' . explode('?', $roomId)[0];//rtmp地址
-            $live_m3u8_url = 'http://down.hls.qxiu.com/live/' . explode('?', $roomId)[0] . '/index.m3u8';//m3u8地址
+            $rtmp_url = 'rtmp://publish-ws.qxiu.com/qxiu/' . $roomId;//获取rtmp地址
+            $live_flv_url = 'http://hdl-ws.qxiu.com/qxiu/' . explode('?', $roomId)[0] . '.flv';//flv地址
+            $live_rtmp_url = 'rtmp://rtmp-ws.qxiu.com/qxiu/251314' . explode('?', $roomId)[0];//rtmp地址
+            $live_m3u8_url = 'http://hls-ws.qxiu.com/qxiu/' . explode('?', $roomId)[0] . '/playlist.m3u8';//m3u8地址
 
             $fontsize = $request->input('fontsize', 18);
             $watermark = $request->input('watermark', '');

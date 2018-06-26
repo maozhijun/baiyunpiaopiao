@@ -19,11 +19,23 @@ class CustomEncodesController extends BaseController
         if (env('APP_NAME') == 'good') {
 
         } elseif (env('APP_NAME') == 'aikq') {
-            $rens[] = 'renren##201804241141222057111';
-            $rens[] = 'renren##201804241141222057222';
-            $rens[] = 'renren##201804241141222057333';
-            $rens[] = 'renren##201804241141222057444';
-            $this->channels['人人-金山'] = $rens;
+//            $rens[] = 'renren##201804241141222057111';
+//            $rens[] = 'renren##201804241141222057222';
+//            $rens[] = 'renren##201804241141222057333';
+//            $rens[] = 'renren##201804241141222057444';
+//            $this->channels['人人-金山'] = $rens;
+
+            $bohes[] = 'bohe-ws##34b99596dbe84c3295d33b7f7f481a5b';
+            $bohes[] = 'bohe-ws##6bce78d83b61453881b09f0a3e89a409';
+            $bohes[] = 'bohe-ws##d796b0966ec742248e3950eff78d5955';
+            $bohes[] = 'bohe-ws##5a75b2c34a964ed5bbbd5399be5ccd7a';
+            $this->channels['薄荷-网易'] = $bohes;
+
+            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bcaf11';
+            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bcaf22';
+            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bcaf33';
+            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bcaf44';
+            $this->channels['上鱼-网宿'] = $shangyuers;
 
             $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008dvaa';
             $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008dvbb';
@@ -31,17 +43,17 @@ class CustomEncodesController extends BaseController
             $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008dvdd';
             $this->channels['我乐-帝联'] = $dfms;
 
-            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008dvaa';
-            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008dvbb';
-            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008dvcc';
-            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008dvdd';
-            $this->channels['我乐-网宿'] = $wfms;
+//            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008dvaa';
+//            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008dvbb';
+//            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008dvcc';
+//            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008dvdd';
+//            $this->channels['我乐-网宿'] = $wfms;
 
-            $memes[] = 'meme-ali##40290811';
-            $memes[] = 'meme-ali##40290822';
-            $memes[] = 'meme-ali##40290833';
-            $memes[] = 'meme-ali##40290844';
-            $this->channels['么么-阿里'] = $memes;
+//            $memes[] = 'meme-ali##40290811';
+//            $memes[] = 'meme-ali##40290822';
+//            $memes[] = 'meme-ali##40290833';
+//            $memes[] = 'meme-ali##40290844';
+//            $this->channels['么么-阿里'] = $memes;
 
             $nagezanalis[] = 'yuntu-ali##9bfd6634-9ea6-4081-95e1-2ccee184f8aa';
             $nagezanalis[] = 'yuntu-ali##9bfd6634-9ea6-4081-95e1-2ccee184f8bb';
@@ -116,10 +128,23 @@ class CustomEncodesController extends BaseController
             $kdfs[] = 'kdf-ws##wCOXzowoOsmGe_11125_1486629432112_444';
             $this->channels['看东方-网宿'] = $kdfs;$rens[] = 'renren##201804241141222056111';
 
-            $rens[] = 'renren##201804241141222056222';
-            $rens[] = 'renren##201804241141222056333';
-            $rens[] = 'renren##201804241141222056444';
-            $this->channels['人人-金山'] = $rens;
+//            $rens[] = 'renren##201804241141222056111';
+//            $rens[] = 'renren##201804241141222056222';
+//            $rens[] = 'renren##201804241141222056333';
+//            $rens[] = 'renren##201804241141222056444';
+//            $this->channels['人人-金山'] = $rens;
+
+            $bohes[] = 'bohe-ws##735f725292624dfd98d117664bb02460';
+            $bohes[] = 'bohe-ws##3c53b37b83f042c6a96656a11dd496cf';
+            $bohes[] = 'bohe-ws##e1956de55d1e44c4bd2552216b11edc0';
+            $bohes[] = 'bohe-ws##bebf1bdf215e493cb4877832aa2c2c64';
+            $this->channels['薄荷-网易'] = $bohes;
+
+            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bcaf55';
+            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bcaf66';
+            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bcaf77';
+            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bcaf88';
+            $this->channels['上鱼-网宿'] = $shangyuers;
 
             $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008ddaa';
             $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008ddbb';
@@ -127,17 +152,17 @@ class CustomEncodesController extends BaseController
             $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008dddd';
             $this->channels['我乐-帝联'] = $dfms;
 
-            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008dcaa';
-            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008dcbb';
-            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008dccc';
-            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008dcdd';
-            $this->channels['我乐-网宿'] = $wfms;
+//            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008dcaa';
+//            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008dcbb';
+//            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008dccc';
+//            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008dcdd';
+//            $this->channels['我乐-网宿'] = $wfms;
 
-            $memes[] = 'meme-ali##40290611';
-            $memes[] = 'meme-ali##40290622';
-            $memes[] = 'meme-ali##40290633';
-            $memes[] = 'meme-ali##40290644';
-            $this->channels['么么-阿里'] = $memes;
+//            $memes[] = 'meme-ali##40290611';
+//            $memes[] = 'meme-ali##40290622';
+//            $memes[] = 'meme-ali##40290633';
+//            $memes[] = 'meme-ali##40290644';
+//            $this->channels['么么-阿里'] = $memes;
         } elseif (env('APP_NAME') == 'leqiuba') {
 
         }
@@ -235,6 +260,18 @@ class CustomEncodesController extends BaseController
                     $rtmp_url = 'rtmp://kdf.wslive.cibnlive.com/live/' . $roomId;//获取rtmp地址
                     $live_rtmp_url = 'http://kdf.wsflv.cibnlive.com/live/' . $roomId . '.flv';//播放rtmp地址
                     $live_m3u8_url = 'http://kdf.wshls.cibnlive.com/live/' . $roomId . '/playlist.m3u8';//播放m3u8地址
+                    break;
+                }
+                case 'bohe-ws': {
+                    $rtmp_url = 'rtmp://pbohetec1.live.126.net/live/' . $roomId;//获取rtmp地址
+                    $live_rtmp_url = 'http://flvbohetec1.live.126.net/live/' . $roomId . '.flv';//播放rtmp地址
+                    $live_m3u8_url = 'http://pullhlsbohetec1.live.126.net/live/' . $roomId . '/playlist.m3u8';//播放m3u8地址
+                    break;
+                }
+                case 'shangyuer-ws': {
+                    $rtmp_url = 'rtmp://push.live.shangyuer.com/vod/' . $roomId;//获取rtmp地址
+                    $live_rtmp_url = 'http://pull.live.shangyuer.com/vod/' . $roomId . '.flv';//播放rtmp地址
+                    $live_m3u8_url = 'http://pull-hls.live.shangyuer.com/vod/' . $roomId . '/playlist.m3u8';//播放m3u8地址
                     break;
                 }
             }

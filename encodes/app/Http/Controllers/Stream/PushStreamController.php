@@ -42,11 +42,11 @@ class PushStreamController extends BaseController
 //            $huajiaos[] = 'hua##_LC_AL1_5832731615253162591494444';
 //            $this->channels['花椒'] = $huajiaos;
 
-            $memes[] = 'meme-ali##40290111';
-            $memes[] = 'meme-ali##40290222';
-            $memes[] = 'meme-ali##40290333';
-            $memes[] = 'meme-ali##40290444';
-            $this->channels['么么-阿里'] = $memes;
+//            $memes[] = 'meme-ali##40290111';
+//            $memes[] = 'meme-ali##40290222';
+//            $memes[] = 'meme-ali##40290333';
+//            $memes[] = 'meme-ali##40290444';
+//            $this->channels['么么-阿里'] = $memes;
 
             $pcs = PushChannle::query()
                 ->where(['platform' => 'changba'])
@@ -64,33 +64,33 @@ class PushStreamController extends BaseController
             }
             $this->channels['唱吧-网速'] = $changbas;
 
-            $pcs = PushChannle::query()
-                ->where(['platform' => '9158'])
-                ->where('status', 0)
-                ->orderBy('updated_at', 'desc')
-                ->take(20)
-                ->get();
-            $_9158s = [];
-            $i = 0;
-            foreach ($pcs as $pc) {
-                if ($i > 10 && $i < 15) {
-                    $_9158s[] = '9158##' . $pc->id;
-                }
-                $i++;
-            }
-            $this->channels['9158'] = $_9158s;
-
-            $pcs = PushChannle::query()
-                ->where(['platform' => 'chushou'])
-                ->where('status', 0)
-                ->orderBy('updated_at', 'desc')
-                ->take(4)
-                ->get();
-            $chushous = [];
-            foreach ($pcs as $pc) {
-                $chushous[] = 'chushou##' . $pc->id;
-            }
-            $this->channels['触手'] = $chushous;
+//            $pcs = PushChannle::query()
+//                ->where(['platform' => '9158'])
+//                ->where('status', 0)
+//                ->orderBy('updated_at', 'desc')
+//                ->take(20)
+//                ->get();
+//            $_9158s = [];
+//            $i = 0;
+//            foreach ($pcs as $pc) {
+//                if ($i > 10 && $i < 15) {
+//                    $_9158s[] = '9158##' . $pc->id;
+//                }
+//                $i++;
+//            }
+//            $this->channels['9158'] = $_9158s;
+//
+//            $pcs = PushChannle::query()
+//                ->where(['platform' => 'chushou'])
+//                ->where('status', 0)
+//                ->orderBy('updated_at', 'desc')
+//                ->take(4)
+//                ->get();
+//            $chushous = [];
+//            foreach ($pcs as $pc) {
+//                $chushous[] = 'chushou##' . $pc->id;
+//            }
+//            $this->channels['触手'] = $chushous;
 
         } elseif (env('APP_NAME') == 'aikq1') {
 
