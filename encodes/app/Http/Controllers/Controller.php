@@ -125,6 +125,10 @@ class Controller extends BaseController
             if (str_contains($input_uri, '5club.cctv.cn')) {
                 $execs[] = '-user_agent "cctv_app_phone_cctv5"';
                 $execs[] = '-headers "UID:4044A747-5BF0-4465-A894-99E2FEBAC4C1"';
+            } elseif (str_contains($input_uri, 'http://cctv5')) {
+                $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
+                $execs[] = '-headers "Referer: http://tv.cctv.com/live/cctv5/"';
+                $execs[] = '-headers "X-Requested-With:ShockwaveFlash/28.0.0.126"';
             } elseif (str_contains($input_uri, 'zijian.hls.video.qq.com')) {
                 $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
                 $execs[] = '-headers "Referer: http://sports.qq.com/kbsweb/"';

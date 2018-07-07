@@ -159,6 +159,8 @@ Route::group(["namespace" => "Stream"], function () {
 
     Route::get("/crontab/stream/hotsoon/", "CrontabStreamController@hotsoon");
     Route::get("/crontab/stream/qianfan/", "CrontabStreamController@qianfan");
+    Route::get("/crontab/stream/weibo/", "CrontabStreamController@weibo");
+    Route::get("/crontab/stream/inke/", "CrontabStreamController@inke");
 
     Route::get("/crontab/stream/test/", "CrontabStreamController@test");
 

@@ -18,32 +18,32 @@ class HuajiaoEncodesController extends BaseController
         if (env('APP_NAME') == 'good') {
 
         } elseif (env('APP_NAME') == 'aikq') {
-            $this->channels[] = '花椒直播1##_LC_AL1_5832731615253162591492831';
-            $this->channels[] = '花椒直播2##_LC_AL1_5832731615253162591492832';
-            $this->channels[] = '花椒直播3##_LC_AL1_5832731615253162591492833';
-            $this->channels[] = '花椒直播4##_LC_AL1_5832731615253162591492834';
-            $this->channels[] = '花椒直播5##_LC_AL1_5832731615253162591492835';
-            $this->channels[] = '花椒直播6##_LC_AL1_5832731615253162591492836';
-            $this->channels[] = '花椒直播7##_LC_AL1_5832731615253162591492837';
-            $this->channels[] = '花椒直播8##_LC_AL1_5832731615253162591492838';
+            $this->channels[] = '花椒直播1##_LC_QH2_non_13165978915306825521604211_OX';
+            $this->channels[] = '花椒直播2##_LC_QH2_non_13165978915306825521604222_OX';
+            $this->channels[] = '花椒直播3##_LC_QH2_non_13165978915306825521604233_OX';
+            $this->channels[] = '花椒直播4##_LC_QH2_non_13165978915306825521604244_OX';
+            $this->channels[] = '花椒直播5##_LC_QH2_non_13165978915306825521604255_OX';
+            $this->channels[] = '花椒直播6##_LC_QH2_non_13165978915306825521604266_OX';
+            $this->channels[] = '花椒直播7##_LC_QH2_non_13165978915306825521604277_OX';
+            $this->channels[] = '花椒直播8##_LC_QH2_non_13165978915306825521604288_OX';
         } elseif (env('APP_NAME') == 'aikq1') {
-            $this->channels[] = '花椒直播1##_LC_AL1_5822731615253162591492831';
-            $this->channels[] = '花椒直播2##_LC_AL1_5822731615253162591492832';
-            $this->channels[] = '花椒直播3##_LC_AL1_5822731615253162591492833';
-            $this->channels[] = '花椒直播4##_LC_AL1_5822731615253162591492834';
-            $this->channels[] = '花椒直播5##_LC_AL1_5822731615253162591492835';
-            $this->channels[] = '花椒直播6##_LC_AL1_5822731615253162591492836';
-            $this->channels[] = '花椒直播7##_LC_AL1_5822731615253162591492837';
-            $this->channels[] = '花椒直播8##_LC_AL1_5822731615253162591492838';
+            $this->channels[] = '花椒直播1##_LC_QH2_non_13165978915306825521603211_OX';
+            $this->channels[] = '花椒直播2##_LC_QH2_non_13165978915306825521603222_OX';
+            $this->channels[] = '花椒直播3##_LC_QH2_non_13165978915306825521603233_OX';
+            $this->channels[] = '花椒直播4##_LC_QH2_non_13165978915306825521603244_OX';
+            $this->channels[] = '花椒直播5##_LC_QH2_non_13165978915306825521603255_OX';
+            $this->channels[] = '花椒直播6##_LC_QH2_non_13165978915306825521603266_OX';
+            $this->channels[] = '花椒直播7##_LC_QH2_non_13165978915306825521603277_OX';
+            $this->channels[] = '花椒直播8##_LC_QH2_non_13165978915306825521603288_OX';
         } elseif (env('APP_NAME') == 'leqiuba') {
-            $this->channels[] = '花椒直播1##_LC_AL1_5812731615253162591492831';
-            $this->channels[] = '花椒直播2##_LC_AL1_5812731615253162591492832';
-            $this->channels[] = '花椒直播3##_LC_AL1_5812731615253162591492833';
-            $this->channels[] = '花椒直播4##_LC_AL1_5812731615253162591492834';
-            $this->channels[] = '花椒直播5##_LC_AL1_5812731615253162591492835';
-            $this->channels[] = '花椒直播6##_LC_AL1_5812731615253162591492836';
-            $this->channels[] = '花椒直播7##_LC_AL1_5812731615253162591492837';
-            $this->channels[] = '花椒直播8##_LC_AL1_5812731615253162591492838';
+            $this->channels[] = '花椒直播1##_LC_QH2_non_13165978915306825521603311_OX';
+            $this->channels[] = '花椒直播2##_LC_QH2_non_13165978915306825521603322_OX';
+            $this->channels[] = '花椒直播3##_LC_QH2_non_13165978915306825521603333_OX';
+            $this->channels[] = '花椒直播4##_LC_QH2_non_13165978915306825521603344_OX';
+            $this->channels[] = '花椒直播5##_LC_QH2_non_13165978915306825521603355_OX';
+            $this->channels[] = '花椒直播6##_LC_QH2_non_13165978915306825521603366_OX';
+            $this->channels[] = '花椒直播7##_LC_QH2_non_13165978915306825521603377_OX';
+            $this->channels[] = '花椒直播8##_LC_QH2_non_13165978915306825521603388_OX';
         }
     }
 
@@ -78,10 +78,10 @@ class HuajiaoEncodesController extends BaseController
             }
             list($roomName, $roomId) = explode('##', $channel);
 //            $rtmp_url = 'rtmp://al1.live.huajiao.com/live_huajiao_v2/' . $roomId;//获取rtmp地址
-            $rtmp_url = 'rtmp://ps1.live.huajiao.com/live_huajiao_v2/' . $roomId;//获取rtmp地址
-            $live_flv_url = 'http://pl1.live.huajiao.com/live_huajiao_v2/' . explode('?', $roomId)[0] . '.flv';//flv地址
+            $rtmp_url = 'rtmp://qh2-publish.live.huajiao.com/live_huajiao_v2/' . $roomId;//获取rtmp地址
+            $live_flv_url = 'http://qh2-flv.live.huajiao.com/live_huajiao_v2/' . explode('?', $roomId)[0] . '.flv';//flv地址
             $live_rtmp_url = '';//rtmp地址
-            $live_m3u8_url = 'http://pl1-hls.live.huajiao.com/live_huajiao_v2/' . explode('?', $roomId)[0] . '/index.m3u8';//m3u8地址
+            $live_m3u8_url = 'http://qh2-hls.live.huajiao.com/live_huajiao_v2/' . explode('?', $roomId)[0] . '/index.m3u8';//m3u8地址
 
             $fontsize = $request->input('fontsize', 18);
             $watermark = $request->input('watermark', '');

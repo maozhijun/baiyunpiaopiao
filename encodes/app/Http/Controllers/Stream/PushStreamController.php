@@ -22,13 +22,13 @@ class PushStreamController extends BaseController
 //            $longzhus[] = 'long##18249335694?';
 //            $longzhus[] = 'long##18346335974?';
 //            $longzhus[] = 'long##17121073689?';
-//            $longzhus[] = 'long##17169085461?767103cc093871c01344898faafd56b18d207e81ae9efd7ccfa1356dc8ef528ec48325fd416c5d9e6421bdded4c2b7f29f47ba9d769ed606';
-//            $longzhus[] = 'long##17121073721?063d41cd55a3f8a5c989e7cab5d0e5bc21052154850184809cfd74123667b9e84ea0c077bbcb667de84585a4e2c9410cb8ba8ddc27291f30';
-//            $longzhus[] = 'long##17172850051?b4741b90affbbb195d625a79d87b3cbff5c922ba9faae1c820afc418777cb9e3c0bcad1e4329056b949acea4556a9aa0616f0e09354909dd';
-//            $longzhus[] = 'long##17172850057?511ec45902a8b983e56825bbf565537131272ca3184e3329755fe5b14300b6629b9dc413ac1d3ebcb2162e254b5a820475cb5e7f8ac69031';
-//            $longzhus[] = 'long##17177260095?cd5545ff9e71f2da40b22572472a90813c12451ecf4dc41ff9c2688935d9d844ec6c2ba5ea6bb8506e512406b3ff2dadd23ff33e265552a8';
-//            $longzhus[] = 'long##17177260086?2914a2e92753683983bd50c2a52513eafcd1249eb427bf02501197ebf9c7297c6905566b597c4fbc6132bcf23312b0fce1d3164fb38460bf';
-//            $this->channels['龙珠'] = $longzhus;
+//            $longzhus[] = 'long##17172850051?';
+            $longzhus[] = 'long##17169085461?e6ba85af8aa1902d034cae91178274b0270603fbfd25dda7189843bda55a8646c09fe67229e964eda5460dce88d32d39cbb794cf855c5653';
+            $longzhus[] = 'long##17121073721?674545a7323900293af87d61185980ac18938808607ab79877a9ce4654c26704cbadb759a61acfbc03fa823e291ec336514450e36e328c31';
+            $longzhus[] = 'long##17172850057?d92217faef38c4c841de66419e739c9f87e6133888d3fb351217270eb71f5455261383a68adcef4e5f3e0019704650b1cf3d3a67a60fee80';
+            $longzhus[] = 'long##17177260095?bd3eceb0485e19d7a796bab61e5ecea8e8f7244e2cc1cd9995128b1006d6c0ce2b07b6f040c6a2c79bab7fa6d06eb433f9b84b8ed930b448';
+            $longzhus[] = 'long##17177260086?007a60ccff7dea79dc679efeddb096e7f5b4f9b119df368c2d00dbcee58a50210ccf22ce243169266a7f05cc33124e44eaa3ad1e6af53209';
+            $this->channels['龙珠'] = $longzhus;
 
 //            $xiaomis[] = 'mi##cid201804241141222051111';
 //            $xiaomis[] = 'mi##cid201804241141222052222';
@@ -148,20 +148,47 @@ class PushStreamController extends BaseController
             if ($platform == 'long') {
                 list($phone, $token) = explode('?', $key);
                 $this->closeLongZhuLive($token);
-                $rtmp_json = $this->startLongZhuLive($token);//获取rtmp地址
-                $push_rtmp = $rtmp_json['upStreamUrl'];
-                $roomId = $rtmp_json['roomId'];
-
-                $urls = $this->getLongZhuLiveUrl($roomId);
-                foreach ($urls as $url) {
-                    if ($url['ext'] == 'flv') {
-                        $live_lines .= $url['securityUrl'];
-                    } elseif ($url['ext'] == 'rtmp') {
-                        $live_lines .= "\n" . $url['securityUrl'];
-                    } elseif ($url['ext'] == 'm3u8') {
-                        $live_lines .= "\n" . $url['securityUrl'];
+                $rtmp_json = $this->startLongZhuLive($token);//开始直播
+                $upStreamLines = $this->getLongZhuUpStreamUrl($token);//获取rtmp地址
+//                dump($upStreamLines);
+                foreach ($upStreamLines as $upStreamLine) {
+//                    dump($upStreamLine);
+                    if (empty($push_rtmp) && $upStreamLine['supplier'] == 18) {
+                        $push_rtmp = $upStreamLine['upStreamUrl'];
+//                        dump($push_rtmp);
+                        list($rtmp_push_url) = explode('?', $push_rtmp);
+//                        dump($rtmp_push_url);
+                        $urls = explode('/', $rtmp_push_url);
+                        $stream_name = array_pop($urls);
+//                        dump($stream_name);
+                        $live_lines .= 'http://hdl1801.plures.net/onlive/' . $stream_name . '.flv';
+                        $live_lines .= "\n" . 'http://hdl1802.plures.net/onlive/' . $stream_name . '.m3u8';
+//                        $live_lines .= 'http://hdl1803.plures.net/onlive/' . $stream_name;
+                    }
+                    if (empty($push_rtmp) && $upStreamLine['supplier'] == 9) {
+                        $push_rtmp = $upStreamLine['upStreamUrl'];
+                        list($rtmp_push_url) = explode('?', $push_rtmp);
+                        $urls = explode('/', $rtmp_push_url);
+                        $stream_name = array_pop($urls);
+                        $live_lines .= 'http://hdl0901.plures.net/onlive/' . $stream_name . '.flv';
+                        $live_lines .= "\n" . 'http://hdl0902.plures.net/onlive/' . $stream_name . '/playlist.m3u8';
+//                        $live_lines .= "\n" . 'http://hdl0903.plures.net/onlive/' . $stream_name;
                     }
                 }
+//                $push_rtmp = $rtmp_json['upStreamUrl'];
+
+//                $roomId = $rtmp_json['roomId'];
+
+//                $urls = $this->getLongZhuLiveUrl($roomId);
+//                foreach ($urls as $url) {
+//                    if ($url['ext'] == 'flv') {
+//                        $live_lines .= $url['securityUrl'];
+//                    } elseif ($url['ext'] == 'rtmp') {
+//                        $live_lines .= "\n" . $url['securityUrl'];
+//                    } elseif ($url['ext'] == 'm3u8') {
+//                        $live_lines .= "\n" . $url['securityUrl'];
+//                    }
+//                }
 //                $this->closeLongZhuLive($token);
             } elseif ($platform == 'mi') {
                 $push_rtmp = 'rtmp://r1.zb.mi.com/live/' . $key;//获取rtmp地址
@@ -173,7 +200,7 @@ class PushStreamController extends BaseController
                 $live_lines .= "\n" . 'http://pl1-hls.live.huajiao.com/live_huajiao_v2/' . $key . '/index.m3u8';//m3u8地址
             } elseif ($platform == 'meme-ali') {
                 $push_rtmp = 'rtmp://video-center.alivecdn.com/memeyule/' . $key . '?vhost=aliyun.memeyule.com';//获取rtmp地址
-                $live_lines = 'http://aliyun.memeyule.com/memeyule/' . $key . '.flv';//播放rtmp地址
+                $live_lines = "\n" . 'http://aliyun.memeyule.com/memeyule/' . $key . '.flv';//播放rtmp地址
                 $live_lines .= 'http://aliyun.memeyule.com/memeyule/' . $key . '.m3u8';//播放m3u8地址
             } elseif ($platform == '9158') {
                 $pc = PushChannle::query()->find($key);
@@ -240,12 +267,13 @@ class PushStreamController extends BaseController
     private function startLongZhuLive($token)
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://liveapi.longzhu.com/liveapp/startlive?address=&bitrate=800&bundleId=com.longzhu.tga&device=2&fh=640&fw=360&gameId=119&latitude=&liveSourceType=1&liveStreamType=10&longitude=&model=iPhone%206S&p1uuid=&packageId=1&title=&version=4.6.5&watchDirections=portrait');
+        curl_setopt($ch, CURLOPT_URL, 'http://liveapi.plu.cn/liveapp/startlive?address=%E5%B9%BF%E5%BB%BA%E5%A4%A7%E5%8E%A6&bitrate=1500&device=2&fh=768&fw=432&gameId=119&latitude=23.143591&liveSourceType=1&liveStreamType=12&longitude=113.336060&model=iPhone%206S&packageId=3&title=%E6%83%8A%E5%91%86%EF%BC%8C%E8%BF%99%E4%B8%AA%E4%BA%BA%E5%B1%85%E7%84%B6%E2%8B%AF%E2%8B%AF&version=3.3.2&watchDirections=portrait');
+//        curl_setopt($ch, CURLOPT_URL, 'https://liveapi.longzhu.com/liveapp/startlive?address=&bitrate=800&bundleId=com.longzhu.tga&device=2&fh=640&fw=360&gameId=119&latitude=&liveSourceType=1&liveStreamType=10&longitude=&model=iPhone%206S&p1uuid=&packageId=1&title=&version=4.6.5&watchDirections=portrait');
         curl_setopt($ch, CURLOPT_COOKIE, "p1u_id=$token;");
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //跳过证书检查
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
-        curl_setopt($ch, CURLOPT_USERAGENT, "longzhu/4.6.5 (iPhone; iOS 11.2.6; Scale/2.00)");
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+        curl_setopt($ch, CURLOPT_USERAGENT, "Push/3.3.2 (iPhone; iOS 11.4; Scale/2.00)");
         curl_setopt($ch, CURLOPT_COOKIESESSION, true);
         $response = curl_exec($ch);
         if ($error = curl_error($ch)) {
@@ -262,15 +290,43 @@ class PushStreamController extends BaseController
         }
     }
 
+    private function getLongZhuUpStreamUrl($token)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'http://star.api.plu.cn/live/GetUpStreamUrl?device=2&packageId=3&streamType=0&version=3.3.2');
+//        curl_setopt($ch, CURLOPT_URL, 'https://liveapi.longzhu.com/liveapp/startlive?address=&bitrate=800&bundleId=com.longzhu.tga&device=2&fh=640&fw=360&gameId=119&latitude=&liveSourceType=1&liveStreamType=10&longitude=&model=iPhone%206S&p1uuid=&packageId=1&title=&version=4.6.5&watchDirections=portrait');
+        curl_setopt($ch, CURLOPT_COOKIE, "p1u_id=$token;");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); //跳过证书检查
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+        curl_setopt($ch, CURLOPT_USERAGENT, "Push/3.3.2 (iPhone; iOS 11.4; Scale/2.00)");
+        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+        $response = curl_exec($ch);
+        if ($error = curl_error($ch)) {
+            die($error);
+        }
+        curl_close($ch);
+//        dump($response);
+        $json = json_decode($response, true);
+//        dump($json);
+        if (isset($json) && isset($json['upStreamLines'])) {
+            return $json['upStreamLines'];
+        } else {
+            return null;
+        }
+    }
+
     private function closeLongZhuLive($token)
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://liveapi.longzhu.com/liveapp/endlive?bundleId=com.longzhu.tga&device=2&liveSourceType=1&p1uuid=&packageId=1&reason=101&reasonDesp=iOS::Qiniu[2.0]::UserClosed&version=4.6.5');
+        //http://liveapi.plu.cn/liveapp/endlive?device=2&liveSourceType=1&packageId=3&reason=101&reasonDesp=iOS%3A%3ALongzhu%5B1.0%5D%3A%3AUserClosed&version=3.3.2
+        curl_setopt($ch, CURLOPT_URL, 'http://liveapi.plu.cn/liveapp/endlive?device=2&liveSourceType=1&packageId=3&reason=101&reasonDesp=iOS%3A%3ALongzhu%5B1.0%5D%3A%3AUserClosed&version=3.3.2');
+//        curl_setopt($ch, CURLOPT_URL, 'https://liveapi.longzhu.com/liveapp/endlive?bundleId=com.longzhu.tga&device=2&liveSourceType=1&p1uuid=&packageId=1&reason=101&reasonDesp=iOS::Qiniu[2.0]::UserClosed&version=4.6.5');
         curl_setopt($ch, CURLOPT_COOKIE, "p1u_id=$token;");
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
-        curl_setopt($ch, CURLOPT_USERAGENT, "longzhu/4.6.5 (iPhone; iOS 11.2.6; Scale/2.00)");
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+        curl_setopt($ch, CURLOPT_USERAGENT, "Push/3.3.2 (iPhone; iOS 11.4; Scale/2.00)");
         curl_setopt($ch, CURLOPT_COOKIESESSION, true);
         $response = curl_exec($ch);
         if ($error = curl_error($ch)) {
