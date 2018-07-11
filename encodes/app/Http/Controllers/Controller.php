@@ -55,12 +55,8 @@ class Controller extends BaseController
             View::share('watermark', '足球专家微信：bet6879，篮球专家微信：bet8679a');
             View::share('logo_text', '加微信：bet6879');
         } elseif (env('APP_NAME') == 'aikq' || env('APP_NAME') == 'aikq1') {
-//            View::share('watermark', '加微信【kanqiu616】进群聊球，美女福利+大神免费推单，每天轻松收米！');
-//            View::share('logo_text', '加微信：kanqiu616');
-            View::share('watermark', '玩赚世界杯！加微信【kanqiu858】进群聊球，每日抢红包，会员抽iPhone X');
+            View::share('watermark', '加主播微信【kanqiu858】进群聊球，每日抢红包，会员抽iPhone X');
             View::share('logo_text', '加微信：kanqiu858');
-//            View::share('watermark', '加微信【fs188fs】进群聊球，美女福利+大神免费推单，每天轻松收米！');
-//            View::share('logo_text', '加微信：fs188fs');
             $this->random_logo = '爱看球直播：aikq.cc';
         } elseif (env('APP_NAME') == 'leqiuba') {
             View::share('watermark', '看球 聊球 微信群，进群加微信：zhibo556 红包福利天天有！');

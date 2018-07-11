@@ -23,7 +23,7 @@ class PushStreamController extends BaseController
 //            $longzhus[] = 'long##18346335974?';
 //            $longzhus[] = 'long##17121073689?';
 //            $longzhus[] = 'long##17172850051?';
-            $longzhus[] = 'long##17169085461?e6ba85af8aa1902d034cae91178274b0270603fbfd25dda7189843bda55a8646c09fe67229e964eda5460dce88d32d39cbb794cf855c5653';
+//            $longzhus[] = 'long##17169085461?589f283876c13f09b85d0bf1ce85c7ae5e3ea05a37dbabefc45039dbd5495ef930e950f2a536ee572e4d282de49282b586f205d4ea56b2e3';
             $longzhus[] = 'long##17121073721?674545a7323900293af87d61185980ac18938808607ab79877a9ce4654c26704cbadb759a61acfbc03fa823e291ec336514450e36e328c31';
             $longzhus[] = 'long##17172850057?d92217faef38c4c841de66419e739c9f87e6133888d3fb351217270eb71f5455261383a68adcef4e5f3e0019704650b1cf3d3a67a60fee80';
             $longzhus[] = 'long##17177260095?bd3eceb0485e19d7a796bab61e5ecea8e8f7244e2cc1cd9995128b1006d6c0ce2b07b6f040c6a2c79bab7fa6d06eb433f9b84b8ed930b448';
@@ -150,21 +150,16 @@ class PushStreamController extends BaseController
                 $this->closeLongZhuLive($token);
                 $rtmp_json = $this->startLongZhuLive($token);//开始直播
                 $upStreamLines = $this->getLongZhuUpStreamUrl($token);//获取rtmp地址
-//                dump($upStreamLines);
                 foreach ($upStreamLines as $upStreamLine) {
-//                    dump($upStreamLine);
-                    if (empty($push_rtmp) && $upStreamLine['supplier'] == 18) {
-                        $push_rtmp = $upStreamLine['upStreamUrl'];
-//                        dump($push_rtmp);
-                        list($rtmp_push_url) = explode('?', $push_rtmp);
-//                        dump($rtmp_push_url);
-                        $urls = explode('/', $rtmp_push_url);
-                        $stream_name = array_pop($urls);
-//                        dump($stream_name);
-                        $live_lines .= 'http://hdl1801.plures.net/onlive/' . $stream_name . '.flv';
-                        $live_lines .= "\n" . 'http://hdl1802.plures.net/onlive/' . $stream_name . '.m3u8';
-//                        $live_lines .= 'http://hdl1803.plures.net/onlive/' . $stream_name;
-                    }
+//                    if (empty($push_rtmp) && $upStreamLine['supplier'] == 18) {
+//                        $push_rtmp = $upStreamLine['upStreamUrl'];
+//                        list($rtmp_push_url) = explode('?', $push_rtmp);
+//                        $urls = explode('/', $rtmp_push_url);
+//                        $stream_name = array_pop($urls);
+//                        $live_lines .= 'http://hdl1801.plures.net/onlive/' . $stream_name . '.flv';
+//                        $live_lines .= "\n" . 'http://hdl1802.plures.net/onlive/' . $stream_name . '.m3u8';
+//                        $live_lines .= "\n" . 'rtmp://hdl1803.plures.net/onlive/' . $stream_name;
+//                    }
                     if (empty($push_rtmp) && $upStreamLine['supplier'] == 9) {
                         $push_rtmp = $upStreamLine['upStreamUrl'];
                         list($rtmp_push_url) = explode('?', $push_rtmp);
@@ -172,7 +167,7 @@ class PushStreamController extends BaseController
                         $stream_name = array_pop($urls);
                         $live_lines .= 'http://hdl0901.plures.net/onlive/' . $stream_name . '.flv';
                         $live_lines .= "\n" . 'http://hdl0902.plures.net/onlive/' . $stream_name . '/playlist.m3u8';
-//                        $live_lines .= "\n" . 'http://hdl0903.plures.net/onlive/' . $stream_name;
+                        $live_lines .= "\n" . 'rtmp://hdl0903.plures.net/onlive/' . $stream_name;
                     }
                 }
 //                $push_rtmp = $rtmp_json['upStreamUrl'];

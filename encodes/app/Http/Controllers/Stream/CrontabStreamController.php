@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Stream;
 
+use App\Http\Controllers\ChushouStream;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\PushChannle;
 use Illuminate\Http\Request;
@@ -9,10 +10,131 @@ use Illuminate\Support\Facades\Log;
 
 class CrontabStreamController extends BaseController
 {
+    use ChushouStream;
+    private $chushous;
 
     public function __construct()
     {
-
+        $this->chushous['17031505710'] = [
+            'get_stream_url' => [
+                'url' => 'https://api.chushou.tv/api/live-room/get-rookie-push-url.htm?_appVersion=2.8.0&_appkey=CSRecIos&_identifier=40677F57-ED05-45DE-A42D-1201162FB42A&_ltn=1531298039592&_modelName=iPhone8%2C1&_sign=d4d1f0db9375119e862caadb46eda3f9&token=fe09f076ba486f02g520695fe',
+                'method' => 'get',
+                'param' => '',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 iOS ChushouRec/2.8.0',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
+            'online_url' => [
+                'url' => 'https://api.chushou.tv/api/live-room/online.htm',
+                'method' => 'post',
+                'param' => '_appVersion=2.8.0&_appkey=CSRecIos&_identifier=40677F57-ED05-45DE-A42D-1201162FB42A&_ltn=1531298042092&_modelName=iPhone8%2C1&_sign=8f771fb699c8018e4fc2e7130284c3cc&_t=1531298041839&bitrate=2000&gameName=%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80&isPrivate=1&liveSourceId=8&roomId=80522518&roomName=%E5%90%A7%E5%95%A6%E5%93%94%E5%93%A9bolo&style=0&token=fe09f076ba486f02g520695fe',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 iOS ChushouRec/2.8.0',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
+            'get_play_url' => [
+                'url' => 'https://chushou.tv/room/m-80522518.htm?hmsr=share&hmpl=unknow&hmcu=unknow&hmkw=&hmci=',
+                'method' => 'get',
+                'param' => '',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 MicroMessenger/6.7.0 NetType/WIFI Language/zh_CN',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
+            'offline_url' => [
+                'url' => 'https://api.chushou.tv/api/live-room/offline.htm',
+                'method' => 'post',
+                'param' => '_appVersion=2.8.0&_appkey=CSRecIos&_identifier=40677F57-ED05-45DE-A42D-1201162FB42A&_ltn=1531298078278&_modelName=iPhone8%2C1&_sign=0dbffa4fe841b4d9d139a400abb48f2f&_t=1531298076025&roomId=80522518&token=fe09f076ba486f02g520695fe',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 iOS ChushouRec/2.8.0',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
+        ];
+        $this->chushous['17073355245'] = [
+            'get_stream_url' => [
+                'url' => 'https://api.chushou.tv/api/live-room/get-rookie-push-url.htm?_appVersion=2.8.0&_appkey=CSRecIos&_identifier=40677F57-ED05-45DE-A42D-1201162FB42A&_ltn=1531304579175&_modelName=iPhone8%2C1&_sign=116ef7bee9fcc5e394c0721aa3552fdd&token=17dd6622a7294a4eg51e1174e',
+                'method' => 'get',
+                'param' => '',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 iOS ChushouRec/2.8.0',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
+            'online_url' => [
+                'url' => 'https://api.chushou.tv/api/live-room/online.htm',
+                'method' => 'post',
+                'param' => '_appVersion=2.8.0&_appkey=CSRecIos&_identifier=40677F57-ED05-45DE-A42D-1201162FB42A&_ltn=1531304580319&_modelName=iPhone8%2C1&_sign=c220eef81fb0829ed37fba4e94cb05f8&_t=1531304579857&bitrate=1000&gameName=%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80&isPrivate=1&liveSourceId=51&roomId=79898715&roomName=%E7%94%A8%E6%88%B7_1373706062&style=0&token=17dd6622a7294a4eg51e1174e',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 iOS ChushouRec/2.8.0',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
+            'get_play_url' => [
+                'url' => 'https://chushou.tv/room/m-79898715.htm?hmsr=share&hmpl=unknow&hmcu=unknow&hmkw=&hmci=',
+                'method' => 'get',
+                'param' => '',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 MicroMessenger/6.7.0 NetType/WIFI Language/zh_CN',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
+            'offline_url' => [
+                'url' => 'https://api.chushou.tv/api/live-room/offline.htm',
+                'method' => 'post',
+                'param' => '_appVersion=2.8.0&_appkey=CSRecIos&_identifier=40677F57-ED05-45DE-A42D-1201162FB42A&_ltn=1531304594460&_modelName=iPhone8%2C1&_sign=08a18d1b2b1cfb4b93ab74d409494fb7&_t=1531304593022&roomId=79898715&token=17dd6622a7294a4eg51e1174e',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 iOS ChushouRec/2.8.0',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
+        ];
+        $this->chushous['15584445409'] = [
+            'get_stream_url' => [
+                'url' => 'https://api.chushou.tv/api/live-room/get-rookie-push-url.htm?_appVersion=2.8.0&_appkey=CSRecIos&_identifier=40677F57-ED05-45DE-A42D-1201162FB42A&_ltn=1531304871085&_modelName=iPhone8%2C1&_sign=b9e2f3edf3b94649b42ed919124ad914&token=f050754b0ad1fd3ag52077dc6',
+                'method' => 'get',
+                'param' => '',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 iOS ChushouRec/2.8.0',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
+            'online_url' => [
+                'url' => 'https://api.chushou.tv/api/live-room/online.htm',
+                'method' => 'post',
+                'param' => '_appVersion=2.8.0&_appkey=CSRecIos&_identifier=40677F57-ED05-45DE-A42D-1201162FB42A&_ltn=1531304872119&_modelName=iPhone8%2C1&_sign=93acd2093816efb9bbc4ad23b67b14e5&_t=1531304871718&bitrate=1000&gameName=%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80&isPrivate=1&liveSourceId=51&roomId=80512823&roomName=%E7%94%A8%E6%88%B7_1376222662&style=0&token=f050754b0ad1fd3ag52077dc6',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 iOS ChushouRec/2.8.0',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
+            'get_play_url' => [
+                'url' => 'https://chushou.tv/room/m-80512823.htm?hmsr=share&hmpl=unknow&hmcu=unknow&hmkw=&hmci=',
+                'method' => 'get',
+                'param' => '',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 MicroMessenger/6.7.0 NetType/WIFI Language/zh_CN',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
+            'offline_url' => [
+                'url' => 'https://api.chushou.tv/api/live-room/offline.htm',
+                'method' => 'post',
+                'param' => '_appVersion=2.8.0&_appkey=CSRecIos&_identifier=40677F57-ED05-45DE-A42D-1201162FB42A&_ltn=1531304883910&_modelName=iPhone8%2C1&_sign=da7219d51be560921da7f474a067d5e1&_t=1531304882443&roomId=80512823&token=f050754b0ad1fd3ag52077dc6',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 iOS ChushouRec/2.8.0',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
+        ];
+        $this->chushous['17134263258'] = [
+            'get_stream_url' => [
+                'url' => 'https://api.chushou.tv/api/live-room/get-rookie-push-url.htm?_appVersion=2.8.0&_appkey=CSRecIos&_identifier=40677F57-ED05-45DE-A42D-1201162FB42A&_ltn=1531305076088&_modelName=iPhone8%2C1&_sign=7765a5d7f5515f22fbecfe3d38b79d1c&token=97903f8d9b5c3be8g52067018',
+                'method' => 'get',
+                'param' => '',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 iOS ChushouRec/2.8.0',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
+            'online_url' => [
+                'url' => 'https://api.chushou.tv/api/live-room/online.htm',
+                'method' => 'post',
+                'param' => '_appVersion=2.8.0&_appkey=CSRecIos&_identifier=40677F57-ED05-45DE-A42D-1201162FB42A&_ltn=1531305077307&_modelName=iPhone8%2C1&_sign=bc22d8575e8deb9874673e07331fce2b&_t=1531305077006&bitrate=1000&gameName=%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80&isPrivate=1&liveSourceId=51&roomId=80527065&roomName=%E4%B8%BD%E4%B8%BD%E6%9C%89%E7%94%B7%E7%9B%86%E5%8F%8B%E4%BA%86&style=0&token=97903f8d9b5c3be8g52067018',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 iOS ChushouRec/2.8.0',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
+            'get_play_url' => [
+                'url' => 'https://chushou.tv/room/m-80527065.htm?hmsr=share&hmpl=unknow&hmcu=unknow&hmkw=&hmci=',
+                'method' => 'get',
+                'param' => '',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 MicroMessenger/6.7.0 NetType/WIFI Language/zh_CN',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
+            'offline_url' => [
+                'url' => 'https://api.chushou.tv/api/live-room/offline.htm',
+                'method' => 'post',
+                'param' => '_appVersion=2.8.0&_appkey=CSRecIos&_identifier=40677F57-ED05-45DE-A42D-1201162FB42A&_ltn=1531305086749&_modelName=iPhone8%2C1&_sign=b14787a49395b5a02c856477c7945c5d&_t=1531305085196&roomId=80527065&token=97903f8d9b5c3be8g52067018',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 iOS ChushouRec/2.8.0',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
+        ];
     }
 
     public function get9158Rooms()
@@ -240,6 +362,25 @@ class CrontabStreamController extends BaseController
         }
     }
 
+    public function chushou(Request $request, $room)
+    {
+        $param = $this->chushous[$room];
+        $rtmp_push_url = $this->getChushouStream($param['get_stream_url']);
+//        dump($stream);
+        $this->choushouOnline($param['online_url']);
+        $play = $this->getChushouPlay($param['get_play_url']);
+        $this->choushouOffline($param['offline_url']);
+//        dump($play);
+        $urls = explode('/', $rtmp_push_url);
+        $stream_name = array_pop($urls);
+        $stream_url = join('/', $urls);
+        dump('#############################   推流   ################################');
+        dump('URL：' . $stream_url);
+        dump('流名称：' . $stream_name);
+        dump('#############################   播放   ################################');
+        dump('M3U8：' . $play);
+    }
+
     public function hotsoon()
     {
         $ch = curl_init();
@@ -267,9 +408,10 @@ class CrontabStreamController extends BaseController
             $urls = explode('/', $rtmp_push_url);
             $stream_name = array_pop($urls);
             $stream_url = join('/', $urls);
+            dump('#############################   推流   ################################');
             dump('URL：' . $stream_url);
             dump('流名称：' . $stream_name);
-            dump('==================================================================');
+            dump('#############################   播放   ################################');
             dump('PC播放地址：' . $rtmp_pull_url);
             $m3u8 = str_replace('flv-l6', 'hls-l6', $rtmp_pull_url);
             $m3u8 = str_replace('.flv', '/index.m3u8', $m3u8);
