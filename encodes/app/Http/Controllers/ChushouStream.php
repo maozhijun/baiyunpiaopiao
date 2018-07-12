@@ -59,6 +59,26 @@ trait ChushouStream
         return $matches[2];
     }
 
+    private function getChushouFlvPlay($param)
+    {
+        $response = $this->curl($param);
+//        dump($response);
+        $json = json_decode($response, true);
+        if (isset($json) && isset($json['data'])) {
+            $urls = $json['data'];
+            $flv = '';
+            foreach ($urls as $url) {
+//                dump($url['protocol'] . ':' . $url['shdPlayUrl']);
+                if ($url['protocol'] == 2) {
+                    $flv = $url['shdPlayUrl'];
+                }
+            }
+            return $flv;
+        } else {
+            return null;
+        }
+    }
+
     private function choushouOffline($param)
     {
         $response = $this->curl($param);

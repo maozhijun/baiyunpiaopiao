@@ -37,6 +37,13 @@ class CrontabStreamController extends BaseController
                 'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 MicroMessenger/6.7.0 NetType/WIFI Language/zh_CN',
                 'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
             ],
+            'get_flv_play_url' => [
+                'url' => 'https://api.chushou.tv/api/live-room/get-play-url.htm?_appEnv=1&_appSource=811&_appVersion=5.0.3.27028&_appkey=CSIos&_identifier=DAF4A4E4-3268-4D30-801D-69C5EB976BF6&_idfa=4044A747-5BF0-4465-A894-99E2FEBAC4C1&_locRadius=10.000000&_locType=bd09ll&_sign=57956dfcac619e07d01b4ef0eedfd304&_t=1543560472069&_wsign=52feded3617378380e5e084efecd52710fa4967a&_xappVersion=10504&device_cs=311d8fbc2bf1f715cfd982d1d0931ce6&device_ds=DAF4A4E4-3268-4D30-801D-69C5EB976BF6&device_es=he196bcebd0450458a9eec275b786d490&device_model=iPhone8%2C1&device_ram=2105016320&device_release=11.4&device_user=%E2%80%9C%E6%AF%9B%E5%BF%97%E5%86%9B%E2%80%9D%E7%9A%84%20iPhone&protocols=1%2C2%2C101%2C102&roomId=80522518&token=74789c318d0cf918g52067018',
+                'method' => 'get',
+                'param' => '',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 iOS ChushouRec/2.8.0',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
             'offline_url' => [
                 'url' => 'https://api.chushou.tv/api/live-room/offline.htm',
                 'method' => 'post',
@@ -65,6 +72,13 @@ class CrontabStreamController extends BaseController
                 'method' => 'get',
                 'param' => '',
                 'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 MicroMessenger/6.7.0 NetType/WIFI Language/zh_CN',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
+            'get_flv_play_url' => [
+                'url' => 'https://api.chushou.tv/api/live-room/get-play-url.htm?_appEnv=1&_appSource=811&_appVersion=5.0.3.27028&_appkey=CSIos&_identifier=DAF4A4E4-3268-4D30-801D-69C5EB976BF6&_idfa=4044A747-5BF0-4465-A894-99E2FEBAC4C1&_locRadius=10.000000&_locType=bd09ll&_sign=6e8b74c7f1258fa25a418bf81ca82ca8&_t=1543560430078&_wsign=63a7e2089614112a5c97aa8fa9cf3bcb88b6c84c&_xappVersion=10504&device_cs=311d8fbc2bf1f715cfd982d1d0931ce6&device_ds=DAF4A4E4-3268-4D30-801D-69C5EB976BF6&device_es=he196bcebd0450458a9eec275b786d490&device_model=iPhone8%2C1&device_ram=2105016320&device_release=11.4&device_user=%E2%80%9C%E6%AF%9B%E5%BF%97%E5%86%9B%E2%80%9D%E7%9A%84%20iPhone&protocols=1%2C2%2C101%2C102&roomId=79898715&token=74789c318d0cf918g52067018',
+                'method' => 'get',
+                'param' => '',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 iOS ChushouRec/2.8.0',
                 'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
             ],
             'offline_url' => [
@@ -97,6 +111,13 @@ class CrontabStreamController extends BaseController
                 'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 MicroMessenger/6.7.0 NetType/WIFI Language/zh_CN',
                 'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
             ],
+            'get_flv_play_url' => [
+                'url' => 'https://api.chushou.tv/api/live-room/get-play-url.htm?_appEnv=1&_appSource=811&_appVersion=5.0.3.27028&_appkey=CSIos&_identifier=DAF4A4E4-3268-4D30-801D-69C5EB976BF6&_idfa=4044A747-5BF0-4465-A894-99E2FEBAC4C1&_locRadius=10.000000&_locType=bd09ll&_sign=cb2e843da89028d058c681ae77de62d9&_t=1543560398690&_wsign=1a683fc710dbfadb2e76f79ce971b67b28cd7c36&_xappVersion=10504&device_cs=311d8fbc2bf1f715cfd982d1d0931ce6&device_ds=DAF4A4E4-3268-4D30-801D-69C5EB976BF6&device_es=he196bcebd0450458a9eec275b786d490&device_model=iPhone8%2C1&device_ram=2105016320&device_release=11.4&device_user=%E2%80%9C%E6%AF%9B%E5%BF%97%E5%86%9B%E2%80%9D%E7%9A%84%20iPhone&protocols=1%2C2%2C101%2C102&roomId=80512823&token=74789c318d0cf918g52067018',
+                'method' => 'get',
+                'param' => '',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 iOS ChushouRec/2.8.0',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
             'offline_url' => [
                 'url' => 'https://api.chushou.tv/api/live-room/offline.htm',
                 'method' => 'post',
@@ -125,6 +146,13 @@ class CrontabStreamController extends BaseController
                 'method' => 'get',
                 'param' => '',
                 'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 MicroMessenger/6.7.0 NetType/WIFI Language/zh_CN',
+                'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
+            ],
+            'get_flv_play_url' => [
+                'url' => 'https://api.chushou.tv/api/live-room/get-play-url.htm?_appEnv=1&_appSource=811&_appVersion=5.0.3.27028&_appkey=CSIos&_identifier=DAF4A4E4-3268-4D30-801D-69C5EB976BF6&_idfa=4044A747-5BF0-4465-A894-99E2FEBAC4C1&_locRadius=10.000000&_locType=bd09ll&_sign=82e87550cf11b4cba4ba34fb15a95139&_t=1543560302450&_wsign=879d43a11f169c1d865c55c37a9d2abf3d84801d&_xappVersion=10504&device_cs=311d8fbc2bf1f715cfd982d1d0931ce6&device_ds=DAF4A4E4-3268-4D30-801D-69C5EB976BF6&device_es=he196bcebd0450458a9eec275b786d490&device_model=iPhone8%2C1&device_ram=2105016320&device_release=11.4&device_user=%E2%80%9C%E6%AF%9B%E5%BF%97%E5%86%9B%E2%80%9D%E7%9A%84%20iPhone&protocols=1%2C2%2C101%2C102&roomId=80527065&token=74789c318d0cf918g52067018',
+                'method' => 'get',
+                'param' => '',
+                'ua' => 'Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15F79 iOS ChushouRec/2.8.0',
                 'cookie' => '_i7=7f9a6f6e90744f64a5d055044a70c5ef'
             ],
             'offline_url' => [
@@ -368,6 +396,7 @@ class CrontabStreamController extends BaseController
         $rtmp_push_url = $this->getChushouStream($param['get_stream_url']);
 //        dump($stream);
         $this->choushouOnline($param['online_url']);
+        $flv = $this->getChushouFlvPlay($param['get_flv_play_url']);
         $play = $this->getChushouPlay($param['get_play_url']);
         $this->choushouOffline($param['offline_url']);
 //        dump($play);
@@ -378,6 +407,7 @@ class CrontabStreamController extends BaseController
         dump('URL：' . $stream_url);
         dump('流名称：' . $stream_name);
         dump('#############################   播放   ################################');
+        dump('FLV：' . $flv);
         dump('M3U8：' . $play);
     }
 

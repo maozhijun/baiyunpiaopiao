@@ -247,4 +247,30 @@ class Controller extends BaseController
             }
         }
     }
+
+    //抓取关键帧
+    protected function grabKeyFrame($stream, $out)
+    {
+        exec('ffmpeg -i "' . $stream . '" -y -vframes 1 -f image2 ' . $out);
+    }
+
+    //验证流是否正常
+    protected function streamCheck($stream)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $stream);
+        curl_setopt($ch, CURLOPT_NOBODY, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1); // connect timeout
+        curl_setopt($ch, CURLOPT_TIMEOUT, 1); // curl timeout
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // curl timeout
+
+        $status = false;
+        if (TRUE === curl_exec($ch)) {
+            $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            if ($httpcode == 200) {
+                $status = true;
+            }
+        }
+        return $status;
+    }
 }
