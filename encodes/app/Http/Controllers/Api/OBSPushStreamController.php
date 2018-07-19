@@ -70,19 +70,27 @@ class OBSPushStreamController extends BaseController
         return response()->json($result);
     }
 
-    public function test()
+    public function test(Request $request)
     {
-//        list($roomName, $roomId, $token) = explode('##', '老铁扣波666##10061563##3c4068b47d194772');
-//        $rtmp_json = $this->getRtmp($token);
-//        $fms_val = $rtmp_json['fms_val'];
-//        $rtmp_id = array_first(array_keys($rtmp_json['list']));
-//        $rtmp_url = array_first(array_values($rtmp_json['list']));
-//        if ($this->startLive($token, $fms_val, $rtmp_id)) {//开播成功
-//            $flvUrl = $this->getFlv($roomId);
-//            $m3u8Url = $this->getM3u8($roomId);
-//            dump($rtmp_url);
-//            dump($flvUrl);
-//            dump($m3u8Url);
-//        }
+        $request->input('id', 101);
+        $channel = ChannelFactory::createInstanceById($request->id);
+        if (isset($channel)) {
+            $data['level'] = $channel->level;
+            $data['channel_id'] = $channel->id;
+            $data['channel_name'] = $channel->name;
+            $data['expiration'] = $channel->expiration;
+            $data['push_rtmp'] = $channel->pushURL();
+            $data['push_key'] = $channel->pushKey();
+            $data['live_flv'] = $channel->playFLV();
+            $data['live_m3u8'] = $channel->playM3U8();
+            $data['live_rtmp'] = $channel->playRTMP();
+            $result['data'] = $data;
+            $result['code'] = 0;
+            $result['msg'] = 'ok';
+        } else {
+            $result['code'] = 404;
+            $result['msg'] = '找不到对应的平台';
+        }
+        return response()->json($result);
     }
 }

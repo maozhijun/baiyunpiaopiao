@@ -16,9 +16,9 @@ use App\Http\Controllers\Api\Channels\Inke;
 use App\Http\Controllers\Api\Channels\Longzhu;
 use App\Http\Controllers\Api\Channels\Sina7d;
 use App\Http\Controllers\Api\Channels\Syyba123;
+use App\Http\Controllers\Api\Channels\WoleW;
 use App\Http\Controllers\Api\Channels\Xiaoka;
 use App\Http\Controllers\Api\Channels\Zhibo;
-use phpDocumentor\Reflection\Types\Integer;
 
 class ChannelFactory
 {
@@ -32,6 +32,7 @@ class ChannelFactory
         '2' => [//小平台推小比赛
             Xiaoka::class,
             Fd00cdn::class,
+            WoleW::class,
         ],
         '3' => [//大平台推大比赛
 //            Zhibo::class,
@@ -52,5 +53,22 @@ class ChannelFactory
         } else {
             return null;
         }
+    }
+
+    /**
+     * @param $id
+     * @return Channel
+     */
+    public static function createInstanceById($id)
+    {
+        foreach (self::$channels as $channel) {
+            foreach ($channel as $ch) {
+                $c = new $ch;
+                if ($c->id == $id) {
+                    return $c;
+                }
+            }
+        }
+        return null;
     }
 }
