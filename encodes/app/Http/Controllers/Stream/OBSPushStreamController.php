@@ -28,11 +28,11 @@ class OBSPushStreamController extends BaseController
 //            $this->channels['zhibo4'] = 'meme-ali##40290888';
 //            $this->channels['zhibo5'] = 'meme-ali##40290999';
 
-            $this->channels['zhibo6'] = 'maobo-ali##300222111';
-            $this->channels['zhibo7'] = 'maobo-ali##300222222';
-            $this->channels['zhibo8'] = 'maobo-ali##300222333';
-            $this->channels['zhibo9'] = 'maobo-ali##300222444';
-            $this->channels['zhibo10'] = 'maobo-ali##300222555';
+//            $this->channels['zhibo6'] = 'maobo-ali##300222111';
+//            $this->channels['zhibo7'] = 'maobo-ali##300222222';
+//            $this->channels['zhibo8'] = 'maobo-ali##300222333';
+//            $this->channels['zhibo9'] = 'maobo-ali##300222444';
+//            $this->channels['zhibo10'] = 'maobo-ali##300222555';
 
 //            $this->channels['zhibo11'] = 'qt-ali##30022211';
 //            $this->channels['zhibo12'] = 'qt-ali##30022222';
@@ -56,6 +56,12 @@ class OBSPushStreamController extends BaseController
 //            $this->channels['zhibo27'] = 'bohe-ws##2178442ea8f44ed6992b468530bbad57';
 //            $this->channels['zhibo28'] = 'bohe-ws##1c652c45e5a14c879575802605b60fdb';
 //            $this->channels['zhibo29'] = 'bohe-ws##6c162a2b52034586a360e0c95abf0e5e';
+
+            $this->channels['zhibo6'] = 'meme-test##40290555';
+            $this->channels['zhibo7'] = 'meme-test##40290666';
+            $this->channels['zhibo8'] = 'meme-test##40290777';
+            $this->channels['zhibo9'] = 'meme-test##40290888';
+            $this->channels['zhibo10'] = 'meme-test##40290999';
 
             $this->channels['zhibo101'] = 'akq-ali##300222111';
             $this->channels['zhibo102'] = 'akq-ali##300222222';
@@ -121,6 +127,14 @@ class OBSPushStreamController extends BaseController
                 $params['live_flv'] = 'http://flvbohetec2.live.126.net/live/' . $key . '.flv';//flv播放地址
                 $params['live_m3u8'] = 'http://pullhlsbohetec2.live.126.net/live/' . $key . '/playlist.m3u8';//播放m3u8地址
                 $params['live_rtmp'] = '-';//rtmp播放地址
+                break;
+            }
+            case 'meme-test': {
+                $params['push_rtmp'] = 'rtmp://publish.demo.zego.im/livedemo';//流地址
+                $params['push_key'] = $key;//流名称
+//                $params['live_flv'] = 'http://flvbohetec2.live.126.net/live/' . $key . '.flv';//flv播放地址
+                $params['live_m3u8'] = 'http://hls.demo.zego.im/livedemo/' . $key . '.m3u8';//播放m3u8地址
+                $params['live_rtmp'] = 'rtmp://rtmp.demo.zego.im/livedemo/' . $key;//rtmp播放地址
                 break;
             }
             case 'akq-ali': {

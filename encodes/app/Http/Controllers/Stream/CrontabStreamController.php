@@ -553,10 +553,6 @@ class CrontabStreamController extends BaseController
 //        dump($json);
         if (!empty($json['data']) && !empty($json['data']['pull_stream_url'])) {
             $rtmp_push_url = $json['data']['pull_stream_url'];
-//            $flv_pull_url = $json['data']['live_flv_hd'];
-//            $rtmp_pull_hd = $json['data']['rtmp_hd'];
-//            $hls_pull_url = $json['data']['live_hd'];
-//            rtmp://istream.inke.cn/live/1530764334486657?sign=364c99d464fbf258MjAwLWlzdHJlYW0uaW5rZS5jbi0xMDQwOTk0MTQ=&ver=2&uid=104099414&ikAppState=0
             $urls = explode('/', $rtmp_push_url);
             $stream_name = array_pop($urls);
             $stream_url = join('/', $urls);

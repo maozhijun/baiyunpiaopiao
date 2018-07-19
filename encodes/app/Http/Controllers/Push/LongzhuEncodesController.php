@@ -40,14 +40,22 @@ class LongzhuEncodesController extends BaseController
 
 //            $this->channels[] = '17053903117##';//停封
         } elseif (env('APP_NAME') == 'aikq1') {
-            $this->channels[] = '17172850051##';
-            $this->channels[] = '17172850057##';
-            $this->channels[] = '17177260095##';
-            $this->channels[] = '17177260086##';
-            $this->channels[] = '17139230362##';
-            $this->channels[] = '17151290942##';
-            $this->channels[] = '17165142105##';
-            $this->channels[] = '17177160082##';
+//            $this->channels[] = '17172850051##';
+//            $this->channels[] = '17172850057##';
+//            $this->channels[] = '17177260095##';
+//            $this->channels[] = '17177260086##';
+//            $this->channels[] = '17139230362##';
+//            $this->channels[] = '17151290942##';
+//            $this->channels[] = '17165142105##';
+//            $this->channels[] = '17177160082##';
+
+            $this->channels[] = 'longzhu12?aba9bd53152c4bb4945f11ae16ad5511';
+            $this->channels[] = 'longzhu12?aba9bd53152c4bb4945f11ae16ad5522';
+            $this->channels[] = 'longzhu12?aba9bd53152c4bb4945f11ae16ad5533';
+            $this->channels[] = 'longzhu12?aba9bd53152c4bb4945f11ae16ad5544';
+            $this->channels[] = 'longzhu12?aba9bd53152c4bb4945f11ae16ad5555';
+            $this->channels[] = 'longzhu12?aba9bd53152c4bb4945f11ae16ad5566';
+
         } elseif (env('APP_NAME') == 'leqiuba') {
 //            $this->channels[] = '17160980733##';//待确认
 //            $this->channels[] = '17082248663##';//封
@@ -100,8 +108,9 @@ class LongzhuEncodesController extends BaseController
             if ($roomName == 'longzhu12') {
                 $rtmp_url = 'rtmp://push12.plures.net/lzlive/' . $token;
                 $live_lines .= 'http://hdl1201.plures.net/lzlive/' . $token . '.flv';
-                $live_lines .= "\n" . 'http://hdl1201.plures.net/onlive/' . $token . '.m3u8';
-                $live_lines .= "\n" . 'rtmp://hdl1201.plures.net/onlive/' . $token;
+                $live_lines .= "\n" . 'http://hdl1202.plures.net/lzlive/' . $token . '.m3u8';
+                $live_lines .= "\n" . 'rtmp://hdl1203.plures.net/lzlive/' . $token;
+                $roomName = $channel;
             } else {
                 $this->closeLongZhuLive($token);
                 $rtmp_json = $this->startLongZhuLive($token);//开始直播

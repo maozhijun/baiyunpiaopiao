@@ -15,29 +15,6 @@ class SSportsEncodesController extends BaseController
     {
         parent::__construct();
         $this->middleware('filter')->except([]);
-        if (env('APP_NAME') == 'good') {
-            $this->channels[] = '云端直播0##vod_3180361';
-            $this->channels[] = '云端直播1##vod_3180362';
-            $this->channels[] = '云端直播2##vod_3180363';
-            $this->channels[] = '云端直播3##vod_3180364';
-            $this->channels[] = '云端直播4##vod_3180365';
-            $this->channels[] = '云端直播5##vod_3180366';
-            $this->channels[] = '云端直播6##vod_3180367';
-            $this->channels[] = '云端直播7##vod_3180368';
-            $this->channels[] = '云端直播8##vod_3180369';
-            $this->channels[] = '云端直播9##vod_3180370';
-        } elseif (env('APP_NAME') == 'aikq') {
-            $this->channels[] = '云端直播0##vod_3183361';
-            $this->channels[] = '云端直播1##vod_3183362';
-            $this->channels[] = '云端直播2##vod_3183363';
-            $this->channels[] = '云端直播3##vod_3183364';
-            $this->channels[] = '云端直播4##vod_3183365';
-            $this->channels[] = '云端直播5##vod_3183366';
-            $this->channels[] = '云端直播6##vod_3183367';
-            $this->channels[] = '云端直播7##vod_3183368';
-            $this->channels[] = '云端直播8##vod_3183369';
-            $this->channels[] = '云端直播9##vod_3183370';
-        }
     }
 
     public function index(Request $request)
@@ -65,68 +42,11 @@ class SSportsEncodesController extends BaseController
 
     public function created(Request $request)
     {
-        if ($request->isMethod('post')
-            && $request->has('input')
-            && $request->has('channel')
-            && $request->has('name')
-        ) {
-            $name = str_replace(' ', '-', $request->input('name'));
-            $input = $request->input('input');
-
-            $channel = $request->input('channel');
-            list($roomName, $roomId) = explode('##', $channel);
-            $rtmp_url = 'rtmp://push.china0736.com/vod/' . $roomId;//获取rtmp地址
-            $live_rtmp_url = 'rtmp://live.china0736.com/vod/' . $roomId;//播放rtmp地址
-            $live_m3u8_url = 'http://hls.china0736.com/vod/' . $roomId . '.m3u8';//播放m3u8地址
-
-            $fontsize = $request->input('fontsize', 18);
-            $watermark = $request->input('watermark', '');
-            $location = $request->input('location', 'top');
-            $has_logo = $request->input('logo');
-            $referer = $request->input('referer', '');
-            $header1 = $request->input('header1', '');
-            $header2 = $request->input('header2', '');
-            $header3 = $request->input('header3', '');
-            $size = $request->input('size', 'md');
-            $exec = $this->generateFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $size, $referer, $header1, $header2, $header3);
-            Log::info($exec);
-            shell_exec($exec);
-            $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');
-            if (!empty($pid)) {
-                $et = new EncodeTask();
-                $et->name = $name;
-                $et->channel = $channel;
-                $et->input = $input;
-                $et->rtmp = $rtmp_url;
-                $et->out = $live_rtmp_url . "\n" . $live_m3u8_url;
-                $et->from = 'Very';
-                $et->to = 'Very';
-                $et->status = 1;
-                $et->save();
-            }
-
-        }
         return back();
     }
 
     public function stop(Request $request, $id)
     {
-        $et = EncodeTask::query()->find($id);
-        if (isset($et)) {
-            $pid = exec('pgrep -f "' . explode('?', $et->rtmp)[0] . '"');
-            if (!empty($pid)) {
-                exec('kill -9 ' . $pid, $output_array, $return_var);
-                if ($return_var == 0) {
-                    $et->status = 0;
-                    $et->stop_at = date_create();
-                    $et->save();
-                }
-            } else {
-                $et->status = 0;
-                $et->stop_at = date_create();
-                $et->save();
-            }
-        }
         return back();
     }
 
@@ -188,7 +108,7 @@ class SSportsEncodesController extends BaseController
     private function getSSKeys($id)
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "http://security.ssports.com/api/channel/v3/watchMatch/match/$id/device/app?userId=17951244&uuid=36695AD5D460A8D1D6CB8850DB58AF7B");
+        curl_setopt($ch, CURLOPT_URL, "http://security.ssports.com/api/channel/v4/watchMatch/match/$id/device/app?userId=17951244&uuid=36695AD5D460A8D1D6CB8850DB58AF7B");
 //        curl_setopt($ch, CURLOPT_COOKIE, 'SERVERID=e8e4d482877771492d8d82843185eeb8|1522664175|1522659461; public_token=leisu_test;');
 //        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

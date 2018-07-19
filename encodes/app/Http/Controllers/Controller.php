@@ -55,8 +55,10 @@ class Controller extends BaseController
             View::share('watermark', '足球专家微信：bet6879，篮球专家微信：bet8679a');
             View::share('logo_text', '加微信：bet6879');
         } elseif (env('APP_NAME') == 'aikq' || env('APP_NAME') == 'aikq1') {
-            View::share('watermark', '加主播微信【kanqiu858】进群聊球，每日抢红包，会员抽iPhone X');
-            View::share('logo_text', '加微信：kanqiu858');
+//            View::share('watermark', '加主播微信【kanqiu818】进群聊球，每日抢红包，会员抽iPhone X');
+//            View::share('logo_text', '加微信：kanqiu818');
+            View::share('watermark', '专业赛事推荐，昨晚4中3！微信搜索关注《足彩边角料》公众号免费获取');
+            View::share('logo_text', '爱看球直播');
             $this->random_logo = '爱看球直播：aikq.cc';
         } elseif (env('APP_NAME') == 'leqiuba') {
             View::share('watermark', '看球 聊球 微信群，进群加微信：zhibo556 红包福利天天有！');
@@ -249,7 +251,7 @@ class Controller extends BaseController
     }
 
     //抓取关键帧
-    protected function grabKeyFrame($stream, $out)
+    protected function spiderKeyFrame($stream, $out)
     {
         exec('ffmpeg -i "' . $stream . '" -y -vframes 1 -f image2 ' . $out);
     }
