@@ -97,7 +97,7 @@ class XBetEncodesController extends BaseController
 
         if (!empty($eval)) {
             $scripts = [];
-            $scripts[] = '<script>';
+//            $scripts[] = '<script>';
             $scripts[] = 'var vServer=""';
             $scripts[] = 'var vMp4url=""';
             $scripts[] = 'var vIosurl=""';

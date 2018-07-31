@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\EncodeTask;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\View;
 
 class Controller extends BaseController
@@ -55,10 +56,20 @@ class Controller extends BaseController
             View::share('watermark', '足球专家微信：bet6879，篮球专家微信：bet8679a');
             View::share('logo_text', '加微信：bet6879');
         } elseif (env('APP_NAME') == 'aikq' || env('APP_NAME') == 'aikq1') {
+            $watermark = Redis::get('watermark');
+            $logo_text = Redis::get('logo_text');
 //            View::share('watermark', '加主播微信【kanqiu818】进群聊球，每日抢红包，会员抽iPhone X');
 //            View::share('logo_text', '加微信：kanqiu818');
-            View::share('watermark', '专业赛事推荐，昨晚4中3！微信搜索关注《足彩边角料》公众号免费获取');
-            View::share('logo_text', '爱看球直播');
+            if (isset($logo_text)) {
+                View::share('logo_text', $logo_text);
+            } else {
+                View::share('logo_text', '爱看球直播');
+            }
+            if (isset($watermark)) {
+                View::share('watermark', $watermark);
+            } else {
+                View::share('watermark', '专业赛事推荐，今日重心已发布！微信搜索关注《足彩边角料》公众号免费获取');
+            }
             $this->random_logo = '爱看球直播：aikq.cc';
         } elseif (env('APP_NAME') == 'leqiuba') {
             View::share('watermark', '看球 聊球 微信群，进群加微信：zhibo556 红包福利天天有！');
@@ -67,8 +78,23 @@ class Controller extends BaseController
             View::share('watermark', '');
             View::share('logo_text', '');
         }
-        View::share('fontsize', $this->fontsize);
+        $fontsize = Redis::get('fontsize');
+        if (isset($fontsize)) {
+            View::share('fontsize', $fontsize);
+        } else {
+            View::share('fontsize', $this->fontsize);
+        }
+
+        $sizes = Redis::get('sizes');
+        if (isset($sizes)) {
+            View::share('default_sizes', $sizes);//默认
+        }
         View::share('sizes', $this->sizes);
+
+        $logo_position = Redis::get('logo_position');
+        if (isset($logo_position)) {
+            View::share('default_logo_position', $logo_position);
+        }
         View::share('logo_position', $this->logo_position);
     }
 
@@ -105,6 +131,24 @@ class Controller extends BaseController
     {
         if (empty($input_uri) || empty($rtmp_url)) {
             return '';
+        }
+        if (!empty($watermark)) {
+            Redis::set('watermark', $watermark);
+        }
+        if (!empty($logo_text)) {
+            Redis::set('logo_text', $logo_text);
+        }
+        if (!empty($logo_position)) {
+            Redis::set('logo_position', $logo_position);
+        }
+        if (!empty($location)) {
+            Redis::set('location', $location);
+        }
+        if (!empty($size)) {
+            Redis::set('size', $size);
+        }
+        if (!empty($fontsize)) {
+            Redis::set('fontsize', $fontsize);
         }
         $size = $this->sizes[$size];
         if (empty($size)) {
