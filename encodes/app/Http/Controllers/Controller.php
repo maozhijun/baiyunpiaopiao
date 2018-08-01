@@ -85,8 +85,8 @@ class Controller extends BaseController
             View::share('fontsize', $this->fontsize);
         }
 
-        $sizes = Redis::get('sizes');
-        View::share('default_sizes', $sizes);//默认
+        $size = Redis::get('size');
+        View::share('default_size', $size);//默认
         View::share('sizes', $this->sizes);
 
         $logo_position = Redis::get('logo_position');
@@ -96,8 +96,8 @@ class Controller extends BaseController
         $has_logo = Redis::get('has_logo');
         View::share('default_has_logo', $has_logo);
 
-        $position = Redis::get('position');
-        View::share('default_position', $position);
+        $location = Redis::get('location');
+        View::share('default_location', $location);
     }
 
     /**
@@ -134,24 +134,6 @@ class Controller extends BaseController
         if (empty($input_uri) || empty($rtmp_url)) {
             return '';
         }
-//        if (!empty($watermark)) {
-//            Redis::set('watermark', $watermark);
-//        }
-//        if (!empty($logo_text)) {
-//            Redis::set('logo_text', $logo_text);
-//        }
-//        if (!empty($logo_position)) {
-//            Redis::set('logo_position', $logo_position);
-//        }
-//        if (!empty($location)) {
-//            Redis::set('location', $location);
-//        }
-//        if (!empty($size)) {
-//            Redis::set('size', $size);
-//        }
-//        if (!empty($fontsize)) {
-//            Redis::set('fontsize', $fontsize);
-//        }
         $size = $this->sizes[$size];
         if (empty($size)) {
             $size = $this->sizes['md'];

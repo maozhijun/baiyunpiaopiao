@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\Setting;
 
 use App\Http\Controllers\Controller as BaseController;
-use App\Models\EncodeTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 
 class VideoSettingController extends BaseController
 {
-    private $channels = [];
 
     public function __construct()
     {
@@ -27,19 +25,29 @@ class VideoSettingController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Custom')->where('created_at', '>', date_create('-24 hour'))->whereIn('status', [1, 2, -1])->get();
-        return view('manager.setting.video', ['ets' => $ets, 'channels' => $this->channels]);
+        return view('manager.setting.video');
     }
 
-    public function created(Request $request)
+    public function save(Request $request)
     {
         if ($request->isMethod('post')
-            && $request->has('input')
-            && $request->has('channel')
-            && $request->has('name')
+            && $request->has('watermark')
+            && $request->has('logo_text')
+            && $request->has('location')
+            && $request->has('logo_position')
         ) {
-
-
+            $watermark = $request->input('watermark', '');
+            $location = $request->input('location', 'top');
+            $has_logo = $request->input('logo','0');
+            $logo_position = $request->input('logo_position', '');
+            $logo_text = $request->input('logo_text', '');
+            $size = $request->input('size', 'md');
+            Redis::set('watermark', $watermark);
+            Redis::set('logo_text', $logo_text);
+            Redis::set('logo_position', $logo_position);
+            Redis::set('location', $location);
+            Redis::set('size', $size);
+            Redis::set('has_logo', $has_logo);
         }
         return back();
     }
