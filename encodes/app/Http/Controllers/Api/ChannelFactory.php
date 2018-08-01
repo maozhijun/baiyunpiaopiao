@@ -32,14 +32,16 @@ class ChannelFactory
             AikqWS::class,
         ],
         '2' => [//小平台推小比赛
-            Xiaoka::class,
-            Fd00cdn::class,
-            WoleW::class,
+//            Xiaoka::class,
+//            Fd00cdn::class,
+//            WoleW::class,
+            AikqWS::class,
         ],
         '3' => [//大平台推大比赛
 //            Zhibo::class,
-            Longzhu::class,
-            Inke::class,
+//            Longzhu::class,
+//            Inke::class,
+            AikqWS::class,
         ],
     ];
 

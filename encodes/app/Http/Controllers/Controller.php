@@ -86,16 +86,18 @@ class Controller extends BaseController
         }
 
         $sizes = Redis::get('sizes');
-        if (isset($sizes)) {
-            View::share('default_sizes', $sizes);//默认
-        }
+        View::share('default_sizes', $sizes);//默认
         View::share('sizes', $this->sizes);
 
         $logo_position = Redis::get('logo_position');
-        if (isset($logo_position)) {
-            View::share('default_logo_position', $logo_position);
-        }
+        View::share('default_logo_position', $logo_position);
         View::share('logo_position', $this->logo_position);
+
+        $has_logo = Redis::get('has_logo');
+        View::share('default_has_logo', $has_logo);
+
+        $position = Redis::get('position');
+        View::share('default_position', $position);
     }
 
     /**
@@ -132,24 +134,24 @@ class Controller extends BaseController
         if (empty($input_uri) || empty($rtmp_url)) {
             return '';
         }
-        if (!empty($watermark)) {
-            Redis::set('watermark', $watermark);
-        }
-        if (!empty($logo_text)) {
-            Redis::set('logo_text', $logo_text);
-        }
-        if (!empty($logo_position)) {
-            Redis::set('logo_position', $logo_position);
-        }
-        if (!empty($location)) {
-            Redis::set('location', $location);
-        }
-        if (!empty($size)) {
-            Redis::set('size', $size);
-        }
-        if (!empty($fontsize)) {
-            Redis::set('fontsize', $fontsize);
-        }
+//        if (!empty($watermark)) {
+//            Redis::set('watermark', $watermark);
+//        }
+//        if (!empty($logo_text)) {
+//            Redis::set('logo_text', $logo_text);
+//        }
+//        if (!empty($logo_position)) {
+//            Redis::set('logo_position', $logo_position);
+//        }
+//        if (!empty($location)) {
+//            Redis::set('location', $location);
+//        }
+//        if (!empty($size)) {
+//            Redis::set('size', $size);
+//        }
+//        if (!empty($fontsize)) {
+//            Redis::set('fontsize', $fontsize);
+//        }
         $size = $this->sizes[$size];
         if (empty($size)) {
             $size = $this->sizes['md'];

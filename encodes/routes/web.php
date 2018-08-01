@@ -12,7 +12,7 @@
 */
 
 Route::match(["get", "post"], "/login", 'AuthController@index');//登录
-Route::get("/manager/list/", "EncodesController@index");
+//Route::get("/manager/list/", "EncodesController@index");
 
 Route::group(["middleware" => "auth", "namespace" => "Push"], function () {
     if (env('APP_NAME') == 'good') {
@@ -143,9 +143,14 @@ Route::group(["middleware" => "auth", "namespace" => "Record"], function () {
 
 Route::group(["middleware" => "auth", "namespace" => "Stream"], function () {
     Route::get("/obs/stream/", "PushStreamController@index");
-    Route::post("/obs/stream/take-stream", "PushStreamController@takeStream");
+    Route::post("/obs/stream/take-stream/", "PushStreamController@takeStream");
     Route::get("/obs/stream/release-stream/{id}", "PushStreamController@releaseStream");
     Route::get("/obs/stream/close-long-stream/{id}", "PushStreamController@closeStreamLongZhu");
+});
+
+Route::group(["middleware" => "auth", "namespace" => "Setting"], function () {
+    Route::get("/setting/video/", "VideoSettingController@index");
+    Route::post("/setting/video/save", "VideoSettingController@save");
 });
 
 Route::group(["namespace" => "Stream"], function () {

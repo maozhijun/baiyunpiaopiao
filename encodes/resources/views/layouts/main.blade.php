@@ -47,6 +47,9 @@
                         <a href="/resources/qq/">直播源</a>
                     </li>
                 @endif
+                <li {{ starts_with(request()->path(),'setting')?'class=active':'' }}>
+                    <a href="/setting/video/">推流设置</a>
+                </li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
