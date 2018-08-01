@@ -15,7 +15,7 @@ class HuomaoWs  extends Channel
 {
     public $id = 309;//平台ID
     public $name = 'huomao.com';//平台名称
-    public $level = 2;//平台级别，1:野鸡，2:一般，3:大平台
+    public $level = 3;//平台级别，1:野鸡，2:一般，3:大平台
     public $expiration = -1;//过期时间，单位秒，-1表示不过期
 
     private $streamURL;

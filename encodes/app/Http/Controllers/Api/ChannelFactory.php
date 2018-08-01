@@ -13,6 +13,8 @@ use App\Http\Controllers\Api\Channels\AikqAli;
 use App\Http\Controllers\Api\Channels\AikqWS;
 use App\Http\Controllers\Api\Channels\China0736;
 use App\Http\Controllers\Api\Channels\Fd00cdn;
+use App\Http\Controllers\Api\Channels\HuomaoQiniu;
+use App\Http\Controllers\Api\Channels\HuomaoWs;
 use App\Http\Controllers\Api\Channels\Inke;
 use App\Http\Controllers\Api\Channels\Longzhu;
 use App\Http\Controllers\Api\Channels\Sina7d;
@@ -29,6 +31,7 @@ class ChannelFactory
 //            Sina7d::class,
 //            Syyba123::class,
 //            China0736::class,
+//            HuomaoQiniu::class,
             AikqWS::class,
         ],
         '2' => [//小平台推小比赛
@@ -42,6 +45,7 @@ class ChannelFactory
 //            Longzhu::class,
 //            Inke::class,
             AikqWS::class,
+//            HuomaoWs::class,
         ],
     ];
 
