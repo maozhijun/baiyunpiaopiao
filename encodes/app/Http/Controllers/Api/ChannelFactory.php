@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Api\Channels\AikqAli;
+use App\Http\Controllers\Api\Channels\AikqWS;
 use App\Http\Controllers\Api\Channels\China0736;
 use App\Http\Controllers\Api\Channels\Fd00cdn;
 use App\Http\Controllers\Api\Channels\Inke;
@@ -25,9 +26,10 @@ class ChannelFactory
     public static $channels = [
         '1' => [//野鸡平台推野鸡赛
 //            AikqAli::class,
-            Sina7d::class,
-            Syyba123::class,
-            China0736::class,
+//            Sina7d::class,
+//            Syyba123::class,
+//            China0736::class,
+            AikqWS::class,
         ],
         '2' => [//小平台推小比赛
             Xiaoka::class,
