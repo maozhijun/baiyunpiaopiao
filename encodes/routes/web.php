@@ -175,3 +175,6 @@ Route::group(["namespace" => "Stream"], function () {
 
 //定时任务
 Route::get("/manager/check-ffmpeg", 'CrontabController@checkFFMPEG');
+
+//测试用的接口
+Route::get("/test/channels", 'TestController@onTest');
