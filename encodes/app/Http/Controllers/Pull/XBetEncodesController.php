@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller as BaseController;
 use App\Models\EncodeTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use QL\QueryList;
 
 class XBetEncodesController extends BaseController
 {
@@ -18,18 +19,19 @@ class XBetEncodesController extends BaseController
 
     public function index(Request $request)
     {
-//        $LSLives = $this->getXBetLives();
-        $lives = $this->getXBetLives();
-//        foreach ($LSLives['matches'] as $live) {
-//            if ($live[10] == 1 && $live[2] <= 4) {
-//                $lives[] = $live;
-//            }
-//        }
-//        $leagues = $LSLives['events'];
-//        dump($lives);
-//        dump($leagues);
-//        $ets = EncodeTask::query()->where('from', 'LS')->where('status', 1)->get();
-        return view('manager.pull.xbet', ['lives' => $lives]);
+//        $lives = $this->getXBetLives();
+//        return view('manager.pull.xbet', ['lives' => $lives]);
+        $lives = $this->getSStreamLives();
+        return view('manager.pull.sstream365', ['lives' => $lives]);
+    }
+
+    public function getSStreamUrl(Request $request)
+    {
+        $lives = $this->getSStreamLines($request->input('url'));
+        if (!empty($lives)) {
+            return response($lives);
+        }
+        return response('404');
     }
 
     public function getLiveUrl(Request $request, $id)
@@ -68,6 +70,93 @@ class XBetEncodesController extends BaseController
         }
     }
 
+    private function getSStreamLives()
+    {
+        $ql = new QueryList();
+        $ql->get('http://sstream365.com/', [], [
+//            'proxy' => 'http://222.141.11.17:8118',
+            //设置超时时间，单位：秒
+            'timeout' => 30,
+            'headers' => [
+                'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36',
+                'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+                'accept-encoding' => 'gzip, deflate, br',
+                'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8,ja;q=0.7',
+                'upgrade-insecure-requests' => '1',
+                'Cookie' => '__cfduid=d913bf68f903853b3c1697c9c29733ba31532567654'
+            ]
+        ])->encoding('UTF-8')->removeHead();
+
+        $lives = [];
+        $trs = $ql->find('tbody tr')->htmls();
+        foreach ($trs as $tr) {
+            $qlb = new QueryList();
+            $qlb->setHtml($tr);
+            $type = $qlb->find('td b')->texts()->last();
+//            dump($type);
+            if ($type == '足球' || $type == '篮球' || $type == '网球') {
+                $a['type'] = $type;
+                $league = $qlb->find('td b')->texts()->first();
+                $a['league'] = $league;
+//                dump($league);
+                $name = $qlb->find('td a')->texts()->first();
+                $a['name'] = $name;
+//                dump($name);
+                $link = 'http://sstream365.com' . $qlb->find('td a')->attrs('href')->first();
+                $a['link'] = $link;
+//                dump($link);
+                $date = $qlb->find('td')->texts()->last();
+                $a['date'] = $date;
+//                dump($date);
+                $lives[] = $a;
+            }
+        }
+        return $lives;
+    }
+
+    private function getSStreamLines($url)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "$url");
+        curl_setopt($ch, CURLOPT_COOKIE, 'SERVERID=e8e4d482877771492d8d82843185eeb8|1522664175|1522659461; public_token=leisu_test;');
+//        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+//        curl_setopt($ch, CURLINFO_CONTENT_TYPE, 'application/x-www-form-urlencoded');
+        curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+//        curl_setopt($ch, CURLOPT_HEADER, true);
+        $response = curl_exec($ch);
+        if ($error = curl_error($ch)) {
+            die($error);
+        }
+        curl_close($ch);
+//        dump($response);
+        $response = str_replace("\x00", '', $response);
+        $lines = explode("\n", $response);
+        $eval = '';
+        foreach ($lines as $line) {
+            if (str_contains($line, 'eval(function')) {
+                $eval = $line;
+            }
+        }
+
+        if (!empty($eval)) {
+            $scripts = [];
+//            $scripts[] = '<script>';
+//            $scripts[] = 'var vServer=""';
+//            $scripts[] = 'var vMp4url=""';
+//            $scripts[] = 'var vIosurl=""';
+            $scripts[] = $eval;
+            $scripts[] = 'document.write("<p><label>rtmp源:</label><input value=\""+vServer+"/"+vMp4url+"\" size=\"120\"></p>")';
+            $scripts[] = 'document.write("<p><label>m3u8源:</label><input value=\""+vIosurl+"\" size=\"120\"></p>")';
+            $scripts[] = '</script>';
+            $script = join("\n", $scripts);
+            return $script;
+        }
+        return '';
+    }
+
     private function getXBetLines($id)
     {
         $ch = curl_init();
@@ -98,9 +187,9 @@ class XBetEncodesController extends BaseController
         if (!empty($eval)) {
             $scripts = [];
 //            $scripts[] = '<script>';
-            $scripts[] = 'var vServer=""';
-            $scripts[] = 'var vMp4url=""';
-            $scripts[] = 'var vIosurl=""';
+//            $scripts[] = 'var vServer=""';
+//            $scripts[] = 'var vMp4url=""';
+//            $scripts[] = 'var vIosurl=""';
             $scripts[] = $eval;
             $scripts[] = 'document.write("<p><label>rtmp源:</label><input value=\""+vServer+"/"+vMp4url+"\" size=\"120\"></p>")';
             $scripts[] = 'document.write("<p><label>m3u8源:</label><input value=\""+vIosurl+"\" size=\"120\"></p>")';

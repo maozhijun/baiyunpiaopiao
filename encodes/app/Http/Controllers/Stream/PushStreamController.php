@@ -24,7 +24,7 @@ class PushStreamController extends BaseController
 //            $longzhus[] = 'long##17121073689?';
 //            $longzhus[] = 'long##17172850051?';
 //            $longzhus[] = 'long##17169085461?589f283876c13f09b85d0bf1ce85c7ae5e3ea05a37dbabefc45039dbd5495ef930e950f2a536ee572e4d282de49282b586f205d4ea56b2e3';
-            $longzhus[] = 'long##17121073721?674545a7323900293af87d61185980ac18938808607ab79877a9ce4654c26704cbadb759a61acfbc03fa823e291ec336514450e36e328c31';
+            $longzhus[] = 'long##17121073721?19cb2435936d6d99a80abb6d7cadb1653d9583aac179407364d03bea40da5cdc9c99178f0600703680275f4dfb4d628a014b9a2f1f51b068';
             $longzhus[] = 'long##17172850057?d92217faef38c4c841de66419e739c9f87e6133888d3fb351217270eb71f5455261383a68adcef4e5f3e0019704650b1cf3d3a67a60fee80';
             $longzhus[] = 'long##17177260095?bd3eceb0485e19d7a796bab61e5ecea8e8f7244e2cc1cd9995128b1006d6c0ce2b07b6f040c6a2c79bab7fa6d06eb433f9b84b8ed930b448';
             $longzhus[] = 'long##17177260086?007a60ccff7dea79dc679efeddb096e7f5b4f9b119df368c2d00dbcee58a50210ccf22ce243169266a7f05cc33124e44eaa3ad1e6af53209';
@@ -301,7 +301,7 @@ class PushStreamController extends BaseController
             die($error);
         }
         curl_close($ch);
-//        dump($response);
+        dump($response);
         $json = json_decode($response, true);
 //        dump($json);
         if (isset($json) && isset($json['upStreamLines'])) {

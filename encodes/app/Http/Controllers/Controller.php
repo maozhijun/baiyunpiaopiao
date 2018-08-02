@@ -167,6 +167,13 @@ class Controller extends BaseController
                 $execs[] = '-user_agent "BLUEIOS"';
                 $execs[] = '-headers "Range: bytes=0-"';
                 $execs[] = '-headers "Icy-MetaData: 1"';
+            } elseif (str_contains($input_uri, 'aliez.me')) {
+                $execs[] = '-user_agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"';
+                $execs[] = '-headers "Cookie: _ga=GA1.2.737073763.1533176046; _gid=GA1.2.373040297.1533176046"';
+                $execs[] = '-headers "Host: a3.aliez.me:8080"';
+                $execs[] = '-headers "Upgrade-Insecure-Requests: 1"';
+                $execs[] = '-headers "origin: http://aliez.tv"';
+                $execs[] = '-headers "referer: http://aliez.tv/live/dat03_67671/"';
             } elseif (starts_with($input_uri, 'https://m3u8.zhibo1.cc/')) {
                 $execs[] = '-user_agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"';
                 $execs[] = '-headers "origin: https://www.ballbar.cc"';
