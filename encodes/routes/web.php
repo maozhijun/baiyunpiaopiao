@@ -114,6 +114,7 @@ Route::group(["middleware" => "auth", "namespace" => "Pull"], function () {
     Route::get("/resources/xbet/", "XBetEncodesController@index");
     Route::get("/resources/xbet/get_live_url/{id}", "XBetEncodesController@getLiveUrl");
     Route::get("/resources/xbet/get_slive_url", "XBetEncodesController@getSStreamUrl");
+    Route::get("/resources/xbet/test", "XBetEncodesController@test");
 
     Route::get("/resources/ssports/", "SSportsEncodesController@index");
     Route::get("/resources/ssports/get_live_url/{id}", "SSportsEncodesController@getLiveUrl");

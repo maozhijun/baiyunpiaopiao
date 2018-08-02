@@ -22,7 +22,8 @@ class XBetEncodesController extends BaseController
 //        $lives = $this->getXBetLives();
 //        return view('manager.pull.xbet', ['lives' => $lives]);
         $lives = $this->getSStreamLives();
-        return view('manager.pull.sstream365', ['lives' => $lives]);
+        $upcomings = $this->getSStreamUpcomingLives();
+        return view('manager.pull.sstream365', ['lives' => $lives,'upcomings' => $upcomings]);
     }
 
     public function getSStreamUrl(Request $request)
@@ -74,7 +75,6 @@ class XBetEncodesController extends BaseController
     {
         $ql = new QueryList();
         $ql->get('http://sstream365.com/', [], [
-//            'proxy' => 'http://222.141.11.17:8118',
             //设置超时时间，单位：秒
             'timeout' => 30,
             'headers' => [
@@ -94,7 +94,8 @@ class XBetEncodesController extends BaseController
             $qlb->setHtml($tr);
             $type = $qlb->find('td b')->texts()->last();
 //            dump($type);
-            if ($type == '足球' || $type == '篮球' || $type == '网球') {
+            if ($type == '足球' || $type == '篮球') {
+//          if ($type == '足球' || $type == '篮球' || $type == '网球') {
                 $a['type'] = $type;
                 $league = $qlb->find('td b')->texts()->first();
                 $a['league'] = $league;
@@ -107,6 +108,50 @@ class XBetEncodesController extends BaseController
 //                dump($link);
                 $date = $qlb->find('td')->texts()->last();
                 $a['date'] = $date;
+//                dump($date);
+                $lives[] = $a;
+            }
+        }
+        return $lives;
+    }
+
+    private function getSStreamUpcomingLives()
+    {
+        $ql = new QueryList();
+        $ql->get('http://sstream365.com/upcoming/', [], [
+            //设置超时时间，单位：秒
+            'timeout' => 30,
+            'headers' => [
+                'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36',
+                'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+                'accept-encoding' => 'gzip, deflate, br',
+                'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8,ja;q=0.7',
+                'upgrade-insecure-requests' => '1',
+                'Cookie' => '__cfduid=d913bf68f903853b3c1697c9c29733ba31532567654'
+            ]
+        ])->encoding('UTF-8')->removeHead();
+
+        $lives = [];
+        $trs = $ql->find('tbody tr')->htmls();
+        foreach ($trs as $tr) {
+            $qlb = new QueryList();
+            $qlb->setHtml($tr);
+            $type = $qlb->find('td b')->texts()->last();
+//            dump($type);
+            if ($type == '足球' || $type == '篮球') {
+//          if ($type == '足球' || $type == '篮球' || $type == '网球') {
+                $a['type'] = $type;
+                $league = $qlb->find('td b')->texts()->first();
+                $a['league'] = $league;
+//                dump($league);
+                $name = $qlb->find('td a')->texts()->first();
+                $a['name'] = $name;
+//                dump($name);
+                $link = 'http://sstream365.com' . $qlb->find('td a')->attrs('href')->first();
+                $a['link'] = $link;
+//                dump($link);
+                $date = $qlb->find('td')->texts()->first();
+                $a['date'] = explode(' ',$date)[1];
 //                dump($date);
                 $lives[] = $a;
             }
@@ -202,17 +247,36 @@ class XBetEncodesController extends BaseController
 
     public function test()
     {
-//        list($roomName, $roomId, $token) = explode('##', '老铁扣波666##10061563##3c4068b47d194772');
-//        $rtmp_json = $this->getRtmp($token);
-//        $fms_val = $rtmp_json['fms_val'];
-//        $rtmp_id = array_first(array_keys($rtmp_json['list']));
-//        $rtmp_url = array_first(array_values($rtmp_json['list']));
-//        if ($this->startLive($token, $fms_val, $rtmp_id)) {//开播成功
-//            $flvUrl = $this->getFlv($roomId);
-//            $m3u8Url = $this->getM3u8($roomId);
-//            dump($rtmp_url);
-//            dump($flvUrl);
-//            dump($m3u8Url);
-//        }
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://aliez-stream.gcdn.co/hls/streama71710/index.m3u8");
+//        curl_setopt($ch, CURLOPT_COOKIE, 'SERVERID=e8e4d482877771492d8d82843185eeb8|1522664175|1522659461; public_token=leisu_test;');
+//        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+//            'Origin: http://emb.aliez.me',
+//            'Host: a3.aliez.me:8080',
+//            'x-playback-session-id: 3A991DC8-2FD4-434D-8382-0141D13913E7',
+//            'Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,ja;q=0.7',
+//            'Accept: */*',
+//            'If-Modified-Since: Thu, 02 Aug 2018 07:48:53 GMT',
+//            'If-None-Match: "5b62b765-c3"',
+        ]);
+        curl_setopt($ch, CURLOPT_REFERER, 'http://emb.aliez.me/');
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+//        curl_setopt($ch, CURLINFO_CONTENT_TYPE, 'application/x-www-form-urlencoded');
+        curl_setopt($ch, CURLOPT_USERAGENT, "AppleCoreMedia/1.0.0.15G77 (iPhone; U; CPU OS 11_4_1 like Mac OS X; zh_cn)");
+//        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+        curl_setopt($ch, CURLOPT_HEADER, true);
+        curl_setopt($ch, CURLOPT_VERBOSE, true);
+//        $verbose = fopen(dirname(__FILE__).'/errorlog.txt', 'w+');
+//        curl_setopt($ch, CURLOPT_STDERR, $verbose);
+//        $info = curl_getinfo($ch);
+//        dump($info);
+        $response = curl_exec($ch);
+        if ($error = curl_error($ch)) {
+            die($error);
+        }
+        curl_close($ch);
+        dump($response);
     }
 }
