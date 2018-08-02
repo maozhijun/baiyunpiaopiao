@@ -97,6 +97,10 @@ Route::group(["middleware" => "auth", "namespace" => "Push"], function () {
     Route::get("/manager/mi/stop/{id}", "MiEncodesController@stop");
     Route::get("/manager/mi/repeat/{id}", "MiEncodesController@repeat");
 
+    Route::get("/manager/huomao/", "HuoMaoEncodesController@index");
+    Route::post("/manager/huomao/created/", "HuoMaoEncodesController@created");
+    Route::get("/manager/huomao/stop/{id}", "HuoMaoEncodesController@stop");
+    Route::get("/manager/huomao/repeat/{id}", "HuoMaoEncodesController@repeat");
 });
 
 Route::group(["middleware" => "auth", "namespace" => "Pull"], function () {

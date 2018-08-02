@@ -3,7 +3,8 @@
 encodes/publish.sh
 
 encodes/publish.sh
+encodes/composer.lock
 zhibo/storage/app
 zhibo/composer.lock
-
+/.idea
 *.sh

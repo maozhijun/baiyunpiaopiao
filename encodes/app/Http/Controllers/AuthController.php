@@ -30,6 +30,12 @@ class AuthController extends BaseController
             'salt' => '6dalIdJiO2Vt',
             'role' => 'gg'
         ],
+        [
+            'account' => 'ricky',
+            'password' => '246e7a738db9b835ef16455b1ce01179d653f918',//333333
+            'salt' => '6dclIaFsi45Es',
+            'role' => 'admin'
+        ]
     ];
 
     public function index(Request $request)

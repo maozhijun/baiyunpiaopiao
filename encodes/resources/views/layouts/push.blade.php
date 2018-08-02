@@ -37,8 +37,11 @@
                 <a href="/manager/custom/">一堆平台</a>
             </li>
         @endif
-        <li role="presentation" {{ starts_with(request()->path(),'manager/qxiu')?'class=active':'' }}>
-            <a href="/manager/qxiu/">齐齐直播</a>
+        {{--<li role="presentation" {{ starts_with(request()->path(),'manager/qxiu')?'class=active':'' }}>--}}
+            {{--<a href="/manager/qxiu/">齐齐直播</a>--}}
+        {{--</li>--}}
+        <li role="presentation" {{ starts_with(request()->path(),'manager/huomao')?'class=active':'' }}>
+            <a href="/manager/huomao/">火猫直播</a>
         </li>
         {{--<li role="presentation" {{ starts_with(request()->path(),'manager/kuku')?'class=active':'' }}>--}}
         {{--<a href="/manager/kuku/">酷酷直播</a>--}}

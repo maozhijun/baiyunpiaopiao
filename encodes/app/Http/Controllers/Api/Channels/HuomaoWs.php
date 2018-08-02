@@ -48,18 +48,21 @@ class HuomaoWs  extends Channel
         5656=>483539
     ];
 
-    public function __construct()
+    public function __construct($roomId = 0)
     {
-        $roomId = self::STREAM_ANCHOR_ROOMS[random_int(1, count(self::STREAM_ANCHOR_ROOMS)) - 1];
+        if ($roomId == 0) {
+            $roomId = self::STREAM_ANCHOR_ROOMS[random_int(1, count(self::STREAM_ANCHOR_ROOMS)) - 1];
+        }
         $this->huoMaoRoomUrl = "https://www.huomao.com/$roomId";
-
-        $uid = self::STREAM_ANCHOR_IDS[$roomId];
-        $result = $this->getStream($uid);
-        $this->streamURL = isset($result['stream_url']) ? $result['stream_url'] : '';
-        $this->streamKey = isset($result['stream_name']) ? $result['stream_name'] : '';;
-        $this->playFlv = isset($result['play_flv']) ? $result['play_flv'] : '';
-        $this->playM3U8 = isset($result['play_m3u8']) ? $result['play_m3u8'] : '';
-        $this->playRTMP = isset($result['play_rtmp']) ? $result['play_rtmp'] : '';
+        $uid = array_key_exists($roomId, self::STREAM_ANCHOR_IDS) ? self::STREAM_ANCHOR_IDS[$roomId] : 0;
+        if ($uid > 0) {
+            $result = $this->getStream($uid);
+            $this->streamURL = isset($result['stream_url']) ? $result['stream_url'] : '';
+            $this->streamKey = isset($result['stream_name']) ? $result['stream_name'] : '';;
+            $this->playFlv = isset($result['play_flv']) ? $result['play_flv'] : '';
+            $this->playM3U8 = isset($result['play_m3u8']) ? $result['play_m3u8'] : '';
+            $this->playRTMP = isset($result['play_rtmp']) ? $result['play_rtmp'] : '';
+        }
     }
 
     public function pushURL()
