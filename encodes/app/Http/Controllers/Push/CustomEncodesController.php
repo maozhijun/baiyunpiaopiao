@@ -103,11 +103,17 @@ class CustomEncodesController extends BaseController
             $stagers[] = 'stager-ws##7397844';
             $this->channels['小鬼子-网宿'] = $stagers;
 
-            $xiu8s[] = 'xiu8-ws##9103291';
-            $xiu8s[] = 'xiu8-ws##9103292';
-            $xiu8s[] = 'xiu8-ws##9103293';
-            $xiu8s[] = 'xiu8-ws##9103294';
-            $this->channels['秀吧-网宿'] = $xiu8s;
+//            $xiu8s[] = 'xiu8-ws##9103291';
+//            $xiu8s[] = 'xiu8-ws##9103292';
+//            $xiu8s[] = 'xiu8-ws##9103293';
+//            $xiu8s[] = 'xiu8-ws##9103294';
+//            $this->channels['秀吧-网宿'] = $xiu8s;
+
+            $xiu8kss[] = 'xiu8-ks##9203291';
+            $xiu8kss[] = 'xiu8-ks##9203292';
+            $xiu8kss[] = 'xiu8-ks##9203293';
+            $xiu8kss[] = 'xiu8-ks##9203294';
+            $this->channels['秀吧-金山'] = $xiu8kss;
 
             $ewqoks[] = 'ewqok-dl##24506211';
             $ewqoks[] = 'ewqok-dl##24506222';
@@ -127,11 +133,17 @@ class CustomEncodesController extends BaseController
             $stagers[] = 'stager-ws##7397744';
             $this->channels['小鬼子-网宿'] = $stagers;
 
-            $xiu8s[] = 'xiu8-ws##9103281';
-            $xiu8s[] = 'xiu8-ws##9103282';
-            $xiu8s[] = 'xiu8-ws##9103283';
-            $xiu8s[] = 'xiu8-ws##9103284';
-            $this->channels['秀吧-网宿'] = $xiu8s;
+//            $xiu8s[] = 'xiu8-ws##9103281';
+//            $xiu8s[] = 'xiu8-ws##9103282';
+//            $xiu8s[] = 'xiu8-ws##9103283';
+//            $xiu8s[] = 'xiu8-ws##9103284';
+//            $this->channels['秀吧-网宿'] = $xiu8s;
+
+            $xiu8kss[] = 'xiu8-ks##9203291';
+            $xiu8kss[] = 'xiu8-ks##9203292';
+            $xiu8kss[] = 'xiu8-ks##9203293';
+            $xiu8kss[] = 'xiu8-ks##9203294';
+            $this->channels['秀吧-金山'] = $xiu8kss;
 
             $memes[] = 'meme-uc##40290711';
             $memes[] = 'meme-uc##40290722';
@@ -337,6 +349,12 @@ class CustomEncodesController extends BaseController
                     $rtmp_url = 'rtmp://upvoid.xiu8.com/liverepeater/' . $roomId;//获取rtmp地址
                     $live_rtmp_url = 'http://void.xiu8.com/liverepeater/' . $roomId . '.flv';//播放rtmp地址
                     $live_m3u8_url = 'http://void.xiu8.com/liverepeater/' . $roomId . '/playlist.m3u8';//播放m3u8地址
+                    break;
+                }
+                case 'xiu8-ks': {
+                    $rtmp_url = 'rtmp://uplive.xiu8.com/live/' . $roomId;//获取rtmp地址
+                    $live_rtmp_url = 'rtmp://rtmplive.xiu8.com/live/990023' . $roomId;//播放rtmp地址
+                    $live_m3u8_url = 'http://hlslive.xiu8.com/live/' . $roomId . '/index.m3u8';//播放m3u8地址
                     break;
                 }
                 case 'stager-ws': {
