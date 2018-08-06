@@ -27,7 +27,8 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li {{ starts_with(request()->path(),'manager')?'class=active':'' }}>
-                    <a href="/manager/longzhu/">推流</a>
+                    {{--<a href="/manager/longzhu/">推流</a>--}}
+                    <a href="/manager/aikqws/">推流</a>
                 </li>
                 @if(env('APP_NAME')=='aikq' || env('APP_NAME')=='aikq1')
                     <li {{ starts_with(request()->path(),'obs')?'class=active':'' }}>

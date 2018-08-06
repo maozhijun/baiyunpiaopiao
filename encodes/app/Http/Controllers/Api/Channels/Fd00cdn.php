@@ -18,7 +18,7 @@ class Fd00cdn extends Channel
     private $playRTMP;
     private $playM3U8;
 
-    public function __construct()
+    public function __construct($uid = 0)
     {
         $key = 'stream' . time();
         $this->streamURL = 'rtmp://pushsdk.test.live.00cdn.com/live';

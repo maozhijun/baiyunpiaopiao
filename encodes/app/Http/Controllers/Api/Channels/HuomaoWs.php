@@ -11,7 +11,7 @@ namespace App\Http\Controllers\Api\Channels;
 
 use App\Http\Controllers\Api\Channel;
 
-class HuomaoWs  extends Channel
+class HuomaoWs extends Channel
 {
     public $id = 309;//平台ID
     public $name = 'huomao.com';//平台名称
@@ -36,19 +36,19 @@ class HuomaoWs  extends Channel
         12073, 233878, 9129, 273504, 5656
     ];
     const STREAM_ANCHOR_IDS = [
-        4428=>387678 ,
-        8850=>807255,
-        11279=>1545383,
-        6734=>582923,
-        8707=>772032,
-        12073=>1858774,
-        233878=>15118738,
-        9129=>847641,
-        273504=>14926750,
-        5656=>483539
+        4428 => 387678,
+        8850 => 807255,
+        11279 => 1545383,
+        6734 => 582923,
+        8707 => 772032,
+        12073 => 1858774,
+        233878 => 15118738,
+        9129 => 847641,
+        273504 => 14926750,
+        5656 => 483539
     ];
 
-    public function __construct($roomId = 0)
+    public function __construct($uid = 0, $roomId = 0)
     {
         if ($roomId == 0) {
             $roomId = self::STREAM_ANCHOR_ROOMS[random_int(1, count(self::STREAM_ANCHOR_ROOMS)) - 1];
@@ -94,15 +94,15 @@ class HuomaoWs  extends Channel
     {
         $url = "http://api.huomao.com/stream/getAnchorStream?uid=$uid";
         $refer = "androidLive";
-        $url .= "&refer=".$refer;
+        $url .= "&refer=" . $refer;
         $accessToken = md5(random_bytes(10));//随便写的token
-        $url .= "&access_token=".$accessToken;
+        $url .= "&access_token=" . $accessToken;
         $expiresTime = strtotime('+3 hours');//随便写的过期时间
-        $url .= "&expires_time=".$expiresTime;
+        $url .= "&expires_time=" . $expiresTime;
         $time = time(); //当前时间（也可以随便写）
-        $url .= "&time=".$time;
-        $token = md5($accessToken.$expiresTime.$refer.$time.$uid."EU*T*)*(#23ssdfd");
-        $url .= "&token=".$token;
+        $url .= "&time=" . $time;
+        $token = md5($accessToken . $expiresTime . $refer . $time . $uid . "EU*T*)*(#23ssdfd");
+        $url .= "&token=" . $token;
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -138,7 +138,7 @@ class HuomaoWs  extends Channel
             if ($pushUrl != "") {
                 list($stream_url, $stream_name) = explode($streamId, $pushUrl);
                 $result['stream_url'] = "rtmp://send-e.huomaotv.cn/live/";
-                $result['stream_name'] = $streamId.$stream_name;
+                $result['stream_name'] = $streamId . $stream_name;
                 $result['play_flv'] = "http://live-js-hdl.huomaotv.cn/live/$streamId.flv";
                 $result['play_m3u8'] = "http://live-ws-hls.huomaotv.cn/live/$streamId/playlist.m3u8";
             }

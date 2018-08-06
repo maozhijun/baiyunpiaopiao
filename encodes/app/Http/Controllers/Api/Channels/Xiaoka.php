@@ -18,7 +18,7 @@ class Xiaoka extends Channel
     private $playRTMP;
     private $playM3U8;
 
-    public function __construct()
+    public function __construct($uid = 0)
     {
         $key = str_random(16);
         $this->streamURL = 'rtmp://video-center.alivecdn.com/live';

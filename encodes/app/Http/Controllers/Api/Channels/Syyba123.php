@@ -18,7 +18,7 @@ class Syyba123 extends Channel
     private $playRTMP;
     private $playM3U8;
 
-    public function __construct()
+    public function __construct($uid = 0)
     {
         $key = 'le' . random_int(1111, 9999) . time() . random_int(1111111, 9999999);
         $this->streamURL = 'rtmp://pushabc2018aa.yjyc-ask.com/live';

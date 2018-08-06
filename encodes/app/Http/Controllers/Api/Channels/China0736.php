@@ -18,7 +18,7 @@ class China0736 extends Channel
     private $playRTMP;
     private $playM3U8;
 
-    public function __construct()
+    public function __construct($uid = 0)
     {
         $key = 'vod_' . random_int(11111111, 99999999);
         $this->streamURL = 'rtmp://push.china0736.com/vod';

@@ -23,7 +23,7 @@ class XBetEncodesController extends BaseController
 //        return view('manager.pull.xbet', ['lives' => $lives]);
         $lives = $this->getSStreamLives();
         $upcomings = $this->getSStreamUpcomingLives();
-        return view('manager.pull.sstream365', ['lives' => $lives,'upcomings' => $upcomings]);
+        return view('manager.pull.sstream365', ['lives' => $lives, 'upcomings' => $upcomings]);
     }
 
     public function getSStreamUrl(Request $request)
@@ -134,10 +134,13 @@ class XBetEncodesController extends BaseController
         $lives = [];
         $trs = $ql->find('tbody tr')->htmls();
         foreach ($trs as $tr) {
+            if (count($lives) >= 10) break;
+//            dump($tr);
             $qlb = new QueryList();
             $qlb->setHtml($tr);
+//            dump($qlb->find('td a'));
+//            dump($qlb->find('td b')->texts());
             $type = $qlb->find('td b')->texts()->last();
-//            dump($type);
             if ($type == '足球' || $type == '篮球') {
 //          if ($type == '足球' || $type == '篮球' || $type == '网球') {
                 $a['type'] = $type;

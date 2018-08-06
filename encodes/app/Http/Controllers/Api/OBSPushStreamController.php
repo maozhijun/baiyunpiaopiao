@@ -39,7 +39,7 @@ class OBSPushStreamController extends BaseController
         $rps = RoomPushStream::query()->where('uid', $uid)->orderBy('created_at', 'desc')->first();
         if (!isset($rps) || $refresh == 1) {
             $rps = new RoomPushStream();
-            $channel = ChannelFactory::createInstance($level);
+            $channel = ChannelFactory::createInstance($level, $uid);
             $rps->level = $channel->level;
             $rps->uid = $uid;
             $rps->status = 1;

@@ -18,7 +18,7 @@ class Zhibo extends Channel
     private $playRTMP;
     private $playM3U8;
 
-    public function __construct()
+    public function __construct($uid = 0)
     {
         $roomId = 's_9' . random_int(111111, 999999);
         $ss = [2, 3, 6];

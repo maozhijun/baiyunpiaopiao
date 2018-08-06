@@ -23,14 +23,14 @@ class AikqWS extends Channel
     private $playRTMP = '';
     private $playM3U8 = '';
 
-    public function __construct()
+    public function __construct($uid = 0)
     {
         $this->expiration = time() + 10800;
         $this->push_host = env('WS_PUSH_HOST', '');
         $this->hls_host = env('WS_HLS_HOST', '');
         $this->hdl_host = env('WS_HDL_HOST', '');
         $this->ws_key = env('WS_PUSH_KEY', '');
-        $key = 'stream-' . time() . '-' . random_int(111111, 999999);
+        $key = 'stream-' . $uid . '-' . time() . '-' . random_int(111111, 999999);
         $timestamp = $this->expiration;
 
         $sstring = $this->ws_key . '/live/' . $key . "$timestamp";

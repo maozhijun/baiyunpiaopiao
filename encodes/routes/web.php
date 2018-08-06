@@ -16,18 +16,23 @@ Route::match(["get", "post"], "/login", 'AuthController@index');//登录
 
 Route::group(["middleware" => "auth", "namespace" => "Push"], function () {
     if (env('APP_NAME') == 'good') {
-        Route::get("/manager/", "HeiEncodesController@index");
-        Route::get("/manager/hei/", "HeiEncodesController@index");
-        Route::post("/manager/hei/created/", "HeiEncodesController@created");
-        Route::get("/manager/hei/stop/{id}", "HeiEncodesController@stop");
-        Route::get("/manager/hei/ali-live-room", "HeiEncodesController@createdAliRoom");
-    } elseif (env('APP_NAME') == 'aikq') {
-        Route::get("/manager/", "QQEncodesController@index");
-        Route::get("/manager/qq/", "QQEncodesController@index");
-        Route::post("/manager/qq/created/", "QQEncodesController@created");
-        Route::get("/manager/qq/stop/{id}", "QQEncodesController@stop");
-        Route::get("/manager/qq/repeat/{id}", "QQEncodesController@repeat");
-        Route::get("/manager/ali-live-room", "QQEncodesController@createdAliRoom");
+//        Route::get("/manager/", "HeiEncodesController@index");
+//        Route::get("/manager/hei/", "HeiEncodesController@index");
+//        Route::post("/manager/hei/created/", "HeiEncodesController@created");
+//        Route::get("/manager/hei/stop/{id}", "HeiEncodesController@stop");
+//        Route::get("/manager/hei/ali-live-room", "HeiEncodesController@createdAliRoom");
+    } elseif (env('APP_NAME') == 'aikq' || env('APP_NAME') == 'aikq1') {
+//        Route::get("/manager/", "QQEncodesController@index");
+        Route::get("/manager/aikqali/", "QQEncodesController@index");
+        Route::post("/manager/aikqali/created/", "QQEncodesController@created");
+        Route::get("/manager/aikqali/stop/{id}", "QQEncodesController@stop");
+        Route::get("/manager/aikqali/repeat/{id}", "QQEncodesController@repeat");
+//        Route::get("/manager/ali-live-room", "QQEncodesController@createdAliRoom");
+
+        Route::get("/manager/aikqws/", "AikqWSEncodesController@index");
+        Route::post("/manager/aikqws/created/", "AikqWSEncodesController@created");
+        Route::get("/manager/aikqws/stop/{id}", "AikqWSEncodesController@stop");
+        Route::get("/manager/aikqws/repeat/{id}", "AikqWSEncodesController@repeat");
     } else {
         Route::get("/manager/", "OtherEncodesController@index");
     }
@@ -101,6 +106,7 @@ Route::group(["middleware" => "auth", "namespace" => "Push"], function () {
     Route::post("/manager/huomao/created/", "HuoMaoEncodesController@created");
     Route::get("/manager/huomao/stop/{id}", "HuoMaoEncodesController@stop");
     Route::get("/manager/huomao/repeat/{id}", "HuoMaoEncodesController@repeat");
+
 });
 
 Route::group(["middleware" => "auth", "namespace" => "Pull"], function () {
@@ -138,7 +144,8 @@ Route::group(["middleware" => "auth", "namespace" => "Pull"], function () {
     Route::get("/resources/ballbar/get_live_url/{id}", "BallbarEncodesController@getLiveUrl");
 
     Route::get("/resources/sportlive/", "SportLiveEncodesController@index");
-    Route::get("/resources/sportlive/get_live_url/{id}", "SportLiveEncodesController@getLiveUrl");
+
+    Route::get("/resources/aliez/", "AliezEncodesController@index");
 });
 
 Route::group(["middleware" => "auth", "namespace" => "Record"], function () {

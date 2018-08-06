@@ -50,7 +50,7 @@ class HuomaoQiniu  extends Channel
         528238=>16710605
     ];
 
-    public function __construct()
+    public function __construct($uid = 0)
     {
         $roomId = self::STREAM_ANCHOR_ROOMS[random_int(1, count(self::STREAM_ANCHOR_ROOMS)) - 1];
         $this->huoMaoRoomUrl = "https://www.huomao.com/$roomId";

@@ -18,7 +18,7 @@ class Inke extends Channel
     private $playRTMP;
     private $playM3U8;
 
-    public function __construct()
+    public function __construct($uid = 0)
     {
         $result = $this->getInkeStream();
         $this->streamURL = isset($result['stream_url']) ? $result['stream_url'] : '';

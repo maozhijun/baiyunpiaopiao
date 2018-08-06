@@ -21,12 +21,12 @@ class AikqAli extends Channel
     private $playRTMP = '';
     private $playM3U8 = '';
 
-    public function __construct()
+    public function __construct($uid = 0)
     {
         $this->expiration = time() + 10800;
         $this->ali_host = env('ALI_CDN_HOST', '');
         $this->ali_key = env('ALI_CDN_KEY', '');
-        $key = 'stream-' . time() . '-' . random_int(111111, 999999);
+        $key = 'stream-' . $uid . '-' . time() . '-' . random_int(111111, 999999);
         $timestamp = $this->expiration;
 
         $sstring = '/live/' . $key . "-$timestamp-0-0-" . $this->ali_key;

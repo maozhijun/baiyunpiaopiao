@@ -53,11 +53,11 @@ class ChannelFactory
      * @param $level
      * @return Channel
      */
-    public static function createInstance($level)
+    public static function createInstance($level, $uid)
     {
         $cs = self::$channels[$level];
         if (count($cs) > 0) {
-            return new $cs[array_rand($cs)];
+            return new $cs[array_rand($cs)]($uid);
         } else {
             return null;
         }

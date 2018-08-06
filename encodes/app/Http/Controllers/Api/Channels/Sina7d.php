@@ -18,7 +18,7 @@ class Sina7d extends Channel
     private $playRTMP;
     private $playM3U8;
 
-    public function __construct()
+    public function __construct($uid = 0)
     {
         $key = time();
         $this->streamURL = 'rtmp://video-center.alivecdn.com/live';
