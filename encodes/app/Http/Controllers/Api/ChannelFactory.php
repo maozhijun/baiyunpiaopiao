@@ -21,6 +21,7 @@ use App\Http\Controllers\Api\Channels\Sina7d;
 use App\Http\Controllers\Api\Channels\Syyba123;
 use App\Http\Controllers\Api\Channels\WoleW;
 use App\Http\Controllers\Api\Channels\Xiaoka;
+use App\Http\Controllers\Api\Channels\Xiu95;
 use App\Http\Controllers\Api\Channels\Zhibo;
 
 class ChannelFactory
@@ -38,6 +39,7 @@ class ChannelFactory
 //            Xiaoka::class,
 //            Fd00cdn::class,
 //            WoleW::class,
+//            Xiu95::class,
             AikqWS::class,
         ],
         '3' => [//大平台推大比赛
