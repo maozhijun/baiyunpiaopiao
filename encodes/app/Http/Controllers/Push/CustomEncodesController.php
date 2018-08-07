@@ -67,11 +67,11 @@ class CustomEncodesController extends BaseController
 //            $nagezanwss[] = 'yuntu-ws##9bfd6634-9ea6-4081-95e1-2ccee184f7dd';
 //            $this->channels['云图-网宿'] = $nagezanwss;
 
-//            $maobos[] = 'maobo-ali##300223331';
-//            $maobos[] = 'maobo-ali##300223332';
-//            $maobos[] = 'maobo-ali##300223333';
-//            $maobos[] = 'maobo-ali##300223334';
-//            $this->channels['猫播-阿里'] = $maobos;
+            $maobos[] = 'maobo-ali##300223331';
+            $maobos[] = 'maobo-ali##300223332';
+            $maobos[] = 'maobo-ali##300223333';
+            $maobos[] = 'maobo-ali##300223334';
+            $this->channels['猫播-阿里'] = $maobos;
 
 //            $huoxings[] = 'huoxing-ks##29589011';
 //            $huoxings[] = 'huoxing-ks##29589022';
@@ -169,11 +169,11 @@ class CustomEncodesController extends BaseController
 //            $nagezanwss[] = 'yuntu-ws##9bfd6634-9ea6-4081-95e1-2ccee184c7dd';
 //            $this->channels['云图-网宿'] = $nagezanwss;
 
-//            $maobos[] = 'maobo-ali##300213331';
-//            $maobos[] = 'maobo-ali##300213332';
-//            $maobos[] = 'maobo-ali##300213333';
-//            $maobos[] = 'maobo-ali##300213334';
-//            $this->channels['猫播-阿里'] = $maobos;
+            $maobos[] = 'maobo-ali##300213331';
+            $maobos[] = 'maobo-ali##300213332';
+            $maobos[] = 'maobo-ali##300213333';
+            $maobos[] = 'maobo-ali##300213334';
+            $this->channels['猫播-阿里'] = $maobos;
 
 //            $huoxings[] = 'huoxing-ks##29589111';
 //            $huoxings[] = 'huoxing-ks##29589222';
@@ -310,9 +310,12 @@ class CustomEncodesController extends BaseController
                     break;
                 }
                 case 'maobo-ali': {
-                    $rtmp_url = 'rtmp://push.maobotv.com/maozhua/' . $roomId;//获取rtmp地址
-                    $live_rtmp_url = 'http://flv.maobotv.com/maozhua/' . $roomId . '.flv';//播放rtmp地址
-                    $live_m3u8_url = 'http://hls.maobotv.com/maozhua/' . $roomId . '/index.m3u8';//播放m3u8地址
+//                    $rtmp_url = 'rtmp://push.maobotv.com/maozhua/' . $roomId;//获取rtmp地址
+//                    $live_rtmp_url = 'http://flv.maobotv.com/maozhua/' . $roomId . '.flv';//播放rtmp地址
+//                    $live_m3u8_url = 'http://hls.maobotv.com/maozhua/' . $roomId . '/index.m3u8';//播放m3u8地址
+                    $rtmp_url = 'rtmp://video-center.alivecdn.com/live/'.$roomId.'?vhost=flv.maobotv.com';//获取rtmp地址
+                    $live_rtmp_url = '';//播放rtmp地址
+                    $live_m3u8_url = 'http://flv.maobotv.com/live/' . $roomId . '.m3u8';//播放m3u8地址
                     break;
                 }
                 case 'huoxing-ks': {
