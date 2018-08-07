@@ -36,14 +36,14 @@ class MiEncodesController extends BaseController
             $this->channels[] = '小米直播7##cid201804241147222057599';
             $this->channels[] = '小米直播8##cid201804241148222057599';
         } elseif (env('APP_NAME') == 'leqiuba') {
-            $this->channels[] = '小米直播1##cid201803241141222057579';
-            $this->channels[] = '小米直播2##cid201803241142222057579';
-            $this->channels[] = '小米直播3##cid201803241143222057579';
-            $this->channels[] = '小米直播4##cid201803241144222057579';
-            $this->channels[] = '小米直播5##cid201803241145222057579';
-            $this->channels[] = '小米直播6##cid201803241146222057579';
-            $this->channels[] = '小米直播7##cid201803241147222057579';
-            $this->channels[] = '小米直播8##cid201803241148222057579';
+//            $this->channels[] = '小米直播1##cid201803241141222057579';
+//            $this->channels[] = '小米直播2##cid201803241142222057579';
+//            $this->channels[] = '小米直播3##cid201803241143222057579';
+//            $this->channels[] = '小米直播4##cid201803241144222057579';
+//            $this->channels[] = '小米直播5##cid201803241145222057579';
+//            $this->channels[] = '小米直播6##cid201803241146222057579';
+//            $this->channels[] = '小米直播7##cid201803241147222057579';
+//            $this->channels[] = '小米直播8##cid201803241148222057579';
         }
     }
 
@@ -77,9 +77,14 @@ class MiEncodesController extends BaseController
             }
 
             list($roomName, $roomId) = explode('##', $channel);
-            $rtmp_url = 'rtmp://r1.zb.mi.com/live/' . $roomId;//获取rtmp地址
-            $live_flv_url = 'http://v2.zb.mi.com/live/' . explode('?', $roomId)[0] . '.flv';//flv地址
-            $live_m3u8_url = 'http://hls.zb.mi.com/live/' . explode('?', $roomId)[0] . '/playlist.m3u8';//m3u8地址
+            //网宿（推不了流了）
+//            $rtmp_url = 'rtmp://r2.zb.mi.com/live/' . $roomId;//获取rtmp地址
+//            $live_flv_url = 'http://v2.zb.mi.com/live/' . explode('?', $roomId)[0] . '.flv';//flv地址
+//            $live_m3u8_url = 'http://hls.zb.mi.com/live/' . explode('?', $roomId)[0] . '/playlist.m3u8';//m3u8地址
+            //金山
+            $rtmp_url = 'rtmp://r2.ks.zb.mi.com/live/' . $roomId;//获取rtmp地址
+            $live_flv_url = 'http://v2.ks.zb.mi.com/live/' . explode('?', $roomId)[0] . '.flv';//flv地址
+            $live_m3u8_url = 'http://hls.ksy.zb.mi.com/live/' . explode('?', $roomId)[0] . '/index.m3u8';//m3u8地址
 
             $fontsize = $request->input('fontsize', 18);
             $watermark = $request->input('watermark', '');

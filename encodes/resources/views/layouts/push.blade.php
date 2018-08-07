@@ -26,9 +26,9 @@
         <li role="presentation" {{ starts_with(request()->path(),'manager/huajiao')?'class=active':'' }}>
             <a href="/manager/huajiao/">花椒直播</a>
         </li>
-        {{--<li role="presentation" {{ starts_with(request()->path(),'manager/mi')?'class=active':'' }}>--}}
-        {{--<a href="/manager/mi/">小米直播</a>--}}
-        {{--</li>--}}
+        <li role="presentation" {{ starts_with(request()->path(),'manager/mi')?'class=active':'' }}>
+            <a href="/manager/mi/">小米直播</a>
+        </li>
         @if(env('APP_NAME')=='aikq' || env('APP_NAME')=='aikq1')
             <li role="presentation" {{ starts_with(request()->path(),'manager/inke')?'class=active':'' }}>
                 <a href="/manager/inke/">映客直播</a>
