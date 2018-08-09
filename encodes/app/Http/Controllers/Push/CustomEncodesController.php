@@ -119,13 +119,19 @@ class CustomEncodesController extends BaseController
             $ewqoks[] = 'ewqok-dl##24506222';
             $ewqoks[] = 'ewqok-dl##24506233';
             $ewqoks[] = 'ewqok-dl##24506244';
+            $this->channels['什么鬼-帝联'] = $ewqoks;
 
             $sb126s[] = 'sb126-ws##735f725292624dfd98d117664bb02411';
             $sb126s[] = 'sb126-ws##3c53b37b83f042c6a96656a11dd49612';
             $sb126s[] = 'sb126-ws##e1956de55d1e44c4bd2552216b11ed13';
             $sb126s[] = 'sb126-ws##bebf1bdf215e493cb4877832aa2c2c14';
             $this->channels['随便-网易'] = $sb126s;
-            $this->channels['什么鬼-帝联'] = $ewqoks;
+
+            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqda";
+            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqdb";
+            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqdc";
+            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqdd";
+            $this->channels['拉拉-UC'] = $lesparks;
         } elseif (env('APP_NAME') == 'aikq1') {
             $stagers[] = 'stager-ws##7397711';
             $stagers[] = 'stager-ws##7397722';
@@ -234,6 +240,12 @@ class CustomEncodesController extends BaseController
             $sb126s[] = 'sb126-ws##e1956de55d1e44c4bd2552216b11ed23';
             $sb126s[] = 'sb126-ws##bebf1bdf215e493cb4877832aa2c2c24';
             $this->channels['随便-网易'] = $sb126s;
+
+            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsmqda";
+            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsmqdb";
+            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsmqdc";
+            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsmqdd";
+            $this->channels['拉拉-UC'] = $lesparks;
         } elseif (env('APP_NAME') == 'leqiuba') {
 
         }
@@ -382,6 +394,12 @@ class CustomEncodesController extends BaseController
                     $rtmp_url = 'rtmp://pbcf4cbdf.live.126.net/live/' . $roomId;//获取rtmp地址
                     $live_rtmp_url = 'http://flvbcf4cbdf.live.live.126.net/live/' . $roomId . '.flv';//播放rtmp地址
                     $live_m3u8_url = 'http://pullhlsbcf4cbdf.live.126.net/live/' . $roomId . '/playlist.m3u8';//播放m3u8地址
+                    break;
+                }
+                case 'lala-uc': {
+                    $rtmp_url = 'rtmp://push.lespark.cn/live/' . $roomId;//获取rtmp地址
+                    $live_rtmp_url = 'http://hls.lespark.cn/live/' . $roomId . '.flv';//播放rtmp地址
+                    $live_m3u8_url = 'http://pull.lespark.cn/live/' . $roomId . '/playlist.m3u8';//播放m3u8地址
                     break;
                 }
             }
