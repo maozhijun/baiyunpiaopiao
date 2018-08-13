@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\Channels\Inke;
 use App\Http\Controllers\Api\Channels\Longzhu;
 use App\Http\Controllers\Api\Channels\Sina7d;
 use App\Http\Controllers\Api\Channels\Syyba123;
+use App\Http\Controllers\Api\Channels\Weibo;
 use App\Http\Controllers\Api\Channels\WoleW;
 use App\Http\Controllers\Api\Channels\Xiaoka;
 use App\Http\Controllers\Api\Channels\Xiu9;
@@ -49,6 +50,7 @@ class ChannelFactory
 //            Longzhu::class,
 //            Inke::class,
             AikqWS::class,
+//            Weibo::class,
 //            HuomaoWs::class,
         ],
     ];
@@ -61,10 +63,12 @@ class ChannelFactory
     {
         $cs = self::$channels[$level];
         if (count($cs) > 0) {
-            return new $cs[array_rand($cs)]($uid);
-        } else {
-            return null;
+            $channel = new $cs[array_rand($cs)]($uid);
+            if ($channel instanceof Channel && !empty($channel->pushURL())) {
+                return $channel;
+            }
         }
+        return null;
     }
 
     /**
