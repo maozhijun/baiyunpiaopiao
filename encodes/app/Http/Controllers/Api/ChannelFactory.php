@@ -47,14 +47,14 @@ class ChannelFactory
         ],
         '3' => [//大平台推大比赛
 //            Zhibo::class,
-            Longzhu::class,
+//            Longzhu::class,
             Xiaoka::class,
             Fd00cdn::class,
             WoleW::class,
             Xiu95::class,
             Xiu9::class,
             Sina7d::class,
-            Syyba123::class,
+//            Syyba123::class,
             China0736::class,
 //            Inke::class,
 //            AikqWS::class,
@@ -94,5 +94,17 @@ class ChannelFactory
             }
         }
         return null;
+    }
+
+    /**
+     * 测试用的方法
+     */
+    public function onChannelTest() {
+        foreach (self::$channels as $key=>$channelItems) {
+            dump("======= 平台：".$key."======");
+            foreach ($channelItems as $channelItem) {
+                dump(new $channelItem(0));
+            }
+        }
     }
 }

@@ -16,6 +16,9 @@ use Illuminate\Http\Request;
 Route::group(["namespace" => "Api"], function () {
     Route::get("/v1/get_push_stream", "OBSPushStreamController@index");
     Route::get("/v1/get_push_stream/test", "OBSPushStreamController@test");
+
+
+    Route::get("/v1/anchor_channel/test", "ChannelFactory@onChannelTest");
 });
 
 
