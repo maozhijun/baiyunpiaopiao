@@ -23,7 +23,7 @@ class Weibo extends Channel
 
     private $requestCount;
 
-    public function __construct()
+    public function __construct($uid = 0)
     {
         $result = $this->getStream();
         $this->streamURL = isset($result['stream_url']) ? $result['stream_url'] : '';

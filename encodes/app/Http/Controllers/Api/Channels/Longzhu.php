@@ -21,7 +21,7 @@ class Longzhu extends Channel
     public function __construct($uid = 0)
     {
         $key = str_random(32);
-        $this->streamURL = 'rtmp://push12.plures.net/onlive';
+        $this->streamURL = 'rtmp://push1201.plures.net/onlive';
         $this->streamKey = $key;
         $this->playFlv = 'http://hdl1201.plures.net/onlive/' . $key . '.flv';
         $this->playM3U8 = 'http://hdl1202.plures.net/onlive/' . $key . '.m3u8';
