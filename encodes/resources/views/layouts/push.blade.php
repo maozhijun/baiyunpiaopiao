@@ -20,16 +20,16 @@
         <li role="presentation" {{ starts_with(request()->path(),'manager/longzhu')?'class=active':'' }}>
             <a href="/manager/longzhu/">龙珠直播</a>
         </li>
-        <li role="presentation" {{ starts_with(request()->path(),'manager/weibo')?'class=active':'' }}>
-            <a href="/manager/weibo/">微博直播</a>
-        </li>
         <li role="presentation" {{ starts_with(request()->path(),'manager/huajiao')?'class=active':'' }}>
             <a href="/manager/huajiao/">花椒直播</a>
         </li>
-        <li role="presentation" {{ starts_with(request()->path(),'manager/mi')?'class=active':'' }}>
-            <a href="/manager/mi/">小米直播</a>
+        <li role="presentation" {{ starts_with(request()->path(),'manager/weibo')?'class=active':'' }}>
+            <a href="/manager/weibo/">微博直播</a>
         </li>
         @if(env('APP_NAME')=='aikq' || env('APP_NAME')=='aikq1')
+            <li role="presentation" {{ starts_with(request()->path(),'manager/mi')?'class=active':'' }}>
+                <a href="/manager/mi/">小米直播</a>
+            </li>
             <li role="presentation" {{ starts_with(request()->path(),'manager/inke')?'class=active':'' }}>
                 <a href="/manager/inke/">映客直播</a>
             </li>
@@ -39,13 +39,14 @@
             <li role="presentation" {{ starts_with(request()->path(),'manager/custom')?'class=active':'' }}>
                 <a href="/manager/custom/">一堆平台</a>
             </li>
+            <li role="presentation" {{ starts_with(request()->path(),'manager/huomao')?'class=active':'' }}>
+                <a href="/manager/huomao/">火猫直播</a>
+            </li>
         @endif
         {{--<li role="presentation" {{ starts_with(request()->path(),'manager/qxiu')?'class=active':'' }}>--}}
         {{--<a href="/manager/qxiu/">齐齐直播</a>--}}
         {{--</li>--}}
-        <li role="presentation" {{ starts_with(request()->path(),'manager/huomao')?'class=active':'' }}>
-            <a href="/manager/huomao/">火猫直播</a>
-        </li>
+
         {{--<li role="presentation" {{ starts_with(request()->path(),'manager/kuku')?'class=active':'' }}>--}}
         {{--<a href="/manager/kuku/">酷酷直播</a>--}}
         {{--</li>--}}

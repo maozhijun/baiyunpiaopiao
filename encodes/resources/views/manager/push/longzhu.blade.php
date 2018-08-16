@@ -38,6 +38,8 @@
                     </td>
                     <td>
                         {{ substr($et->created_at,5,11) }}
+                        <br>
+                        {{ substr($et->updated_at,5,11) }}
                     </td>
                     <td>
                         <label class="label label-{{ $et->status >= 1?'success':'danger' }}">{{ $et->status >= 1?'正常':'停止' }}</label>

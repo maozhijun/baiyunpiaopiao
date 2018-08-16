@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Pull;
 
 use App\Http\Controllers\Controller as BaseController;
-use App\Models\EncodeTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use QL\QueryList;
@@ -106,8 +105,10 @@ class XBetEncodesController extends BaseController
                 $link = 'http://sstream365.com' . $qlb->find('td a')->attrs('href')->first();
                 $a['link'] = $link;
 //                dump($link);
-                $date = $qlb->find('td')->texts()->last();
-                $a['date'] = $date;
+//                $date = $qlb->find('td')->texts()->last();
+//                $a['date'] = $date;
+                $date = $qlb->find('td')->texts()->first();
+                $a['date'] = explode(' ',$date)[0];
 //                dump($date);
                 $lives[] = $a;
             }

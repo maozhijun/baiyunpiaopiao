@@ -9,35 +9,11 @@ use Illuminate\Support\Facades\Log;
 
 class LeisuEncodesController extends BaseController
 {
-    private $channels = [];
 
     public function __construct()
     {
         parent::__construct();
         $this->middleware('filter')->except([]);
-        if (env('APP_NAME') == 'good') {
-            $this->channels[] = '云端直播0##vod_3180361';
-            $this->channels[] = '云端直播1##vod_3180362';
-            $this->channels[] = '云端直播2##vod_3180363';
-            $this->channels[] = '云端直播3##vod_3180364';
-            $this->channels[] = '云端直播4##vod_3180365';
-            $this->channels[] = '云端直播5##vod_3180366';
-            $this->channels[] = '云端直播6##vod_3180367';
-            $this->channels[] = '云端直播7##vod_3180368';
-            $this->channels[] = '云端直播8##vod_3180369';
-            $this->channels[] = '云端直播9##vod_3180370';
-        } elseif (env('APP_NAME') == 'aikq') {
-            $this->channels[] = '云端直播0##vod_3183361';
-            $this->channels[] = '云端直播1##vod_3183362';
-            $this->channels[] = '云端直播2##vod_3183363';
-            $this->channels[] = '云端直播3##vod_3183364';
-            $this->channels[] = '云端直播4##vod_3183365';
-            $this->channels[] = '云端直播5##vod_3183366';
-            $this->channels[] = '云端直播6##vod_3183367';
-            $this->channels[] = '云端直播7##vod_3183368';
-            $this->channels[] = '云端直播8##vod_3183369';
-            $this->channels[] = '云端直播9##vod_3183370';
-        }
     }
 
     public function index(Request $request)
@@ -53,12 +29,12 @@ class LeisuEncodesController extends BaseController
 //        dump($lives);
 //        dump($leagues);
         $ets = EncodeTask::query()->where('from', 'LS')->where('status', 1)->get();
-        return view('manager.pull.leisu', ['lives' => $lives, 'leagues' => $leagues, 'ets' => $ets, 'channels' => $this->channels]);
+        return view('manager.pull.leisu', ['lives' => $lives, 'leagues' => $leagues]);
     }
 
     public function getLiveUrl(Request $request, $id)
     {
-        $pcurl = $this->getLeiSuLivestream($id);
+        $pcurl = $this->getLeiSuLiveStream($id);
         if (!empty($pcurl)){
             $rtmp = $this->getLeiSuRtmp($id, $pcurl);
             return response($rtmp);
@@ -66,75 +42,9 @@ class LeisuEncodesController extends BaseController
         return response('404');
     }
 
-    public function created(Request $request)
-    {
-        if ($request->isMethod('post')
-            && $request->has('input')
-            && $request->has('channel')
-            && $request->has('name')
-        ) {
-            $name = str_replace(' ', '-', $request->input('name'));
-            $input = $request->input('input');
-
-            $channel = $request->input('channel');
-            list($roomName, $roomId) = explode('##', $channel);
-            $rtmp_url = 'rtmp://push.china0736.com/vod/' . $roomId;//获取rtmp地址
-            $live_rtmp_url = 'rtmp://live.china0736.com/vod/' . $roomId;//播放rtmp地址
-            $live_m3u8_url = 'http://hls.china0736.com/vod/' . $roomId . '.m3u8';//播放m3u8地址
-
-            $fontsize = $request->input('fontsize', 18);
-            $watermark = $request->input('watermark', '');
-            $location = $request->input('location', 'top');
-            $has_logo = $request->input('logo');
-            $referer = $request->input('referer', '');
-            $header1 = $request->input('header1', '');
-            $header2 = $request->input('header2', '');
-            $header3 = $request->input('header3', '');
-            $size = $request->input('size', 'md');
-            $exec = $this->generateFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $size, $referer, $header1, $header2, $header3);
-            Log::info($exec);
-            shell_exec($exec);
-            $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');
-            if (!empty($pid)) {
-                $et = new EncodeTask();
-                $et->name = $name;
-                $et->channel = $channel;
-                $et->input = $input;
-                $et->rtmp = $rtmp_url;
-                $et->out = $live_rtmp_url . "\n" . $live_m3u8_url;
-                $et->from = 'Very';
-                $et->to = 'Very';
-                $et->status = 1;
-                $et->save();
-            }
-
-        }
-        return back();
-    }
-
-    public function stop(Request $request, $id)
-    {
-        $et = EncodeTask::query()->find($id);
-        if (isset($et)) {
-            $pid = exec('pgrep -f "' . explode('?', $et->rtmp)[0] . '"');
-            if (!empty($pid)) {
-                exec('kill -9 ' . $pid, $output_array, $return_var);
-                if ($return_var == 0) {
-                    $et->status = 0;
-                    $et->stop_at = date_create();
-                    $et->save();
-                }
-            } else {
-                $et->status = 0;
-                $et->stop_at = date_create();
-                $et->save();
-            }
-        }
-        return back();
-    }
-
     private function getLeiSuRtmp($id, $liveurl)
     {
+//        dump($liveurl);
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $liveurl);
 //        curl_setopt($ch, CURLOPT_COOKIE, 'SERVERID=e8e4d482877771492d8d82843185eeb8|1522664175|1522659461; public_token=leisu_test;');
@@ -145,6 +55,7 @@ class LeisuEncodesController extends BaseController
         curl_setopt($ch, CURLINFO_CONTENT_TYPE, 'application/x-www-form-urlencoded');
         curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
         curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 //        curl_setopt($ch, CURLOPT_HEADER, true);
         $response = curl_exec($ch);
         if ($error = curl_error($ch)) {
@@ -152,14 +63,18 @@ class LeisuEncodesController extends BaseController
         }
         curl_close($ch);
 //        dump($response);
-        preg_match('#\"(rtmp://\S+)\"#', $response, $matches);
+//        preg_match('#\"(rtmp://\S+)\"#', $response, $matches);
+
+        preg_match('#(eval.+)#', $response, $matches);
         if (!empty($matches)) {
-            return array_last($matches);
+//            dump(array_last($matches));
+            return '<script src="/js/jquery.js"></script><script type="text/javascript">try{'.array_last($matches).'}catch(err){}setTimeout(function(){document.write(decodeURIComponent(flashvars.f))},100);</script>';
+//            return '<script type="text/javascript">'.array_last($matches).';document.write(decodeURIComponent(flashvars.f))</script>';
         }
         return '';
     }
 
-    private function getLeiSuLivestream($id)
+    private function getLeiSuLiveStream($id)
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, 'https://api.leisu.com/api/livestream?app=0&platform=2&sid=' . $id . '&time=1522661124&type=1&ver=2.6.2');

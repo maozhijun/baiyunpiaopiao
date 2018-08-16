@@ -218,7 +218,8 @@ class Controller extends BaseController
             $execs[] = $vf;
         }
 
-        $execs[] = '-b:v:0 ' . (1200 * $size['factor']) . 'k -pixel_format yuv420p -s ' . $size['w'] . 'x' . $size['h'] . ' -f flv "' . $rtmp_url . '"';
+        $execs[] = '-r 24 -keyint_min 36 -g 36 -sc_threshold 0 -b:v:0 ' . (1200 * $size['factor']) . 'k -pixel_format yuv420p -s ' . $size['w'] . 'x' . $size['h'] . ' -f flv "' . $rtmp_url . '"';
+//        $execs[] = '-r 24 -keyint_min 36 -g 36 -sc_threshold 0 -maxrate ' . (1200 * $size['factor']) . 'k -minrate ' . (1200 * $size['factor']) . 'k -bf 1 -b_strategy 0 -pixel_format yuv420p -s ' . $size['w'] . 'x' . $size['h'] . ' -f flv "' . $rtmp_url . '"';
 
         $date = date('YmdHis');
         $execs[] = ">> /tmp/ffmpeg-$date.log &";

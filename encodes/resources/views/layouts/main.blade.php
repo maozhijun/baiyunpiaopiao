@@ -26,11 +26,11 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li {{ starts_with(request()->path(),'manager')?'class=active':'' }}>
-                    {{--<a href="/manager/longzhu/">推流</a>--}}
-                    <a href="/manager/aikqws/">推流</a>
-                </li>
                 @if(env('APP_NAME')=='aikq' || env('APP_NAME')=='aikq1')
+                    <li {{ starts_with(request()->path(),'manager')?'class=active':'' }}>
+                        {{--<a href="/manager/longzhu/">推流</a>--}}
+                        <a href="/manager/aikqws/">推流</a>
+                    </li>
                     <li {{ starts_with(request()->path(),'obs')?'class=active':'' }}>
                         <a href="/obs/stream/">OBS推流码</a>
                     </li>
@@ -41,6 +41,9 @@
                         <a href="/records/qq/">录像、集锦</a>
                     </li>
                 @elseif(env('APP_NAME')=='leqiuba')
+                    <li {{ starts_with(request()->path(),'manager')?'class=active':'' }}>
+                        <a href="/manager/longzhu/">推流</a>
+                    </li>
                     <li {{ starts_with(request()->path(),'obs')?'class=active':'' }}>
                         <a href="/obs/stream/">OBS推流码</a>
                     </li>

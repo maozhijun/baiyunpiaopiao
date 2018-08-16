@@ -490,11 +490,12 @@ class CrontabStreamController extends BaseController
         }
     }
 
-    public function weibo()
+    public function weibo(Request $request)
     {
+        dump($request->getUri());
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "https://ing.weibo.com/api/protoweb/getcreateparams");
-        curl_setopt($ch, CURLOPT_COOKIE, "LIVE-G0=5353d40b740d677d1f8edf8408955b65; WBStorage=201807040031|undefined; login_sid_t=f317719f69ba49ae46c45b6baa998c87; cross_origin_proto=SSL; _s_tentry=-; Apache=121035831212.49706.1530635556751; SINAGLOBAL=121035831212.49706.1530635556751; ULV=1530635556761:1:1:1:121035831212.49706.1530635556751:; SCF=AmKW-d8Zq4uyOZp1wsNOR7nge-alqfJygwBg6ckboxkVJ1W3Os8dsA08OOpFSyLDDtVxPI2E6CoSjbuoNiRwZVk.; SUB=_2A252P9VpDeRhGedH61UZ8CzNwjmIHXVVTUGhrDV8PUNbmtAKLXT6kW9NUPbxf1krouhfKDQOAkDPvTvsJbw81rOh; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WWmajPEkfJqO7g_ws.3yQ685JpX5KzhUgL.Fo24ehMRehzp1K-2dJLoIpzLxKqL122L122LxK-L1-zL1-zt; SUHB=079ilJbrM8Iobh; ALF=1562171577; SSOLoginState=1530635578; wvr=6");
+        curl_setopt($ch, CURLOPT_COOKIE, "LIVE-G0=a82cdb606eafc1a07103b2e433230245; login_sid_t=356c7fef606f03d8a09d66261f94338c; cross_origin_proto=SSL; _s_tentry=passport.weibo.com; Apache=6685256578257.513.1533634404357; SINAGLOBAL=6685256578257.513.1533634404357; ULV=1533634404411:1:1:1:6685256578257.513.1533634404357:; SUB=_2A252bReaDeRhGedH61UZ8CzNwjmIHXVVGw5SrDV8PUNbmtBeLXjbkW9NUPbxf5Mmy0PBejdX6cAnwCNrwJxUw2gr; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WWmajPEkfJqO7g_ws.3yQ685JpX5KzhUgL.Fo24ehMRehzp1K-2dJLoIpzLxKqL122L122LxK-L1-zL1-zt; SUHB=0ElbmWR3qnL1Cs; ALF=1565170505; SSOLoginState=1533634506; wvr=6; WBStorage=e8781eb7dee3fd7f|undefined");
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, "is_premium=0");
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
