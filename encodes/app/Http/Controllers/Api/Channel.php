@@ -25,4 +25,35 @@ abstract class Channel
     public abstract function playRTMP();
 
     public abstract function playM3U8();
+
+    public function pushWholeUrl() {
+        $pushUrl = $this->pushURL();
+        if ($pushUrl == null || strlen($pushUrl) <= 0) return $pushUrl;
+        if (ends_with($pushUrl, '/')) {
+            return $pushUrl.$this->pushKey();
+        } else {
+            return $pushUrl."/".$this->pushKey();
+        }
+    }
+
+    public function playAllUrl() {
+        $flv = $this->playFLV();
+        $rtmp = $this->playRTMP();
+        $m3u8 = $this->playM3U8();
+
+        $text = "";
+        if ($flv != null && strlen($flv) > 0) {
+            $text .= $flv. "\n";
+        }
+        if ($rtmp != null && strlen($rtmp) > 0) {
+            $text .= $rtmp. "\n";
+        }
+        if ($m3u8 != null && strlen($m3u8) > 0) {
+            $text .= $m3u8. "\n";
+        }
+        if (ends_with($text, "\n")) {
+            $text = substr($text, 0, -2);
+        }
+        return $text;
+    }
 }

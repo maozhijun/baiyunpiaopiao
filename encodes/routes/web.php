@@ -164,6 +164,11 @@ Route::group(["middleware" => "auth", "namespace" => "Stream"], function () {
 Route::group(["middleware" => "auth", "namespace" => "Setting"], function () {
     Route::get("/setting/video/", "VideoSettingController@index");
     Route::post("/setting/video/save", "VideoSettingController@save");
+
+    //主播推流源测试
+    Route::get("/setting/anchor/channels", "AnchorChannelsSettingController@channels");
+    Route::post("/setting/anchor/channels/save", "AnchorChannelsSettingController@save");
+
 });
 
 Route::group(["namespace" => "Stream"], function () {
