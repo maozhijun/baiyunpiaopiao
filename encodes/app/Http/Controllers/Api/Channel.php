@@ -51,9 +51,6 @@ abstract class Channel
         if ($m3u8 != null && strlen($m3u8) > 0) {
             $text .= $m3u8. "\n";
         }
-        if (ends_with($text, "\n")) {
-            $text = substr($text, 0, -2);
-        }
-        return $text;
+        return trim($text);
     }
 }
