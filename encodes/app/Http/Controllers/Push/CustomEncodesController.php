@@ -131,7 +131,7 @@ class CustomEncodesController extends BaseController
 //            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqdb";
 //            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqdc";
 //            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqdd";
-            $this->channels['拉拉-UC'] = $lesparks;
+//            $this->channels['拉拉-UC'] = $lesparks;
         } elseif (env('APP_NAME') == 'aikq1') {
             $stagers[] = 'stager-ws##7397711';
             $stagers[] = 'stager-ws##7397722';
@@ -368,7 +368,7 @@ class CustomEncodesController extends BaseController
                 }
                 case 'xiu8-ks': {
                     $rtmp_url = 'rtmp://uplive.xiu8.com/live/' . $roomId;//获取rtmp地址
-                    $live_rtmp_url = 'rtmp://rtmplive.xiu8.com/live/990023' . $roomId;//播放rtmp地址
+                    $live_rtmp_url = 'rtmp://rtmplive.xiu8.com/live/' . $roomId;//播放rtmp地址
                     $live_m3u8_url = 'http://hlslive.xiu8.com/live/' . $roomId . '/index.m3u8';//播放m3u8地址
                     break;
                 }
@@ -392,7 +392,7 @@ class CustomEncodesController extends BaseController
                 }
                 case 'sb126-ws': {
                     $rtmp_url = 'rtmp://pbcf4cbdf.live.126.net/live/' . $roomId;//获取rtmp地址
-                    $live_rtmp_url = 'http://flvbcf4cbdf.live.live.126.net/live/' . $roomId . '.flv';//播放rtmp地址
+                    $live_rtmp_url = 'http://flvbcf4cbdf.live.126.net/live/' . $roomId . '.flv';//播放rtmp地址
                     $live_m3u8_url = 'http://pullhlsbcf4cbdf.live.126.net/live/' . $roomId . '/playlist.m3u8';//播放m3u8地址
                     break;
                 }
