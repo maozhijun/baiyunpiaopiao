@@ -127,11 +127,11 @@ class CustomEncodesController extends BaseController
             $sb126s[] = 'sb126-ws##bebf1bdf215e493cb4877832aa2c2c14';
             $this->channels['随便-网易'] = $sb126s;
 
-//            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqda";
-//            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqdb";
-//            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqdc";
-//            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqdd";
-//            $this->channels['拉拉-UC'] = $lesparks;
+            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqda";
+            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqdb";
+            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqdc";
+            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqdd";
+            $this->channels['拉拉-UC'] = $lesparks;
         } elseif (env('APP_NAME') == 'aikq1') {
             $stagers[] = 'stager-ws##7397711';
             $stagers[] = 'stager-ws##7397722';
@@ -241,11 +241,11 @@ class CustomEncodesController extends BaseController
             $sb126s[] = 'sb126-ws##bebf1bdf215e493cb4877832aa2c2c24';
             $this->channels['随便-网易'] = $sb126s;
 
-//            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsmqda";
-//            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsmqdb";
-//            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsmqdc";
-//            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsmqdd";
-//            $this->channels['拉拉-UC'] = $lesparks;
+            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsmqda";
+            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsmqdb";
+            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsmqdc";
+            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsmqdd";
+            $this->channels['拉拉-UC'] = $lesparks;
         } elseif (env('APP_NAME') == 'leqiuba') {
 
         }
