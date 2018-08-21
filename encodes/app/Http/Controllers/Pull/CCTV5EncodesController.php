@@ -9,42 +9,25 @@ use Illuminate\Support\Facades\Log;
 
 class CCTV5EncodesController extends BaseController
 {
-    private $channels = [];
 
     public function __construct()
     {
         parent::__construct();
         $this->middleware('filter')->except([]);
-        if (env('APP_NAME') == 'good') {
-            $this->channels[] = '云端直播0##vod_3180361';
-            $this->channels[] = '云端直播1##vod_3180362';
-            $this->channels[] = '云端直播2##vod_3180363';
-            $this->channels[] = '云端直播3##vod_3180364';
-            $this->channels[] = '云端直播4##vod_3180365';
-            $this->channels[] = '云端直播5##vod_3180366';
-            $this->channels[] = '云端直播6##vod_3180367';
-            $this->channels[] = '云端直播7##vod_3180368';
-            $this->channels[] = '云端直播8##vod_3180369';
-            $this->channels[] = '云端直播9##vod_3180370';
-        } elseif (env('APP_NAME') == 'aikq') {
-            $this->channels[] = '云端直播0##vod_3183361';
-            $this->channels[] = '云端直播1##vod_3183362';
-            $this->channels[] = '云端直播2##vod_3183363';
-            $this->channels[] = '云端直播3##vod_3183364';
-            $this->channels[] = '云端直播4##vod_3183365';
-            $this->channels[] = '云端直播5##vod_3183366';
-            $this->channels[] = '云端直播6##vod_3183367';
-            $this->channels[] = '云端直播7##vod_3183368';
-            $this->channels[] = '云端直播8##vod_3183369';
-            $this->channels[] = '云端直播9##vod_3183370';
-        }
     }
 
     public function index(Request $request)
     {
         $lines = $this->getLines();
-        $ets = EncodeTask::query()->where('from', 'SS')->where('status', 1)->get();
-        return view('manager.pull.cctv5', ['lives' => $lines, 'ets' => $ets, 'channels' => $this->channels]);
+        $asianLines = $this->getAsianLines();
+        if (!empty($asianLines) && !empty($lines)) {
+            $lines = array_merge($lines, $asianLines);
+            $lines = array_sort($lines,function ($value){
+                return $value['starttime'];
+            });
+//            dump($lines);
+        }
+        return view('manager.pull.cctv5', ['lives' => $lines]);
     }
 
     public function getLiveUrl(Request $request, $id)
@@ -78,6 +61,37 @@ class CCTV5EncodesController extends BaseController
         curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
         curl_setopt($ch, CURLINFO_CONTENT_TYPE, 'application/x-www-form-urlencoded');
         curl_setopt($ch, CURLOPT_USERAGENT, "CCTVFive/2.4.2 (iPhone; iOS 11.2.6; Scale/2.00)");
+        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+        $response = curl_exec($ch);
+        if ($error = curl_error($ch)) {
+            die($error);
+        }
+        curl_close($ch);
+        $json = json_decode($response, true);
+//        dump($json);
+        if (isset($json) && isset($json['error_code']) && $json['error_code'] == 0) {
+            return $json['videolivelist'];
+        } else {
+            return false;
+        }
+    }
+
+    private function getAsianLines()
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'http://api.5club.cctv.cn/mobileinf/rest/asian/liveduration');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, 'json=%7B%0A%20%20%22date_time%22%20%3A%20%22%22%2C%0A%20%20%22competitions_id%22%20%3A%20%22%22%0A%7D');
+        curl_setopt($ch, CURLOPT_COOKIE, 'aliyungf_tc=AQAAAMvsYQR1yQ4AkyoEt4yeNZ48JYFj;');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+        curl_setopt($ch, CURLINFO_CONTENT_TYPE, 'application/x-www-form-urlencoded');
+        curl_setopt($ch, CURLOPT_USERAGENT, "CCTVFive/2.6.2 (iPhone; iOS 11.4.1; Scale/2.00)");
+//        curl_setopt($ch, CURLINFO_CONTENT_LENGTH_UPLOAD, 101);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Length'=>'101',
+            'X-Tingyun-Id'=>'lOO3v-LaMio;c=2;r=598381378',
+        ]);
         curl_setopt($ch, CURLOPT_COOKIESESSION, true);
         $response = curl_exec($ch);
         if ($error = curl_error($ch)) {
