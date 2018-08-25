@@ -60,16 +60,19 @@ class BallbarEncodesController extends BaseController
             foreach ($lis as $li) {
                 $qll = new QueryList();
                 $qll->setHtml($li);
-                $live['time'] = $qll->find('.time')->texts()->first();
-                $live['league'] = $qll->find('.league')->texts()->first();
-                $live['match_name'] = $qll->find('.match-name')->texts()->first();
-                $live['url'] = $qll->find('.match-name')->attrs('href')->first();
+                try {
+                    $live['time'] = $qll->find('.time')->texts()->first();
+                    $live['league'] = $qll->find('.league')->texts()->first();
+                    $live['match_name'] = $qll->find('.match-name')->texts()->first();
+                    $live['url'] = $qll->find('.match-name')->attrs('href')->first();
 //                if (!starts_with($live['url'], 'http')) {
 //                    $live['url'] = 'https:' . $live['url'];
 //                }
-                $live['id'] = array_last(explode('/', $live['url']));
-                $live['url'] = 'https://v.ballbar.cc/v/' . $live['id'];
-                $lives[$date][] = $live;
+                    $live['id'] = array_last(explode('/', $live['url']));
+                    $live['url'] = 'https://v.ballbar.cc/v/' . $live['id'];
+                    $lives[$date][] = $live;
+                } catch (\Exception $e) {
+                }
             }
         }
 //        dump($lives);
