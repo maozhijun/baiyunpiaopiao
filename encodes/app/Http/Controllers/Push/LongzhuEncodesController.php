@@ -31,13 +31,13 @@ class LongzhuEncodesController extends BaseController
 //            $this->channels[] = '17177260082##6c16f9e308e708ffbddec21bf46844038da6eabddcb4f1e95adafd98a87592c9072ee1d03c5b400962411b33824a402fe67132b56f7b8992';
 //            $this->channels[] = '17121073721##b6e58ff1d47c632b3896a05b005f4ac56f2fdd8ba1da02d2a57e21f020d81dd7134a549875c5c13cbf9e8e107563efb06443353c463d15cf';
 
-            //腾讯
-            $this->channels[] = 'longzhu12?aba9bd53152c4bb4945f11ae16ad5981';
-            $this->channels[] = 'longzhu12?aba9bd53152c4bb4945f11ae16ad5982';
-            $this->channels[] = 'longzhu12?aba9bd53152c4bb4945f11ae16ad5983';
-            $this->channels[] = 'longzhu12?aba9bd53152c4bb4945f11ae16ad5984';
-            $this->channels[] = 'longzhu12?aba9bd53152c4bb4945f11ae16ad5985';
-            $this->channels[] = 'longzhu12?aba9bd53152c4bb4945f11ae16ad5986';
+//            //腾讯
+//            $this->channels[] = 'longzhu12?aba9bd53152c4bb4945f11ae16ad5981';
+//            $this->channels[] = 'longzhu12?aba9bd53152c4bb4945f11ae16ad5982';
+//            $this->channels[] = 'longzhu12?aba9bd53152c4bb4945f11ae16ad5983';
+//            $this->channels[] = 'longzhu12?aba9bd53152c4bb4945f11ae16ad5984';
+//            $this->channels[] = 'longzhu12?aba9bd53152c4bb4945f11ae16ad5985';
+//            $this->channels[] = 'longzhu12?aba9bd53152c4bb4945f11ae16ad5986';
 
 //            //云帆
 //            $this->channels[] = 'longzhu19?aba9bd53152c4bb4945f11ae16ad5981';
@@ -46,13 +46,13 @@ class LongzhuEncodesController extends BaseController
 //            $this->channels[] = 'longzhu19?aba9bd53152c4bb4945f11ae16ad5984';
 //            $this->channels[] = 'longzhu19?aba9bd53152c4bb4945f11ae16ad5985';
 //            $this->channels[] = 'longzhu19?aba9bd53152c4bb4945f11ae16ad5986';
-//            //网宿
-//            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5981';
-//            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5982';
-//            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5983';
-//            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5984';
-//            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5985';
-//            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5986';
+            //网宿
+            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5981';
+            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5982';
+            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5983';
+            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5984';
+            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5985';
+            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5986';
 
 //            $this->channels[] = '17053903117##';//停封
         } elseif (env('APP_NAME') == 'aikq1') {
@@ -65,13 +65,13 @@ class LongzhuEncodesController extends BaseController
 //            $this->channels[] = '17165142105##';
 //            $this->channels[] = '17177160082##';
 
-            //腾讯
-            $this->channels[] = 'longzhu12?bba9bd53152c4bb4945f11ae16ad5981';
-            $this->channels[] = 'longzhu12?bba9bd53152c4bb4945f11ae16ad5982';
-            $this->channels[] = 'longzhu12?bba9bd53152c4bb4945f11ae16ad5983';
-            $this->channels[] = 'longzhu12?bba9bd53152c4bb4945f11ae16ad5984';
-            $this->channels[] = 'longzhu12?bba9bd53152c4bb4945f11ae16ad5985';
-            $this->channels[] = 'longzhu12?bba9bd53152c4bb4945f11ae16ad5986';
+//            //腾讯
+//            $this->channels[] = 'longzhu12?bba9bd53152c4bb4945f11ae16ad5981';
+//            $this->channels[] = 'longzhu12?bba9bd53152c4bb4945f11ae16ad5982';
+//            $this->channels[] = 'longzhu12?bba9bd53152c4bb4945f11ae16ad5983';
+//            $this->channels[] = 'longzhu12?bba9bd53152c4bb4945f11ae16ad5984';
+//            $this->channels[] = 'longzhu12?bba9bd53152c4bb4945f11ae16ad5985';
+//            $this->channels[] = 'longzhu12?bba9bd53152c4bb4945f11ae16ad5986';
 
 //            //云帆
 //            $this->channels[] = 'longzhu19?aba9bd53152c4bb4945f11ae16ad5981';
@@ -80,13 +80,13 @@ class LongzhuEncodesController extends BaseController
 //            $this->channels[] = 'longzhu19?aba9bd53152c4bb4945f11ae16ad5984';
 //            $this->channels[] = 'longzhu19?aba9bd53152c4bb4945f11ae16ad5985';
 //            $this->channels[] = 'longzhu19?aba9bd53152c4bb4945f11ae16ad5986';
-//            //网宿
-//            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5981';
-//            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5982';
-//            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5983';
-//            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5984';
-//            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5985';
-//            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5986';
+            //网宿
+            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5981';
+            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5982';
+            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5983';
+            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5984';
+            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5985';
+            $this->channels[] = 'longzhu09?aba9bd53152c4bb4945f11ae16ad5986';
 
         } elseif (env('APP_NAME') == 'leqiuba') {
 ////            $this->channels[] = '17160980733##';//待确认
