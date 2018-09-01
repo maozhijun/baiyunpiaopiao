@@ -22,6 +22,7 @@ use App\Http\Controllers\Api\Channels\Syyba123;
 use App\Http\Controllers\Api\Channels\Weibo;
 use App\Http\Controllers\Api\Channels\WoleW;
 use App\Http\Controllers\Api\Channels\Xiaoka;
+use App\Http\Controllers\Api\Channels\Xiaomi;
 use App\Http\Controllers\Api\Channels\Xiu9;
 use App\Http\Controllers\Api\Channels\Xiu95;
 use App\Http\Controllers\Api\Channels\Zhibo;
@@ -41,6 +42,7 @@ class ChannelFactory
         204 =>Sina7d::class,
         106 =>Syyba123::class,
         107 =>China0736::class,
+        311 =>Xiaomi::class,
         312 =>Weibo::class,
         302 =>Zhibo::class,
         208 =>Inke::class,
@@ -68,6 +70,7 @@ class ChannelFactory
         '3' => [//大平台推大比赛
 //            Zhibo::class,
             Longzhu::class,
+            Xiaomi::class,
             Xiaoka::class,
             Fd00cdn::class,
             WoleW::class,
