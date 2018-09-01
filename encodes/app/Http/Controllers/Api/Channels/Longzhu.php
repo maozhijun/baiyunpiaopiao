@@ -21,11 +21,11 @@ class Longzhu extends Channel
     public function __construct($uid = 0)
     {
         $key = str_random(32);
-        $this->streamURL = 'rtmp://push1201.plures.net/onlive';
+        $this->streamURL = 'rtmp://push0901.plures.net/onlive';
         $this->streamKey = $key;
-        $this->playFlv = 'http://hdl1201.plures.net/onlive/' . $key . '.flv';
-        $this->playM3U8 = 'http://hdl1202.plures.net/onlive/' . $key . '.m3u8';
-        $this->playRTMP = 'rtmp://hdl1203.plures.net/onlive/' . $key;
+        $this->playFlv = 'http://hdl0901.plures.net/onlive/' . $key . '.flv';
+        $this->playM3U8 = 'http://hdl0902.plures.net/onlive/' . $key . '.m3u8';
+        $this->playRTMP = 'rtmp://hdl0903.plures.net/onlive/' . $key;
     }
 
     public function pushURL()
