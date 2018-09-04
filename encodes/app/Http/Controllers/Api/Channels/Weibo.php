@@ -98,7 +98,7 @@ class Weibo extends Channel
         }
 //        curl_exec($ch);
         curl_close($ch);
-//        dump($response);
+        dump($response);
         $json = json_decode($response, true);
 //        dump($json);
         $result = [];

@@ -9,7 +9,7 @@
 namespace App\Console;
 
 
-use App\Http\Controllers\Api\Channels\Xiaomi;
+use App\Http\Controllers\Api\Channels\Weibo;
 use Illuminate\Console\Command;
 
 class TestCommand extends Command
@@ -26,8 +26,8 @@ class TestCommand extends Command
 
     public function handle()
     {
-//        $xiaomi = new Xiaomi();
-//        dump($xiaomi);
+        $weibo = new Weibo();
+        dump($weibo);
     }
 
 }
