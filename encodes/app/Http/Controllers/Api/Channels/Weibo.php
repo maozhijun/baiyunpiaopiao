@@ -80,12 +80,12 @@ class Weibo extends Channel
 
     private function onStreamCreate() {
 //        $url = "http://api.weibo.cn/2/live/create?networktype=wifi&moduleID=700&wb_version=3724&c=android&i=83b2637&s=e8f3d64e&ft=0&ua=Meizu-m2%20note__weibo__8.8.0__android__android5.1&wm=9848_0009&aid=01AufVrbaTCXKSczdXZdl7pPDQzsfmJEbBwtizMfBAE1l9uEw.&v_f=2&v_p=63&from=1088095010&gsid=_2A252aR3WDeRxGeBL6FUS8CzEzDSIHXVTPxYerDV6PUJbkdAKLVPxkWpNRw-yQX3wj1Ngu3Lrv5tV4YMGUMiCZx6f&lang=zh_CN&skin=default&oldwm=19005_0019&sflag=1&cum=0D6A7190";
-        $url = "http://api.weibo.cn/2/live/create?c=android&s=e8f3d64e&from=1088095010&gsid=_2A252aR3WDeRxGeBL6FUS8CzEzDSIHXVTPxYerDV6PUJbkdAKLVPxkWpNRw-yQX3wj1Ngu3Lrv5tV4YMGUMiCZx6f";
+        $url = "http://api.weibo.cn/2/live/create";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_POST, true);
-//        curl_setopt($ch, CURLOPT_POSTFIELDS, "id=0&screen_orientation=portrait&name=&gps_position=");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "c=android&s=e8f3d64e&from=1088095010&gsid=_2A252aR3WDeRxGeBL6FUS8CzEzDSIHXVTPxYerDV6PUJbkdAKLVPxkWpNRw-yQX3wj1Ngu3Lrv5tV4YMGUMiCZx6f");
 //        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
@@ -98,7 +98,7 @@ class Weibo extends Channel
         }
 //        curl_exec($ch);
         curl_close($ch);
-        dump($response);
+//        dump($response);
         $json = json_decode($response, true);
 //        dump($json);
         $result = [];
@@ -125,8 +125,9 @@ class Weibo extends Channel
 
     private function onStreamFinish() {
 //        $finishUrl = "http://api.weibo.cn/2/live/finish?networktype=wifi&moduleID=700&wb_version=3724&c=android&i=83b2637&s=e8f3d64e&ft=0&ua=Meizu-m2%20note__weibo__8.8.0__android__android5.1&wm=9848_0009&aid=01AufVrbaTCXKSczdXZdl7pPDQzsfmJEbBwtizMfBAE1l9uEw.&v_f=2&v_p=63&from=1088095010&gsid=_2A252aR3WDeRxGeBL6FUS8CzEzDSIHXVTPxYerDV6PUJbkdAKLVPxkWpNRw-yQX3wj1Ngu3Lrv5tV4YMGUMiCZx6f&lang=zh_CN&skin=default&oldwm=19005_0019&sflag=1&cum=876FECE4&live_id=1042097:592819922_VibQV_tj0nvuClvF";
-        $finishUrl = "http://api.weibo.cn/2/live/finish?c=android&s=e8f3d64e&from=1088095010&gsid=_2A252aR3WDeRxGeBL6FUS8CzEzDSIHXVTPxYerDV6PUJbkdAKLVPxkWpNRw-yQX3wj1Ngu3Lrv5tV4YMGUMiCZx6f&live_id=";
+        $finishUrl = "http://api.weibo.cn/2/live/finish";
 
+        $initData = "c=android&s=e8f3d64e&from=1088095010&gsid=_2A252aR3WDeRxGeBL6FUS8CzEzDSIHXVTPxYerDV6PUJbkdAKLVPxkWpNRw-yQX3wj1Ngu3Lrv5tV4YMGUMiCZx6f&live_id=";
         $lastLiveIdStr = Redis::get(self::STREAM_LIVE_ID_KEYS);
 //        dump($lastLiveIdStr);
         if ($lastLiveIdStr != null) {
@@ -135,11 +136,12 @@ class Weibo extends Channel
             if (is_array($lastLiveIds)) {
                 foreach ($lastLiveIds as $lastLiveId) {
                     if ($lastLiveId != null) {
-                        $url = $finishUrl.$lastLiveId;
+                        $postData = $initData.$lastLiveId;
 
                         $ch = curl_init();
-                        curl_setopt($ch, CURLOPT_URL, $url);
+                        curl_setopt($ch, CURLOPT_URL, $finishUrl);
                         curl_setopt($ch, CURLOPT_POST, true);
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                         $response = curl_exec($ch);
                         if ($error = curl_error($ch)) {
