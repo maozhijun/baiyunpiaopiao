@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\Channels\Fd00cdn;
 use App\Http\Controllers\Api\Channels\HuomaoQiniu;
 use App\Http\Controllers\Api\Channels\HuomaoWs;
 use App\Http\Controllers\Api\Channels\Inke;
+use App\Http\Controllers\Api\Channels\LiveMe;
 use App\Http\Controllers\Api\Channels\Longzhu;
 use App\Http\Controllers\Api\Channels\Sina7d;
 use App\Http\Controllers\Api\Channels\Syyba123;
@@ -33,21 +34,22 @@ class ChannelFactory
     const REDIS_DISABLE_KEY = "channels_disable_key";
 
     const ID_CHANNELS = [
-        301 =>Longzhu::class,
-        203 =>Xiaoka::class,
-        205 =>Fd00cdn::class,
-        209 =>WoleW::class,
-        210 =>Xiu95::class,
-        211 =>Xiu9::class,
-        204 =>Sina7d::class,
         106 =>Syyba123::class,
         107 =>China0736::class,
+        203 =>Xiaoka::class,
+        204 =>Sina7d::class,
+        205 =>Fd00cdn::class,
+        209 =>WoleW::class,
+        208 =>Inke::class,
+        210 =>Xiu95::class,
+        211 =>Xiu9::class,
+        301 =>Longzhu::class,
+        302 =>Zhibo::class,
+        309 =>HuomaoWs::class,
         311 =>Xiaomi::class,
         312 =>Weibo::class,
-        302 =>Zhibo::class,
-        208 =>Inke::class,
+        313 =>LiveMe::class,
         998 =>AikqWS::class,
-        309 =>HuomaoWs::class,
     ];
 
     public static $channels = [
@@ -73,6 +75,7 @@ class ChannelFactory
             Xiaomi::class,
             Weibo::class,
             Syyba123::class,
+//            LiveMe::class,
             Xiu9::class,
             Xiaoka::class,
             Fd00cdn::class,
