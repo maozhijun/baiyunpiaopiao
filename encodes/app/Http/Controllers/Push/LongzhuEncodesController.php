@@ -158,7 +158,7 @@ class LongzhuEncodesController extends BaseController
             } else if ($roomName == 'longzhu09') {
                 $rtmp_url = 'rtmp://push0901.plures.net/onlive/' . $token;
                 $live_lines .= 'http://hdl0901.plures.net/onlive/' . $token . '.flv';
-                $live_lines .= "\n" . 'http://hdl0902.plures.net/onlive/' . $token . '.m3u8';
+                $live_lines .= "\n" . 'http://hdl0902.plures.net/onlive/' . $token . '/playlist.m3u8';
                 $live_lines .= "\n" . 'rtmp://hdl0903.plures.net/onlive/' . $token;
                 $roomName = $channel;
             }  else {

@@ -24,7 +24,7 @@ class Longzhu extends Channel
         $this->streamURL = 'rtmp://push0901.plures.net/onlive';
         $this->streamKey = $key;
         $this->playFlv = 'http://hdl0901.plures.net/onlive/' . $key . '.flv';
-        $this->playM3U8 = 'http://hdl0902.plures.net/onlive/' . $key . '.m3u8';
+        $this->playM3U8 = 'http://hdl0902.plures.net/onlive/' . $key . '/playlist.m3u8';
         $this->playRTMP = 'rtmp://hdl0903.plures.net/onlive/' . $key;
     }
 
