@@ -78,7 +78,7 @@ class ChannelFactory
             Syyba123::class,
             KittyLive::class,
             LiveMe::class,
-            Weibo::class,
+//            Weibo::class,
             Xiu9::class,
             Xiaoka::class,
             Fd00cdn::class,
