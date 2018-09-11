@@ -70,7 +70,7 @@ class Controller extends BaseController
             } else {
                 View::share('watermark', '专业赛事推荐，今日重心已发布！微信搜索关注《足彩边角料》公众号免费获取');
             }
-            $this->random_logo = '爱看球直播：aikq.cc';
+            $this->random_logo = '爱看球直播：aikanqiu.com';
         } elseif (env('APP_NAME') == 'leqiuba') {
             View::share('watermark', '看球 聊球 微信群，进群加微信：zhibo556 红包福利天天有！');
             View::share('logo_text', '加微信：zhibo556');
