@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\Channels\Fd00cdn;
 use App\Http\Controllers\Api\Channels\HuomaoQiniu;
 use App\Http\Controllers\Api\Channels\HuomaoWs;
 use App\Http\Controllers\Api\Channels\Inke;
+use App\Http\Controllers\Api\Channels\KittyLive;
 use App\Http\Controllers\Api\Channels\LiveMe;
 use App\Http\Controllers\Api\Channels\Longzhu;
 use App\Http\Controllers\Api\Channels\Sina7d;
@@ -49,6 +50,7 @@ class ChannelFactory
         311 =>Xiaomi::class,
         312 =>Weibo::class,
         313 =>LiveMe::class,
+        314 =>KittyLive::class,
         998 =>AikqWS::class,
     ];
 
@@ -73,9 +75,10 @@ class ChannelFactory
 //            Zhibo::class,
             Longzhu::class,
             Xiaomi::class,
-            Weibo::class,
             Syyba123::class,
+//            KittyLive::class,
 //            LiveMe::class,
+            Weibo::class,
             Xiu9::class,
             Xiaoka::class,
             Fd00cdn::class,
