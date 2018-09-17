@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Api\Channels\AikqAli;
 use App\Http\Controllers\Api\Channels\AikqWS;
 use App\Http\Controllers\Api\Channels\China0736;
+use App\Http\Controllers\Api\Channels\Esport007;
 use App\Http\Controllers\Api\Channels\Fd00cdn;
 use App\Http\Controllers\Api\Channels\HuomaoQiniu;
 use App\Http\Controllers\Api\Channels\HuomaoWs;
@@ -21,6 +22,7 @@ use App\Http\Controllers\Api\Channels\LiveMe;
 use App\Http\Controllers\Api\Channels\Longzhu;
 use App\Http\Controllers\Api\Channels\Sina7d;
 use App\Http\Controllers\Api\Channels\Syyba123;
+use App\Http\Controllers\Api\Channels\Uplive;
 use App\Http\Controllers\Api\Channels\Weibo;
 use App\Http\Controllers\Api\Channels\WoleW;
 use App\Http\Controllers\Api\Channels\Xiaoka;
@@ -51,6 +53,8 @@ class ChannelFactory
         312 =>Weibo::class,
         313 =>LiveMe::class,
         314 =>KittyLive::class,
+        315 =>Uplive::class,
+        316 =>Esport007::class,
         998 =>AikqWS::class,
     ];
 
@@ -76,9 +80,11 @@ class ChannelFactory
             Longzhu::class,
             Xiaomi::class,
             Syyba123::class,
-            KittyLive::class,
             LiveMe::class,
+//            Uplive::class,
 //            Weibo::class,
+            Esport007::class,
+            KittyLive::class,
             Xiu9::class,
             Xiaoka::class,
             Fd00cdn::class,

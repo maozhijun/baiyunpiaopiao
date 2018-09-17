@@ -9,6 +9,7 @@
 namespace App\Console;
 
 
+use App\Http\Controllers\Api\Channels\Uplive;
 use App\Http\Controllers\Api\Channels\Weibo;
 use Illuminate\Console\Command;
 
@@ -26,8 +27,7 @@ class TestCommand extends Command
 
     public function handle()
     {
-//        $weibo = new Weibo();
-//        dump($weibo);
+        dump(new Uplive());
     }
 
     public static function execUrl($url, $timeout = 5, $isHttps = false) {
