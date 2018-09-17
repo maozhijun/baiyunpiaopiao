@@ -39,7 +39,10 @@ class CCTV5EncodesController extends BaseController
             foreach ($lines as $name => $line) {
 //                $url = $this->getCCTV5LiveUrlAuth($line);
 //                $urls['m3u8_' . $name] = $url;
-                $url = $this->getCCTV5LiveUrlAuth(str_replace('/playlist.m3u8', '.flv', $line));
+//                $line = str_replace("http://", "rtmp://", $line);
+                $line = str_replace('/playlist.m3u8', '.flv', $line);
+//                $line = str_replace('/playlist.m3u8', '', $line);
+                $url = $this->getCCTV5LiveUrlAuth($line);
                 $urls['flv_' . $name] = $url;
             }
             return view('manager.pull.cctv5_lines', ['lines' => $urls]);
@@ -151,7 +154,7 @@ class CCTV5EncodesController extends BaseController
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, 'url=' . str_replace(':', '%3A', $url));
 //        dump('url=' . str_replace(':', '%3A', $url));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Refer: api.cctv.cn', 'UID: 4044A747-5BF0-4465-A894-99E2FEBAC4C1']);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Refer: api.cctv.cn', 'UID: 269482797625189']);
         curl_setopt($ch, CURLOPT_COOKIE, 'acw_tc=AQAAALNPL1XoOQgA4ioEt/zneHCLrF3u; aliyungf_tc=AQAAAO/bfmMGEAgA4ioEt5bFhXwptOnI');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
