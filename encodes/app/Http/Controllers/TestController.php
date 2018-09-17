@@ -11,14 +11,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Api\Channels\HuomaoQiniu;
 use App\Http\Controllers\Api\Channels\HuomaoWs;
+use App\Http\Controllers\Api\Channels\Uplive;
 
 class TestController extends Controller
 {
     public function onTest() {
-        $huomaoQn = new HuomaoQiniu();
-        dump($huomaoQn);
-
-        $huomaoWs = new HuomaoWs();
-        dump($huomaoWs);
+//        $huomaoQn = new HuomaoQiniu();
+//        dump($huomaoQn);
+//
+//        $huomaoWs = new HuomaoWs();
+//        dump($huomaoWs);
+        dump(new Uplive());
     }
 }
