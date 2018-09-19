@@ -196,3 +196,6 @@ Route::get("/manager/check-ffmpeg", 'CrontabController@checkFFMPEG');
 
 //测试用的接口
 Route::get("/test/channels", 'TestController@onTest');
+
+Route::get("/home/info", 'TestController@homeInfo');
+Route::get("/speak", 'TestController@speak');
