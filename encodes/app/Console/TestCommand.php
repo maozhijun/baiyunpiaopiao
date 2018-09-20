@@ -11,6 +11,7 @@ namespace App\Console;
 
 use App\Http\Controllers\Api\Channels\Uplive;
 use App\Http\Controllers\Api\Channels\Weibo;
+use App\Http\Controllers\Api\Channels\Zhangyu;
 use Illuminate\Console\Command;
 
 class TestCommand extends Command
@@ -27,7 +28,8 @@ class TestCommand extends Command
 
     public function handle()
     {
-        dump(new Uplive());
+//        dump(new Uplive());
+        dump(new Zhangyu());
     }
 
     public static function execUrl($url, $timeout = 5, $isHttps = false) {

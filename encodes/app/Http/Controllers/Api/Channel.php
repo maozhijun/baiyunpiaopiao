@@ -53,4 +53,25 @@ abstract class Channel
         }
         return trim($text);
     }
+
+    /**
+     * 请求网络数据的通用方法
+     * @param $url
+     * @param int $timeout
+     * @param bool $isHttps
+     * @return mixed
+     */
+    protected function execUrl($url, $timeout = 5, $isHttps = false) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);//8秒超时
+        if ($isHttps) {
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    // https请求 不验证证书和hosts
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+        }
+        $server_out = curl_exec ($ch);
+        curl_close ($ch);
+        return $server_out;
+    }
 }

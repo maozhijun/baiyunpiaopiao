@@ -29,6 +29,7 @@ use App\Http\Controllers\Api\Channels\Xiaoka;
 use App\Http\Controllers\Api\Channels\Xiaomi;
 use App\Http\Controllers\Api\Channels\Xiu9;
 use App\Http\Controllers\Api\Channels\Xiu95;
+use App\Http\Controllers\Api\Channels\Zhangyu;
 use App\Http\Controllers\Api\Channels\Zhibo;
 use Illuminate\Support\Facades\Redis;
 
@@ -55,6 +56,7 @@ class ChannelFactory
         314 =>KittyLive::class,
         315 =>Uplive::class,
         316 =>Esport007::class,
+        317 =>Zhangyu::class,
         998 =>AikqWS::class,
     ];
 
@@ -82,7 +84,7 @@ class ChannelFactory
             Syyba123::class,
             LiveMe::class,
 //            Uplive::class,
-//            Weibo::class,
+            Zhangyu::class,
             Esport007::class,
             KittyLive::class,
             Xiu9::class,
@@ -92,6 +94,7 @@ class ChannelFactory
             Xiu95::class,
             Sina7d::class,
             China0736::class,
+//            Weibo::class,
 //            Inke::class,
 //            AikqWS::class,
 //            HuomaoWs::class,
