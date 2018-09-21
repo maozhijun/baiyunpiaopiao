@@ -3,15 +3,17 @@
 namespace App\Http\Controllers\Api\Channels;
 
 use App\Http\Controllers\Api\Channel;
+use App\Http\Controllers\ASBase64Decoder;
 
-class Zhangyu extends Channel
+class JustFun extends Channel
 {
-    public $id = 317;//平台ID
-    public $name = 'zhangyu.tv';//平台名称
+    public $id = 318;//平台ID
+    public $name = 'justfun.live';//平台名称
     public $level = 3;//平台级别，1:野鸡，2:一般，3:大平台
     public $expiration = -1;//过期时间，单位秒，-1表示不过期
 
     const ZHANGYU_HOST = "http://www.zhangyu.tv";
+    const JUSTFUN_HOST = "http://www.justfun.live";
     const MIN_FAVOR_COUNT = 5; //用来筛选关注数非常少的主播
 
     private $streamURL;
@@ -26,19 +28,19 @@ class Zhangyu extends Channel
         if (strlen($keyword) <= 0) {
             $keyword = strtolower(str_random(1));
         }
-        $cid = $this->getZhangYuCid($keyword);
+        $cid = $this->getJustFunCid($keyword);
         if ($cid > 0) {
             $zy_cid = $this->setPushUrl($cid);
             if (strlen($zy_cid) > 0) {
-                sleep(1);
-                $this->setFlvUrl($zy_cid);
+//                sleep(1);
+//                $this->setFlvUrl($zy_cid);
                 $this->setM3u8Url($zy_cid);
             }
         }
     }
 
-    private function getZhangYuCid($keyword) {
-        $url = self::ZHANGYU_HOST."/search/search/query?keyword=$keyword";
+    private function getJustFunCid($keyword) {
+        $url = self::JUSTFUN_HOST."/live-channel-search/search/query?keyword=$keyword";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$url);
@@ -66,21 +68,25 @@ class Zhangyu extends Channel
     }
 
     private function setPushUrl($cid) {
-        $url = self::ZHANGYU_HOST."/channel/info?cid=$cid&stream=1";
+        $url = self::JUSTFUN_HOST."/live-channel-info/channel/info?cid=$cid&stream=1";
         $dataStr = $this->execUrl($url);
         $data = json_decode($dataStr, true);
         $zy_cid = "";
         if (is_array($data) && array_key_exists('fengyuncid', $data)) {
-            $this->streamURL = $data['uploadUrl'];
-            $this->streamKey = $data['streamCode'];
             $zy_cid = $data['fengyuncid'];
+            list($streamUrl, $streamCode) = explode("/".$zy_cid, $data['uploadUrl'], 2);
+            $this->streamURL = $streamUrl;
+            $this->streamKey = $zy_cid.$streamCode;
         }
         return $zy_cid;
     }
 
     private function setFlvUrl($cid) {
-        $url = self::ZHANGYU_HOST."/SourceManager/live?cid=$cid";
-        $dataStr = $this->decodNew($this->execUrl($url));
+
+        $url = self::ZHANGYU_HOST."/SourceManager/live?cid=$cid&rtmpurl=play.justfun.live";
+        $result = $this->execUrl($url);
+        $dataStr = $this->decodNew($result);
+//        dump($cid, "=====", $result, "==========", $dataStr);
         $data = json_decode($dataStr, true);
         if (is_array($data) && array_key_exists('rtmpurl', $data)) {
             $this->playFlv = $data['rtmpurl'];
@@ -88,15 +94,24 @@ class Zhangyu extends Channel
     }
 
     private function setM3u8Url($cid) {
-        $url = self::ZHANGYU_HOST."/SourceManager/m3u8?cid=$cid";
-        $dataStr = $this->execUrl($url);
-        $data = json_decode($dataStr, true);
-        if (is_array($data) && array_key_exists('m3u8', $data)) {
-            $this->playM3U8 = $data['m3u8'];
+        $url = "http://m.justfun.live/tv/$cid";
+        $useAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) CriOS/56.0.2924.75 Mobile/14E5239e Safari/602.1";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_USERAGENT, $useAgent);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);//8秒超时
+        $server_out = curl_exec ($ch);
+        curl_close ($ch);
+
+        preg_match_all("/<video _src='(.*?)' class=/is", $server_out, $tempItems);
+        if (is_array($tempItems) && count($tempItems) >= 2 && isset($tempItems[1])) {
+            $this->playM3U8 = $tempItems[1][0];
         }
     }
 
-    private function decodNew($str) {
+    protected function decodNew($str) {
         $bytes = array();
         $oldBytes = str_split($str);
         $index = 0;

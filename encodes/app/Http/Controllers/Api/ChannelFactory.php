@@ -84,7 +84,7 @@ class ChannelFactory
             Syyba123::class,
             LiveMe::class,
 //            Uplive::class,
-            Zhangyu::class,
+//            Zhangyu::class,
             Esport007::class,
             KittyLive::class,
             Xiu9::class,

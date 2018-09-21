@@ -20,6 +20,9 @@
         <li role="presentation" {{ starts_with(request()->path(),'manager/longzhu')?'class=active':'' }}>
             <a href="/manager/longzhu/">龙珠直播</a>
         </li>
+        <li role="presentation" {{ starts_with(request()->path(),'manager/zhangyu')?'class=active':'' }}>
+            <a href="/manager/zhangyu/">章鱼直播</a>
+        </li>
         <li role="presentation" {{ starts_with(request()->path(),'manager/huajiao')?'class=active':'' }}>
             <a href="/manager/huajiao/">花椒直播</a>
         </li>
