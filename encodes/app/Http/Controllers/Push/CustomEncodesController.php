@@ -19,6 +19,10 @@ class CustomEncodesController extends BaseController
         if (env('APP_NAME') == 'good') {
 
         } elseif (env('APP_NAME') == 'aikq') {
+            $randomEnd = str_random(2);
+            $randomEnd = strtolower($randomEnd);
+            $randomIntEnd = random_int(1, 9);
+
 //            $rens[] = 'renren##201804241141222057111';
 //            $rens[] = 'renren##201804241141222057222';
 //            $rens[] = 'renren##201804241141222057333';
@@ -31,16 +35,22 @@ class CustomEncodesController extends BaseController
 //            $bohes[] = 'bohe-ws##5a75b2c34a964ed5bbbd5399be5ccd7a';
 //            $this->channels['薄荷-网易'] = $bohes;
 
-            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bcaf11';
-            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bcaf22';
-            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bcaf33';
-            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bcaf44';
-            $this->channels['上鱼-网宿'] = $shangyuers;
+//            $shangyuers[] = "shangyuer-ws##2f34f11a-548d-4ba7-b1aa-2b7b3a2bf$randomEnd"."a";
+//            $shangyuers[] = "shangyuer-ws##2f34f11a-548d-4ba7-b1aa-2b7b3a2bf$randomEnd"."b";
+//            $shangyuers[] = "shangyuer-ws##2f34f11a-548d-4ba7-b1aa-2b7b3a2bf$randomEnd"."c";
+//            $shangyuers[] = "shangyuer-ws##2f34f11a-548d-4ba7-b1aa-2b7b3a2bf$randomEnd"."d";
+//            $this->channels['上鱼-网宿'] = $shangyuers;
 
-            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008dvaa';
-            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008dvbb';
-            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008dvcc';
-            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008dvdd';
+            $shangyuers[] = "shangyuer-pili##2f34f11a-548d-4ba7-b1aa-2b7b3a2bf$randomEnd"."a";
+            $shangyuers[] = "shangyuer-pili##2f34f11a-548d-4ba7-b1aa-2b7b3a2bf$randomEnd"."b";
+            $shangyuers[] = "shangyuer-pili##2f34f11a-548d-4ba7-b1aa-2b7b3a2bf$randomEnd"."c";
+            $shangyuers[] = "shangyuer-pili##2f34f11a-548d-4ba7-b1aa-2b7b3a2bf$randomEnd"."d";
+            $this->channels['上鱼-七牛'] = $shangyuers;
+
+            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'a';
+            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'b';
+            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'c';
+            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'d';
             $this->channels['我乐-帝联'] = $dfms;
 
 //            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008dvaa';
@@ -67,10 +77,10 @@ class CustomEncodesController extends BaseController
 //            $nagezanwss[] = 'yuntu-ws##9bfd6634-9ea6-4081-95e1-2ccee184f7dd';
 //            $this->channels['云图-网宿'] = $nagezanwss;
 
-            $maobos[] = 'maobo-ali##300223331';
-            $maobos[] = 'maobo-ali##300223332';
-            $maobos[] = 'maobo-ali##300223333';
-            $maobos[] = 'maobo-ali##300223334';
+            $maobos[] = 'maobo-ali##3002233'.$randomIntEnd.'1';
+            $maobos[] = 'maobo-ali##3002233'.$randomIntEnd.'2';
+            $maobos[] = 'maobo-ali##3002233'.$randomIntEnd.'3';
+            $maobos[] = 'maobo-ali##3002233'.$randomIntEnd.'4';
             $this->channels['猫播-阿里'] = $maobos;
 
 //            $huoxings[] = 'huoxing-ks##29589011';
@@ -79,10 +89,10 @@ class CustomEncodesController extends BaseController
 //            $huoxings[] = 'huoxing-ks##29589044';
 //            $this->channels['火星-金山'] = $huoxings;
 
-            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b086aa';
-            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b086bb';
-            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b086cc';
-            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b086dd';
+            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b08'.$randomEnd.'a';
+            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b08'.$randomEnd.'b';
+            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b08'.$randomEnd.'c';
+            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b08'.$randomEnd.'d';
             $this->channels['艾米-网速'] = $imis;
 
 //            $kdfs[] = 'kdf-ws##wCOXzowoOsmGe_11125_1486629432113_111';
@@ -91,16 +101,16 @@ class CustomEncodesController extends BaseController
 //            $kdfs[] = 'kdf-ws##wCOXzowoOsmGe_11125_1486629432113_444';
 //            $this->channels['看东方-网宿'] = $kdfs;
 
-            $memes[] = 'meme-uc##40290811';
-            $memes[] = 'meme-uc##40290822';
-            $memes[] = 'meme-uc##40290833';
-            $memes[] = 'meme-uc##40290844';
+            $memes[] = 'meme-uc##402908'.$randomIntEnd.'1';
+            $memes[] = 'meme-uc##402908'.$randomIntEnd.'2';
+            $memes[] = 'meme-uc##402908'.$randomIntEnd.'3';
+            $memes[] = 'meme-uc##402908'.$randomIntEnd.'4';
             $this->channels['么么-UC'] = $memes;
 
-            $stagers[] = 'stager-ws##7397811';
-            $stagers[] = 'stager-ws##7397822';
-            $stagers[] = 'stager-ws##7397833';
-            $stagers[] = 'stager-ws##7397844';
+            $stagers[] = 'stager-ws##73978'.$randomIntEnd.'1';
+            $stagers[] = 'stager-ws##73978'.$randomIntEnd.'2';
+            $stagers[] = 'stager-ws##73978'.$randomIntEnd.'3';
+            $stagers[] = 'stager-ws##73978'.$randomIntEnd.'4';
             $this->channels['小鬼子-网宿'] = $stagers;
 
 //            $xiu8s[] = 'xiu8-ws##9103291';
@@ -109,34 +119,38 @@ class CustomEncodesController extends BaseController
 //            $xiu8s[] = 'xiu8-ws##9103294';
 //            $this->channels['秀吧-网宿'] = $xiu8s;
 
-            $xiu8kss[] = 'xiu8-ks##9203291';
-            $xiu8kss[] = 'xiu8-ks##9203292';
-            $xiu8kss[] = 'xiu8-ks##9203293';
-            $xiu8kss[] = 'xiu8-ks##9203294';
+            $xiu8kss[] = 'xiu8-ks##92032'.$randomIntEnd.'1';
+            $xiu8kss[] = 'xiu8-ks##92032'.$randomIntEnd.'2';
+            $xiu8kss[] = 'xiu8-ks##92032'.$randomIntEnd.'3';
+            $xiu8kss[] = 'xiu8-ks##92032'.$randomIntEnd.'4';
             $this->channels['秀吧-金山'] = $xiu8kss;
 
-            $ewqoks[] = 'ewqok-dl##24506211';
-            $ewqoks[] = 'ewqok-dl##24506222';
-            $ewqoks[] = 'ewqok-dl##24506233';
-            $ewqoks[] = 'ewqok-dl##24506244';
+            $ewqoks[] = 'ewqok-dl##245062'.$randomIntEnd.'1';
+            $ewqoks[] = 'ewqok-dl##245062'.$randomIntEnd.'2';
+            $ewqoks[] = 'ewqok-dl##245062'.$randomIntEnd.'3';
+            $ewqoks[] = 'ewqok-dl##245062'.$randomIntEnd.'4';
             $this->channels['什么鬼-帝联'] = $ewqoks;
 
-            $sb126s[] = 'sb126-ws##735f725292624dfd98d117664bb02411';
-            $sb126s[] = 'sb126-ws##3c53b37b83f042c6a96656a11dd49612';
-            $sb126s[] = 'sb126-ws##e1956de55d1e44c4bd2552216b11ed13';
-            $sb126s[] = 'sb126-ws##bebf1bdf215e493cb4877832aa2c2c14';
+            $sb126s[] = 'sb126-ws##735f725292624dfd98d117664bb02'.$randomEnd.'1';
+            $sb126s[] = 'sb126-ws##3c53b37b83f042c6a96656a11dd49'.$randomEnd.'2';
+            $sb126s[] = 'sb126-ws##e1956de55d1e44c4bd2552216b11e'.$randomEnd.'3';
+            $sb126s[] = 'sb126-ws##bebf1bdf215e493cb4877832aa2c2'.$randomEnd.'4';
             $this->channels['随便-网易'] = $sb126s;
 
-            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqda";
-            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqdb";
-            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqdc";
-            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsmqdd";
+            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsm".$randomEnd."a";
+            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsm".$randomEnd."b";
+            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsm".$randomEnd."c";
+            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsm".$randomEnd."d";
             $this->channels['拉拉-UC'] = $lesparks;
         } elseif (env('APP_NAME') == 'aikq1') {
-            $stagers[] = 'stager-ws##7397711';
-            $stagers[] = 'stager-ws##7397722';
-            $stagers[] = 'stager-ws##7397733';
-            $stagers[] = 'stager-ws##7397744';
+            $randomEnd = str_random(2);
+            $randomEnd = strtolower($randomEnd);
+            $randomIntEnd = random_int(1, 9);
+
+            $stagers[] = 'stager-ws##73977'.$randomIntEnd.'1';
+            $stagers[] = 'stager-ws##73977'.$randomIntEnd.'2';
+            $stagers[] = 'stager-ws##73977'.$randomIntEnd.'3';
+            $stagers[] = 'stager-ws##73977'.$randomIntEnd.'4';
             $this->channels['小鬼子-网宿'] = $stagers;
 
 //            $xiu8s[] = 'xiu8-ws##9103281';
@@ -145,22 +159,22 @@ class CustomEncodesController extends BaseController
 //            $xiu8s[] = 'xiu8-ws##9103284';
 //            $this->channels['秀吧-网宿'] = $xiu8s;
 
-            $xiu8kss[] = 'xiu8-ks##9203291';
-            $xiu8kss[] = 'xiu8-ks##9203292';
-            $xiu8kss[] = 'xiu8-ks##9203293';
-            $xiu8kss[] = 'xiu8-ks##9203294';
+            $xiu8kss[] = 'xiu8-ks##92032'.$randomIntEnd.'1';
+            $xiu8kss[] = 'xiu8-ks##92032'.$randomIntEnd.'2';
+            $xiu8kss[] = 'xiu8-ks##92032'.$randomIntEnd.'3';
+            $xiu8kss[] = 'xiu8-ks##92032'.$randomIntEnd.'4';
             $this->channels['秀吧-金山'] = $xiu8kss;
 
-            $memes[] = 'meme-uc##40290711';
-            $memes[] = 'meme-uc##40290722';
-            $memes[] = 'meme-uc##40290733';
-            $memes[] = 'meme-uc##40290744';
+            $memes[] = 'meme-uc##402907'.$randomIntEnd.'1';
+            $memes[] = 'meme-uc##402907'.$randomIntEnd.'2';
+            $memes[] = 'meme-uc##402907'.$randomIntEnd.'3';
+            $memes[] = 'meme-uc##402907'.$randomIntEnd.'4';
             $this->channels['么么-UC'] = $memes;
 
-            $ewqoks[] = 'ewqok-dl##24506255';
-            $ewqoks[] = 'ewqok-dl##24506266';
-            $ewqoks[] = 'ewqok-dl##24506277';
-            $ewqoks[] = 'ewqok-dl##24506288';
+            $ewqoks[] = 'ewqok-dl##245062'.$randomIntEnd.'5';
+            $ewqoks[] = 'ewqok-dl##245062'.$randomIntEnd.'6';
+            $ewqoks[] = 'ewqok-dl##245062'.$randomIntEnd.'7';
+            $ewqoks[] = 'ewqok-dl##245062'.$randomIntEnd.'8';
             $this->channels['什么鬼-帝联'] = $ewqoks;
 
 //            $nagezanalis[] = 'yuntu-ali##9bfd6634-9ea6-4081-95e1-2ccee184d7aa';
@@ -175,10 +189,10 @@ class CustomEncodesController extends BaseController
 //            $nagezanwss[] = 'yuntu-ws##9bfd6634-9ea6-4081-95e1-2ccee184c7dd';
 //            $this->channels['云图-网宿'] = $nagezanwss;
 
-            $maobos[] = 'maobo-ali##300213331';
-            $maobos[] = 'maobo-ali##300213332';
-            $maobos[] = 'maobo-ali##300213333';
-            $maobos[] = 'maobo-ali##300213334';
+            $maobos[] = 'maobo-ali##3002133'.$randomIntEnd.'1';
+            $maobos[] = 'maobo-ali##3002133'.$randomIntEnd.'2';
+            $maobos[] = 'maobo-ali##3002133'.$randomIntEnd.'3';
+            $maobos[] = 'maobo-ali##3002133'.$randomIntEnd.'4';
             $this->channels['猫播-阿里'] = $maobos;
 
 //            $huoxings[] = 'huoxing-ks##29589111';
@@ -187,10 +201,10 @@ class CustomEncodesController extends BaseController
 //            $huoxings[] = 'huoxing-ks##29589444';
 //            $this->channels['火星-金山'] = $huoxings;
 
-            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b088aa';
-            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b088bb';
-            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b088cc';
-            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b088dd';
+            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b08'.$randomEnd.'a';
+            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b08'.$randomEnd.'b';
+            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b08'.$randomEnd.'c';
+            $imis[] = 'imi-ws##33568497-1-08ca05825e12d522c74285dcb2b08'.$randomEnd.'d';
             $this->channels['艾米-网速'] = $imis;
 
 //            $kdfs[] = 'kdf-ws##wCOXzowoOsmGe_11125_1486629432112_111';
@@ -211,16 +225,22 @@ class CustomEncodesController extends BaseController
 //            $bohes[] = 'bohe-ws##bebf1bdf215e493cb4877832aa2c2c64';
 //            $this->channels['薄荷-网易'] = $bohes;
 
-            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bcaf55';
-            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bcaf66';
-            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bcaf77';
-            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bcaf88';
-            $this->channels['上鱼-网宿'] = $shangyuers;
+//            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bca'.$randomEnd.'5';
+//            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bca'.$randomEnd.'6';
+//            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bca'.$randomEnd.'7';
+//            $shangyuers[] = 'shangyuer-ws##81a9238b-e69e-4a7a-9ec8-1e0846bca'.$randomEnd.'8';
+//            $this->channels['上鱼-网宿'] = $shangyuers;
 
-            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008ddaa';
-            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008ddbb';
-            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008ddcc';
-            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008dddd';
+            $shangyuers[] = 'shangyuer-pili##21a9238b-e69e-4a7a-9ec8-1e0846bca'.$randomEnd.'5';
+            $shangyuers[] = 'shangyuer-pili##21a9238b-e69e-4a7a-9ec8-1e0846bca'.$randomEnd.'6';
+            $shangyuers[] = 'shangyuer-pili##21a9238b-e69e-4a7a-9ec8-1e0846bca'.$randomEnd.'7';
+            $shangyuers[] = 'shangyuer-pili##21a9238b-e69e-4a7a-9ec8-1e0846bca'.$randomEnd.'8';
+            $this->channels['上鱼-七牛'] = $shangyuers;
+
+            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'a';
+            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'b';
+            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'c';
+            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'d';
             $this->channels['我乐-帝联'] = $dfms;
 
 //            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008dcaa';
@@ -235,16 +255,16 @@ class CustomEncodesController extends BaseController
 //            $memes[] = 'meme-ali##40290644';
 //            $this->channels['么么-阿里'] = $memes;
 
-            $sb126s[] = 'sb126-ws##735f725292624dfd98d117664bb02421';
-            $sb126s[] = 'sb126-ws##3c53b37b83f042c6a96656a11dd49622';
-            $sb126s[] = 'sb126-ws##e1956de55d1e44c4bd2552216b11ed23';
-            $sb126s[] = 'sb126-ws##bebf1bdf215e493cb4877832aa2c2c24';
+            $sb126s[] = 'sb126-ws##735f725292624dfd98d117664bb02'.$randomEnd.'1';
+            $sb126s[] = 'sb126-ws##3c53b37b83f042c6a96656a11dd49'.$randomEnd.'2';
+            $sb126s[] = 'sb126-ws##e1956de55d1e44c4bd2552216b11e'.$randomEnd.'3';
+            $sb126s[] = 'sb126-ws##bebf1bdf215e493cb4877832aa2c2'.$randomEnd.'4';
             $this->channels['随便-网易'] = $sb126s;
 
-            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsmqda";
-            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsmqdb";
-            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsmqdc";
-            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsmqdd";
+            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsm'.$randomEnd.'a";
+            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsm'.$randomEnd.'b";
+            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsm'.$randomEnd.'c";
+            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsm'.$randomEnd.'d";
             $this->channels['拉拉-UC'] = $lesparks;
         } elseif (env('APP_NAME') == 'leqiuba') {
 
@@ -358,6 +378,12 @@ class CustomEncodesController extends BaseController
                     $rtmp_url = 'rtmp://push.live.shangyuer.com/vod/' . $roomId;//获取rtmp地址
                     $live_rtmp_url = 'http://pull.live.shangyuer.com/vod/' . $roomId . '.flv';//播放rtmp地址
                     $live_m3u8_url = 'http://pull-hls.live.shangyuer.com/vod/' . $roomId . '/playlist.m3u8';//播放m3u8地址
+                    break;
+                }
+                case 'shangyuer-pili': {
+                    $rtmp_url = 'rtmp://pili-publish.shangyuer.com/vodd/' . $roomId;//获取rtmp地址
+                    $live_rtmp_url = 'http://pili-live-hdl.shangyuer.com/vodd/' . $roomId . '.flv';//播放rtmp地址
+                    $live_m3u8_url = 'http://pili-live-hls.shangyuer.com/vodd/' . $roomId . '.m3u8';//播放m3u8地址
                     break;
                 }
                 case 'xiu8-ws': {

@@ -17,6 +17,9 @@
         <li role="presentation" {{ starts_with(request()->path(),'manager/other')?'class=active':'' }}>
             <a href="/manager/other/">自定义转码</a>
         </li>
+        <li role="presentation" {{ starts_with(request()->path(),'manager/custom')?'class=active':'' }}>
+            <a href="/manager/custom/">一堆平台</a>
+        </li>
         <li role="presentation" {{ starts_with(request()->path(),'manager/longzhu')?'class=active':'' }}>
             <a href="/manager/longzhu/">龙珠直播</a>
         </li>
@@ -39,9 +42,6 @@
             {{--<li role="presentation" {{ starts_with(request()->path(),'manager/netease')?'class=active':'' }}>--}}
             {{--<a href="/manager/netease/">黄易直播</a>--}}
             {{--</li>--}}
-            <li role="presentation" {{ starts_with(request()->path(),'manager/custom')?'class=active':'' }}>
-                <a href="/manager/custom/">一堆平台</a>
-            </li>
             <li role="presentation" {{ starts_with(request()->path(),'manager/huomao')?'class=active':'' }}>
                 <a href="/manager/huomao/">火猫直播</a>
             </li>
