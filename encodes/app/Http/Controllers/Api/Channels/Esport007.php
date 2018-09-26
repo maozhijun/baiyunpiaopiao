@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\Channel;
 
 class Esport007 extends Channel
 {
-    public $id = 311;//平台ID
+    public $id = 316;//平台ID
     public $name = 'esport007.com';//平台名称
     public $level = 3;//平台级别，1:野鸡，2:一般，3:大平台
     public $expiration = -1;//过期时间，单位秒，-1表示不过期
