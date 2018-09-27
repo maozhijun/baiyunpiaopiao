@@ -14,6 +14,8 @@
 Route::match(["get", "post"], "/login", 'AuthController@index');//登录
 //Route::get("/manager/list/", "EncodesController@index");
 
+Route::get("/", 'AuthController@host')->middleware('auth'); //首页
+
 Route::group(["middleware" => "auth", "namespace" => "Push"], function () {
     if (env('APP_NAME') == 'good') {
 //        Route::get("/manager/", "HeiEncodesController@index");
@@ -36,10 +38,6 @@ Route::group(["middleware" => "auth", "namespace" => "Push"], function () {
     } else {
         Route::get("/manager/", "OtherEncodesController@index");
     }
-
-    Route::get("/", function () {
-        return redirect('/manager/longzhu/');
-    });
 
     Route::get("/manager/other/", "OtherEncodesController@index");
     Route::post("/manager/other/created/", "OtherEncodesController@created");

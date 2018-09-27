@@ -20,21 +20,29 @@ class AuthVerify
         if ($this->isAuth($request)) {
             return $next($request);
         } else {
-            return redirect('/login/?target='.urlencode($request->fullUrl()));
+            if (isset($request->role) && $request->role > 0) {
+                return redirect('/');
+            } else {
+                return redirect('/login/?target=' . urlencode($request->fullUrl()));
+            }
         }
     }
 
     public function isAuth(Request $request)
     {
         //检查session
-        $login_session = session(AuthController::K_LOGIN_SESSION_KEY);
-        if (isset($login_session)) {
-            return true;
+        $user = session(AuthController::K_LOGIN_SESSION_KEY);
+        if (isset($user) && is_array($user) && array_key_exists('role', $user)) {
+            $role = $user['role'];
+        } else {
+            $role = 0;
         }
+        $request->role = $role;
+
 //        $auth_cookie = $request->cookie(AuthController::K_LOGIN_COOKIE_KEY);
 //        if (!empty($cookie)) {
 //
 //        }
-        return false;
+        return AuthController::hasAccess($request, $user);
     }
 }
