@@ -61,7 +61,8 @@ class AuthController extends BaseController
                 'account' => 'gg-user',
                 'password' => '73b7873465e24754faeb01a5158b0ea97db49b72',
                 'salt' => '6dalIdJiO2Vt',
-                'role' => $this->getAccessRole([self::ACCESS_INDEX_PULL])
+//                'role' => $this->getAccessRole([self::ACCESS_INDEX_PULL])
+                'role' => $this->getAccessRole()
             ],
             [
                 'account' => 'ricky',
