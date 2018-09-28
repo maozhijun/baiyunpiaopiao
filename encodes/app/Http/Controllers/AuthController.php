@@ -18,14 +18,15 @@ class AuthController extends BaseController
     const ACCESS_INDEX_SETTING = 4;
 
     const ACCESS_NAME_INDEXS = [
-        "manager"=>self::ACCESS_INDEX_PUSH, //Push 推流
-        "resources"=>self::ACCESS_INDEX_PULL, //Pull 直播源
-        "records"=>self::ACCESS_INDEX_RECODE, //Record 录像、集锦
-        "obs"=>self::ACCESS_INDEX_OBS, //Stream OBS推流码
-        "setting"=>self::ACCESS_INDEX_SETTING, //Setting 推流设置
+        "manager" => self::ACCESS_INDEX_PUSH, //Push 推流
+        "resources" => self::ACCESS_INDEX_PULL, //Pull 直播源
+        "records" => self::ACCESS_INDEX_RECODE, //Record 录像、集锦
+        "obs" => self::ACCESS_INDEX_OBS, //Stream OBS推流码
+        "setting" => self::ACCESS_INDEX_SETTING, //Setting 推流设置
     ];
 
-    private function getAccessRole(array $array = null) {
+    private function getAccessRole(array $array = null)
+    {
         $accessRole = 0;
         if (isset($array) && count($array) > 0) {
             foreach ($array as $index) {
@@ -39,15 +40,18 @@ class AuthController extends BaseController
         return $accessRole;
     }
 
-    public static function isAccess($role, $index) {
+    public static function isAccess($role, $index)
+    {
         return ($role >> $index & 1) == 1;
     }
 
-    private function getUsers() {
+    //php -r "echo sha1(sha1('aikanqiuzhibo').'6dUrCKcxVycRs');"
+    private function getUsers()
+    {
         return [
             [
                 'account' => '牛逼编码系统',
-                'password' => '9e8fa2d95c15baeca38d8d6c2ccae959ac078e61',
+                'password' => '15d58f3a0b959ffb64f50edb4247add1652cbc19',//aikanqiuzhibo
                 'salt' => '6dUrCKcxVycRs',
                 'role' => $this->getAccessRole()
             ],
@@ -58,11 +62,11 @@ class AuthController extends BaseController
                 'role' => $this->getAccessRole()
             ],
             [
-                'account' => 'gg-user',
-                'password' => '73b7873465e24754faeb01a5158b0ea97db49b72',
+                'account' => 'guest',
+                'password' => '8b317399601fe67b356d569de20fe10b35d93bf9',//guest001
                 'salt' => '6dalIdJiO2Vt',
-//                'role' => $this->getAccessRole([self::ACCESS_INDEX_PULL])
-                'role' => $this->getAccessRole()
+                'role' => $this->getAccessRole([self::ACCESS_INDEX_PULL])
+//                'role' => $this->getAccessRole()
             ],
             [
                 'account' => 'ricky',
@@ -95,11 +99,13 @@ class AuthController extends BaseController
         return view('manager.auth');
     }
 
-    public function host(Request $request) {
+    public function host(Request $request)
+    {
         return view('layouts.main');
     }
 
-    public static function hasAccess(Request $request, $user) {
+    public static function hasAccess(Request $request, $user)
+    {
         $path = $request->path();
         if (isset($user)) {
             if (strlen($path) > 0 && starts_with("/", $path)) {
