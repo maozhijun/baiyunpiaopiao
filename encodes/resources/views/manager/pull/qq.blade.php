@@ -16,18 +16,18 @@
             @foreach($lives as $live)
                 <tr>
                     <td>
-                        <label class="label {{ $live['isPay']==1?'label-danger':'label-primary' }}">{{ $live['matchInfo']['matchDesc'] }}</label>
+                        <label class="label {{ $live['isPay']==1?'label-danger':'label-primary' }}">{{ $live['matchDesc'] }}</label>
                     </td>
                     <td>
-                        {{ $live['matchInfo']['startTime'] }}
+                        {{ $live['startTime'] }}
                     </td>
                     <td>
-                        {!! $live['matchInfo']['leftName'].'&nbsp;VS&nbsp;'.$live['matchInfo']['rightName'] !!}
+                        {!! $live['leftName'].'&nbsp;VS&nbsp;'.$live['rightName'] !!}
                     </td>
                     <td>
-                        @if($live['matchInfo']['livePeriod'] == 1)
+                        @if($live['livePeriod'] == 1)
                             <label class="label label-info">进行中</label>
-                        @elseif($live['matchInfo']['livePeriod'] == 0)
+                        @elseif($live['livePeriod'] == 0)
                             <label class="label label-default">未开始</label>
                         @endif
                     </td>
