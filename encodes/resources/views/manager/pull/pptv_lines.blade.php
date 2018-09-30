@@ -71,7 +71,7 @@
 <script src="/js/jquery.js"></script>
 <script src="/js/bootstrap.js"></script>
 <script src="/js/toastr.min.js"></script>
-<script src="/js/pptv/player-test.js"></script>
+<script src="/js/pptv/player.js"></script>
 @if(!empty($key))
     <script>
         function videoData() {
