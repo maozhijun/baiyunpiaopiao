@@ -149,6 +149,10 @@ Route::group(["middleware" => "auth", "namespace" => "Pull"], function () {
     Route::get("/resources/sportlive/", "SportLiveEncodesController@index");
 
     Route::get("/resources/aliez/", "AliezEncodesController@index");
+
+    //pp视频
+    Route::get("/resources/pptv/", "PPTVEncodesController@index");
+    Route::get("/resources/pptv/get_live_url/{id}", "PPTVEncodesController@getLiveUrl");
 });
 
 Route::group(["middleware" => "auth", "namespace" => "Record"], function () {

@@ -51,14 +51,15 @@ class BallbarEncodesController extends BaseController
 
         $lives = [];
         $boxes = $ql->find('.box')->htmls();
-        foreach ($boxes as $box) {
-            $qlb = new QueryList();
+        //最好提取出来，否则会报错
+        $qlb = new QueryList();
+        $qll = new QueryList();
+        foreach ($boxes as $index=>$box) {
             $qlb->setHtml($box);
             $date = $qlb->find('.dateHeader')->texts()->first();
 
             $lis = $qlb->find('.match-container li')->htmls();
             foreach ($lis as $li) {
-                $qll = new QueryList();
                 $qll->setHtml($li);
                 try {
                     $live['time'] = $qll->find('.time')->texts()->first();
