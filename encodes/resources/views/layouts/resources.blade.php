@@ -1,3 +1,10 @@
+<?php
+use App\Http\Controllers\AuthController;
+
+$black = request()->black;
+$qqAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX_RESOURCE_QQ);
+$pptvAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX_RESOURCE_PPTV);
+?>
 @extends('layouts.main')
 
 @section('navTabs')
@@ -19,12 +26,16 @@
         <li role="presentation" {{ starts_with(request()->path(),'resources/ssports')?'class=active':'' }}>
             <a href="/resources/ssports/">新英</a>
         </li>
+        @if($qqAccess)
         <li role="presentation" {{ starts_with(request()->path(),'resources/qq')?'class=active':'' }}>
             <a href="/resources/qq/">QQ</a>
         </li>
+        @endif
+        @if($pptvAccess)
         <li role="presentation" {{ starts_with(request()->path(),'resources/pptv')?'class=active':'' }}>
             <a href="/resources/pptv/">PPTV</a>
         </li>
+        @endif
         <li role="presentation" {{ starts_with(request()->path(),'resources/longzhu')?'class=active':'' }}>
             <a href="/resources/longzhu/">龙珠</a>
         </li>

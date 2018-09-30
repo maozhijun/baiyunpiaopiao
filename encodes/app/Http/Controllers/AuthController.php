@@ -17,12 +17,23 @@ class AuthController extends BaseController
     const ACCESS_INDEX_OBS = 3;
     const ACCESS_INDEX_SETTING = 4;
 
-    const ACCESS_NAME_INDEXS = [
+    const ACCESS_NAME_INDEXS = [//基本权限
         "manager" => self::ACCESS_INDEX_PUSH, //Push 推流
         "resources" => self::ACCESS_INDEX_PULL, //Pull 直播源
         "records" => self::ACCESS_INDEX_RECODE, //Record 录像、集锦
         "obs" => self::ACCESS_INDEX_OBS, //Stream OBS推流码
         "setting" => self::ACCESS_INDEX_SETTING, //Setting 推流设置
+    ];
+
+    //某些页面单独设置黑名单
+    const BLACK_INDEX_PUSH_COUNT = 0; //推流数
+    const BLACK_INDEX_RESOURCE_QQ = 1; //qq直播源
+    const BLACK_INDEX_RESOURCE_PPTV = 2; //pptv直播源
+
+    const BLACK_NAME_INDEXS = [
+        "push_count"=> self::BLACK_INDEX_PUSH_COUNT, //qq直播源
+        "resources/qq"=> self::BLACK_INDEX_RESOURCE_QQ, //qq直播源
+        "resources/pptv"=> self::BLACK_INDEX_RESOURCE_QQ, //pptv直播源
     ];
 
     private function getAccessRole(array $array = null)
@@ -38,6 +49,21 @@ class AuthController extends BaseController
             }
         }
         return $accessRole;
+    }
+
+    private function getBlackRole(array $array = null)
+    {
+        $blackRole = 0;
+        if (isset($array) && count($array) > 0) {
+            foreach ($array as $index) {
+                $blackRole = $blackRole | 1 << $index;
+            }
+        } else { //如果传入的array为空则认为black里全部都屏蔽
+            foreach (self::ACCESS_NAME_INDEXS as $name => $index) {
+                $blackRole = $blackRole | 1 << $index;
+            }
+        }
+        return $blackRole;
     }
 
     public static function isAccess($role, $index)
@@ -65,8 +91,9 @@ class AuthController extends BaseController
                 'account' => 'guest',
                 'password' => '8b317399601fe67b356d569de20fe10b35d93bf9',//guest001
                 'salt' => '6dalIdJiO2Vt',
-                'role' => $this->getAccessRole([self::ACCESS_INDEX_PULL])
+                'role' => $this->getAccessRole([self::ACCESS_INDEX_PULL]),
 //                'role' => $this->getAccessRole()
+                'black'=> $this->getBlackRole()
             ],
             [
                 'account' => 'ricky',
@@ -122,7 +149,21 @@ class AuthController extends BaseController
                 $role = $user['role'];
                 if (array_key_exists($name, self::ACCESS_NAME_INDEXS)) {
                     $index = self::ACCESS_NAME_INDEXS[$name];
-                    return self::isAccess($role, $index);
+                    $isAccess =  self::isAccess($role, $index);
+                    if ($isAccess && isset($other)) {
+                        if (str_contains($other, "/")) {
+                            list($item, $str) = explode("/", $other, 2);
+                        } else {
+                            $item = $other;
+                        }
+                        $blackName = $name."/".$item;
+                        if (array_key_exists($blackName, self::BLACK_NAME_INDEXS)) {
+                            $blackIndex = self::BLACK_NAME_INDEXS[$blackName];
+                            $isBlack = isset($user['black']) && self::isAccess($user['black'], $blackIndex);
+                            return !$isBlack;
+                        }
+                    }
+                    return $isAccess;
                 }
             }
         }

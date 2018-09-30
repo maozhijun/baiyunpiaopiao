@@ -32,12 +32,17 @@ class AuthVerify
     {
         //检查session
         $user = session(AuthController::K_LOGIN_SESSION_KEY);
-        if (isset($user) && is_array($user) && array_key_exists('role', $user)) {
-            $role = $user['role'];
-        } else {
-            $role = 0;
+        $role = 0; $black = 0;
+        if (isset($user) && is_array($user)) {
+            if (array_key_exists('role', $user)) {
+                $role = $user['role'];
+            }
+            if (array_key_exists('black', $user)) {
+                $black = $user['black'];
+            }
         }
         $request->role = $role;
+        $request->black = $black;
 
 //        $auth_cookie = $request->cookie(AuthController::K_LOGIN_COOKIE_KEY);
 //        if (!empty($cookie)) {

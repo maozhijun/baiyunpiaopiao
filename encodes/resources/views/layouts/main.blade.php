@@ -1,3 +1,16 @@
+<?php
+use App\Http\Controllers\AuthController;
+
+$role = request()->role;
+$pushAccess = AuthController::isAccess($role, AuthController::ACCESS_INDEX_PUSH);
+$pullAccess = AuthController::isAccess($role, AuthController::ACCESS_INDEX_PULL);
+$obsAccess = AuthController::isAccess($role, AuthController::ACCESS_INDEX_OBS);
+$recordAccess = AuthController::isAccess($role, AuthController::ACCESS_INDEX_RECODE);
+$settingAccess = AuthController::isAccess($role, AuthController::ACCESS_INDEX_SETTING);
+
+$black = request()->black;
+$pushCountAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX_PUSH_COUNT);
+?>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -17,21 +30,14 @@
     </button>
     <div class="navbar-header" style="background-color: {{ $banner_color or '' }};width: 100%;">
         <a class="navbar-brand" href="/manager/" style="color: #fff;">
+            @if($pushCountAccess)
             推流后台-{{ $banner_text or '' }}-当前推流数：<label class="label label-danger">{{ $banner_count or 0 }}条</label>
+            @else
+            推流后台-{{ $banner_text or '' }}
+            @endif
         </a>
     </div>
 </nav>
-
-<?php
-    use App\Http\Controllers\AuthController;
-
-    $role = request()->role;
-    $pushAccess = AuthController::isAccess($role, AuthController::ACCESS_INDEX_PUSH);
-    $pullAccess = AuthController::isAccess($role, AuthController::ACCESS_INDEX_PULL);
-    $obsAccess = AuthController::isAccess($role, AuthController::ACCESS_INDEX_OBS);
-    $recordAccess = AuthController::isAccess($role, AuthController::ACCESS_INDEX_RECODE);
-    $settingAccess = AuthController::isAccess($role, AuthController::ACCESS_INDEX_SETTING);
-?>
 
 <div class="container-fluid">
     <div class="row">
@@ -51,7 +57,7 @@
                     @endif
                     @if($pullAccess)
                     <li {{ starts_with(request()->path(),'resources')?'class=active':'' }}>
-                        <a href="/resources/qq/">直播源</a>
+                        <a href="/resources/kball/">直播源</a>
                     </li>
                     @endif
                     @if($recordAccess)
