@@ -162,12 +162,14 @@ class PPTVEncodesController extends BaseController
                             $sectionInfo['matchDatetime'] = $matchInfo['matchDatetime'];
                             $matches[] = $sectionInfo;
                         }
+                    } else if (strtotime($startTime) > time()) {
+                        $sectionInfo['status'] = 0;
+                        $matches[] = $sectionInfo;
                     } else if (strtotime($startTime) <= time() && strtotime($endTime) >= time()) {
                         $sectionInfo['status'] = 1;
-                        $this->dumpData($sectionInfo);
                         $matches[] = $sectionInfo;
                     }
-                    if (strtotime($endTime) > strtotime("+2 days")) {
+                    if (strtotime($endTime) > strtotime("+3 days")) {
                         $this->dumpData($index);
                         break;
                     }
