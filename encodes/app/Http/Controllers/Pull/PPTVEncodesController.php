@@ -154,9 +154,9 @@ class PPTVEncodesController extends BaseController
                         $sectionInfo['isVip'] = $isVip;
                     }
 
-                    if (isset($itemMatch['matchInfo'])) {
+                    if (isset($itemMatch['matchInfo']) && isset($itemMatch['matchInfo']['status'])) {
                         $matchInfo = $itemMatch['matchInfo'];
-                        if (isset($matchInfo['status']) && $matchInfo['status'] < 2) {
+                        if ($matchInfo['status'] < 2) {
                             $status = $matchInfo['status'];
                             $sectionInfo['status'] = $status;
                             $sectionInfo['matchDatetime'] = $matchInfo['matchDatetime'];
