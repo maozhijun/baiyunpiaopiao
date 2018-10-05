@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Pull\XBetEncodesController;
 use App\Models\EncodeTask;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -175,6 +176,10 @@ class Controller extends BaseController
                 $execs[] = '-user_agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"';
                 $execs[] = '-headers "origin: https://www.ballbar.cc"';
                 $execs[] = '-headers "referer: https://www.ballbar.cc/live/17240"';
+            } elseif (str_contains($input_uri, 'livecdn.tk')) {
+                $execs[] = '-user_agent "'.XBetEncodesController::K_X_BET_USER_AGENT.'"';
+//                $execs[] = '-headers "origin: https://www.ballbar.cc"';
+//                $execs[] = '-headers "referer: https://www.ballbar.cc/live/17240"';
             } else {
                 $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
                 if (!empty($referer)) {
