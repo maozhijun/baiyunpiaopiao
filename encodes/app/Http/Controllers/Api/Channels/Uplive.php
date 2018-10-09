@@ -6,9 +6,21 @@ use App\Http\Controllers\Api\Channel;
 use Protos\AnchorCreate_Request;
 use Protos\ResultResponse;
 
+/**
+ * 基本不用看了，接口做了验证配置，拿不到推流地址了
+ */
 class Uplive extends Channel
 {
-    const UPLIVE_TOKENS = ["61jDgsKa16589d3DCq8", "61iG2zS417a1332GHuM"];
+    const UPLIVE_TOKENS = [
+        "61jDgsKa16589d3DCq8",
+        "61iG2zS417a1332GHuM",
+        "61jMOJUeb1b9703DCq8",
+        "61jf6Nf5039ea63VuuJ",
+        "61jfx3y5aa8fb53WP74",
+        "61jfxK4b4dca3d3WPNA",
+        "61jfxRJ9869f353WPUP", //账号被封了
+        "61jfxXxa744e023WPb3", //账号被封了
+    ];
 
     public $id = 315;//平台ID
     public $name = 'up.live';//平台名称
@@ -22,9 +34,9 @@ class Uplive extends Channel
     private $playRTMP;
     private $playM3U8;
 
-    public function __construct($uid = 0)
+    public function __construct($uid = 0, $index = 0)
     {
-        $pushStreamUrl = $this->getPushStreamUrl(self::UPLIVE_TOKENS[0]);
+        $pushStreamUrl = $this->getPushStreamUrl(self::UPLIVE_TOKENS[$index]);
         if (strlen($pushStreamUrl) > 0 && starts_with($pushStreamUrl, "rtmp://")) {
             $liveChannel = ""; $streamUrl = ""; $key = "";$playFlv = "";$palyM3u8 = "";
             if (str_contains($pushStreamUrl, "/ws/")) { //网宿的推流地址

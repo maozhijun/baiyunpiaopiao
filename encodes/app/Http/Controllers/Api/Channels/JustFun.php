@@ -23,12 +23,14 @@ class JustFun extends Channel
     private $playRTMP;
     private $playM3U8;
 
-    public function __construct($uid = 0, $keyword = "")
+    public function __construct($uid = 0, $keyword = "", $cid = 0)
     {
-        if (strlen($keyword) <= 0) {
-            $keyword = strtolower(str_random(1));
+        if ($cid == 0) {
+            if (strlen($keyword) <= 0) {
+                $keyword = strtolower(str_random(1));
+            }
+            $cid = $this->getJustFunCid($keyword);
         }
-        $cid = $this->getJustFunCid($keyword);
         if ($cid > 0) {
             $zy_cid = $this->setPushUrl($cid);
             if (strlen($zy_cid) > 0) {

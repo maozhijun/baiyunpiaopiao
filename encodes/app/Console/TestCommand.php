@@ -9,9 +9,7 @@
 namespace App\Console;
 
 
-use App\Http\Controllers\Api\Channels\Uplive;
-use App\Http\Controllers\Api\Channels\Weibo;
-use App\Http\Controllers\Api\Channels\Zhangyu;
+use App\Http\Controllers\Api\Channels\JustFun;
 use Illuminate\Console\Command;
 
 class TestCommand extends Command
@@ -28,21 +26,21 @@ class TestCommand extends Command
 
     public function handle()
     {
-//        dump(new Uplive());
-        dump(new Zhangyu());
+        dump(new JustFun(0, "", 242501));
     }
 
-    public static function execUrl($url, $timeout = 5, $isHttps = false) {
+    public static function execUrl($url, $timeout = 5, $isHttps = false)
+    {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);//8秒超时
         if ($isHttps) {
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    // https请求 不验证证书和hosts
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
         }
-        $server_out = curl_exec ($ch);
-        curl_close ($ch);
+        $server_out = curl_exec($ch);
+        curl_close($ch);
         return $server_out;
     }
 
