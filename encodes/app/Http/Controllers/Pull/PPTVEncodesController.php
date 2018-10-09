@@ -12,7 +12,14 @@ class PPTVEncodesController extends BaseController
     const K_PPTV_LINES_SESSION_KEY = "__pptv_lines__";
 
 //    private $cookie = "PUID=b76c118ef74441b7ab0d-26a60a544d49; __crt=1538037805673; ppi=302c3332; Hm_lvt_7adaa440f53512a144c13de93f4c22db=1538037800,1538038459,1538214006; Hm_lpvt_7adaa440f53512a144c13de93f4c22db=1538214006";
+    /**
+     * http://sports.pptv.com   网址下的cookie
+     */
     private $cookie = 'PUID=2366b427ec2444c2e3c3-f84fcd3d785c; ab_cid=0ebf078bdb5a4f6dd17a-31a5ed5b89cb; _df_ud=6d239a85-cbb8-4dc0-aa00-a5990b6bd694; isSuning=0; UDR={"1":"1524987021000"}; ppToken=MwnWnyfKNZmhYOXc1AzwsCj3pvkVedNIm4RzNqCi_FA5ABNt9QYK5rQmfsbO3NMCf50Cb19zvNvP%0D%0AY8Xp-eEwfr12AobeQboZrnxVRKMal65e0YhVe0B7sCaOiAoxAuUM8wlYs-19Td9kfgJoof6_zX2W%0D%0Ao0B2wwtjQ5GoAkOYBxA%0D%0A; ppid=5027277990; isUpgrade=1; PPName=13378681807_180310l88$B71BE42FF7E844AA86A11E2A2C530A67; UDI=0$$0$PP%E6%B8%B8%E6%B0%91$$$$$$http%3A%2F%2Fimage.suning.cn%2Fuimg%2Fcmf%2Fcust_headpic%2F0000000000_01_120x120.jpg$$$$$$$PP%E7%94%A8%E6%88%B7_681807$0$$false$Sun+Apr+29+15; ppi=302c34; website_msg=%257B%2522times%2522%253A0%252C%2522date%2522%253A1538984310573%252C%2522interval%2522%253A3600000%257D; sprotsVipType=2; BubbleName=%25E4%25B8%25AD%25E7%25A7%258B%25E7%25AD%25BE%25E5%2588%25B0; Hm_lvt_7adaa440f53512a144c13de93f4c22db=1538986778; Hm_lpvt_7adaa440f53512a144c13de93f4c22db=1538986778; __ssar=direct%7Cdirect%7C%7C%7C; __ssav=153898677785275832%7C1538986777852%7C1538986777852%7C1538986777853%7C1%7C1%7C1; __ssas=153898677786417699%7C1538986777870%7C1538986777864%7C1; _snvd=1536045425885ieOKYqmOpbt; _snstyxuid=FB62BE72299C5QQ2; sctx=; ab_3d333112_search_algorithm={"sid":"3d333112_search_algorithm","abid":"","sv":"default","errorCode":"3","lsd":1538987216000}; PPKey=SwE0oYg%2Bpf6FwrUYAKPLZBwuxOe1k377D5T%2Bpidgq4w04wuWJFZJgL3vVM%2BNV16T%2BRimfvFz8YETibL5W01HxM1j8kEQBv2WctYEOjNGf2JoaOTK5NLA2dn5wfHsKgUp1S2l6PH0OxxnPZBiGAEoV6f0KC12yUXQeArevSJ34%2FiZ3kc%2FjL%2BdbPaV9BmnEFAS';
+    /**
+     * http://v.pptv.com    网址下的cookie
+     */
+//    private $cookie = 'PUID=2366b427ec2444c2e3c3-f84fcd3d785c; _df_ud=6d239a85-cbb8-4dc0-aa00-a5990b6bd694; isSuning=0; UDR={"1":"1524987021000"}; ppToken=MwnWnyfKNZmhYOXc1AzwsCj3pvkVedNIm4RzNqCi_FA5ABNt9QYK5rQmfsbO3NMCf50Cb19zvNvP%0D%0AY8Xp-eEwfr12AobeQboZrnxVRKMal65e0YhVe0B7sCaOiAoxAuUM8wlYs-19Td9kfgJoof6_zX2W%0D%0Ao0B2wwtjQ5GoAkOYBxA%0D%0A; ppid=5027277990; isUpgrade=1; PPName=13378681807_180310l88$B71BE42FF7E844AA86A11E2A2C530A67; UDI=0$$0$PP%E6%B8%B8%E6%B0%91$$$$$$http%3A%2F%2Fimage.suning.cn%2Fuimg%2Fcmf%2Fcust_headpic%2F0000000000_01_120x120.jpg$$$$$$$PP%E7%94%A8%E6%88%B7_681807$0$$false$Sun+Apr+29+15; sprotsVipType=2; BubbleName=%25E4%25B8%25AD%25E7%25A7%258B%25E7%25AD%25BE%25E5%2588%25B0; Hm_lvt_7adaa440f53512a144c13de93f4c22db=1538986778; __ssar=direct%7Cdirect%7C%7C%7C; __ssav=153898677785275832%7C1538986777852%7C1538986777852%7C1538986777853%7C1%7C1%7C1; _snvd=1536045425885ieOKYqmOpbt; idx_player_ap=1; sctx=; _snstyxuid=B76A4692F7CCOP22; website_msg=%257B%2522times%2522%253A0%252C%2522date%2522%253A1539069455520%252C%2522interval%2522%253A3600000%257D; ppi=302c34; PPKey=SwE0oYg%2Bpf6FwrUYAKPLZBwuxOe1k377D5T%2Bpidgq4w04wuWJFZJgL3vVM%2BNV16T%2BRimfvFz8YETibL5W01HxD3ShOpnBgvwWKuFp9tBpuJeSVIofathFiFN5EIwGyx1W4YO9yio3ngtavsaYHtgaOFRZsL5qnPgEHkb4Kqb%2BIfeX2My6Q5yMh4gYf%2FajQ06';
     private $userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36";
 
     private $isDebug = false;
@@ -185,7 +192,8 @@ class PPTVEncodesController extends BaseController
     }
 
     private function getWebPlayInfo($cid) {
-        $url = "http://web-play.pptv.com/webplay3-0-$cid.xml?version=6&type=mpptv&complete=1&poster=http%3A%2F%2Flive2image0.pplive.cn%2F304341.jpg&kk=c7928161b69b9bf07c30f03c5b773d43-391b-5baf756f&o=m.pptv.com&isVipMovie=0&isSport=0&msiteSourceSite=m_channel_sports&pageUrl=http%3A%2F%2Fm.pptv.com%2Fshow%2F1a8OjPRaygjlTrUbiaw.html&referrer=http%3A%2F%2Fm.pptv.com%2Fshow%2F1a8OjPRaygjlTrUbiaw.html&rcc_id=m.pptv.com&appver=4.0.2&appplt=wap&appid=pptv.wap&vvid=c1e5de63-5a8c-ee2b-220b-252bdacc6541&nddp=1&scver=1&scRandom=5f7a437534362d48487a226f38614d4c&scSignature=c3425a69b0b6c63fdb550b7392ff7bc52915a77b989b44c0da815f519a49b8f3&cb=getPlayEncode";
+//        $url = "http://web-play.pptv.com/webplay3-0-$cid.xml?version=6&type=mpptv&complete=1&poster=http%3A%2F%2Flive2image0.pplive.cn%2F304341.jpg&kk=c7928161b69b9bf07c30f03c5b773d43-391b-5baf756f&o=m.pptv.com&isVipMovie=0&isSport=0&msiteSourceSite=m_channel_sports&pageUrl=http%3A%2F%2Fm.pptv.com%2Fshow%2F1a8OjPRaygjlTrUbiaw.html&referrer=http%3A%2F%2Fm.pptv.com%2Fshow%2F1a8OjPRaygjlTrUbiaw.html&rcc_id=m.pptv.com&appver=4.0.2&appplt=wap&appid=pptv.wap&vvid=c1e5de63-5a8c-ee2b-220b-252bdacc6541&nddp=1&scver=1&scRandom=5f7a437534362d48487a226f38614d4c&scSignature=c3425a69b0b6c63fdb550b7392ff7bc52915a77b989b44c0da815f519a49b8f3&cb=getPlayEncode";
+        $url = "http://web-play.pptv.com/webplay3-0-$cid.xml?zone=8&vvid=cd04b338-c0ee-c1e4-359a-57cb13173b1d&username=13378681807_180310l88&token=MwnWnyfKNZmhYOXc1AzwsCj3pvkVedNIm4RzNqCi_FA5ABNt9QYK5rQmfsbO3NMCf50Cb19zvNvP%0D%0AY8Xp-eEwfr12AobeQboZrnxVRKMal65e0YhVe0B7sCaOiAoxAuUM8wlYs-19Td9kfgJoof6_zX2W%0D%0Ao0B2wwtjQ5GoAkOYBxA%0D%0A&param=type%3Dweb%26ahl_ver%3D1%26ahl_random%3D35332a72706c7874377a5b596a62796b%26ahl_signa%3D732f7211e3a008c1ea5bfd8f4aac107545110790347581790e252b3c2165ce4d%26userType%3D0%26o%3D0&ppi=302c34&isSports=1&sl=1&vts=0&o=0&stime=&referrer=&kk=dba5035d2562c4cda1222bebb6b5cf22-7c38-5bbc6afd&type=web&isIframe=0&pageUrl=http%3A%2F%2Fv.pptv.com%2Fshow%2FDelQzjacDEp2viaWLibw.html&r=1539071218495&version=6&appplt=flp&appid=pptv.flashplayer.live&appver=2.12.44&nddp=1";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$url);
@@ -270,10 +278,12 @@ class PPTVEncodesController extends BaseController
                 $name = "清晰";
             } else if ($key == 2) {
                 $name = "超清";
+            } else if ($key == 3) {
+                $name = "蓝光";
             }
             $lines[$name] = $this->getM3u8StreamUrls($stream, $cKey);
         }
-        return $lines;
+        return array_reverse($lines);
     }
 
     private function getItemChildNodes($stream) {
