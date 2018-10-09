@@ -122,7 +122,11 @@ class XBetEncodesController extends BaseController
 //                $date = $qlb->find('td')->texts()->last();
 //                $a['date'] = $date;
                 $date = $qlb->find('td')->texts()->first();
-                $a['date'] = explode(' ',$date)[0];
+                $dateStr = explode(' ',$date)[0];
+                if (strlen($dateStr) > 5) {
+                    $dateStr = substr($dateStr, 0, 5);
+                }
+                $a['date'] = $dateStr;
 //                dump($date);
                 $lives[] = $a;
             }
@@ -169,7 +173,11 @@ class XBetEncodesController extends BaseController
                 $a['link'] = $link;
 //                dump($link);
                 $date = $qlb->find('td')->texts()->first();
-                $a['date'] = explode(' ',$date)[1];
+                $dateStr = explode(' ',$date)[1];
+                if (strlen($dateStr) > 5) {
+                    $dateStr = substr($dateStr, 0, 5);
+                }
+                $a['date'] = $dateStr;
 //                dump($date);
                 $lives[] = $a;
             }

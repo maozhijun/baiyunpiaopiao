@@ -39,6 +39,7 @@ class PPTVEncodesController extends BaseController
 
     public function getLiveUrl(Request $request, $sessionId)
     {
+        $this->dumpData("getLiveUrl");
         $index = 0;
         $sessionCids = session(self::K_PPTV_CIDS_SESSION_KEY);
         $this->dumpData($sessionCids);
@@ -112,6 +113,7 @@ class PPTVEncodesController extends BaseController
 
     private function getAppMatches() {
         $url = "https://sportlive.suning.com/slsp-web/lms/list/v1218/hot.do?app=android&timeSort=1&version=2&_source=ppsports&apptype=android&appversion=5.2.2";
+        $this->dumpData("getAppMatches: url = $url");
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$url);
@@ -158,19 +160,16 @@ class PPTVEncodesController extends BaseController
                     //判断是否是会员才可观看
                     if (isset($itemMatch['flags'])) {
                         $isVip = isset($itemMatch['flags']['goldGuessFlag']) && $itemMatch['flags']['goldGuessFlag'] == 1
-                            && isset($itemMatch['flags']['baseFlag']) && $itemMatch['flags']['baseFlag'] ==1;
+                            && isset($itemMatch['flags']['baseFlag']) && $itemMatch['flags']['baseFlag'] == 1;
                         $sectionInfo['isVip'] = $isVip;
                     }
 
                     if (isset($itemMatch['matchInfo']) && isset($itemMatch['matchInfo']['status'])) {
                         $matchInfo = $itemMatch['matchInfo'];
-                        if ($matchInfo['status'] < 2) {
-                            $status = $matchInfo['status'];
-                            $sectionInfo['status'] = $status;
-                            $sectionInfo['matchDatetime'] = $matchInfo['matchDatetime'];
-                            $matches[] = $sectionInfo;
-                        }
-                    } else if (strtotime($startTime) > time()) {
+                        $sectionInfo['matchDatetime'] = $matchInfo['matchDatetime'];
+                    }
+                    //进行时间以主播开播时间为准
+                    if (strtotime($startTime) > time()) {
                         $sectionInfo['status'] = 0;
                         $matches[] = $sectionInfo;
                     } else if (strtotime($startTime) <= time() && strtotime($endTime) >= time()) {
@@ -192,8 +191,11 @@ class PPTVEncodesController extends BaseController
     }
 
     private function getWebPlayInfo($cid) {
+
 //        $url = "http://web-play.pptv.com/webplay3-0-$cid.xml?version=6&type=mpptv&complete=1&poster=http%3A%2F%2Flive2image0.pplive.cn%2F304341.jpg&kk=c7928161b69b9bf07c30f03c5b773d43-391b-5baf756f&o=m.pptv.com&isVipMovie=0&isSport=0&msiteSourceSite=m_channel_sports&pageUrl=http%3A%2F%2Fm.pptv.com%2Fshow%2F1a8OjPRaygjlTrUbiaw.html&referrer=http%3A%2F%2Fm.pptv.com%2Fshow%2F1a8OjPRaygjlTrUbiaw.html&rcc_id=m.pptv.com&appver=4.0.2&appplt=wap&appid=pptv.wap&vvid=c1e5de63-5a8c-ee2b-220b-252bdacc6541&nddp=1&scver=1&scRandom=5f7a437534362d48487a226f38614d4c&scSignature=c3425a69b0b6c63fdb550b7392ff7bc52915a77b989b44c0da815f519a49b8f3&cb=getPlayEncode";
-        $url = "http://web-play.pptv.com/webplay3-0-$cid.xml?zone=8&vvid=cd04b338-c0ee-c1e4-359a-57cb13173b1d&username=13378681807_180310l88&token=MwnWnyfKNZmhYOXc1AzwsCj3pvkVedNIm4RzNqCi_FA5ABNt9QYK5rQmfsbO3NMCf50Cb19zvNvP%0D%0AY8Xp-eEwfr12AobeQboZrnxVRKMal65e0YhVe0B7sCaOiAoxAuUM8wlYs-19Td9kfgJoof6_zX2W%0D%0Ao0B2wwtjQ5GoAkOYBxA%0D%0A&param=type%3Dweb%26ahl_ver%3D1%26ahl_random%3D35332a72706c7874377a5b596a62796b%26ahl_signa%3D732f7211e3a008c1ea5bfd8f4aac107545110790347581790e252b3c2165ce4d%26userType%3D0%26o%3D0&ppi=302c34&isSports=1&sl=1&vts=0&o=0&stime=&referrer=&kk=dba5035d2562c4cda1222bebb6b5cf22-7c38-5bbc6afd&type=web&isIframe=0&pageUrl=http%3A%2F%2Fv.pptv.com%2Fshow%2FDelQzjacDEp2viaWLibw.html&r=1539071218495&version=6&appplt=flp&appid=pptv.flashplayer.live&appver=2.12.44&nddp=1";
+        $url = "http://web-play.pptv.com/webplay3-0-$cid.xml?version=6&type=mpptv&complete=1&poster=http%3A%2F%2Flive2image0.pplive.cn%2F303983.jpg&kk=1ac5abfb2db6e82ddc27d594b4474f6b-59b2-5bbc7313&o=m.pptv.com&isVipMovie=0&isSport=0&msiteSourceSite=&pageUrl=http%3A%2F%2Fm.pptv.com%2Fshow%2Fbwpx71e9LWs6jfZczA.html&referrer=http%3A%2F%2Fm.pptv.com%2Fshow%2Fbwpx71e9LWs6jfZczA.html&rcc_id=m.pptv.com&appver=4.0.2&appplt=wap&appid=pptv.wap&token=MwnWnyfKNZmhYOXc1AzwsCj3pvkVedNIm4RzNqCi_FA5ABNt9QYK5rQmfsbO3NMCf50Cb19zvNvP%0D%0AY8Xp-eEwfr12AobeQboZrnxVRKMal65e0YhVe0B7sCaOiAoxAuUM8wlYs-19Td9kfgJoof6_zX2W%0D%0Ao0B2wwtjQ5GoAkOYBxA%0D%0A&username=13378681807_180310l88&vvid=11d7ab1b-58ea-72c1-9426-57eb6e987e95&nddp=1&scver=1&scRandom=7033386a707045596f7d463150506755&scSignature=eb40ae7f24af829a4b04357b1aac595d8abb5b8fb0b25095c858845f8d16f3f5&cb=getPlayEncode";
+
+        $this->dumpData("getWebPlayInfo: url = $url");
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$url);
