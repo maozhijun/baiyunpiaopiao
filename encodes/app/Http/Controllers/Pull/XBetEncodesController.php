@@ -102,8 +102,8 @@ class XBetEncodesController extends BaseController
 
         $lives = [];
         $trs = $ql->find('tbody tr')->htmls();
+        $qlb = new QueryList();
         foreach ($trs as $tr) {
-            $qlb = new QueryList();
             $qlb->setHtml($tr);
             $type = $qlb->find('td b')->texts()->last();
 //            dump($type);
@@ -148,10 +148,10 @@ class XBetEncodesController extends BaseController
 
         $lives = [];
         $trs = $ql->find('tbody tr')->htmls();
+        $qlb = new QueryList();
         foreach ($trs as $tr) {
             if (count($lives) >= 10) break;
 //            dump($tr);
-            $qlb = new QueryList();
             $qlb->setHtml($tr);
 //            dump($qlb->find('td a'));
 //            dump($qlb->find('td b')->texts());

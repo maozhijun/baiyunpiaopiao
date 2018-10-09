@@ -45,9 +45,9 @@ class AliezEncodesController extends BaseController
 
         $lives = [];
         $trs = $ql->find('table td')->htmls();
+        $qlb = new QueryList();
         foreach ($trs as $tr) {
 //            dump($tr);
-            $qlb = new QueryList();
             $qlb->setHtml($tr);
             $href = $qlb->find('a')->attrs('href')->first();
             $img = $qlb->find('a img')->attrs('src')->first();
