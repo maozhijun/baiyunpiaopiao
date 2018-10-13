@@ -53,11 +53,11 @@ class CustomEncodesController extends BaseController
 //            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'d';
 //            $this->channels['我乐-帝联'] = $dfms;
 
-            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'a';
-            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'b';
-            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'c';
-            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'d';
-            $this->channels['我乐-网宿'] = $wfms;
+//            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'a';
+//            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'b';
+//            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'c';
+//            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'d';
+//            $this->channels['我乐-网宿'] = $wfms;
 
 //            $memes[] = 'meme-ali##40290811';
 //            $memes[] = 'meme-ali##40290822';
@@ -249,11 +249,11 @@ class CustomEncodesController extends BaseController
 //            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'d';
 //            $this->channels['我乐-帝联'] = $dfms;
 
-            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'a';
-            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'b';
-            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'c';
-            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'d';
-            $this->channels['我乐-网宿'] = $wfms;
+//            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'a';
+//            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'b';
+//            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'c';
+//            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'d';
+//            $this->channels['我乐-网宿'] = $wfms;
 
 //            $memes[] = 'meme-ali##40290611';
 //            $memes[] = 'meme-ali##40290622';
