@@ -82,9 +82,13 @@ class MiEncodesController extends BaseController
 //            $live_flv_url = 'http://v2.zb.mi.com/live/' . explode('?', $roomId)[0] . '.flv';//flv地址
 //            $live_m3u8_url = 'http://hls.zb.mi.com/live/' . explode('?', $roomId)[0] . '/playlist.m3u8';//m3u8地址
             //金山
-            $rtmp_url = 'rtmp://r2.ks.zb.mi.com/live/' . $roomId;//获取rtmp地址
-            $live_flv_url = 'http://v2.ks.zb.mi.com/live/' . explode('?', $roomId)[0] . '.flv';//flv地址
-            $live_m3u8_url = 'http://hls.ksy.zb.mi.com/live/' . explode('?', $roomId)[0] . '/index.m3u8';//m3u8地址
+//            $rtmp_url = 'rtmp://r2.ks.zb.mi.com/live/' . $roomId;//获取rtmp地址
+//            $live_flv_url = 'http://v2.ks.zb.mi.com/live/' . explode('?', $roomId)[0] . '.flv';//flv地址
+//            $live_m3u8_url = 'http://hls.ksy.zb.mi.com/live/' . explode('?', $roomId)[0] . '/index.m3u8';//m3u8地址
+            //网宿-估计是测试地址
+            $rtmp_url = 'rtmp://r2.pandora.zb.mi.com/live/' . $roomId;//获取rtmp地址
+            $live_flv_url = 'http://v2.pandora.zb.mi.com/live/' . explode('?', $roomId)[0] . '.flv';//flv地址
+            $live_m3u8_url = 'http://hls.pandora.zb.mi.com/live/' . explode('?', $roomId)[0] . '/playlist.m3u8';//m3u8地址
 
             $fontsize = $request->input('fontsize', 18);
             $watermark = $request->input('watermark', '');

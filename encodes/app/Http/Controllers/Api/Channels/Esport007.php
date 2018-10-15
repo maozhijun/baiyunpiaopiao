@@ -6,6 +6,9 @@ use App\Http\Controllers\Api\Channel;
 
 class Esport007 extends Channel
 {
+    //推流没问题，但是播放必须设置referee
+    const REFEREE = "http://www.esport007.com/";
+
     public $id = 316;//平台ID
     public $name = 'esport007.com';//平台名称
     public $level = 3;//平台级别，1:野鸡，2:一般，3:大平台
@@ -20,12 +23,14 @@ class Esport007 extends Channel
 
     public function __construct($uid = 0)
     {
+        $host = "live007.zyjrvan.cn";
+
         $key = strtolower(str_random(32));
         $this->streamURL = 'rtmp://video-center.alivecdn.com/esport007';
-        $this->streamKey = $key."?vhost=livenew.zyjrvan.cn";
-        $this->playFlv = 'http://livenew.zyjrvan.cn/esport007/' . $key . '.flv';
-        $this->playM3U8 = 'http://livenew.zyjrvan.cn/esport007/' . $key . '.m3u8';
-        $this->playRTMP = 'rtmp://livenew.zyjrvan.cn/esport007/' . $key;
+        $this->streamKey = $key."?vhost=$host";
+        $this->playFlv = 'http://'.$host.'/esport007/' . $key . '.flv';
+        $this->playM3U8 = 'http://'.$host.'/esport007/' . $key . '.m3u8';
+        $this->playRTMP = 'rtmp://'.$host.'/esport007/' . $key;
     }
 
     public function pushURL()
