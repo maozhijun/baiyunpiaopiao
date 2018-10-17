@@ -148,6 +148,12 @@ class CustomEncodesController extends BaseController
             $whyal[] = 'why-al##whyef'.$randomIntEnd.'3';
             $whyal[] = 'why-al##whyef'.$randomIntEnd.'4';
             $this->channels['文化云-阿里'] = $whyal;
+
+            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'1';
+            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'2';
+            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'3';
+            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'4';
+            $this->channels['cjy-阿里'] = $cjyal;
         } elseif (env('APP_NAME') == 'aikq1') {
             $randomEnd = str_random(2);
             $randomEnd = strtolower($randomEnd);
@@ -278,6 +284,12 @@ class CustomEncodesController extends BaseController
             $whyal[] = 'why-al##whycd'.$randomIntEnd.'3';
             $whyal[] = 'why-al##whycd'.$randomIntEnd.'4';
             $this->channels['文化云-阿里'] = $whyal;
+
+            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'5';
+            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'6';
+            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'7';
+            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'8';
+            $this->channels['cjy-阿里'] = $cjyal;
         } elseif (env('APP_NAME') == 'leqiuba') {
 
         }
@@ -444,6 +456,12 @@ class CustomEncodesController extends BaseController
                     $rtmp_url = 'rtmp://video-center.alivecdn.com/wenhuayun/' . $roomId . '?vhost=live.wenhuayun.cn';//获取rtmp地址
                     $live_rtmp_url = 'http://live.wenhuayun.cn/wenhuayun/' . $roomId . '.flv';//播放rtmp地址
                     $live_m3u8_url = 'http://live.wenhuayun.cn/wenhuayun/' . $roomId . '.m3u8';//播放m3u8地址
+                    break;
+                }
+                case 'cjy-al': {
+                    $rtmp_url = 'rtmp://video-center.alivecdn.com/live/' . $roomId . '?vhost=cjy.pier39.cn';//获取rtmp地址
+                    $live_rtmp_url = 'http://cjy.pier39.cn/live/' . $roomId . '.flv';//播放rtmp地址
+                    $live_m3u8_url = 'http://cjy.pier39.cn/live/' . $roomId . '.m3u8';//播放m3u8地址
                     break;
                 }
             }
