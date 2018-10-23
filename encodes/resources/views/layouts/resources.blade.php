@@ -19,9 +19,9 @@ $pptvAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX_RESO
             <li role="presentation" {{ starts_with(request()->path(),'resources/ballbar')?'class=active':'' }}>
                 <a href="/resources/ballbar/">播吧</a>
             </li>
-            <li role="presentation" {{ starts_with(request()->path(),'resources/xbet')?'class=active':'' }}>
-                <a href="/resources/xbet/">1XBet</a>
-            </li>
+            {{--<li role="presentation" {{ starts_with(request()->path(),'resources/xbet')?'class=active':'' }}>--}}
+                {{--<a href="/resources/xbet/">1XBet</a>--}}
+            {{--</li>--}}
         @endif
         <li role="presentation" {{ starts_with(request()->path(),'resources/ssports')?'class=active':'' }}>
             <a href="/resources/ssports/">新英</a>
