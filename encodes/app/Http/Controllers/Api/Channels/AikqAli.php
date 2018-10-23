@@ -23,7 +23,7 @@ class AikqAli extends Channel
 
     public function __construct($uid = 0)
     {
-        $this->expiration = time() + 10800;
+        $this->expiration = time() + 21600;
         $this->ali_host = env('ALI_CDN_HOST', '');
         $this->ali_key = env('ALI_CDN_KEY', '');
         $key = 'stream-' . $uid . '-' . time() . '-' . random_int(111111, 999999);

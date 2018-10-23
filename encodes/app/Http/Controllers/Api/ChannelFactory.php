@@ -38,26 +38,26 @@ class ChannelFactory
     const REDIS_DISABLE_KEY = "channels_disable_key";
 
     const ID_CHANNELS = [
-        106 =>Syyba123::class,
-        107 =>China0736::class,
-        203 =>Xiaoka::class,
-        204 =>Sina7d::class,
-        205 =>Fd00cdn::class,
-        209 =>WoleW::class,
-        208 =>Inke::class,
-        210 =>Xiu95::class,
-        211 =>Xiu9::class,
-        301 =>Longzhu::class,
-        302 =>Zhibo::class,
-        309 =>HuomaoWs::class,
-        311 =>Xiaomi::class,
-        312 =>Weibo::class,
-        313 =>LiveMe::class,
-        314 =>KittyLive::class,
-        315 =>Uplive::class,
-        316 =>Esport007::class,
-        317 =>Zhangyu::class,
-        998 =>AikqWS::class,
+        106 => Syyba123::class,
+        107 => China0736::class,
+        203 => Xiaoka::class,
+        204 => Sina7d::class,
+        205 => Fd00cdn::class,
+        209 => WoleW::class,
+        208 => Inke::class,
+        210 => Xiu95::class,
+        211 => Xiu9::class,
+        301 => Longzhu::class,
+        302 => Zhibo::class,
+        309 => HuomaoWs::class,
+        311 => Xiaomi::class,
+        312 => Weibo::class,
+        313 => LiveMe::class,
+        314 => KittyLive::class,
+        315 => Uplive::class,
+        316 => Esport007::class,
+        317 => Zhangyu::class,
+        998 => AikqWS::class,
     ];
 
     public static $channels = [
@@ -78,6 +78,8 @@ class ChannelFactory
 //            AikqWS::class,
         ],
         '3' => [//大平台推大比赛
+            AikqWS::class,
+            AikqAli::class,
 //            Zhibo::class,
             Longzhu::class,
             Xiaomi::class,
@@ -96,7 +98,6 @@ class ChannelFactory
             China0736::class,
 //            Weibo::class,
 //            Inke::class,
-//            AikqWS::class,
 //            HuomaoWs::class,
         ],
     ];
@@ -139,7 +140,8 @@ class ChannelFactory
      * 获取无法推流了的平台id
      * @return array
      */
-    public static function getDisableChannelIds() {
+    public static function getDisableChannelIds()
+    {
         $disableIds = array();
         $disableIdStr = Redis::get(self::REDIS_DISABLE_KEY);
         if ($disableIdStr != null && strlen($disableIdStr) > 0) {
@@ -153,7 +155,8 @@ class ChannelFactory
      * @param $id
      * @param $isDisable
      */
-    public static function saveDisableChannelId($id, $isDisable) {
+    public static function saveDisableChannelId($id, $isDisable)
+    {
         $disableIds = self::getDisableChannelIds();
         if ($isDisable && !in_array($id, $disableIds)) {
             $disableIds[] = $id;
@@ -166,7 +169,8 @@ class ChannelFactory
     /**
      * 获取经后台筛选后的可用平台
      */
-    private static function getFilterChannels() {
+    private static function getFilterChannels()
+    {
         $disableIds = self::getDisableChannelIds();
 
         if (count($disableIds) > 0) {
@@ -196,7 +200,8 @@ class ChannelFactory
      * @param $value
      * @return array
      */
-    private static function unsetArrayItemByValue(array $array, $value) {
+    private static function unsetArrayItemByValue(array $array, $value)
+    {
         $key = array_search($value, $array);
         if (!is_bool($key) && array_key_exists($key, $array)) {
             unset($array[$key]);
@@ -207,11 +212,12 @@ class ChannelFactory
     /**
      * 获取所有需要测试的平台
      */
-    public static function getTestChannels($isAllTest = true) {
+    public static function getTestChannels($isAllTest = true)
+    {
         $allChannels = array();
         $channels = $isAllTest ? self::$channels : self::getFilterChannels();
 
-        foreach ($channels as $key=>$channelItems) {
+        foreach ($channels as $key => $channelItems) {
             $levelChannels = array();
             foreach ($channelItems as $channelItem) {
                 $levelChannels[] = new $channelItem(0);
@@ -224,7 +230,8 @@ class ChannelFactory
     /**
      * 测试用的方法
      */
-    public function onChannelTest() {
+    public function onChannelTest()
+    {
         dump(self::getTestChannels(false));
     }
 }

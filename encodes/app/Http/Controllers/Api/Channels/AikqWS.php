@@ -23,9 +23,13 @@ class AikqWS extends Channel
     private $playRTMP = '';
     private $playM3U8 = '';
 
+    private $playFlvSD = '';
+    private $playRTMPSD = '';
+    private $playM3U8SD = '';
+
     public function __construct($uid = 0)
     {
-        $this->expiration = time() + 10800;
+        $this->expiration = time() + 21600;
         $this->push_host = env('WS_PUSH_HOST', '');
         $this->hls_host = env('WS_HLS_HOST', '');
         $this->hdl_host = env('WS_HDL_HOST', '');
@@ -42,9 +46,17 @@ class AikqWS extends Channel
         $auth_key = md5($sstring);
         $this->playFlv = 'http://' . $this->hdl_host . '/live/' . $key . '.flv?wsSecret=' . $auth_key . '&wsABSTime=' . $timestamp;//flv播放地址
 
+        $sstring = $this->ws_key . '/live/' . $key . "-sd.flv$timestamp";
+        $auth_key = md5($sstring);
+        $this->playFlvSD = 'http://' . $this->hdl_host . '/live/' . $key . '-sd.flv?wsSecret=' . $auth_key . '&wsABSTime=' . $timestamp;//flv播放地址
+
         $sstring = $this->ws_key . '/live/' . $key . "/playlist.m3u8$timestamp";
         $auth_key = md5($sstring);
         $this->playM3U8 = 'http://' . $this->hls_host . '/live/' . $key . '/playlist.m3u8?wsSecret=' . $auth_key . '&wsABSTime=' . $timestamp;//播放m3u8地址
+
+        $sstring = $this->ws_key . '/live/' . $key . "-sd/playlist.m3u8$timestamp";
+        $auth_key = md5($sstring);
+        $this->playM3U8SD = 'http://' . $this->hls_host . '/live/' . $key . '-sd/playlist.m3u8?wsSecret=' . $auth_key . '&wsABSTime=' . $timestamp;//播放m3u8地址
     }
 
     public function pushURL()
@@ -59,16 +71,19 @@ class AikqWS extends Channel
 
     public function playFLV()
     {
-        return $this->playFlv;
+//        return $this->playFlv;
+        return $this->playFlvSD;
     }
 
     public function playRTMP()
     {
-        return $this->playRTMP;
+//        return $this->playRTMP;
+        return $this->playRTMPSD;
     }
 
     public function playM3U8()
     {
-        return $this->playM3U8;
+//        return $this->playM3U8;
+        return $this->playM3U8SD;
     }
 }

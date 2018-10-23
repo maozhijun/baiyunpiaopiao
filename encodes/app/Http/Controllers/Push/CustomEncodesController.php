@@ -464,6 +464,7 @@ class CustomEncodesController extends BaseController
                     $live_m3u8_url = 'http://cjy.pier39.cn/live/' . $roomId . '.m3u8';//播放m3u8地址
                     break;
                 }
+
             }
 
             if (!empty($rtmp_url)) {
