@@ -58,6 +58,7 @@ class ChannelFactory
         316 => Esport007::class,
         317 => Zhangyu::class,
         998 => AikqWS::class,
+        999 => AikqAli::class,
     ];
 
     public static $channels = [
