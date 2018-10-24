@@ -143,23 +143,23 @@ class CustomEncodesController extends BaseController
 //            $lesparks[] = "lala-uc##77fgeiii5sbcf0w4p6mbpehg9rzsm".$randomEnd."d";
 //            $this->channels['拉拉-UC'] = $lesparks;
 
-            $whyal[] = 'why-al##whyef'.$randomIntEnd.'1';
-            $whyal[] = 'why-al##whyef'.$randomIntEnd.'2';
-            $whyal[] = 'why-al##whyef'.$randomIntEnd.'3';
-            $whyal[] = 'why-al##whyef'.$randomIntEnd.'4';
-            $this->channels['文化云-阿里'] = $whyal;
-
-            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'1';
-            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'2';
-            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'3';
-            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'4';
-            $this->channels['cjy-阿里'] = $cjyal;
-
-            $yicai[] = 'yicai-al##stream8231'.$randomIntEnd.'1';
-            $yicai[] = 'yicai-al##stream8231'.$randomIntEnd.'2';
-            $yicai[] = 'yicai-al##stream8231'.$randomIntEnd.'3';
-            $yicai[] = 'yicai-al##stream8231'.$randomIntEnd.'4';
-            $this->channels['yicai-阿里'] = $yicai;
+//            $whyal[] = 'why-al##whyef'.$randomIntEnd.'1';
+//            $whyal[] = 'why-al##whyef'.$randomIntEnd.'2';
+//            $whyal[] = 'why-al##whyef'.$randomIntEnd.'3';
+//            $whyal[] = 'why-al##whyef'.$randomIntEnd.'4';
+//            $this->channels['文化云-阿里'] = $whyal;
+//
+//            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'1';
+//            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'2';
+//            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'3';
+//            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'4';
+//            $this->channels['cjy-阿里'] = $cjyal;
+//
+//            $yicai[] = 'yicai-al##stream8231'.$randomIntEnd.'1';
+//            $yicai[] = 'yicai-al##stream8231'.$randomIntEnd.'2';
+//            $yicai[] = 'yicai-al##stream8231'.$randomIntEnd.'3';
+//            $yicai[] = 'yicai-al##stream8231'.$randomIntEnd.'4';
+//            $this->channels['yicai-阿里'] = $yicai;
         } elseif (env('APP_NAME') == 'aikq1') {
             $randomEnd = str_random(2);
             $randomEnd = strtolower($randomEnd);
@@ -285,23 +285,23 @@ class CustomEncodesController extends BaseController
 //            $lesparks[] = "lala-uc##67fgeiii5sbcf0w4p6mbpehg9rzsm'.$randomEnd.'d";
 //            $this->channels['拉拉-UC'] = $lesparks;
 
-            $whyal[] = 'why-al##whycd'.$randomIntEnd.'1';
-            $whyal[] = 'why-al##whycd'.$randomIntEnd.'2';
-            $whyal[] = 'why-al##whycd'.$randomIntEnd.'3';
-            $whyal[] = 'why-al##whycd'.$randomIntEnd.'4';
-            $this->channels['文化云-阿里'] = $whyal;
-
-            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'5';
-            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'6';
-            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'7';
-            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'8';
-            $this->channels['cjy-阿里'] = $cjyal;
-
-            $yicai[] = 'yicai-al##stream8230'.$randomIntEnd.'1';
-            $yicai[] = 'yicai-al##stream8230'.$randomIntEnd.'2';
-            $yicai[] = 'yicai-al##stream8230'.$randomIntEnd.'3';
-            $yicai[] = 'yicai-al##stream8230'.$randomIntEnd.'4';
-            $this->channels['yicai-阿里'] = $yicai;
+//            $whyal[] = 'why-al##whycd'.$randomIntEnd.'1';
+//            $whyal[] = 'why-al##whycd'.$randomIntEnd.'2';
+//            $whyal[] = 'why-al##whycd'.$randomIntEnd.'3';
+//            $whyal[] = 'why-al##whycd'.$randomIntEnd.'4';
+//            $this->channels['文化云-阿里'] = $whyal;
+//
+//            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'5';
+//            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'6';
+//            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'7';
+//            $cjyal[] = 'cjy-al##jy-live'.$randomIntEnd.'8';
+//            $this->channels['cjy-阿里'] = $cjyal;
+//
+//            $yicai[] = 'yicai-al##stream8230'.$randomIntEnd.'1';
+//            $yicai[] = 'yicai-al##stream8230'.$randomIntEnd.'2';
+//            $yicai[] = 'yicai-al##stream8230'.$randomIntEnd.'3';
+//            $yicai[] = 'yicai-al##stream8230'.$randomIntEnd.'4';
+//            $this->channels['yicai-阿里'] = $yicai;
         } elseif (env('APP_NAME') == 'leqiuba') {
 
         }
