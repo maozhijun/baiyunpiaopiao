@@ -47,11 +47,11 @@ class CustomEncodesController extends BaseController
 //            $shangyuers[] = "shangyuer-pili##2f34f11a-548d-4ba7-b1aa-2b7b3a2bf$randomEnd"."d";
 //            $this->channels['上鱼-七牛'] = $shangyuers;
 
-//            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'a';
-//            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'b';
-//            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'c';
-//            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'d';
-//            $this->channels['我乐-帝联'] = $dfms;
+            $dfms[] = 'wole-dl##3ad02f57e85eb9cf5975eb7008d'.$randomEnd.'a';
+            $dfms[] = 'wole-dl##3ad02f57e85eb9cf5975eb7008d'.$randomEnd.'b';
+            $dfms[] = 'wole-dl##3ad02f57e85eb9cf5975eb7008d'.$randomEnd.'c';
+            $dfms[] = 'wole-dl##3ad02f57e85eb9cf5975eb7008d'.$randomEnd.'d';
+            $this->channels['我乐-帝联'] = $dfms;
 
 //            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'a';
 //            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'b';
@@ -255,11 +255,11 @@ class CustomEncodesController extends BaseController
 //            $shangyuers[] = 'shangyuer-pili##21a9238b-e69e-4a7a-9ec8-1e0846bca'.$randomEnd.'8';
 //            $this->channels['上鱼-七牛'] = $shangyuers;
 
-//            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'a';
-//            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'b';
-//            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'c';
-//            $dfms[] = 'wole-dl##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'d';
-//            $this->channels['我乐-帝联'] = $dfms;
+            $dfms[] = 'wole-dl##7ad02f57e85eb9cf5975eb7008d'.$randomEnd.'a';
+            $dfms[] = 'wole-dl##7ad02f57e85eb9cf5975eb7008d'.$randomEnd.'b';
+            $dfms[] = 'wole-dl##7ad02f57e85eb9cf5975eb7008d'.$randomEnd.'c';
+            $dfms[] = 'wole-dl##7ad02f57e85eb9cf5975eb7008d'.$randomEnd.'d';
+            $this->channels['我乐-帝联'] = $dfms;
 
 //            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'a';
 //            $wfms[] = 'wole-ws##5ad02f57e85eb9cf5975eb7008d'.$randomEnd.'b';
