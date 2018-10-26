@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\Channels\AikqWS;
 use App\Http\Controllers\Api\Channels\China0736;
 use App\Http\Controllers\Api\Channels\Esport007;
 use App\Http\Controllers\Api\Channels\Fd00cdn;
+use App\Http\Controllers\Api\Channels\HuaJiao;
 use App\Http\Controllers\Api\Channels\HuomaoQiniu;
 use App\Http\Controllers\Api\Channels\HuomaoWs;
 use App\Http\Controllers\Api\Channels\Inke;
@@ -57,6 +58,7 @@ class ChannelFactory
         315 => Uplive::class,
         316 => Esport007::class,
         317 => Zhangyu::class,
+        318 => HuaJiao::class,
         998 => AikqWS::class,
         999 => AikqAli::class,
     ];
@@ -83,6 +85,7 @@ class ChannelFactory
             AikqAli::class,
 //            Zhibo::class,
             Longzhu::class,
+            HuaJiao::class,
             Xiaomi::class,
             Syyba123::class,
             LiveMe::class,
