@@ -71,25 +71,24 @@ class AuthController extends BaseController
         return ($role >> $index & 1) == 1;
     }
 
-    //php -r "echo sha1(sha1('aikanqiuzhibo').'6dUrCKcxVycRs');"
     private function getUsers()
     {
         return [
             [
                 'account' => '牛逼编码系统',
-                'password' => '15d58f3a0b959ffb64f50edb4247add1652cbc19',//aikanqiuzhibo
+                'password' => '15d58f3a0b959ffb64f50edb4247add1652cbc19',
                 'salt' => '6dUrCKcxVycRs',
                 'role' => $this->getAccessRole()
             ],
             [
                 'account' => 'leqiuba',
-                'password' => '141efbfed999db378707878803b34fb7585f7a6f',//leqiuba88
+                'password' => '141efbfed999db378707878803b34fb7585f7a6f',
                 'salt' => '6dalIaEsi35Cs',
                 'role' => $this->getAccessRole()
             ],
             [
                 'account' => 'guest',
-                'password' => '8b317399601fe67b356d569de20fe10b35d93bf9',//guest001
+                'password' => '8b317399601fe67b356d569de20fe10b35d93bf9',
                 'salt' => '6dalIdJiO2Vt',
                 'role' => $this->getAccessRole([self::ACCESS_INDEX_PULL]),
 //                'role' => $this->getAccessRole()
@@ -97,7 +96,7 @@ class AuthController extends BaseController
             ],
             [
                 'account' => 'ricky',
-                'password' => '246e7a738db9b835ef16455b1ce01179d653f918',//333333
+                'password' => '246e7a738db9b835ef16455b1ce01179d653f918',
                 'salt' => '6dclIaFsi45Es',
                 'role' => $this->getAccessRole()
             ]
