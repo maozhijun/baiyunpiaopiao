@@ -44,6 +44,11 @@ Route::group(["middleware" => "auth", "namespace" => "Push"], function () {
     Route::get("/manager/other/stop/{id}", "OtherEncodesController@stop");
     Route::get("/manager/other/repeat/{id}", "OtherEncodesController@repeat");
 
+    Route::get("/manager/alirandom/", "AliRandomController@index");
+    Route::post("/manager/alirandom/created/", "AliRandomController@created");
+    Route::get("/manager/alirandom/stop/{id}", "AliRandomController@stop");
+    Route::get("/manager/alirandom/repeat/{id}", "AliRandomController@repeat");
+
     Route::get("/manager/zhibo/", "ZhiboEncodesController@index");
     Route::post("/manager/zhibo/created/", "ZhiboEncodesController@created");
     Route::get("/manager/zhibo/stop/{id}", "ZhiboEncodesController@stop");
