@@ -14,6 +14,9 @@
                 <a href="/manager/aikqws/">爱看球-网宿</a>
             </li>
         @endif
+        <li role="presentation" {{ starts_with(request()->path(),'manager/alirandom')?'class=active':'' }}>
+            <a href="/manager/alirandom/">阿里破解专用</a>
+        </li>
         <li role="presentation" {{ starts_with(request()->path(),'manager/other')?'class=active':'' }}>
             <a href="/manager/other/">自定义转码</a>
         </li>
