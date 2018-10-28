@@ -21,7 +21,9 @@ use App\Http\Controllers\Api\Channels\Inke;
 use App\Http\Controllers\Api\Channels\KittyLive;
 use App\Http\Controllers\Api\Channels\LiveMe;
 use App\Http\Controllers\Api\Channels\Longzhu;
+use App\Http\Controllers\Api\Channels\OfWeek;
 use App\Http\Controllers\Api\Channels\Sina7d;
+use App\Http\Controllers\Api\Channels\Sobey;
 use App\Http\Controllers\Api\Channels\Syyba123;
 use App\Http\Controllers\Api\Channels\Uplive;
 use App\Http\Controllers\Api\Channels\Weibo;
@@ -59,6 +61,8 @@ class ChannelFactory
         316 => Esport007::class,
         317 => Zhangyu::class,
         318 => HuaJiao::class,
+        319 => OfWeek::class,
+        320 => Sobey::class,
         998 => AikqWS::class,
         999 => AikqAli::class,
     ];
@@ -89,17 +93,19 @@ class ChannelFactory
             Xiaomi::class,
             Syyba123::class,
             LiveMe::class,
+            OfWeek::class,
+            Sobey::class,
 //            Uplive::class,
 //            Zhangyu::class,
-            Esport007::class,
+//            Esport007::class,
             KittyLive::class,
             Xiu9::class,
-            Xiaoka::class,
-            Fd00cdn::class,
-            WoleW::class,
+//            Xiaoka::class,
+//            Fd00cdn::class,
+//            WoleW::class,
             Xiu95::class,
-            Sina7d::class,
-            China0736::class,
+//            Sina7d::class,
+//            China0736::class,
 //            Weibo::class,
 //            Inke::class,
 //            HuomaoWs::class,
