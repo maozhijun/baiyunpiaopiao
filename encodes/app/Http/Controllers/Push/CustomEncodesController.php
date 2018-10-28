@@ -159,7 +159,18 @@ class CustomEncodesController extends BaseController
 //            $yicai[] = 'yicai-al##stream8231'.$randomIntEnd.'2';
 //            $yicai[] = 'yicai-al##stream8231'.$randomIntEnd.'3';
 //            $yicai[] = 'yicai-al##stream8231'.$randomIntEnd.'4';
-//            $this->channels['yicai-阿里'] = $yicai;
+
+            $ofweek[] = 'week-jomo##ddwi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'a';
+            $ofweek[] = 'week-jomo##ddwi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'b';
+            $ofweek[] = 'week-jomo##ddwi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'c';
+            $ofweek[] = 'week-jomo##ddwi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'d';
+            $this->channels['ofweek-jomo'] = $ofweek;
+
+            $sobey[] = 'sobey-pili##9704643001'.$randomIntEnd.'1';
+            $sobey[] = 'sobey-pili##9704643001'.$randomIntEnd.'2';
+            $sobey[] = 'sobey-pili##9704643001'.$randomIntEnd.'3';
+            $sobey[] = 'sobey-pili##9704643001'.$randomIntEnd.'4';
+            $this->channels['sobey-pili'] = $sobey;
         } elseif (env('APP_NAME') == 'aikq1') {
             $randomEnd = str_random(2);
             $randomEnd = strtolower($randomEnd);
@@ -302,6 +313,18 @@ class CustomEncodesController extends BaseController
 //            $yicai[] = 'yicai-al##stream8230'.$randomIntEnd.'3';
 //            $yicai[] = 'yicai-al##stream8230'.$randomIntEnd.'4';
 //            $this->channels['yicai-阿里'] = $yicai;
+
+            $ofweek[] = 'week-jomo##dewi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'a';
+            $ofweek[] = 'week-jomo##dewi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'b';
+            $ofweek[] = 'week-jomo##dewi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'c';
+            $ofweek[] = 'week-jomo##dewi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'d';
+            $this->channels['ofweek-jomo'] = $ofweek;
+
+            $sobey[] = 'sobey-pili##8504643001'.$randomIntEnd.'1';
+            $sobey[] = 'sobey-pili##8504643001'.$randomIntEnd.'2';
+            $sobey[] = 'sobey-pili##8504643001'.$randomIntEnd.'3';
+            $sobey[] = 'sobey-pili##8504643001'.$randomIntEnd.'4';
+            $this->channels['sobey-pili'] = $sobey;
         } elseif (env('APP_NAME') == 'leqiuba') {
 
         }
@@ -482,7 +505,18 @@ class CustomEncodesController extends BaseController
                     $live_m3u8_url = 'http://t1.livecdn.yicai.com/beijing/' . $roomId . '.m3u8';//播放m3u8地址
                     break;
                 }
-
+                case 'week-jomo': {
+                    $rtmp_url = 'rtmp://push.ofweek.com/live/' . $roomId;//获取rtmp地址
+                    $live_rtmp_url = 'http://play.ofweek.com/live/' . $roomId.'.flv';//播放rtmp地址
+                    $live_m3u8_url = 'http://play.ofweek.com/live/' . $roomId . '.m3u8';//播放m3u8地址
+                    break;
+                }
+                case 'sobey-pili': {
+                    $rtmp_url = 'rtmp://pili-publish.livechangs.sobeycache.com/livechangs/' . $roomId;//获取rtmp地址
+                    $live_rtmp_url = 'http://pili-live-hdl.livechangs.sobeycache.com/livechangs/' . $roomId.'.flv';//播放rtmp地址
+                    $live_m3u8_url = 'http://pili-live-hls.livechangs.sobeycache.com/livechangs/' . $roomId . '.m3u8';//播放m3u8地址
+                    break;
+                }
             }
 
             if (!empty($rtmp_url)) {
