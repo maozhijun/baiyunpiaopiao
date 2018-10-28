@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Api\Channels\AikqWS1;
 use App\Http\Controllers\Api\Channels\Uplive;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
@@ -21,7 +22,11 @@ class TestController extends Controller
 //
 //        $huomaoWs = new HuomaoWs();
 //        dump($huomaoWs);
-        dump(new Uplive());
+
+//        dump(str_random(32));
+        $aikqWs = new AikqWS1(888);
+        dump($aikqWs);
+//        dump(new Uplive());
     }
 
     public function homeInfo(Request $request)
@@ -84,5 +89,22 @@ class TestController extends Controller
             return response('无效的ID', 404);
         }
         return view('test.speak', ['json' => $json]);
+    }
+
+    public function getStream()
+    {
+//        $huomaoQn = new HuomaoQiniu();
+//        dump($huomaoQn);
+//
+//        $huomaoWs = new HuomaoWs();
+//        dump($huomaoWs);
+
+//        dump(str_random(32));
+        $aikqWs = new AikqWS1(888);
+        dump('URL--> '.$aikqWs->pushURL());
+        dump('KEY--> '.$aikqWs->pushKey());
+        dump('M3U8--> '.$aikqWs->playM3U8());
+        dump('FLV--> '.$aikqWs->playFLV());
+//        dump(new Uplive());
     }
 }

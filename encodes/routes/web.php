@@ -203,6 +203,10 @@ Route::group(["namespace" => "Stream"], function () {
     Route::get("/obs/stream/{name}", "OBSPushStreamController@index");
 });
 
+Route::group(["middleware" => "auth"], function () {
+    Route::get("/manager/stream-ws", 'TestController@getStream');
+});
+
 //定时任务
 Route::get("/manager/check-ffmpeg", 'CrontabController@checkFFMPEG');
 
