@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\Channels\AikqAli;
 use App\Http\Controllers\Api\Channels\AikqWS;
+use App\Http\Controllers\Api\Channels\AikqWS1;
 use App\Http\Controllers\Api\Channels\China0736;
 use App\Http\Controllers\Api\Channels\Esport007;
 use App\Http\Controllers\Api\Channels\Fd00cdn;
@@ -63,6 +64,7 @@ class ChannelFactory
         318 => HuaJiao::class,
         319 => OfWeek::class,
         320 => Sobey::class,
+        997 => AikqWS1::class,
         998 => AikqWS::class,
         999 => AikqAli::class,
     ];
@@ -86,6 +88,7 @@ class ChannelFactory
         ],
         '3' => [//大平台推大比赛
             AikqWS::class,
+            AikqWS1::class,
             AikqAli::class,
 //            Zhibo::class,
             Longzhu::class,

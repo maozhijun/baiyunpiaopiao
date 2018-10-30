@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\Channel;
 class AikqAli extends Channel
 {
     public $id = 999;//平台ID
-    public $name = 'aikq.ali';//平台名称
+    public $name = '阿里(流量包)';//平台名称
     public $level = 1;//平台级别，1:野鸡，2:一般，3:大平台
     public $expiration = -1;//过期时间，单位秒，-1表示不过期
 

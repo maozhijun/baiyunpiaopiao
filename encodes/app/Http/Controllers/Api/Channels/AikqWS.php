@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\Channel;
 class AikqWS extends Channel
 {
     public $id = 998;//平台ID
-    public $name = 'aikq.ws';//平台名称
+    public $name = '网宿(带宽)';//平台名称
     public $level = 1;//平台级别，1:野鸡，2:一般，3:大平台
     public $expiration = -1;//过期时间，单位秒，-1表示不过期
 

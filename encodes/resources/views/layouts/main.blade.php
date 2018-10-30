@@ -47,7 +47,7 @@ $pushCountAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX
                     @if($pushAccess)
                     <li {{ starts_with(request()->path(),'manager')?'class=active':'' }}>
                         {{--<a href="/manager/longzhu/">推流</a>--}}
-                        <a href="/manager/aikqws/">推流</a>
+                        <a href="/manager/aikqws1/">推流</a>
                     </li>
                     @endif
                     @if($obsAccess)

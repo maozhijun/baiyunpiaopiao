@@ -31,10 +31,15 @@ Route::group(["middleware" => "auth", "namespace" => "Push"], function () {
         Route::get("/manager/aikqali/repeat/{id}", "QQEncodesController@repeat");
 //        Route::get("/manager/ali-live-room", "QQEncodesController@createdAliRoom");
 
-        Route::get("/manager/aikqws/", "AikqWSEncodesController@index");
-        Route::post("/manager/aikqws/created/", "AikqWSEncodesController@created");
-        Route::get("/manager/aikqws/stop/{id}", "AikqWSEncodesController@stop");
-        Route::get("/manager/aikqws/repeat/{id}", "AikqWSEncodesController@repeat");
+        Route::get("/manager/aikqws2/", "AikqWSEncodesController@index");
+        Route::post("/manager/aikqws2/created/", "AikqWSEncodesController@created");
+        Route::get("/manager/aikqws2/stop/{id}", "AikqWSEncodesController@stop");
+        Route::get("/manager/aikqws2/repeat/{id}", "AikqWSEncodesController@repeat");
+
+        Route::get("/manager/aikqws1/", "AikqWS1EncodesController@index");
+        Route::post("/manager/aikqws1/created/", "AikqWS1EncodesController@created");
+        Route::get("/manager/aikqws1/stop/{id}", "AikqWS1EncodesController@stop");
+        Route::get("/manager/aikqws1/repeat/{id}", "AikqWS1EncodesController@repeat");
     } else {
         Route::get("/manager/", "OtherEncodesController@index");
     }
