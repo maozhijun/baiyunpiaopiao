@@ -1,6 +1,6 @@
 @extends('layouts.push')
 @section('content')
-    <form action="/manager/aikqws/created/" method="post">
+    <form action="/manager/aikqws2/created/" method="post">
         {{ csrf_field() }}
         @component('layouts.video_setting')
         @endcomponent
@@ -37,10 +37,10 @@
                     <td>
                         @if($et->status != 0)
                             <a class="btn btn-xs btn-danger"
-                               href="javascript:if(confirm('确认删除')) location.href='/manager/aikqws/stop/{{ $et->id }}'">停止</a>
+                               href="javascript:if(confirm('确认删除')) location.href='/manager/aikqws2/stop/{{ $et->id }}'">停止</a>
                             <br><br>
                             <a class="btn btn-xs btn-warning"
-                               href="javascript:if(confirm('确认重推')) location.href='/manager/aikqws/repeat/{{ $et->id }}'">重推</a>
+                               href="javascript:if(confirm('确认重推')) location.href='/manager/aikqws2/repeat/{{ $et->id }}'">重推</a>
                         @endif
                     </td>
                 </tr>
