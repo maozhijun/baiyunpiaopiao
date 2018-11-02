@@ -160,17 +160,23 @@ class CustomEncodesController extends BaseController
 //            $yicai[] = 'yicai-al##stream8231'.$randomIntEnd.'3';
 //            $yicai[] = 'yicai-al##stream8231'.$randomIntEnd.'4';
 
-            $ofweek[] = 'week-jomo##ddwi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'a';
-            $ofweek[] = 'week-jomo##ddwi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'b';
-            $ofweek[] = 'week-jomo##ddwi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'c';
-            $ofweek[] = 'week-jomo##ddwi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'d';
-            $this->channels['ofweek-jomo'] = $ofweek;
+//            $ofweek[] = 'week-jomo##ddwi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'a';
+//            $ofweek[] = 'week-jomo##ddwi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'b';
+//            $ofweek[] = 'week-jomo##ddwi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'c';
+//            $ofweek[] = 'week-jomo##ddwi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'d';
+//            $this->channels['ofweek-jomo'] = $ofweek;
+//
+//            $sobey[] = 'sobey-pili##9704643001'.$randomIntEnd.'1';
+//            $sobey[] = 'sobey-pili##9704643001'.$randomIntEnd.'2';
+//            $sobey[] = 'sobey-pili##9704643001'.$randomIntEnd.'3';
+//            $sobey[] = 'sobey-pili##9704643001'.$randomIntEnd.'4';
+//            $this->channels['sobey-pili'] = $sobey;
 
-            $sobey[] = 'sobey-pili##9704643001'.$randomIntEnd.'1';
-            $sobey[] = 'sobey-pili##9704643001'.$randomIntEnd.'2';
-            $sobey[] = 'sobey-pili##9704643001'.$randomIntEnd.'3';
-            $sobey[] = 'sobey-pili##9704643001'.$randomIntEnd.'4';
-            $this->channels['sobey-pili'] = $sobey;
+            $gltv[] = 'gltv-ws##ddwi2j3uhqtox1tgbxm3'.$randomEnd.'a';
+            $gltv[] = 'gltv-ws##ddwi2j3uhqtox1tgbxm3'.$randomEnd.'b';
+            $gltv[] = 'gltv-ws##ddwi2j3uhqtox1tgbxm3'.$randomEnd.'c';
+            $gltv[] = 'gltv-ws##ddwi2j3uhqtox1tgbxm3'.$randomEnd.'d';
+            $this->channels['gltv-ws'] = $gltv;
         } elseif (env('APP_NAME') == 'aikq1') {
             $randomEnd = str_random(2);
             $randomEnd = strtolower($randomEnd);
@@ -314,17 +320,23 @@ class CustomEncodesController extends BaseController
 //            $yicai[] = 'yicai-al##stream8230'.$randomIntEnd.'4';
 //            $this->channels['yicai-阿里'] = $yicai;
 
-            $ofweek[] = 'week-jomo##dewi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'a';
-            $ofweek[] = 'week-jomo##dewi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'b';
-            $ofweek[] = 'week-jomo##dewi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'c';
-            $ofweek[] = 'week-jomo##dewi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'d';
-            $this->channels['ofweek-jomo'] = $ofweek;
+//            $ofweek[] = 'week-jomo##dewi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'a';
+//            $ofweek[] = 'week-jomo##dewi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'b';
+//            $ofweek[] = 'week-jomo##dewi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'c';
+//            $ofweek[] = 'week-jomo##dewi2j3uhqtox1tgbxm34yv7nljpp'.$randomEnd.'d';
+//            $this->channels['ofweek-jomo'] = $ofweek;
+//
+//            $sobey[] = 'sobey-pili##8504643001'.$randomIntEnd.'1';
+//            $sobey[] = 'sobey-pili##8504643001'.$randomIntEnd.'2';
+//            $sobey[] = 'sobey-pili##8504643001'.$randomIntEnd.'3';
+//            $sobey[] = 'sobey-pili##8504643001'.$randomIntEnd.'4';
+//            $this->channels['sobey-pili'] = $sobey;
 
-            $sobey[] = 'sobey-pili##8504643001'.$randomIntEnd.'1';
-            $sobey[] = 'sobey-pili##8504643001'.$randomIntEnd.'2';
-            $sobey[] = 'sobey-pili##8504643001'.$randomIntEnd.'3';
-            $sobey[] = 'sobey-pili##8504643001'.$randomIntEnd.'4';
-            $this->channels['sobey-pili'] = $sobey;
+            $gltv[] = 'gltv-ws##ffwi2j3uhqtox1tgbxm3'.$randomEnd.'a';
+            $gltv[] = 'gltv-ws##ffwi2j3uhqtox1tgbxm3'.$randomEnd.'b';
+            $gltv[] = 'gltv-ws##ffwi2j3uhqtox1tgbxm3'.$randomEnd.'c';
+            $gltv[] = 'gltv-ws##ffwi2j3uhqtox1tgbxm3'.$randomEnd.'d';
+            $this->channels['gltv-ws'] = $gltv;
         } elseif (env('APP_NAME') == 'leqiuba') {
 
         }
@@ -515,6 +527,12 @@ class CustomEncodesController extends BaseController
                     $rtmp_url = 'rtmp://pili-publish.livechangs.sobeycache.com/livechangs/' . $roomId;//获取rtmp地址
                     $live_rtmp_url = 'http://pili-live-hdl.livechangs.sobeycache.com/livechangs/' . $roomId.'.flv';//播放rtmp地址
                     $live_m3u8_url = 'http://pili-live-hls.livechangs.sobeycache.com/livechangs/' . $roomId . '.m3u8';//播放m3u8地址
+                    break;
+                }
+                case 'gltv-ws': {
+                    $rtmp_url = 'rtmp://push.gltvs.com/live/' . $roomId;//获取rtmp地址
+                    $live_rtmp_url = 'http://pull.gltvs.com/live/' . $roomId.'.flv';//播放rtmp地址
+                    $live_m3u8_url = 'http://pull.gltvs.com/live/' . $roomId . '/playlist.m3u8';//播放m3u8地址
                     break;
                 }
             }
