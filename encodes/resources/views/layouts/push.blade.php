@@ -10,8 +10,11 @@
             {{--<li role="presentation" {{ starts_with(request()->path(),'manager/aikqali')?'class=active':'' }}>--}}
             {{--<a href="/manager/aikqali/">爱看球-阿里</a>--}}
             {{--</li>--}}
-            <li role="presentation" {{ starts_with(request()->path(),'manager/aikqws')?'class=active':'' }}>
-                <a href="/manager/aikqws/">爱看球-网宿</a>
+            <li role="presentation" {{ starts_with(request()->path(),'manager/aikqws1')?'class=active':'' }}>
+                <a href="/manager/aikqws1/">网宿(流量包)</a>
+            </li>
+            <li role="presentation" {{ starts_with(request()->path(),'manager/aikqws2')?'class=active':'' }}>
+                <a href="/manager/aikqws2/">网宿(带宽)</a>
             </li>
         @endif
         <li role="presentation" {{ starts_with(request()->path(),'manager/alirandom')?'class=active':'' }}>
@@ -26,28 +29,28 @@
         <li role="presentation" {{ starts_with(request()->path(),'manager/longzhu')?'class=active':'' }}>
             <a href="/manager/longzhu/">龙珠直播</a>
         </li>
-        <li role="presentation" {{ starts_with(request()->path(),'manager/zhangyu')?'class=active':'' }}>
-            <a href="/manager/zhangyu/">章鱼直播</a>
-        </li>
+        {{--<li role="presentation" {{ starts_with(request()->path(),'manager/zhangyu')?'class=active':'' }}>--}}
+            {{--<a href="/manager/zhangyu/">章鱼直播</a>--}}
+        {{--</li>--}}
         <li role="presentation" {{ starts_with(request()->path(),'manager/huajiao')?'class=active':'' }}>
             <a href="/manager/huajiao/">花椒直播</a>
         </li>
-        <li role="presentation" {{ starts_with(request()->path(),'manager/weibo')?'class=active':'' }}>
-            <a href="/manager/weibo/">微博直播</a>
-        </li>
+        {{--<li role="presentation" {{ starts_with(request()->path(),'manager/weibo')?'class=active':'' }}>--}}
+            {{--<a href="/manager/weibo/">微博直播</a>--}}
+        {{--</li>--}}
         @if(env('APP_NAME')=='aikq' || env('APP_NAME')=='aikq1')
-            <li role="presentation" {{ starts_with(request()->path(),'manager/mi')?'class=active':'' }}>
-                <a href="/manager/mi/">小米直播</a>
-            </li>
-            <li role="presentation" {{ starts_with(request()->path(),'manager/inke')?'class=active':'' }}>
-                <a href="/manager/inke/">映客直播</a>
-            </li>
+            {{--<li role="presentation" {{ starts_with(request()->path(),'manager/mi')?'class=active':'' }}>--}}
+                {{--<a href="/manager/mi/">小米直播</a>--}}
+            {{--</li>--}}
+            {{--<li role="presentation" {{ starts_with(request()->path(),'manager/inke')?'class=active':'' }}>--}}
+                {{--<a href="/manager/inke/">映客直播</a>--}}
+            {{--</li>--}}
             {{--<li role="presentation" {{ starts_with(request()->path(),'manager/netease')?'class=active':'' }}>--}}
             {{--<a href="/manager/netease/">黄易直播</a>--}}
             {{--</li>--}}
-            <li role="presentation" {{ starts_with(request()->path(),'manager/huomao')?'class=active':'' }}>
-                <a href="/manager/huomao/">火猫直播</a>
-            </li>
+            {{--<li role="presentation" {{ starts_with(request()->path(),'manager/huomao')?'class=active':'' }}>--}}
+                {{--<a href="/manager/huomao/">火猫直播</a>--}}
+            {{--</li>--}}
         @endif
         {{--<li role="presentation" {{ starts_with(request()->path(),'manager/qxiu')?'class=active':'' }}>--}}
         {{--<a href="/manager/qxiu/">齐齐直播</a>--}}

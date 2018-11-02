@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Push;
 
-use App\Http\Controllers\Api\Channels\AikqWS;
+use App\Http\Controllers\Api\Channels\AikqWS1;
 use App\Http\Controllers\Controller as BaseController;
 use App\Models\EncodeTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class AikqWSEncodesController extends BaseController
+class AikqWS1EncodesController extends BaseController
 {
 
     public function __construct()
@@ -29,7 +29,7 @@ class AikqWSEncodesController extends BaseController
     public function index(Request $request)
     {
         $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'AikqWS')->where('created_at', '>', date_create('-24 hour'))->whereIn('status', [1, 2, -1])->get();
-        return view('manager.push.aikqws', ['ets' => $ets]);
+        return view('manager.push.aikqws1', ['ets' => $ets]);
     }
 
     public function created(Request $request)
@@ -39,10 +39,17 @@ class AikqWSEncodesController extends BaseController
             && $request->has('name')
         ) {
 
+            $t20 = strtotime(date("Y-m-d 17:00:00"));
+            $t23 = strtotime(date("Y-m-d 23:30:00"));
+            $t = time();
+            if ($t > $t20 && $t < $t23) {
+                return response('<h1 style="padding-top: 100px;width: 100%;text-align: center;">兄dei，现在是晚高峰，不要用网宿，记住哟！</h1>');
+            }
+
             $name = str_replace(' ', '-', $request->input('name'));
             $input = $request->input('input');
 
-            $aikqWs = new AikqWS(99999);
+            $aikqWs = new AikqWS1(99999);
 
             $rtmp_url = $aikqWs->pushURL() . '/' . $aikqWs->pushKey();//获取rtmp地址
             $live_flv_url = $aikqWs->playFLV();//flv地址
