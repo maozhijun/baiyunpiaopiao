@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Push;
 
+use App\Http\Controllers\Api\Channels\IFeng;
 use App\Http\Controllers\Controller as BaseController;
 use App\Models\EncodeTask;
 use Illuminate\Http\Request;
@@ -177,6 +178,12 @@ class CustomEncodesController extends BaseController
             $gltv[] = 'gltv-ws##ddwi2j3uhqtox1tgbxm3'.$randomEnd.'c';
             $gltv[] = 'gltv-ws##ddwi2j3uhqtox1tgbxm3'.$randomEnd.'d';
             $this->channels['gltv-ws'] = $gltv;
+
+            $ifengtv[] = '$ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'1';
+            $ifengtv[] = '$ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'2';
+            $ifengtv[] = '$ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'3';
+            $ifengtv[] = '$ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'4';
+            $this->channels['ifengtv-ali'] = $ifengtv;
         } elseif (env('APP_NAME') == 'aikq1') {
             $randomEnd = str_random(2);
             $randomEnd = strtolower($randomEnd);
@@ -337,6 +344,12 @@ class CustomEncodesController extends BaseController
             $gltv[] = 'gltv-ws##ffwi2j3uhqtox1tgbxm3'.$randomEnd.'c';
             $gltv[] = 'gltv-ws##ffwi2j3uhqtox1tgbxm3'.$randomEnd.'d';
             $this->channels['gltv-ws'] = $gltv;
+
+            $ifengtv[] = '$ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'1';
+            $ifengtv[] = '$ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'2';
+            $ifengtv[] = '$ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'3';
+            $ifengtv[] = '$ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'4';
+            $this->channels['ifengtv-ali'] = $ifengtv;
         } elseif (env('APP_NAME') == 'leqiuba') {
 
         }
@@ -533,6 +546,13 @@ class CustomEncodesController extends BaseController
                     $rtmp_url = 'rtmp://push.gltvs.com/live/' . $roomId;//获取rtmp地址
                     $live_rtmp_url = 'http://pull.gltvs.com/live/' . $roomId.'.flv';//播放rtmp地址
                     $live_m3u8_url = 'http://pull.gltvs.com/live/' . $roomId . '/playlist.m3u8';//播放m3u8地址
+                    break;
+                }
+                case 'ifengtv-ali': {
+                    $ifeng = new IFeng(0, $roomId);
+                    $rtmp_url = $ifeng->pushURL()."/".$ifeng->pushKey();//获取rtmp地址
+                    $live_rtmp_url = $ifeng->playFLV();//播放rtmp地址
+                    $live_m3u8_url = $ifeng->playM3U8();//播放m3u8地址
                     break;
                 }
             }

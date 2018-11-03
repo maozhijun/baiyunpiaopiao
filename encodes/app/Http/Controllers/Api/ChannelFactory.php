@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\Channels\Fd00cdn;
 use App\Http\Controllers\Api\Channels\HuaJiao;
 use App\Http\Controllers\Api\Channels\HuomaoQiniu;
 use App\Http\Controllers\Api\Channels\HuomaoWs;
+use App\Http\Controllers\Api\Channels\IFeng;
 use App\Http\Controllers\Api\Channels\Inke;
 use App\Http\Controllers\Api\Channels\KittyLive;
 use App\Http\Controllers\Api\Channels\LiveMe;
@@ -64,6 +65,7 @@ class ChannelFactory
         318 => HuaJiao::class,
         319 => OfWeek::class,
         320 => Sobey::class,
+        321 => IFeng::class,
         997 => AikqWS1::class,
         998 => AikqWS::class,
         999 => AikqAli::class,
@@ -97,7 +99,8 @@ class ChannelFactory
             Syyba123::class,
             LiveMe::class,
             OfWeek::class,
-            Sobey::class,
+            IFeng::class,
+//            Sobey::class,
 //            Uplive::class,
 //            Zhangyu::class,
 //            Esport007::class,
