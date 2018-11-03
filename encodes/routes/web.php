@@ -126,6 +126,7 @@ Route::group(["middleware" => "auth", "namespace" => "Pull"], function () {
     Route::get("/resources/", "KBallEncodesController@index");
 
     Route::get("/resources/kball/", "KBallEncodesController@index");
+    Route::get("/resources/kball/rtmpurl", "KBallEncodesController@kBallRtmpUrl");
 
     Route::get("/resources/leisu/", "LeisuEncodesController@index");
     Route::get("/resources/leisu/get_live_url/{id}", "LeisuEncodesController@getLiveUrl");

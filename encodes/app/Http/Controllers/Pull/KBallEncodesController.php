@@ -19,16 +19,27 @@ class KBallEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $KBLives = $this->getKBallLives();
+//        $KBLives = $this->getKBallLives();
+//        $lives = [];
+//        foreach ($KBLives as $live) {
+//            if (!empty($live['list'])) {
+//                $lives = array_merge($lives, $live['list']);
+//            }
+//        }
+////        dump($lives);
+//        $ets = EncodeTask::query()->where('from', 'KB')->where('status', 1)->get();
+//        return view('manager.pull.kball', ['lives' => $lives, 'ets' => $ets, 'channels' => $this->channels]);
+
+        $KBLives = $this->getKBallAppLives();
         $lives = [];
         foreach ($KBLives as $live) {
-            if (!empty($live['list'])) {
-                $lives = array_merge($lives, $live['list']);
+            if ($live['componentCode'] == "recomMatch") {
+                $lives = $live['recomMatch'];
+                break;
             }
         }
 //        dump($lives);
-        $ets = EncodeTask::query()->where('from', 'KB')->where('status', 1)->get();
-        return view('manager.pull.kball', ['lives' => $lives, 'ets' => $ets, 'channels' => $this->channels]);
+        return view('manager.pull.kball2', ['lives' => $lives]);
     }
 
     private function getKBallLives()
@@ -55,6 +66,64 @@ class KBallEncodesController extends BaseController
             return $json['data'];
         } else {
             return null;
+        }
+    }
+
+    private function getKBallAppLives() {
+        $url = "https://api.kqiu.cn/content/v1/recommendations/1";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+//        curl_setopt($ch, CURLOPT_COOKIE, 'language=zh-cn;');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
+//        curl_setopt($ch, CURLINFO_CONTENT_TYPE, 'application/x-www-form-urlencoded');
+        curl_setopt($ch, CURLOPT_USERAGENT, "okhttp/3.10.0");
+//        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+//        curl_setopt($ch, CURLOPT_HEADER, true);
+        $response = curl_exec($ch);
+        if ($error = curl_error($ch)) {
+            die($error);
+        }
+        curl_close($ch);
+//        dump($response);
+        $json = json_decode($response, true);
+
+        if (isset($json) && isset($json['msg']) && $json['msg'] == "SUCCESS") {
+            return $json['data'];
+        } else {
+            return null;
+        }
+    }
+
+    public function kBallRtmpUrl(Request $request) {
+        $gid = $request->input('gid');
+        if (!$gid || strlen($gid) < 0) return response('信号还在路上，等会再来看看！');
+
+        $url = "https://api.kqiu.cn/live/v1/lives/$gid";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+//        curl_setopt($ch, CURLOPT_COOKIE, 'language=zh-cn;');
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
+//        curl_setopt($ch, CURLINFO_CONTENT_TYPE, 'application/x-www-form-urlencoded');
+        curl_setopt($ch, CURLOPT_USERAGENT, "okhttp/3.10.0");
+//        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+//        curl_setopt($ch, CURLOPT_HEADER, true);
+        $response = curl_exec($ch);
+        if ($error = curl_error($ch)) {
+            die($error);
+        }
+        curl_close($ch);
+
+        $json = json_decode($response, true);
+        if (isset($json) && isset($json['msg']) && $json['msg'] == "SUCCESS") {
+            return response($json['data'][0]['liveHighLink']);
+        } else {
+            return response('信号还在路上，等会再来看看！');
         }
     }
 
