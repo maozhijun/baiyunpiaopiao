@@ -124,6 +124,8 @@ class ChannelFactory
      */
     public static function createInstance($level, $uid)
     {
+        //直接写死level = 3
+        $level = 3;
         $cs = self::getFilterChannels()[$level];
         if (count($cs) > 0) {
             $channel = new $cs[array_rand($cs)]($uid);
