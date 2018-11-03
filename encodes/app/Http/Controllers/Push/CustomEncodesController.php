@@ -179,10 +179,10 @@ class CustomEncodesController extends BaseController
             $gltv[] = 'gltv-ws##ddwi2j3uhqtox1tgbxm3'.$randomEnd.'d';
             $this->channels['gltv-ws'] = $gltv;
 
-            $ifengtv[] = '$ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'1';
-            $ifengtv[] = '$ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'2';
-            $ifengtv[] = '$ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'3';
-            $ifengtv[] = '$ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'4';
+            $ifengtv[] = 'ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'1';
+            $ifengtv[] = 'ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'2';
+            $ifengtv[] = 'ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'3';
+            $ifengtv[] = 'ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'4';
             $this->channels['ifengtv-ali'] = $ifengtv;
         } elseif (env('APP_NAME') == 'aikq1') {
             $randomEnd = str_random(2);
@@ -345,10 +345,10 @@ class CustomEncodesController extends BaseController
             $gltv[] = 'gltv-ws##ffwi2j3uhqtox1tgbxm3'.$randomEnd.'d';
             $this->channels['gltv-ws'] = $gltv;
 
-            $ifengtv[] = '$ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'1';
-            $ifengtv[] = '$ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'2';
-            $ifengtv[] = '$ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'3';
-            $ifengtv[] = '$ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'4';
+            $ifengtv[] = 'ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'1';
+            $ifengtv[] = 'ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'2';
+            $ifengtv[] = 'ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'3';
+            $ifengtv[] = 'ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'4';
             $this->channels['ifengtv-ali'] = $ifengtv;
         } elseif (env('APP_NAME') == 'leqiuba') {
 
