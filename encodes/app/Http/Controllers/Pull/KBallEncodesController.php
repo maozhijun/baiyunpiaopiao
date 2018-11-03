@@ -121,7 +121,11 @@ class KBallEncodesController extends BaseController
 
         $json = json_decode($response, true);
         if (isset($json) && isset($json['msg']) && $json['msg'] == "SUCCESS") {
-            return response($json['data'][0]['liveHighLink']);
+            $rtmpUrl = $json['data'][0]['liveHighLink'];
+            $m3u8Url = str_replace("rtmp://", "http://", $rtmpUrl).".m3u8";
+            $flvUrl = str_replace("rtmp://", "http://", $rtmpUrl).".flv";
+
+            return response($rtmpUrl."<br><br><a target='_blank' href='$flvUrl'>$flvUrl</a><br><br>"."<a target='_blank' href='$m3u8Url'>$m3u8Url</a>");
         } else {
             return response('信号还在路上，等会再来看看！');
         }
