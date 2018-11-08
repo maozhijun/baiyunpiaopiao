@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Push;
 
+use App\Http\Controllers\Api\Channels\FmLive;
 use App\Http\Controllers\Api\Channels\IFeng;
 use App\Http\Controllers\Controller as BaseController;
 use App\Models\EncodeTask;
@@ -173,17 +174,24 @@ class CustomEncodesController extends BaseController
 //            $sobey[] = 'sobey-pili##9704643001'.$randomIntEnd.'4';
 //            $this->channels['sobey-pili'] = $sobey;
 
-            $gltv[] = 'gltv-ws##ddwi2j3uhqtox1tgbxm3'.$randomEnd.'a';
-            $gltv[] = 'gltv-ws##ddwi2j3uhqtox1tgbxm3'.$randomEnd.'b';
-            $gltv[] = 'gltv-ws##ddwi2j3uhqtox1tgbxm3'.$randomEnd.'c';
-            $gltv[] = 'gltv-ws##ddwi2j3uhqtox1tgbxm3'.$randomEnd.'d';
-            $this->channels['gltv-ws'] = $gltv;
+//            $gltv[] = 'gltv-ws##ddwi2j3uhqtox1tgbxm3'.$randomEnd.'a';
+//            $gltv[] = 'gltv-ws##ddwi2j3uhqtox1tgbxm3'.$randomEnd.'b';
+//            $gltv[] = 'gltv-ws##ddwi2j3uhqtox1tgbxm3'.$randomEnd.'c';
+//            $gltv[] = 'gltv-ws##ddwi2j3uhqtox1tgbxm3'.$randomEnd.'d';
+//            $this->channels['gltv-ws'] = $gltv;
+//
+//            $ifengtv[] = 'ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'1';
+//            $ifengtv[] = 'ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'2';
+//            $ifengtv[] = 'ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'3';
+//            $ifengtv[] = 'ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'4';
+//            $this->channels['ifengtv-ali'] = $ifengtv;
 
-            $ifengtv[] = 'ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'1';
-            $ifengtv[] = 'ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'2';
-            $ifengtv[] = 'ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'3';
-            $ifengtv[] = 'ifengtv-ali##1daAWyy000e_'.$randomIntEnd.'4';
-            $this->channels['ifengtv-ali'] = $ifengtv;
+
+            $fmLive[] = 'fmLive-pili##fpzb455322368533'.$randomIntEnd.'1';
+            $fmLive[] = 'fmLive-pili##fpzb455322368533'.$randomIntEnd.'2';
+            $fmLive[] = 'fmLive-pili##fpzb455322368533'.$randomIntEnd.'3';
+            $fmLive[] = 'fmLive-pili##fpzb455322368533'.$randomIntEnd.'4';
+            $this->channels['fmLive-pili'] = $fmLive;
         } elseif (env('APP_NAME') == 'aikq1') {
             $randomEnd = str_random(2);
             $randomEnd = strtolower($randomEnd);
@@ -339,17 +347,23 @@ class CustomEncodesController extends BaseController
 //            $sobey[] = 'sobey-pili##8504643001'.$randomIntEnd.'4';
 //            $this->channels['sobey-pili'] = $sobey;
 
-            $gltv[] = 'gltv-ws##ffwi2j3uhqtox1tgbxm3'.$randomEnd.'a';
-            $gltv[] = 'gltv-ws##ffwi2j3uhqtox1tgbxm3'.$randomEnd.'b';
-            $gltv[] = 'gltv-ws##ffwi2j3uhqtox1tgbxm3'.$randomEnd.'c';
-            $gltv[] = 'gltv-ws##ffwi2j3uhqtox1tgbxm3'.$randomEnd.'d';
-            $this->channels['gltv-ws'] = $gltv;
+//            $gltv[] = 'gltv-ws##ffwi2j3uhqtox1tgbxm3'.$randomEnd.'a';
+//            $gltv[] = 'gltv-ws##ffwi2j3uhqtox1tgbxm3'.$randomEnd.'b';
+//            $gltv[] = 'gltv-ws##ffwi2j3uhqtox1tgbxm3'.$randomEnd.'c';
+//            $gltv[] = 'gltv-ws##ffwi2j3uhqtox1tgbxm3'.$randomEnd.'d';
+//            $this->channels['gltv-ws'] = $gltv;
+//
+//            $ifengtv[] = 'ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'1';
+//            $ifengtv[] = 'ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'2';
+//            $ifengtv[] = 'ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'3';
+//            $ifengtv[] = 'ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'4';
+//            $this->channels['ifengtv-ali'] = $ifengtv;
 
-            $ifengtv[] = 'ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'1';
-            $ifengtv[] = 'ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'2';
-            $ifengtv[] = 'ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'3';
-            $ifengtv[] = 'ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'4';
-            $this->channels['ifengtv-ali'] = $ifengtv;
+            $fmLive[] = 'fmLive-pili##fpzb555322368533'.$randomIntEnd.'1';
+            $fmLive[] = 'fmLive-pili##fpzb555322368533'.$randomIntEnd.'2';
+            $fmLive[] = 'fmLive-pili##fpzb555322368533'.$randomIntEnd.'3';
+            $fmLive[] = 'fmLive-pili##fpzb555322368533'.$randomIntEnd.'4';
+            $this->channels['fmLive-pili'] = $fmLive;
         } elseif (env('APP_NAME') == 'leqiuba') {
 
         }
@@ -549,10 +563,17 @@ class CustomEncodesController extends BaseController
                     break;
                 }
                 case 'ifengtv-ali': {
-                    $ifeng = new IFeng(0, $roomId);
-                    $rtmp_url = $ifeng->pushURL()."/".$ifeng->pushKey();//获取rtmp地址
-                    $live_rtmp_url = $ifeng->playFLV();//播放rtmp地址
-                    $live_m3u8_url = $ifeng->playM3U8();//播放m3u8地址
+                    $fmLive = new IFeng(0, $roomId);
+                    $rtmp_url = $fmLive->pushURL()."/".$fmLive->pushKey();//获取rtmp地址
+                    $live_rtmp_url = $fmLive->playFLV();//播放rtmp地址
+                    $live_m3u8_url = $fmLive->playM3U8();//播放m3u8地址
+                    break;
+                }
+                case 'fmLive-pili': {
+                    $fmLive = new FmLive(0, $roomId);
+                    $rtmp_url = $fmLive->pushURL()."/".$fmLive->pushKey();//获取rtmp地址
+                    $live_rtmp_url = $fmLive->playFLV();//播放rtmp地址
+                    $live_m3u8_url = $fmLive->playM3U8();//播放m3u8地址
                     break;
                 }
             }
