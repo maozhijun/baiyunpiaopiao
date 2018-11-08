@@ -18,24 +18,23 @@ class InkeEncodesController extends BaseController
         if (env('APP_NAME') == 'good') {
 
         } elseif (env('APP_NAME') == 'aikq') {
-            $this->channels[] = '映客直播1##1525761803094761?sign=8dffa036e482f090MjAwLWlzdHJlYW02Lmlua2UuY24tNzAxOTU4Mjgz&ver=2&uid=701958283';
-            $this->channels[] = '映客直播2##1525761855051042?sign=8dffa036e482f090MjAwLWlzdHJlYW02Lmlua2UuY24tNzAxOTU4Mjgz&ver=2&uid=701958283';
-            $this->channels[] = '映客直播3##1525761870172893?sign=8dffa036e482f090MjAwLWlzdHJlYW02Lmlua2UuY24tNzAxOTU4Mjgz&ver=2&uid=701958283';
-            $this->channels[] = '映客直播4##1525761880145370?sign=8dffa036e482f090MjAwLWlzdHJlYW02Lmlua2UuY24tNzAxOTU4Mjgz&ver=2&uid=701958283';
-            $this->channels[] = '映客直播5##1525761899159900?sign=8dffa036e482f090MjAwLWlzdHJlYW02Lmlua2UuY24tNzAxOTU4Mjgz&ver=2&uid=701958283';
-            $this->channels[] = '映客直播6##1525761889889592?sign=8dffa036e482f090MjAwLWlzdHJlYW02Lmlua2UuY24tNzAxOTU4Mjgz&ver=2&uid=701958283';
-            $this->channels[] = '映客直播7##1525761910008081?sign=8dffa036e482f090MjAwLWlzdHJlYW02Lmlua2UuY24tNzAxOTU4Mjgz&ver=2&uid=701958283';
-            $this->channels[] = '映客直播8##1525761922554657?sign=8dffa036e482f090MjAwLWlzdHJlYW02Lmlua2UuY24tNzAxOTU4Mjgz&ver=2&uid=701958283';
+            $this->channels[] = '映客直播1##1541070384696312?sign=364c99d464fbf258MjAwLWlzdHJlYW0uaW5rZS5jbi0xMDQwOTk0MTQ=&ver=2&uid=&ikAppState=0&ikBeauty=1&dd_type=0';
+            $this->channels[] = '映客直播2##1541062343234801?sign=364c99d464fbf258MjAwLWlzdHJlYW0uaW5rZS5jbi0xMDQwOTk0MTQ=&ver=2&uid=&ikAppState=0&ikBeauty=1&dd_type=0';
+            $this->channels[] = '映客直播3##1541150626753977?sign=364c99d464fbf258MjAwLWlzdHJlYW0uaW5rZS5jbi0xMDQwOTk0MTQ=&ver=2&uid=&ikAppState=0&ikBeauty=1&dd_type=0';
+            $this->channels[] = '映客直播4##1541150645385007?sign=364c99d464fbf258MjAwLWlzdHJlYW0uaW5rZS5jbi0xMDQwOTk0MTQ=&ver=2&uid=&ikAppState=0&ikBeauty=1&dd_type=0';
+            $this->channels[] = '映客直播5##1541150655903875?sign=364c99d464fbf258MjAwLWlzdHJlYW0uaW5rZS5jbi0xMDQwOTk0MTQ=&ver=2&uid=&ikAppState=0&ikBeauty=1&dd_type=0';
+            $this->channels[] = '映客直播6##1541150668253001?sign=364c99d464fbf258MjAwLWlzdHJlYW0uaW5rZS5jbi0xMDQwOTk0MTQ=&ver=2&uid=&ikAppState=0&ikBeauty=1&dd_type=0';
+            $this->channels[] = '映客直播7##1541150681525306?sign=364c99d464fbf258MjAwLWlzdHJlYW0uaW5rZS5jbi0xMDQwOTk0MTQ=&ver=2&uid=&ikAppState=0&ikBeauty=1&dd_type=0';
+            $this->channels[] = '映客直播8##1541150691699506?sign=364c99d464fbf258MjAwLWlzdHJlYW0uaW5rZS5jbi0xMDQwOTk0MTQ=&ver=2&uid=&ikAppState=0&ikBeauty=1&dd_type=0';
         } elseif (env('APP_NAME') == 'aikq1') {
-            $this->channels[] = '映客直播1##1525925512011066?sign=750659bdd7214997MjAwLWlzdHJlYW02Lmlua2UuY24tMTA0MDk5NDE0&ver=2&uid=104099414';
-            $this->channels[] = '映客直播2##1525925474840284?sign=750659bdd7214997MjAwLWlzdHJlYW02Lmlua2UuY24tMTA0MDk5NDE0&ver=2&uid=104099414';
-            $this->channels[] = '映客直播3##1525925521680882?sign=750659bdd7214997MjAwLWlzdHJlYW02Lmlua2UuY24tMTA0MDk5NDE0&ver=2&uid=104099414';
-            $this->channels[] = '映客直播4##1525925531242280?sign=750659bdd7214997MjAwLWlzdHJlYW02Lmlua2UuY24tMTA0MDk5NDE0&ver=2&uid=104099414';
-            $this->channels[] = '映客直播5##1525925540426235?sign=750659bdd7214997MjAwLWlzdHJlYW02Lmlua2UuY24tMTA0MDk5NDE0&ver=2&uid=104099414';
-            $this->channels[] = '映客直播6##1525925551023481?sign=750659bdd7214997MjAwLWlzdHJlYW02Lmlua2UuY24tMTA0MDk5NDE0&ver=2&uid=104099414';
-            $this->channels[] = '映客直播7##1525925562347874?sign=750659bdd7214997MjAwLWlzdHJlYW02Lmlua2UuY24tMTA0MDk5NDE0&ver=2&uid=104099414';
-            $this->channels[] = '映客直播8##1525925570453696?sign=750659bdd7214997MjAwLWlzdHJlYW02Lmlua2UuY24tMTA0MDk5NDE0&ver=2&uid=104099414';
-
+//            $this->channels[] = '映客直播1##1541070384696312rtmp://pl.live.weibo.com/alicdn/f035e0c4cfcc49d0e7d86e9a4f2d4fcasign=364c99d464fbf258MjAwLWlzdHJlYW0uaW5rZS5jbi0xMDQwOTk0MTQ=&ver=2&uid=&ikAppState=0&ikBeauty=1&dd_type=0, ';
+//            $this->channels[] = '映客直播2##';
+//            $this->channels[] = '映客直播3##';
+//            $this->channels[] = '映客直播4##';
+//            $this->channels[] = '映客直播5##';
+//            $this->channels[] = '映客直播6##';
+//            $this->channels[] = '映客直播7##';
+//            $this->channels[] = '映客直播8##';
         } elseif (env('APP_NAME') == 'leqiuba') {
         }
     }
@@ -70,8 +69,8 @@ class InkeEncodesController extends BaseController
                 return back()->with(['error' => '没有可用的直播间咯']);
             }
             list($roomName, $roomId) = explode('##', $channel);
-            $rtmp_url = 'rtmp://istream6.inke.cn/live/' . $roomId;//获取rtmp地址
-            $live_flv_url = '';//flv地址
+            $rtmp_url = 'rtmp://istream.inke.cn/live/' . $roomId;//获取rtmp地址
+            $live_flv_url = 'http://wssource.pull.inke.cn/live/' . explode('?', $roomId)[0] . '.flv';//flv地址
             $live_rtmp_url = 'rtmp://wssource.pull.inke.cn/live/' . explode('?', $roomId)[0];//rtmp地址
             $live_m3u8_url = 'http://wssource.hls.inke.cn/live/' . explode('?', $roomId)[0] . '/playlist.m3u8';//m3u8地址
 
