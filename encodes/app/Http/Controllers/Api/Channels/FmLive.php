@@ -18,10 +18,12 @@ class FmLive extends Channel
     private $playRTMP;
     private $playM3U8;
 
-    public function __construct($uid = 0)
+    public function __construct($uid = 0, $key = "")
     {
-        $key = "ffzb".(random_int(pow(10, 8), pow(10, 9) - 1));
-         $this->streamURL = 'rtmp://pili-publish.thecover.cn/fmlive';
+        if (!$key || strlen($key) <= 0) {
+            $key = "ffzb" . (random_int(pow(10, 8), pow(10, 9) - 1));
+        }
+        $this->streamURL = 'rtmp://pili-publish.thecover.cn/fmlive';
         $this->streamKey = $key;
         $this->playFlv = 'http://pili-live-hls.thecover.cn/fmlive/' . $key . '.flv';
         $this->playM3U8 = 'http://pili-live-hls.thecover.cn/fmlive/' . $key . '.m3u8';
