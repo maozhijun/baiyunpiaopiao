@@ -23,7 +23,7 @@ class Baijiayun extends Channel
         if (!$key || strlen($key) <= 0) {
             $key = strtolower(str_random(32));
         }
-        $this->streamURL = 'http://pushtc-live.baijiayun.com/mgclient/';
+        $this->streamURL = 'rtmp://pushtc-live.baijiayun.com/mgclient/';
         $this->streamKey = $key;
         $this->playFlv = 'http://pulltc-live.baijiayun.com/mgclient/' . $key . '.flv';
         $this->playM3U8 = 'http://pulltc-live.baijiayun.com/mgclient/' . $key . '/playlist.m3u8';
