@@ -24,7 +24,7 @@ class Xiaoka extends Channel
         $this->streamURL = 'rtmp://video-center.alivecdn.com/live';
         $this->streamKey = $key . '?vhost=al01.alcdn.hls.xiaoka.tv';
         $this->playFlv = 'https://al01.alcdn.hls.xiaoka.tv/live/' . $key . '.flv';
-        $this->playM3U8 = 'https://al01.alcdn.hls.xiaoka.tv/live/'. $key .'.m3u8';
+//        $this->playM3U8 = 'https://al01.alcdn.hls.xiaoka.tv/live/'. $key .'.m3u8';
         $this->playRTMP = 'rtmp://al01.alcdn.hls.xiaoka.tv/live/' . $key;
     }
 

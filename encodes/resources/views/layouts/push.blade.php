@@ -42,9 +42,9 @@
             {{--<li role="presentation" {{ starts_with(request()->path(),'manager/mi')?'class=active':'' }}>--}}
                 {{--<a href="/manager/mi/">小米直播</a>--}}
             {{--</li>--}}
-            {{--<li role="presentation" {{ starts_with(request()->path(),'manager/inke')?'class=active':'' }}>--}}
-                {{--<a href="/manager/inke/">映客直播</a>--}}
-            {{--</li>--}}
+            <li role="presentation" {{ starts_with(request()->path(),'manager/inke')?'class=active':'' }}>
+                <a href="/manager/inke/">映客直播</a>
+            </li>
             {{--<li role="presentation" {{ starts_with(request()->path(),'manager/netease')?'class=active':'' }}>--}}
             {{--<a href="/manager/netease/">黄易直播</a>--}}
             {{--</li>--}}
