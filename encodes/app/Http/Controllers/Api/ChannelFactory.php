@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Api\Channels\AikqAli;
 use App\Http\Controllers\Api\Channels\AikqWS;
 use App\Http\Controllers\Api\Channels\AikqWS1;
+use App\Http\Controllers\Api\Channels\Baijiayun;
 use App\Http\Controllers\Api\Channels\China0736;
 use App\Http\Controllers\Api\Channels\Esport007;
 use App\Http\Controllers\Api\Channels\Fd00cdn;
@@ -68,6 +69,7 @@ class ChannelFactory
         320 => Sobey::class,
         321 => IFeng::class,
         322 => FmLive::class,
+        323 => Baijiayun::class,
         997 => AikqWS1::class,
         998 => AikqWS::class,
         999 => AikqAli::class,
@@ -101,6 +103,7 @@ class ChannelFactory
             Syyba123::class,
             LiveMe::class,
             FmLive::class,
+            Baijiayun::class,
 //            OfWeek::class,
 //            IFeng::class,
 //            Sobey::class,

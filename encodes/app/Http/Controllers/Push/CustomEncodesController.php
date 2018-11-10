@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Push;
 
+use App\Http\Controllers\Api\Channels\Baijiayun;
 use App\Http\Controllers\Api\Channels\FmLive;
 use App\Http\Controllers\Api\Channels\IFeng;
 use App\Http\Controllers\Controller as BaseController;
@@ -187,11 +188,17 @@ class CustomEncodesController extends BaseController
 //            $this->channels['ifengtv-ali'] = $ifengtv;
 
 
-            $fmLive[] = 'fmLive-pili##fpzb455322368533'.$randomIntEnd.'1';
-            $fmLive[] = 'fmLive-pili##fpzb455322368533'.$randomIntEnd.'2';
-            $fmLive[] = 'fmLive-pili##fpzb455322368533'.$randomIntEnd.'3';
-            $fmLive[] = 'fmLive-pili##fpzb455322368533'.$randomIntEnd.'4';
-            $this->channels['fmLive-pili'] = $fmLive;
+//            $fmLive[] = 'fmLive-pili##fpzb455322368533'.$randomIntEnd.'1';
+//            $fmLive[] = 'fmLive-pili##fpzb455322368533'.$randomIntEnd.'2';
+//            $fmLive[] = 'fmLive-pili##fpzb455322368533'.$randomIntEnd.'3';
+//            $fmLive[] = 'fmLive-pili##fpzb455322368533'.$randomIntEnd.'4';
+//            $this->channels['fmLive-pili'] = $fmLive;
+
+            $baijiayun[] = 'baijiayun-ws##eeesdfwewavasgweagwe'.$randomEnd.'a';
+            $baijiayun[] = 'baijiayun-ws##eeesdfwewavasgweagwe'.$randomEnd.'b';
+            $baijiayun[] = 'baijiayun-ws##eeesdfwewavasgweagwe'.$randomEnd.'c';
+            $baijiayun[] = 'baijiayun-ws##eeesdfwewavasgweagwe'.$randomEnd.'d';
+            $this->channels['baijiayun-ws'] = $baijiayun;
         } elseif (env('APP_NAME') == 'aikq1') {
             $randomEnd = str_random(2);
             $randomEnd = strtolower($randomEnd);
@@ -358,12 +365,18 @@ class CustomEncodesController extends BaseController
 //            $ifengtv[] = 'ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'3';
 //            $ifengtv[] = 'ifengtv-ali##1faAWyy000e_'.$randomIntEnd.'4';
 //            $this->channels['ifengtv-ali'] = $ifengtv;
+//
+//            $fmLive[] = 'fmLive-pili##fpzb555322368533'.$randomIntEnd.'1';
+//            $fmLive[] = 'fmLive-pili##fpzb555322368533'.$randomIntEnd.'2';
+//            $fmLive[] = 'fmLive-pili##fpzb555322368533'.$randomIntEnd.'3';
+//            $fmLive[] = 'fmLive-pili##fpzb555322368533'.$randomIntEnd.'4';
+//            $this->channels['fmLive-pili'] = $fmLive;
 
-            $fmLive[] = 'fmLive-pili##fpzb555322368533'.$randomIntEnd.'1';
-            $fmLive[] = 'fmLive-pili##fpzb555322368533'.$randomIntEnd.'2';
-            $fmLive[] = 'fmLive-pili##fpzb555322368533'.$randomIntEnd.'3';
-            $fmLive[] = 'fmLive-pili##fpzb555322368533'.$randomIntEnd.'4';
-            $this->channels['fmLive-pili'] = $fmLive;
+            $baijiayun[] = 'baijiayun-ws##ffesdfwewavasgweagwe'.$randomEnd.'a';
+            $baijiayun[] = 'baijiayun-ws##ffesdfwewavasgweagwe'.$randomEnd.'b';
+            $baijiayun[] = 'baijiayun-ws##ffesdfwewavasgweagwe'.$randomEnd.'c';
+            $baijiayun[] = 'baijiayun-ws##ffesdfwewavasgweagwe'.$randomEnd.'d';
+            $this->channels['baijiayun-ws'] = $baijiayun;
         } elseif (env('APP_NAME') == 'leqiuba') {
 
         }
@@ -571,6 +584,13 @@ class CustomEncodesController extends BaseController
                 }
                 case 'fmLive-pili': {
                     $fmLive = new FmLive(0, $roomId);
+                    $rtmp_url = $fmLive->pushURL()."/".$fmLive->pushKey();//获取rtmp地址
+                    $live_rtmp_url = $fmLive->playFLV();//播放rtmp地址
+                    $live_m3u8_url = $fmLive->playM3U8();//播放m3u8地址
+                    break;
+                }
+                case 'baijiayun-ws': {
+                    $fmLive = new Baijiayun(0, $roomId);
                     $rtmp_url = $fmLive->pushURL()."/".$fmLive->pushKey();//获取rtmp地址
                     $live_rtmp_url = $fmLive->playFLV();//播放rtmp地址
                     $live_m3u8_url = $fmLive->playM3U8();//播放m3u8地址
