@@ -39,21 +39,21 @@ $pptvAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX_RESO
         <li role="presentation" {{ starts_with(request()->path(),'resources/longzhu')?'class=active':'' }}>
             <a href="/resources/longzhu/">龙珠</a>
         </li>
-        <li role="presentation" {{ starts_with(request()->path(),'resources/cntv')?'class=active':'' }}>
-            <a href="/resources/cntv/">电视台</a>
-        </li>
+        {{--<li role="presentation" {{ starts_with(request()->path(),'resources/cntv')?'class=active':'' }}>--}}
+            {{--<a href="/resources/cntv/">电视台</a>--}}
+        {{--</li>--}}
         {{--<li role="presentation" {{ starts_with(request()->path(),'resources/baitv')?'class=active':'' }}>--}}
             {{--<a href="/resources/baitv/">BaiTV</a>--}}
         {{--</li>--}}
-        <li role="presentation" {{ starts_with(request()->path(),'resources/cctv5')?'class=active':'' }}>
-            <a href="/resources/cctv5/">CCTV5</a>
-        </li>
-        <li role="presentation" {{ starts_with(request()->path(),'resources/sportlive')?'class=active':'' }}>
-            <a href="/resources/sportlive/">SportLive(德国)</a>
-        </li>
-        <li role="presentation" {{ starts_with(request()->path(),'resources/aliez')?'class=active':'' }}>
-            <a href="/resources/aliez/">Aliez(老毛子)</a>
-        </li>
+        {{--<li role="presentation" {{ starts_with(request()->path(),'resources/cctv5')?'class=active':'' }}>--}}
+            {{--<a href="/resources/cctv5/">CCTV5</a>--}}
+        {{--</li>--}}
+        {{--<li role="presentation" {{ starts_with(request()->path(),'resources/sportlive')?'class=active':'' }}>--}}
+            {{--<a href="/resources/sportlive/">SportLive(德国)</a>--}}
+        {{--</li>--}}
+        {{--<li role="presentation" {{ starts_with(request()->path(),'resources/aliez')?'class=active':'' }}>--}}
+            {{--<a href="/resources/aliez/">Aliez(老毛子)</a>--}}
+        {{--</li>--}}
     </ul>
     <br>
 @endsection
