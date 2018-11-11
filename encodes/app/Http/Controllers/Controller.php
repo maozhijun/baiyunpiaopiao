@@ -172,6 +172,9 @@ class Controller extends BaseController
             } elseif (str_contains($input_uri, 'aliez-stream.gcdn.co')) {
                 $execs[] = '-user_agent "AppleCoreMedia/1.0.0.15G77 (iPhone; U; CPU OS 11_4_1 like Mac OS X; zh_cn)"';
                 $execs[] = '-headers "referer: http://emb.aliez.me/"';
+            } elseif (str_contains($input_uri, '.live.sjmhw.com')) {
+                $execs[] = '-user_agent "AppleCoreMedia/1.0.0.15G77 (iPhone; U; CPU OS 11_4_1 like Mac OS X; zh_cn)"';
+                $execs[] = '-headers "referer: https://www.lehuzhibo.com/"';
             } elseif (starts_with($input_uri, 'https://m3u8.zhibo1.cc/')) {
                 $execs[] = '-user_agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"';
                 $execs[] = '-headers "origin: https://www.ballbar.cc"';
