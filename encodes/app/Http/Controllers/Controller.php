@@ -162,9 +162,9 @@ class Controller extends BaseController
                 $execs[] = '-headers "Referer: http://sports.qq.com/kbsweb/"';
                 $execs[] = '-headers "X-Requested-With:ShockwaveFlash/28.0.0.126"';
             } elseif (str_contains($input_uri, 'qietv.douyucdn.cn')) {
-                $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
-                $execs[] = '-headers "Referer: http://live.qq.com/10003848"';
-                $execs[] = '-headers "X-Requested-With: ShockwaveFlash/29.0.0.140"';
+//                $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
+//                $execs[] = '-headers "Referer: http://live.qq.com/10003848"';
+//                $execs[] = '-headers "X-Requested-With: ShockwaveFlash/29.0.0.140"';
             } elseif (starts_with($input_uri, 'http://gmcllc.de')) {
                 $execs[] = '-user_agent "BLUEIOS"';
                 $execs[] = '-headers "Range: bytes=0-"';

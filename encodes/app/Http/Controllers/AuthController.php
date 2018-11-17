@@ -16,6 +16,7 @@ class AuthController extends BaseController
     const ACCESS_INDEX_RECODE = 2;
     const ACCESS_INDEX_OBS = 3;
     const ACCESS_INDEX_SETTING = 4;
+    const ACCESS_INDEX_LEHU = 5;
 
     const ACCESS_NAME_INDEXS = [//基本权限
         "manager" => self::ACCESS_INDEX_PUSH, //Push 推流
@@ -23,6 +24,7 @@ class AuthController extends BaseController
         "records" => self::ACCESS_INDEX_RECODE, //Record 录像、集锦
         "obs" => self::ACCESS_INDEX_OBS, //Stream OBS推流码
         "setting" => self::ACCESS_INDEX_SETTING, //Setting 推流设置
+        "lehu" => self::ACCESS_INDEX_LEHU, //Setting 推流设置
     ];
 
     //某些页面单独设置黑名单
