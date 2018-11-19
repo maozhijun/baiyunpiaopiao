@@ -26,6 +26,18 @@ abstract class Channel
 
     public abstract function playM3U8();
 
+    public function playFLVHD(){
+        return $this->playFLV();
+    }
+
+    public function playRTMPHD(){
+        return $this->playRTMP();
+    }
+
+    public function playM3U8HD(){
+        return $this->playM3U8();
+    }
+
     public function pushWholeUrl() {
         $pushUrl = $this->pushURL();
         if ($pushUrl == null || strlen($pushUrl) <= 0) return $pushUrl;

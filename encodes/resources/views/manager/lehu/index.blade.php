@@ -1,17 +1,41 @@
 @extends('layouts.lehu')
 @section('content')
-    <form action="/manager/custom/created/" method="post">
+    <form action="/lehu/stream/push/" method="post">
         {{ csrf_field() }}
+
         <div class="form-inline form-group">
-            <label for="label-channel">推流地址</label>
-            <select name="channel" class="form-control" id="label-channel">
-                <option value="qq_nba">企鹅NBA</option>
-                <option value="qq_cba">企鹅CBA</option>
-                <option value="qq_football">企鹅足球</option>
-                <option value="qq_english">企鹅英文原声</option>
+            <label for="label-channel">推流房间</label>
+            <select name="room" class="form-control" id="label-channel">
+                @foreach($rooms as $room)
+                    @if($room->live_status == '0')
+                        <option value="{{ $room->id.'-'.$room->room_num.'-'. $room->nickname }}">{{ $room->nickname }}</option>
+                    @endif
+                @endforeach
+            </select>
+            <label for="label-channel">房间类型</label>
+            <select name="type" class="form-control" id="label-channel">
+                @foreach($types as $type)
+                    <optgroup label="{{ $type->name }}">{{ $type->name }}</optgroup>
+                    @foreach($type->children as $st)
+                        <option value="{{ $type->id.'-'.$st->id }}">{{ $st->name }}</option>
+                    @endforeach
+                @endforeach
+            </select>
+            <label for="label-logo-text">房间标题</label>
+            <input name="title" type="text" value="" class="form-control" id="label-logo-text"
+                   size="40">
+            <label for="label-channel">计费类型</label>
+            <select name="platform" class="form-control" id="label-channel">
+                <option value="3">平均计费</option>
+                <option value="2">流量计费</option>
+                <option value="1">95计费</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">新建转码</button>
+        <div class="form-inline form-group">
+            <label for="label-resource">源地址</label>
+            <input name="input" type="text" class="form-control" id="label-resource" size="100">
+            <button type="submit" class="btn btn-primary">一键转推</button>
+        </div>
     </form>
     <div class="table-responsive">
         <table class="table table-striped">
