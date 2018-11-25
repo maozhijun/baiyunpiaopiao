@@ -53,7 +53,7 @@ class KukuEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Kuku')->where('created_at', '>', date_create('-24 hour'))->whereIn('status', [1, 2, -1])->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Kuku')->where('created_at', '>', date_create('-48 hour'))->whereIn('status', [1, 2, -1])->get();
         return view('manager.push.kuku', ['ets' => $ets, 'channels' => $this->channels]);
     }
 
@@ -69,7 +69,7 @@ class KukuEncodesController extends BaseController
 
 //            $channel = $request->input('channel');
             $channel = $request->input('channel');
-            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Kuku')->where('created_at', '>', date_create('-24 hour'))->whereIn('status', [1, 2, -1])->inRandomOrder()->get();
+            $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'Kuku')->where('created_at', '>', date_create('-48 hour'))->whereIn('status', [1, 2, -1])->inRandomOrder()->get();
             if ($ets->contains('channel', $channel)) {
                 foreach ($this->channels as $ch) {
                     if (!$ets->contains('channel', $ch)) {

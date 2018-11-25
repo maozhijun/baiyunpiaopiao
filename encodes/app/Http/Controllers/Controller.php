@@ -49,7 +49,7 @@ class Controller extends BaseController
         View::share('banner_color', env('banner_color', ''));
 //        $count = EncodeTask::query()->where('from', env('APP_NAME'))->where('status', '>=', 1)->count();
         $count = EncodeTask::query()
-            ->where('created_at', '>', date_create('-24 hour'))
+            ->where('created_at', '>', date_create('-48 hour'))
             ->whereIn('status', [1, 2, -1])
             ->count();
         View::share('banner_count', $count);
@@ -180,7 +180,7 @@ class Controller extends BaseController
                 $execs[] = '-headers "origin: https://www.ballbar.cc"';
                 $execs[] = '-headers "referer: https://www.ballbar.cc/live/17240"';
             } elseif (str_contains($input_uri, 'livecdn.tk')) {
-                $execs[] = '-user_agent "'.XBetEncodesController::K_X_BET_USER_AGENT.'"';
+                $execs[] = '-user_agent "' . XBetEncodesController::K_X_BET_USER_AGENT . '"';
 //                $execs[] = '-headers "origin: https://www.ballbar.cc"';
 //                $execs[] = '-headers "referer: https://www.ballbar.cc/live/17240"';
             } else {
@@ -236,6 +236,95 @@ class Controller extends BaseController
         return $exec;
     }
 
+    protected function generateLehuFfmpegCmd($input_uri = '',
+                                             $rtmp_url = '',
+                                             $watermark = '',
+                                             $fontsize = 18,
+                                             $location = 'top',
+                                             $has_logo = '1',
+                                             $size = 'hd',
+                                             $logo_position = 'right',
+                                             $logo_text = '')
+    {
+        if (empty($input_uri) || empty($rtmp_url)) {
+            return '';
+        }
+        $size = $this->sizes[$size];
+        if (empty($size)) {
+            $size = $this->sizes['hd'];
+        }
+        $fontsize *= $size['factor'];
+        $lp = $this->logo_position[$logo_position];
+        $lp = [
+            'x' => $lp['x'] * $size['factor'],
+            'y' => $lp['y'] * $size['factor'],
+            'w' => $lp['w'] * $size['factor'],
+            'h' => $lp['h'] * $size['factor']
+        ];
+        $execs = ['nohup /usr/bin/ffmpeg'];
+        if (starts_with($input_uri, 'http')) {
+            if (str_contains($input_uri, '5club.cctv.cn')) {
+                $execs[] = '-user_agent "cctv_app_phone_cctv5"';
+                $execs[] = '-headers "Referer: api.cctv.cn"';
+                $execs[] = '-headers "UID: 269482797625189"';
+            } elseif (str_contains($input_uri, 'http://cctv5')) {
+                $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
+                $execs[] = '-headers "Referer: http://tv.cctv.com/live/cctv5/"';
+                $execs[] = '-headers "X-Requested-With:ShockwaveFlash/28.0.0.126"';
+            } elseif (str_contains($input_uri, 'zijian.hls.video.qq.com')) {
+                $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
+                $execs[] = '-headers "Referer: http://sports.qq.com/kbsweb/"';
+                $execs[] = '-headers "X-Requested-With:ShockwaveFlash/28.0.0.126"';
+            } elseif (str_contains($input_uri, 'aliez-stream.gcdn.co')) {
+                $execs[] = '-user_agent "AppleCoreMedia/1.0.0.15G77 (iPhone; U; CPU OS 11_4_1 like Mac OS X; zh_cn)"';
+                $execs[] = '-headers "referer: http://emb.aliez.me/"';
+            } elseif (str_contains($input_uri, 'live.sjmhw.com')) {
+                $execs[] = '-user_agent "AppleCoreMedia/1.0.0.15G77 (iPhone; U; CPU OS 11_4_1 like Mac OS X; zh_cn)"';
+                $execs[] = '-headers "referer: https://www.lehuzhibo.com/"';
+            } elseif (str_contains($input_uri, 'live.dlfyb.com')) {
+                $execs[] = '-user_agent "AppleCoreMedia/1.0.0.15G77 (iPhone; U; CPU OS 11_4_1 like Mac OS X; zh_cn)"';
+                $execs[] = '-headers "referer: https://www.lehuzhibo.com/"';
+            } elseif (starts_with($input_uri, 'https://m3u8.zhibo1.cc/')) {
+                $execs[] = '-user_agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"';
+                $execs[] = '-headers "origin: https://www.ballbar.cc"';
+                $execs[] = '-headers "referer: https://www.ballbar.cc/live/17240"';
+            } elseif (str_contains($input_uri, 'livecdn.tk')) {
+                $execs[] = '-user_agent "' . XBetEncodesController::K_X_BET_USER_AGENT . '"';
+//                $execs[] = '-headers "origin: https://www.ballbar.cc"';
+//                $execs[] = '-headers "referer: https://www.ballbar.cc/live/17240"';
+            } else {
+                $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
+            }
+        }
+        $execs[] = '-c:v h264_cuvid -i "' . $input_uri . '"';
+        $execs[] = '-vcodec h264_nvenc -acodec aac';
+
+        if (!empty($watermark) || !empty($has_logo)) {
+            $logo_code = '';//logo
+            if (!empty($has_logo)) {
+                $logo_code = 'drawbox=color=black:x=' . $lp['x'] . ':y=' . $lp['y'] . ':width=' . $lp['w'] . ':height=' . $lp['h'] . ':t=fill,';
+                if (!empty($logo_text)) {
+                    $logo_code .= 'drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $logo_text . '\':fontcolor=0xf7f14e:fontsize=' . $fontsize . ':x=(' . $lp['x'] . '+(' . $lp['w'] . '-tw)/2):y=(' . $lp['y'] . '+(' . $lp['h'] . '-' . $fontsize . ')/2),';
+                }
+            }
+            $watermark_code = '';//mark
+            if (!empty($has_logo)) {
+                $watermark_code = 'drawbox=y=0:color=black@' . $this->watermark_alpha . ':width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2);
+                if ($location = 'bottom') {
+                    $watermark_code = 'drawbox=y=(ih-' . ($fontsize * 2) . '):color=black@' . $this->watermark_alpha . ':width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=(h-' . ($fontsize + $fontsize / 2) . ')';
+                }
+            }
+            $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . $watermark_code . '"';
+            $execs[] = $vf;
+        }
+
+        $execs[] = '-r 24 -keyint_min 36 -g 36 -sc_threshold 0 -b:v:0 ' . (1200 * $size['factor']) . 'k -pixel_format yuv420p -s ' . $size['w'] . 'x' . $size['h'] . ' -f flv "' . $rtmp_url . '"';
+
+        $date = date('YmdHis');
+        $execs[] = ">> /tmp/ffmpeg-$date.log &";
+        $exec = join($execs, ' ');
+        return $exec;
+    }
 
     protected function stopPush($id)
     {

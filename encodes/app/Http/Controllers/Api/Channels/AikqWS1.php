@@ -34,12 +34,12 @@ class AikqWS1 extends Channel
         $this->hls_host = env('WS1_HLS_HOST', '');
         $this->hdl_host = env('WS1_HDL_HOST', '');
         $this->ws_key = env('WS1_PUSH_KEY', '');
-        $key = 'stream-' . $uid . '-' . time() . '-' . random_int(111111, 999999);
-//        if ($uid == 0) {
-//            $key = 'stream-' . $uid . '-' . time() . '-' . random_int(111111, 999999);
-//        } else {
-//            $key = 'stream-' . $uid;
-//        }
+//        $key = 'stream-' . $uid . '-' . time() . '-' . random_int(111111, 999999);
+        if ($uid == 0) {
+            $key = 'stream-' . $uid . '-' . time() . '-' . random_int(111111, 999999);
+        } else {
+            $key = 'stream-' . $uid;
+        }
         $timestamp = $this->expiration;
 
         $sstring = $this->ws_key . '/live/' . $key . "$timestamp";

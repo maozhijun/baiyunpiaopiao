@@ -32,6 +32,34 @@
             </select>
         </div>
         <div class="form-inline form-group">
+            <label class="checkbox-logo">
+                <input name="logo" type="checkbox" id="checkbox-logo" value="1" @if(1 == $default_has_logo) checked @endif> 是否显示Logo挡板
+            </label>
+
+            <label for="label-logo-text">Logo文案</label>
+            <input name="logo_text" type="text" value="{{ $logo_text }}" class="form-control" id="label-logo-text"
+                   size="20">
+
+            <label for="label-position">Logo位置</label>
+            <select name="logo_position" class="form-control" id="label-position">
+                @foreach($logo_position as $key=>$position)
+                    <option value="{{ $key }}" @if($key == $default_logo_position) selected @endif>{{ $position['name'] }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-inline form-group">
+            <label for="label-watermark">水印内容</label>
+            <input name="watermark" type="text" value="{{ $watermark }}"
+                   class="form-control" id="label-watermark" size="70">
+            <label for="label-watermark-location">水印位置</label>
+            <select id="label-watermark-location" name="location" class="form-control">
+                <option value="bottom" @if('bottom' == $default_location) selected @endif>下面</option>
+                <option value="top" @if('top' == $default_location) selected @endif>上面</option>
+            </select>
+            {{--<label for="label-fontsize">字体大小</label>--}}
+            {{--<input name="fontsize" type="text" value="{{ $fontsize }}" class="form-control" id="label-fontsize" size="4">--}}
+        </div>
+        <div class="form-inline form-group">
             <label for="label-resource">源地址</label>
             <input name="input" type="text" class="form-control" id="label-resource" size="100">
             <button type="submit" class="btn btn-primary">一键转推</button>
@@ -68,10 +96,10 @@
                     <td>
                         @if($et->status != 0)
                             <a class="btn btn-xs btn-danger"
-                               href="javascript:if(confirm('确认删除')) location.href='/manager/custom/stop/{{ $et->id }}'">停止</a>
+                               href="javascript:if(confirm('确认删除')) location.href='/lehu/stream/stop/{{ $et->id }}'">停止</a>
                             <br><br>
                             <a class="btn btn-xs btn-warning"
-                               href="javascript:if(confirm('确认重推')) location.href='/manager/custom/repeat/{{ $et->id }}'">重推</a>
+                               href="javascript:if(confirm('确认重推')) location.href='/lehu/stream/repeat/{{ $et->id }}'">重推</a>
                         @endif
                     </td>
                 </tr>

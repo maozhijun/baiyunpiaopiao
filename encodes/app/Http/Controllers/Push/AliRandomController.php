@@ -27,7 +27,7 @@ class AliRandomController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'AliRandom')->where('created_at', '>', date_create('-24 hour'))->whereIn('status', [1, 2, -1])->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'AliRandom')->where('created_at', '>', date_create('-48 hour'))->whereIn('status', [1, 2, -1])->get();
         return view('manager.push.alirandom', ['ets' => $ets]);
     }
 
@@ -47,7 +47,7 @@ class AliRandomController extends BaseController
                 $tempUrl = str_replace("https://", "", $tempUrl);
                 $tempUrl = str_replace("rtmp://", "", $tempUrl);
             }
-            if (strlen($tempUrl) <= 0) return;
+            if (strlen($tempUrl) <= 0) return response('404');
 
             list($host, $app, $other) = explode("/", $tempUrl);
 

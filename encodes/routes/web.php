@@ -213,6 +213,8 @@ Route::group(["namespace" => "Stream"], function () {
 Route::group(["middleware" => "auth", "namespace" => "Lehu"], function () {
     Route::get("/lehu/stream/", "LehuStreamController@index");
     Route::post("/lehu/stream/push/", "LehuStreamController@created");
+    Route::get("/lehu/stream/stop/{id}", "LehuStreamController@stop");
+    Route::get("/lehu/stream/repeat/{id}", "LehuStreamController@repeat");
 });
 
 Route::group(["middleware" => "auth"], function () {

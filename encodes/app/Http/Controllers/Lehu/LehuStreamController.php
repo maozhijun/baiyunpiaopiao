@@ -47,7 +47,7 @@ class LehuStreamController extends BaseController
         $ets = EncodeTask::query()
             ->where('from', env('APP_NAME'))
             ->where('to', 'Lehu')
-            ->where('created_at', '>', date_create('-24 hour'))
+            ->where('created_at', '>', date_create('-48 hour'))
             ->whereIn('status', [1, 2, -1])
             ->get();
         return view('manager.lehu.index', ['ets' => $ets, 'rooms' => $rooms, 'types' => $types]);
@@ -99,12 +99,8 @@ class LehuStreamController extends BaseController
             $has_logo = $request->input('logo', false);
             $logo_position = $request->input('logo_position', 'right');
             $logo_text = $request->input('logo_text', '');
-            $referer = $request->input('referer', '');
-            $header1 = $request->input('header1', '');
-            $header2 = $request->input('header2', '');
-            $header3 = $request->input('header3', '');
-            $size = $request->input('size', 'md');
-            $exec = $this->generateFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $size, $referer, $header1, $header2, $header3, $logo_position, $logo_text);
+            $size = $request->input('size', 'hd');
+            $exec = $this->generateLehuFfmpegCmd($input, $rtmp_url, $watermark, $fontsize, $location, $has_logo, $size, $logo_position, $logo_text);
             Log::info($exec);
             shell_exec($exec);
             $pid = exec('pgrep -f "' . explode('?', $rtmp_url)[0] . '"');

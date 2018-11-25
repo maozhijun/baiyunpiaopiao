@@ -71,7 +71,7 @@ $pushCountAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX
                         </li>
                     @endif
                     @if($pushAccess)
-                        <li {{ starts_with(request()->path(),'records')?'class=active':'' }}>
+                        <li {{ starts_with(request()->path(),'lehu')?'class=active':'' }}>
                             <a href="/lehu/stream/">乐虎自动转流</a>
                         </li>
                     @endif
