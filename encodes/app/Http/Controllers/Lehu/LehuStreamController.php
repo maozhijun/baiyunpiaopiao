@@ -137,6 +137,18 @@ class LehuStreamController extends BaseController
         }
         return back();
     }
+    
+    public function stop(Request $request, $id)
+    {
+        $this->stopPush($id);
+        return back();
+    }
+
+    public function repeat(Request $request, $id)
+    {
+        $this->repeatPush($id);
+        return back();
+    }
 
     public function test()
     {

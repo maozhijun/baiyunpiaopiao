@@ -45,9 +45,9 @@ $pptvAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX_RESO
         {{--<li role="presentation" {{ starts_with(request()->path(),'resources/baitv')?'class=active':'' }}>--}}
             {{--<a href="/resources/baitv/">BaiTV</a>--}}
         {{--</li>--}}
-        {{--<li role="presentation" {{ starts_with(request()->path(),'resources/cctv5')?'class=active':'' }}>--}}
-            {{--<a href="/resources/cctv5/">CCTV5</a>--}}
-        {{--</li>--}}
+        <li role="presentation" {{ starts_with(request()->path(),'resources/cctv5')?'class=active':'' }}>
+            <a href="/resources/cctv5/">CCTV5</a>
+        </li>
         {{--<li role="presentation" {{ starts_with(request()->path(),'resources/sportlive')?'class=active':'' }}>--}}
             {{--<a href="/resources/sportlive/">SportLive(德国)</a>--}}
         {{--</li>--}}
