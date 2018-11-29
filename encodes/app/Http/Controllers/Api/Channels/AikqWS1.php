@@ -34,12 +34,12 @@ class AikqWS1 extends Channel
         $this->hls_host = env('WS1_HLS_HOST', '');
         $this->hdl_host = env('WS1_HDL_HOST', '');
         $this->ws_key = env('WS1_PUSH_KEY', '');
-        $key = 'stream-' . $uid . '-' . time() . '-' . random_int(111111, 999999);
-//        if ($uid == 0) {
-//            $key = 'stream-' . $uid . '-' . time() . '-' . random_int(111111, 999999);
-//        } else {
-//            $key = 'stream-' . $uid;
-//        }
+//        $key = 'stream-' . $uid . '-' . time() . '-' . random_int(111111, 999999);
+        if ($uid == 0) {
+            $key = 'stream-' . $uid . '-' . time() . '-' . random_int(111111, 999999);
+        } else {
+            $key = 'stream-' . $uid;
+        }
         $timestamp = $this->expiration;
 
         $sstring = $this->ws_key . '/live/' . $key . "$timestamp";
@@ -49,19 +49,19 @@ class AikqWS1 extends Channel
 
         $sstring = $this->ws_key . '/live/' . $key . ".flv$timestamp";
         $auth_key = md5($sstring);
-        $this->playFlv = 'http://' . $this->hdl_host . '/live/' . $key . '.flv?wsSecret=' . $auth_key . '&wsABSTime=' . $timestamp;//flv播放地址
+        $this->playFlv = 'https://' . $this->hdl_host . '/live/' . $key . '.flv?wsSecret=' . $auth_key . '&wsABSTime=' . $timestamp;//flv播放地址
 
         $sstring = $this->ws_key . '/live/' . $key . "-sd.flv$timestamp";
         $auth_key = md5($sstring);
-        $this->playFlvSD = 'http://' . $this->hdl_host . '/live/' . $key . '-sd.flv?wsSecret=' . $auth_key . '&wsABSTime=' . $timestamp;//flv播放地址
+        $this->playFlvSD = 'https://' . $this->hdl_host . '/live/' . $key . '-sd.flv?wsSecret=' . $auth_key . '&wsABSTime=' . $timestamp;//flv播放地址
 
         $sstring = $this->ws_key . '/live/' . $key . "/playlist.m3u8$timestamp";
         $auth_key = md5($sstring);
-        $this->playM3U8 = 'http://' . $this->hls_host . '/live/' . $key . '/playlist.m3u8?wsSecret=' . $auth_key . '&wsABSTime=' . $timestamp;//播放m3u8地址
+        $this->playM3U8 = 'https://' . $this->hls_host . '/live/' . $key . '/playlist.m3u8?wsSecret=' . $auth_key . '&wsABSTime=' . $timestamp;//播放m3u8地址
 
         $sstring = $this->ws_key . '/live/' . $key . "-sd/playlist.m3u8$timestamp";
         $auth_key = md5($sstring);
-        $this->playM3U8SD = 'http://' . $this->hls_host . '/live/' . $key . '-sd/playlist.m3u8?wsSecret=' . $auth_key . '&wsABSTime=' . $timestamp;//播放m3u8地址
+        $this->playM3U8SD = 'https://' . $this->hls_host . '/live/' . $key . '-sd/playlist.m3u8?wsSecret=' . $auth_key . '&wsABSTime=' . $timestamp;//播放m3u8地址
     }
 
     public function pushURL()
@@ -76,19 +76,30 @@ class AikqWS1 extends Channel
 
     public function playFLV()
     {
-//        return $this->playFlv;
         return $this->playFlvSD;
+    }
+
+    public function playFLVHD()
+    {
+        return $this->playFlv;
     }
 
     public function playRTMP()
     {
-//        return $this->playRTMP;
         return $this->playRTMPSD;
+    }
+
+    public function playRTMPHD()
+    {
+        return $this->playRTMP;
     }
 
     public function playM3U8()
     {
-//        return $this->playM3U8;
         return $this->playM3U8SD;
+    }
+
+    public function playM3U8HD(){
+        return $this->playM3U8;
     }
 }

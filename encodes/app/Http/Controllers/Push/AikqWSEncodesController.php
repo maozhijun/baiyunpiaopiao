@@ -28,7 +28,7 @@ class AikqWSEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'AikqWS')->where('created_at', '>', date_create('-24 hour'))->whereIn('status', [1, 2, -1])->get();
+        $ets = EncodeTask::query()->where('from', env('APP_NAME'))->where('to', 'AikqWS')->where('created_at', '>', date_create('-48 hour'))->whereIn('status', [1, 2, -1])->get();
         return view('manager.push.aikqws', ['ets' => $ets]);
     }
 
@@ -42,7 +42,7 @@ class AikqWSEncodesController extends BaseController
             $name = str_replace(' ', '-', $request->input('name'));
             $input = $request->input('input');
 
-            $aikqWs = new AikqWS(99999);
+            $aikqWs = new AikqWS();
 
             $rtmp_url = $aikqWs->pushURL() . '/' . $aikqWs->pushKey();//获取rtmp地址
             $live_flv_url = $aikqWs->playFLV();//flv地址

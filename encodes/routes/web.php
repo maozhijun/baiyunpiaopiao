@@ -209,6 +209,14 @@ Route::group(["namespace" => "Stream"], function () {
     Route::get("/obs/stream/{name}", "OBSPushStreamController@index");
 });
 
+//一键推流到乐虎直播
+Route::group(["middleware" => "auth", "namespace" => "Lehu"], function () {
+    Route::get("/lehu/stream/", "LehuStreamController@index");
+    Route::post("/lehu/stream/push/", "LehuStreamController@created");
+    Route::get("/lehu/stream/stop/{id}", "LehuStreamController@stop");
+    Route::get("/lehu/stream/repeat/{id}", "LehuStreamController@repeat");
+});
+
 Route::group(["middleware" => "auth"], function () {
     Route::get("/manager/stream-ws", 'TestController@getStream');
 });

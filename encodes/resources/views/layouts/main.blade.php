@@ -11,7 +11,7 @@ $settingAccess = AuthController::isAccess($role, AuthController::ACCESS_INDEX_SE
 $black = request()->black;
 $pushCountAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX_PUSH_COUNT);
 ?>
-<!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8">
@@ -31,9 +31,9 @@ $pushCountAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX
     <div class="navbar-header" style="background-color: {{ $banner_color or '' }};width: 100%;">
         <a class="navbar-brand" href="/manager/" style="color: #fff;">
             @if($pushCountAccess)
-            推流后台-{{ $banner_text or '' }}-当前推流数：<label class="label label-danger">{{ $banner_count or 0 }}条</label>
+                推流后台-{{ $banner_text or '' }}-当前推流数：<label class="label label-danger">{{ $banner_count or 0 }}条</label>
             @else
-            推流后台-{{ $banner_text or '' }}
+                推流后台-{{ $banner_text or '' }}
             @endif
         </a>
     </div>
@@ -45,47 +45,57 @@ $pushCountAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX
             <ul class="nav nav-sidebar">
                 @if(env('APP_NAME')=='aikq' || env('APP_NAME')=='aikq1')
                     @if($pushAccess)
-                    <li {{ starts_with(request()->path(),'manager')?'class=active':'' }}>
-                        {{--<a href="/manager/longzhu/">推流</a>--}}
-                        <a href="/manager/aikqws1/">推流</a>
-                    </li>
+                        <li {{ starts_with(request()->path(),'manager')?'class=active':'' }}>
+                            {{--<a href="/manager/longzhu/">推流</a>--}}
+                            <a href="/manager/aikqws1/">推流</a>
+                        </li>
                     @endif
                     @if($obsAccess)
-                    <li {{ starts_with(request()->path(),'obs')?'class=active':'' }}>
-                        <a href="/obs/stream/">OBS推流码</a>
-                    </li>
+                        <li {{ starts_with(request()->path(),'obs')?'class=active':'' }}>
+                            <a href="/obs/stream/">OBS推流码</a>
+                        </li>
                     @endif
                     @if($pullAccess)
-                    <li {{ starts_with(request()->path(),'resources')?'class=active':'' }}>
-                        <a href="/resources/kball/">直播源</a>
-                    </li>
+                        <li {{ starts_with(request()->path(),'resources')?'class=active':'' }}>
+                            <a href="/resources/kball/">直播源</a>
+                        </li>
                     @endif
                     @if($recordAccess)
-                    <li {{ starts_with(request()->path(),'records')?'class=active':'' }}>
-                        <a href="/records/qq/">录像、集锦</a>
-                    </li>
+                        <li {{ starts_with(request()->path(),'records')?'class=active':'' }}>
+                            <a href="/records/qq/">录像、集锦</a>
+                        </li>
+                    @endif
+                    @if($settingAccess)
+                        <li {{ starts_with(request()->path(),'setting')?'class=active':'' }}>
+                            <a href="/setting/video/">推流设置</a>
+                        </li>
+                    @endif
+                    @if($pushAccess)
+                        <li {{ starts_with(request()->path(),'lehu')?'class=active':'' }}>
+                            <a href="/lehu/stream/">乐虎自动转流</a>
+                        </li>
                     @endif
                 @elseif(env('APP_NAME')=='leqiuba')
                     @if($pushAccess)
-                    <li {{ starts_with(request()->path(),'manager')?'class=active':'' }}>
-                        <a href="/manager/longzhu/">推流</a>
-                    </li>
+                        <li {{ starts_with(request()->path(),'manager')?'class=active':'' }}>
+                            <a href="/manager/longzhu/">推流</a>
+                        </li>
                     @endif
                     @if($obsAccess)
-                    <li {{ starts_with(request()->path(),'obs')?'class=active':'' }}>
-                        <a href="/obs/stream/">OBS推流码</a>
-                    </li>
+                        <li {{ starts_with(request()->path(),'obs')?'class=active':'' }}>
+                            <a href="/obs/stream/">OBS推流码</a>
+                        </li>
                     @endif
                     @if($pullAccess)
-                    <li {{ starts_with(request()->path(),'resources')?'class=active':'' }}>
-                        <a href="/resources/qq/">直播源</a>
-                    </li>
+                        <li {{ starts_with(request()->path(),'resources')?'class=active':'' }}>
+                            <a href="/resources/qq/">直播源</a>
+                        </li>
                     @endif
-                @endif
-                @if($settingAccess)
-                <li {{ starts_with(request()->path(),'setting')?'class=active':'' }}>
-                    <a href="/setting/video/">推流设置</a>
-                </li>
+                    @if($settingAccess)
+                        <li {{ starts_with(request()->path(),'setting')?'class=active':'' }}>
+                            <a href="/setting/video/">推流设置</a>
+                        </li>
+                    @endif
                 @endif
             </ul>
         </div>
