@@ -80,11 +80,11 @@ class BallbarEncodesController extends BaseController
         return $lives;
     }
 
-
     private function getBallbarLive($id)
     {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://v.ballbar.cc/data/LivePlayerNew.php');
+//        curl_setopt($ch, CURLOPT_URL, 'https://v.ballbar.cc/data/LivePlayerNew.php');
+        curl_setopt($ch, CURLOPT_URL, 'https://watch.b8b8.tv/data/live.php');
         curl_setopt($ch, CURLOPT_COOKIE, '_ga=GA1.2.681749934.1513324254; UM_distinctid=1617fcbc42ffa-0086fc9eb17e1-32607400-fa000-1617fcbc43172a; Hm_lvt_73fed32a3c365c85a9a5313be34a1790=1522144311; _gid=GA1.2.2061057574.1524450396; Hm_lvt_d4e5f9ab49e8cb4e425268179b76a2fc=1524450492; _gat_gtag_UA_76409055_1=1; _gat_gtag_UA_101929895_1=1; Hm_lpvt_d4e5f9ab49e8cb4e425268179b76a2fc=1524468129; Hm_lpvt_73fed32a3c365c85a9a5313be34a1790=1524468146');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POST, true);
@@ -98,7 +98,7 @@ class BallbarEncodesController extends BaseController
         curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
         curl_setopt($ch, CURLOPT_COOKIESESSION, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Referer:https://v.ballbar.cc',
+            'Referer:https://watch.b8b8.tv',
             'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
             'accept-language:zh-CN,zh;q=0.9,en;q=0.8,ja;q=0.7',
             'content-type:application/x-www-form-urlencoded; charset=UTF-8',
@@ -114,7 +114,9 @@ class BallbarEncodesController extends BaseController
 //        dump($response);
         $json = json_decode($response, true);
         if (!empty($json['playurl'])) {
-            return urldecode($json['playurl']);
+            $playUrl = urldecode($json['playurl']);
+//            return urldecode($json['playurl']);
+            return view("manager.pull.ballbar_details", ['playUrl'=>$playUrl]);
         }
         return '';
     }
