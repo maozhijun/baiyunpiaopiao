@@ -40,7 +40,7 @@ class LongzhuEncodesController extends BaseController
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, "https://livestream.longzhu.com/live/GetLivePlayUrl?appId=5001&bundleId=com.longzhu.tga&device=2&p1uuid=135796461&packageId=1&roomId=$id&version=4.6.5");
         curl_setopt($ch, CURLOPT_COOKIE, 'p1u_id=5fc97c48e734ff8eb36a14e55af63cfe367deb720797d377f13e9873422df0e1e1b98cee2eb7520e353496dcc940db7f3d78ec51246414bb; pluguest=9E21C4BB628F901529EC8EFDBF9D5FD615E69E45DBC440106608C6866EE926C95DB7E094C9C5B2AB3EA5DAD675F58AB853C2645C694D6D69; _ma=OREN.2.1361566749.1520689312; UM_distinctid=16210256f2d3ec-0c1806c5bf42758-48635939-3d10d-16210256f2e3f6');
-//        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['X-CorrelationId: 97A40AEA1F594F5C998C0EEE453A03DA', 'x-b3-traceid: dafdb25b762b6b4a1ed3aef9ce1741c7', 'x-b3-spanid: 0522BAF66', 'x-b3-sampled: true']);
@@ -49,6 +49,7 @@ class LongzhuEncodesController extends BaseController
         curl_setopt($ch, CURLOPT_COOKIESESSION, true);
 //        curl_setopt($ch, CURLOPT_HEADER, true);
         $response = curl_exec($ch);
+//        dump($response);
         if ($error = curl_error($ch)) {
             die($error);
         }

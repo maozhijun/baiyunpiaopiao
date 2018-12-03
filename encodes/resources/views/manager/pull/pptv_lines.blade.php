@@ -25,10 +25,10 @@
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="table-responsive">
                     <table class="table table-condensed">
-                        @foreach($lines as $anchor=>$innerLines)
+                        @foreach($lines as $anchor=>$data)
                             <thead>
                             <tr class="active">
-                                <td>频道：{{$anchor}}</td>
+                                <td colspan="2">频道：<label class="label {{$data['isVip'] ? 'label-danger' : 'label-primary'}}">{{$anchor}}</label></td>
                             </tr>
                             </thead>
                             <tbody></tbody>
@@ -39,7 +39,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($innerLines as $name=>$items)
+                            @foreach($data['streams'] as $name=>$items)
                                 <?php $count = count($items); ?>
                                 <tr>
                                     <td rowspan="{{$count}}">{{$name}}</td>

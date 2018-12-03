@@ -45,6 +45,7 @@ class PPTVEncodesController extends BaseController
         $this->dumpData("getLiveUrl");
         $index = 0;
         $sessionCids = session(self::K_PPTV_CIDS_SESSION_KEY);
+        $this->dumpData("sessionCids");
         $this->dumpData($sessionCids);
         if (isset($sessionCids) && isset($sessionCids['sid']) && $sessionCids['sid'] == $sessionId) {
             $cids = $sessionCids['data'];
@@ -56,11 +57,14 @@ class PPTVEncodesController extends BaseController
         $name = $cids[$index]['name'];
         $cid = $cids[$index]['cid'];
         $matchId = isset($cids[$index]['matchId']) ? $cids[$index]['matchId'] : "";
+        $isVip = isset($cids[$index]['isVip']) && $cids[$index]['isVip'];
 
 //        $this->getSportWebPlayData($sessionId, "", $cid);
 //        return null;
 
         $sessionStreamInfo = session(self::K_PPTV_STREAM_SESSION_KEY);
+
+        $this->dumpData("sessionStreamInfo");
         $this->dumpData($sessionStreamInfo);
 
         $streamInfo = array();
@@ -68,7 +72,6 @@ class PPTVEncodesController extends BaseController
             && $sessionStreamInfo['cid'] == $cid)
         {
             $streamInfo = $sessionStreamInfo['data'];
-            $this->dumpData(000);
         } else {
             $playInfo = $this->getWebPlayInfo($sessionId, $matchId, $cid);
             if (isset($playInfo['childNodes'])) {
@@ -79,21 +82,21 @@ class PPTVEncodesController extends BaseController
                 }
                 session([self::K_PPTV_STREAM_SESSION_KEY => ['cid'=>$cid, 'data'=>$streamInfo]]);
             }
-            $this->dumpData(111);
         }
+        $this->dumpData("streamInfo");
         $this->dumpData($streamInfo);
 
         if (count($streamInfo) > 0) {
             if ($request->has('cKey')) {
-                $this->dumpData(222);
-
                 $currentLines = $this->convertStreamInfo($streamInfo, $request->input('cKey'));
                 $sessionLines = session(self::K_PPTV_LINES_SESSION_KEY);
+                $this->dumpData("sessionLines");
                 $this->dumpData($sessionLines);
                 if (isset($sessionLines) && $sessionLines['sid'] == $sessionId) {
                     $lines = $sessionLines['data'];
                 }
-                $lines[$name] = $currentLines;
+                $lines[$name]['isVip'] = $isVip;
+                $lines[$name]['streams'] = $currentLines;
 
                 if ($index == count($cids) - 1 && count($lines) >= 0) {
                     return view('manager.pull.pptv_lines', ['lines' => $lines]);
@@ -107,7 +110,6 @@ class PPTVEncodesController extends BaseController
                     return redirect('/resources/pptv/get_live_url/'.$sessionId);
                 }
             } else {
-                $this->dumpData(333);
                 $key = $this->getItemStrValue($streamInfo[0], [3, 0]);
                 if (strlen($key) > 0) {
                     return view('manager.pull.pptv_lines', ['key' => $key]);
@@ -143,6 +145,7 @@ class PPTVEncodesController extends BaseController
             $matchList = array();
             foreach ($dataList as $date=>$itemMatches) {
                 if ($date == date('Ymd')) {
+                    $this->dumpData("itemMatches");
                     $this->dumpData($itemMatches);
                 }
                 $matchList = array_merge($matchList, $itemMatches);
@@ -165,11 +168,22 @@ class PPTVEncodesController extends BaseController
                     $sectionInfo['matchVs'] = $matchVs;
 
                     //判断是否是会员才可观看
-                    if (isset($itemMatch['flags'])) {
-                        $isVip = isset($itemMatch['flags']['goldGuessFlag']) && $itemMatch['flags']['goldGuessFlag'] == 1
-                            && isset($itemMatch['flags']['baseFlag']) && $itemMatch['flags']['baseFlag'] == 1;
-                        $sectionInfo['isVip'] = $isVip;
+//                    if (isset($itemMatch['flags'])) {
+//                        $isVip = isset($itemMatch['flags']['goldGuessFlag']) && $itemMatch['flags']['goldGuessFlag'] == 1
+//                            && isset($itemMatch['flags']['baseFlag']) && $itemMatch['flags']['baseFlag'] == 1;
+//                        $sectionInfo['isVip'] = $isVip;
+//                    }
+                    $isVip = false;
+                    if ($sectionInfo['list'] && count($sectionInfo['list']) > 0) {
+                        $isVip = true;
+                        foreach ($sectionInfo['list'] as $item) {
+                            if (isset($item['pay']) && $item['pay'] == 0) {
+                                $isVip = false;
+                                break;
+                            }
+                        }
                     }
+                    $sectionInfo['isVip'] = $isVip;
 
                     if (isset($itemMatch['matchInfo']) && isset($itemMatch['matchInfo']['status'])) {
                         $matchInfo = $itemMatch['matchInfo'];
@@ -247,6 +261,7 @@ class PPTVEncodesController extends BaseController
         curl_close ($ch);
 
         $result = json_decode($response, true);
+        $this->dumpData("convertSectionId2Cid result");
         $this->dumpData($result);
 
         if (is_array($result) && array_key_exists('retCode', $result) && $result['retCode'] == 0) {
@@ -259,10 +274,11 @@ class PPTVEncodesController extends BaseController
                     if(isset($liveData['commentator']) && strlen($liveData['commentator']) > 0) {
                         $name = $liveData['commentator'];
                     }
-                    $cids[] = ['name'=>$name, 'cid'=>$liveData['cid'], 'matchId'=>$matchId];
+                    $cids[] = ['isVip'=>$liveData['pay']==1, 'name'=>$name, 'cid'=>$liveData['cid'], 'matchId'=>$matchId];
                 }
             }
         }
+        $this->dumpData("convertSectionId2Cid cids");
         $this->dumpData($cids);
 
         return $cids;
@@ -340,12 +356,19 @@ class PPTVEncodesController extends BaseController
         $aliHost = $this->getItemStrValue($stream, [0, 0]);
         $wsHost = $this->getItemStrValue($stream, [4, 0]);
 
-        if (strlen($aliHost) > 0) {
-            $urls[] = $this->convertM3u8Url($aliHost, $rid, $cKey);
-        }
-        if (strlen($wsHost) > 0) {
-            $urls[] = $this->convertM3u8Url($wsHost, $rid, $cKey);
-        }
+//        if ($isVip) {
+//            if (strlen($aliHost) > 0) {
+//                $aliHost = "shenhu.live.pptv.com";
+//                $urls[] = $this->convertM3u8Url($aliHost, $rid, $cKey);
+//            }
+//        } else {
+            if (strlen($aliHost) > 0) {
+                $urls[] = $this->convertM3u8Url($aliHost, $rid, $cKey);
+            }
+            if (strlen($wsHost) > 0) {
+                $urls[] = $this->convertM3u8Url($wsHost, $rid, $cKey);
+            }
+//        }
         return $urls;
     }
 
