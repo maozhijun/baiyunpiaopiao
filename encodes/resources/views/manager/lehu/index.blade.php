@@ -26,9 +26,8 @@
                    size="40">
             <label for="label-channel">计费类型</label>
             <select name="platform" class="form-control" id="label-channel">
-                <option value="3">平均计费</option>
-                <option value="2">流量计费</option>
-                <option value="1">95计费</option>
+                {{--<option value="3">网宿计费</option>--}}
+                <option value="4">阿里计费</option>
             </select>
         </div>
         <div class="form-inline form-group">

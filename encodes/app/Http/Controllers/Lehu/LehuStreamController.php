@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Lehu;
 
+use App\Http\Controllers\Api\Channels\AikqAli;
 use App\Http\Controllers\Api\Channels\AikqWS;
 use App\Http\Controllers\Api\Channels\AikqWS1;
 use App\Http\Controllers\Api\Channels\AikqWS2;
@@ -82,6 +83,10 @@ class LehuStreamController extends BaseController
                 }
                 case 3: {
                     $aikqWs = new AikqWS2($room_num);
+                    break;
+                }
+                case 4: {
+                    $aikqWs = new AikqAli($room_num);
                     break;
                 }
                 default: {

@@ -26,7 +26,12 @@ class AikqAli extends Channel
         $this->expiration = time() + 21600;
         $this->ali_host = env('ALI_CDN_HOST', '');
         $this->ali_key = env('ALI_CDN_KEY', '');
-        $key = 'stream-' . $uid . '-' . time() . '-' . random_int(111111, 999999);
+//        $key = 'stream-' . $uid . '-' . time() . '-' . random_int(111111, 999999);
+        if ($uid == 0) {
+            $key = 'stream-' . $uid . '-' . time() . '-' . random_int(111111, 999999);
+        } else {
+            $key = 'stream-' . $uid;
+        }
         $timestamp = $this->expiration;
 
         $sstring = '/live/' . $key . "-$timestamp-0-0-" . $this->ali_key;
