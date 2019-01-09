@@ -31,22 +31,22 @@ if ($isAdmin && !isset($groups)) {
 
 <div class="container-fluid">
     <div class="row">
-        @if(isset($groups))
-            <div class="col-sm-3 col-md-2 sidebar">
-                <ul class="nav nav-sidebar">
-                    <li {{ starts_with(request()->path(), "$roleStr/groups")?'class=active':'' }}>
+        <div class="col-sm-12 main">
+            @if(isset($groups))
+                <ul class="nav nav-pills">
+                    <li role="presentation" {{ starts_with(request()->path(), "$roleStr/groups")?'class=active':'' }}>
                         <a href="/{{$roleStr}}/groups">管理小组</a>
                     </li>
                     @foreach($groups as $group)
                         <?php $gid = $group->id; ?>
-                        <li {{ request()->has('gid') && request()->gid == $gid ? 'class=active':'' }}>
+                        <li role="presentation" {{ request()->has('gid') && request()->gid == $gid ? 'class=active':'' }}>
                             <a href="/{{$roleStr}}/members?gid={{$gid}}">{{$group->name}}</a>
                         </li>
                     @endforeach
                 </ul>
-            </div>
-        @endif
-        <div class="col-sm-9 @if(isset($groups)) col-sm-offset-3 col-md-10 col-md-offset-2 @endif main">
+            @endif
+            <br>
+
             @yield('navTabs')
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
