@@ -16,7 +16,7 @@ class AuthController extends Controller
     const K_LOGIN_AUTH_TOKEN = '__auth_manager__';
     const K_LOGIN_SESSION_KEY = '_auth_manager_';
 
-    public function index(Request $request)
+    public function login(Request $request)
     {
         if ($request->isMethod('post')) {
             if (!$request->has('account')) {
@@ -41,11 +41,6 @@ class AuthController extends Controller
             View::share('err_msg', '用户名或密码错误');
         }
         return view('manager.auth');
-    }
-
-    public function host(Request $request)
-    {
-        return view('welcome');
     }
 
     public function register(Request $request) {
@@ -82,5 +77,12 @@ class AuthController extends Controller
             }
         }
         return view('manager.register');
+    }
+
+
+    public function logout(Request $request)
+    {
+        setcookie(self::K_LOGIN_AUTH_TOKEN, '', time() - 3600, '/', env('APP_HOST'));
+        return back();
     }
 }

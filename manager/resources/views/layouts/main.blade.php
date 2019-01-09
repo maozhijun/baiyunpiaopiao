@@ -22,10 +22,9 @@ if ($isAdmin && !isset($groups)) {
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="margin-bottom: 0">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-    </button>
     <div class="navbar-header" style="background-color: {{ $banner_color or '' }};width: 100%;">
         <a class="navbar-brand" href="/" style="color: #fff;">管理后台</a>
+        <a class="navbar-brand navbar-right" href="/logout" style="color: #e83433; margin-right: 10px;">退出</a>
     </div>
 </nav>
 

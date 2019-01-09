@@ -11,7 +11,8 @@
 |
 */
 
-Route::match(["get", "post"], "/login", 'AuthController@index');//登录
+Route::match(["get", "post"], "/login", 'AuthController@login');//登录
+Route::get("/logout", 'AuthController@logout');//登录
 Route::match(["get", "post"], "/register", 'AuthController@register');//注册
 
 Route::get("/", 'AuthController@host')->middleware('auth'); //首页

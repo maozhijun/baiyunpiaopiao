@@ -44,10 +44,10 @@
                             </select>
                         </td>
                         <td>
-                            <select name="role" class="form-control" id="label-role">
+                            <select name="role" class="form-control" id="label-role" @if($member->role <= $role) disabled @endif>
                                 @foreach(\App\Models\Account::MANAGER_ROLES as $index=>$roleItem)
                                     @if($index > $role)
-                                        <option value="{{$index}}" @if($index == \App\Models\Account::K_ROLE_MEMBER)selected @endif>{{$roleItem['ch']}}</option>
+                                        <option value="{{$index}}" @if($index == $member->role)selected @endif>{{$roleItem['ch']}}</option>
                                     @endif
                                 @endforeach
                             </select>
@@ -82,11 +82,9 @@
     <script src="/js/sha1.js"></script>
     <script>
         function verifyForm(form) {
-            if (form.account.value === '' || form.password.value === '') {
-                toastr.error('用户名或者密码不能为空');
-                return false;
+            if (form.password.value != '') {
+                form.password.value = sha1(form.password.value);
             }
-            form.password.value = sha1(form.password.value);
             return true;
         }
     </script>
