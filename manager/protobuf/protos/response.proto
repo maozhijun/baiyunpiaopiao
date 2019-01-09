@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package protos;
+
+message ResultResponse {
+    int32 code_ = 1;
+    string msg_ = 2;
+    AnchorCreate_Response data_ = 3;
+}
+
+message AnchorCreate_Request {
+    int32 liveType_ = 1;
+    int32 continueFlag_ = 2;
+    bool dressingFlag_ = 3;
+}
+
+message AnchorCreate_Response {
+    string typeUrl_ = 1;
+    AnchorCreate_Data value_ = 2;
+}
+
+message AnchorCreate_Data {
+    int32 roomId_ = 1;
+    string ip_ = 2;
+    int32 port_ = 3;
+    string m1_ = 4;
+    string liveMsg_ = 5;
+    int32 moneyTotal_ = 6;
+    int32 peoples_ = 7;
+    int32 multiLive_ = 8;
+    int32 multiLiving_ = 9;
+    int32 multiLimit_ = 10;
+    int32 freeVipLevel_ = 11;
+    string multiLiveMsg_ = 12;
+    bool allowPrivateLiveFlag_ = 13;
+    bool allowPayFlag_ = 14;
+    bool allowAudienceLimitFlag_ = 15;
+    string audienceLimitList_ = 16;
+    string feeList_ = 17;
+    string privateLiveMsg_ = 18;
+    bool allowVoiceFlag_ = 19;
+    int32 awakenLiveType_ = 20;
+    int32 keepTime_ = 21;
+}
