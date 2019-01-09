@@ -121,14 +121,16 @@ class ExcelExportController extends Controller
         }
         $cellData = $query->orderBy('groups.created_at')->orderBy('accounts.created_at')->get()->toArray();
 
-        $sheetDatas = array_chunk($cellData, 1000);
-        Excel::create($name,function($excel) use ($sheetDatas, $headArray){
-            foreach ($sheetDatas as $index=>$sheetData) {
-                $tempData = array_merge($headArray, $sheetData);
-                $excel->sheet('sheet'.$index, function ($sheet) use ($tempData) {
-                    $sheet->rows($tempData);
-                });
-            }
-        })->export('xls');
+        if (count($cellData) > 0) {
+            $sheetDatas = array_chunk($cellData, 1000);
+            Excel::create($name, function ($excel) use ($sheetDatas, $headArray) {
+                foreach ($sheetDatas as $index => $sheetData) {
+                    $tempData = array_merge($headArray, $sheetData);
+                    $excel->sheet('sheet' . $index, function ($sheet) use ($tempData) {
+                        $sheet->rows($tempData);
+                    });
+                }
+            })->export('xls');
+        }
     }
 }
