@@ -14,6 +14,9 @@ if (request()->has('gid')) {
         <li role="presentation" {{ starts_with(request()->path(),"$roleStr/members")?'class=active':'' }}>
             <a href="/{{$roleStr}}/members{{$endStr}}">成员列表</a>
         </li>
+        <li role="presentation">
+            <a href="/{{$roleStr}}/excel/export/group{{$endStr}}">导出excel</a>
+        </li>
     </ul>
     <br>
 @endsection

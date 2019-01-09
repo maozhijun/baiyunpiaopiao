@@ -56,8 +56,6 @@ class AuthController extends Controller
                 View::share('err_msg', '用户名不能为空');
             } elseif (!$request->has('password')) {
                 View::share('err_msg', '密码不能为空');
-            } elseif (!$request->has('gid')) {
-                View::share('err_msg', '小组不能为空');
             } else {
                 $accountName = $request->input('account');
                 $nickName = $request->input('name');

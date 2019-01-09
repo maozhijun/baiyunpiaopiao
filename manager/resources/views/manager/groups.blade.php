@@ -4,6 +4,17 @@ if (!isset($roleStr)) {
 }
 ?>
 @extends('layouts.main')
+@section('navTabs')
+    <ul class="nav nav-tabs">
+        <li role="presentation" {{ starts_with(request()->path(),"$roleStr/groups")?'class=active':'' }}>
+            <a href="/{{$roleStr}}/groups">小组列表</a>
+        </li>
+        <li role="presentation">
+            <a href="/{{$roleStr}}/excel/export/all">导出excel</a>
+        </li>
+    </ul>
+    <br>
+@endsection
 @section('content')
     <form action="/{{$roleStr}}/group/create" method="post">
         {{ csrf_field() }}

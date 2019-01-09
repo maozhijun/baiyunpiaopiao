@@ -17,6 +17,9 @@ if (request()->has('mid')) {
         <li role="presentation" {{ starts_with(request()->path(),"$roleStr/customers")?'class=active':'' }}>
             <a href="/{{$roleStr}}/customers{{$endStr}}">客户列表</a>
         </li>
+        <li role="presentation">
+            <a href="/{{$roleStr}}/excel/export/member{{$endStr}}">导出excel</a>
+        </li>
     </ul>
     <br>
 @endsection

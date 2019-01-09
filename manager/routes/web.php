@@ -37,4 +37,11 @@ Route::group(["middleware" => "auth"], function () {
     Route::post("/{roleStr}/customer/delete", 'ManagerController@customerDelete'); //删除客户
 
     Route::get("/{roleStr}", 'ManagerController@index')->middleware('auth'); //管理员自己的首页
+
+    //Excel导出全部客户
+    Route::get('/{roleStr}/excel/export/all','ExcelExportController@exportAll');
+    //Excel导出小组客户
+    Route::get('/{roleStr}/excel/export/group','ExcelExportController@exportGroup');
+    //Excel导出成员客户
+    Route::get('/{roleStr}/excel/export/member','ExcelExportController@exportMember');
 });

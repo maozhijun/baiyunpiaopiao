@@ -84,7 +84,7 @@ $groups = \App\Models\Group::allGroups();
 <script>
 
     function verifyForm(form) {
-        if (form.name.value === '' || form.gid.value === '' || form.account.value === '' || form.password.value === '') {
+        if (form.name.value === '' || form.account.value === '' || form.password.value === '') {
             $('#alertMsg').html('用户名 | 账号 | 密码不能为空');
             $("#myAlert").show();
             return false;
