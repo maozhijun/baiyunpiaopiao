@@ -25,9 +25,9 @@ class ManagerController extends Controller
         if ($role <= Account::K_ROLE_MANAGER) {
             return redirect("/$roleStr/groups");
         } else if ($role <= Account::K_ROLE_HEADMAN) {
-            return redirect("/$roleStr/member");
+            return redirect("/$roleStr/members");
         } else {
-            return redirect("/$roleStr/customer");
+            return redirect("/$roleStr/customers");
         }
     }
 
