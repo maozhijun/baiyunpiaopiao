@@ -315,12 +315,17 @@ class ManagerController extends Controller
     }
 
     public function customerEdit(Request $request, $roleStr) {
-        if (!$request->has('account')) {
+        if (!$request->has('account') || !$request->has('id')) {
             return back()->with('error', '参数错误');
         }
         $account = trim($request->input('account', "")); //注册账号
-        $customer = Customer::query()->where(['account'=>$account, 'status'=>1])->first();
+        $id = $request->input('id'); //注册账号
+        $customer = Customer::query()->where(['id'=>$id, 'status'=>1])->first();
         if (isset($customer)) {
+            $accountCust = Customer::query()->where(['account'=>$account, 'status'=>1])->first();
+            if (isset($accountCust) && $accountCust->id != $id) {
+                return back()->with('error', "该客户账号已存在");
+            }
             $registerTime = $request->input('register', ''); //注册时间
             $firstBlood = $request->input('first', $customer->first_money); //首存金
             $wechat = $request->input('wechat', $customer->wechat); //微信账号
@@ -329,6 +334,10 @@ class ManagerController extends Controller
             $changed = false;
             if (strlen($registerTime) > 0) {
                 $customer->registed_at = date_create($registerTime);
+                $changed = true;
+            }
+            if ($customer->account != $account) {
+                $customer->account = $account;
                 $changed = true;
             }
             if ($customer->first_money != $firstBlood) {
@@ -345,7 +354,7 @@ class ManagerController extends Controller
             }
             if ($changed) {
                 if ($customer->save()) {
-                    return back()->with('success', "修改客户账号成功");
+                    return back()->with('success', "修改客户信息成功");
                 } else {
                     return back()->with('error', "服务器异常，请稍后重试！");
                 }

@@ -48,9 +48,7 @@
                 <td>微信号</td>
                 <td>首存金</td>
                 <td>注册时间</td>
-                @if($isAdmin)
-                    <td>操作</td>
-                @endif
+                <td>操作</td>
             </tr>
             </thead>
             <tbody>
@@ -67,25 +65,23 @@
                         </td>
                     @endif
                     <td>
-                        <input type="text" name="account" @if(!$isAdmin) disabled @endif value="{{ $customer->account }}">
+                        <input type="text" name="account" value="{{ $customer->account }}">
                     </td>
                     <td>
-                        <input type="text" name="wechat" @if(!$isAdmin) disabled @endif value="{{ $customer->wechat }}">
+                        <input type="text" name="wechat" value="{{ $customer->wechat }}">
                     </td>
                     <td>
-                        <input type="number" name="first" @if(!$isAdmin) disabled @endif value="{{ $customer->first_money }}">
+                        <input type="number" name="first" value="{{ $customer->first_money }}">
                     </td>
                     <td>
-                        <input id="label-register" name="register" @if(!$isAdmin) disabled @endif type="text" value="{{ $customer->registed_at }}"
+                        <input id="label-register" name="register" type="text" value="{{ $customer->registed_at }}"
                                class="form_datetime" size="16">
                     </td>
-                    @if($isAdmin)
-                        <td width="10%">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="id" value="{{$customer->id}}">
-                            <button class="btn btn-xs btn-danger" type="submit">保存</button>
-                        </td>
-                    @endif
+                    <td width="10%">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="id" value="{{$customer->id}}">
+                        <button class="btn btn-xs btn-danger" type="submit">保存</button>
+                    </td>
                 </tr>
                 </form>
             @endforeach
