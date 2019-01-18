@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Stream;
 
+use App\Http\Controllers\Api\Channels\AikqWS2;
 use App\Http\Controllers\Controller as BaseController;
 use App\Models\PushChannle;
 use Illuminate\Http\Request;
@@ -24,17 +25,29 @@ class PushStreamController extends BaseController
 //            $longzhus[] = 'long##17121073689?';
 //            $longzhus[] = 'long##17172850051?';
 //            $longzhus[] = 'long##17169085461?589f283876c13f09b85d0bf1ce85c7ae5e3ea05a37dbabefc45039dbd5495ef930e950f2a536ee572e4d282de49282b586f205d4ea56b2e3';
-            $longzhus[] = 'long##17121073721?19cb2435936d6d99a80abb6d7cadb1653d9583aac179407364d03bea40da5cdc9c99178f0600703680275f4dfb4d628a014b9a2f1f51b068';
-            $longzhus[] = 'long##17172850057?d92217faef38c4c841de66419e739c9f87e6133888d3fb351217270eb71f5455261383a68adcef4e5f3e0019704650b1cf3d3a67a60fee80';
-            $longzhus[] = 'long##17177260095?bd3eceb0485e19d7a796bab61e5ecea8e8f7244e2cc1cd9995128b1006d6c0ce2b07b6f040c6a2c79bab7fa6d06eb433f9b84b8ed930b448';
-            $longzhus[] = 'long##17177260086?007a60ccff7dea79dc679efeddb096e7f5b4f9b119df368c2d00dbcee58a50210ccf22ce243169266a7f05cc33124e44eaa3ad1e6af53209';
-            $this->channels['龙珠'] = $longzhus;
+//            $longzhus[] = 'long##17121073721?19cb2435936d6d99a80abb6d7cadb1653d9583aac179407364d03bea40da5cdc9c99178f0600703680275f4dfb4d628a014b9a2f1f51b068';
+//            $longzhus[] = 'long##17172850057?d92217faef38c4c841de66419e739c9f87e6133888d3fb351217270eb71f5455261383a68adcef4e5f3e0019704650b1cf3d3a67a60fee80';
+//            $longzhus[] = 'long##17177260095?bd3eceb0485e19d7a796bab61e5ecea8e8f7244e2cc1cd9995128b1006d6c0ce2b07b6f040c6a2c79bab7fa6d06eb433f9b84b8ed930b448';
+//            $longzhus[] = 'long##17177260086?007a60ccff7dea79dc679efeddb096e7f5b4f9b119df368c2d00dbcee58a50210ccf22ce243169266a7f05cc33124e44eaa3ad1e6af53209';
+//            $this->channels['龙珠'] = $longzhus;
 
 //            $xiaomis[] = 'mi##cid201804241141222051111';
 //            $xiaomis[] = 'mi##cid201804241141222052222';
 //            $xiaomis[] = 'mi##cid201804241141222053333';
 //            $xiaomis[] = 'mi##cid201804241141222054444';
 //            $this->channels['小米'] = $xiaomis;
+
+            $aikqws2[] = 'aikqws2##12319';
+            $aikqws2[] = 'aikqws2##22812';
+            $aikqws2[] = 'aikqws2##45974';
+            $aikqws2[] = 'aikqws2##23517';
+            $aikqws2[] = 'aikqws2##33059';
+            $aikqws2[] = 'aikqws2##34713';
+            $aikqws2[] = 'aikqws2##17094';
+            $aikqws2[] = 'aikqws2##37130';
+            $aikqws2[] = 'aikqws2##33058';
+            $aikqws2[] = 'aikqws2##22971';
+            $this->channels['乐虎网宿'] = $aikqws2;
 
 //            $huajiaos[] = 'hua##_LC_AL1_5832731615253162591491111';
 //            $huajiaos[] = 'hua##_LC_AL1_5832731615253162591492222';
@@ -48,21 +61,21 @@ class PushStreamController extends BaseController
 //            $memes[] = 'meme-ali##40290444';
 //            $this->channels['么么-阿里'] = $memes;
 
-            $pcs = PushChannle::query()
-                ->where(['platform' => 'changba'])
-                ->where('status', 0)
-                ->orderBy('updated_at', 'desc')
-                ->take(20)
-                ->get();
-            $changbas = [];
-            $i = 0;
-            foreach ($pcs as $pc) {
-                if ($i > 10 && $i < 15) {
-                    $changbas[] = 'changba##' . $pc->id;
-                }
-                $i++;
-            }
-            $this->channels['唱吧-网速'] = $changbas;
+//            $pcs = PushChannle::query()
+//                ->where(['platform' => 'changba'])
+//                ->where('status', 0)
+//                ->orderBy('updated_at', 'desc')
+//                ->take(20)
+//                ->get();
+//            $changbas = [];
+//            $i = 0;
+//            foreach ($pcs as $pc) {
+//                if ($i > 10 && $i < 15) {
+//                    $changbas[] = 'changba##' . $pc->id;
+//                }
+//                $i++;
+//            }
+//            $this->channels['唱吧-网速'] = $changbas;
 
 //            $pcs = PushChannle::query()
 //                ->where(['platform' => '9158'])
@@ -215,6 +228,11 @@ class PushStreamController extends BaseController
                     $pc->status = 1;
                     $pc->save();
                 }
+            } elseif ($platform == 'aikqws2') {
+                $aikqws2 = new AikqWS2($key);
+                $push_rtmp = $aikqws2->pushURL().'/'.$aikqws2->pushKey();
+                $live_lines = $aikqws2->playFLVHD();//flv地址
+                $live_lines .= "\n" . $aikqws2->playM3U8HD();//m3u8地址
             }
 
             if (!empty($push_rtmp) && !empty($live_lines)) {

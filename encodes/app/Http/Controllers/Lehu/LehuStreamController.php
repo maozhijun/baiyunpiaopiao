@@ -39,10 +39,10 @@ class LehuStreamController extends BaseController
     public function index(Request $request)
     {
 
-        $roomStr = file_get_contents('http://console.lehuzhibo.com/api/rooms/robot.json');
+        $roomStr = file_get_contents('http://console.lehuzhibo.cc/api/rooms/robot.json');
         $rooms = json_decode($roomStr);
 
-        $typeStr = file_get_contents('http://console.lehuzhibo.com/api/rooms/types');
+        $typeStr = file_get_contents('http://console.lehuzhibo.cc/api/rooms/types');
         $types = json_decode($typeStr);
 
         $ets = EncodeTask::query()
@@ -124,7 +124,7 @@ class LehuStreamController extends BaseController
                 $et->save();
 
                 $curl = curl_init();
-                curl_setopt($curl, CURLOPT_URL, 'http://console.lehuzhibo.com/api/rooms/robot/save');
+                curl_setopt($curl, CURLOPT_URL, 'http://console.lehuzhibo.cc/api/rooms/robot/save');
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($curl, CURLOPT_POST, 1);
                 list($type, $subtype) = explode('-', $request->type);
