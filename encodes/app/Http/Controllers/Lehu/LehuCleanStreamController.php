@@ -12,7 +12,7 @@ use App\Models\EncodeTask;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class LehuStreamController extends BaseController
+class LehuCleanStreamController extends BaseController
 {
 
     /**
@@ -40,36 +40,30 @@ class LehuStreamController extends BaseController
     public function index(Request $request)
     {
 
-        $roomStr = file_get_contents('http://console.lehuzhibo.cc/api/rooms/robot.json');
-        $rooms = json_decode($roomStr);
-
-        $typeStr = file_get_contents('http://console.lehuzhibo.cc/api/rooms/types');
-        $types = json_decode($typeStr);
-
         $ets = EncodeTask::query()
             ->where('from', env('APP_NAME'))
-            ->where('to', 'Lehu')
+            ->where('to', 'LehuC')
             ->where('created_at', '>', date_create('-48 hour'))
             ->whereIn('status', [1, 2, -1])
             ->get();
-        return view('manager.lehu.index', ['ets' => $ets, 'rooms' => $rooms, 'types' => $types]);
+        return view('manager.lehu.indexc', ['ets' => $ets]);
     }
 
     public function created(Request $request)
     {
         if ($request->isMethod('post')
-            && $request->has('room') && !empty($request->room)
-            && $request->has('type') && !empty($request->type)
+//            && $request->has('room') && !empty($request->room)
+//            && $request->has('type') && !empty($request->type)
             && $request->has('title') && !empty($request->title)
             && $request->has('platform') && !empty($request->platform)
             && $request->has('input') && !empty($request->input)
         ) {
-            list($room_id, $room_num, $room_nickname) = explode('-', $request->room);
+//            list($room_id, $room_num, $room_nickname) = explode('-', $request->room);
             $input = $request->input;
             $name = $request->title;
             switch ($request->platform) {
                 case 1: {
-                    $aikqWs = new AikqWS($room_num);
+                    $aikqWs = new AikqWS();
                     break;
                 }
                 case 2: {
@@ -79,19 +73,19 @@ class LehuStreamController extends BaseController
                     if ($t > $t20 && $t < $t23) {
                         return response('<h1 style="padding-top: 100px;width: 100%;text-align: center;">兄dei，现在是晚高峰，不要用网宿，记住哟！</h1>');
                     }
-                    $aikqWs = new AikqWS1($room_num);
+                    $aikqWs = new AikqWS1();
                     break;
                 }
                 case 3: {
-                    $aikqWs = new AikqWS2($room_num);
+                    $aikqWs = new AikqWS2();
                     break;
                 }
                 case 4: {
-                    $aikqWs = new AikqAli($room_num);
+                    $aikqWs = new AikqAli();
                     break;
                 }
                 case 5: {
-                    $aikqWs = new ShayuWS($room_num);
+                    $aikqWs = new ShayuWS();
                     break;
                 }
                 default: {
@@ -117,32 +111,16 @@ class LehuStreamController extends BaseController
             if (!empty($pid) && is_numeric($pid) && $pid > 0) {
                 $et = new EncodeTask();
                 $et->name = $name;
-                $et->channel = $room_nickname;
+                $et->channel = $name;
                 $et->input = $input;
                 $et->rtmp = $rtmp_url;
                 $et->exec = $exec;
                 $et->pid = $pid;
                 $et->out = $live_flv_url . "\n" . $live_rtmp_url . "\n" . $live_m3u8_url;
                 $et->from = env('APP_NAME');
-                $et->to = "Lehu";
+                $et->to = "LehuC";
                 $et->status = 1;
                 $et->save();
-
-                $curl = curl_init();
-                curl_setopt($curl, CURLOPT_URL, 'http://console.lehuzhibo.cc/api/rooms/robot/save');
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-                curl_setopt($curl, CURLOPT_POST, 1);
-                list($type, $subtype) = explode('-', $request->type);
-                $post_data = array(
-                    "id" => $room_id,
-                    "title" => $name,
-                    "liveType" => $type,
-                    "liveTypeChild" => $subtype,
-                );
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
-                $data = curl_exec($curl);
-                curl_close($curl);
-                sleep(3);//休息3秒
             }
         }
         return back();

@@ -215,6 +215,11 @@ Route::group(["middleware" => "auth", "namespace" => "Lehu"], function () {
     Route::post("/lehu/stream/push/", "LehuStreamController@created");
     Route::get("/lehu/stream/stop/{id}", "LehuStreamController@stop");
     Route::get("/lehu/stream/repeat/{id}", "LehuStreamController@repeat");
+
+    Route::get("/lehu/clean-stream/", "LehuCleanStreamController@index");
+    Route::post("/lehu/clean-stream/push/", "LehuCleanStreamController@created");
+    Route::get("/lehu/clean-stream/stop/{id}", "LehuCleanStreamController@stop");
+    Route::get("/lehu/clean-stream/repeat/{id}", "LehuCleanStreamController@repeat");
 });
 
 Route::group(["middleware" => "auth"], function () {
