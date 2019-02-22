@@ -75,7 +75,8 @@ class ShayuWS extends Channel
 
     public function playFLV()
     {
-        return $this->playFlvSD;
+//        return $this->playFlvSD;
+        return $this->playFlv;
     }
 
     public function playFLVHD()
@@ -85,7 +86,8 @@ class ShayuWS extends Channel
 
     public function playRTMP()
     {
-        return $this->playRTMPSD;
+//        return $this->playRTMPSD;
+        return $this->playRTMP;
     }
 
     public function playRTMPHD()
@@ -95,7 +97,8 @@ class ShayuWS extends Channel
 
     public function playM3U8()
     {
-        return $this->playM3U8SD;
+//        return $this->playM3U8SD;
+        return $this->playM3U8;
     }
 
     public function playM3U8HD(){

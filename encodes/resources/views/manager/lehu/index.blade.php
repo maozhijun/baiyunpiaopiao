@@ -27,8 +27,8 @@
             <label for="label-channel">计费类型</label>
             <select name="platform" class="form-control" id="label-channel">
                 {{--<option value="3">网宿计费</option>--}}
-                <option value="4">阿里计费</option>
                 <option value="5">鲨鱼直播</option>
+                <option value="4">阿里计费</option>
             </select>
         </div>
         <div class="form-inline form-group">
