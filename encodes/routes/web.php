@@ -224,6 +224,7 @@ Route::group(["middleware" => "auth", "namespace" => "Lehu"], function () {
 
 Route::group(["middleware" => "auth"], function () {
     Route::get("/manager/stream-ws", 'TestController@getStream');
+    Route::get("/manager/stream-ali", 'TestController@getAliStream');
 });
 
 //定时任务

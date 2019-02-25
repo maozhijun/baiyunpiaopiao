@@ -26,7 +26,6 @@ class AikqAli extends Channel
         $this->expiration = time() + 21600;
         $this->ali_host = env('ALI_CDN_HOST', '');
         $this->ali_key = env('ALI_CDN_KEY', '');
-//        $key = 'stream-' . $uid . '-' . time() . '-' . random_int(111111, 999999);
         if ($uid == 0) {
             $key = 'stream-' . $uid . '-' . time() . '-' . random_int(111111, 999999);
         } else {
@@ -36,6 +35,8 @@ class AikqAli extends Channel
 
         $sstring = '/live/' . $key . "-$timestamp-0-0-" . $this->ali_key;
         $auth_key = "$timestamp-0-0-" . md5($sstring);
+//        $this->streamURL = 'rtmp://' . $this->ali_host . '/live';//流地址
+//        $this->streamKey = $key . '?auth_key=' . $auth_key;//流名称
         $this->streamURL = 'rtmp://video-center.alivecdn.com/live';//流地址
         $this->streamKey = $key . '?vhost=' . $this->ali_host . '&auth_key=' . $auth_key;//流名称
 
