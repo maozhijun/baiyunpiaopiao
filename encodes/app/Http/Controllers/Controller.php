@@ -199,7 +199,7 @@ class Controller extends BaseController
                 }
             }
         }
-        $execs[] = '-c:v h264_cuvid -i "' . $input_uri . '"';
+        $execs[] = '-c:v h264_cuvid -re -i "' . $input_uri . '"';
         $execs[] = '-vcodec h264_nvenc -acodec aac';
 
         if (!empty($watermark)) {
@@ -300,7 +300,7 @@ class Controller extends BaseController
                 $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
             }
         }
-        $execs[] = '-c:v h264_cuvid -i "' . $input_uri . '"';
+        $execs[] = '-c:v h264_cuvid -re -i "' . $input_uri . '"';
         $execs[] = '-vcodec h264_nvenc -acodec aac';
 
         if (!empty($watermark) || !empty($has_logo)) {
