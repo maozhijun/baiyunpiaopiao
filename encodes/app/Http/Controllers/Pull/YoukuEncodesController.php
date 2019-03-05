@@ -36,14 +36,27 @@ class YoukuEncodesController extends BaseController
 
     public function index(Request $request)
     {
+        $yk_rq_count = session("yk_rq_count");
         if ($request->has('cookies')) {
             $cookies = $request->input('cookies');
             if (strlen($cookies) > 0) {
                 $lives = $this->getAppMatches($cookies, $request->input("params"));
-                return view('manager.pull.youku', ['lives' => $lives]);
+                if (!empty($lives)) {
+                    return view('manager.pull.youku', ['lives' => $lives]);
+                }
+                $yk_rq_count++;
+            } else {
+                $yk_rq_count = 0;
             }
+        } else {
+            $yk_rq_count = 0;
         }
-        return redirect("http://test.youku.com/resources/youku/fake_detail");
+        session(['yk_rq_count'=>$yk_rq_count]);
+        if ($yk_rq_count < 3) {
+            return redirect("http://test.youku.com/resources/youku/fake_detail");
+        } else {
+            return response('信号还在路上，等会再来看看！');
+        }
     }
 
     public function getLiveUrl(Request $request, $id)

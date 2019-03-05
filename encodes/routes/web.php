@@ -168,13 +168,16 @@ Route::group(["middleware" => "auth", "namespace" => "Pull"], function () {
     //优酷
     Route::get("/resources/youku/", "YoukuEncodesController@index");
     Route::get("/resources/youku/get_live_url/{id}", "YoukuEncodesController@getLiveUrl");
+});
+
+Route::group(["namespace" => "Pull"], function () {
+//    Route::get("/resources/youku/get_live_url/{id}", "YoukuEncodesController@getLiveUrl");
     Route::get("/resources/youku/fake_detail", "YoukuEncodesController@fakeDetail");
 });
 
 Route::group(["middleware" => "auth", "namespace" => "Record"], function () {
     Route::get("/records/qq/", "QQEncodesController@index");
     Route::get("/records/qq/get_record_url/{id}", "QQEncodesController@getRecordUrl");
-
 });
 
 Route::group(["middleware" => "auth", "namespace" => "Stream"], function () {

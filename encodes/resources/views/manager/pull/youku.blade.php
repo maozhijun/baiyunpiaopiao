@@ -35,7 +35,7 @@
                     </td>
                     <td>
                         @foreach($live['multiLiveList'] as $liveItem)
-                            <a class="label {{ $liveItem['isPay']==1?'label-danger':'label-primary' }}" href="http://test.youku.com/resources/youku/get_live_url/{{ $liveItem['liveId'] }}" target="_blank">{{$liveItem['styleName']}}</a>
+                            <a class="label {{ $liveItem['isPay']==1?'label-danger':'label-primary' }}" href="/resources/youku/get_live_url/{{ $liveItem['liveId'] }}" target="_blank">{{$liveItem['styleName']}}</a>
                         @endforeach
                     </td>
                 </tr>
