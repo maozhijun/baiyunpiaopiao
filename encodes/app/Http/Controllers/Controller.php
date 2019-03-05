@@ -199,7 +199,7 @@ class Controller extends BaseController
                 }
             }
         }
-        $execs[] = '-c:v h264_cuvid -i "' . $input_uri . '"';
+        $execs[] = '-c:v h264_cuvid -re -i "' . $input_uri . '"';
         $execs[] = '-vcodec h264_nvenc -acodec aac';
 
         if (!empty($watermark)) {
@@ -300,25 +300,25 @@ class Controller extends BaseController
                 $execs[] = '-user_agent "Mozilla / 5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 63.0.3239.84 Safari / 537.36"';
             }
         }
-        $execs[] = '-c:v h264_cuvid -i "' . $input_uri . '"';
+        $execs[] = '-c:v h264_cuvid -re -i "' . $input_uri . '"';
         $execs[] = '-vcodec h264_nvenc -acodec aac';
 
         if (!empty($watermark) || !empty($has_logo)) {
             $logo_code = '';//logo
             if (!empty($has_logo)) {
-                $logo_code = 'drawbox=color=black:x=' . $lp['x'] . ':y=' . $lp['y'] . ':width=' . $lp['w'] . ':height=' . $lp['h'] . ':t=fill,';
+                $logo_code = ',drawbox=color=black:x=' . $lp['x'] . ':y=' . $lp['y'] . ':width=' . $lp['w'] . ':height=' . $lp['h'] . ':t=fill';
                 if (!empty($logo_text)) {
-                    $logo_code .= 'drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $logo_text . '\':fontcolor=0xf7f14e:fontsize=' . $fontsize . ':x=(' . $lp['x'] . '+(' . $lp['w'] . '-tw)/2):y=(' . $lp['y'] . '+(' . $lp['h'] . '-' . $fontsize . ')/2),';
+                    $logo_code .= ',drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $logo_text . '\':fontcolor=0xf7f14e:fontsize=' . $fontsize . ':x=(' . $lp['x'] . '+(' . $lp['w'] . '-tw)/2):y=(' . $lp['y'] . '+(' . $lp['h'] . '-' . $fontsize . ')/2)';
                 }
             }
             $watermark_code = '';//mark
-            if (!empty($has_logo)) {
-                $watermark_code = 'drawbox=y=0:color=black@' . $this->watermark_alpha . ':width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2);
+            if (!empty($watermark)) {
+                $watermark_code = ',drawbox=y=0:color=black@' . $this->watermark_alpha . ':width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=' . ($fontsize / 2);
                 if ($location = 'bottom') {
-                    $watermark_code = 'drawbox=y=(ih-' . ($fontsize * 2) . '):color=black@' . $this->watermark_alpha . ':width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=(h-' . ($fontsize + $fontsize / 2) . ')';
+                    $watermark_code = ',drawbox=y=(ih-' . ($fontsize * 2) . '):color=black@' . $this->watermark_alpha . ':width=iw:height=' . ($fontsize * 2) . ':t=fill,drawtext=font=\'WenQuanYi Zen Hei\':text=\'' . $watermark . '\':fontcolor=white:fontsize=' . $fontsize . ':x=(w-tw)/2:y=(h-' . ($fontsize + $fontsize / 2) . ')';
                 }
             }
-            $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p,' . $logo_code . $watermark_code . '"';
+            $vf = '-vf "scale=' . $size['w'] . ':' . $size['h'] . ',format=pix_fmts=yuv420p' . $logo_code . $watermark_code . '"';
             $execs[] = $vf;
         }
 

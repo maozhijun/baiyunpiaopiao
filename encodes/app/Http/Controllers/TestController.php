@@ -8,8 +8,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Api\Channels\AikqWS1;
-use App\Http\Controllers\Api\Channels\Uplive;
+use App\Http\Controllers\Api\Channels\AikqAli;
+use App\Http\Controllers\Api\Channels\ShayuWS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
@@ -24,8 +24,8 @@ class TestController extends Controller
 //        dump($huomaoWs);
 
 //        dump(str_random(32));
-        $aikqWs = new AikqWS1(888);
-        dump($aikqWs);
+//        $aikqWs = new AikqWS1(888);
+//        dump($aikqWs);
 //        dump(new Uplive());
     }
 
@@ -93,18 +93,19 @@ class TestController extends Controller
 
     public function getStream()
     {
-//        $huomaoQn = new HuomaoQiniu();
-//        dump($huomaoQn);
-//
-//        $huomaoWs = new HuomaoWs();
-//        dump($huomaoWs);
-
-//        dump(str_random(32));
-        $aikqWs = new AikqWS1(888);
+        $aikqWs = new ShayuWS();
         dump('URL--> '.$aikqWs->pushURL());
         dump('KEY--> '.$aikqWs->pushKey());
         dump('M3U8--> '.$aikqWs->playM3U8());
         dump('FLV--> '.$aikqWs->playFLV());
-//        dump(new Uplive());
+    }
+
+    public function getAliStream()
+    {
+        $aikqWs = new AikqAli();
+        dump('URL--> '.$aikqWs->pushURL());
+        dump('KEY--> '.$aikqWs->pushKey());
+        dump('M3U8--> '.$aikqWs->playM3U8());
+        dump('FLV--> '.$aikqWs->playFLV());
     }
 }

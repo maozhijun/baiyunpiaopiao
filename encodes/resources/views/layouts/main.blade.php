@@ -57,7 +57,7 @@ $pushCountAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX
                     @endif
                     @if($pullAccess)
                         <li {{ starts_with(request()->path(),'resources')?'class=active':'' }}>
-                            <a href="/resources/kball/">直播源</a>
+                            <a href="/resources/leisu/">直播源</a>
                         </li>
                     @endif
                     @if($recordAccess)

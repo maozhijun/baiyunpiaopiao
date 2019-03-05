@@ -10,8 +10,8 @@ $youkuAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX_RES
 
 @section('navTabs')
     <ul class="nav nav-tabs">
-        <li role="presentation" {{ starts_with(request()->path(),'resources/kball')?'class=active':'' }}>
-            <a href="/resources/kball/">K球</a>
+        <li role="presentation" {{ starts_with(request()->path(),'resources/ssports')?'class=active':'' }}>
+            <a href="/resources/ssports/">新英</a>
         </li>
         <li role="presentation" {{ starts_with(request()->path(),'resources/leisu')?'class=active':'' }}>
             <a href="/resources/leisu/">雷速</a>
@@ -24,9 +24,6 @@ $youkuAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX_RES
                 {{--<a href="/resources/xbet/">1XBet</a>--}}
             {{--</li>--}}
         @endif
-        <li role="presentation" {{ starts_with(request()->path(),'resources/ssports')?'class=active':'' }}>
-            <a href="/resources/ssports/">新英</a>
-        </li>
         @if($qqAccess)
         <li role="presentation" {{ starts_with(request()->path(),'resources/qq')?'class=active':'' }}>
             <a href="/resources/qq/">QQ</a>
@@ -44,6 +41,9 @@ $youkuAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX_RES
         @endif
         <li role="presentation" {{ starts_with(request()->path(),'resources/longzhu')?'class=active':'' }}>
             <a href="/resources/longzhu/">龙珠</a>
+        </li>
+        <li role="presentation" {{ starts_with(request()->path(),'resources/kball')?'class=active':'' }}>
+            <a href="/resources/kball/">K球</a>
         </li>
         {{--<li role="presentation" {{ starts_with(request()->path(),'resources/cntv')?'class=active':'' }}>--}}
             {{--<a href="/resources/cntv/">电视台</a>--}}

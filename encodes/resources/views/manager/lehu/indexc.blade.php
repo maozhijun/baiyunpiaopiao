@@ -1,34 +1,17 @@
 @extends('layouts.lehu')
 @section('content')
-    <form action="/lehu/stream/push/" method="post">
+    <form action="/lehu/clean-stream/push/" method="post">
         {{ csrf_field() }}
 
         <div class="form-inline form-group">
-            <label for="label-channel">推流房间</label>
-            <select name="room" class="form-control" id="label-channel">
-                @foreach($rooms as $room)
-                    @if($room->live_status == '0')
-                        <option value="{{ $room->id.'-'.$room->room_num.'-'. $room->nickname }}">{{ $room->nickname }}</option>
-                    @endif
-                @endforeach
-            </select>
-            <label for="label-channel">房间类型</label>
-            <select name="type" class="form-control" id="label-channel">
-                @foreach($types as $type)
-                    <optgroup label="{{ $type->name }}">{{ $type->name }}</optgroup>
-                    @foreach($type->children as $st)
-                        <option value="{{ $type->id.'-'.$st->id }}">{{ $st->name }}</option>
-                    @endforeach
-                @endforeach
-            </select>
-            <label for="label-logo-text">房间标题</label>
+            <label for="label-logo-text">标题</label>
             <input name="title" type="text" value="" class="form-control" id="label-logo-text"
                    size="40">
             <label for="label-channel">计费类型</label>
             <select name="platform" class="form-control" id="label-channel">
                 {{--<option value="3">网宿计费</option>--}}
+                {{--<option value="4">阿里计费</option>--}}
                 <option value="5">鲨鱼直播</option>
-                <option value="4">阿里计费</option>
             </select>
         </div>
         <div class="form-inline form-group">
@@ -37,7 +20,7 @@
             </label>
 
             <label for="label-logo-text">Logo文案</label>
-            <input name="logo_text" type="text" value="{{ $logo_text }}" class="form-control" id="label-logo-text"
+            <input name="logo_text" type="text" value="" class="form-control" id="label-logo-text"
                    size="20">
 
             <label for="label-position">Logo位置</label>
@@ -49,7 +32,7 @@
         </div>
         <div class="form-inline form-group">
             <label for="label-watermark">水印内容</label>
-            <input name="watermark" type="text" value="{{ $watermark }}"
+            <input name="watermark" type="text" value=""
                    class="form-control" id="label-watermark" size="70">
             <label for="label-watermark-location">水印位置</label>
             <select id="label-watermark-location" name="location" class="form-control">
@@ -62,7 +45,7 @@
         <div class="form-inline form-group">
             <label for="label-resource">源地址</label>
             <input name="input" type="text" class="form-control" id="label-resource" size="100">
-            <button type="submit" class="btn btn-primary">一键转推</button>
+            <button type="submit" class="btn btn-primary">开始推流</button>
         </div>
     </form>
     <div class="table-responsive">
@@ -96,10 +79,10 @@
                     <td>
                         @if($et->status != 0)
                             <a class="btn btn-xs btn-danger"
-                               href="javascript:if(confirm('确认删除')) location.href='/lehu/stream/stop/{{ $et->id }}'">停止</a>
+                               href="javascript:if(confirm('确认删除')) location.href='/lehu/clean-stream/stop/{{ $et->id }}'">停止</a>
                             <br><br>
                             <a class="btn btn-xs btn-warning"
-                               href="javascript:if(confirm('确认重推')) location.href='/lehu/stream/repeat/{{ $et->id }}'">重推</a>
+                               href="javascript:if(confirm('确认重推')) location.href='/lehu/clean-stream/repeat/{{ $et->id }}'">重推</a>
                         @endif
                     </td>
                 </tr>

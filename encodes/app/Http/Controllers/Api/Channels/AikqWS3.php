@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api\Channels;
 
 use App\Http\Controllers\Api\Channel;
 
-class AikqWS2 extends Channel
+class AikqWS3 extends Channel
 {
-    public $id = 996;//平台ID
+    public $id = 995;//平台ID
     public $name = '网宿(平均)';//平台名称
     public $level = 1;//平台级别，1:野鸡，2:一般，3:大平台
     public $expiration = -1;//过期时间，单位秒，-1表示不过期
@@ -30,10 +30,10 @@ class AikqWS2 extends Channel
     public function __construct($uid = 0)
     {
         $this->expiration = time() + 21600;
-        $this->push_host = env('WS2_PUSH_HOST', '');
-        $this->hls_host = env('WS2_HLS_HOST', '');
-        $this->hdl_host = env('WS2_HDL_HOST', '');
-        $this->ws_key = env('WS2_PUSH_KEY', '');
+        $this->push_host = env('WS3_PUSH_HOST', '');
+        $this->hls_host = env('WS3_HLS_HOST', '');
+        $this->hdl_host = env('WS3_HDL_HOST', '');
+        $this->ws_key = env('WS3_PUSH_KEY', '');
         if ($uid == 0) {
             $key = 'stream-' . $uid . '-' . time() . '-' . random_int(111111, 999999);
         } else {
