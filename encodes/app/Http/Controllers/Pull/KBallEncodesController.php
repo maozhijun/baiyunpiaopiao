@@ -32,10 +32,12 @@ class KBallEncodesController extends BaseController
 
         $KBLives = $this->getKBallAppLives();
         $lives = [];
-        foreach ($KBLives as $live) {
-            if ($live['componentCode'] == "recomMatch") {
-                $lives = $live['recomMatch'];
-                break;
+        if (isset($KBLives) && count($KBLives) > 0) {
+            foreach ($KBLives as $live) {
+                if ($live['componentCode'] == "recomMatch") {
+                    $lives = $live['recomMatch'];
+                    break;
+                }
             }
         }
 //        dump($lives);
