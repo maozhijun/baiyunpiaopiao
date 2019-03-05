@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 $black = request()->black;
 $qqAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX_RESOURCE_QQ);
 $pptvAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX_RESOURCE_PPTV);
+$youkuAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX_RESOURCE_YOUKU);
 ?>
 @extends('layouts.main')
 
@@ -34,6 +35,11 @@ $pptvAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX_RESO
         @if($pptvAccess)
         <li role="presentation" {{ starts_with(request()->path(),'resources/pptv')?'class=active':'' }}>
             <a href="/resources/pptv/">PPTV</a>
+        </li>
+        @endif
+        @if($youkuAccess)
+        <li role="presentation" {{ starts_with(request()->path(),'resources/youku')?'class=active':'' }}>
+            <a href="/resources/youku/">优酷</a>
         </li>
         @endif
         <li role="presentation" {{ starts_with(request()->path(),'resources/longzhu')?'class=active':'' }}>

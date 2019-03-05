@@ -31,11 +31,13 @@ class AuthController extends BaseController
     const BLACK_INDEX_PUSH_COUNT = 0; //推流数
     const BLACK_INDEX_RESOURCE_QQ = 1; //qq直播源
     const BLACK_INDEX_RESOURCE_PPTV = 2; //pptv直播源
+    const BLACK_INDEX_RESOURCE_YOUKU = 3; //优酷直播源
 
     const BLACK_NAME_INDEXS = [
         "push_count"=> self::BLACK_INDEX_PUSH_COUNT, //qq直播源
         "resources/qq"=> self::BLACK_INDEX_RESOURCE_QQ, //qq直播源
-        "resources/pptv"=> self::BLACK_INDEX_RESOURCE_QQ, //pptv直播源
+        "resources/pptv"=> self::BLACK_INDEX_RESOURCE_PPTV, //pptv直播源
+        "resources/youku"=> self::BLACK_INDEX_RESOURCE_YOUKU, //pptv直播源
     ];
 
     private function getAccessRole(array $array = null)

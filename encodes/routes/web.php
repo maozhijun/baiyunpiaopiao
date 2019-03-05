@@ -164,6 +164,11 @@ Route::group(["middleware" => "auth", "namespace" => "Pull"], function () {
     //pp视频
     Route::get("/resources/pptv/", "PPTVEncodesController@index");
     Route::get("/resources/pptv/get_live_url/{id}", "PPTVEncodesController@getLiveUrl");
+
+    //优酷
+    Route::get("/resources/youku/", "YoukuEncodesController@index");
+    Route::get("/resources/youku/get_live_url/{id}", "YoukuEncodesController@getLiveUrl");
+    Route::get("/resources/youku/fake_detail", "YoukuEncodesController@fakeDetail");
 });
 
 Route::group(["middleware" => "auth", "namespace" => "Record"], function () {
