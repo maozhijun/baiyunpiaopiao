@@ -144,7 +144,7 @@ class YoukuEncodesController extends BaseController
             $jsonData = json_decode($response, true);
 
             if (isset($jsonData['data']['matchsList'])) {
-                $matches = $jsonData['data']['matchsList'];
+                $matches = collect($jsonData['data']['matchsList'])->sortBy('startTime')->all();
             }
         }
         $this->dumpData($matches);
