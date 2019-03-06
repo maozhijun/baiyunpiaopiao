@@ -40,7 +40,7 @@ class YoukuEncodesController extends BaseController
         if ($request->has('cookies')) {
             $cookies = $request->input('cookies');
             if (strlen($cookies) > 0) {
-                $lives = $this->getAppMatches($cookies, $request->input("params"));
+                $lives = $this->getAppMatches($cookies, $request->input("params"), $request->input("data"));
                 if (!empty($lives)) {
                     return view('manager.pull.youku', ['lives' => $lives]);
                 }
@@ -64,7 +64,7 @@ class YoukuEncodesController extends BaseController
         if ($request->has('cookies')) {
             $cookies = $request->input('cookies');
             if (strlen($cookies) > 0) {
-                $lines = $this->getStreamInfo($cookies, $request->input("params"));
+                $lines = $this->getStreamInfo($cookies, $request->input("params"), $request->input("data"));
                 return view('manager.pull.youku_lines', ['lines' => $lines]);
             } else {
                 return response('信号还在路上，等会再来看看！');
@@ -79,12 +79,15 @@ class YoukuEncodesController extends BaseController
         return view('manager.pull.youku_fake_detail', ['id'=>$id]);
     }
 
-    private function getStreamInfo($cookies, $params) {
+    private function getStreamInfo($cookies, $params, $data) {
         if ($cookies) $cookies = urldecode($cookies);
         if ($params) $params = urldecode($params);
+//        if ($data) $data = urldecode($data);
 
-        $url = "http://acs.youku.com/h5/mtop.youku.live.com.liveplaycontrolv2/2.0/?$params";
-        $this->dumpData("getAppMatches: url = $url");
+        $url = "http://acs.youku.com/h5/mtop.youku.live.com.liveplaycontrolv2/2.0/?$params&data=".urlencode($data);
+        $this->dumpData("getStreamInfo: url = $url");
+        $this->dumpData("getStreamInfo: cookies = $cookies");
+        $this->dumpData("getStreamInfo: data = $data");
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -114,11 +117,11 @@ class YoukuEncodesController extends BaseController
         return $streams;
     }
 
-    private function getAppMatches($cookies, $params) {
+    private function getAppMatches($cookies, $params, $data) {
         if ($cookies) $cookies = urldecode($cookies);
         if ($params) $params = urldecode($params);
 
-        $url = "https://acs.youku.com/h5/mtop.youku.sports.show.schedule.drawer.list/1.0/?$params";
+        $url = "https://acs.youku.com/h5/mtop.youku.sports.show.schedule.drawer.list/1.0/?$params&data=".urlencode($data);
         $this->dumpData("getAppMatches: url = $url");
         $this->dumpData("getAppMatches: cookie = $cookies");
 

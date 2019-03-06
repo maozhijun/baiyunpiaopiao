@@ -7,14 +7,14 @@ var streamInfoKey = 23536927;
 /**
  * 获取签名
  */
-function getYoukuSignByLiveId(Token, Time, LiveId) {
+function getYoukuSignByLiveId(Token, Time, LiveId, Cna) {
     var AppKey;
     if (LiveId && LiveId.length > 0) {
         AppKey = streamInfoKey;
     } else {
         AppKey = liveInfoKey;
     }
-    var Data = getYoukuRequestData(LiveId);
+    var Data = getYoukuRequestData(LiveId, Cna);
     return getYoukuSign(Token, Time, AppKey, Data);
 }
 
@@ -23,18 +23,45 @@ function getYoukuSignByLiveId(Token, Time, LiveId) {
  */
 function getYoukuSign(Token, Time, AppKey, Data) {
     var key = Token + "&" + Time + "&" + AppKey + "&" + Data;
-    return h(key);
+    return generateYoukuSign(key);
+}
+
+function getYoukuCkey() {
+    var e = window[window.UA_Opt.LogVal];
+    return window.UA_Opt.Token = (new Date).getTime() + ":" + Math.random(), window.UA_Opt.reload && window.UA_Opt.reload(), this.ckey = e || this.ckey, this.ckey
 }
 
 /**
  * 获取签名
  */
-function getYoukuRequestData(LiveId) {
+function getYoukuRequestData(LiveId, Cna) {
+    var data;
     if (LiveId && LiveId.length > 0) {
-        return'{"liveId":' + LiveId + ',"app":"H5"}';
+        // return'{"liveId":' + LiveId + ',"app":"H5"}';
+        // return"{\"liveId\":" + LiveId + ",\"app\":\"Pc\", \"ckey\":\""+getYoukuCkey()+"\"}";
+        // data = '{"ccode":"live05010101","liveId":'+LiveId+',"app":"Pc","ckey":"'+getYoukuCkey()+'"}';
+        data = {
+            // "playAbilities": '{"decode_resolution_FPS":"1080p_50"}',
+            "keyIndex":"web01",
+            "encryptRClient": lib.mtop.config.encryptRClient,
+            // "encryptRClient": "",
+            "cna":Cna,
+            "ccode":lib.mtop.config.ccode,
+            // "ccode":"",
+            "liveId":LiveId,
+            // "ad":'"{\"site\":\"youku\",\"utdid\":\"\",\"aw\":\"w\",\"p\":1,\"vs\":\"1.0\",\"vc\":0,\"fu\":0,\"bt\":\"pc\",\"rst\":\"mp4\",\"dq\":0,\"isvert\":0,\"os\":\"win\",\"dvh\":290,\"dvw\":145,\"wintype\":\"h5\",\"ccode\":\"'+lib.mtop.config.ccode+'\",\"bf\":0,\"lid\":'+LiveId+'}"',
+            // "ad":lib.mtop.config.ad,
+            // "sceneId":0,
+            // "reqQuality":0,
+            // "utdid":"",
+            "ckey":getYoukuCkey()
+        };
     } else {
-        return "{}";
+        data = {};
+        // data = "{}";
     }
+    return JSON.stringify(data);
+    // return data;
 }
 
 /**
@@ -48,7 +75,8 @@ function getCookieItem(Key) {
 /**
  * 签名方法
  */
-function h(a) {
+function generateYoukuSign(a) {
+    console.log("signKey", a);
     function b(a, b) {
         return a << b | a >>> 32 - b
     }
