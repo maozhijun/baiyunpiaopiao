@@ -168,6 +168,10 @@ Route::group(["middleware" => "auth", "namespace" => "Pull"], function () {
     //优酷
     Route::get("/resources/youku/", "YoukuEncodesController@index");
     Route::get("/resources/youku/get_live_url/{id}", "YoukuEncodesController@getLiveUrl");
+
+    //滚球
+    Route::get("/resources/gunqiu/", "GunQiuEncodesController@index");
+    Route::get("/resources/gunqiu/get_live_url", "GunqiuEncodesController@getLiveUrl");
 });
 
 Route::group(["namespace" => "Pull"], function () {

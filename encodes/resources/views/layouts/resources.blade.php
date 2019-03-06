@@ -51,6 +51,10 @@ $youkuAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX_RES
         {{--<li role="presentation" {{ starts_with(request()->path(),'resources/baitv')?'class=active':'' }}>--}}
             {{--<a href="/resources/baitv/">BaiTV</a>--}}
         {{--</li>--}}
+
+        <li role="presentation" {{ starts_with(request()->path(),'resources/gunqiu')?'class=active':'' }}>
+            <a href="/resources/gunqiu/">滚球</a>
+        </li>
         <li role="presentation" {{ starts_with(request()->path(),'resources/cctv5')?'class=active':'' }}>
             <a href="/resources/cctv5/">CCTV5</a>
         </li>
