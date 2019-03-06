@@ -48,19 +48,19 @@ class ShayuWS extends Channel
 
         $sstring = $this->ws_key . '/live/' . $key . ".flv$timestamp";
         $auth_key = md5($sstring);
-        $this->playFlv = 'https://' . $this->hdl_host . '/live/' . $key . '.flv?wsSecret=' . $auth_key . '&wsABStime=' . $timestamp;//flv播放地址
+        $this->playFlv = 'https://' . $this->hdl_host . '/live/' . $key . '.flv?k=' . $auth_key . '&t=' . $timestamp;//flv播放地址
 
         $sstring = $this->ws_key . '/live/' . $key . "-sd.flv$timestamp";
         $auth_key = md5($sstring);
-        $this->playFlvSD = 'https://' . $this->hdl_host . '/live/' . $key . '-sd.flv?wsSecret=' . $auth_key . '&wsABStime=' . $timestamp;//flv播放地址
+        $this->playFlvSD = 'https://' . $this->hdl_host . '/live/' . $key . '-sd.flv?k=' . $auth_key . '&t=' . $timestamp;//flv播放地址
 
         $sstring = $this->ws_key . '/live/' . $key . "/playlist.m3u8$timestamp";
         $auth_key = md5($sstring);
-        $this->playM3U8 = 'https://' . $this->hls_host . '/live/' . $key . '/playlist.m3u8?wsSecret=' . $auth_key . '&wsABStime=' . $timestamp;//播放m3u8地址
+        $this->playM3U8 = 'https://' . $this->hls_host . '/live/' . $key . '/playlist.m3u8?k=' . $auth_key . '&t=' . $timestamp;//播放m3u8地址
 
         $sstring = $this->ws_key . '/live/' . $key . "-sd/playlist.m3u8$timestamp";
         $auth_key = md5($sstring);
-        $this->playM3U8SD = 'https://' . $this->hls_host . '/live/' . $key . '-sd/playlist.m3u8?wsSecret=' . $auth_key . '&wsABStime=' . $timestamp;//播放m3u8地址
+        $this->playM3U8SD = 'https://' . $this->hls_host . '/live/' . $key . '-sd/playlist.m3u8?k=' . $auth_key . '&t=' . $timestamp;//播放m3u8地址
     }
 
     public function pushURL()
