@@ -37,7 +37,7 @@ function getYoukuCkey() {
 function getYoukuRequestData(LiveId, Cna) {
     var data;
     if (LiveId && LiveId.length > 0) {
-        // return'{"liveId":' + LiveId + ',"app":"H5"}';
+        // data = {"liveId": LiveId,"app":"H5"};
         // return"{\"liveId\":" + LiveId + ",\"app\":\"Pc\", \"ckey\":\""+getYoukuCkey()+"\"}";
         // data = '{"ccode":"live05010101","liveId":'+LiveId+',"app":"Pc","ckey":"'+getYoukuCkey()+'"}';
         data = {
