@@ -584,7 +584,8 @@
                 chrome: parseFloat((l.match(/chrome[\s|\/]([\d.]+)/) || ["", "0"])[1])
             };
             d.isMobile = !(!d.iOS && !d.wphone && !d.android && void 0 === window.orientation), d.isPad = d.isMobile && ("ipad" == d.iOS || -1 == l.indexOf("mobile") || -1 != l.indexOf("windows nt") && -1 != l.indexOf("touch")) || !1, d.isPhone = d.isMobile && ("iphone" == d.iOS || "ipod" == d.iOS) || -1 != l.indexOf("mobile") && !!d.android || !1, u.Browser = d;
-            var h = "Pc";
+            // var h = "Pc";
+            var h = "H5";
             /iku|ikucid/.test(navigator.userAgent.toLowerCase()) ? h = d.mac ? "H5-Ikumac" : "H5-Iku" : d.youkuHD ? h = "H5-Pad" : d.youku && d.iOS ? h = "H5-Ios" : d.youku && d.android ? h = "H5-Android" : d.isPhone ? h = "H5" : d.isPad && (h = "Padweb"), u.appName = h, u.initUA_OPT(), u.checkProtocol(), u.loadAplus(), e.default = u
         })
     }, function (e, t, i) {
@@ -616,7 +617,8 @@
                 }, {
                     key: "publicTemplate", value: function (e) {
                         var t = "spvdiv";
-                        return "live" == e && (t = "livebox"), '\n            <player class="player_ad">\n                <player class="player_ad_box">\n                    <player class="player_ad_tip player_ad_count">广告还有<span>0</span>秒</player>\n                    <player class="player_ad_tip ad_mute"></player>    \n                    <player class="player_ad_tip ad_nomute"></player>\n                    <player class="player_ad_tip player_ad_skip">跳过广告</player>\n                    <player class="player_ad_tip player_ad_more">了解详情</player>\n                    <player class="player_ad_big"></player>\n                </player>\n            </player>\n            <' + t + ' class="base ' + e + '_lock">\n                <' + t + ' class="' + e + '_lock_et"></' + t + ">\n                <" + t + ' class="' + e + '_lock_box">\n                    <' + t + ' class="' + e + '_lock_des"></' + t + ">\n                    <" + t + ' class="' + e + '_lock_btn" sourceid="youkulive"></' + t + ">\n                </" + t + ">\n            </" + t + ">\n            <" + t + ' class="' + e + '_load_first">\n                <' + t + ' class="' + e + '_load_img"></' + t + ">\n            </" + t + ">\n            <" + t + ' class="' + e + '_poster" style=""></' + t + ">\n            <" + t + ' class="' + e + '_little">\n                <' + t + ' class="' + e + '_little_tip"></' + t + ">\n            </" + t + ">\n            <" + t + ' class="' + e + '_tips"></' + t + ">\n            <" + t + ' class="' + e + '_play_btn"></' + t + ">\n            <" + t + ' class="' + e + '_background"></' + t + ">\n            <" + t + ' class="' + e + '_shadow"></' + t + ">\n            <" + t + ' class="' + e + '_logo"></' + t + ">\n            <" + t + ' class="' + e + '_playload">\n                <' + t + ' class="spvimg"></' + t + ">\n            </" + t + ">\n            <" + t + ' class="' + e + '_vip_info">\n                <' + t + ' class="' + e + '_vip_bar"></' + t + ">\n            </" + t + ">\n        "
+                        //fix
+                        // return "live" == e && (t = "livebox"), '\n            <player class="player_ad">\n                <player class="player_ad_box">\n                    <player class="player_ad_tip player_ad_count">广告还有<span>0</span>秒</player>\n                    <player class="player_ad_tip ad_mute"></player>    \n                    <player class="player_ad_tip ad_nomute"></player>\n                    <player class="player_ad_tip player_ad_skip">跳过广告</player>\n                    <player class="player_ad_tip player_ad_more">了解详情</player>\n                    <player class="player_ad_big"></player>\n                </player>\n            </player>\n            <' + t + ' class="base ' + e + '_lock">\n                <' + t + ' class="' + e + '_lock_et"></' + t + ">\n                <" + t + ' class="' + e + '_lock_box">\n                    <' + t + ' class="' + e + '_lock_des"></' + t + ">\n                    <" + t + ' class="' + e + '_lock_btn" sourceid="youkulive"></' + t + ">\n                </" + t + ">\n            </" + t + ">\n            <" + t + ' class="' + e + '_load_first">\n                <' + t + ' class="' + e + '_load_img"></' + t + ">\n            </" + t + ">\n            <" + t + ' class="' + e + '_poster" style=""></' + t + ">\n            <" + t + ' class="' + e + '_little">\n                <' + t + ' class="' + e + '_little_tip"></' + t + ">\n            </" + t + ">\n            <" + t + ' class="' + e + '_tips"></' + t + ">\n            <" + t + ' class="' + e + '_play_btn"></' + t + ">\n            <" + t + ' class="' + e + '_background"></' + t + ">\n            <" + t + ' class="' + e + '_shadow"></' + t + ">\n            <" + t + ' class="' + e + '_logo"></' + t + ">\n            <" + t + ' class="' + e + '_playload">\n                <' + t + ' class="spvimg"></' + t + ">\n            </" + t + ">\n            <" + t + ' class="' + e + '_vip_info">\n                <' + t + ' class="' + e + '_vip_bar"></' + t + ">\n            </" + t + ">\n        "
                     }
                 }, {
                     key: "template", value: function () {
@@ -2489,7 +2491,8 @@
                 }, {
                     key: "sendSU_", value: function (e) {
                         if (this.addata) {
-                            curnum += 2;
+                            //fix
+                            //curnum += 2;
                             var t = this.addata["A" + curnum].MT;
                             if (t && e >= parseInt(t, 10)) {
                                 var i = this.addata["A" + curnum].MU, n = this.addata["A" + curnum].CMU;
@@ -5661,6 +5664,9 @@
             Object.defineProperty(e, "__esModule", {value: !0});
             var u = r(t), l = r(i), d = r(n), h = r(s), c = r(a), f = function () {
                 function e(t, i, n) {
+                    lib.mtop.config.encryptRClient = window._sce_lgtcaygl(n.R1);
+                    lib.mtop.config.ccode = n.ccode;
+
                     (0, l.default)(this, e), this.liveid = t, this.EventManager = i, this.config = n, this.config.data && (this.data = this.config.data.data), this.collina = new h.default, this.utid = c.default.getCna(), this.linktype = this.config.pc ? "pc" : "h5", lib.mtop.config.subDomain = "", lib.mtop.config.mainDomain = "youku.com", -1 == lib.mtop.config.prefix.indexOf("acs") && (lib.mtop.config.prefix = "acs"), "acs" == lib.mtop.config.prefix || "pre-acs" == lib.mtop.config.prefix ? this.appKey = 23536927 : this.appKey = 4272
                 }
 
