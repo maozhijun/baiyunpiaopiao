@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Http\Request;
 use QL\QueryList;
 
-class GunqiuEncodesController extends BaseController
+class GunQiuEncodesController extends BaseController
 {
     /**
      * http://sports.pptv.com   网址下的cookie

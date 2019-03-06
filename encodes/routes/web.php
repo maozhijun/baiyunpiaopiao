@@ -171,7 +171,7 @@ Route::group(["middleware" => "auth", "namespace" => "Pull"], function () {
 
     //滚球
     Route::get("/resources/gunqiu/", "GunQiuEncodesController@index");
-    Route::get("/resources/gunqiu/get_live_url", "GunqiuEncodesController@getLiveUrl");
+    Route::get("/resources/gunqiu/get_live_url", "GunQiuEncodesController@getLiveUrl");
 });
 
 Route::group(["namespace" => "Pull"], function () {
