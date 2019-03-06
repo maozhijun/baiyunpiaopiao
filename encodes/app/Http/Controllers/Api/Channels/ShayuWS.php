@@ -44,7 +44,7 @@ class ShayuWS extends Channel
         $sstring = $this->ws_key . '/live/' . $key . "$timestamp";
         $auth_key = md5($sstring);
         $this->streamURL = "rtmp://$this->push_host/live";//流地址
-        $this->streamKey = $key . '?wsSecret=' . $auth_key . '&wsABSTime=' . $timestamp;//流名称
+        $this->streamKey = $key . '?k=' . $auth_key . '&t=' . $timestamp;//流名称
 
         $sstring = $this->ws_key . '/live/' . $key . ".flv$timestamp";
         $auth_key = md5($sstring);
