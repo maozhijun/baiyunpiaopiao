@@ -67,6 +67,7 @@ class LehuStreamController extends BaseController
             list($room_id, $room_num, $room_nickname) = explode('-', $request->room);
             $input = $request->input;
             $name = $request->title;
+            $sync = 0;
             switch ($request->platform) {
                 case 1: {
                     $aikqWs = new AikqWS($room_num);
@@ -92,6 +93,7 @@ class LehuStreamController extends BaseController
                 }
                 case 5: {
                     $aikqWs = new ShayuWS($room_num);
+                    $sync = 1;
                     break;
                 }
                 default: {
@@ -138,6 +140,7 @@ class LehuStreamController extends BaseController
                     "title" => $name,
                     "liveType" => $type,
                     "liveTypeChild" => $subtype,
+                    "push" => $sync,
                 );
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
                 $data = curl_exec($curl);
@@ -147,7 +150,7 @@ class LehuStreamController extends BaseController
         }
         return back();
     }
-    
+
     public function stop(Request $request, $id)
     {
         $this->stopPush($id);
