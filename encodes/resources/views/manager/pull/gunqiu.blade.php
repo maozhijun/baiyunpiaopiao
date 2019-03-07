@@ -25,7 +25,6 @@
                         <label class="label label-primary">{{ isset($matchInfo) ? $matchInfo['leagueName'] : "其他"}}</label>
                     </td>
                     <td>{{isset($matchInfo) ? $matchInfo['time'] : "-"}}</td>
-                    <td></td>
                     <td>{{isset($matchInfo) ? $matchInfo['hname'].' vs '.$matchInfo['aname'] : "-"}}</td>
                     <td>
                         @if($matchInfo['status'] == 1)

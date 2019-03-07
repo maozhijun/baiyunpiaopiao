@@ -49,6 +49,7 @@
     lib.mtop.config.liveAppkey = 24679788;
     lib.mtop.config.encryptRClient = "";
     lib.mtop.config.ccode = "";
+    lib.mtop.config.pid = "";
 //    lib.mtop.config.ad = "";
 
 //    lib.mtop.config.streamParam_sign = "";

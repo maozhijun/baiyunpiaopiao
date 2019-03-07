@@ -1,5 +1,8 @@
 @extends('layouts.resources')
 @section('content')
+    @if(!$isLogin)
+        <label class="label label-danger">登录已过期</label>
+    @endif
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -13,7 +16,8 @@
             </thead>
             <tbody>
             @foreach($lives as $live)
-                @if($live['liveStatus'] == 2 || $live['playType'] == 2)
+                @if(!isset($live['playType']) || $live['liveStatus'] == 2 || $live['playType'] == 2)
+                {{--@if(!isset($live['playType']) || $live['liveStatus'] == 2 || $live['playType'] == 0)--}}
                     @continue
                 @endif
                 <tr>
@@ -34,8 +38,11 @@
                         @endif
                     </td>
                     <td>
-                        @foreach($live['multiLiveList'] as $liveItem)
+                        @foreach($live['multiLiveList'] as $key=>$liveItem)
                             <a class="label {{ $liveItem['isPay']==1?'label-danger':'label-primary' }}" href="/resources/youku/get_live_url/{{ $liveItem['liveId'] }}" target="_blank">{{$liveItem['styleName']}}</a>
+                            @if($key > 0 && $key % 2 == 1)
+                                <br>
+                            @endif
                         @endforeach
                     </td>
                 </tr>
@@ -43,5 +50,4 @@
             </tbody>
         </table>
     </div>
-
 @endsection
