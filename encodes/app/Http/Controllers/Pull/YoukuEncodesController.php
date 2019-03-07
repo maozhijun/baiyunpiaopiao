@@ -4,16 +4,17 @@ namespace App\Http\Controllers\Pull;
 
 use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Http\Request;
-use QL\QueryList;
+use Illuminate\Support\Facades\Redis;
 
 class YoukuEncodesController extends BaseController
 {
-//    private $cookie = "PUID=b76c118ef74441b7ab0d-26a60a544d49; __crt=1538037805673; ppi=302c3332; Hm_lvt_7adaa440f53512a144c13de93f4c22db=1538037800,1538038459,1538214006; Hm_lpvt_7adaa440f53512a144c13de93f4c22db=1538214006";
+    const REDIS_YOU_KU_COOKIE_KEY = "redis_you_ku_cookie_key";
+
     /**
      * http://sports.pptv.com   网址下的cookie
      */
-//    private $cookie = 'PUID=2366b427ec2444c2e3c3-f84fcd3d785c; ab_cid=0ebf078bdb5a4f6dd17a-31a5ed5b89cb; _df_ud=6d239a85-cbb8-4dc0-aa00-a5990b6bd694; isSuning=0; UDR={"1":"1524987021000"}; ppToken=MwnWnyfKNZmhYOXc1AzwsCj3pvkVedNIm4RzNqCi_FA5ABNt9QYK5rQmfsbO3NMCf50Cb19zvNvP%0D%0AY8Xp-eEwfr12AobeQboZrnxVRKMal65e0YhVe0B7sCaOiAoxAuUM8wlYs-19Td9kfgJoof6_zX2W%0D%0Ao0B2wwtjQ5GoAkOYBxA%0D%0A; ppid=5027277990; isUpgrade=1; PPName=13378681807_180310l88$B71BE42FF7E844AA86A11E2A2C530A67; UDI=0$$0$PP%E6%B8%B8%E6%B0%91$$$$$$http%3A%2F%2Fimage.suning.cn%2Fuimg%2Fcmf%2Fcust_headpic%2F0000000000_01_120x120.jpg$$$$$$$PP%E7%94%A8%E6%88%B7_681807$0$$false$Sun+Apr+29+15; ppi=302c34; website_msg=%257B%2522times%2522%253A0%252C%2522date%2522%253A1538984310573%252C%2522interval%2522%253A3600000%257D; sprotsVipType=2; BubbleName=%25E4%25B8%25AD%25E7%25A7%258B%25E7%25AD%25BE%25E5%2588%25B0; Hm_lvt_7adaa440f53512a144c13de93f4c22db=1538986778; Hm_lpvt_7adaa440f53512a144c13de93f4c22db=1538986778; __ssar=direct%7Cdirect%7C%7C%7C; __ssav=153898677785275832%7C1538986777852%7C1538986777852%7C1538986777853%7C1%7C1%7C1; __ssas=153898677786417699%7C1538986777870%7C1538986777864%7C1; _snvd=1536045425885ieOKYqmOpbt; _snstyxuid=FB62BE72299C5QQ2; sctx=; ab_3d333112_search_algorithm={"sid":"3d333112_search_algorithm","abid":"","sv":"default","errorCode":"3","lsd":1538987216000}; PPKey=SwE0oYg%2Bpf6FwrUYAKPLZBwuxOe1k377D5T%2Bpidgq4w04wuWJFZJgL3vVM%2BNV16T%2BRimfvFz8YETibL5W01HxM1j8kEQBv2WctYEOjNGf2JoaOTK5NLA2dn5wfHsKgUp1S2l6PH0OxxnPZBiGAEoV6f0KC12yUXQeArevSJ34%2FiZ3kc%2FjL%2BdbPaV9BmnEFAS';
-    private $cookie = 'P_sck=3VeSMvWtQnsu9VnkYQBzxr7At1FZFGSFB4SSVLtTtnQdih73YNRuTAN6Nsiw3gbybSjK%2FtCZsJSoOTodLz04Utfl66M8PufjaS1VXwVvYXfzct%2FI09UX%2FJgejfqZwFploW7veYCFYQKsU2PpEjor6TY2t0SlLt385WfUxXAMi9s%3D;P_gck=NA%7CLc5rzHPwovJPr3nn2W7BJQ%3D%3D%7CNA%7C1551927342705;';
+    private $cookie_Pgck = "P_gck=NA%7CLc5rzHPwovJPr3nn2W7BJQ%3D%3D%7CNA%7C1551927342705;";
+    private $cookie_Psck = 'P_sck=C2pWpfGmjeXJ0tksf56O8lQlEnGMONZfusOfXwRCVA%2BcgYwX3Gd%2BMHAgSg%2BYIsLXml1hr6NTFhaRSBvFMbicduJDGDlFL4o4O%2Bnwd%2FK%2BbuBVNjJqpvUhH5LDsZL9uYJRAUnXw6uO14YtTLXfyZoNq13mmOU6krHTEP6oL246crM%3D;';
     /**
      * http://v.pptv.com    网址下的cookie
      */
@@ -38,9 +39,9 @@ class YoukuEncodesController extends BaseController
             if (strlen($cookies) > 0) {
                 $lives = $this->getAppMatches($cookies, $request->input("params"), $request->input("data"));
                 if (!empty($lives)) {
-                    //检查登录
-                    $isLogin = $this->checkLogin();
-                    return view('manager.pull.youku', ['lives' => $lives, 'isLogin'=>$isLogin]);
+                    //刷新cookies，并判断cookie是否过期
+                    $isLogin = $this->refreshCookies();
+                    return view('manager.pull.youku', ['lives' => $lives, 'isLogin' => $isLogin]);
                 }
                 $yk_rq_count++;
             } else {
@@ -49,7 +50,7 @@ class YoukuEncodesController extends BaseController
         } else {
             $yk_rq_count = 0;
         }
-        session(['yk_rq_count'=>$yk_rq_count]);
+        session(['yk_rq_count' => $yk_rq_count]);
         if ($yk_rq_count < 3) {
             return redirect("http://test.youku.com/resources/youku/fake_detail");
         } else {
@@ -74,17 +75,18 @@ class YoukuEncodesController extends BaseController
     public function fakeDetail(Request $request)
     {
         $id = $request->input('id');
-        return view('manager.pull.youku_fake_detail', ['id'=>$id]);
+        return view('manager.pull.youku_fake_detail', ['id' => $id]);
     }
 
-    private function getStreamInfo($cookies, $params, $data) {
+    private function getStreamInfo($cookies, $params, $data)
+    {
         if ($cookies) $cookies = urldecode($cookies);
         if ($params) $params = urldecode($params);
 //        if ($data) $data = urldecode($data);
 
-        $cookies = $this->cookie.$cookies;
+        $cookies = $this->getYoukuCookie() . $cookies;
 
-        $url = "http://acs.youku.com/h5/mtop.youku.live.com.liveplaycontrolv2/2.0/?$params&data=".urlencode($data);
+        $url = "http://acs.youku.com/h5/mtop.youku.live.com.liveplaycontrolv2/2.0/?$params&data=" . urlencode($data);
         $this->dumpData("getStreamInfo: url = $url");
         $this->dumpData("getStreamInfo: cookies = $cookies");
         $this->dumpData("getStreamInfo: data = $data");
@@ -101,8 +103,8 @@ class YoukuEncodesController extends BaseController
         curl_setopt($ch, CURLOPT_USERAGENT, "$this->userAgentPC");
         curl_setopt($ch, CURLOPT_COOKIESESSION, true);
 
-        $response = curl_exec ($ch);
-        curl_close ($ch);
+        $response = curl_exec($ch);
+        curl_close($ch);
 
         $streams = array();
         if ($response && strlen($response) > 0) {
@@ -117,11 +119,12 @@ class YoukuEncodesController extends BaseController
         return $streams;
     }
 
-    private function getAppMatches($cookies, $params, $data) {
+    private function getAppMatches($cookies, $params, $data)
+    {
         if ($cookies) $cookies = urldecode($cookies);
         if ($params) $params = urldecode($params);
 
-        $url = "https://acs.youku.com/h5/mtop.youku.sports.show.schedule.list/1.0/?$params&data=".urlencode($data);
+        $url = "https://acs.youku.com/h5/mtop.youku.sports.show.schedule.list/1.0/?$params&data=" . urlencode($data);
         $this->dumpData("getAppMatches: url = $url");
         $this->dumpData("getAppMatches: cookie = $cookies");
 
@@ -137,8 +140,8 @@ class YoukuEncodesController extends BaseController
         curl_setopt($ch, CURLOPT_USERAGENT, "$this->userAgentPC");
         curl_setopt($ch, CURLOPT_COOKIESESSION, true);
 
-        $response = curl_exec ($ch);
-        curl_close ($ch);
+        $response = curl_exec($ch);
+        curl_close($ch);
 
         $this->dumpData($response);
 
@@ -158,7 +161,8 @@ class YoukuEncodesController extends BaseController
         return $matches;
     }
 
-    private function dumpData($data) {
+    private function dumpData($data)
+    {
         if ($this->isDebug) {
             dump($data);
         }
@@ -170,34 +174,63 @@ class YoukuEncodesController extends BaseController
     /**
      * 通过获取用户信息，验证token是否过期
      */
-    private function checkLogin() {
-        $url = "https://cmstool.youku.com/cms/player/userinfo/user_info";
+    private function refreshCookies()
+    {
+        $url = "https://lv.youku.com/api/grade/get_uinfo?from=web";
 
         $this->dumpData("checkLogin: url = $url");
-        $this->dumpData("checkLogin: cookie = $this->cookie");
+        $this->dumpData("checkLogin: cookie = " . $this->getYoukuCookie());
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_COOKIE, "$this->cookie");
+        curl_setopt($ch, CURLOPT_COOKIE, $this->getYoukuCookie());
 //        curl_setopt($ch, CURLOPT_POST, true);
 //        curl_setopt($ch, CURLOPT_POSTFIELDS, "id=0&screen_orientation=portrait&name=&gps_position=");
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate, br');
-        curl_setopt($ch, CURLOPT_REFERER, 'https://sports.youku.com/');
+        curl_setopt($ch, CURLOPT_REFERER, 'https://www.youku.com/');
         curl_setopt($ch, CURLOPT_USERAGENT, "$this->userAgentPC");
         curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+        //获取请求头
+        curl_setopt($ch, CURLOPT_HEADER, 1);
 
-        $response = curl_exec ($ch);
-        curl_close ($ch);
+        $response = curl_exec($ch);
+        curl_close($ch);
 
+        $cookies = array();
         if ($response && strlen($response) > 0) {
             $this->dumpData($response);
-            $jsonData = json_decode($response, true);
-            if (isset($jsonData['error']) && $jsonData['error'] == 0) {
-                return true;
+
+            //获取cookies
+            preg_match_all('/^Set-Cookie:\s*([^;]*)/mi', $response, $matches);
+            foreach ($matches[1] as $item) {
+                parse_str($item, $cookie);
+                $cookies = array_merge($cookies, $cookie);
             }
+            $this->dumpData($cookies);
+            $this->saveYoukuCookie($cookies);
         }
-        return false;
+
+        return count($cookies) > 0;
+    }
+
+    private function getYoukuCookie()
+    {
+        $cookieStr = Redis::get(self::REDIS_YOU_KU_COOKIE_KEY);
+        if ($cookieStr && strlen($cookieStr) && str_contains($cookieStr, "P_sck")) {
+            $this->cookie_Psck = $cookieStr;
+            $this->dumpData("getYoukuCookie: cookieStr = $cookieStr");
+        }
+        return $this->cookie_Psck . $this->cookie_Pgck;
+    }
+
+    private function saveYoukuCookie($cookies)
+    {
+        $cookieStr = "";
+        foreach ($cookies as $key => $cookie) {
+            $cookieStr .= $key . "=" . $cookie . ";";
+        }
+        Redis::setEx(self::REDIS_YOU_KU_COOKIE_KEY, 30 * 24 * 60 * 60, $cookieStr);
     }
 }
