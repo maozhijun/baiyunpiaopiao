@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Redis;
 
 class YoukuEncodesController extends BaseController
 {
-    const REDIS_YOU_KU_COOKIE_KEY = "redis_you_ku_cookie_key";
+    const REDIS_YOU_KU_COOKIE_KEY = "redis_youku_cookie_key";
+
+    private $uid = 138403076;
 
     /**
      * http://sports.pptv.com   网址下的cookie
@@ -40,7 +42,7 @@ class YoukuEncodesController extends BaseController
                 $lives = $this->getAppMatches($cookies, $request->input("params"), $request->input("data"));
                 if (!empty($lives)) {
                     //刷新cookies，并判断cookie是否过期
-                    $isLogin = $this->refreshCookies();
+                    $isLogin = $this->refreshCookies($request->input("usig"));
                     return view('manager.pull.youku', ['lives' => $lives, 'isLogin' => $isLogin]);
                 }
                 $yk_rq_count++;
@@ -75,7 +77,7 @@ class YoukuEncodesController extends BaseController
     public function fakeDetail(Request $request)
     {
         $id = $request->input('id');
-        return view('manager.pull.youku_fake_detail', ['id' => $id]);
+        return view('manager.pull.youku_fake_detail', ['id' => $id, 'uid'=>$this->uid]);
     }
 
     private function getStreamInfo($cookies, $params, $data)
@@ -174,12 +176,15 @@ class YoukuEncodesController extends BaseController
     /**
      * 通过获取用户信息，验证token是否过期
      */
-    private function refreshCookies()
+    private function refreshCookies($usigParams)
     {
-        $url = "https://lv.youku.com/api/grade/get_uinfo?from=web";
+        if ($usigParams) $usigParams = urldecode($usigParams);
 
-        $this->dumpData("checkLogin: url = $url");
-        $this->dumpData("checkLogin: cookie = " . $this->getYoukuCookie());
+//        $url = "https://lv.youku.com/api/grade/get_uinfo?from=web";
+        $url = "https://lvip.youku.com/api/user/get_user_info?$usigParams";
+
+        $this->dumpData("refreshCookies: url = $url");
+        $this->dumpData("refreshCookies: cookie = " . $this->getYoukuCookie());
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -212,7 +217,7 @@ class YoukuEncodesController extends BaseController
             $this->saveYoukuCookie($cookies);
         }
 
-        return count($cookies) > 0;
+        return count($cookies) > 0 && isset($cookies['P_sck']) && strlen($cookies['P_sck']) > 10;
     }
 
     private function getYoukuCookie()
@@ -229,7 +234,9 @@ class YoukuEncodesController extends BaseController
     {
         $cookieStr = "";
         foreach ($cookies as $key => $cookie) {
-            $cookieStr .= $key . "=" . $cookie . ";";
+            if ($cookie && $cookie != 'deleted') {
+                $cookieStr .= $key . "=" . $cookie . ";";
+            }
         }
         Redis::setEx(self::REDIS_YOU_KU_COOKIE_KEY, 30 * 24 * 60 * 60, $cookieStr);
     }

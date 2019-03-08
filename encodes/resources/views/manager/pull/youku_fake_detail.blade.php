@@ -89,12 +89,17 @@
             console.log("yk_data", lib.mtop.config.streamParam_data);
         } else {
             appKey = liveInfoKey;
-            url = "{{env('HOST_URL')}}" + "/resources/youku"
+            url = "{{env('HOST_URL')}}" + "/resources/youku";
+            var uid = '{{$uid}}';
+            var usig = getApiSignature(uid);
         }
         var sign = getYoukuSign(token, time, appKey, data);
         var params = "appKey=" + appKey + "&t=" + time + "&sign=" +  sign;
-        location.href = url + "?cookies=" + encodeURIComponent(cookies) + "&params=" + encodeURIComponent(params) + "&data=" + encodeURIComponent(data);
-//        var href = url + "?cookies=" + encodeURIComponent(cookies) + "&params=" + encodeURIComponent(params) + "&data=" + encodeURIComponent(data);
+        var href = url + "?cookies=" + encodeURIComponent(cookies) + "&params=" + encodeURIComponent(params) + "&data=" + encodeURIComponent(data);
+        if (usig && usig.length > 0) {
+            href += "&usig=" + encodeURIComponent(usig);
+        }
+        location.href = href;
 //        console.log(href);
 //        console.log(cookies);
 //        console.log(appKey, time, sign, data);
