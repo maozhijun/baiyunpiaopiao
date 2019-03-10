@@ -12,33 +12,35 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($lives['matches'] as $key=>$live)
+            @foreach($matchesInfo as $match)
                 <?php
-                    $matchInfo = isset($lives['matchInfos'][$live['sid']]) ? $lives['matchInfos'][$live['sid']] : null;
-                    if (!$live['isOut']) {
-                        $live['heibaiUrl'] = "http://www.gunqiu.com/match_live/".$live['sid'];
+                    $sid = $match['mid'];
+                    $liveUrl = isset($livesInfo[$sid]) ? $livesInfo[$sid] : "";
+                    if (isset($liveUrl) && !str_contains($liveUrl, "heibaizhibo.com")) {
+                        $liveUrl = "http://www.gunqiu.com/match_live/".$sid;
                     }
                 ?>
-                @if(!isset($matchInfo)) @continue @endif
                 <tr>
                     <td>
-                        <label class="label label-primary">{{ isset($matchInfo) ? $matchInfo['leagueName'] : "其他"}}</label>
+                        <label class="label label-primary">{{ $match['league']}}</label>
                     </td>
-                    <td>{{isset($matchInfo) ? $matchInfo['time'] : "-"}}</td>
-                    <td>{{isset($matchInfo) ? $matchInfo['hname'].' vs '.$matchInfo['aname'] : "-"}}</td>
+                    <td>{{$match['matchtime']}}</td>
+                    <td>{{$match['hometeam'].' vs '.$match['guestteam']}}</td>
                     <td>
-                        @if($matchInfo['status'] == 1)
+                        @if($match['matchstate'] == 1)
                             <label class="label label-info">上半场</label>
-                        @elseif($matchInfo['status'] == 2)
+                        @elseif($match['matchstate'] == 2)
                             <label class="label label-warning">中场</label>
-                        @elseif($matchInfo['status'] == 3)
+                        @elseif($match['matchstate'] == 3)
                             <label class="label label-success">下半场</label>
                         @else
                             <label class="label label-default">未开始</label>
                         @endif
                     </td>
                     <td>
-                        <a href="/resources/gunqiu/get_live_url?url={{urlencode($live['heibaiUrl'])}}" target="_blank">获取流地址</a>
+                        @if(strlen($liveUrl) > 0)
+                            <a href="/resources/gunqiu/get_live_url?url={{urlencode($liveUrl)}}" target="_blank">获取流地址</a>
+                        @endif
                     </td>
                 </tr>
             @endforeach

@@ -31,8 +31,9 @@ class GunQiuEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $lives = $this->getAppMatches();
-        return view('manager.pull.gunqiu', ['lives' => $lives]);
+        $livesInfo = $this->getLiveInfos();
+        $matchesInfo = $this->getMatchesInfo();
+        return view('manager.pull.gunqiu', ['livesInfo' => $livesInfo, 'matchesInfo'=>$matchesInfo]);
     }
 
     public function getLiveUrl(Request $request)
@@ -163,9 +164,9 @@ class GunQiuEncodesController extends BaseController
         return $gunqiuUrl;
     }
 
-    private function getAppMatches() {
+    private function getLiveInfos() {
         $url = "http://mobile.gunqiu.com/interface/v3.6/livestv/index";
-        $this->dumpData("getAppMatches: url = $url");
+        $this->dumpData("getLiveInfos: url = $url");
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -184,9 +185,7 @@ class GunQiuEncodesController extends BaseController
 
 //        $this->dumpData($response);
 
-
-        $matches = array();
-        $matchInfos = array();
+        $liveInfos = array();
         if ($response && strlen($response) > 0) {
             $jsonData = json_decode($response, true);
 
@@ -194,68 +193,105 @@ class GunQiuEncodesController extends BaseController
             if (isset($jsonData['data'])) {
 //                $matches = collect($jsonData['data'])->where("isOut", true)->values()->all();
                 $matches = $jsonData['data'];
-
-                $matchIds = collect($matches)->map(function ($item){
-                    return $item['sid'];
-                })->values()->all();
-                $matchInfos = $this->getPcMatches($matchIds);
+                $liveInfos = collect($matches)->mapWithKeys(function ($item){
+                    return [$item['sid']=>$item['heibaiUrl']];
+                })->all();
             }
         }
-        return ['matches'=>$matches, 'matchInfos'=>$matchInfos];
+        $this->dumpData($liveInfos);
+        return $liveInfos;
     }
 
-    private function getPcMatches($appMatchIdes) {
-        $ql = new QueryList();
-        $ql->get('http://www.gunqiu.com/', [], [
-            //设置超时时间，单位：秒
-            'timeout' => 30,
-            'headers' => [
-                'User-Agent' => $this->userAgentPC,
-                'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-                'accept-encoding' => 'gzip, deflate, br',
-                'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8,ja;q=0.7',
-                'upgrade-insecure-requests' => '1',
-//                'Cookie' => '__cfduid=d913bf68f903853b3c1697c9c29733ba31532567654'
-            ]
-        ])->encoding('UTF-8')->removeHead();
+    private function getMatchesInfo() {
+        $url = "http://mobile.gunqiu.com/interface/v3.6/bifen2/live";
+        $this->dumpData("getMatchesInfo: url = $url");
 
-//        $this->dumpData($ql);
-//        $lives = [];
-//        $lis = $ql->find('ol li')->getElements();
-        $matchIds = $ql->find('ol li')->attrs("id");
-        $matchStatus = $ql->find('ol li')->attrs("matchstate");
-        $leagueNames = $ql->find("span.league")->texts();
-        $matchTimes = $ql->find("span.time")->texts();
-        $matchHnames = $ql->find(".gleft i.teamname")->texts();
-        $matchAnames = $ql->find(".gright i.teamname")->texts();
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+//        curl_setopt($ch, CURLOPT_COOKIE, "$cookies");
+//        curl_setopt($ch, CURLOPT_POST, true);
+//        curl_setopt($ch, CURLOPT_POSTFIELDS, "id=0&screen_orientation=portrait&name=&gps_position=");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate, br');
+//        curl_setopt($ch, CURLOPT_REFERER, 'https://sports.youku.com/');
+        curl_setopt($ch, CURLOPT_USERAGENT, "$this->userAgentPC");
+        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
 
-//        $this->dumpData($lis);
-//        $ql_li = new QueryList();
+        $response = curl_exec ($ch);
+        curl_close ($ch);
 
         $matchInfos = array();
-        foreach ($matchIds as $key=>$id) {
-            if (in_array($id, $appMatchIdes)) {
-//                $ql_li->setHtml($liHtmls[$key]);
-//                $matchInfo['leagueName'] = $ql_li->find("span.league")->texts()->first();
-//                $matchInfo['time'] = $ql_li->find("span.time")->texts()->first();
-//                $matchInfo['status'] = $ql_li->find("span.status")->texts()->first();
-//                $matchInfo['hname'] = $ql_li->find("i.teamname")->texts()->first();
-//                $matchInfo['aname'] = $ql_li->find("i.teamname")->texts()->last();
+        if ($response && strlen($response) > 0) {
+            $jsonData = json_decode($response, true);
 
-                $status = $matchStatus[$key];
-                if ($status == -1) continue; //如果比赛结束了，不再操作
+//            $this->dumpData($jsonData);
+            if (isset($jsonData['data']['matchs'])) {
+//                $matches = collect($jsonData['data'])->where("isOut", true)->values()->all();
+                $matches = $jsonData['data']['matchs'];
 
-                $matchInfo['leagueName'] = $leagueNames[$key+2];
-                $matchInfo['time'] = $matchTimes[$key+2];
-                $matchInfo['status'] = $status;
-                $matchInfo['hname'] = $matchHnames[$key];
-                $matchInfo['aname'] = $matchAnames[$key];
-
-                $matchInfos[$id] = $matchInfo;
+                $matchInfos = collect($matches)
+                    ->where('islive', true)
+                    ->where('matchstate', '>=', 0)
+                    ->sortBy('matchtimex')->values()->all();
             }
         }
+        $this->dumpData($matchInfos);
         return $matchInfos;
     }
+//
+//    private function getPcMatches($appMatchIdes) {
+//        $ql = new QueryList();
+//        $ql->get('http://www.gunqiu.com/', [], [
+//            //设置超时时间，单位：秒
+//            'timeout' => 30,
+//            'headers' => [
+//                'User-Agent' => $this->userAgentPC,
+//                'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+//                'accept-encoding' => 'gzip, deflate, br',
+//                'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8,ja;q=0.7',
+//                'upgrade-insecure-requests' => '1',
+////                'Cookie' => '__cfduid=d913bf68f903853b3c1697c9c29733ba31532567654'
+//            ]
+//        ])->encoding('UTF-8')->removeHead();
+//
+////        $this->dumpData($ql);
+////        $lives = [];
+////        $lis = $ql->find('ol li')->getElements();
+//        $matchIds = $ql->find('ol li')->attrs("id");
+//        $matchStatus = $ql->find('ol li')->attrs("matchstate");
+//        $leagueNames = $ql->find("span.league")->texts();
+//        $matchTimes = $ql->find("span.time")->texts();
+//        $matchHnames = $ql->find(".gleft i.teamname")->texts();
+//        $matchAnames = $ql->find(".gright i.teamname")->texts();
+//
+////        $this->dumpData($lis);
+////        $ql_li = new QueryList();
+//
+//        $matchInfos = array();
+//        foreach ($matchIds as $key=>$id) {
+//            if (in_array($id, $appMatchIdes)) {
+////                $ql_li->setHtml($liHtmls[$key]);
+////                $matchInfo['leagueName'] = $ql_li->find("span.league")->texts()->first();
+////                $matchInfo['time'] = $ql_li->find("span.time")->texts()->first();
+////                $matchInfo['status'] = $ql_li->find("span.status")->texts()->first();
+////                $matchInfo['hname'] = $ql_li->find("i.teamname")->texts()->first();
+////                $matchInfo['aname'] = $ql_li->find("i.teamname")->texts()->last();
+//
+//                $status = $matchStatus[$key];
+//                if ($status == -1) continue; //如果比赛结束了，不再操作
+//
+//                $matchInfo['leagueName'] = $leagueNames[$key+2];
+//                $matchInfo['time'] = $matchTimes[$key+2];
+//                $matchInfo['status'] = $status;
+//                $matchInfo['hname'] = $matchHnames[$key];
+//                $matchInfo['aname'] = $matchAnames[$key];
+//
+//                $matchInfos[$id] = $matchInfo;
+//            }
+//        }
+//        return $matchInfos;
+//    }
 
     private function dumpData($data)
     {
