@@ -42,6 +42,7 @@ class YoukuEncodesController extends BaseController
                 $lives = $this->getAppMatches($cookies, $request->input("params"), $request->input("data"));
                 if (!empty($lives)) {
                     //刷新cookies，并判断cookie是否过期
+                    $this->refreshUserInfo(); //需要先调用用户接口，然后再刷新cookies
                     $isLogin = $this->refreshCookies($request->input("usig"));
                     return view('manager.pull.youku', ['lives' => $lives, 'isLogin' => $isLogin]);
                 }
@@ -173,6 +174,46 @@ class YoukuEncodesController extends BaseController
     /**
      * ===========================登录相关的逻辑======================================
      */
+
+    /**
+     * 如果登录过期了，需要调用这个接口
+     */
+    private function refreshUserInfo()
+    {
+        $url = "https://cmstool.youku.com/cms/player/userinfo/user_info?specialTest=test&client=pc";
+
+        $cookies = $this->getDefaultCookie();
+        $this->dumpData("refreshCookies: url = $url");
+        $this->dumpData("refreshCookies: cookie = " . $cookies);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_COOKIE, $cookies);
+//        curl_setopt($ch, CURLOPT_POST, true);
+//        curl_setopt($ch, CURLOPT_POSTFIELDS, "id=0&screen_orientation=portrait&name=&gps_position=");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate, br');
+        curl_setopt($ch, CURLOPT_REFERER, 'https://www.youku.com/');
+        curl_setopt($ch, CURLOPT_USERAGENT, "$this->userAgentPC");
+        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+        //获取请求头
+//        curl_setopt($ch, CURLOPT_HEADER, 1);
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        if ($response && strlen($response) > 0) {
+            $this->dumpData($response);
+
+            $jsonData = json_decode($response, true);
+            if (isset($jsonData['error']) && $jsonData['error'] == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * 通过获取用户信息，验证token是否过期
      */
@@ -183,12 +224,13 @@ class YoukuEncodesController extends BaseController
 //        $url = "https://lv.youku.com/api/grade/get_uinfo?from=web";
         $url = "https://lvip.youku.com/api/user/get_user_info?$usigParams";
 
+        $cookies = $this->getYoukuCookie();
         $this->dumpData("refreshCookies: url = $url");
-        $this->dumpData("refreshCookies: cookie = " . $this->getYoukuCookie());
+        $this->dumpData("refreshCookies: cookie = " . $cookies);
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_COOKIE, $this->getYoukuCookie());
+        curl_setopt($ch, CURLOPT_COOKIE, $cookies);
 //        curl_setopt($ch, CURLOPT_POST, true);
 //        curl_setopt($ch, CURLOPT_POSTFIELDS, "id=0&screen_orientation=portrait&name=&gps_position=");
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
@@ -239,5 +281,12 @@ class YoukuEncodesController extends BaseController
             }
         }
         Redis::setEx(self::REDIS_YOU_KU_COOKIE_KEY, 30 * 24 * 60 * 60, $cookieStr);
+    }
+
+    private function getDefaultCookie() {
+        $timeOut = strtotime('+1 hours') * 1000;
+        $timeCur = time() * 1000;
+        $token = $this->getYoukuCookie();
+        return $token."__ysuid=1541747078955y52; gray_mark=36; cna=3jzxE7x/HXkCAbcHr9BgQH63; juid=01d4pk26ll1ruk; timerun_8020477=1350.589135; timerun_8020615=1907.935669; timerun_8020756=0; __aysid=1551661678228P5H; timerun_8020546=17; timerun_8020987=638.955441; timerun_8020729=0; timerun_8016576=179; timerun_8021037=531.989644; timerun_8021231=2048.569068; timerun_8021234=5.939051; timerun_8020557=0; P_pck_rm=StnL7pwid9BesW0qBFgOEzzo582yfZNExp6rtfymGy9Myy8q%2Brw1KQBzj1DdefzIMG%2Fu6Qc2MRMIIHC2ixcGwDz%2B%2Ff6K8rdWLa6798t8jdkg%2B6ylN183QZqM8FFOe7UOyyj3Gs1xAhWxSYiHVPY86oR3N%2BkSddePvfQB1pINz3k%3D; timerun_8021343=7.967944; __ayft=1552039826877; __arycid=cms-00-1519-27244-0; __ayscnt=1; __arcms=cms-00-1519-27244-0; referhost=; ycid=0; ysestep=1; ypvid=1552150692376MHOFlo; yseid=1552150692377wR44JQ; yseidcount=18; yseidtimeout=$timeOut; ystep=26; P_ck_ctl=DBA200EFA14C73DE960D708A2D50D457; isg=BK2teIREjYizMmmXwW2eTPfTqUnnoh_atFCoVu-y1MSzZs0Yt1jxrB93UHolXPmU; __arpvid=1552181469876epBkbb-$timeCur; __aypstp=9; __ayspstp=183; seid=01d5ijj9f9225s; seidtimeout=$timeOut";
     }
 }
