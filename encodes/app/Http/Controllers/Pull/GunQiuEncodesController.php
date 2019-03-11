@@ -38,21 +38,32 @@ class GunQiuEncodesController extends BaseController
 
     public function getLiveUrl(Request $request)
     {
-        $url = $request->input('url');
-        if (strlen($url) > 0) {
-            $lines = $this->getStreamInfo($url);
+        $sid = $request->input('sid');
+        $hbId = $request->input('hbId', 0);
+        if (strlen($sid) > 0) {
+            $lines = $this->getStreamInfo($sid, $hbId);
             return view('manager.pull.gunqiu_lines', ['lines' => $lines]);
         } else {
             return response('信号还在路上，等会再来看看！');
         }
     }
 
-    private function getStreamInfo($url) {
-        //转换一下链接
-        $url = $this->convertGunqiuUrl($url);
+    private function getStreamInfo($sid, $hbId) {
+        if ($hbId == 0 || $hbId == '0') {
+            $url = $this->convertGunqiuUrl($sid);
+            //rtmp流地址
+            $streams = $this->getStreamUrlsByApp($sid);
+        } else {
+            $url = "http://www.heibaizhibo.com/live/$hbId";
+            $streams = array();
+        }
+
+        if (ends_with($url, "/0")) {
+            $this->dumpData($streams);
+            return $streams;
+        }
 
         $this->dumpData("getStreamInfo: url = $url");
-
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
 //        curl_setopt($ch, CURLOPT_COOKIE, "$cookies");
@@ -69,7 +80,6 @@ class GunQiuEncodesController extends BaseController
         curl_close ($ch);
 
 //        $this->dumpData($response);
-        $streams = array();
         if ($response && strlen($response) > 0) {
             preg_match("/var playCode = \\[(.*?)\\];/is", $response, $playCodeStr);
             $playCodeStr = (isset($playCodeStr) && isset($playCodeStr[1])&& isset($playCodeStr[1])) ? $playCodeStr[1] : "";
@@ -129,15 +139,46 @@ class GunQiuEncodesController extends BaseController
         return $streamItem;
     }
 
-    private function convertGunqiuUrl($gunqiuUrl) {
-        $this->dumpData("convertGunqiuUrl");
-        if (!$gunqiuUrl || !str_contains($gunqiuUrl, "www.gunqiu.com")) {
-            return $gunqiuUrl;
-        }
-        $this->dumpData($gunqiuUrl);
+    /**
+     * 从app中获取rtmp流地址
+     */
+    private function getStreamUrlsByApp($mid) {
+        $url = "http://mobile.gunqiu.com/interface/v3.6/livestv/list?mid=$mid";
 
-        $id = str_replace("http://www.gunqiu.com/match_live/", "", $gunqiuUrl);
-        $url = "http://mobile.gunqiu.com/interface/v3.6/livestv/listForPc?mid=$id";
+        $this->dumpData("getStreamInfoByApp: url = $url");
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+//        curl_setopt($ch, CURLOPT_COOKIE, "$cookies");
+//        curl_setopt($ch, CURLOPT_POST, true);
+//        curl_setopt($ch, CURLOPT_POSTFIELDS, "id=0&screen_orientation=portrait&name=&gps_position=");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate, br');
+//        curl_setopt($ch, CURLOPT_REFERER, 'https://sports.youku.com/');
+        curl_setopt($ch, CURLOPT_USERAGENT, "$this->userAgentPC");
+        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+
+        $response = curl_exec ($ch);
+        curl_close ($ch);
+
+        $streams = array();
+        if (isset($response) && strlen($response) > 0) {
+            $jsonData = json_decode($response, true);
+            foreach ($jsonData['data'] as $key=>$item) {
+                if (isset($item['url']) && strlen($item['url']) > 0) {
+                    $streamItem['name'] = $item['name'] . ($key + 1);
+                    $streamItem['playUrl'] = $item['url'];
+                    $streams[] = $streamItem;
+                }
+            }
+        }
+        $this->dumpData($streams);
+        return $streams;
+    }
+
+    private function convertGunqiuUrl($mid) {
+        $url = "http://mobile.gunqiu.com/interface/v3.6/livestv/listForPc?mid=$mid";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -161,7 +202,7 @@ class GunQiuEncodesController extends BaseController
                 return $jsonData['data']['heibaiUrl'];
             }
         }
-        return $gunqiuUrl;
+        return "";
     }
 
     private function getLiveInfos() {
@@ -194,7 +235,13 @@ class GunQiuEncodesController extends BaseController
 //                $matches = collect($jsonData['data'])->where("isOut", true)->values()->all();
                 $matches = $jsonData['data'];
                 $liveInfos = collect($matches)->mapWithKeys(function ($item){
-                    return [$item['sid']=>$item['heibaiUrl']];
+                    $heibaiUrl = $item['heibaiUrl'];
+                    if (str_contains($heibaiUrl, '/live/')) {
+                        $hbId = explode('/live/', $heibaiUrl)[1];
+                    } else {
+                        $hbId = 0;
+                    }
+                    return [$item['sid']=>$hbId];
                 })->all();
             }
         }

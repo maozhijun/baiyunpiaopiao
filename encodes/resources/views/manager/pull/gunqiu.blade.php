@@ -8,6 +8,7 @@
                 <td>时间</td>
                 <td>比赛</td>
                 <td>状态</td>
+                <td>地址</td>
                 <td>操作</td>
             </tr>
             </thead>
@@ -15,10 +16,7 @@
             @foreach($matchesInfo as $match)
                 <?php
                     $sid = $match['mid'];
-                    $liveUrl = isset($livesInfo[$sid]) ? $livesInfo[$sid] : "";
-                    if (isset($liveUrl) && !str_contains($liveUrl, "heibaizhibo.com")) {
-                        $liveUrl = "http://www.gunqiu.com/match_live/".$sid;
-                    }
+                    $hbId = isset($livesInfo[$sid]) ? $livesInfo[$sid] : 0;
                 ?>
                 <tr>
                     <td>
@@ -38,9 +36,14 @@
                         @endif
                     </td>
                     <td>
-                        @if(strlen($liveUrl) > 0)
-                            <a href="/resources/gunqiu/get_live_url?url={{urlencode($liveUrl)}}" target="_blank">获取流地址</a>
+                        @if($hbId > 0)
+                            <a href="http://www.heibaizhibo.com/live/{{$hbId}}" target="_blank">播放地址</a>
+                        @else
+                            <a href="http://www.gunqiu.com/match_live/{{$sid}}" target="_blank">播放地址</a>
                         @endif
+                    </td>
+                    <td>
+                        <a href="/resources/gunqiu/get_live_url?sid={{$sid}}&hbId={{$hbId}}" target="_blank">获取流地址</a>
                     </td>
                 </tr>
             @endforeach
