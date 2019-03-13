@@ -31,16 +31,19 @@ class GunQiuEncodesController extends BaseController
 
     public function index(Request $request)
     {
-        $livesInfo = $this->getLiveInfos();
-        $matchesInfo = $this->getMatchesInfo();
-        return view('manager.pull.gunqiu', ['livesInfo' => $livesInfo, 'matchesInfo'=>$matchesInfo]);
+//        $livesInfo = $this->getLiveInfos();
+//        $matchesInfo = $this->getMatchesInfo();
+//        return view('manager.pull.gunqiu', ['livesInfo' => $livesInfo, 'matchesInfo'=>$matchesInfo]);
+
+        $matchesInfo = $this->getPcMatchesByHeibai();
+        return view('manager.pull.gunqiu_pc', ['matchesInfo'=>$matchesInfo]);
     }
 
     public function getLiveUrl(Request $request)
     {
         $sid = $request->input('sid');
         $hbId = $request->input('hbId', 0);
-        if (strlen($sid) > 0) {
+        if (strlen($sid) > 0 || $hbId > 0) {
             $lines = $this->getStreamInfo($sid, $hbId);
             return view('manager.pull.gunqiu_lines', ['lines' => $lines]);
         } else {
@@ -286,59 +289,128 @@ class GunQiuEncodesController extends BaseController
         $this->dumpData($matchInfos);
         return $matchInfos;
     }
-//
-//    private function getPcMatches($appMatchIdes) {
-//        $ql = new QueryList();
-//        $ql->get('http://www.gunqiu.com/', [], [
-//            //设置超时时间，单位：秒
-//            'timeout' => 30,
-//            'headers' => [
-//                'User-Agent' => $this->userAgentPC,
-//                'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-//                'accept-encoding' => 'gzip, deflate, br',
-//                'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8,ja;q=0.7',
-//                'upgrade-insecure-requests' => '1',
-////                'Cookie' => '__cfduid=d913bf68f903853b3c1697c9c29733ba31532567654'
-//            ]
-//        ])->encoding('UTF-8')->removeHead();
-//
-////        $this->dumpData($ql);
-////        $lives = [];
-////        $lis = $ql->find('ol li')->getElements();
-//        $matchIds = $ql->find('ol li')->attrs("id");
-//        $matchStatus = $ql->find('ol li')->attrs("matchstate");
-//        $leagueNames = $ql->find("span.league")->texts();
-//        $matchTimes = $ql->find("span.time")->texts();
-//        $matchHnames = $ql->find(".gleft i.teamname")->texts();
-//        $matchAnames = $ql->find(".gright i.teamname")->texts();
-//
-////        $this->dumpData($lis);
-////        $ql_li = new QueryList();
-//
-//        $matchInfos = array();
-//        foreach ($matchIds as $key=>$id) {
-//            if (in_array($id, $appMatchIdes)) {
-////                $ql_li->setHtml($liHtmls[$key]);
-////                $matchInfo['leagueName'] = $ql_li->find("span.league")->texts()->first();
-////                $matchInfo['time'] = $ql_li->find("span.time")->texts()->first();
-////                $matchInfo['status'] = $ql_li->find("span.status")->texts()->first();
-////                $matchInfo['hname'] = $ql_li->find("i.teamname")->texts()->first();
-////                $matchInfo['aname'] = $ql_li->find("i.teamname")->texts()->last();
-//
-//                $status = $matchStatus[$key];
-//                if ($status == -1) continue; //如果比赛结束了，不再操作
-//
-//                $matchInfo['leagueName'] = $leagueNames[$key+2];
-//                $matchInfo['time'] = $matchTimes[$key+2];
-//                $matchInfo['status'] = $status;
-//                $matchInfo['hname'] = $matchHnames[$key];
-//                $matchInfo['aname'] = $matchAnames[$key];
-//
-//                $matchInfos[$id] = $matchInfo;
-//            }
-//        }
-//        return $matchInfos;
-//    }
+
+    /**====================================================================*/
+    /**从网页获取数据*/
+
+    private function getPcMatches($appMatchIdes) {
+        $ql = new QueryList();
+        $ql->get('http://www.gunqiu.com/', [], [
+            //设置超时时间，单位：秒
+            'timeout' => 30,
+            'headers' => [
+                'User-Agent' => $this->userAgentPC,
+                'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+                'accept-encoding' => 'gzip, deflate, br',
+                'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8,ja;q=0.7',
+                'upgrade-insecure-requests' => '1',
+//                'Cookie' => '__cfduid=d913bf68f903853b3c1697c9c29733ba31532567654'
+            ]
+        ])->encoding('UTF-8')->removeHead();
+
+//        $this->dumpData($ql);
+//        $lives = [];
+//        $lis = $ql->find('ol li')->getElements();
+        $matchIds = $ql->find('ol li')->attrs("id");
+        $matchStatus = $ql->find('ol li')->attrs("matchstate");
+        $leagueNames = $ql->find("span.league")->texts();
+        $matchTimes = $ql->find("span.time")->texts();
+        $matchHnames = $ql->find(".gleft i.teamname")->texts();
+        $matchAnames = $ql->find(".gright i.teamname")->texts();
+
+//        $this->dumpData($lis);
+//        $ql_li = new QueryList();
+
+        $matchInfos = array();
+        foreach ($matchIds as $key=>$id) {
+            if (in_array($id, $appMatchIdes)) {
+//                $ql_li->setHtml($liHtmls[$key]);
+//                $matchInfo['leagueName'] = $ql_li->find("span.league")->texts()->first();
+//                $matchInfo['time'] = $ql_li->find("span.time")->texts()->first();
+//                $matchInfo['status'] = $ql_li->find("span.status")->texts()->first();
+//                $matchInfo['hname'] = $ql_li->find("i.teamname")->texts()->first();
+//                $matchInfo['aname'] = $ql_li->find("i.teamname")->texts()->last();
+
+                $status = $matchStatus[$key];
+                if ($status == -1) continue; //如果比赛结束了，不再操作
+
+                $matchInfo['leagueName'] = $leagueNames[$key+2];
+                $matchInfo['time'] = $matchTimes[$key+2];
+                $matchInfo['status'] = $status;
+                $matchInfo['hname'] = $matchHnames[$key];
+                $matchInfo['aname'] = $matchAnames[$key];
+
+                $matchInfos[$id] = $matchInfo;
+            }
+        }
+        return $matchInfos;
+    }
+
+    private function getPcMatchesByHeibai() {
+        $ql = new QueryList();
+        $ql->get('http://www.heibaizhibo.com/', [], [
+            //设置超时时间，单位：秒
+            'timeout' => 30,
+            'headers' => [
+                'User-Agent' => $this->userAgentPC,
+                'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+                'accept-encoding' => 'gzip, deflate, br',
+                'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8,ja;q=0.7',
+                'upgrade-insecure-requests' => '1',
+//                'Cookie' => '__cfduid=d913bf68f903853b3c1697c9c29733ba31532567654'
+            ]
+        ])->encoding('UTF-8')->removeHead();
+
+//        $this->dumpData($ql);
+
+        $divHtmls = $ql->find("div.body div")->htmls();
+        $divAttrs = $ql->find("div.body div")->attrs("class");
+
+//        $this->dumpData($divs);
+
+        $ql_div = new QueryList();
+        $matchInfos = array();
+        $dayStr = "";
+        foreach ($divHtmls as $key=>$divHtml) {
+            $className = $divAttrs[$key];
+            if (str_contains($className, "live-day")) {
+                if (str_contains($divHtml, "星期")) {
+                    $dayStr = explode(" ", $divHtml)[0];
+                }
+            } else if (!str_contains($className, "live-head")) {
+                $ql_div->setHtml($divHtml);
+                $timeLi = $ql_div->find('li.live-time');
+                if (isset($timeLi) && $timeLi->count() > 0) {
+                    $timeStr = $dayStr." ".$timeLi->texts()->first();
+                    $league = $ql_div->find('li.live-event')->texts()->first();
+                    $hname = $ql_div->find('span.live-home')->texts()->first();
+                    $aname = $ql_div->find('span.live-away')->texts()->first();
+                    $liveStatusStr = $ql_div->find('li.live-status')->texts()->first();
+
+                    $liveStatus = -1;
+                    if ($liveStatusStr == "直播中") {
+                        $liveStatus = 1;
+                    } else if ($liveStatusStr == "未开始") {
+                        $liveStatus = 0;
+                    }
+
+                    $liveUrlA = $ql_div->find('li.live-channel a');
+                    $hbId = ""; $sid = "";
+                    if (isset($liveUrlA)) {
+                        $href = $liveUrlA->attrs("href")->first();
+                        if (str_contains($href, "/live/")) {
+                            $hbId = explode("/live/", $href)[1];
+                        } else if (str_contains($href, "/match_live/")) {
+                            $sid = explode("/match_live/", $href)[1];
+                        }
+                    }
+                    $matchInfos[] = ['sid'=>$sid, 'hbId'=>$hbId, 'time'=>$timeStr, 'league'=>$league, 'hname'=>$hname, 'aname'=>$aname, 'liveStatus'=>$liveStatus];
+                }
+            }
+        }
+        $this->dumpData($matchInfos);
+        return $matchInfos;
+    }
 
     private function dumpData($data)
     {
