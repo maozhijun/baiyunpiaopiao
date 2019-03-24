@@ -30,16 +30,20 @@ class KBallEncodesController extends BaseController
 //        $ets = EncodeTask::query()->where('from', 'KB')->where('status', 1)->get();
 //        return view('manager.pull.kball', ['lives' => $lives, 'ets' => $ets, 'channels' => $this->channels]);
 
-        $KBLives = $this->getKBallAppLives();
-        $lives = [];
-        if (isset($KBLives) && count($KBLives) > 0) {
-            foreach ($KBLives as $live) {
-                if ($live['componentCode'] == "recomMatch") {
-                    $lives = $live['recomMatch'];
-                    break;
-                }
-            }
-        }
+//        $KBLives = $this->getKBallAppLives();
+//        $lives = [];
+//        if (isset($KBLives) && count($KBLives) > 0) {
+//            foreach ($KBLives as $live) {
+//                if ($live['componentCode'] == "recomMatch") {
+//                    $lives = $live['recomMatch'];
+//                    break;
+//                }
+//            }
+//        }
+
+        $lives = $this->getKBallAppLives();
+        $lives = array_merge($lives, $this->getKBallAppLives(2));
+
 //        dump($lives);
         return view('manager.pull.kball2', ['lives' => $lives]);
     }
@@ -71,8 +75,9 @@ class KBallEncodesController extends BaseController
         }
     }
 
-    private function getKBallAppLives() {
-        $url = "https://api.kqiu.cn/content/v1/recommendations/1";
+    private function getKBallAppLives($liveStatus = 1) {
+//        $url = "https://api.kqiu.cn/content/v1/recommendations/1";
+        $url = "https://api.kqiu.cn/match/v1/games?gameStatus=$liveStatus&pageNum=1&pageSize=100";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -81,9 +86,13 @@ class KBallEncodesController extends BaseController
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
 //        curl_setopt($ch, CURLINFO_CONTENT_TYPE, 'application/x-www-form-urlencoded');
-        curl_setopt($ch, CURLOPT_USERAGENT, "okhttp/3.10.0");
+//        curl_setopt($ch, CURLOPT_USERAGENT, "okhttp/3.10.0");
 //        curl_setopt($ch, CURLOPT_COOKIESESSION, true);
 //        curl_setopt($ch, CURLOPT_HEADER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'AndroidVersion: 1001014'
+        ));
+
         $response = curl_exec($ch);
         if ($error = curl_error($ch)) {
             die($error);
