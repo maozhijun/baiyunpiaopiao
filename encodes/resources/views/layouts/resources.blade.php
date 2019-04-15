@@ -7,7 +7,6 @@ $pptvAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX_RESO
 $youkuAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX_RESOURCE_YOUKU);
 ?>
 @extends('layouts.main')
-
 @section('navTabs')
     <ul class="nav nav-tabs">
         <li role="presentation" {{ starts_with(request()->path(),'resources/ssports')?'class=active':'' }}>
@@ -57,6 +56,9 @@ $youkuAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX_RES
         </li>
         <li role="presentation" {{ starts_with(request()->path(),'resources/cctv5')?'class=active':'' }}>
             <a href="/resources/cctv5/">CCTV5</a>
+        </li>
+        <li role="presentation" {{ starts_with(request()->path(),'resources/ttzb')?'class=active':'' }}>
+            <a href="/resources/ttzb/">天天直播</a>
         </li>
         {{--<li role="presentation" {{ starts_with(request()->path(),'resources/sportlive')?'class=active':'' }}>--}}
             {{--<a href="/resources/sportlive/">SportLive(德国)</a>--}}

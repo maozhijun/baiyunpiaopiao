@@ -119,4 +119,5 @@ $pushCountAccess = !AuthController::isAccess($black, AuthController::BLACK_INDEX
         toastr.error('{{ session('error') }}');
     </script>
 @endif
+@yield('js')
 </html>

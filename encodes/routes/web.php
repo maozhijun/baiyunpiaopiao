@@ -172,6 +172,10 @@ Route::group(["middleware" => "auth", "namespace" => "Pull"], function () {
     //滚球
     Route::get("/resources/gunqiu/", "GunQiuEncodesController@index");
     Route::get("/resources/gunqiu/get_live_url", "GunQiuEncodesController@getLiveUrl");
+
+    //天天直播
+    Route::get("/resources/ttzb/", "TTZBEncodesController@index");
+    Route::get("/resources/ttzb/url/{key}", "TTZBEncodesController@getTTZBLiveUrl");
 });
 
 Route::group(["namespace" => "Pull"], function () {
