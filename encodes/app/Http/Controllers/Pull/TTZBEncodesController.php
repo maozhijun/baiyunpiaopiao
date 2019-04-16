@@ -27,21 +27,25 @@ class TTZBEncodesController extends BaseController
 
     private function getLives()
     {
-        $ql = QueryList::get('http://www.tiantianzhibo.com/zuqiuzhibo/');
-        $divs = $ql->find('div.listcontent')->eq(0);
+        $ql = QueryList::get('http://www.tiantianzhibo.com/');
+        $divs = $ql->find('div.datelist');
 
-        $datas = $divs->children()->map(function ($item){
-            //用is判断节点类型
-            if ($item->is('div')) {
-                //切割时间 2017年12月12日
-                $timeStr = $item->text();
-                $time = date_format(date_create_from_format('Y年m月d日',explode(' ',$timeStr)[0]),'Y-m-d');
-                return array('type'=>'div','data'=>$time);
-            } elseif ($item->is('ul')) {
-                //切割时间 主客队
-                return array('type'=>'ul','data'=>$item);
-            }
-        });
+        $datas = array();
+        for ($i = 0 ; $i < $divs->length() ; $i++) {
+            $tmp = $divs->eq($i)->children()->map(function ($item) {
+                //用is判断节点类型
+                if ($item->is('div')) {
+                    //切割时间 2017年12月12日
+                    $timeStr = $item->text();
+                    $time = date_format(date_create_from_format('Y年m月d日', explode(' ', $timeStr)[0]), 'Y-m-d');
+                    return array('type' => 'div', 'data' => $time);
+                } elseif ($item->is('ul')) {
+                    //切割时间 主客队
+                    return array('type' => 'ul', 'data' => $item);
+                }
+            });
+            $datas = array_merge($datas,$tmp->toArray());
+        }
 
         $timeStr = 'error';
         $result = array();
@@ -54,7 +58,6 @@ class TTZBEncodesController extends BaseController
                 $result[$timeStr][] = $data['data'];
             }
         }
-//        dump($result);
         $countNotMatch = 0;
 
         $bj = array();
