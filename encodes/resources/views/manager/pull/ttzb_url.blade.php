@@ -26,7 +26,7 @@
     <link href="{{ asset('/css/dashboard.css') }}" rel="stylesheet">
 </head>
 <body>
-<p id="url" style="">加载中</p>
+<textarea id="url" style="width: 90%;height: 60px">加载中</textarea>
 </body>
 <script src="/js/jquery.js"></script>
 <script src="/js/bootstrap.js"></script>

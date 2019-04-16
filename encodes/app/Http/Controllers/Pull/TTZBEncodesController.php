@@ -64,6 +64,11 @@ class TTZBEncodesController extends BaseController
                 $timeStr = $ul->find('li.t1')->eq(0)->text();
                 $teamStr = $ul->find('li.t4')->eq(0)->text();
                 $leagueStr = $ul->find('li.t3')->eq(0)->text();
+                $liveCSS = $ul->find('li.t5 a')->eq(0)->style;
+                $living = false;
+                if (stristr($liveCSS,'red')){
+                    $living = true;
+                }
                 $liveStr = $ul->find('li.t5 a')->eq(0)->href;
                 $liveStr = explode('/',$liveStr);
                 $liveStr = $liveStr[count($liveStr) - 1];
@@ -86,6 +91,7 @@ class TTZBEncodesController extends BaseController
                             'homeTeamName'=>$host,
                             'awayTeamName'=>$away,
                             'matchDate'=>$timeStr,
+                            'living'=>$living,
                             'competitionNameZh'=>$leagueStr,
                             'liveStr'=>$liveStr
                             );
@@ -99,6 +105,7 @@ class TTZBEncodesController extends BaseController
                                 'homeTeamName'=>$host,
                                 'awayTeamName'=>$away,
                                 'matchDate'=>$timeStr,
+                                'living'=>$living,
                                 'competitionNameZh'=>$leagueStr,
                                 'liveStr'=>$liveStr
                             );

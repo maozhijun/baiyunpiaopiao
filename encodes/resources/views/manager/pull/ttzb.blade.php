@@ -18,11 +18,11 @@
                     <td>{{ $live['matchDate']}}</td>
                     <td>{!! $live['homeTeamName'].'&nbsp;VS&nbsp;'.$live['awayTeamName'] !!}</td>
                     <td>
-{{--                        @if($live['liveStatus'] == 1)--}}
-                            {{--<label class="label label-info">进行中</label>--}}
-{{--                        @elseif($live['liveStatus'] == 2)--}}
-                            <label class="label label-default">还没弄</label>
-                        {{--@endif--}}
+                        @if($live['living'])
+                            <label class="label label-info">进行中</label>
+                        @else
+                            <label class="label label-default">未开始</label>
+                        @endif
                     </td>
                     <td>
                         <a target="_blank" href="/resources/ttzb/url/{{$live['liveStr']}}">获取rtmp地址</a>
